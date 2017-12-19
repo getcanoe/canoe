@@ -1,4 +1,12 @@
- { 
+{
   "name": "RaiW",
-  "app_id": "se.krampe.raiw"
+  "app_id": "se.krampe.raiw",
+  "integrations": {},
+  "type": "ionic1",
+  "watchPatterns": [
+    "scss/**/*",
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map"
+  ]
 }
