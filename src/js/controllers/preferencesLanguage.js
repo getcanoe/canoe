@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('preferencesLanguageController',
+angular.module('raiwApp.controllers').controller('preferencesLanguageController',
   function($scope, $log, $ionicHistory, configService, profileService, uxLanguage, walletService, externalLinkService, gettextCatalog) {
 
     $scope.availableLanguages = uxLanguage.getLanguages();

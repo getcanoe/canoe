@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('amazonCardDetailsController', function($scope, $log, $timeout, $ionicScrollDelegate, bwcError, amazonService, lodash, ongoingProcess, popupService, externalLinkService) {
+angular.module('raiwApp.controllers').controller('amazonCardDetailsController', function($scope, $log, $timeout, $ionicScrollDelegate, bwcError, amazonService, lodash, ongoingProcess, popupService, externalLinkService) {
 
   $scope.cancelGiftCard = function() {
     ongoingProcess.set('cancelingGiftCard', true);

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('advancedSettingsController', function($scope, $log, configService, platformInfo, externalLinkService, gettextCatalog) {
+angular.module('raiwApp.controllers').controller('advancedSettingsController', function($scope, $log, configService, platformInfo, externalLinkService, gettextCatalog) {
 
   var updateConfig = function() {
     var config = configService.getSync();

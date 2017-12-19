@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('copayersController',
+angular.module('raiwApp.controllers').controller('copayersController',
   function($scope, $log, $timeout, $stateParams, $state, $rootScope, $ionicHistory, appConfigService, lodash, profileService, walletService, popupService, bwcError, platformInfo, gettextCatalog, ongoingProcess, pushNotificationsService) {
 
     var listener;

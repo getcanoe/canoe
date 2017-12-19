@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').service('popupService', function($log, $ionicPopup, platformInfo, gettextCatalog) {
+angular.module('raiwApp.services').service('popupService', function($log, $ionicPopup, platformInfo, gettextCatalog) {
 
   var isCordova = platformInfo.isCordova;
   var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;

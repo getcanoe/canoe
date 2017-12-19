@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('preferencesLogs',
+angular.module('raiwApp.controllers').controller('preferencesLogs',
   function($scope, historicLog, lodash, configService, gettextCatalog) {
 
     var config = configService.getSync();

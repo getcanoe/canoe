@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').factory('platformInfo', function($window) {
+angular.module('raiwApp.services').factory('platformInfo', function($window) {
 
   var ua = navigator ? navigator.userAgent : null;
 

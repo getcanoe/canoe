@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('preferencesAliasController',
+angular.module('raiwApp.controllers').controller('preferencesAliasController',
   function($scope, $timeout, $stateParams, $ionicHistory, configService, profileService, walletService) {
     var wallet = profileService.getWallet($stateParams.walletId);
     var walletId = wallet.credentials.walletId;

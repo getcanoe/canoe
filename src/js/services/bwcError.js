@@ -1,5 +1,5 @@
 'use strict';
-angular.module('copayApp.services')
+angular.module('raiwApp.services')
   .factory('bwcError', function bwcErrorService($log, gettextCatalog) {
     var root = {};
 

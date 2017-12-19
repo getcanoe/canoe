@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('coinbaseController', function($scope, $timeout, $ionicModal, $ionicHistory, $log, coinbaseService, lodash, platformInfo, ongoingProcess, popupService, externalLinkService) {
+angular.module('raiwApp.controllers').controller('coinbaseController', function($scope, $timeout, $ionicModal, $ionicHistory, $log, coinbaseService, lodash, platformInfo, ongoingProcess, popupService, externalLinkService) {
 
   var isNW = platformInfo.isNW;
   var isCordova = platformInfo.isCordova;

@@ -1,6 +1,6 @@
 'use strict';
 var logs = [];
-angular.module('copayApp.services')
+angular.module('raiwApp.services')
   .factory('historicLog', function historicLog(lodash) {
     var root = {};
 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('backupWarningController', function($scope, $state, $timeout, $stateParams, $ionicModal) {
+angular.module('raiwApp.controllers').controller('backupWarningController', function($scope, $state, $timeout, $stateParams, $ionicModal) {
 
   $scope.walletId = $stateParams.walletId;
   $scope.fromState = $stateParams.from == 'onboarding' ? $stateParams.from + '.backupRequest' : $stateParams.from;

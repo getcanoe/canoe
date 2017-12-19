@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('importController',
+angular.module('raiwApp.controllers').controller('importController',
   function($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, sjcl, ledger, trezor, derivationPathHelper, platformInfo, bwcService, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService, hwWallet) {
 
     var reader = new FileReader();

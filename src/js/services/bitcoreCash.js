@@ -1,5 +1,5 @@
 'use strict';
-angular.module('copayApp.services')
+angular.module('raiwApp.services')
   .factory('bitcoreCash', function bitcoreFactory(bwcService) {
     var bitcoreCash = bwcService.getBitcoreCash();
     return bitcoreCash;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('bitpayCardConfirmationController', function($scope, $timeout, $state, bitpayCardService) {
+angular.module('raiwApp.controllers').controller('bitpayCardConfirmationController', function($scope, $timeout, $state, bitpayCardService) {
 
   $scope.ok = function() {
     bitpayCardService.logout(function() {

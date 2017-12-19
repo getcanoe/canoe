@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('preferencesCashController',
+angular.module('raiwApp.controllers').controller('preferencesCashController',
   function($rootScope, $timeout, $scope, $state, $ionicHistory, gettextCatalog, lodash, ongoingProcess, profileService, walletService, $log, txFormatService, bwcError, pushNotificationsService, bwcService, externalLinkService) {
     var wallet;
     var errors = bwcService.getErrors();

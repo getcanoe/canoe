@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('completeController', function($scope, $stateParams, $timeout, $log, $ionicHistory, $state, $ionicNavBarDelegate, $ionicConfig, platformInfo, configService, storageService, lodash, appConfigService, gettextCatalog) {
+angular.module('raiwApp.controllers').controller('completeController', function($scope, $stateParams, $timeout, $log, $ionicHistory, $state, $ionicNavBarDelegate, $ionicConfig, platformInfo, configService, storageService, lodash, appConfigService, gettextCatalog) {
   $scope.isCordova = platformInfo.isCordova;
   $scope.title = gettextCatalog.getString("Share {{appName}}", {
     appName: appConfigService.nameCase

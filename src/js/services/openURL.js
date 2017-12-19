@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').factory('openURLService', function($rootScope, $ionicHistory, $document, $log, $state, platformInfo, lodash, profileService, incomingData, appConfigService) {
+angular.module('raiwApp.services').factory('openURLService', function($rootScope, $ionicHistory, $document, $log, $state, platformInfo, lodash, profileService, incomingData, appConfigService) {
   var root = {};
 
   var handleOpenURL = function(args) {

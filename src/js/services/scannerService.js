@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').service('scannerService', function($log, $timeout, platformInfo, $rootScope, $window) {
+angular.module('raiwApp.services').service('scannerService', function($log, $timeout, platformInfo, $rootScope, $window) {
 
   var isDesktop = !platformInfo.isCordova;
   var QRScanner = $window.QRScanner;

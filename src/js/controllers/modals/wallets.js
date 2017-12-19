@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('walletsController', function($scope, $timeout, bwcError, profileService) {
+angular.module('raiwApp.controllers').controller('walletsController', function($scope, $timeout, bwcError, profileService) {
 
   $scope.selectWallet = function(walletId) {
 

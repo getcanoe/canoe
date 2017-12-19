@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('amazonController',
+angular.module('raiwApp.controllers').controller('amazonController',
   function($scope, $timeout, $ionicModal, $log, $state, $ionicHistory, lodash, amazonService, externalLinkService, popupService) {
 
     $scope.openExternalLink = function(url) {

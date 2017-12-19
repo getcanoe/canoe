@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('coinbaseTxDetailsController', function($scope, coinbaseService, popupService) {
+angular.module('raiwApp.controllers').controller('coinbaseTxDetailsController', function($scope, coinbaseService, popupService) {
 
   $scope.remove = function() {
     coinbaseService.setCredentials();

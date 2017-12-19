@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('tabsController', function($rootScope, $log, $scope, $state, $stateParams, $timeout, platformInfo, incomingData, lodash, popupService, gettextCatalog, scannerService) {
+angular.module('raiwApp.controllers').controller('tabsController', function($rootScope, $log, $scope, $state, $stateParams, $timeout, platformInfo, incomingData, lodash, popupService, gettextCatalog, scannerService) {
 
   $scope.onScan = function(data) {
     if (!incomingData.redir(data)) {

@@ -1,5 +1,5 @@
 'use strict';
-angular.module('copayApp.services')
+angular.module('raiwApp.services')
   .factory('storageService', function(logHeader, fileStorageService, localStorageService, sjcl, $log, lodash, platformInfo, $timeout) {
 
     var root = {};

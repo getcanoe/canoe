@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').factory('walletService', function($log, $timeout, lodash, trezor, ledger, intelTEE, storageService, configService, rateService, uxLanguage, $filter, gettextCatalog, bwcError, $ionicPopup, fingerprintService, ongoingProcess, gettext, $rootScope, txFormatService, $ionicModal, $state, bwcService, bitcore, popupService, feeService) {
+angular.module('raiwApp.services').factory('walletService', function($log, $timeout, lodash, trezor, ledger, intelTEE, storageService, configService, rateService, uxLanguage, $filter, gettextCatalog, bwcError, $ionicPopup, fingerprintService, ongoingProcess, gettext, $rootScope, txFormatService, $ionicModal, $state, bwcService, bitcore, popupService, feeService) {
 
   // Ratio low amount warning (fee/amount) in incoming TX
   var LOW_AMOUNT_RATIO = 0.15;

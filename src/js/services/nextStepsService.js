@@ -1,5 +1,5 @@
  'use strict';
- angular.module('copayApp.services').factory('nextStepsService', function(configService, $log, lodash) {
+ angular.module('raiwApp.services').factory('nextStepsService', function(configService, $log, lodash) {
    var root = {};
    var services = [];
 

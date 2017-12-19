@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('joinController',
+angular.module('raiwApp.controllers').controller('joinController',
   function($scope, $rootScope, $timeout, $state, $ionicHistory, $ionicScrollDelegate, profileService, configService, storageService, applicationService, gettextCatalog, lodash, ledger, trezor, intelTEE, derivationPathHelper, ongoingProcess, walletService, $log, $stateParams, popupService, appConfigService) {
 
     $scope.$on("$ionicView.beforeEnter", function(event, data) {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.directives')
+angular.module('raiwApp.directives')
   /**
    * Replaces img tag with its svg content to allow for CSS styling of the svg.
    */

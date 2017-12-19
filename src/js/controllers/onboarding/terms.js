@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('termsController', function($scope, $log, $state, appConfigService, uxLanguage, profileService, externalLinkService, gettextCatalog) {
+angular.module('raiwApp.controllers').controller('termsController', function($scope, $log, $state, appConfigService, uxLanguage, profileService, externalLinkService, gettextCatalog) {
   $scope.lang = uxLanguage.currentLanguage;
 
   $scope.confirm = function() {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').factory('addressbookService', function($log, bitcore, bitcoreCash, storageService, lodash) {
+angular.module('raiwApp.services').factory('addressbookService', function($log, bitcore, bitcoreCash, storageService, lodash) {
   var root = {};
 
   var getNetwork = function(address) {

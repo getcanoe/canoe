@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').factory('timeService', function() {
+angular.module('raiwApp.services').factory('timeService', function() {
   var root = {};
 
   root.withinSameMonth = function(time1, time2) {

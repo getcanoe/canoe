@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('preferencesGlideraController',
+angular.module('raiwApp.controllers').controller('preferencesGlideraController',
   function($scope, $timeout, $state, $ionicHistory, glideraService, popupService) {
 
     $scope.revokeToken = function() {

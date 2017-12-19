@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('createController',
+angular.module('raiwApp.controllers').controller('createController',
   function($scope, $rootScope, $timeout, $log, lodash, $state, $ionicScrollDelegate, $ionicHistory, profileService, configService, gettextCatalog, ledger, trezor, intelTEE, derivationPathHelper, ongoingProcess, walletService, storageService, popupService, appConfigService, pushNotificationsService) {
 
     /* For compressed keys, m*73 + n*34 <= 496 */

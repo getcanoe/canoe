@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').factory('ongoingProcess', function($log, $timeout, $filter, lodash, $ionicLoading, gettext, platformInfo) {
+angular.module('raiwApp.services').factory('ongoingProcess', function($log, $timeout, $filter, lodash, $ionicLoading, gettext, platformInfo) {
   var root = {};
   var isCordova = platformInfo.isCordova;
   var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;

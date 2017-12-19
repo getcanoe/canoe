@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('exportController',
+angular.module('raiwApp.controllers').controller('exportController',
   function($scope, $timeout, $log, $ionicHistory, $ionicScrollDelegate, backupService, walletService, storageService, profileService, platformInfo, gettextCatalog, $state, $stateParams, popupService, appConfigService) {
     var wallet = profileService.getWallet($stateParams.walletId);
     $scope.wallet = wallet;

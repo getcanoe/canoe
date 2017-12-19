@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('preferencesBitpayCardController',
+angular.module('raiwApp.controllers').controller('preferencesBitpayCardController',
   function($scope, $state, $timeout, $ionicHistory, bitpayCardService, popupService, gettextCatalog, $log) {
 
     $scope.remove = function(card) {

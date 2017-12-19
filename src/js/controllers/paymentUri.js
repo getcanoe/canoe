@@ -1,5 +1,5 @@
 'use strict';
-angular.module('copayApp.controllers').controller('paymentUriController',
+angular.module('raiwApp.controllers').controller('paymentUriController',
   function($rootScope, $scope, $stateParams, $location, $timeout, $ionicHistory, profileService, configService, lodash, bitcore, $state) {
     function strip(number) {
       return (parseFloat(number.toPrecision(12)));

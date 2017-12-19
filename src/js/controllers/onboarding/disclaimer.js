@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('disclaimerController', function($scope, $timeout, $state, $log, $ionicModal, $ionicConfig, profileService, uxLanguage, externalLinkService, storageService, $stateParams, startupService, $rootScope) {
+angular.module('raiwApp.controllers').controller('disclaimerController', function($scope, $timeout, $state, $log, $ionicModal, $ionicConfig, profileService, uxLanguage, externalLinkService, storageService, $stateParams, startupService, $rootScope) {
 
   $scope.$on("$ionicView.afterEnter", function() {
     startupService.ready();

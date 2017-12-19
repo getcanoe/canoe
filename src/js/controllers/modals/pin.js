@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('pinController', function($state, $interval, $stateParams, $ionicHistory, $timeout, $scope, $log, configService, appConfigService, applicationService) {
+angular.module('raiwApp.controllers').controller('pinController', function($state, $interval, $stateParams, $ionicHistory, $timeout, $scope, $log, configService, appConfigService, applicationService) {
   var ATTEMPT_LIMIT = 3;
   var ATTEMPT_LOCK_OUT_TIME = 5 * 60;
   var currentPin;

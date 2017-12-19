@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('txpDetailsController', function($scope, $rootScope, $timeout, $interval, $log, ongoingProcess, platformInfo, $ionicScrollDelegate, txFormatService, bwcError, gettextCatalog, lodash, walletService, popupService, $ionicHistory, feeService) {
+angular.module('raiwApp.controllers').controller('txpDetailsController', function($scope, $rootScope, $timeout, $interval, $log, ongoingProcess, platformInfo, $ionicScrollDelegate, txFormatService, bwcError, gettextCatalog, lodash, walletService, popupService, $ionicHistory, feeService) {
   var isGlidera = $scope.isGlidera;
   var GLIDERA_LOCK_TIME = 6 * 60 * 60;
   var now = Math.floor(Date.now() / 1000);

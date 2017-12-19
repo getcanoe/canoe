@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('addressbookViewController', function($scope, $state, $timeout, lodash, addressbookService, popupService, $ionicHistory, platformInfo, gettextCatalog, bitcoreCash) {
+angular.module('raiwApp.controllers').controller('addressbookViewController', function($scope, $state, $timeout, lodash, addressbookService, popupService, $ionicHistory, platformInfo, gettextCatalog, bitcoreCash) {
   $scope.isChromeApp = platformInfo.isChromeApp;
   $scope.addressbookEntry = {};
   var coin;

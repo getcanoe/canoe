@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('preferencesHistory',
+angular.module('raiwApp.controllers').controller('preferencesHistory',
   function($scope, $log, $stateParams, $timeout, $state, $ionicHistory, storageService, platformInfo, profileService, lodash, appConfigService, walletService) {
     $scope.wallet = profileService.getWallet($stateParams.walletId);
     $scope.csvReady = false;

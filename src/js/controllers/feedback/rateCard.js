@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('rateCardController', function($scope, $state, $timeout, $log, gettextCatalog, platformInfo, storageService, appConfigService) {
+angular.module('raiwApp.controllers').controller('rateCardController', function($scope, $state, $timeout, $log, gettextCatalog, platformInfo, storageService, appConfigService) {
 
   $scope.isCordova = platformInfo.isCordova;
   $scope.score = 0;

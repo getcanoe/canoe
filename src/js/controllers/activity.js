@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('activityController',
+angular.module('raiwApp.controllers').controller('activityController',
   function($timeout, $scope, $log, $ionicModal, lodash, txpModalService, profileService, walletService, ongoingProcess, popupService, gettextCatalog, $state) {
     $scope.openTxpModal = txpModalService.open;
     $scope.fetchingNotifications = true;

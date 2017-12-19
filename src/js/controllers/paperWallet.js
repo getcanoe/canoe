@@ -1,4 +1,4 @@
-angular.module('copayApp.controllers').controller('paperWalletController',
+angular.module('raiwApp.controllers').controller('paperWalletController',
   function($scope, $timeout, $log, $ionicModal, $ionicHistory, feeService, popupService, gettextCatalog, platformInfo, configService, profileService, $state, bitcore, ongoingProcess, txFormatService, $stateParams, walletService) {
 
     function _scanFunds(cb) {

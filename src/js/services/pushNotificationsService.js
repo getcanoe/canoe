@@ -1,5 +1,5 @@
 'use strict';
-angular.module('copayApp.services').factory('pushNotificationsService', function pushNotificationsService($log, $state, $ionicHistory, sjcl, platformInfo, lodash, appConfigService, profileService, configService) {
+angular.module('raiwApp.services').factory('pushNotificationsService', function pushNotificationsService($log, $state, $ionicHistory, sjcl, platformInfo, lodash, appConfigService, profileService, configService) {
   var root = {};
   var isIOS = platformInfo.isIOS;
   var isAndroid = platformInfo.isAndroid;

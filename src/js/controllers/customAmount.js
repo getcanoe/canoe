@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('customAmountController', function($scope, $ionicHistory, txFormatService, platformInfo, configService, profileService, walletService, popupService) {
+angular.module('raiwApp.controllers').controller('customAmountController', function($scope, $ionicHistory, txFormatService, platformInfo, configService, profileService, walletService, popupService) {
 
   var showErrorAndBack = function(title, msg) {
     popupService.showAlert(title, msg, function() {

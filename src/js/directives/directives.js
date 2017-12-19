@@ -1,5 +1,5 @@
 'use strict';
-angular.module('copayApp.directives')
+angular.module('raiwApp.directives')
   .directive('validAddress', ['$rootScope', 'bitcore', 'bitcoreCash',
     function($rootScope, bitcore, bitcoreCash) {
       return {

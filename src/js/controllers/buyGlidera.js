@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('buyGlideraController', function($scope, $log, $state, $timeout, $ionicHistory, $ionicConfig, lodash, glideraService, popupService, profileService, ongoingProcess, walletService, platformInfo, txFormatService) {
+angular.module('raiwApp.controllers').controller('buyGlideraController', function($scope, $log, $state, $timeout, $ionicHistory, $ionicConfig, lodash, glideraService, popupService, profileService, ongoingProcess, walletService, platformInfo, txFormatService) {
 
   var coin = 'btc';
   var amount;

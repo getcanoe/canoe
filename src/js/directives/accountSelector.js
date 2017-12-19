@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.directives')
+angular.module('raiwApp.directives')
   .directive('accountSelector', function($timeout) {
     return {
       restrict: 'E',

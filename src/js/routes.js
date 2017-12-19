@@ -13,7 +13,7 @@ if (window && window.navigator) {
 }
 
 //Setting up route
-angular.module('copayApp').config(function(historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider) {
+angular.module('raiwApp').config(function(historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider) {
     $urlRouterProvider.otherwise('/starting');
 
     // NO CACHE

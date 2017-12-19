@@ -13,17 +13,17 @@ var modules = [
   'angular-md5',
   'bwcModule',
   'bitauthModule',
-  'copayApp.filters',
-  'copayApp.services',
-  'copayApp.controllers',
-  'copayApp.directives',
-  'copayApp.addons'
+  'raiwApp.filters',
+  'raiwApp.services',
+  'raiwApp.controllers',
+  'raiwApp.directives',
+  'raiwApp.addons'
 ];
 
-var copayApp = window.copayApp = angular.module('copayApp', modules);
+var raiwApp = window.raiwApp = angular.module('raiwApp', modules);
 
-angular.module('copayApp.filters', []);
-angular.module('copayApp.services', []);
-angular.module('copayApp.controllers', []);
-angular.module('copayApp.directives', []);
-angular.module('copayApp.addons', []);
+angular.module('raiwApp.filters', []);
+angular.module('raiwApp.services', []);
+angular.module('raiwApp.controllers', []);
+angular.module('raiwApp.directives', []);
+angular.module('raiwApp.addons', []);

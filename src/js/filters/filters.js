@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.filters', [])
+angular.module('raiwApp.filters', [])
   .filter('amTimeAgo', ['amMoment',
     function(amMoment) {
       return function(input) {

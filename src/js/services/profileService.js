@@ -1,5 +1,5 @@
 'use strict';
-angular.module('copayApp.services')
+angular.module('raiwApp.services')
   .factory('profileService', function profileServiceFactory($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, bwcService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, appConfigService) {
 
 

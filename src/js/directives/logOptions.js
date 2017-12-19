@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.directives')
+angular.module('raiwApp.directives')
   .directive('logOptions', function($timeout, platformInfo) {
     return {
       restrict: 'E',

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services')
+angular.module('raiwApp.services')
   .factory('trezor', function($log, $timeout, lodash, bitcore, hwWallet, platformInfo) {
     var root = {};
 

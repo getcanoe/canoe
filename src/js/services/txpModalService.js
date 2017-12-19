@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').factory('txpModalService', function(configService, profileService, $rootScope, $ionicModal) {
+angular.module('raiwApp.services').factory('txpModalService', function(configService, profileService, $rootScope, $ionicModal) {
 
   var root = {};
 

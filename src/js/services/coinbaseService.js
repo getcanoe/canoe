@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').factory('coinbaseService', function($http, $log, $window, $filter, platformInfo, lodash, storageService, configService, appConfigService, txFormatService, buyAndSellService, $rootScope, feeService) {
+angular.module('raiwApp.services').factory('coinbaseService', function($http, $log, $window, $filter, platformInfo, lodash, storageService, configService, appConfigService, txFormatService, buyAndSellService, $rootScope, feeService) {
   var root = {};
   var credentials = {};
   var isCordova = platformInfo.isCordova;

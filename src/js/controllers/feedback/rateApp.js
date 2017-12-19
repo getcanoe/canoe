@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.controllers').controller('rateAppController', function($scope, $state, $stateParams, $window, lodash, externalLinkService, configService, platformInfo, feedbackService, ongoingProcess, popupService, appConfigService) {
+angular.module('raiwApp.controllers').controller('rateAppController', function($scope, $state, $stateParams, $window, lodash, externalLinkService, configService, platformInfo, feedbackService, ongoingProcess, popupService, appConfigService) {
   $scope.score = parseInt($stateParams.score);
   $scope.appName = appConfigService.nameCase;
   var isAndroid = platformInfo.isAndroid;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.directives')
+angular.module('raiwApp.directives')
   .directive('qrScanner', function($state, $rootScope, $log, $ionicHistory, platformInfo, scannerService, popupService) {
 
     return {

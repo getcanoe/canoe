@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('copayApp.services').service('nodeWebkitService', function() {
+angular.module('raiwApp.services').service('nodeWebkitService', function() {
 
   this.readFromClipboard = function() {
     var gui = require('nw.gui');
