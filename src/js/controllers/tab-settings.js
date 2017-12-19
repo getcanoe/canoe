@@ -41,7 +41,7 @@ angular.module('raiwApp.controllers').controller('tabSettingsController', functi
 
   $scope.openExternalLink = function() {
     var appName = appConfigService.name;
-    var url = appName == 'copay' ? 'https://github.com/gokr/raiw/issues' : 'https://help.bitpay.com/bitpay-app';
+    var url = appName == 'raiw' ? 'https://github.com/gokr/raiw/issues' : 'https://help.bitpay.com/bitpay-app';
     var optIn = true;
     var title = null;
     var message = gettextCatalog.getString('Help and support information is available at the website.');

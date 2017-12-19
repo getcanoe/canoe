@@ -10,8 +10,8 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
     $scope.loading = null;
     $scope.isCordova = platformInfo.isCordova;
     $scope.isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
-    $scope.copayers = $scope.wallet.status.wallet.copayers;
-    $scope.copayerId = $scope.wallet.credentials.copayerId;
+    $scope.raiwers = $scope.wallet.status.wallet.raiwers;
+    $scope.raiwerId = $scope.wallet.credentials.raiwerId;
     $scope.isShared = $scope.wallet.credentials.n > 1;
     $scope.canSign = $scope.wallet.canSign() || $scope.wallet.isPrivKeyExternal();
     $scope.color = $scope.wallet.color;
@@ -76,7 +76,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
         type: action.type,
         time: action.createdOn,
         description: actionDescriptions[action.type],
-        by: action.copayerName
+        by: action.raiwerName
       });
     });
 
@@ -222,7 +222,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
       }
 
       var action = lodash.find(tx.actions, {
-        copayerId: $scope.wallet.credentials.copayerId
+        raiwerId: $scope.wallet.credentials.raiwerId
       });
 
       $scope.tx = txFormatService.processTx($scope.wallet.coin, tx);
@@ -252,9 +252,9 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
   });
 
   $scope.updateRaiWerList = function() {
-    lodash.map($scope.copayers, function(cp) {
+    lodash.map($scope.raiwers, function(cp) {
       lodash.each($scope.tx.actions, function(ac) {
-        if (cp.id == ac.copayerId) {
+        if (cp.id == ac.raiwerId) {
           cp.action = ac.type;
         }
       });

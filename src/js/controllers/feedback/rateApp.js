@@ -39,9 +39,9 @@ angular.module('raiwApp.controllers').controller('rateAppController', function($
     var defaults = configService.getDefaults();
     var url;
     if (isAndroid)
-      url = $scope.appName == 'RaiW' ? defaults.rateApp.copay.android : defaults.rateApp.bitpay.android;
+      url = $scope.appName == 'RaiW' ? defaults.rateApp.raiw.android : defaults.rateApp.bitpay.android;
     if (isIOS)
-      url = $scope.appName == 'RaiW' ? defaults.rateApp.copay.ios : defaults.rateApp.bitpay.ios;
+      url = $scope.appName == 'RaiW' ? defaults.rateApp.raiw.ios : defaults.rateApp.bitpay.ios;
 
     externalLinkService.open(url);
     $state.go('tabs.rate.complete', {

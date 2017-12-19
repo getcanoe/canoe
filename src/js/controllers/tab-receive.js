@@ -39,7 +39,7 @@ angular.module('raiwApp.controllers').controller('tabReceiveController', functio
     });
     $state.go('tabs.home');
     $timeout(function() {
-      $state.transitionTo('tabs.copayers', {
+      $state.transitionTo('tabs.raiwers', {
         walletId: $scope.wallet.credentials.walletId
       });
     }, 100);

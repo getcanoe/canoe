@@ -103,7 +103,7 @@ angular.module('raiwApp.controllers').controller('preferencesCashController',
       opts.name = wallet.name + '[BCH]';
       opts.m = wallet.m;
       opts.n = wallet.n;
-      opts.myName = wallet.credentials.copayerName;
+      opts.myName = wallet.credentials.raiwerName;
       opts.networkName = wallet.network;
       opts.coin = 'bch';
       opts.walletPrivKey = wallet.credentials.walletPrivKey;
@@ -150,7 +150,7 @@ angular.module('raiwApp.controllers').controller('preferencesCashController',
         if (!isNew) return cb();
         if (wallet.n == 1) return cb();
 
-        $log.info('Adding copayers for BCH wallet config:' + wallet.m + '-' + wallet.n);
+        $log.info('Adding raiwers for BCH wallet config:' + wallet.m + '-' + wallet.n);
 
         walletService.copyRaiWers(wallet, newWallet, function(err) {
           if (err) return setErr(err, cb);

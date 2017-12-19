@@ -57,7 +57,7 @@ angular.module('raiwApp.controllers').controller('joinController',
 
     if ($stateParams.url) {
       var data = $stateParams.url;
-      data = data.replace('copay:', '');
+      data = data.replace('raiw:', '');
       $scope.onQrCodeScannedJoin(data);
     }
 
@@ -76,7 +76,7 @@ angular.module('raiwApp.controllers').controller('joinController',
 
       */
 
-      if (appConfigService.name == 'copay') {
+      if (appConfigService.name == 'raiw') {
         if (walletService.externalSource.ledger.supported) {
           $scope.seedOptions.push({
             id: walletService.externalSource.ledger.id,
@@ -209,7 +209,7 @@ angular.module('raiwApp.controllers').controller('joinController',
             });
             $state.go('tabs.home');
             $timeout(function() {
-              $state.transitionTo('tabs.copayers', {
+              $state.transitionTo('tabs.raiwers', {
                 walletId: client.credentials.walletId
               });
             });

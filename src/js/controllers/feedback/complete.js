@@ -7,7 +7,7 @@ angular.module('raiwApp.controllers').controller('completeController', function(
   });
 
   var defaults = configService.getDefaults();
-  var downloadUrl = appConfigService.name == 'copay' ? defaults.download.copay.url : defaults.download.bitpay.url;
+  var downloadUrl = appConfigService.name == 'raiw' ? defaults.download.raiw.url : defaults.download.bitpay.url;
 
   function quickFeedback(cb) {
     window.plugins.spinnerDialog.show();

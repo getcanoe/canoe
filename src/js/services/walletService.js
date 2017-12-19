@@ -144,7 +144,7 @@ angular.module('raiwApp.services').factory('walletService', function($log, $time
         }
 
         var action = lodash.find(tx.actions, {
-          copayerId: tx.wallet.copayerId
+          raiwerId: tx.wallet.raiwerId
         });
 
         if (!action && tx.status == 'pending') {
@@ -1279,17 +1279,17 @@ angular.module('raiwApp.services').factory('walletService', function($log, $time
 
     var walletPrivKey = bitcore.PrivateKey.fromString(c.walletPrivKey);
 
-    var copayer = 1,
+    var raiwer = 1,
       i = 0,
       l = c.publicKeyRing.length;
     var mainErr = null;
 
     lodash.each(c.publicKeyRing, function(item) {
-      var name = item.copayerName || ('copayer ' + copayer++);
+      var name = item.raiwerName || ('raiwer ' + raiwer++);
       newWallet._doJoinWallet(newWallet.credentials.walletId, walletPrivKey, item.xPubKey, item.requestPubKey, name, {
         coin: newWallet.credentials.coin,
       }, function(err) {
-        //Ignore error is copayer already in wallet
+        //Ignore error is raiwer already in wallet
         if (err && !(err instanceof errors.COPAYER_IN_WALLET)) {
           mainErr = err;
         }

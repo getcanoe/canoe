@@ -18,7 +18,7 @@ angular.module('raiwApp.controllers').controller('importController',
       $scope.formData.account = 1;
       $scope.formData.coin = $stateParams.coin;
       $scope.importErr = false;
-      $scope.isRaiW = appConfigService.name == 'copay';
+      $scope.isRaiW = appConfigService.name == 'raiw';
       $scope.fromHardwareWallet = {
         value: false
       };

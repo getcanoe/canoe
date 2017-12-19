@@ -50,19 +50,19 @@ angular.module('raiwApp.controllers').controller('preferencesHistory',
         $scope.csvFilename = $scope.appName + '-' + $scope.wallet.name + '.csv';
         $scope.csvHeader = ['Date', 'Destination', 'Description', 'Amount', 'Currency', 'Txid', 'Creator', 'RaiWers', 'Comment'];
 
-        var _amount, _note, _copayers, _creator, _comment;
+        var _amount, _note, _raiwers, _creator, _comment;
         data.forEach(function(it, index) {
           var amount = it.amount;
 
           if (it.action == 'moved')
             amount = 0;
 
-          _copayers = '';
+          _raiwers = '';
           _creator = '';
 
           if (it.actions && it.actions.length > 1) {
             for (var i = 0; i < it.actions.length; i++) {
-              _copayers += it.actions[i].copayerName + ':' + it.actions[i].type + ' - ';
+              _raiwers += it.actions[i].raiwerName + ':' + it.actions[i].type + ' - ';
             }
             _creator = (it.creatorName && it.creatorName != 'undefined') ? it.creatorName : '';
           }
@@ -81,7 +81,7 @@ angular.module('raiwApp.controllers').controller('preferencesHistory',
             'Currency': 'BTC',
             'Txid': it.txid,
             'Creator': _creator,
-            'RaiWers': _copayers,
+            'RaiWers': _raiwers,
             'Comment': _comment
           });
 

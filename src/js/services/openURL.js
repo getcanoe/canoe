@@ -85,7 +85,7 @@ angular.module('raiwApp.services').factory('openURLService', function($rootScope
         $log.debug('Registering Browser handlers base:' + base);
         navigator.registerProtocolHandler('bitcoin', url, 'RaiW Bitcoin Handler');
         navigator.registerProtocolHandler('web+bitcoincash', url, 'RaiW Bitcoin Cash Handler');
-        navigator.registerProtocolHandler('web+copay', url, 'RaiW Wallet Handler');
+        navigator.registerProtocolHandler('web+raiw', url, 'RaiW Wallet Handler');
         navigator.registerProtocolHandler('web+bitpay', url, 'BitPay Wallet Handler');
       }
     }

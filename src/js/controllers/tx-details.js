@@ -12,7 +12,7 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
     $scope.title = gettextCatalog.getString('Transaction');
     $scope.wallet = profileService.getWallet(data.stateParams.walletId);
     $scope.color = $scope.wallet.color;
-    $scope.copayerId = $scope.wallet.credentials.copayerId;
+    $scope.raiwerId = $scope.wallet.credentials.raiwerId;
     $scope.isShared = $scope.wallet.credentials.n > 1;
     $scope.txsUnsubscribedForNotifications = config.confirmedTxsNotifications ? !config.confirmedTxsNotifications.enabled : true;
 
@@ -93,7 +93,7 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
         type: action.type,
         time: action.createdOn,
         description: actionDescriptions[action.type],
-        by: action.copayerName
+        by: action.raiwerName
       });
     });
 

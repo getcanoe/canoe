@@ -86,7 +86,7 @@ angular.module('raiwApp.services')
       wallet.started = true;
       wallet.doNotVerifyPayPro = isChromeApp;
       wallet.network = wallet.credentials.network;
-      wallet.copayerId = wallet.credentials.copayerId;
+      wallet.raiwerId = wallet.credentials.raiwerId;
       wallet.m = wallet.credentials.m;
       wallet.n = wallet.credentials.n;
       wallet.coin = wallet.credentials.coin;
@@ -948,7 +948,7 @@ angular.module('raiwApp.services')
 
             var idToName = {};
             if (wallet.cachedStatus) {
-              lodash.each(wallet.cachedStatus.wallet.copayers, function(c) {
+              lodash.each(wallet.cachedStatus.wallet.raiwers, function(c) {
                 idToName[c.id] = c.name;
               });
             }

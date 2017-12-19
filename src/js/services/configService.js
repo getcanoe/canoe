@@ -21,8 +21,8 @@ angular.module('raiwApp.services').factory('configService', function(storageServ
       bitpay: {
         url: 'https://bitpay.com/wallet'
       },
-      copay: {
-        url: 'https://copay.io/#download'
+      raiw: {
+        url: 'https://raiw.io/#download'
       }
     },
 
@@ -32,9 +32,9 @@ angular.module('raiwApp.services').factory('configService', function(storageServ
         android: 'https://play.google.com/store/apps/details?id=com.bitpay.wallet',
         wp: ''
       },
-      copay: {
+      raiw: {
         ios: 'http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=951330296&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8',
-        android: 'https://play.google.com/store/apps/details?id=com.bitpay.copay',
+        android: 'https://play.google.com/store/apps/details?id=com.bitpay.raiw',
         wp: ''
       }
     },
@@ -74,7 +74,7 @@ angular.module('raiwApp.services').factory('configService', function(storageServ
     },
 
     release: {
-      url: 'https://api.github.com/repos/bitpay/copay/releases/latest'
+      url: 'https://api.github.com/repos/bitpay/raiw/releases/latest'
     },
 
     pushNotificationsEnabled: true,

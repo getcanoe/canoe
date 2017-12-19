@@ -21,7 +21,7 @@ angular.module('raiwApp.services').factory('incomingData', function($log, $state
       var value = match[0].replace(',', '.');
       var newUri = data.replace(regex, value);
 
-      // mobile devices, uris like copay://glidera
+      // mobile devices, uris like raiw://glidera
       newUri.replace('://', ':');
 
       return newUri;
@@ -277,7 +277,7 @@ angular.module('raiwApp.services').factory('incomingData', function($log, $state
       return true;
 
       // Join
-    } else if (data && data.match(/^copay:[0-9A-HJ-NP-Za-km-z]{70,80}$/)) {
+    } else if (data && data.match(/^raiw:[0-9A-HJ-NP-Za-km-z]{70,80}$/)) {
       $state.go('tabs.home', {}, {
         'reload': true,
         'notify': $state.current.name == 'tabs.home' ? false : true

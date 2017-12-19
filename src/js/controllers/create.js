@@ -95,7 +95,7 @@ angular.module('raiwApp.controllers').controller('createController',
 
       */
 
-      if (appConfigService.name == 'copay') {
+      if (appConfigService.name == 'raiw') {
         if (n > 1 && walletService.externalSource.ledger.supported)
           seedOptions.push({
             id: walletService.externalSource.ledger.id,
@@ -247,7 +247,7 @@ angular.module('raiwApp.controllers').controller('createController',
             });
             $state.go('tabs.home');
             $timeout(function() {
-              $state.transitionTo('tabs.copayers', {
+              $state.transitionTo('tabs.raiwers', {
                 walletId: client.credentials.walletId
               });
             }, 100);

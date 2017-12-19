@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('copayersController',
+angular.module('raiwApp.controllers').controller('raiwersController',
   function($scope, $log, $timeout, $stateParams, $state, $rootScope, $ionicHistory, appConfigService, lodash, profileService, walletService, popupService, bwcError, platformInfo, gettextCatalog, ongoingProcess, pushNotificationsService) {
 
     var listener;
@@ -30,7 +30,7 @@ angular.module('raiwApp.controllers').controller('copayersController',
           return popupService.showAlert(bwcError.msg(err, gettextCatalog.getString('Could not update wallet')));
         }
         $scope.wallet.status = status;
-        $scope.copayers = $scope.wallet.status.wallet.copayers;
+        $scope.raiwers = $scope.wallet.status.wallet.raiwers;
         $scope.secret = $scope.wallet.status.wallet.secret;
         $timeout(function() {
           $scope.$apply();

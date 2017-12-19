@@ -20,7 +20,7 @@ angular.module('raiwApp.filters', [])
   .filter('removeEmpty', function() {
     return function(elements) {
       elements = elements || [];
-      // Hide empty change addresses from other copayers
+      // Hide empty change addresses from other raiwers
       return elements.filter(function(e) {
         return !e.isChange || e.balance > 0;
       });

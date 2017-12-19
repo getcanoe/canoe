@@ -17,7 +17,7 @@ angular.module('raiwApp.services').factory('txpModalService', function(configSer
     scope.tx = tx;
     if (!scope.tx.toAddress) scope.tx.toAddress = tx.outputs[0].toAddress;
     scope.wallet = wallet;
-    scope.copayers = wallet ? wallet.copayers : null;
+    scope.raiwers = wallet ? wallet.raiwers : null;
     scope.isGlidera = glideraActive;
     scope.currentSpendUnconfirmed = config.spendUnconfirmed;
     // scope.tx.hasMultiplesOutputs = true;  // Uncomment to test multiple outputs

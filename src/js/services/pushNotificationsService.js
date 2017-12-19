@@ -89,7 +89,7 @@ angular.module('raiwApp.services').factory('pushNotificationsService', function 
     if (!wallet) return;
     
     if (!wallet.isComplete()) {
-      return $state.go('tabs.copayers', {
+      return $state.go('tabs.raiwers', {
         walletId: wallet.id 
       });
     }

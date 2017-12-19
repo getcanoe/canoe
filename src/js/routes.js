@@ -1,104 +1,98 @@
-'use strict';
+'use strict'
 
-var unsupported, isaosp;
+var unsupported, isaosp
 
 if (window && window.navigator) {
-  var rxaosp = window.navigator.userAgent.match(/Android.*AppleWebKit\/([\d.]+)/);
-  isaosp = (rxaosp && rxaosp[1] < 537);
-  if (!window.cordova && isaosp)
-    unsupported = true;
+  var rxaosp = window.navigator.userAgent.match(/Android.*AppleWebKit\/([\d.]+)/)
+  isaosp = (rxaosp && rxaosp[1] < 537)
+  if (!window.cordova && isaosp) { unsupported = true }
   if (unsupported) {
-    window.location = '#/unsupported';
+    window.location = '#/unsupported'
   }
 }
 
-//Setting up route
-angular.module('raiwApp').config(function(historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider) {
-    $urlRouterProvider.otherwise('/starting');
+// Setting up route
+angular.module('raiwApp').config(function (historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider) {
+  $urlRouterProvider.otherwise('/starting')
 
     // NO CACHE
-    //$ionicConfigProvider.views.maxCache(0);
+    // $ionicConfigProvider.views.maxCache(0);
 
     // TABS BOTTOM
-    $ionicConfigProvider.tabs.position('bottom');
+  $ionicConfigProvider.tabs.position('bottom')
 
     // NAV TITTLE CENTERED
-    $ionicConfigProvider.navBar.alignTitle('center');
+  $ionicConfigProvider.navBar.alignTitle('center')
 
     // NAV BUTTONS ALIGMENT
-    $ionicConfigProvider.navBar.positionPrimaryButtons('left');
-    $ionicConfigProvider.navBar.positionSecondaryButtons('right');
+  $ionicConfigProvider.navBar.positionPrimaryButtons('left')
+  $ionicConfigProvider.navBar.positionSecondaryButtons('right')
 
     // NAV BACK-BUTTON TEXT/ICON
-    $ionicConfigProvider.backButton.icon('icon ion-ios-arrow-thin-left').text('');
-    $ionicConfigProvider.backButton.previousTitleText(false);
+  $ionicConfigProvider.backButton.icon('icon ion-ios-arrow-thin-left').text('')
+  $ionicConfigProvider.backButton.previousTitleText(false)
 
     // CHECKBOX CIRCLE
-    $ionicConfigProvider.form.checkbox('circle');
+  $ionicConfigProvider.form.checkbox('circle')
 
     // USE NATIVE SCROLLING
-    $ionicConfigProvider.scrolling.jsScrolling(false);
+  $ionicConfigProvider.scrolling.jsScrolling(false)
 
-    $logProvider.debugEnabled(true);
-    $provide.decorator('$log', ['$delegate', 'platformInfo',
-    function($delegate, platformInfo) {
-        var historicLog = historicLogProvider.$get();
+  $logProvider.debugEnabled(true)
+  $provide.decorator('$log', ['$delegate', 'platformInfo',
+    function ($delegate, platformInfo) {
+        var historicLog = historicLogProvider.$get()
 
-        historicLog.getLevels().forEach(function(levelDesc) {
-          var level = levelDesc.level;
-          if (platformInfo.isDevel && level == 'error') return;
+        historicLog.getLevels().forEach(function (levelDesc) {
+          var level = levelDesc.level
+          if (platformInfo.isDevel && level == 'error') return
 
-          var orig = $delegate[level];
-          $delegate[level] = function() {
-            if (level == 'error')
-              console.log(arguments);
+          var orig = $delegate[level]
+          $delegate[level] = function () {
+            if (level == 'error') { console.log(arguments) }
 
-            var args = Array.prototype.slice.call(arguments);
+            var args = Array.prototype.slice.call(arguments)
 
-            args = args.map(function(v) {
+            args = args.map(function (v) {
               try {
-                if (typeof v == 'undefined') v = 'undefined';
-                if (!v) v = 'null';
-                if (typeof v == 'object') {
-                  if (v.message)
-                    v = v.message;
-                  else
-                    v = JSON.stringify(v);
+                if (typeof v === 'undefined') v = 'undefined'
+                if (!v) v = 'null'
+                if (typeof v === 'object') {
+                  if (v.message) { v = v.message } else { v = JSON.stringify(v) }
                 }
                 // Trim output in mobile
                 if (platformInfo.isCordova) {
-                  v = v.toString();
+                  v = v.toString()
                   if (v.length > 3000) {
-                    v = v.substr(0, 2997) + '...';
+                    v = v.substr(0, 2997) + '...'
                   }
                 }
               } catch (e) {
-                console.log('Error at log decorator:', e);
-                v = 'undefined';
+                console.log('Error at log decorator:', e)
+                v = 'undefined'
               }
-              return v;
-            });
+              return v
+            })
 
             try {
-              if (platformInfo.isCordova)
-                console.log(args.join(' '));
+              if (platformInfo.isCordova) { console.log(args.join(' ')) }
 
-              historicLog.add(level, args.join(' '));
-              orig.apply(null, args);
+              historicLog.add(level, args.join(' '))
+              orig.apply(null, args)
             } catch (e) {
-              console.log('ERROR (at log decorator):', e, args[0]);
+              console.log('ERROR (at log decorator):', e, args[0])
             }
-          };
-        });
-        return $delegate;
-    }
-  ]);
+          }
+        })
+        return $delegate
+      }
+  ])
 
     // whitelist 'chrome-extension:' for chromeApp to work with image URLs processed by Angular
     // link: http://stackoverflow.com/questions/15606751/angular-changes-urls-to-unsafe-in-extension-page?lq=1
-    $compileProvider.imgSrcSanitizationWhitelist(/^\s*((https?|ftp|file|blob|chrome-extension):|data:image\/)/);
+  $compileProvider.imgSrcSanitizationWhitelist(/^\s*((https?|ftp|file|blob|chrome-extension):|data:image\/)/)
 
-    $stateProvider
+  $stateProvider
 
       /*
        *
@@ -124,12 +118,12 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
 
       .state('uri', {
         url: '/uri/:url',
-        controller: function($stateParams, $log, openURLService, profileService) {
-          profileService.whenAvailable(function() {
-            $log.info('DEEP LINK from Browser:' + $stateParams.url);
+        controller: function ($stateParams, $log, openURLService, profileService) {
+          profileService.whenAvailable(function () {
+            $log.info('DEEP LINK from Browser:' + $stateParams.url)
             openURLService.handleURL({
               url: $stateParams.url
-            });
+            })
           })
         }
       })
@@ -154,7 +148,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
         views: {
           'tab-home@tabs': {
             controller: 'activityController',
-            templateUrl: 'views/activity.html',
+            templateUrl: 'views/activity.html'
           }
         }
       })
@@ -163,7 +157,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
         views: {
           'tab-home@tabs': {
             controller: 'proposalsController',
-            templateUrl: 'views/proposals.html',
+            templateUrl: 'views/proposals.html'
           }
         }
       })
@@ -231,7 +225,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
         views: {
           'tab-home': {
             controller: 'tabHomeController',
-            templateUrl: 'views/tab-home.html',
+            templateUrl: 'views/tab-home.html'
           }
         }
       })
@@ -240,7 +234,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
         views: {
           'tab-receive': {
             controller: 'tabReceiveController',
-            templateUrl: 'views/tab-receive.html',
+            templateUrl: 'views/tab-receive.html'
           }
         }
       })
@@ -249,14 +243,14 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
         views: {
           'tab-scan': {
             controller: 'tabScanController',
-            templateUrl: 'views/tab-scan.html',
+            templateUrl: 'views/tab-scan.html'
           }
         }
       })
       .state('scanner', {
         url: '/scanner',
         params: {
-          passthroughMode: null,
+          passthroughMode: null
         },
         controller: 'tabScanController',
         templateUrl: 'views/tab-scan.html'
@@ -266,7 +260,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
         views: {
           'tab-send': {
             controller: 'tabSendController',
-            templateUrl: 'views/tab-send.html',
+            templateUrl: 'views/tab-send.html'
           }
         }
       })
@@ -275,7 +269,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
         views: {
           'tab-settings': {
             controller: 'tabSettingsController',
-            templateUrl: 'views/tab-settings.html',
+            templateUrl: 'views/tab-settings.html'
           }
         }
       })
@@ -340,7 +334,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           'tab-home@tabs': {
             templateUrl: 'views/join.html',
             controller: 'joinController'
-          },
+          }
         }
       })
       .state('tabs.add.import', {
@@ -349,8 +343,8 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           'tab-home@tabs': {
             templateUrl: 'views/import.html',
             controller: 'importController'
-          },
-        },
+          }
+        }
       })
       .state('tabs.add.create-personal', {
         url: '/create-personal',
@@ -358,7 +352,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           'tab-home@tabs': {
             templateUrl: 'views/tab-create-personal.html',
             controller: 'createController'
-          },
+          }
         }
       })
       .state('tabs.add.create-shared', {
@@ -367,7 +361,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           'tab-home@tabs': {
             templateUrl: 'views/tab-create-shared.html',
             controller: 'createController'
-          },
+          }
         }
       })
 
@@ -463,7 +457,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
         views: {
           'tab-settings@tabs': {
             controller: 'lockSetupController',
-            templateUrl: 'views/lockSetup.html',
+            templateUrl: 'views/lockSetup.html'
           }
         }
       })
@@ -477,7 +471,6 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           }
         }
       })
-
 
       /*
        *
@@ -609,7 +602,6 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
        *
        */
 
-
       .state('tabs.addressbook', {
         url: '/addressbook',
         views: {
@@ -644,12 +636,12 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
        *
        */
 
-      .state('tabs.copayers', {
-        url: '/copayers/:walletId',
+      .state('tabs.raiwers', {
+        url: '/raiwers/:walletId',
         views: {
           'tab-home': {
-            templateUrl: 'views/copayers.html',
-            controller: 'copayersController'
+            templateUrl: 'views/raiwers.html',
+            controller: 'raiwersController'
           }
         }
       })
@@ -690,7 +682,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
         abstract: true,
         params: {
           id: null,
-          nextStep: 'tabs.paymentRequest.confirm',
+          nextStep: 'tabs.paymentRequest.confirm'
         }
       })
 
@@ -842,12 +834,12 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           'onboarding': {
             templateUrl: 'views/import.html',
             controller: 'importController'
-          },
+          }
         },
         params: {
           code: null,
           fromOnboarding: null
-        },
+        }
       })
 
       /*
@@ -939,7 +931,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           }
         },
         params: {
-          coin: 'btc',
+          coin: 'btc'
         }
       })
       .state('tabs.buyandsell.glidera.amount', {
@@ -995,7 +987,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           }
         },
         params: {
-          coin: 'btc',
+          coin: 'btc'
         }
       })
       .state('tabs.preferences.coinbase', {
@@ -1085,7 +1077,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           nextStep: 'tabs.giftcards.mercadoLibre.buy',
           currency: 'BRL',
           coin: 'btc',
-          fixedUnit: 1,
+          fixedUnit: 1
         }
       })
       .state('tabs.giftcards.mercadoLibre.buy', {
@@ -1137,7 +1129,7 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
           nextStep: 'tabs.giftcards.amazon.buy',
           currency: 'USD',
           coin: 'btc',
-          fixedUnit: true,
+          fixedUnit: true
         }
       })
       .state('tabs.giftcards.amazon.buy', {
@@ -1207,148 +1199,145 @@ angular.module('raiwApp').config(function(historicLogProvider, $provide, $logPro
             templateUrl: 'views/preferencesBitpayServices.html'
           }
         }
-      });
-  })
-  .run(function($rootScope, $state, $location, $log, $timeout, startupService, ionicToast, fingerprintService, $ionicHistory, $ionicPlatform, $window, appConfigService, lodash, platformInfo, profileService, uxLanguage, gettextCatalog, openURLService, storageService, scannerService, configService, emailService, /* plugins START HERE => */ coinbaseService, glideraService, amazonService, bitpayCardService, applicationService, mercadoLibreService) {
+      })
+})
+  .run(function ($rootScope, $state, $location, $log, $timeout, startupService, ionicToast, fingerprintService, $ionicHistory, $ionicPlatform, $window, appConfigService, lodash, platformInfo, profileService, uxLanguage, gettextCatalog, openURLService, storageService, scannerService, configService, emailService, /* plugins START HERE => */ coinbaseService, glideraService, amazonService, bitpayCardService, applicationService, mercadoLibreService) {
+    uxLanguage.init()
 
-    uxLanguage.init();
-
-    $ionicPlatform.ready(function() {
-      if (screen.width < 768 && platformInfo.isCordova)
-        screen.lockOrientation('portrait');
+    $ionicPlatform.ready(function () {
+      if (screen.width < 768 && platformInfo.isCordova) { screen.lockOrientation('portrait') }
 
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard && !platformInfo.isWP) {
-        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
-        cordova.plugins.Keyboard.disableScroll(true);
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false)
+        cordova.plugins.Keyboard.disableScroll(true)
       }
 
-      window.addEventListener('native.keyboardshow', function() {
-        document.body.classList.add('keyboard-open');
-      });
+      window.addEventListener('native.keyboardshow', function () {
+        document.body.classList.add('keyboard-open')
+      })
 
-      $ionicPlatform.registerBackButtonAction(function(e) {
+      $ionicPlatform.registerBackButtonAction(function (e) {
+        // from root tabs view
+        var matchHome = $ionicHistory.currentStateName() == 'tabs.home'
+        var matchReceive = $ionicHistory.currentStateName() == 'tabs.receive'
+        var matchScan = $ionicHistory.currentStateName() == 'tabs.scan'
+        var matchSend = $ionicHistory.currentStateName() == 'tabs.send'
+        var matchSettings = $ionicHistory.currentStateName() == 'tabs.settings'
 
-        //from root tabs view
-        var matchHome = $ionicHistory.currentStateName() == 'tabs.home' ? true : false;
-        var matchReceive = $ionicHistory.currentStateName() == 'tabs.receive' ? true : false;
-        var matchScan = $ionicHistory.currentStateName() == 'tabs.scan' ? true : false;
-        var matchSend = $ionicHistory.currentStateName() == 'tabs.send' ? true : false;
-        var matchSettings = $ionicHistory.currentStateName() == 'tabs.settings' ? true : false;
+        var fromTabs = matchHome | matchReceive | matchScan | matchSend | matchSettings
 
-        var fromTabs = matchHome | matchReceive | matchScan | matchSend | matchSettings;
+        // onboarding with no back views
+        var matchWelcome = $ionicHistory.currentStateName() == 'onboarding.welcome'
+        var matchCollectEmail = $ionicHistory.currentStateName() == 'onboarding.collectEmail'
+        var matchBackupRequest = $ionicHistory.currentStateName() == 'onboarding.backupRequest'
+        var backedUp = $ionicHistory.backView().stateName == 'onboarding.backup'
+        var noBackView = $ionicHistory.backView().stateName == 'starting'
+        var matchDisclaimer = !!($ionicHistory.currentStateName() == 'onboarding.disclaimer' && (backedUp || noBackView))
 
-        //onboarding with no back views
-        var matchWelcome = $ionicHistory.currentStateName() == 'onboarding.welcome' ? true : false;
-        var matchCollectEmail = $ionicHistory.currentStateName() == 'onboarding.collectEmail' ? true : false;
-        var matchBackupRequest = $ionicHistory.currentStateName() == 'onboarding.backupRequest' ? true : false;
-        var backedUp = $ionicHistory.backView().stateName == 'onboarding.backup' ? true : false;
-        var noBackView = $ionicHistory.backView().stateName == 'starting' ? true : false;
-        var matchDisclaimer = $ionicHistory.currentStateName() == 'onboarding.disclaimer' && (backedUp || noBackView) ? true : false;
+        var fromOnboarding = matchCollectEmail | matchBackupRequest | matchWelcome | matchDisclaimer
 
-        var fromOnboarding = matchCollectEmail | matchBackupRequest | matchWelcome | matchDisclaimer;
-
-        //views with disable backbutton
-        var matchComplete = $ionicHistory.currentStateName() == 'tabs.rate.complete' ? true : false;
-        var matchLockedView = $ionicHistory.currentStateName() == 'lockedView' ? true : false;
-        var matchPin = $ionicHistory.currentStateName() == 'pin' ? true : false;
+        // views with disable backbutton
+        var matchComplete = $ionicHistory.currentStateName() == 'tabs.rate.complete'
+        var matchLockedView = $ionicHistory.currentStateName() == 'lockedView'
+        var matchPin = $ionicHistory.currentStateName() == 'pin'
 
         if ($ionicHistory.backView() && !fromTabs && !fromOnboarding && !matchComplete && !matchPin && !matchLockedView) {
-          $ionicHistory.goBack();
+          $ionicHistory.goBack()
         } else
         if ($rootScope.backButtonPressedOnceToExit) {
-          navigator.app.exitApp();
+          navigator.app.exitApp()
         } else {
-          $rootScope.backButtonPressedOnceToExit = true;
-          $rootScope.$apply(function() {
-            ionicToast.show(gettextCatalog.getString('Press again to exit'), 'bottom', false, 1000);
-          });
-          $timeout(function() {
-            $rootScope.backButtonPressedOnceToExit = false;
-          }, 3000);
+          $rootScope.backButtonPressedOnceToExit = true
+          $rootScope.$apply(function () {
+            ionicToast.show(gettextCatalog.getString('Press again to exit'), 'bottom', false, 1000)
+          })
+          $timeout(function () {
+            $rootScope.backButtonPressedOnceToExit = false
+          }, 3000)
         }
-        e.preventDefault();
-      }, 101);
+        e.preventDefault()
+      }, 101)
 
-      $ionicPlatform.on('pause', function() {
+      $ionicPlatform.on('pause', function () {
         // Nothing to do
-      });
+      })
 
-      $ionicPlatform.on('resume', function() {
-        applicationService.appLockModal('check');
-      });
+      $ionicPlatform.on('resume', function () {
+        applicationService.appLockModal('check')
+      })
 
-      $ionicPlatform.on('menubutton', function() {
-        window.location = '#/preferences';
-      });
+      $ionicPlatform.on('menubutton', function () {
+        window.location = '#/preferences'
+      })
 
-      $log.info('Init profile...');
+      $log.info('Init profile...')
       // Try to open local profile
-      profileService.loadAndBindProfile(function(err) {
+      profileService.loadAndBindProfile(function (err) {
         $ionicHistory.nextViewOptions({
           disableAnimate: true
-        });
+        })
         if (err) {
           if (err.message && err.message.match('NOPROFILE')) {
-            $log.debug('No profile... redirecting');
-            $state.go('onboarding.welcome');
+            $log.debug('No profile... redirecting')
+            $state.go('onboarding.welcome')
           } else if (err.message && err.message.match('NONAGREEDDISCLAIMER')) {
             if (lodash.isEmpty(profileService.getWallets())) {
-              $log.debug('No wallets and no disclaimer... redirecting');
-              $state.go('onboarding.welcome');
+              $log.debug('No wallets and no disclaimer... redirecting')
+              $state.go('onboarding.welcome')
             } else {
-              $log.debug('Display disclaimer... redirecting');
+              $log.debug('Display disclaimer... redirecting')
               $state.go('onboarding.disclaimer', {
                 resume: true
-              });
+              })
             }
           } else {
-            throw new Error(err); // TODO
+            throw new Error(err) // TODO
           }
         } else {
-          profileService.storeProfileIfDirty();
-          $log.debug('Profile loaded ... Starting UX.');
-          scannerService.gentleInitialize();
+          profileService.storeProfileIfDirty()
+          $log.debug('Profile loaded ... Starting UX.')
+          scannerService.gentleInitialize()
           // Reload tab-home if necessary (from root path: starting)
           $state.go('starting', {}, {
             'reload': true,
-            'notify': $state.current.name == 'starting' ? false : true
-          }).then(function() {
+            'notify': $state.current.name != 'starting'
+          }).then(function () {
             $ionicHistory.nextViewOptions({
               disableAnimate: true,
               historyRoot: true
-            });
-            $state.transitionTo('tabs.home').then(function() {
+            })
+            $state.transitionTo('tabs.home').then(function () {
               // Clear history
-              $ionicHistory.clearHistory();
-            });
-            applicationService.appLockModal('check');
-          });
+              $ionicHistory.clearHistory()
+            })
+            applicationService.appLockModal('check')
+          })
         };
         // After everything have been loaded
-        $timeout(function() {
-          emailService.init(); // Update email subscription if necessary
-          openURLService.init();
-        }, 1000);
-      });
-    });
+        $timeout(function () {
+          emailService.init() // Update email subscription if necessary
+          openURLService.init()
+        }, 1000)
+      })
+    })
 
     if (platformInfo.isNW) {
-      var gui = require('nw.gui');
-      var win = gui.Window.get();
+      var gui = require('nw.gui')
+      var win = gui.Window.get()
       var nativeMenuBar = new gui.Menu({
-        type: "menubar"
-      });
+        type: 'menubar'
+      })
       try {
-        nativeMenuBar.createMacBuiltin(appConfigService.nameCase);
+        nativeMenuBar.createMacBuiltin(appConfigService.nameCase)
       } catch (e) {
-        $log.debug('This is not OSX');
+        $log.debug('This is not OSX')
       }
-      win.menu = nativeMenuBar;
+      win.menu = nativeMenuBar
     }
 
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-      $log.debug('Route change from:', fromState.name || '-', ' to:', toState.name);
-      $log.debug('            toParams:' + JSON.stringify(toParams || {}));
-      $log.debug('            fromParams:' + JSON.stringify(fromParams || {}));
-    });
-  });
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+      $log.debug('Route change from:', fromState.name || '-', ' to:', toState.name)
+      $log.debug('            toParams:' + JSON.stringify(toParams || {}))
+      $log.debug('            fromParams:' + JSON.stringify(fromParams || {}))
+    })
+  })

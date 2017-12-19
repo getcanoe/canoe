@@ -157,7 +157,7 @@ angular.module('raiwApp.services').factory('txFormatService', function($filter, 
       tx = txFormatService.processTx(tx.wallet.coin, tx);
 
       var action = lodash.find(tx.actions, {
-        copayerId: tx.wallet.copayerId
+        raiwerId: tx.wallet.raiwerId
       });
 
       if (!action && tx.status == 'pending') {

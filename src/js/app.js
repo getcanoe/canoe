@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var modules = [
   'angularMoment',
@@ -18,12 +18,12 @@ var modules = [
   'raiwApp.controllers',
   'raiwApp.directives',
   'raiwApp.addons'
-];
+]
 
-var raiwApp = window.raiwApp = angular.module('raiwApp', modules);
+var raiwApp = window.raiwApp = angular.module('raiwApp', modules)
 
-angular.module('raiwApp.filters', []);
-angular.module('raiwApp.services', []);
-angular.module('raiwApp.controllers', []);
-angular.module('raiwApp.directives', []);
-angular.module('raiwApp.addons', []);
+angular.module('raiwApp.filters', [])
+angular.module('raiwApp.services', [])
+angular.module('raiwApp.controllers', [])
+angular.module('raiwApp.directives', [])
+angular.module('raiwApp.addons', [])

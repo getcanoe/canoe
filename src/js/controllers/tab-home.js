@@ -187,7 +187,7 @@ angular.module('raiwApp.controllers').controller('tabHomeController',
 
     $scope.openWallet = function(wallet) {
       if (!wallet.isComplete()) {
-        return $state.go('tabs.copayers', {
+        return $state.go('tabs.raiwers', {
           walletId: wallet.credentials.walletId
         });
       }
