@@ -1,5 +1,7 @@
 .vscode
 
+src/js/appConfig.js
+
 # translation
 i18n/po/*.mo
 i18n/crowdin_api_key.txt

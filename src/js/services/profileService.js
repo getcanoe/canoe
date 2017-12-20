@@ -1,341 +1,315 @@
-'use strict';
+'use strict'
 angular.module('raiwApp.services')
-  .factory('profileService', function profileServiceFactory($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, bwcService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, appConfigService) {
+  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, bwcService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, appConfigService) {
+    var isChromeApp = platformInfo.isChromeApp
+    var isCordova = platformInfo.isCordova
+    var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
+    var isIOS = platformInfo.isIOS
 
+    var root = {}
+    var errors = bwcService.getErrors()
+    var usePushNotifications = isCordova && !isWindowsPhoneApp
 
-    var isChromeApp = platformInfo.isChromeApp;
-    var isCordova = platformInfo.isCordova;
-    var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
-    var isIOS = platformInfo.isIOS;
+    var UPDATE_PERIOD = 15
 
-    var root = {};
-    var errors = bwcService.getErrors();
-    var usePushNotifications = isCordova && !isWindowsPhoneApp;
+    root.profile = null
 
-    var UPDATE_PERIOD = 15;
-
-    root.profile = null;
-
-    Object.defineProperty(root, "focusedClient", {
-      get: function() {
-        throw "focusedClient is not used any more"
+    Object.defineProperty(root, 'focusedClient', {
+      get: function () {
+        throw 'focusedClient is not used any more'
       },
-      set: function() {
-        throw "focusedClient is not used any more"
+      set: function () {
+        throw 'focusedClient is not used any more'
       }
-    });
+    })
 
+    root.wallet = {} // decorated version of client
 
-    root.wallet = {}; // decorated version of client
-
-    root.updateWalletSettings = function(wallet) {
-      var defaults = configService.getDefaults();
-      configService.whenAvailable(function(config) {
-        wallet.usingCustomBWS = config.bwsFor && config.bwsFor[wallet.id] && (config.bwsFor[wallet.id] != defaults.bws.url);
-        wallet.name = (config.aliasFor && config.aliasFor[wallet.id]) || wallet.credentials.walletName;
-        wallet.color = (config.colorFor && config.colorFor[wallet.id]);
-        wallet.email = config.emailFor && config.emailFor[wallet.id];
-      });
+    root.updateWalletSettings = function (wallet) {
+      var defaults = configService.getDefaults()
+      configService.whenAvailable(function (config) {
+        wallet.usingCustomBWS = config.bwsFor && config.bwsFor[wallet.id] && (config.bwsFor[wallet.id] != defaults.bws.url)
+        wallet.name = (config.aliasFor && config.aliasFor[wallet.id]) || wallet.credentials.walletName
+        wallet.color = (config.colorFor && config.colorFor[wallet.id])
+        wallet.email = config.emailFor && config.emailFor[wallet.id]
+      })
     }
 
-    root.setBackupFlag = function(walletId) {
-      storageService.setBackupFlag(walletId, function(err) {
-        if (err) $log.error(err);
-        $log.debug('Backup flag stored');
-        root.wallet[walletId].needsBackup = false;
-      });
+    root.setBackupFlag = function (walletId) {
+      storageService.setBackupFlag(walletId, function (err) {
+        if (err) $log.error(err)
+        $log.debug('Backup flag stored')
+        root.wallet[walletId].needsBackup = false
+      })
+    }
+
+    function _requiresBackup (wallet) {
+      if (wallet.isPrivKeyExternal()) return false
+      if (!wallet.credentials.mnemonic) return false
+      if (wallet.credentials.network == 'testnet') return false
+
+      return true
     };
 
-    function _requiresBackup(wallet) {
-      if (wallet.isPrivKeyExternal()) return false;
-      if (!wallet.credentials.mnemonic) return false;
-      if (wallet.credentials.network == 'testnet') return false;
+    function _needsBackup (wallet, cb) {
+      if (!_requiresBackup(wallet)) { return cb(false) }
 
-      return true;
+      storageService.getBackupFlag(wallet.credentials.walletId, function (err, val) {
+        if (err) $log.error(err)
+        if (val) return cb(false)
+        return cb(true)
+      })
     };
 
-    function _needsBackup(wallet, cb) {
-      if (!_requiresBackup(wallet))
-        return cb(false);
-
-      storageService.getBackupFlag(wallet.credentials.walletId, function(err, val) {
-        if (err) $log.error(err);
-        if (val) return cb(false);
-        return cb(true);
-      });
-    };
-
-    function _balanceIsHidden(wallet, cb) {
-      storageService.getHideBalanceFlag(wallet.credentials.walletId, function(err, shouldHideBalance) {
-        if (err) $log.error(err);
-        var hideBalance = (shouldHideBalance == 'true') ? true : false;
-        return cb(hideBalance);
-      });
+    function _balanceIsHidden (wallet, cb) {
+      storageService.getHideBalanceFlag(wallet.credentials.walletId, function (err, shouldHideBalance) {
+        if (err) $log.error(err)
+        var hideBalance = (shouldHideBalance == 'true')
+        return cb(hideBalance)
+      })
     };
     // Adds a wallet client to profileService
-    root.bindWalletClient = function(wallet, opts) {
-      var opts = opts || {};
-      var walletId = wallet.credentials.walletId;
+    root.bindWalletClient = function (wallet, opts) {
+      var opts = opts || {}
+      var walletId = wallet.credentials.walletId
 
       if ((root.wallet[walletId] && root.wallet[walletId].started) && !opts.force) {
-        return false;
+        return false
       }
 
       // INIT WALLET VIEWMODEL
-      wallet.id = walletId;
-      wallet.started = true;
-      wallet.doNotVerifyPayPro = isChromeApp;
-      wallet.network = wallet.credentials.network;
-      wallet.raiwerId = wallet.credentials.raiwerId;
-      wallet.m = wallet.credentials.m;
-      wallet.n = wallet.credentials.n;
-      wallet.coin = wallet.credentials.coin;
+      wallet.id = walletId
+      wallet.started = true
+      wallet.doNotVerifyPayPro = isChromeApp
+      wallet.network = wallet.credentials.network
+      wallet.raiwerId = wallet.credentials.raiwerId
+      wallet.m = wallet.credentials.m
+      wallet.n = wallet.credentials.n
+      wallet.coin = wallet.credentials.coin
 
-      root.updateWalletSettings(wallet);
-      root.wallet[walletId] = wallet;
+      root.updateWalletSettings(wallet)
+      root.wallet[walletId] = wallet
 
-      _needsBackup(wallet, function(val) {
-        wallet.needsBackup = val;
-      });
+      _needsBackup(wallet, function (val) {
+        wallet.needsBackup = val
+      })
 
-      _balanceIsHidden(wallet, function(val) {
-        wallet.balanceHidden = val;
-      });
+      _balanceIsHidden(wallet, function (val) {
+        wallet.balanceHidden = val
+      })
 
-      wallet.removeAllListeners();
+      wallet.removeAllListeners()
 
-      wallet.on('report', function(n) {
-        $log.info('BWC Report:' + n);
-      });
+      wallet.on('report', function (n) {
+        $log.info('BWC Report:' + n)
+      })
 
-      wallet.on('notification', function(n) {
+      wallet.on('notification', function (n) {
+        $log.debug('BWC Notification:', n)
 
-        $log.debug('BWC Notification:', n);
+        if (n.type == 'NewBlock' && n.data.network == 'testnet') {
+          throttledBwsEvent(n, wallet)
+        } else newBwsEvent(n, wallet)
+      })
 
-        if (n.type == "NewBlock" && n.data.network == "testnet") {
-          throttledBwsEvent(n, wallet);
-        } else newBwsEvent(n, wallet);
-      });
+      wallet.on('walletCompleted', function () {
+        $log.debug('Wallet completed')
 
-      wallet.on('walletCompleted', function() {
-        $log.debug('Wallet completed');
-
-        root.updateCredentials(JSON.parse(wallet.export()), function() {
-          $rootScope.$emit('Local/WalletCompleted', walletId);
-        });
-      });
+        root.updateCredentials(JSON.parse(wallet.export()), function () {
+          $rootScope.$emit('Local/WalletCompleted', walletId)
+        })
+      })
 
       wallet.initialize({
-        notificationIncludeOwn: true,
-      }, function(err) {
+        notificationIncludeOwn: true
+      }, function (err) {
         if (err) {
-          $log.error('Could not init notifications err:', err);
-          return;
+          $log.error('Could not init notifications err:', err)
+          return
         }
-        wallet.setNotificationsInterval(UPDATE_PERIOD);
-        wallet.openWallet(function(err) {
-          if (wallet.status !== true)
-            $log.debug('Wallet + ' + walletId + ' status:' + wallet.status)
-        });
-      });
+        wallet.setNotificationsInterval(UPDATE_PERIOD)
+        wallet.openWallet(function (err) {
+          if (wallet.status !== true) { $log.debug('Wallet + ' + walletId + ' status:' + wallet.status) }
+        })
+      })
 
-      $rootScope.$on('Local/SettingsUpdated', function(e, walletId) {
+      $rootScope.$on('Local/SettingsUpdated', function (e, walletId) {
         if (!walletId || walletId == wallet.id) {
-          $log.debug('Updating settings for wallet:' + wallet.id);
-          root.updateWalletSettings(wallet);
+          $log.debug('Updating settings for wallet:' + wallet.id)
+          root.updateWalletSettings(wallet)
         }
-      });
+      })
 
-      return true;
-    };
+      return true
+    }
 
-    var throttledBwsEvent = lodash.throttle(function(n, wallet) {
-      newBwsEvent(n, wallet);
-    }, 10000);
+    var throttledBwsEvent = lodash.throttle(function (n, wallet) {
+      newBwsEvent(n, wallet)
+    }, 10000)
 
-    var newBwsEvent = function(n, wallet) {
-      if (wallet.cachedStatus)
-        wallet.cachedStatus.isValid = false;
+    var newBwsEvent = function (n, wallet) {
+      if (wallet.cachedStatus) { wallet.cachedStatus.isValid = false }
 
-      if (wallet.completeHistory)
-        wallet.completeHistory.isValid = false;
+      if (wallet.completeHistory) { wallet.completeHistory.isValid = false }
 
-      if (wallet.cachedActivity)
-        wallet.cachedActivity.isValid = false;
+      if (wallet.cachedActivity) { wallet.cachedActivity.isValid = false }
 
-      if (wallet.cachedTxps)
-        wallet.cachedTxps.isValid = false;
+      if (wallet.cachedTxps) { wallet.cachedTxps.isValid = false }
 
-      $rootScope.$emit('bwsEvent', wallet.id, n.type, n);
-    };
+      $rootScope.$emit('bwsEvent', wallet.id, n.type, n)
+    }
 
-    var validationLock = false;
+    var validationLock = false
 
-    root.runValidation = function(client, delay, retryDelay) {
-
-      delay = delay || 500;
-      retryDelay = retryDelay || 50;
+    root.runValidation = function (client, delay, retryDelay) {
+      delay = delay || 500
+      retryDelay = retryDelay || 50
 
       if (validationLock) {
-        return $timeout(function() {
-          $log.debug('ValidatingWallet Locked: Retrying in: ' + retryDelay);
-          return root.runValidation(client, delay, retryDelay);
-        }, retryDelay);
+        return $timeout(function () {
+          $log.debug('ValidatingWallet Locked: Retrying in: ' + retryDelay)
+          return root.runValidation(client, delay, retryDelay)
+        }, retryDelay)
       }
-      validationLock = true;
+      validationLock = true
 
       // IOS devices are already checked
-      var skipDeviceValidation = isIOS || root.profile.isDeviceChecked(platformInfo.ua);
-      var walletId = client.credentials.walletId;
+      var skipDeviceValidation = isIOS || root.profile.isDeviceChecked(platformInfo.ua)
+      var walletId = client.credentials.walletId
 
-      $log.debug('ValidatingWallet: ' + walletId + ' skip Device:' + skipDeviceValidation);
-      $timeout(function() {
+      $log.debug('ValidatingWallet: ' + walletId + ' skip Device:' + skipDeviceValidation)
+      $timeout(function () {
         client.validateKeyDerivation({
-          skipDeviceValidation: skipDeviceValidation,
-        }, function(err, isOK) {
-          validationLock = false;
+          skipDeviceValidation: skipDeviceValidation
+        }, function (err, isOK) {
+          validationLock = false
 
-          $log.debug('ValidatingWallet End:  ' + walletId + ' isOK:' + isOK);
+          $log.debug('ValidatingWallet End:  ' + walletId + ' isOK:' + isOK)
           if (isOK) {
-            root.profile.setChecked(platformInfo.ua, walletId);
+            root.profile.setChecked(platformInfo.ua, walletId)
           } else {
-            $log.warn('Key Derivation failed for wallet:' + walletId);
-            storageService.clearLastAddress(walletId, function() {});
+            $log.warn('Key Derivation failed for wallet:' + walletId)
+            storageService.clearLastAddress(walletId, function () {})
           }
 
-          root.storeProfileIfDirty();
-        });
-      }, delay);
-    };
+          root.storeProfileIfDirty()
+        })
+      }, delay)
+    }
 
-    var shouldSkipValidation = function(walletId) {
-      return root.profile.isChecked(platformInfo.ua, walletId) || isIOS || isWindowsPhoneApp;
+    var shouldSkipValidation = function (walletId) {
+      return root.profile.isChecked(platformInfo.ua, walletId) || isIOS || isWindowsPhoneApp
     }
     // Used when reading wallets from the profile
-    root.bindWallet = function(credentials, cb) {
-      if (!credentials.walletId || !credentials.m)
-        return cb('bindWallet should receive credentials JSON');
+    root.bindWallet = function (credentials, cb) {
+      if (!credentials.walletId || !credentials.m) { return cb('bindWallet should receive credentials JSON') }
 
       // Create the client
-      var getBWSURL = function(walletId) {
-        var config = configService.getSync();
-        var defaults = configService.getDefaults();
-        return ((config.bwsFor && config.bwsFor[walletId]) || defaults.bws.url);
-      };
+      var getBWSURL = function (walletId) {
+        var config = configService.getSync()
+        var defaults = configService.getDefaults()
+        return ((config.bwsFor && config.bwsFor[walletId]) || defaults.bws.url)
+      }
 
       var client = bwcService.getClient(JSON.stringify(credentials), {
-        bwsurl: getBWSURL(credentials.walletId),
-      });
+        bwsurl: getBWSURL(credentials.walletId)
+      })
 
+      var skipKeyValidation = shouldSkipValidation(credentials.walletId)
+      if (!skipKeyValidation) { root.runValidation(client, 500) }
 
+      $log.info('Binding wallet:' + credentials.walletId + ' Validating?:' + !skipKeyValidation)
+      return cb(null, root.bindWalletClient(client))
+    }
 
-      var skipKeyValidation = shouldSkipValidation(credentials.walletId);
-      if (!skipKeyValidation)
-        root.runValidation(client, 500);
+    root.bindProfile = function (profile, cb) {
+      root.profile = profile
 
-      $log.info('Binding wallet:' + credentials.walletId + ' Validating?:' + !skipKeyValidation);
-      return cb(null, root.bindWalletClient(client));
-    };
+      configService.get(function (err) {
+        $log.debug('Preferences read')
+        if (err) return cb(err)
 
-    root.bindProfile = function(profile, cb) {
-      root.profile = profile;
-
-      configService.get(function(err) {
-        $log.debug('Preferences read');
-        if (err) return cb(err);
-
-        function bindWallets(cb) {
-          var l = root.profile.credentials.length;
+        function bindWallets (cb) {
+          var l = root.profile.credentials.length
           var i = 0,
-            totalBound = 0;
+            totalBound = 0
 
-          if (!l) return cb();
+          if (!l) return cb()
 
-          lodash.each(root.profile.credentials, function(credentials) {
-            root.bindWallet(credentials, function(err, bound) {
-              i++;
-              totalBound += bound;
+          lodash.each(root.profile.credentials, function (credentials) {
+            root.bindWallet(credentials, function (err, bound) {
+              i++
+              totalBound += bound
               if (i == l) {
-                $log.info('Bound ' + totalBound + ' out of ' + l + ' wallets');
-                return cb();
+                $log.info('Bound ' + totalBound + ' out of ' + l + ' wallets')
+                return cb()
               }
-            });
-          });
+            })
+          })
         }
 
-        bindWallets(function() {
-          root.isBound = true;
+        bindWallets(function () {
+          root.isBound = true
 
-          lodash.each(root._queue, function(x) {
-            $timeout(function() {
-              return x();
-            }, 1);
-          });
-          root._queue = [];
+          lodash.each(root._queue, function (x) {
+            $timeout(function () {
+              return x()
+            }, 1)
+          })
+          root._queue = []
 
-
-
-          root.isDisclaimerAccepted(function(val) {
+          root.isDisclaimerAccepted(function (val) {
             if (!val) {
-              return cb(new Error('NONAGREEDDISCLAIMER: Non agreed disclaimer'));
+              return cb(new Error('NONAGREEDDISCLAIMER: Non agreed disclaimer'))
             }
-            return cb();
-          });
-        });
-      });
-    };
+            return cb()
+          })
+        })
+      })
+    }
 
-    root._queue = [];
-    root.whenAvailable = function(cb) {
+    root._queue = []
+    root.whenAvailable = function (cb) {
       if (!root.isBound) {
-        root._queue.push(cb);
-        return;
+        root._queue.push(cb)
+        return
       }
-      return cb();
-    };
+      return cb()
+    }
 
-    root.loadAndBindProfile = function(cb) {
-      storageService.getProfile(function(err, profile) {
+    root.loadAndBindProfile = function (cb) {
+      storageService.getProfile(function (err, profile) {
         if (err) {
-          $rootScope.$emit('Local/DeviceError', err);
-          return cb(err);
+          $rootScope.$emit('Local/DeviceError', err)
+          return cb(err)
         }
         if (!profile) {
-          // Migration??
-          storageService.tryToMigrate(function(err, migratedProfile) {
-            if (err) return cb(err);
-            if (!migratedProfile)
-              return cb(new Error('NOPROFILE: No profile'));
-
-            profile = migratedProfile;
-            return root.bindProfile(profile, cb);
-          })
+          return cb(new Error('NOPROFILE: No profile'))
         } else {
-          $log.debug('Profile read');
-          return root.bindProfile(profile, cb);
+          $log.debug('Profile read')
+          return root.bindProfile(profile, cb)
         }
-      });
-    };
+      })
+    }
 
-    var seedWallet = function(opts, cb) {
-      opts = opts || {};
-      var walletClient = bwcService.getClient(null, opts);
-      var network = opts.networkName || 'livenet';
+    var seedWallet = function (opts, cb) {
+      opts = opts || {}
+      var walletClient = bwcService.getClient(null, opts)
+      var network = opts.networkName || 'livenet'
 
       if (opts.mnemonic) {
         try {
-          opts.mnemonic = root._normalizeMnemonic(opts.mnemonic);
+          opts.mnemonic = root._normalizeMnemonic(opts.mnemonic)
           walletClient.seedFromMnemonic(opts.mnemonic, {
             network: network,
             passphrase: opts.passphrase,
             account: opts.account || 0,
             derivationStrategy: opts.derivationStrategy || 'BIP44',
             coin: opts.coin
-          });
-
+          })
         } catch (ex) {
-          $log.info(ex);
-          return cb(gettextCatalog.getString('Could not create: Invalid wallet recovery phrase'));
+          $log.info(ex)
+          return cb(gettextCatalog.getString('Could not create: Invalid wallet recovery phrase'))
         }
       } else if (opts.extendedPrivateKey) {
         try {
@@ -343,11 +317,11 @@ angular.module('raiwApp.services')
             network: network,
             account: opts.account || 0,
             derivationStrategy: opts.derivationStrategy || 'BIP44',
-            coin: opts.coin,
-          });
+            coin: opts.coin
+          })
         } catch (ex) {
-          $log.warn(ex);
-          return cb(gettextCatalog.getString('Could not create using the specified extended private key'));
+          $log.warn(ex)
+          return cb(gettextCatalog.getString('Could not create using the specified extended private key'))
         }
       } else if (opts.extendedPublicKey) {
         try {
@@ -355,14 +329,14 @@ angular.module('raiwApp.services')
             account: opts.account || 0,
             derivationStrategy: opts.derivationStrategy || 'BIP44',
             coin: opts.coin
-          });
-          walletClient.credentials.hwInfo = opts.hwInfo;
+          })
+          walletClient.credentials.hwInfo = opts.hwInfo
         } catch (ex) {
-          $log.warn("Creating wallet from Extended Public Key Arg:", ex, opts);
-          return cb(gettextCatalog.getString('Could not create using the specified extended public key'));
+          $log.warn('Creating wallet from Extended Public Key Arg:', ex, opts)
+          return cb(gettextCatalog.getString('Could not create using the specified extended public key'))
         }
       } else {
-        var lang = uxLanguage.getCurrentLanguage();
+        var lang = uxLanguage.getCurrentLanguage()
         try {
           walletClient.seedFromRandomWithMnemonic({
             network: network,
@@ -370,271 +344,265 @@ angular.module('raiwApp.services')
             language: lang,
             account: 0,
             coin: opts.coin
-          });
+          })
         } catch (e) {
-          $log.info('Error creating recovery phrase: ' + e.message);
+          $log.info('Error creating recovery phrase: ' + e.message)
           if (e.message.indexOf('language') > 0) {
-            $log.info('Using default language for recovery phrase');
+            $log.info('Using default language for recovery phrase')
             walletClient.seedFromRandomWithMnemonic({
               network: network,
               passphrase: opts.passphrase,
               account: 0,
               coin: opts.coin
-            });
+            })
           } else {
-            return cb(e);
+            return cb(e)
           }
         }
       }
-      return cb(null, walletClient);
-    };
+      return cb(null, walletClient)
+    }
 
     // Creates a wallet on BWC/BWS
-    var doCreateWallet = function(opts, cb) {
-      var showOpts = lodash.clone(opts);
-      if (showOpts.extendedPrivateKey) showOpts.extendedPrivateKey='[hidden]';
-      if (showOpts.mnemonic) showOpts.mnemonic='[hidden]';
+    var doCreateWallet = function (opts, cb) {
+      var showOpts = lodash.clone(opts)
+      if (showOpts.extendedPrivateKey) showOpts.extendedPrivateKey = '[hidden]'
+      if (showOpts.mnemonic) showOpts.mnemonic = '[hidden]'
 
-      $log.debug('Creating Account:', showOpts);
-      $timeout(function() {
-        seedWallet(opts, function(err, walletClient) {
-          if (err) return cb(err);
+      $log.debug('Creating Account:', showOpts)
+      $timeout(function () {
+        seedWallet(opts, function (err, walletClient) {
+          if (err) return cb(err)
 
-          var name = opts.name || gettextCatalog.getString('Default Account');
-          var myName = opts.myName || gettextCatalog.getString('me');
+          var name = opts.name || gettextCatalog.getString('Default Account')
+          var myName = opts.myName || gettextCatalog.getString('me')
 
           walletClient.createWallet(name, myName, opts.m, opts.n, {
             network: opts.networkName,
             singleAddress: opts.singleAddress,
             walletPrivKey: opts.walletPrivKey,
             coin: opts.coin
-          }, function(err, secret) {
-            if (err) return bwcError.cb(err, gettextCatalog.getString('Error creating account'), cb);
-            return cb(null, walletClient, secret);
-          });
-        });
-      }, 50);
-    };
+          }, function (err, secret) {
+            if (err) return bwcError.cb(err, gettextCatalog.getString('Error creating account'), cb)
+            return cb(null, walletClient, secret)
+          })
+        })
+      }, 50)
+    }
 
     // create and store a wallet
-    root.createWallet = function(opts, cb) {
-      doCreateWallet(opts, function(err, walletClient, secret) {
-        if (err) return cb(err);
+    root.createWallet = function (opts, cb) {
+      doCreateWallet(opts, function (err, walletClient, secret) {
+        if (err) return cb(err)
 
         addAndBindWalletClient(walletClient, {
           bwsurl: opts.bwsurl
-        }, cb);
-      });
-    };
+        }, cb)
+      })
+    }
 
     // joins and stores a wallet
-    root.joinWallet = function(opts, cb) {
-      var walletClient = bwcService.getClient();
-      $log.debug('Joining Wallet:', opts);
+    root.joinWallet = function (opts, cb) {
+      var walletClient = bwcService.getClient()
+      $log.debug('Joining Wallet:', opts)
 
       try {
-        var walletData = bwcService.parseSecret(opts.secret);
+        var walletData = bwcService.parseSecret(opts.secret)
 
         // check if exist
         if (lodash.find(root.profile.credentials, {
-            'walletId': walletData.walletId
-          })) {
-          return cb(gettextCatalog.getString('Cannot join the same wallet more that once'));
+          'walletId': walletData.walletId
+        })) {
+          return cb(gettextCatalog.getString('Cannot join the same wallet more that once'))
         }
       } catch (ex) {
-        $log.debug(ex);
-        return cb(gettextCatalog.getString('Bad wallet invitation'));
+        $log.debug(ex)
+        return cb(gettextCatalog.getString('Bad wallet invitation'))
       }
-      opts.networkName = walletData.network;
-      $log.debug('Joining Wallet:', opts);
+      opts.networkName = walletData.network
+      $log.debug('Joining Wallet:', opts)
 
-      seedWallet(opts, function(err, walletClient) {
-        if (err) return cb(err);
+      seedWallet(opts, function (err, walletClient) {
+        if (err) return cb(err)
 
         walletClient.joinWallet(opts.secret, opts.myName || 'me', {
           coin: opts.coin
-        }, function(err) {
-          if (err) return bwcError.cb(err, gettextCatalog.getString('Could not join wallet'), cb);
+        }, function (err) {
+          if (err) return bwcError.cb(err, gettextCatalog.getString('Could not join wallet'), cb)
           addAndBindWalletClient(walletClient, {
             bwsurl: opts.bwsurl
-          }, cb);
-        });
-      });
-    };
+          }, cb)
+        })
+      })
+    }
 
-    root.getWallet = function(walletId) {
-      return root.wallet[walletId];
-    };
+    root.getWallet = function (walletId) {
+      return root.wallet[walletId]
+    }
 
+    root.deleteWalletClient = function (client, cb) {
+      var walletId = client.credentials.walletId
 
-    root.deleteWalletClient = function(client, cb) {
-      var walletId = client.credentials.walletId;
+      var config = configService.getSync()
 
-      var config = configService.getSync();
+      $log.debug('Deleting Wallet:', client.credentials.walletName)
+      client.removeAllListeners()
 
-      $log.debug('Deleting Wallet:', client.credentials.walletName);
-      client.removeAllListeners();
+      root.profile.deleteWallet(walletId)
 
-      root.profile.deleteWallet(walletId);
+      delete root.wallet[walletId]
 
-      delete root.wallet[walletId];
+      storageService.removeAllWalletData(walletId, function (err) {
+        if (err) $log.warn(err)
+      })
 
-      storageService.removeAllWalletData(walletId, function(err) {
-        if (err) $log.warn(err);
-      });
+      storageService.storeProfile(root.profile, function (err) {
+        if (err) return cb(err)
+        return cb()
+      })
+    }
 
-      storageService.storeProfile(root.profile, function(err) {
-        if (err) return cb(err);
-        return cb();
-      });
-    };
-
-    root.setMetaData = function(walletClient, addressBook, cb) {
-      storageService.getAddressbook(walletClient.credentials.network, function(err, localAddressBook) {
-        var localAddressBook1 = {};
+    root.setMetaData = function (walletClient, addressBook, cb) {
+      storageService.getAddressbook(function (err, localAddressBook) {
+        var localAddressBook1 = {}
         try {
-          localAddressBook1 = JSON.parse(localAddressBook);
+          localAddressBook1 = JSON.parse(localAddressBook)
         } catch (ex) {
-          $log.warn(ex);
+          $log.warn(ex)
         }
-        var mergeAddressBook = lodash.merge(addressBook, localAddressBook1);
-        storageService.setAddressbook(walletClient.credentials.network, JSON.stringify(addressBook), function(err) {
-          if (err) return cb(err);
-          return cb(null);
-        });
-      });
+        var mergeAddressBook = lodash.merge(addressBook, localAddressBook1)
+        storageService.setAddressbook(JSON.stringify(addressBook), function (err) {
+          if (err) return cb(err)
+          return cb(null)
+        })
+      })
     }
 
     // Adds and bind a new client to the profile
-    var addAndBindWalletClient = function(client, opts, cb) {
-      if (!client || !client.credentials)
-        return cb(gettextCatalog.getString('Could not access wallet'));
+    var addAndBindWalletClient = function (client, opts, cb) {
+      if (!client || !client.credentials) { return cb(gettextCatalog.getString('Could not access wallet')) }
 
       var walletId = client.credentials.walletId
 
-      if (!root.profile.addWallet(JSON.parse(client.export())))
-        return cb(gettextCatalog.getString("Wallet already in {{appName}}", {
-          appName: appConfigService.nameCase
-        }));
+      if (!root.profile.addWallet(JSON.parse(client.export()))) {
+        return cb(gettextCatalog.getString('Wallet already in {{appName}}', {
+   appName: appConfigService.nameCase
+ }))
+      }
 
+      var skipKeyValidation = shouldSkipValidation(walletId)
+      if (!skipKeyValidation) { root.runValidation(client) }
 
-      var skipKeyValidation = shouldSkipValidation(walletId);
-      if (!skipKeyValidation)
-        root.runValidation(client);
+      root.bindWalletClient(client)
 
-      root.bindWalletClient(client);
-
-      var saveBwsUrl = function(cb) {
-        var defaults = configService.getDefaults();
-        var bwsFor = {};
-        bwsFor[walletId] = opts.bwsurl || defaults.bws.url;
+      var saveBwsUrl = function (cb) {
+        var defaults = configService.getDefaults()
+        var bwsFor = {}
+        bwsFor[walletId] = opts.bwsurl || defaults.bws.url
 
         // Dont save the default
-        if (bwsFor[walletId] == defaults.bws.url)
-          return cb();
+        if (bwsFor[walletId] == defaults.bws.url) { return cb() }
 
         configService.set({
-          bwsFor: bwsFor,
-        }, function(err) {
-          if (err) $log.warn(err);
-          return cb();
-        });
-      };
+          bwsFor: bwsFor
+        }, function (err) {
+          if (err) $log.warn(err)
+          return cb()
+        })
+      }
 
-      saveBwsUrl(function() {
-        storageService.storeProfile(root.profile, function(err) {
-          return cb(err, client);
-        });
-      });
-    };
+      saveBwsUrl(function () {
+        storageService.storeProfile(root.profile, function (err) {
+          return cb(err, client)
+        })
+      })
+    }
 
-    root.storeProfileIfDirty = function(cb) {
+    root.storeProfileIfDirty = function (cb) {
       if (root.profile.dirty) {
-        storageService.storeProfile(root.profile, function(err) {
-          $log.debug('Saved modified Profile');
-          if (cb) return cb(err);
-        });
+        storageService.storeProfile(root.profile, function (err) {
+          $log.debug('Saved modified Profile')
+          if (cb) return cb(err)
+        })
       } else {
-        if (cb) return cb();
+        if (cb) return cb()
       };
-    };
+    }
 
-    root.importWallet = function(str, opts, cb) {
+    root.importWallet = function (str, opts, cb) {
+      var walletClient = bwcService.getClient(null, opts)
 
-      var walletClient = bwcService.getClient(null, opts);
-
-      $log.debug('Importing Wallet:', opts);
+      $log.debug('Importing Wallet:', opts)
 
       try {
-        var c = JSON.parse(str);
+        var c = JSON.parse(str)
 
         if (c.xPrivKey && c.xPrivKeyEncrypted) {
-          $log.warn('Found both encrypted and decrypted key. Deleting the encrypted version');
-          delete c.xPrivKeyEncrypted;
-          delete c.mnemonicEncrypted;
+          $log.warn('Found both encrypted and decrypted key. Deleting the encrypted version')
+          delete c.xPrivKeyEncrypted
+          delete c.mnemonicEncrypted
         }
 
-        str = JSON.stringify(c);
+        str = JSON.stringify(c)
 
         walletClient.import(str, {
           compressed: opts.compressed,
           password: opts.password
-        });
+        })
       } catch (err) {
-        return cb(gettextCatalog.getString('Could not import. Check input file and spending password'));
+        return cb(gettextCatalog.getString('Could not import. Check input file and spending password'))
       }
 
-      str = JSON.parse(str);
+      str = JSON.parse(str)
 
       if (!str.n) {
-        return cb("Backup format not recognized. If you are using a RaiW Beta backup and version is older than 0.10, please see: https://github.com/gokr/raiw/issues/4730#issuecomment-244522614");
+        return cb('Backup format not recognized. If you are using a RaiW Beta backup and version is older than 0.10, please see: https://github.com/gokr/raiw/issues/4730#issuecomment-244522614')
       }
 
-      var addressBook = str.addressBook || {};
+      var addressBook = str.addressBook || {}
 
       addAndBindWalletClient(walletClient, {
         bwsurl: opts.bwsurl
-      }, function(err, walletId) {
-        if (err) return cb(err);
-        root.setMetaData(walletClient, addressBook, function(error) {
-          if (error) $log.warn(error);
-          return cb(err, walletClient);
-        });
-      });
-    };
+      }, function (err, walletId) {
+        if (err) return cb(err)
+        root.setMetaData(walletClient, addressBook, function (error) {
+          if (error) $log.warn(error)
+          return cb(err, walletClient)
+        })
+      })
+    }
 
-    root.importExtendedPrivateKey = function(xPrivKey, opts, cb) {
-      var walletClient = bwcService.getClient(null, opts);
-      $log.debug('Importing Wallet xPrivKey');
+    root.importExtendedPrivateKey = function (xPrivKey, opts, cb) {
+      var walletClient = bwcService.getClient(null, opts)
+      $log.debug('Importing Wallet xPrivKey')
 
-      walletClient.importFromExtendedPrivateKey(xPrivKey, opts, function(err) {
+      walletClient.importFromExtendedPrivateKey(xPrivKey, opts, function (err) {
         if (err) {
-          if (err instanceof errors.NOT_AUTHORIZED)
-            return cb(err);
+          if (err instanceof errors.NOT_AUTHORIZED) { return cb(err) }
 
-          return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb);
+          return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb)
         }
 
         addAndBindWalletClient(walletClient, {
           bwsurl: opts.bwsurl
-        }, cb);
-      });
-    };
+        }, cb)
+      })
+    }
 
-    root._normalizeMnemonic = function(words) {
-      if (!words || !words.indexOf) return words;
-      var isJA = words.indexOf('\u3000') > -1;
-      var wordList = words.split(/[\u3000\s]+/);
+    root._normalizeMnemonic = function (words) {
+      if (!words || !words.indexOf) return words
+      var isJA = words.indexOf('\u3000') > -1
+      var wordList = words.split(/[\u3000\s]+/)
 
-      return wordList.join(isJA ? '\u3000' : ' ');
-    };
+      return wordList.join(isJA ? '\u3000' : ' ')
+    }
 
-    root.importMnemonic = function(words, opts, cb) {
-      var walletClient = bwcService.getClient(null, opts);
+    root.importMnemonic = function (words, opts, cb) {
+      var walletClient = bwcService.getClient(null, opts)
 
-      $log.debug('Importing Wallet Mnemonic');
+      $log.debug('Importing Wallet Mnemonic')
 
-      words = root._normalizeMnemonic(words);
+      words = root._normalizeMnemonic(words)
       walletClient.importFromMnemonic(words, {
         network: opts.networkName,
         passphrase: opts.passphrase,
@@ -642,355 +610,341 @@ angular.module('raiwApp.services')
         derivationStrategy: opts.derivationStrategy || 'BIP44',
         account: opts.account || 0,
         coin: opts.coin
-      }, function(err) {
+      }, function (err) {
         if (err) {
-          if (err instanceof errors.NOT_AUTHORIZED)
-            return cb(err);
+          if (err instanceof errors.NOT_AUTHORIZED) { return cb(err) }
 
-          return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb);
+          return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb)
         }
 
         addAndBindWalletClient(walletClient, {
           bwsurl: opts.bwsurl
-        }, cb);
-      });
-    };
+        }, cb)
+      })
+    }
 
-    root.importExtendedPublicKey = function(opts, cb) {
-      var walletClient = bwcService.getClient(null, opts);
-      $log.debug('Importing Wallet XPubKey');
+    root.importExtendedPublicKey = function (opts, cb) {
+      var walletClient = bwcService.getClient(null, opts)
+      $log.debug('Importing Wallet XPubKey')
 
       walletClient.importFromExtendedPublicKey(opts.extendedPublicKey, opts.externalSource, opts.entropySource, {
         account: opts.account || 0,
         derivationStrategy: opts.derivationStrategy || 'BIP44',
         coin: opts.coin
-      }, function(err) {
+      }, function (err) {
         if (err) {
-
           // in HW wallets, req key is always the same. They can't addAccess.
-          if (err instanceof errors.NOT_AUTHORIZED)
-            err.name = 'WALLET_DOES_NOT_EXIST';
+          if (err instanceof errors.NOT_AUTHORIZED) { err.name = 'WALLET_DOES_NOT_EXIST' }
 
-          return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb);
+          return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb)
         }
 
         addAndBindWalletClient(walletClient, {
           bwsurl: opts.bwsurl
-        }, cb);
-      });
-    };
+        }, cb)
+      })
+    }
 
-    root.createProfile = function(cb) {
-      $log.info('Creating profile');
-      var defaults = configService.getDefaults();
+    root.createProfile = function (cb) {
+      $log.info('Creating profile')
+      var defaults = configService.getDefaults()
 
-      configService.get(function(err) {
-        if (err) $log.debug(err);
+      configService.get(function (err) {
+        if (err) $log.debug(err)
 
-        var p = Profile.create();
-        storageService.storeNewProfile(p, function(err) {
-          if (err) return cb(err);
-          root.bindProfile(p, function(err) {
+        var p = Profile.create()
+        storageService.storeNewProfile(p, function (err) {
+          if (err) return cb(err)
+          root.bindProfile(p, function (err) {
             // ignore NONAGREEDDISCLAIMER
-            if (err && err.toString().match('NONAGREEDDISCLAIMER')) return cb();
-            return cb(err);
-          });
-        });
-      });
-    };
+            if (err && err.toString().match('NONAGREEDDISCLAIMER')) return cb()
+            return cb(err)
+          })
+        })
+      })
+    }
 
-    root.createDefaultWallet = function(cb) {
-      var opts = {};
-      opts.m = 1;
-      opts.n = 1;
-      opts.networkName = 'livenet';
-      opts.coin = 'btc';
-      root.createWallet(opts, cb);
-    };
+    root.createDefaultWallet = function (cb) {
+      var opts = {}
+      opts.m = 1
+      opts.n = 1
+      opts.networkName = 'livenet'
+      opts.coin = 'btc'
+      root.createWallet(opts, cb)
+    }
 
-    root.setDisclaimerAccepted = function(cb) {
-      root.profile.disclaimerAccepted = true;
-      storageService.storeProfile(root.profile, function(err) {
-        return cb(err);
-      });
-    };
+    root.setDisclaimerAccepted = function (cb) {
+      root.profile.disclaimerAccepted = true
+      storageService.storeProfile(root.profile, function (err) {
+        return cb(err)
+      })
+    }
 
-    root.isDisclaimerAccepted = function(cb) {
-      var disclaimerAccepted = root.profile && root.profile.disclaimerAccepted;
-      if (disclaimerAccepted)
-        return cb(true);
+    root.isDisclaimerAccepted = function (cb) {
+      var disclaimerAccepted = root.profile && root.profile.disclaimerAccepted
+      if (disclaimerAccepted) { return cb(true) }
 
       // OLD flag
-      storageService.getRaiWDisclaimerFlag(function(err, val) {
+      storageService.getRaiWDisclaimerFlag(function (err, val) {
         if (val) {
-          root.profile.disclaimerAccepted = true;
-          return cb(true);
+          root.profile.disclaimerAccepted = true
+          return cb(true)
         } else {
-          return cb();
+          return cb()
         }
-      });
-    };
+      })
+    }
 
-    root.updateCredentials = function(credentials, cb) {
-      root.profile.updateWallet(credentials);
-      storageService.storeProfile(root.profile, cb);
-    };
+    root.updateCredentials = function (credentials, cb) {
+      root.profile.updateWallet(credentials)
+      storageService.storeProfile(root.profile, cb)
+    }
 
-    root.getLastKnownBalance = function(wid, cb) {
-      storageService.getBalanceCache(wid, cb);
-    };
+    root.getLastKnownBalance = function (wid, cb) {
+      storageService.getBalanceCache(wid, cb)
+    }
 
-    root.addLastKnownBalance = function(wallet, cb) {
-      var now = Math.floor(Date.now() / 1000);
-      var showRange = 600; // 10min;
+    root.addLastKnownBalance = function (wallet, cb) {
+      var now = Math.floor(Date.now() / 1000)
+      var showRange = 600 // 10min;
 
-      root.getLastKnownBalance(wallet.id, function(err, data) {
+      root.getLastKnownBalance(wallet.id, function (err, data) {
         if (data) {
-          data = JSON.parse(data);
-          wallet.cachedBalance = data.balance;
-          wallet.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null;
+          data = JSON.parse(data)
+          wallet.cachedBalance = data.balance
+          wallet.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null
         }
-        return cb();
-      });
-    };
+        return cb()
+      })
+    }
 
-    root.setLastKnownBalance = function(wid, balance, cb) {
+    root.setLastKnownBalance = function (wid, balance, cb) {
       storageService.setBalanceCache(wid, {
         balance: balance,
-        updatedOn: Math.floor(Date.now() / 1000),
-      }, cb);
-    };
+        updatedOn: Math.floor(Date.now() / 1000)
+      }, cb)
+    }
 
-    root.getWallets = function(opts) {
+    root.getWallets = function (opts) {
+      if (opts && !lodash.isObject(opts)) { throw 'bad argument' }
 
-      if (opts && !lodash.isObject(opts))
-        throw "bad argument";
+      opts = opts || {}
 
-      opts = opts || {};
-
-      var ret = lodash.values(root.wallet);
+      var ret = lodash.values(root.wallet)
 
       if (opts.coin) {
-        ret = lodash.filter(ret, function(x) {
-          return (x.credentials.coin == opts.coin);
-        });
+        ret = lodash.filter(ret, function (x) {
+          return (x.credentials.coin == opts.coin)
+        })
       }
 
       if (opts.network) {
-        ret = lodash.filter(ret, function(x) {
-          return (x.credentials.network == opts.network);
-        });
+        ret = lodash.filter(ret, function (x) {
+          return (x.credentials.network == opts.network)
+        })
       }
 
       if (opts.n) {
-        ret = lodash.filter(ret, function(w) {
-          return (w.credentials.n == opts.n);
-        });
+        ret = lodash.filter(ret, function (w) {
+          return (w.credentials.n == opts.n)
+        })
       }
 
       if (opts.m) {
-        ret = lodash.filter(ret, function(w) {
-          return (w.credentials.m == opts.m);
-        });
+        ret = lodash.filter(ret, function (w) {
+          return (w.credentials.m == opts.m)
+        })
       }
 
       if (opts.hasFunds) {
-        ret = lodash.filter(ret, function(w) {
-          if (!w.status) return;
-          return (w.status.availableBalanceSat > 0);
-        });
+        ret = lodash.filter(ret, function (w) {
+          if (!w.status) return
+          return (w.status.availableBalanceSat > 0)
+        })
       }
 
       if (opts.minAmount) {
-        ret = lodash.filter(ret, function(w) {
-          if (!w.status) return;
-          return (w.status.availableBalanceSat > opts.minAmount);
-        });
+        ret = lodash.filter(ret, function (w) {
+          if (!w.status) return
+          return (w.status.availableBalanceSat > opts.minAmount)
+        })
       }
 
       if (opts.onlyComplete) {
-        ret = lodash.filter(ret, function(w) {
-          return w.isComplete();
-        });
+        ret = lodash.filter(ret, function (w) {
+          return w.isComplete()
+        })
       } else {}
 
       // Add cached balance async
-      lodash.each(ret, function(x) {
-        root.addLastKnownBalance(x, function() {});
-      });
-
+      lodash.each(ret, function (x) {
+        root.addLastKnownBalance(x, function () {})
+      })
 
       return lodash.sortBy(ret, [
 
-        function(x) {
-          return x.isComplete();
+        function (x) {
+          return x.isComplete()
         }, 'createdOn'
-      ]);
-    };
+      ])
+    }
 
-    root.toggleHideBalanceFlag = function(walletId, cb) {
-      root.wallet[walletId].balanceHidden = !root.wallet[walletId].balanceHidden;
-      storageService.setHideBalanceFlag(walletId, root.wallet[walletId].balanceHidden.toString(), cb);
-    };
+    root.toggleHideBalanceFlag = function (walletId, cb) {
+      root.wallet[walletId].balanceHidden = !root.wallet[walletId].balanceHidden
+      storageService.setHideBalanceFlag(walletId, root.wallet[walletId].balanceHidden.toString(), cb)
+    }
 
-    root.getNotifications = function(opts, cb) {
-      opts = opts || {};
+    root.getNotifications = function (opts, cb) {
+      opts = opts || {}
 
-      var TIME_STAMP = 60 * 60 * 6;
-      var MAX = 30;
+      var TIME_STAMP = 60 * 60 * 6
+      var MAX = 30
 
       var typeFilter = {
         'NewOutgoingTx': 1,
         'NewIncomingTx': 1
-      };
+      }
 
-      var w = root.getWallets();
-      if (lodash.isEmpty(w)) return cb();
+      var w = root.getWallets()
+      if (lodash.isEmpty(w)) return cb()
 
       var l = w.length,
         j = 0,
-        notifications = [];
+        notifications = []
 
-
-      function isActivityCached(wallet) {
-        return wallet.cachedActivity && wallet.cachedActivity.isValid;
+      function isActivityCached (wallet) {
+        return wallet.cachedActivity && wallet.cachedActivity.isValid
       };
 
-
-      function updateNotifications(wallet, cb2) {
-        if (isActivityCached(wallet) && !opts.force) return cb2();
+      function updateNotifications (wallet, cb2) {
+        if (isActivityCached(wallet) && !opts.force) return cb2()
 
         wallet.getNotifications({
           timeSpan: TIME_STAMP,
-          includeOwn: true,
-        }, function(err, n) {
-          if (err) return cb2(err);
+          includeOwn: true
+        }, function (err, n) {
+          if (err) return cb2(err)
 
           wallet.cachedActivity = {
             n: n.slice(-MAX),
-            isValid: true,
-          };
+            isValid: true
+          }
 
-          return cb2();
-        });
+          return cb2()
+        })
       };
 
-      function process(notifications) {
-        if (!notifications) return [];
+      function process (notifications) {
+        if (!notifications) return []
 
-        var shown = lodash.sortBy(notifications, 'createdOn').reverse();
+        var shown = lodash.sortBy(notifications, 'createdOn').reverse()
 
-        shown = shown.splice(0, opts.limit || MAX);
+        shown = shown.splice(0, opts.limit || MAX)
 
-        lodash.each(shown, function(x) {
-          x.txpId = x.data ? x.data.txProposalId : null;
-          x.txid = x.data ? x.data.txid : null;
-          x.types = [x.type];
+        lodash.each(shown, function (x) {
+          x.txpId = x.data ? x.data.txProposalId : null
+          x.txid = x.data ? x.data.txid : null
+          x.types = [x.type]
 
-          if (x.data && x.data.amount)
-            x.amountStr = txFormatService.formatAmountStr(x.wallet.coin, x.data.amount);
+          if (x.data && x.data.amount) { x.amountStr = txFormatService.formatAmountStr(x.wallet.coin, x.data.amount) }
 
-          x.action = function() {
+          x.action = function () {
             // TODO?
             // $state.go('tabs.wallet', {
             //   walletId: x.walletId,
             //   txpId: x.txpId,
             //   txid: x.txid,
             // });
-          };
-        });
+          }
+        })
 
-        var finale = shown; // GROUPING DISABLED!
+        var finale = shown // GROUPING DISABLED!
 
         var finale = [],
-          prev;
-
+          prev
 
         // Item grouping... DISABLED.
 
         // REMOVE (if we want 1-to-1 notification) ????
-        lodash.each(shown, function(x) {
+        lodash.each(shown, function (x) {
           if (prev && prev.walletId === x.walletId && prev.txpId && prev.txpId === x.txpId && prev.creatorId && prev.creatorId === x.creatorId) {
-            prev.types.push(x.type);
-            prev.data = lodash.assign(prev.data, x.data);
-            prev.txid = prev.txid || x.txid;
-            prev.amountStr = prev.amountStr || x.amountStr;
-            prev.creatorName = prev.creatorName || x.creatorName;
+            prev.types.push(x.type)
+            prev.data = lodash.assign(prev.data, x.data)
+            prev.txid = prev.txid || x.txid
+            prev.amountStr = prev.amountStr || x.amountStr
+            prev.creatorName = prev.creatorName || x.creatorName
           } else {
-            finale.push(x);
-            prev = x;
+            finale.push(x)
+            prev = x
           }
-        });
+        })
 
-        var u = bwcService.getUtils();
-        lodash.each(finale, function(x) {
+        var u = bwcService.getUtils()
+        lodash.each(finale, function (x) {
           if (x.data && x.data.message && x.wallet && x.wallet.credentials.sharedEncryptingKey) {
             // TODO TODO TODO => BWC
-            x.message = u.decryptMessage(x.data.message, x.wallet.credentials.sharedEncryptingKey);
+            x.message = u.decryptMessage(x.data.message, x.wallet.credentials.sharedEncryptingKey)
           }
-        });
+        })
 
-        return finale;
+        return finale
       };
 
-      lodash.each(w, function(wallet) {
-        updateNotifications(wallet, function(err) {
-          j++;
+      lodash.each(w, function (wallet) {
+        updateNotifications(wallet, function (err) {
+          j++
           if (err) {
-            $log.warn('Error updating notifications:' + err);
+            $log.warn('Error updating notifications:' + err)
           } else {
+            var n
 
-            var n;
+            n = lodash.filter(wallet.cachedActivity.n, function (x) {
+              return typeFilter[x.type]
+            })
 
-            n = lodash.filter(wallet.cachedActivity.n, function(x) {
-              return typeFilter[x.type];
-            });
-
-            var idToName = {};
+            var idToName = {}
             if (wallet.cachedStatus) {
-              lodash.each(wallet.cachedStatus.wallet.raiwers, function(c) {
-                idToName[c.id] = c.name;
-              });
+              lodash.each(wallet.cachedStatus.wallet.raiwers, function (c) {
+                idToName[c.id] = c.name
+              })
             }
 
-            lodash.each(n, function(x) {
-              x.wallet = wallet;
+            lodash.each(n, function (x) {
+              x.wallet = wallet
               if (x.creatorId && wallet.cachedStatus) {
-                x.creatorName = idToName[x.creatorId];
+                x.creatorName = idToName[x.creatorId]
               };
-            });
+            })
 
-            notifications.push(n);
+            notifications.push(n)
           }
           if (j == l) {
-            notifications = lodash.sortBy(notifications, 'createdOn');
-            notifications = lodash.compact(lodash.flatten(notifications)).slice(0, MAX);
-            var total = notifications.length;
-            return cb(null, process(notifications), total);
+            notifications = lodash.sortBy(notifications, 'createdOn')
+            notifications = lodash.compact(lodash.flatten(notifications)).slice(0, MAX)
+            var total = notifications.length
+            return cb(null, process(notifications), total)
           };
-        });
-      });
-    };
+        })
+      })
+    }
 
+    root.getTxps = function (opts, cb) {
+      var MAX = 100
+      opts = opts || {}
 
-    root.getTxps = function(opts, cb) {
-      var MAX = 100;
-      opts = opts || {};
+      var w = root.getWallets()
+      if (lodash.isEmpty(w)) return cb()
 
-      var w = root.getWallets();
-      if (lodash.isEmpty(w)) return cb();
+      var txps = []
 
-      var txps = [];
+      lodash.each(w, function (x) {
+        if (x.pendingTxps) { txps = txps.concat(x.pendingTxps) }
+      })
+      var n = txps.length
+      txps = lodash.sortBy(txps, 'pendingForUs', 'createdOn')
+      txps = lodash.compact(lodash.flatten(txps)).slice(0, opts.limit || MAX)
+      return cb(null, txps, n)
+    }
 
-      lodash.each(w, function(x) {
-        if (x.pendingTxps)
-          txps = txps.concat(x.pendingTxps);
-      });
-      var n = txps.length;
-      txps = lodash.sortBy(txps, 'pendingForUs', 'createdOn');
-      txps = lodash.compact(lodash.flatten(txps)).slice(0, opts.limit || MAX);
-      return cb(null, txps, n);
-    };
-
-    return root;
-  });
+    return root
+  })

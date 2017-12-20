@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
 angular.module('raiwApp.directives')
-  .directive('walletSelector', function($timeout) {
+  .directive('walletSelector', function ($timeout) {
     return {
       restrict: 'E',
       templateUrl: 'views/includes/walletSelector.html',
@@ -13,16 +13,16 @@ angular.module('raiwApp.directives')
         selectedWallet: '=walletSelectorSelectedWallet',
         onSelect: '=walletSelectorOnSelect'
       },
-      link: function(scope, element, attrs) {
-        scope.hide = function() {
-          scope.show = false;
-        };
-        scope.selectWallet = function(wallet) {
-          $timeout(function() {
-            scope.hide();
-          }, 100);
-          scope.onSelect(wallet);
-        };
+      link: function (scope, element, attrs) {
+        scope.hide = function () {
+          scope.show = false
+        }
+        scope.selectWallet = function (wallet) {
+          $timeout(function () {
+            scope.hide()
+          }, 100)
+          scope.onSelect(wallet)
+        }
       }
-    };
-  });
+    }
+  })

@@ -1,27 +1,24 @@
-'use strict';
+'use strict'
 
-angular.module('raiwApp.controllers').controller('walletsController', function($scope, $timeout, bwcError, profileService) {
+angular.module('raiwApp.controllers').controller('walletsController', function ($scope, $timeout, bwcError, profileService) {
+  $scope.selectWallet = function (walletId) {
+    var client = profileService.getClient(walletId)
+    $scope.errorSelectedWallet = {}
 
-  $scope.selectWallet = function(walletId) {
-
-    var client = profileService.getClient(walletId);
-    $scope.errorSelectedWallet = {};
-
-    profileService.isReady(client, function(err) {
+    profileService.isReady(client, function (err) {
       if (err) {
-        $scope.errorSelectedWallet[walletId] = bwcError.msg(err);
-        $timeout(function() {
-          $scope.$apply();
-        });
-        return;
+        $scope.errorSelectedWallet[walletId] = bwcError.msg(err)
+        $timeout(function () {
+          $scope.$apply()
+        })
+        return
       }
 
-      $scope.$emit('walletSelected', walletId);
-    });
-  };
+      $scope.$emit('walletSelected', walletId)
+    })
+  }
 
-  $scope.cancel = function() {
-    $scope.walletsModal.hide();
-  };
-
-});
+  $scope.cancel = function () {
+    $scope.walletsModal.hide()
+  }
+})
