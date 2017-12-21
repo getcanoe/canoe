@@ -26,10 +26,11 @@ cd raiw
 Ensure you have [Node](https://nodejs.org/) installed, then install and start RaiW:
 
 ```sh
+npm install
 npm start
 ```
 
-Visit [`localhost:8100`](http://localhost:8100/) to view the app.
+Visit [`localhost:8100`](http://localhost:8100/) to view the app, or if you have a browser running it will be opened.
 
 A watch task is also available to rebuild components of the app as changes are made. This task can be run in a separate process – while the server started by `npm start` is running – to quickly test changes.
 
@@ -45,7 +46,7 @@ It's recommended that all final testing be done on a real device – both to ass
 
 Follow the [Cordova Android Platform Guide](https://cordova.apache.org/docs/en/latest/guide/platforms/android/) to set up your development environment.
 
-When your developement enviroment is ready, run the `start:android` npm package script.
+When your development enviroment is ready, run the `start:android` npm package script.
 
 ```sh
 npm run start:android
