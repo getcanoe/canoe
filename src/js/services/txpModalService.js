@@ -11,7 +11,7 @@ angular.module('raiwApp.services').factory('txpModalService', function(configSer
 
 
   root.open = function(tx) {
-    var wallet = tx.wallet ? tx.wallet : profileService.getWallet(tx.walletId);
+    var wallet = tx.account ? tx.account : profileService.getAccount(tx.accountId);
     var config = configService.getSync().wallet;
     var scope = $rootScope.$new(true);
     scope.tx = tx;

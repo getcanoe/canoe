@@ -32,13 +32,13 @@ angular.module('raiwApp.controllers').controller('paymentUriController',
       }
     }
 
-    this.getWallets = function (network) {
-      $scope.wallets = []
-      lodash.forEach(profileService.getWallets(network), function (w) {
+    this.getAccounts = function (network) {
+      $scope.accounts = []
+      lodash.forEach(profileService.getAccounts(network), function (w) {
         var client = profileService.getClient(w.id)
         profileService.isReady(client, function (err) {
           if (err) return
-          $scope.wallets.push(w)
+          $scope.accounts.push(w)
         })
       })
     }

@@ -27,7 +27,7 @@ angular.module('raiwApp.controllers').controller('preferencesLanguageController'
       uxLanguage._set(newLang);
       configService.set(opts, function(err) {
         if (err) $log.warn(err);
-        walletService.updateRemotePreferences(profileService.getWallets());
+        walletService.updateRemotePreferences(profileService.getAccounts());
       });
 
       $ionicHistory.goBack();

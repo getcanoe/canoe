@@ -3,18 +3,51 @@ angular.module('raiwApp.services')
   .factory('raiblocksService', function ($log) {
     var root = {}
 
-    var host = 'http://localhost:7076' // default host
-    var rai = new Rai(host) // connection
+    // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
+    var host = 'https://raiblocks.krampe.se/rpc' // for the beta node
+    var port = 443
+    var rai = new Rai(host, port) // connection
 
     // Initialization global variables
     rai.initialize()
 
-    root.isValid = function (addr, cb) {
+    root.isValidSeed = function (seedHex) {
+      var isValidHash = /^[0123456789ABCDEF]+$/.test(seedHex)
+      return (isValidHash && (seedHex.length === 64))
+    }
+
+    root.isValidAccount = function (addr, cb) {
       $log.debug('Validating addr: ' + addr)
       if (!addr.startsWith('xrb_')) {
         return false
       }
       return rai.account_validate(addr)
+    }
+
+    root.createWallet = function () {
+      $log.debug('Create wallet')
+      var wallet = {}
+      wallet.id = rai.wallet_create()
+      wallet.accounts = []
+      $log.debug('Wallet: ' + JSON.stringify(wallet))
+      return wallet
+    }
+
+    root.createAccount = function (wallet, accountName) {
+      $log.debug('Create account in wallet ' + wallet.id + ' named ' + accountName)
+      var account = {}
+      account.name = accountName
+      account.addr = rai.account_create(wallet.id, true) // work = true
+      $log.debug('Account: ' + JSON.stringify(account))
+      wallet.accounts.push(account)
+      return account
+    }
+
+    root.changeSeed = function (walletId, seed) {
+      $log.debug('Changing seed: ' + seed)
+      if (root.isValidSeed(seed)) {
+        return rai.wallet_change_seed(walletId, seed)
+      }
     }
 
     /*

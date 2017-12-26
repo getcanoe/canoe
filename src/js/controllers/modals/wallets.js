@@ -19,6 +19,6 @@ angular.module('raiwApp.controllers').controller('walletsController', function (
   }
 
   $scope.cancel = function () {
-    $scope.walletsModal.hide()
+    $scope.accountsModal.hide()
   }
 })

@@ -2,8 +2,8 @@
 
 angular.module('raiwApp.controllers').controller('exportController',
   function ($scope, $timeout, $log, $ionicHistory, $ionicScrollDelegate, backupService, walletService, storageService, profileService, platformInfo, gettextCatalog, $state, $stateParams, popupService, appConfigService) {
-    var wallet = profileService.getWallet($stateParams.walletId)
-    $scope.wallet = wallet
+    var wallet = profileService.getAccount($stateParams.walletId)
+    $scope.account = wallet
 
     $scope.showAdvChange = function () {
       $scope.showAdv = !$scope.showAdv
@@ -73,7 +73,7 @@ angular.module('raiwApp.controllers').controller('exportController',
       $scope.isSafari = platformInfo.isSafari
       $scope.formData.noSignEnabled = false
       $scope.showAdvanced = false
-      $scope.wallet = wallet
+      $scope.account = wallet
       $scope.canSign = wallet.canSign()
     }
 

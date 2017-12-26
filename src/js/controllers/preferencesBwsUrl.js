@@ -4,8 +4,8 @@ angular.module('raiwApp.controllers').controller('preferencesBwsUrlController',
   function($scope, $log, $stateParams, configService, applicationService, profileService, storageService, appConfigService) {
     $scope.success = null;
 
-    var wallet = profileService.getWallet($stateParams.walletId);
-    $scope.wallet = wallet;
+    var wallet = profileService.getAccount($stateParams.walletId);
+    $scope.account = wallet;
 
     var walletId = wallet.credentials.walletId;
     var defaults = configService.getDefaults();

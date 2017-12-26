@@ -10,13 +10,13 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
     txId = data.stateParams.txid;
     $scope.title = gettextCatalog.getString('Transaction');
-    $scope.wallet = profileService.getWallet(data.stateParams.walletId);
-    $scope.color = $scope.wallet.color;
-    $scope.raiwerId = $scope.wallet.credentials.raiwerId;
-    $scope.isShared = $scope.wallet.credentials.n > 1;
+    $scope.account = profileService.getAccount(data.stateParams.walletId);
+    $scope.color = $scope.account.color;
+    $scope.raiwerId = $scope.account.credentials.raiwerId;
+    $scope.isShared = $scope.account.credentials.n > 1;
     $scope.txsUnsubscribedForNotifications = config.confirmedTxsNotifications ? !config.confirmedTxsNotifications.enabled : true;
 
-    if ($scope.wallet.coin == 'bch') {
+    if ($scope.account.coin == 'bch') {
       blockexplorerUrl = 'bch-insight.bitpay.com';
     } else {
       blockexplorerUrl = 'insight.bitpay.com';
@@ -58,7 +58,7 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
   };
 
   function updateMemo() {
-    walletService.getTxNote($scope.wallet, $scope.btx.txid, function(err, note) {
+    walletService.getTxNote($scope.account, $scope.btx.txid, function(err, note) {
       if (err) {
         $log.warn('Could not fetch transaction note: ' + err);
         return;
@@ -111,7 +111,7 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
   var updateTx = function(opts) {
     opts = opts || {};
     if (!opts.hideLoading) ongoingProcess.set('loadingTxInfo', true);
-    walletService.getTx($scope.wallet, txId, function(err, tx) {
+    walletService.getTx($scope.account, txId, function(err, tx) {
       if (!opts.hideLoading) ongoingProcess.set('loadingTxInfo', false);
       if (err) {
         $log.warn('Error getting transaction: ' + err);
@@ -119,8 +119,8 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
         return popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Transaction not available at this time'));
       }
 
-      $scope.btx = txFormatService.processTx($scope.wallet.coin, tx);
-      txFormatService.formatAlternativeStr($scope.wallet.coin, tx.fees, function(v) {
+      $scope.btx = txFormatService.processTx($scope.account.coin, tx);
+      txFormatService.formatAlternativeStr($scope.account.coin, tx.fees, function(v) {
         $scope.btx.feeFiatStr = v;
         $scope.btx.feeRateStr = ($scope.btx.fees / ($scope.btx.amount + $scope.btx.fees) * 100).toFixed(2) + '%';
       });
@@ -138,9 +138,9 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
         $scope.$digest();
       });
 
-      feeService.getFeeLevels($scope.wallet.coin, function(err, levels) {
+      feeService.getFeeLevels($scope.account.coin, function(err, levels) {
         if (err) return;
-        walletService.getLowAmount($scope.wallet, levels, function(err, amount) {
+        walletService.getLowAmount($scope.account, levels, function(err, amount) {
           if (err) return;
           $scope.btx.lowAmount = tx.amount < amount;
 
@@ -162,7 +162,7 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
     }
     if ($scope.btx.note && $scope.btx.note.body) opts.defaultText = $scope.btx.note.body;
 
-    popupService.showPrompt($scope.wallet.name, gettextCatalog.getString('Memo'), opts, function(text) {
+    popupService.showPrompt($scope.account.name, gettextCatalog.getString('Memo'), opts, function(text) {
       if (typeof text == "undefined") return;
 
       $scope.btx.note = {
@@ -175,7 +175,7 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
         body: text
       };
 
-      walletService.editTxNote($scope.wallet, args, function(err, res) {
+      walletService.editTxNote($scope.account, args, function(err, res) {
         if (err) {
           $log.debug('Could not save tx comment ' + err);
         }
@@ -195,13 +195,13 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
   };
 
   $scope.getShortNetworkName = function() {
-    var n = $scope.wallet.credentials.network;
+    var n = $scope.account.credentials.network;
     return n.substring(0, 4);
   };
 
   var getFiatRate = function() {
-    $scope.alternativeIsoCode = $scope.wallet.status.alternativeIsoCode;
-    $scope.wallet.getFiatRate({
+    $scope.alternativeIsoCode = $scope.account.status.alternativeIsoCode;
+    $scope.account.getFiatRate({
       code: $scope.alternativeIsoCode,
       ts: $scope.btx.time * 1000
     }, function(err, res) {
@@ -218,11 +218,11 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
 
   $scope.txConfirmNotificationChange = function() {
     if ($scope.txNotification.value) {
-      txConfirmNotification.subscribe($scope.wallet, {
+      txConfirmNotification.subscribe($scope.account, {
         txid: txId
       });
     } else {
-      txConfirmNotification.unsubscribe($scope.wallet, txId);
+      txConfirmNotification.unsubscribe($scope.account, txId);
     }
   };
 

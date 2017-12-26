@@ -30,7 +30,7 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
   }
 
   $scope.showWalletSelector = function () {
-    $scope.walletSelector = true
+    $scope.accountSelector = true
     refresh()
   }
 
@@ -55,7 +55,7 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
   };
 
   function setNoWallet (msg, criticalError) {
-    $scope.wallet = null
+    $scope.account = null
     $scope.noWalletMessage = msg
     $scope.criticalError = criticalError
     $log.warn('Not ready to make the payment:' + msg)
@@ -69,13 +69,13 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
       // no min amount? (sendMax) => look for no empty wallets
       minAmount = minAmount || 1
 
-      $scope.wallets = profileService.getWallets({
+      $scope.accounts = profileService.getAccounts({
         onlyComplete: true,
         network: network,
         coin: coin
       })
 
-      if (!$scope.wallets || !$scope.wallets.length) {
+      if (!$scope.accounts || !$scope.accounts.length) {
         setNoWallet(gettextCatalog.getString('No wallets available'), true)
         return cb()
       }
@@ -84,7 +84,7 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
       var index = 0
       var walletsUpdated = 0
 
-      lodash.each($scope.wallets, function (w) {
+      lodash.each($scope.accounts, function (w) {
         walletService.getStatus(w, {}, function (err, status) {
           if (err || !status) {
             $log.error(err)
@@ -99,13 +99,13 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
             }
           }
 
-          if (++index === $scope.wallets.length) {
+          if (++index === $scope.accounts.length) {
             if (!walletsUpdated) { return cb('Could not update any wallet') }
 
             if (lodash.isEmpty(filteredWallets)) {
               setNoWallet(gettextCatalog.getString('Insufficient funds'), true)
             }
-            $scope.wallets = lodash.clone(filteredWallets)
+            $scope.accounts = lodash.clone(filteredWallets)
             return cb()
           }
         })
@@ -138,17 +138,17 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
     $scope.isWindowsPhoneApp = isWindowsPhoneApp
     $scope.showAddress = false
 
-    $scope.walletSelectorTitle = gettextCatalog.getString('Send from')
+    $scope.accountSelectorTitle = gettextCatalog.getString('Send from')
 
     setWalletSelector(tx.coin, tx.network, tx.toAmount, function (err) {
       if (err) {
         return exitWithError('Could not update wallets')
       }
 
-      if ($scope.wallets.length > 1) {
+      if ($scope.accounts.length > 1) {
         $scope.showWalletSelector()
-      } else if ($scope.wallets.length) {
-        setWallet($scope.wallets[0], tx)
+      } else if ($scope.accounts.length) {
+        setWallet($scope.accounts[0], tx)
       }
     })
   })
@@ -326,7 +326,7 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
       showAmount(tx.toAmount)
     }
 
-    $scope.onWalletSelect($scope.wallet)
+    $scope.onWalletSelect($scope.account)
   }
 
   function setButtonText (isMultisig, isPayPro) {
@@ -435,7 +435,7 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
   /* sets a wallet on the UI, creates a TXPs for that wallet */
 
   function setWallet (wallet, tx) {
-    $scope.wallet = wallet
+    $scope.account = wallet
 
     // If select another wallet
     tx.coin = wallet.coin
@@ -549,8 +549,8 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
     if (
       (
         processName === 'broadcastingTx' ||
-        ((processName === 'signingTx') && $scope.wallet.m > 1) ||
-        (processName == 'sendingTx' && !$scope.wallet.canSign() && !$scope.wallet.isPrivKeyExternal())
+        ((processName === 'signingTx') && $scope.account.m > 1) ||
+        (processName == 'sendingTx' && !$scope.account.canSign() && !$scope.account.isPrivKeyExternal())
       ) && !isOn) {
       $scope.sendStatus = 'success'
       $timeout(function () {

@@ -10,7 +10,7 @@ angular.module('raiwApp.controllers').controller('addressbookViewController', fu
     $scope.addressbookEntry.email = data.stateParams.email
     $scope.addressbookEntry.address = data.stateParams.address
 
-    raiblocksService.isValid($scope.addressbookEntry.address)
+    raiblocksService.isValidAccount($scope.addressbookEntry.address)
   })
 
   $scope.sendTo = function () {

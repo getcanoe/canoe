@@ -57,7 +57,7 @@ angular.module('raiwApp.services')
       if (!password) {
         return null;
       }
-      var wallet = profileService.getWallet($stateParams.walletId);
+      var wallet = profileService.getAccount($stateParams.walletId);
       try {
         opts = opts || {};
         var b = wallet.export(opts);
@@ -74,7 +74,7 @@ angular.module('raiwApp.services')
     };
 
     root.walletDownload = function(password, opts, cb) {
-      var wallet = profileService.getWallet($stateParams.walletId);
+      var wallet = profileService.getAccount($stateParams.walletId);
       var ew = root.walletExport(password, opts);
       if (!ew) return cb('Could not create backup');
 

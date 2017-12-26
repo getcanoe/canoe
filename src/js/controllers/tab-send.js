@@ -8,10 +8,10 @@ angular.module('raiwApp.controllers').controller('tabSendController', function (
   $scope.serverMessage = null
 
   var hasWallets = function () {
-    $scope.wallets = profileService.getWallets({
+    $scope.accounts = profileService.getAccounts({
       onlyComplete: true
     })
-    $scope.hasWallets = !lodash.isEmpty($scope.wallets)
+    $scope.hasWallets = !lodash.isEmpty($scope.accounts)
   }
 
   // THIS is ONLY to show the 'buy bitcoins' message
@@ -26,7 +26,7 @@ angular.module('raiwApp.controllers').controller('tabSendController', function (
     $scope.hasFunds = false
     var foundMessage = false
     var index = 0
-    lodash.each($scope.wallets, function (w) {
+    lodash.each($scope.accounts, function (w) {
       walletService.getStatus(w, {}, function (err, status) {
         ++index
         if (err && !status) {
@@ -45,7 +45,7 @@ angular.module('raiwApp.controllers').controller('tabSendController', function (
           }
         }
 
-        if (index == $scope.wallets.length) {
+        if (index == $scope.accounts.length) {
           $scope.checkingBalance = false
           $timeout(function () {
             $scope.$apply()
@@ -56,12 +56,12 @@ angular.module('raiwApp.controllers').controller('tabSendController', function (
   }
 
   var updateWalletsList = function () {
-    var networkResult = lodash.countBy($scope.wallets, 'network')
+    var networkResult = lodash.countBy($scope.accounts, 'network')
 
     $scope.showTransferCard = $scope.hasWallets && (networkResult.livenet > 1 || networkResult.testnet > 1)
 
     if ($scope.showTransferCard) {
-      var walletsToTransfer = $scope.wallets
+      var walletsToTransfer = $scope.accounts
       if (!(networkResult.livenet > 1)) {
         walletsToTransfer = lodash.filter(walletsToTransfer, function (item) {
           return item.network == 'testnet'
@@ -204,7 +204,7 @@ angular.module('raiwApp.controllers').controller('tabSendController', function (
   // This could probably be enhanced refactoring the routes abstract states
   $scope.createWallet = function () {
     $state.go('tabs.home').then(function () {
-      $state.go('tabs.add.create-personal')
+      $state.go('tabs.add.create-account')
     })
   }
 

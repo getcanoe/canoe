@@ -67,7 +67,7 @@ angular.module('raiwApp.controllers').controller('preferencesAltCurrencyControll
 
         $ionicHistory.goBack();
         saveLastUsed(newAltCurrency);
-        walletService.updateRemotePreferences(profileService.getWallets());
+        walletService.updateRemotePreferences(profileService.getAccounts());
       });
     };
 

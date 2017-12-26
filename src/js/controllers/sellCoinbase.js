@@ -130,7 +130,7 @@ angular.module('raiwApp.controllers').controller('sellCoinbaseController', funct
               ctx['price_sensitivity'] = $scope.selectedPriceSensitivity.data;
               ctx['sell_price_amount'] = sellPrice ? sellPrice.amount : '';
               ctx['sell_price_currency'] = sellPrice ? sellPrice.currency : 'USD';
-              ctx['description'] = appConfigService.nameCase + ' Wallet: ' + $scope.wallet.name;
+              ctx['description'] = appConfigService.nameCase + ' Wallet: ' + $scope.account.name;
               coinbaseService.savePendingTransaction(ctx, null, function(err) {
                 ongoingProcess.set('sellingBitcoin', false, statusChangeHandler);
                 if (err) $log.debug(coinbaseService.getErrorsAsString(err.errors));
@@ -185,7 +185,7 @@ angular.module('raiwApp.controllers').controller('sellCoinbaseController', funct
     $scope.selectedPriceSensitivity = { data: coinbaseService.selectedPriceSensitivity };
 
     $scope.network = coinbaseService.getNetwork();
-    $scope.wallets = profileService.getWallets({
+    $scope.accounts = profileService.getAccounts({
       m: 1, // Only 1-signature wallet
       onlyComplete: true,
       network: $scope.network,
@@ -193,11 +193,11 @@ angular.module('raiwApp.controllers').controller('sellCoinbaseController', funct
       coin: coin
     });
 
-    if (lodash.isEmpty($scope.wallets)) {
+    if (lodash.isEmpty($scope.accounts)) {
       showErrorAndBack('No wallet available to operate with Coinbase');
       return;
     }
-    $scope.onWalletSelect($scope.wallets[0]); // Default first wallet
+    $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
   });
 
   $scope.sellRequest = function() {
@@ -281,14 +281,14 @@ angular.module('raiwApp.controllers').controller('sellCoinbaseController', funct
             feeLevel: walletSettings.feeLevel || 'normal'
           };
 
-          walletService.createTx($scope.wallet, txp, function(err, ctxp) {
+          walletService.createTx($scope.account, txp, function(err, ctxp) {
             if (err) {
               ongoingProcess.set('sellingBitcoin', false, statusChangeHandler);
               showError(err);
               return;
             }
             $log.debug('Transaction created.');
-            publishAndSign($scope.wallet, ctxp, function() {}, function(err, txSent) {
+            publishAndSign($scope.account, ctxp, function() {}, function(err, txSent) {
               if (err) {
                 ongoingProcess.set('sellingBitcoin', false, statusChangeHandler);
                 showError(err);
@@ -304,12 +304,12 @@ angular.module('raiwApp.controllers').controller('sellCoinbaseController', funct
   };
 
   $scope.showWalletSelector = function() {
-    $scope.walletSelectorTitle = 'Sell From';
+    $scope.accountSelectorTitle = 'Sell From';
     $scope.showWallets = true;
   };
 
   $scope.onWalletSelect = function(wallet) {
-    $scope.wallet = wallet;
+    $scope.account = wallet;
     var parsedAmount = txFormatService.parseAmount(
       coin,
       amount,

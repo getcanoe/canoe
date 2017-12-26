@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('raiwApp.controllers').controller('preferencesAdvancedController', function($scope, $timeout, $state, $stateParams, profileService) {
-  var wallet = profileService.getWallet($stateParams.walletId);
+  var wallet = profileService.getAccount($stateParams.walletId);
   $scope.network = wallet.network;
-  $scope.wallet = wallet;
+  $scope.account = wallet;
 
   $scope.goToAddresses = function() {
     $state.go('tabs.settings.addresses', {

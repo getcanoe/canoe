@@ -76,17 +76,17 @@ angular.module('raiwApp.controllers').controller('buyGlideraController', functio
     currency = data.stateParams.currency;
 
     $scope.network = glideraService.getNetwork();
-    $scope.wallets = profileService.getWallets({
+    $scope.accounts = profileService.getAccounts({
       onlyComplete: true,
       network: $scope.network,
       coin: coin
     });
 
-    if (lodash.isEmpty($scope.wallets)) {
+    if (lodash.isEmpty($scope.accounts)) {
       showErrorAndBack('No wallets available');
       return;
     }
-    $scope.onWalletSelect($scope.wallets[0]); // Default first wallet
+    $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
   });
 
   var ask2FaCode = function(mode, cb) {
@@ -130,7 +130,7 @@ angular.module('raiwApp.controllers').controller('buyGlideraController', functio
             return;
           }
 
-          walletService.getAddress($scope.wallet, false, function(err, walletAddr) {
+          walletService.getAddress($scope.account, false, function(err, walletAddr) {
             if (err) {
               ongoingProcess.set('buyingBitcoin', false, statusChangeHandler);
               showError(err);
@@ -155,12 +155,12 @@ angular.module('raiwApp.controllers').controller('buyGlideraController', functio
   };
 
   $scope.showWalletSelector = function() {
-    $scope.walletSelectorTitle = 'Receive in';
+    $scope.accountSelectorTitle = 'Receive in';
     $scope.showWallets = true;
   };
 
   $scope.onWalletSelect = function(wallet) {
-    $scope.wallet = wallet;
+    $scope.account = wallet;
     var parsedAmount = txFormatService.parseAmount(
       coin,
       amount,

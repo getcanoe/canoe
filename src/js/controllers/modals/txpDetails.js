@@ -10,11 +10,11 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
     $scope.loading = null;
     $scope.isCordova = platformInfo.isCordova;
     $scope.isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
-    $scope.raiwers = $scope.wallet.status.wallet.raiwers;
-    $scope.raiwerId = $scope.wallet.credentials.raiwerId;
-    $scope.isShared = $scope.wallet.credentials.n > 1;
-    $scope.canSign = $scope.wallet.canSign() || $scope.wallet.isPrivKeyExternal();
-    $scope.color = $scope.wallet.color;
+    $scope.raiwers = $scope.account.status.wallet.raiwers;
+    $scope.raiwerId = $scope.account.credentials.raiwerId;
+    $scope.isShared = $scope.account.credentials.n > 1;
+    $scope.canSign = $scope.account.canSign() || $scope.account.isPrivKeyExternal();
+    $scope.color = $scope.account.color;
     $scope.data = {};
     displayFeeValues();
     initActionList();
@@ -23,7 +23,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
   };
 
   function displayFeeValues() {
-    txFormatService.formatAlternativeStr($scope.wallet.coin, $scope.tx.fee, function(v) {
+    txFormatService.formatAlternativeStr($scope.account.coin, $scope.tx.fee, function(v) {
       $scope.tx.feeFiatStr = v;
     });
     $scope.tx.feeRateStr = ($scope.tx.fee / ($scope.tx.amount + $scope.tx.fee) * 100).toFixed(2) + '%';
@@ -87,7 +87,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
 
   function checkPaypro() {
     if ($scope.tx.payProUrl && !platformInfo.isChromeApp) {
-      $scope.wallet.fetchPayPro({
+      $scope.account.fetchPayPro({
         payProUrl: $scope.tx.payProUrl,
       }, function(err, paypro) {
         if (err) return;
@@ -142,7 +142,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
 
   $scope.sign = function(onSendStatusChange) {
     $scope.loading = true;
-    walletService.publishAndSign($scope.wallet, $scope.tx, function(err, txp) {
+    walletService.publishAndSign($scope.account, $scope.tx, function(err, txp) {
       $scope.$emit('UpdateTx');
       if (err) return setError(err, gettextCatalog.getString('Could not send payment'));
       success();
@@ -156,7 +156,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
       if (res) {
         $scope.loading = true;
 
-        walletService.reject($scope.wallet, $scope.tx, function(err, txpr) {
+        walletService.reject($scope.account, $scope.tx, function(err, txpr) {
           if (err)
             return setError(err, gettextCatalog.getString('Could not reject payment'));
 
@@ -172,7 +172,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
     popupService.showConfirm(title, msg, null, null, function(res) {
       if (res) {
         ongoingProcess.set('removeTx', true);
-        walletService.removeTx($scope.wallet, $scope.tx, function(err) {
+        walletService.removeTx($scope.account, $scope.tx, function(err) {
           ongoingProcess.set('removeTx', false);
 
           // Hacky: request tries to parse an empty response
@@ -192,7 +192,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
 
     $timeout(function() {
       ongoingProcess.set('broadcastingTx', true);
-      walletService.broadcastTx($scope.wallet, $scope.tx, function(err, txpb) {
+      walletService.broadcastTx($scope.account, $scope.tx, function(err, txpb) {
         ongoingProcess.set('broadcastingTx', false);
 
         if (err) {
@@ -205,11 +205,11 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
   };
 
   $scope.getShortNetworkName = function() {
-    return $scope.wallet.credentials.networkName.substring(0, 4);
+    return $scope.account.credentials.networkName.substring(0, 4);
   };
 
   var updateTxInfo = function(eventName) {
-    $scope.wallet.getTx($scope.tx.id, function(err, tx) {
+    $scope.account.getTx($scope.tx.id, function(err, tx) {
       if (err) {
         if (err.message && err.message == 'Transaction proposal not found' &&
           (eventName == 'transactionProposalRemoved' || eventName == 'TxProposalRemoved')) {
@@ -222,10 +222,10 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
       }
 
       var action = lodash.find(tx.actions, {
-        raiwerId: $scope.wallet.credentials.raiwerId
+        raiwerId: $scope.account.credentials.raiwerId
       });
 
-      $scope.tx = txFormatService.processTx($scope.wallet.coin, tx);
+      $scope.tx = txFormatService.processTx($scope.account.coin, tx);
 
       if (!action && tx.status == 'pending')
         $scope.tx.pendingForUs = true;
@@ -245,7 +245,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
         'NewOutgoingTx',
         'UpdateTx'
     ], function(eventName) {
-      if (walletId == $scope.wallet.id && type == eventName) {
+      if (walletId == $scope.account.id && type == eventName) {
         updateTxInfo(eventName);
       }
     });

@@ -37,7 +37,7 @@ angular.module('raiwApp.services').factory('pushNotificationsService', function 
       return;
     }
 
-    var wallets = profileService.getWallets();
+    var wallets = profileService.getAccounts();
     lodash.forEach(wallets, function(walletClient) {
       _subscribe(walletClient);
     });
@@ -49,7 +49,7 @@ angular.module('raiwApp.services').factory('pushNotificationsService', function 
       return;
     }
 
-    var wallets = profileService.getWallets();
+    var wallets = profileService.getAccounts();
     lodash.forEach(wallets, function(walletClient) {
       _unsubscribe(walletClient);
     });
@@ -81,7 +81,7 @@ angular.module('raiwApp.services').factory('pushNotificationsService', function 
   };
 
   var _openWallet = function(walletIdHashed) {
-    var wallets = profileService.getWallets();
+    var wallets = profileService.getAccounts();
     var wallet = lodash.find(wallets, function(w) {
       return (lodash.isEqual(walletIdHashed, sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(w.id))));
     });

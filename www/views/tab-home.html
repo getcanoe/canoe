@@ -80,7 +80,7 @@
 
     <div class="list card" ng-if="!walletsBtc[0] && !walletsBch[0]">
       <div class="item item-icon-right item-heading">
-        <span translate>Wallets</span>
+        <span translate>Accounts</span>
       </div>
       <a ui-sref="tabs.add" class="item item-icon-left item-big-icon-left item-icon-right next-step">
         <i class="icon big-icon-svg">
@@ -105,21 +105,6 @@
         </a>
       </div>
     </div>
-
-    <!-- <div class="list card" ng-if="walletsBch[0]">
-      <div class="item item-icon-right item-heading">
-        <img class="wallet-coin-logo" src="img/bitcoin-cash-logo.svg" width="22">
-        <span translate>Bitcoin Cash Wallets</span>
-        <a ui-sref="tabs.add({coin:'bch'})"><i class="icon ion-ios-plus-empty list-add-button"></i></a>
-      </div>
-      <div>
-        <a ng-repeat="wallet in walletsBch track by $index"
-           class="item item-sub item-icon-left item-big-icon-left item-icon-right wallet"
-           ng-click="openWallet(wallet)">
-          <span ng-include="'views/includes/walletList.html'"></span>
-        </a>
-      </div>
-    </div> -->
 
     <div class="ng-hide list card" ng-show="walletsBtc[0] && bitpayCardItems.length>0" ng-include="'views/includes/bitpayCardsCard.html'"></div>
     <div class="ng-hide list card" ng-show="walletsBtc[0] && buyAndSellItems.length>0" ng-include="'views/includes/buyAndSellCard.html'"></div>

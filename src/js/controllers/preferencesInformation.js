@@ -2,8 +2,8 @@
 
 angular.module('raiwApp.controllers').controller('preferencesInformation',
   function($scope, $log, $ionicHistory, platformInfo, lodash, profileService, configService, $stateParams, $state, walletService) {
-    var wallet = profileService.getWallet($stateParams.walletId);
-    $scope.wallet = wallet;
+    var wallet = profileService.getAccount($stateParams.walletId);
+    $scope.account = wallet;
 
     var walletId = wallet.id;
     var config = configService.getSync();
@@ -34,9 +34,9 @@ angular.module('raiwApp.controllers').controller('preferencesInformation',
       var c = wallet.credentials;
       var basePath = c.getBaseAddressDerivationPath();
 
-      $scope.wallet = wallet;
-      $scope.walletName = c.walletName;
-      $scope.walletId = c.walletId;
+      $scope.account = wallet;
+      $scope.accountName = c.walletName;
+      $scope.accountId = c.walletId;
       $scope.network = c.network;
       $scope.addressType = c.addressType || 'P2SH';
       $scope.derivationStrategy = c.derivationStrategy || 'BIP45';

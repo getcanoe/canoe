@@ -14,7 +14,7 @@ angular.module('raiwApp.controllers').controller('topUpController', function($sc
   var configWallet = configService.getSync().wallet;
 
   var _resetValues = function() {
-    $scope.totalAmountStr = $scope.amount = $scope.invoiceFee = $scope.networkFee = $scope.totalAmount = $scope.wallet = null;
+    $scope.totalAmountStr = $scope.amount = $scope.invoiceFee = $scope.networkFee = $scope.totalAmount = $scope.account = null;
     createdTx = message = null;
   };
 
@@ -275,14 +275,14 @@ angular.module('raiwApp.controllers').controller('topUpController', function($sc
       $scope.currencySymbol = card[0].currencySymbol;
       $scope.currencyIsoCode = card[0].currency;
 
-      $scope.wallets = profileService.getWallets({
+      $scope.accounts = profileService.getAccounts({
         onlyComplete: true,
         network: bitpayService.getEnvironment().network,
         hasFunds: true,
         coin: coin
       });
 
-      if (lodash.isEmpty($scope.wallets)) {
+      if (lodash.isEmpty($scope.accounts)) {
         showErrorAndBack(null, gettextCatalog.getString('No wallets available'));
         return;
       }
@@ -292,7 +292,7 @@ angular.module('raiwApp.controllers').controller('topUpController', function($sc
         $scope.rate = r.rate;
       });
 
-      $scope.onWalletSelect($scope.wallets[0]); // Default first wallet
+      $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
     });
   });
 
@@ -313,7 +313,7 @@ angular.module('raiwApp.controllers').controller('topUpController', function($sc
       }
 
       ongoingProcess.set('topup', true, statusChangeHandler);
-      publishAndSign($scope.wallet, createdTx, function() {}, function(err, txSent) {
+      publishAndSign($scope.account, createdTx, function() {}, function(err, txSent) {
         if (err) {
           _resetValues();
           ongoingProcess.set('topup', false, statusChangeHandler);
@@ -326,12 +326,12 @@ angular.module('raiwApp.controllers').controller('topUpController', function($sc
   };
 
   $scope.showWalletSelector = function() {
-    $scope.walletSelectorTitle = gettextCatalog.getString('From');
+    $scope.accountSelectorTitle = gettextCatalog.getString('From');
     $scope.showWallets = true;
   };
 
   $scope.onWalletSelect = function(wallet) {
-    $scope.wallet = wallet;
+    $scope.account = wallet;
     ongoingProcess.set('retrievingInputs', true);
     calculateAmount(wallet, function(err, a, c) {
       ongoingProcess.set('retrievingInputs', false);

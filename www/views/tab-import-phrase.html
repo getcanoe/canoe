@@ -6,12 +6,13 @@
   </ul>
 </div>
 
-<form name="importForm12" ng-submit="importMnemonic(importForm12)" novalidate>
+<form name="importForm12" ng-submit="importSeed(importForm12)" novalidate>
   <div class="list settings-list settings-input-group">
     <div>
       <label class="item item-input item-stacked-label no-border">
         <span class="input-label" translate>Enter wallet seed</span>
-          <textarea ng-model="formData.words"
+          <textarea ng-model="formData.seed"
+                    placeholder="{{'Numbers and letters like 904A2CE76... '|translate}}"
                     rows="3"
                     autocapitalize="off"
                     autocomplete="off"
@@ -24,51 +25,6 @@
     </div>
 
     <div class="item item-divider"></div>
-
-    <!--
-    <a class="item" ng-click="showAdvChange()">
-      <span translate ng-show="!showAdv">Show advanced options</span>
-      <span translate ng-show="showAdv">Hide advanced options</span>
-    </a>
-
-    <div ng-show="showAdv">
-      <label class="item item-input item-stacked-label">
-        <span class="input-label" translate>Password</span>
-        <input type="password"
-        placeholder="{{'The recovery phrase could require a password to be imported'|translate}}"
-        autocapitalize="off"
-        ng-model="formData.passphrase">
-      </label>
-
-
-      <label class="item item-input item-stacked-label">
-        <span class="input-label" translate>Derivation Path</span>
-        <input type="text"
-        placeholder="{{'BIP32 path for address derivation'|translate}}"
-        ng-model="formData.derivationPath">
-      </label>
-
-      <ion-toggle ng-model="fromHardwareWallet.value" toggle-class="toggle-positive">
-        <span class="toggle-label" translate>From Hardware Wallet</span>
-      </ion-toggle>
-
-      <label class="item item-input item-select" ng-if="fromHardwareWallet.value">
-        <div class="input-label" translate>
-          Wallet Type
-        </div>
-        <select class="m10t" ng-model="formData.seedSourceAll" ng-options="seed as seed.label for seed in seedOptionsAll"></select>
-      </label>
-
-      <ion-toggle ng-model="formData.testnetEnabled" ng-change="setDerivationPath()" toggle-class="toggle-positive" ng-if="formData.coin == 'btc'">
-        <span translate>Testnet</span>
-      </ion-toggle>
-
-
-      <label class="item item-input item-stacked-label">
-        <span class="input-label" translate>Wallet Service URL</span>
-        <input type="text" ng-model="formData.bwsurl">
-      </label>
-    -->
 
     </div>
   </div>

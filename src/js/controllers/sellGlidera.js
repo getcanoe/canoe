@@ -76,7 +76,7 @@ angular.module('raiwApp.controllers').controller('sellGlideraController', functi
     currency = data.stateParams.currency;
 
     $scope.network = glideraService.getNetwork();
-    $scope.wallets = profileService.getWallets({
+    $scope.accounts = profileService.getAccounts({
       m: 1, // Only 1-signature wallet
       onlyComplete: true,
       network: $scope.network,
@@ -84,11 +84,11 @@ angular.module('raiwApp.controllers').controller('sellGlideraController', functi
       coin: coin
     });
 
-    if (lodash.isEmpty($scope.wallets)) {
+    if (lodash.isEmpty($scope.accounts)) {
       showErrorAndBack('Insufficient funds');
       return;
     }
-    $scope.onWalletSelect($scope.wallets[0]); // Default first wallet
+    $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
   });
 
   var ask2FaCode = function(mode, cb) {
@@ -137,7 +137,7 @@ angular.module('raiwApp.controllers').controller('sellGlideraController', functi
           var configWallet = config.wallet;
           var walletSettings = configWallet.settings;
 
-          walletService.getAddress($scope.wallet, null, function(err, refundAddress) {
+          walletService.getAddress($scope.account, null, function(err, refundAddress) {
             if (!refundAddress) {
               ongoingProcess.set('sellingBitcoin', false, statusChangeHandler);
               showError('Could not create address');
@@ -171,29 +171,29 @@ angular.module('raiwApp.controllers').controller('sellGlideraController', functi
                 }
               };
 
-              walletService.createTx($scope.wallet, txp, function(err, createdTxp) {
+              walletService.createTx($scope.account, txp, function(err, createdTxp) {
                 if (err) {
                   ongoingProcess.set('sellingBitcoin', false, statusChangeHandler);
                   showError(err);
                   return;
                 }
-                walletService.prepare($scope.wallet, function(err, password) {
+                walletService.prepare($scope.account, function(err, password) {
                   if (err) {
                     ongoingProcess.set('sellingBitcoin', false, statusChangeHandler);
                     showError(err);
                     return;
                   }
-                  walletService.publishTx($scope.wallet, createdTxp, function(err, publishedTxp) {
+                  walletService.publishTx($scope.account, createdTxp, function(err, publishedTxp) {
                     if (err) {
                       ongoingProcess.set('sellingBitcoin', false, statusChangeHandler);
                       showError(err);
                       return;
                     }
-                    walletService.signTx($scope.wallet, publishedTxp, password, function(err, signedTxp) {
+                    walletService.signTx($scope.account, publishedTxp, password, function(err, signedTxp) {
                       if (err) {
                         ongoingProcess.set('sellingBitcoin', false, statusChangeHandler);
                         showError(err);
-                        walletService.removeTx($scope.wallet, signedTxp, function(err) {
+                        walletService.removeTx($scope.account, signedTxp, function(err) {
                           if (err) $log.debug(err);
                         });
                         return;
@@ -223,12 +223,12 @@ angular.module('raiwApp.controllers').controller('sellGlideraController', functi
   };
 
   $scope.showWalletSelector = function() {
-    $scope.walletSelectorTitle = 'Sell From';
+    $scope.accountSelectorTitle = 'Sell From';
     $scope.showWallets = true;
   };
 
   $scope.onWalletSelect = function(wallet) {
-    $scope.wallet = wallet;
+    $scope.account = wallet;
     var parsedAmount = txFormatService.parseAmount(
       coin,
       amount,

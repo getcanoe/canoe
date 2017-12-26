@@ -28,7 +28,7 @@ angular.module('raiwApp.controllers').controller('collectEmailController', funct
 
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
     walletId = data.stateParams.walletId;
-    wallet = profileService.getWallet(walletId);
+    wallet = profileService.getAccount(walletId);
     $scope.data.accept = true;
   });
 

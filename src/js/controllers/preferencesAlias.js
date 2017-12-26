@@ -2,14 +2,14 @@
 
 angular.module('raiwApp.controllers').controller('preferencesAliasController',
   function($scope, $timeout, $stateParams, $ionicHistory, configService, profileService, walletService) {
-    var wallet = profileService.getWallet($stateParams.walletId);
+    var wallet = profileService.getAccount($stateParams.walletId);
     var walletId = wallet.credentials.walletId;
     var config = configService.getSync();
 
-    $scope.walletName = wallet.credentials.walletName;
-    $scope.walletAlias = config.aliasFor && config.aliasFor[walletId] ? config.aliasFor[walletId] : wallet.credentials.walletName;
+    $scope.accountName = wallet.credentials.walletName;
+    $scope.accountAlias = config.aliasFor && config.aliasFor[walletId] ? config.aliasFor[walletId] : wallet.credentials.walletName;
     $scope.alias = {
-      value: $scope.walletAlias
+      value: $scope.accountAlias
     };
 
     $scope.save = function() {

@@ -9,7 +9,7 @@ angular.module('raiwApp.controllers').controller('customAmountController', funct
   };
 
   var setProtocolHandler = function() {
-    $scope.protocolHandler = walletService.getProtocolHandler($scope.wallet);
+    $scope.protocolHandler = walletService.getProtocolHandler($scope.account);
   }
 
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
@@ -22,11 +22,11 @@ angular.module('raiwApp.controllers').controller('customAmountController', funct
 
     $scope.showShareButton = platformInfo.isCordova ? (platformInfo.isIOS ? 'iOS' : 'Android') : null;
 
-    $scope.wallet = profileService.getWallet(walletId);
+    $scope.account = profileService.getAccount(walletId);
 
     setProtocolHandler();
 
-    walletService.getAddress($scope.wallet, false, function(err, addr) {
+    walletService.getAddress($scope.account, false, function(err, addr) {
       if (!addr) {
         showErrorAndBack('Error', 'Could not get the address');
         return;
@@ -36,7 +36,7 @@ angular.module('raiwApp.controllers').controller('customAmountController', funct
 
       $scope.coin = data.stateParams.coin;
       var parsedAmount = txFormatService.parseAmount(
-        $scope.wallet.coin,
+        $scope.account.coin,
         data.stateParams.amount,
         data.stateParams.currency);
 
@@ -49,13 +49,13 @@ angular.module('raiwApp.controllers').controller('customAmountController', funct
         // Convert to BTC or BCH
         var config = configService.getSync().wallet.settings;
         var amountUnit = txFormatService.satToUnit(parsedAmount.amountSat);
-        var btcParsedAmount = txFormatService.parseAmount($scope.wallet.coin, amountUnit, $scope.wallet.coin);
+        var btcParsedAmount = txFormatService.parseAmount($scope.account.coin, amountUnit, $scope.account.coin);
 
         $scope.amountBtc = btcParsedAmount.amount;
         $scope.altAmountStr = btcParsedAmount.amountUnitStr;
       } else {
         $scope.amountBtc = amount; // BTC or BCH
-        $scope.altAmountStr = txFormatService.formatAlternativeStr($scope.wallet.coin, parsedAmount.amountSat);
+        $scope.altAmountStr = txFormatService.formatAlternativeStr($scope.account.coin, parsedAmount.amountSat);
       }
     });
   });
@@ -70,14 +70,14 @@ angular.module('raiwApp.controllers').controller('customAmountController', funct
   $scope.shareAddress = function() {
     if (!platformInfo.isCordova) return;
     var protocol = 'bitcoin';
-    if ($scope.wallet.coin == 'bch') protocol += 'cash';
+    if ($scope.account.coin == 'bch') protocol += 'cash';
     var data = protocol + ':' + $scope.address + '?amount=' + $scope.amountBtc;
     window.plugins.socialsharing.share(data, null, null, null);
   }
 
   $scope.copyToClipboard = function() {
     var protocol = 'bitcoin';
-    if ($scope.wallet.coin == 'bch') protocol += 'cash';
+    if ($scope.account.coin == 'bch') protocol += 'cash';
     return protocol + ':' + $scope.address + '?amount=' + $scope.amountBtc;
   };
 

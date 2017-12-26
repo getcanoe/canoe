@@ -328,15 +328,6 @@ angular.module('raiwApp').config(function (historicLogProvider, $provide, $logPr
           coin: 'btc'
         }
       })
-      .state('tabs.add.join', {
-        url: '/join/:url',
-        views: {
-          'tab-home@tabs': {
-            templateUrl: 'views/join.html',
-            controller: 'joinController'
-          }
-        }
-      })
       .state('tabs.add.import', {
         url: '/import/:code',
         views: {
@@ -346,20 +337,20 @@ angular.module('raiwApp').config(function (historicLogProvider, $provide, $logPr
           }
         }
       })
-      .state('tabs.add.create-personal', {
-        url: '/create-personal',
+      .state('tabs.add.create-account', {
+        url: '/create-account',
         views: {
           'tab-home@tabs': {
-            templateUrl: 'views/tab-create-personal.html',
+            templateUrl: 'views/tab-create-account.html',
             controller: 'createController'
           }
         }
       })
-      .state('tabs.add.create-shared', {
-        url: '/create-shared',
+      .state('tabs.add.create-wallet', {
+        url: '/create-wallet',
         views: {
           'tab-home@tabs': {
-            templateUrl: 'views/tab-create-shared.html',
+            templateUrl: 'views/tab-create-wallet.html',
             controller: 'createController'
           }
         }
@@ -370,16 +361,6 @@ angular.module('raiwApp').config(function (historicLogProvider, $provide, $logPr
        * Global Settings
        *
        */
-
-      .state('tabs.preferencesCash', {
-        url: '/preferencesCash',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesCashController',
-            templateUrl: 'views/preferencesCash.html'
-          }
-        }
-      })
 
       .state('tabs.notifications', {
         url: '/notifications',
@@ -396,15 +377,6 @@ angular.module('raiwApp').config(function (historicLogProvider, $provide, $logPr
           'tab-settings@tabs': {
             controller: 'preferencesLanguageController',
             templateUrl: 'views/preferencesLanguage.html'
-          }
-        }
-      })
-      .state('tabs.fee', {
-        url: '/fee',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesFeeController',
-            templateUrl: 'views/preferencesFee.html'
           }
         }
       })
@@ -1281,7 +1253,7 @@ angular.module('raiwApp').config(function (historicLogProvider, $provide, $logPr
             $log.debug('No profile... redirecting')
             $state.go('onboarding.welcome')
           } else if (err.message && err.message.match('NONAGREEDDISCLAIMER')) {
-            if (lodash.isEmpty(profileService.getWallets())) {
+            if (lodash.isEmpty(profileService.getAccounts())) {
               $log.debug('No wallets and no disclaimer... redirecting')
               $state.go('onboarding.welcome')
             } else {

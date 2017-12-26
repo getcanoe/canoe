@@ -1,163 +1,154 @@
-'use strict';
+'use strict'
 
-angular.module('raiwApp.controllers').controller('lockSetupController', function($state, $rootScope, $scope, $timeout, $log, configService, gettextCatalog, fingerprintService, profileService, lodash, applicationService) {
-
-  function init() {
+angular.module('raiwApp.controllers').controller('lockSetupController', function ($state, $rootScope, $scope, $timeout, $log, configService, gettextCatalog, fingerprintService, profileService, lodash, applicationService) {
+  function init () {
     $scope.options = [
       {
         method: 'none',
         label: gettextCatalog.getString('Disabled'),
-        disabled: false,
+        disabled: false
       },
       {
         method: 'pin',
         label: gettextCatalog.getString('Lock by PIN'),
         needsBackup: false,
-        disabled: false,
-      },
-    ];
+        disabled: false
+      }
+    ]
 
     if (fingerprintService.isAvailable()) {
       $scope.options.push({
         method: 'fingerprint',
         label: gettextCatalog.getString('Lock by Fingerprint'),
         needsBackup: false,
-        disabled: false,
-      });
+        disabled: false
+      })
     }
 
-    initMethodSelector();
-    processWallets();
+    initMethodSelector()
+    checkForBackup()
   };
 
-  $scope.$on("$ionicView.beforeEnter", function(event) {
-    init();
-  });
+  $scope.$on('$ionicView.beforeEnter', function (event) {
+    init()
+  })
 
-  function getSavedMethod() {
-    var config = configService.getSync();
-    if (config.lock && config.lock.method) return config.lock.method;
-    return 'none';
-  };
+  function getSavedMethod () {
+    var config = configService.getSync()
+    if (config.lock && config.lock.method) return config.lock.method
+    return 'none'
+  }
 
-  function initMethodSelector() {
-    function disable(method) {
+  function initMethodSelector () {
+    function disable (method) {
       lodash.find($scope.options, {
         method: method
-      }).disabled = true;
+      }).disabled = true
     };
 
-    var savedMethod = getSavedMethod();
+    var savedMethod = getSavedMethod()
 
-    lodash.each($scope.options, function(o) {
-      o.disabled = false;
-    });
+    lodash.each($scope.options, function (o) {
+      o.disabled = false
+    })
 
     // HACK: Disable until we allow to change between methods directly
     if (fingerprintService.isAvailable()) {
       switch (savedMethod) {
         case 'pin':
-          disable('fingerprint');
-          break;
+          disable('fingerprint')
+          break
         case 'fingerprint':
-          disable('pin');
-          break;
+          disable('pin')
+          break
       }
     }
 
     $scope.currentOption = lodash.find($scope.options, {
       method: savedMethod
-    });
-    $timeout(function() {
-      $scope.$apply();
-    });
-  };
+    })
+    $timeout(function () {
+      $scope.$apply()
+    })
+  }
 
-  function processWallets() {
-    var wallets = profileService.getWallets();
-    var singleLivenetWallet = wallets.length == 1 && wallets[0].network == 'livenet' && wallets[0].needsBackup;
-    var atLeastOneLivenetWallet = lodash.any(wallets, function(w) {
-      return w.network == 'livenet' && w.needsBackup;
-    });
+  function checkForBackup () {
+    var wallet = profileService.getWallet()
 
-    if (singleLivenetWallet) {
-      $scope.errorMsg = gettextCatalog.getString('Backup your wallet before using this function');
-      disableOptsUntilBackup();
-    } else if (atLeastOneLivenetWallet) {
-      $scope.errorMsg = gettextCatalog.getString('Backup all livenet wallets before using this function');
-      disableOptsUntilBackup();
+    if (wallet.needsBackup) {
+      $scope.errorMsg = gettextCatalog.getString('Backup your wallet before using this function')
+      disableOptsUntilBackup()
     } else {
-      enableOptsAfterBackup();
-      $scope.errorMsg = null;
+      enableOptsAfterBackup()
+      $scope.errorMsg = null
     }
 
-    function enableOptsAfterBackup() {
-      $scope.options[1].needsBackup = false;
-      if ($scope.options[2]) $scope.options[2].needsBackup = false;
-    };
-
-    function disableOptsUntilBackup() {
-      $scope.options[1].needsBackup = true;
-      if ($scope.options[2]) $scope.options[2].needsBackup = true;
-    };
-
-    $timeout(function() {
-      $scope.$apply();
-    });
-  };
-
-  $scope.select = function(selectedMethod) {
-    var savedMethod = getSavedMethod();
-    if (savedMethod == selectedMethod) return;
-
-    if (selectedMethod == 'none') {
-      disableMethod(savedMethod);
-    } else {
-      enableMethod(selectedMethod);
+    function enableOptsAfterBackup () {
+      $scope.options[1].needsBackup = false
+      if ($scope.options[2]) $scope.options[2].needsBackup = false
     }
-  };
 
-  function disableMethod(method) {
+    function disableOptsUntilBackup () {
+      $scope.options[1].needsBackup = true
+      if ($scope.options[2]) $scope.options[2].needsBackup = true
+    }
+
+    $timeout(function () {
+      $scope.$apply()
+    })
+  }
+
+  $scope.select = function (selectedMethod) {
+    var savedMethod = getSavedMethod()
+    if (savedMethod === selectedMethod) return
+
+    if (selectedMethod === 'none') {
+      disableMethod(savedMethod)
+    } else {
+      enableMethod(selectedMethod)
+    }
+  }
+
+  function disableMethod (method) {
     switch (method) {
       case 'pin':
-        applicationService.pinModal('disable');
-        break;
+        applicationService.pinModal('disable')
+        break
       case 'fingerprint':
-        fingerprintService.check('unlockingApp', function(err) {
-          if (err) init();
-          else saveConfig('none');
-        });
-        break;
+        fingerprintService.check('unlockingApp', function (err) {
+          if (err) init()
+          else saveConfig('none')
+        })
+        break
     }
-  };
+  }
 
-  function enableMethod(method) {
+  function enableMethod (method) {
     switch (method) {
       case 'pin':
-        applicationService.pinModal('setup');
-        break;
+        applicationService.pinModal('setup')
+        break
       case 'fingerprint':
-        saveConfig('fingerprint');
-        break;
+        saveConfig('fingerprint')
+        break
     }
-  };
+  }
 
-  function saveConfig(method) {
+  function saveConfig (method) {
     var opts = {
       lock: {
         method: method,
-        value: null,
+        value: null
       }
-    };
+    }
 
-    configService.set(opts, function(err) {
-      if (err) $log.debug(err);
-      initMethodSelector();
-    });
-  };
+    configService.set(opts, function (err) {
+      if (err) $log.debug(err)
+      initMethodSelector()
+    })
+  }
 
-  $rootScope.$on('pinModalClosed', function() {
+  $rootScope.$on('pinModalClosed', function () {
     init()
-  });
-
-});
+  })
+})

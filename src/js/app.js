@@ -22,6 +22,8 @@ var modules = [
 
 var raiwApp = window.raiwApp = angular.module('raiwApp', modules)
 
+//nw.Window.get().showDevTools()
+
 angular.module('raiwApp.filters', [])
 angular.module('raiwApp.services', [])
 angular.module('raiwApp.controllers', [])

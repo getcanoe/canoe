@@ -1,14 +1,11 @@
 'use strict'
 angular.module('raiwApp.services')
-  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, bwcService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, appConfigService) {
+  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, raiblocksService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, appConfigService) {
     var isChromeApp = platformInfo.isChromeApp
-    var isCordova = platformInfo.isCordova
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
 
     var root = {}
-    var errors = bwcService.getErrors()
-    var usePushNotifications = isCordova && !isWindowsPhoneApp
 
     var UPDATE_PERIOD = 15
 
@@ -23,9 +20,11 @@ angular.module('raiwApp.services')
       }
     })
 
-    root.wallet = {} // decorated version of client
+    root.changeSeed = function (seed) {
+      raiblocksService.changeSeed(root.wallet.id, seed)
+    }
 
-    root.updateWalletSettings = function (wallet) {
+    root.updateAccountSettings = function (wallet) {
       var defaults = configService.getDefaults()
       configService.whenAvailable(function (config) {
         wallet.usingCustomBWS = config.bwsFor && config.bwsFor[wallet.id] && (config.bwsFor[wallet.id] != defaults.bws.url)
@@ -59,7 +58,7 @@ angular.module('raiwApp.services')
         if (val) return cb(false)
         return cb(true)
       })
-    };
+    }
 
     function _balanceIsHidden (wallet, cb) {
       storageService.getHideBalanceFlag(wallet.credentials.walletId, function (err, shouldHideBalance) {
@@ -67,7 +66,8 @@ angular.module('raiwApp.services')
         var hideBalance = (shouldHideBalance == 'true')
         return cb(hideBalance)
       })
-    };
+    }
+
     // Adds a wallet client to profileService
     root.bindWalletClient = function (wallet, opts) {
       var opts = opts || {}
@@ -87,7 +87,7 @@ angular.module('raiwApp.services')
       wallet.n = wallet.credentials.n
       wallet.coin = wallet.credentials.coin
 
-      root.updateWalletSettings(wallet)
+      root.updateAccountSettings(wallet)
       root.wallet[walletId] = wallet
 
       _needsBackup(wallet, function (val) {
@@ -99,26 +99,6 @@ angular.module('raiwApp.services')
       })
 
       wallet.removeAllListeners()
-
-      wallet.on('report', function (n) {
-        $log.info('BWC Report:' + n)
-      })
-
-      wallet.on('notification', function (n) {
-        $log.debug('BWC Notification:', n)
-
-        if (n.type == 'NewBlock' && n.data.network == 'testnet') {
-          throttledBwsEvent(n, wallet)
-        } else newBwsEvent(n, wallet)
-      })
-
-      wallet.on('walletCompleted', function () {
-        $log.debug('Wallet completed')
-
-        root.updateCredentials(JSON.parse(wallet.export()), function () {
-          $rootScope.$emit('Local/WalletCompleted', walletId)
-        })
-      })
 
       wallet.initialize({
         notificationIncludeOwn: true
@@ -136,90 +116,16 @@ angular.module('raiwApp.services')
       $rootScope.$on('Local/SettingsUpdated', function (e, walletId) {
         if (!walletId || walletId == wallet.id) {
           $log.debug('Updating settings for wallet:' + wallet.id)
-          root.updateWalletSettings(wallet)
+          root.updateAccountSettings(wallet)
         }
       })
 
       return true
     }
 
-    var throttledBwsEvent = lodash.throttle(function (n, wallet) {
-      newBwsEvent(n, wallet)
-    }, 10000)
-
-    var newBwsEvent = function (n, wallet) {
-      if (wallet.cachedStatus) { wallet.cachedStatus.isValid = false }
-
-      if (wallet.completeHistory) { wallet.completeHistory.isValid = false }
-
-      if (wallet.cachedActivity) { wallet.cachedActivity.isValid = false }
-
-      if (wallet.cachedTxps) { wallet.cachedTxps.isValid = false }
-
-      $rootScope.$emit('bwsEvent', wallet.id, n.type, n)
-    }
-
-    var validationLock = false
-
-    root.runValidation = function (client, delay, retryDelay) {
-      delay = delay || 500
-      retryDelay = retryDelay || 50
-
-      if (validationLock) {
-        return $timeout(function () {
-          $log.debug('ValidatingWallet Locked: Retrying in: ' + retryDelay)
-          return root.runValidation(client, delay, retryDelay)
-        }, retryDelay)
-      }
-      validationLock = true
-
-      // IOS devices are already checked
-      var skipDeviceValidation = isIOS || root.profile.isDeviceChecked(platformInfo.ua)
-      var walletId = client.credentials.walletId
-
-      $log.debug('ValidatingWallet: ' + walletId + ' skip Device:' + skipDeviceValidation)
-      $timeout(function () {
-        client.validateKeyDerivation({
-          skipDeviceValidation: skipDeviceValidation
-        }, function (err, isOK) {
-          validationLock = false
-
-          $log.debug('ValidatingWallet End:  ' + walletId + ' isOK:' + isOK)
-          if (isOK) {
-            root.profile.setChecked(platformInfo.ua, walletId)
-          } else {
-            $log.warn('Key Derivation failed for wallet:' + walletId)
-            storageService.clearLastAddress(walletId, function () {})
-          }
-
-          root.storeProfileIfDirty()
-        })
-      }, delay)
-    }
-
-    var shouldSkipValidation = function (walletId) {
-      return root.profile.isChecked(platformInfo.ua, walletId) || isIOS || isWindowsPhoneApp
-    }
-    // Used when reading wallets from the profile
-    root.bindWallet = function (credentials, cb) {
-      if (!credentials.walletId || !credentials.m) { return cb('bindWallet should receive credentials JSON') }
-
-      // Create the client
-      var getBWSURL = function (walletId) {
-        var config = configService.getSync()
-        var defaults = configService.getDefaults()
-        return ((config.bwsFor && config.bwsFor[walletId]) || defaults.bws.url)
-      }
-
-      var client = bwcService.getClient(JSON.stringify(credentials), {
-        bwsurl: getBWSURL(credentials.walletId)
-      })
-
-      var skipKeyValidation = shouldSkipValidation(credentials.walletId)
-      if (!skipKeyValidation) { root.runValidation(client, 500) }
-
-      $log.info('Binding wallet:' + credentials.walletId + ' Validating?:' + !skipKeyValidation)
-      return cb(null, root.bindWalletClient(client))
+    root.bindWallet = function (cb) {
+      // GOKR
+      return cb(null, root.wallet)
     }
 
     root.bindProfile = function (profile, cb) {
@@ -228,8 +134,9 @@ angular.module('raiwApp.services')
       configService.get(function (err) {
         $log.debug('Preferences read')
         if (err) return cb(err)
+        root.bindWallet(cb)
 
-        function bindWallets (cb) {
+        /* function bindWallets (cb) {
           var l = root.profile.credentials.length
           var i = 0,
             totalBound = 0
@@ -246,8 +153,8 @@ angular.module('raiwApp.services')
               }
             })
           })
-        }
-
+        }*/
+        /*
         bindWallets(function () {
           root.isBound = true
 
@@ -264,7 +171,7 @@ angular.module('raiwApp.services')
             }
             return cb()
           })
-        })
+        })*/
       })
     }
 
@@ -287,6 +194,7 @@ angular.module('raiwApp.services')
           return cb(new Error('NOPROFILE: No profile'))
         } else {
           $log.debug('Profile read')
+          $log.debug('Profile: ' + JSON.stringify(profile))
           return root.bindProfile(profile, cb)
         }
       })
@@ -363,81 +271,23 @@ angular.module('raiwApp.services')
       return cb(null, walletClient)
     }
 
-    // Creates a wallet on BWC/BWS
-    var doCreateWallet = function (opts, cb) {
-      var showOpts = lodash.clone(opts)
-      if (showOpts.extendedPrivateKey) showOpts.extendedPrivateKey = '[hidden]'
-      if (showOpts.mnemonic) showOpts.mnemonic = '[hidden]'
-
-      $log.debug('Creating Account:', showOpts)
-      $timeout(function () {
-        seedWallet(opts, function (err, walletClient) {
-          if (err) return cb(err)
-
-          var name = opts.name || gettextCatalog.getString('Default Account')
-          var myName = opts.myName || gettextCatalog.getString('me')
-
-          walletClient.createWallet(name, myName, opts.m, opts.n, {
-            network: opts.networkName,
-            singleAddress: opts.singleAddress,
-            walletPrivKey: opts.walletPrivKey,
-            coin: opts.coin
-          }, function (err, secret) {
-            if (err) return bwcError.cb(err, gettextCatalog.getString('Error creating account'), cb)
-            return cb(null, walletClient, secret)
-          })
-        })
-      }, 50)
-    }
-
-    // create and store a wallet
+    // Create wallet and default account
     root.createWallet = function (opts, cb) {
-      doCreateWallet(opts, function (err, walletClient, secret) {
-        if (err) return cb(err)
-
-        addAndBindWalletClient(walletClient, {
-          bwsurl: opts.bwsurl
-        }, cb)
+      var accountName = opts.name || gettextCatalog.getString('Default Account')
+      // Synchronous now
+      root.wallet = raiblocksService.createWallet()
+      raiblocksService.createAccount(root.wallet, accountName)
+      storageService.storeWallet(root.wallet, function () {
+        cb(null, root.wallet)
       })
     }
 
-    // joins and stores a wallet
-    root.joinWallet = function (opts, cb) {
-      var walletClient = bwcService.getClient()
-      $log.debug('Joining Wallet:', opts)
-
-      try {
-        var walletData = bwcService.parseSecret(opts.secret)
-
-        // check if exist
-        if (lodash.find(root.profile.credentials, {
-          'walletId': walletData.walletId
-        })) {
-          return cb(gettextCatalog.getString('Cannot join the same wallet more that once'))
-        }
-      } catch (ex) {
-        $log.debug(ex)
-        return cb(gettextCatalog.getString('Bad wallet invitation'))
-      }
-      opts.networkName = walletData.network
-      $log.debug('Joining Wallet:', opts)
-
-      seedWallet(opts, function (err, walletClient) {
-        if (err) return cb(err)
-
-        walletClient.joinWallet(opts.secret, opts.myName || 'me', {
-          coin: opts.coin
-        }, function (err) {
-          if (err) return bwcError.cb(err, gettextCatalog.getString('Could not join wallet'), cb)
-          addAndBindWalletClient(walletClient, {
-            bwsurl: opts.bwsurl
-          }, cb)
-        })
-      })
+    root.getWallet = function () {
+      return root.wallet
     }
 
-    root.getWallet = function (walletId) {
-      return root.wallet[walletId]
+    root.getAccount = function (addr) {
+      return root.wallet.accounts[addr]
     }
 
     root.deleteWalletClient = function (client, cb) {
@@ -572,38 +422,10 @@ angular.module('raiwApp.services')
       })
     }
 
-    root.importExtendedPrivateKey = function (xPrivKey, opts, cb) {
-      var walletClient = bwcService.getClient(null, opts)
-      $log.debug('Importing Wallet xPrivKey')
+    root.importSeed = function (seed, opts, cb) {
+      $log.debug('Importing Wallet Seed')
 
-      walletClient.importFromExtendedPrivateKey(xPrivKey, opts, function (err) {
-        if (err) {
-          if (err instanceof errors.NOT_AUTHORIZED) { return cb(err) }
-
-          return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb)
-        }
-
-        addAndBindWalletClient(walletClient, {
-          bwsurl: opts.bwsurl
-        }, cb)
-      })
-    }
-
-    root._normalizeMnemonic = function (words) {
-      if (!words || !words.indexOf) return words
-      var isJA = words.indexOf('\u3000') > -1
-      var wordList = words.split(/[\u3000\s]+/)
-
-      return wordList.join(isJA ? '\u3000' : ' ')
-    }
-
-    root.importMnemonic = function (words, opts, cb) {
-      var walletClient = bwcService.getClient(null, opts)
-
-      $log.debug('Importing Wallet Mnemonic')
-
-      words = root._normalizeMnemonic(words)
-      walletClient.importFromMnemonic(words, {
+      raiblocksService.importFromSeed(seed, {
         network: opts.networkName,
         passphrase: opts.passphrase,
         entropySourcePath: opts.entropySourcePath,
@@ -613,28 +435,6 @@ angular.module('raiwApp.services')
       }, function (err) {
         if (err) {
           if (err instanceof errors.NOT_AUTHORIZED) { return cb(err) }
-
-          return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb)
-        }
-
-        addAndBindWalletClient(walletClient, {
-          bwsurl: opts.bwsurl
-        }, cb)
-      })
-    }
-
-    root.importExtendedPublicKey = function (opts, cb) {
-      var walletClient = bwcService.getClient(null, opts)
-      $log.debug('Importing Wallet XPubKey')
-
-      walletClient.importFromExtendedPublicKey(opts.extendedPublicKey, opts.externalSource, opts.entropySource, {
-        account: opts.account || 0,
-        derivationStrategy: opts.derivationStrategy || 'BIP44',
-        coin: opts.coin
-      }, function (err) {
-        if (err) {
-          // in HW wallets, req key is always the same. They can't addAccess.
-          if (err instanceof errors.NOT_AUTHORIZED) { err.name = 'WALLET_DOES_NOT_EXIST' }
 
           return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb)
         }
@@ -666,10 +466,6 @@ angular.module('raiwApp.services')
 
     root.createDefaultWallet = function (cb) {
       var opts = {}
-      opts.m = 1
-      opts.n = 1
-      opts.networkName = 'livenet'
-      opts.coin = 'btc'
       root.createWallet(opts, cb)
     }
 
@@ -725,36 +521,12 @@ angular.module('raiwApp.services')
       }, cb)
     }
 
-    root.getWallets = function (opts) {
+    root.getAccounts = function (opts) {
       if (opts && !lodash.isObject(opts)) { throw 'bad argument' }
 
       opts = opts || {}
 
       var ret = lodash.values(root.wallet)
-
-      if (opts.coin) {
-        ret = lodash.filter(ret, function (x) {
-          return (x.credentials.coin == opts.coin)
-        })
-      }
-
-      if (opts.network) {
-        ret = lodash.filter(ret, function (x) {
-          return (x.credentials.network == opts.network)
-        })
-      }
-
-      if (opts.n) {
-        ret = lodash.filter(ret, function (w) {
-          return (w.credentials.n == opts.n)
-        })
-      }
-
-      if (opts.m) {
-        ret = lodash.filter(ret, function (w) {
-          return (w.credentials.m == opts.m)
-        })
-      }
 
       if (opts.hasFunds) {
         ret = lodash.filter(ret, function (w) {
@@ -805,7 +577,7 @@ angular.module('raiwApp.services')
         'NewIncomingTx': 1
       }
 
-      var w = root.getWallets()
+      var w = root.getAccounts()
       if (lodash.isEmpty(w)) return cb()
 
       var l = w.length,
@@ -932,7 +704,7 @@ angular.module('raiwApp.services')
       var MAX = 100
       opts = opts || {}
 
-      var w = root.getWallets()
+      var w = root.getAccounts()
       if (lodash.isEmpty(w)) return cb()
 
       var txps = []

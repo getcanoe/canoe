@@ -2,7 +2,7 @@
 
 angular.module('raiwApp.controllers').controller('backupWarningController', function($scope, $state, $timeout, $stateParams, $ionicModal) {
 
-  $scope.walletId = $stateParams.walletId;
+  $scope.accountId = $stateParams.walletId;
   $scope.fromState = $stateParams.from == 'onboarding' ? $stateParams.from + '.backupRequest' : $stateParams.from;
   $scope.toState = $stateParams.from + '.backup';
 
@@ -20,7 +20,7 @@ angular.module('raiwApp.controllers').controller('backupWarningController', func
       $scope.warningModal.remove();
       $timeout(function() {
         $state.go($scope.toState, {
-          walletId: $scope.walletId
+          walletId: $scope.accountId
         });
       }, 200);
     };
@@ -28,7 +28,7 @@ angular.module('raiwApp.controllers').controller('backupWarningController', func
 
   $scope.goBack = function() {
     $state.go($scope.fromState, {
-      walletId: $scope.walletId
+      walletId: $scope.accountId
     });
   };
 

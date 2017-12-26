@@ -8,14 +8,14 @@ angular.module('raiwApp.controllers').controller('importController',
     var errors = bwcService.getErrors()
 
     $scope.init = function () {
-      $scope.supportsLedger = platformInfo.supportsLedger
-      $scope.supportsTrezor = platformInfo.supportsTrezor
+      //$scope.supportsLedger = platformInfo.supportsLedger
+      //$scope.supportsTrezor = platformInfo.supportsTrezor
       $scope.isCordova = platformInfo.isCordova
       $scope.formData = {}
-      $scope.formData.bwsurl = defaults.bws.url
-      $scope.formData.derivationPath = derivationPathHelper.default
+      //$scope.formData.bwsurl = defaults.bws.url
+      //$scope.formData.derivationPath = derivationPathHelper.default
       $scope.formData.account = 1
-      $scope.formData.coin = $stateParams.coin
+      //$scope.formData.coin = $stateParams.coin
       $scope.importErr = false
       $scope.isRaiW = appConfigService.name === 'raiw'
       $scope.fromHardwareWallet = {
@@ -61,7 +61,6 @@ angular.module('raiwApp.controllers').controller('importController',
 
     $scope.switchTestnetOff = function () {
       $scope.formData.testnetEnabled = false
-      $scope.setDerivationPath()
       $scope.resizeView()
       $timeout(function () {
         $scope.$apply()
@@ -129,59 +128,11 @@ angular.module('raiwApp.controllers').controller('importController',
       }, 100)
     }
 
-    var _importExtendedPrivateKey = function (xPrivKey, opts) {
-      ongoingProcess.set('importingWallet', true)
-      $timeout(function () {
-        profileService.importExtendedPrivateKey(xPrivKey, opts, function (err, client) {
-          ongoingProcess.set('importingWallet', false)
-          if (err) {
-            if (err instanceof errors.NOT_AUTHORIZED) {
-              $scope.importErr = true
-            } else {
-              popupService.showAlert(gettextCatalog.getString('Error'), err)
-            }
-            return $timeout(function () {
-              $scope.$apply()
-            })
-          }
-          finish(client)
-        })
-      }, 100)
-    }
-
-    /*
-      IMPORT FROM PUBLIC KEY - PENDING
-
-    var _importExtendedPublicKey = function(xPubKey, opts) {
-      ongoingProcess.set('importingWallet', true);
-      $timeout(function() {
-        profileService.importExtendedPublicKey(opts, function(err, walletId) {
-          ongoingProcess.set('importingWallet', false);
-          if (err) {
-            $scope.error = err;
-            return $timeout(function() {
-              $scope.$apply();
-            });
-          }
-
-          profileService.setBackupFlag(walletId);
-           if ($stateParams.fromOnboarding) {
-             profileService.setDisclaimerAccepted(function(err) {
-               if (err) $log.error(err);
-             });
-           }
-
-          $state.go('tabs.home');
-        });
-      }, 100);
-    };
-    */
-
-    var _importMnemonic = function (words, opts) {
+    var _importSeed = function (seed, opts) {
       ongoingProcess.set('importingWallet', true)
 
       $timeout(function () {
-        profileService.importMnemonic(words, opts, function (err, client) {
+        profileService.importSeed(seed, opts, function (err, client) {
           ongoingProcess.set('importingWallet', false)
 
           if (err) {
@@ -197,10 +148,6 @@ angular.module('raiwApp.controllers').controller('importController',
           finish(client)
         })
       }, 100)
-    }
-
-    $scope.setDerivationPath = function () {
-      $scope.formData.derivationPath = $scope.formData.testnetEnabled ? derivationPathHelper.defaultTestnet : derivationPathHelper.default
     }
 
     $scope.getFile = function () {
@@ -240,7 +187,7 @@ angular.module('raiwApp.controllers').controller('importController',
       }
     }
 
-    $scope.importMnemonic = function (form) {
+    $scope.importSeed = function (form) {
       if (form.$invalid) {
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('There is an error in the form'))
         return
@@ -248,36 +195,16 @@ angular.module('raiwApp.controllers').controller('importController',
 
       var opts = {}
 
-      if ($scope.formData.bwsurl) { opts.bwsurl = $scope.formData.bwsurl }
-
-      var pathData = derivationPathHelper.parse($scope.formData.derivationPath)
-
-      if (!pathData) {
-        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Invalid derivation path'))
-        return
-      }
-
       opts.account = pathData.account
       opts.networkName = pathData.networkName
       opts.derivationStrategy = pathData.derivationStrategy
       opts.coin = $scope.formData.coin
 
-      var words = $scope.formData.words || null
+      var seed = $scope.formData.seed || null
 
-      if (!words) {
-        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter the recovery phrase'))
+      if (!seed) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter the seed'))
         return
-      } else if (words.indexOf('xprv') == 0 || words.indexOf('tprv') == 0) {
-        return _importExtendedPrivateKey(words, opts)
-      } else if (words.indexOf('xpub') == 0 || words.indexOf('tpuv') == 0) {
-        return _importExtendedPublicKey(words, opts)
-      } else {
-        var wordList = words.split(/[\u3000\s]+/)
-
-        if ((wordList.length % 3) != 0) {
-          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Wrong number of recovery words: ') + wordList.length)
-          return
-        }
       }
 
       opts.passphrase = $scope.formData.passphrase || null
@@ -292,89 +219,7 @@ angular.module('raiwApp.controllers').controller('importController',
         opts.entropySourcePath = 'm/' + hwWallet.getEntropyPath(id, isMultisig, account)
       }
 
-      _importMnemonic(words, opts)
-    }
-
-    $scope.importTrezor = function (account, isMultisig) {
-      trezor.getInfoForNewWallet(isMultisig, account, 'livenet', function (err, lopts) {
-        ongoingProcess.clear()
-        if (err) {
-          popupService.showAlert(gettextCatalog.getString('Error'), err)
-          return
-        }
-
-        lopts.externalSource = walletService.externalSource.trezor.id
-        lopts.bwsurl = $scope.formData.bwsurl
-        lopts.account = account
-        ongoingProcess.set('importingWallet', true)
-        $log.debug('Import opts', lopts)
-
-        profileService.importExtendedPublicKey(lopts, function (err, wallet) {
-          ongoingProcess.set('importingWallet', false)
-          if (err) {
-            popupService.showAlert(gettextCatalog.getString('Error'), err)
-            return
-          }
-          finish(wallet)
-        })
-      }, 100)
-    }
-
-    $scope.importHW = function (form) {
-      if (form.$invalid || $scope.formData.account < 0) {
-        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('There is an error in the form'))
-        return
-      }
-
-      $scope.importErr = false
-
-      var account = $scope.formData.account
-
-      if ($scope.formData.seedSource.id == walletService.externalSource.trezor.id) {
-        if (account < 1) {
-          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Invalid account number'))
-          return
-        }
-        account = account - 1
-      }
-
-      switch ($scope.formData.seedSource.id) {
-        case (walletService.externalSource.ledger.id):
-          ongoingProcess.set('connectingledger', true)
-          $scope.importLedger(account)
-          break
-        case (walletService.externalSource.trezor.id):
-          ongoingProcess.set('connectingtrezor', true)
-          $scope.importTrezor(account, $scope.formData.isMultisig)
-          break
-        default:
-          throw ('Error: bad source id')
-      };
-    }
-
-    $scope.importLedger = function (account) {
-      ledger.getInfoForNewWallet(true, account, 'livenet', function (err, lopts) {
-        ongoingProcess.clear()
-        if (err) {
-          popupService.showAlert(gettextCatalog.getString('Error'), err)
-          return
-        }
-
-        lopts.externalSource = lopts.externalSource = walletService.externalSource.ledger.id
-        lopts.bwsurl = $scope.formData.bwsurl
-        lopts.account = account
-        ongoingProcess.set('importingWallet', true)
-        $log.debug('Import opts', lopts)
-
-        profileService.importExtendedPublicKey(lopts, function (err, wallet) {
-          ongoingProcess.set('importingWallet', false)
-          if (err) {
-            popupService.showAlert(gettextCatalog.getString('Error'), err)
-            return
-          }
-          finish(wallet)
-        })
-      }, 100)
+      _importSeed(seed, opts)
     }
 
     var finish = function (wallet) {

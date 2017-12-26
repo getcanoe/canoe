@@ -148,16 +148,16 @@ angular.module('raiwApp.services').factory('txFormatService', function($filter, 
       if (tx.createdOn > now)
         tx.createdOn = now;
 
-      tx.wallet = profileService.getWallet(tx.walletId);
-      if (!tx.wallet) {
+      tx.account = profileService.getAccount(tx.accountId);
+      if (!tx.account) {
         $log.error("no wallet at txp?");
         return;
       }
 
-      tx = txFormatService.processTx(tx.wallet.coin, tx);
+      tx = txFormatService.processTx(tx.account.coin, tx);
 
       var action = lodash.find(tx.actions, {
-        raiwerId: tx.wallet.raiwerId
+        raiwerId: tx.account.raiwerId
       });
 
       if (!action && tx.status == 'pending') {

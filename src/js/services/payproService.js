@@ -8,7 +8,7 @@ angular.module('raiwApp.services').factory('payproService',
     ret.getPayProDetails = function(uri, cb, disableLoader) {
       if (!cb) cb = function() {};
 
-      var wallet = profileService.getWallets({
+      var wallet = profileService.getAccounts({
         onlyComplete: true
       })[0];
 

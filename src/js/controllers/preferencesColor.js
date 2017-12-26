@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('raiwApp.controllers').controller('preferencesColorController', function($scope, $timeout, $log, $stateParams, $ionicHistory, configService, profileService) {
-  var wallet = profileService.getWallet($stateParams.walletId);
-  $scope.wallet = wallet;
+  var wallet = profileService.getAccount($stateParams.walletId);
+  $scope.account = wallet;
   var walletId = wallet.credentials.walletId;
   var config = configService.getSync();
   config.colorFor = config.colorFor || {};

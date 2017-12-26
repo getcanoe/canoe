@@ -7,7 +7,7 @@ angular.module('raiwApp.services').factory('emailService', function($log, config
     opts = opts || {};
     if (!opts.email) return;
 
-    var wallets = profileService.getWallets();
+    var wallets = profileService.getAccounts();
 
     configService.set({
       emailFor: null, // Backward compatibility

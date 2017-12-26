@@ -2,7 +2,7 @@
 
 angular.module('raiwApp.controllers').controller('preferencesHistory',
   function($scope, $log, $stateParams, $timeout, $state, $ionicHistory, storageService, platformInfo, profileService, lodash, appConfigService, walletService) {
-    $scope.wallet = profileService.getWallet($stateParams.walletId);
+    $scope.account = profileService.getAccount($stateParams.walletId);
     $scope.csvReady = false;
     $scope.isCordova = platformInfo.isCordova;
     $scope.appName = appConfigService.nameCase;
@@ -13,7 +13,7 @@ angular.module('raiwApp.controllers').controller('preferencesHistory',
       var allTxs = [];
 
       function getHistory(cb) {
-        storageService.getTxHistory($scope.wallet.id, function(err, txs) {
+        storageService.getTxHistory($scope.account.id, function(err, txs) {
           if (err) return cb(err);
 
           var txsFromLocal = [];
@@ -47,7 +47,7 @@ angular.module('raiwApp.controllers').controller('preferencesHistory',
         var data = txs;
         var satToBtc = 1 / 100000000;
         $scope.csvContent = [];
-        $scope.csvFilename = $scope.appName + '-' + $scope.wallet.name + '.csv';
+        $scope.csvFilename = $scope.appName + '-' + $scope.account.name + '.csv';
         $scope.csvHeader = ['Date', 'Destination', 'Description', 'Amount', 'Currency', 'Txid', 'Creator', 'RaiWers', 'Comment'];
 
         var _amount, _note, _raiwers, _creator, _comment;
@@ -125,22 +125,22 @@ angular.module('raiwApp.controllers').controller('preferencesHistory',
     };
 
     $scope.clearTransactionHistory = function() {
-      $log.info('Removing Transaction history ' + $scope.wallet.id);
+      $log.info('Removing Transaction history ' + $scope.account.id);
 
-      walletService.clearTxHistory($scope.wallet, function(err) {
+      walletService.clearTxHistory($scope.account, function(err) {
 
         if (err) {
           $log.error(err);
           return;
         }
 
-        $log.info('Transaction history cleared for :' + $scope.wallet.id);
+        $log.info('Transaction history cleared for :' + $scope.account.id);
 
         $ionicHistory.removeBackView();
         $state.go('tabs.home');
         $timeout(function() {
           $state.transitionTo('tabs.wallet', {
-            walletId: $scope.wallet.id,
+            walletId: $scope.account.id,
             clearCache: true
           });
         }, 100);

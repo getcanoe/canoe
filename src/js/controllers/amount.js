@@ -30,7 +30,7 @@ angular.module('raiwApp.controllers').controller('amountController', function($s
 
       availableUnits = [];
 
-      var hasBTCWallets = profileService.getWallets({
+      var hasBTCWallets = profileService.getAccounts({
         coin: 'btc'
       }).length;
 
@@ -43,7 +43,7 @@ angular.module('raiwApp.controllers').controller('amountController', function($s
       }
 
 
-      var hasBCHWallets = profileService.getWallets({
+      var hasBCHWallets = profileService.getAccounts({
         coin: 'bch'
       }).length;
 

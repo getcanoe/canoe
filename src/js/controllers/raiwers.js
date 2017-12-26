@@ -9,12 +9,12 @@ angular.module('raiwApp.controllers').controller('raiwersController',
 
     $scope.isCordova = platformInfo.isCordova;
     $scope.$on("$ionicView.beforeEnter", function(event, data) {
-      $scope.wallet = profileService.getWallet(data.stateParams.walletId);
+      $scope.account = profileService.getAccount(data.stateParams.walletId);
       updateWallet();
       $scope.shareIcon = platformInfo.isIOS ? 'iOS' : 'Android';
     
       listener = $rootScope.$on('bwsEvent', function(e, walletId, type, n) {
-        if ($scope.wallet && walletId == $scope.wallet.id && type == ('NewRaiWer' || 'WalletComplete'))
+        if ($scope.account && walletId == $scope.account.id && type == ('NewRaiWer' || 'WalletComplete'))
           updateWalletDebounced();
       });
     }); 
@@ -24,24 +24,24 @@ angular.module('raiwApp.controllers').controller('raiwersController',
     });
 
     var updateWallet = function() {
-      $log.debug('Updating wallet:' + $scope.wallet.name)
-      walletService.getStatus($scope.wallet, {}, function(err, status) {
+      $log.debug('Updating wallet:' + $scope.account.name)
+      walletService.getStatus($scope.account, {}, function(err, status) {
         if (err) {
           return popupService.showAlert(bwcError.msg(err, gettextCatalog.getString('Could not update wallet')));
         }
-        $scope.wallet.status = status;
-        $scope.raiwers = $scope.wallet.status.wallet.raiwers;
-        $scope.secret = $scope.wallet.status.wallet.secret;
+        $scope.account.status = status;
+        $scope.raiwers = $scope.account.status.wallet.raiwers;
+        $scope.secret = $scope.account.status.wallet.secret;
         $timeout(function() {
           $scope.$apply();
         });
         if (status.wallet.status == 'complete') {
-          $scope.wallet.openWallet(function(err, status) {
+          $scope.account.openWallet(function(err, status) {
             if (err) $log.error(err);
             $scope.clearNextView();
             $state.go('tabs.home').then(function() {
               $state.transitionTo('tabs.wallet', {
-                walletId: $scope.wallet.credentials.walletId
+                walletId: $scope.account.credentials.walletId
               });
             });
           });
@@ -61,12 +61,12 @@ angular.module('raiwApp.controllers').controller('raiwersController',
 
     function deleteWallet() {
       ongoingProcess.set('deletingWallet', true);
-      profileService.deleteWalletClient($scope.wallet, function(err) {
+      profileService.deleteWalletClient($scope.account, function(err) {
         ongoingProcess.set('deletingWallet', false);
         if (err) {
           popupService.showAlert(gettextCatalog.getString('Error'), err.message || err);
         } else {
-          pushNotificationsService.unsubscribe($scope.wallet);
+          pushNotificationsService.unsubscribe($scope.account);
           $scope.clearNextView();
           $state.go('tabs.home');
         }

@@ -83,9 +83,9 @@ angular.module('raiwApp.controllers').controller('preferencesController',
     };
 
     $scope.$on("$ionicView.beforeEnter", function(event, data) {
-      wallet = profileService.getWallet(data.stateParams.walletId);
+      wallet = profileService.getAccount(data.stateParams.walletId);
       walletId = wallet.credentials.walletId;
-      $scope.wallet = wallet;
+      $scope.account = wallet;
       $scope.isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
       $scope.externalSource = null;
 
@@ -95,7 +95,7 @@ angular.module('raiwApp.controllers').controller('preferencesController',
       var config = configService.getSync();
 
       $scope.hiddenBalance = {
-        value: $scope.wallet.balanceHidden
+        value: $scope.account.balanceHidden
       };
 
       $scope.encryptEnabled = {

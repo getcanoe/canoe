@@ -13,7 +13,7 @@ angular.module('raiwApp.directives')
             }
 
             // Regular Address
-            var isValid = raiblocksService.isValid(value)
+            var isValid = raiblocksService.isValidAccount(value)
             ctrl.$setValidity('validAddress', isValid)
             return value
           };

@@ -113,12 +113,12 @@ angular.module('raiwApp.services')
       storage.get('feedback', cb)
     }
 
-    root.storeFocusedWalletId = function (id, cb) {
-      storage.set('focusedWalletId', id || '', cb)
+    root.storeWallet = function (wallet, cb) {
+      storage.set('wallet', wallet, cb)
     }
 
-    root.getFocusedWalletId = function (cb) {
-      storage.get('focusedWalletId', cb)
+    root.loadWallet = function (cb) {
+      storage.get('wallet', cb)
     }
 
     root.getLastAddress = function (walletId, cb) {

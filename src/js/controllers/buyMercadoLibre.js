@@ -17,7 +17,7 @@ angular.module('raiwApp.controllers').controller('buyMercadoLibreController', fu
   };
 
   var _resetValues = function() {
-    $scope.totalAmountStr = $scope.amount = $scope.invoiceFee = $scope.networkFee = $scope.totalAmount = $scope.wallet = null;
+    $scope.totalAmountStr = $scope.amount = $scope.invoiceFee = $scope.networkFee = $scope.totalAmount = $scope.account = null;
     createdTx = message = invoiceId = null;
   };
 
@@ -307,16 +307,16 @@ angular.module('raiwApp.controllers').controller('buyMercadoLibreController', fu
     }
 
     $scope.network = mercadoLibreService.getNetwork();
-    $scope.wallets = profileService.getWallets({
+    $scope.accounts = profileService.getAccounts({
       onlyComplete: true,
       network: $scope.network,
       coin: coin
     });
-    if (lodash.isEmpty($scope.wallets)) {
+    if (lodash.isEmpty($scope.accounts)) {
       showErrorAndBack(null, gettextCatalog.getString('No wallets available'));
       return;
     }
-    $scope.onWalletSelect($scope.wallets[0]); // Default first wallet
+    $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
   });
 
   $scope.buyConfirm = function() {
@@ -336,7 +336,7 @@ angular.module('raiwApp.controllers').controller('buyMercadoLibreController', fu
       }
 
       ongoingProcess.set('Comprando Vale-Presente', true, statusChangeHandler);
-      publishAndSign($scope.wallet, createdTx, function() {}, function(err, txSent) {
+      publishAndSign($scope.account, createdTx, function() {}, function(err, txSent) {
         if (err) {
           ongoingProcess.set('Comprando Vale-Presente', false, statusChangeHandler);
           showError(gettextCatalog.getString('Could not send transaction'), err);
@@ -348,12 +348,12 @@ angular.module('raiwApp.controllers').controller('buyMercadoLibreController', fu
   };
 
   $scope.showWalletSelector = function() {
-    $scope.walletSelectorTitle = 'Buy from';
+    $scope.accountSelectorTitle = 'Buy from';
     $scope.showWallets = true;
   };
 
   $scope.onWalletSelect = function(wallet) {
-    $scope.wallet = wallet;
+    $scope.account = wallet;
     initialize(wallet);
   };
 

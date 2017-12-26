@@ -1,6 +1,6 @@
 <ion-view class="settings" show-tabs>
   <ion-nav-bar class="bar-royal">
-    <ion-nav-title>{{'Create Shared Wallet' | translate}}</ion-nav-title>
+    <ion-nav-title>{{'Create Account' | translate}}</ion-nav-title>
     <ion-nav-back-button>
     </ion-nav-back-button>
   </ion-nav-bar>
@@ -9,45 +9,14 @@
     <form name="setupForm" ng-submit="create()" novalidate>
       <div class="list settings-list settings-input-group">
         <label class="item item-input item-stacked-label">
-          <span class="input-label" translate>Wallet name</span>
+          <span class="input-label" translate>Account name</span>
           <input type="text"
-            placeholder="{{'Family vacation funds'|translate}}"
-            ng-model="formData.walletName"
-            ng-required="true"
-            ng-focus="formFocus('wallet-name')"
-            ng-blur="formFocus(false)">
-        </label>
-
-        <label class="item item-input item-stacked-label">
-          <span class="input-label" translate>Your name</span>
-          <input type="text"
-            placeholder="Satoshi"
-            ng-model="formData.myName"
-            ng-required="formData.totalCopayers != 1"
-            ng-disabled="formData.totalCopayers == 1"
-            ng-focus="formFocus('my-name')"
-            ng-blur="formFocus(false)">
-        </label>
-
-        <div ng-include="'views/includes/cash.html'"></div>
-
-        <label class="item item-input item-select">
-          <div class="input-label" translate>
-            Total number of raiwers
-          </div>
-          <select class="m10t" ng-model="formData.totalCopayers" ng-options="totalCopayers as totalCopayers for totalCopayers in TCValues"
-            ng-change="setTotalCopayers(formData.totalCopayers)">
-          </select>
-        </label>
-
-        <label class="item item-input item-select">
-          <div class="input-label" translate>
-            Required number of signatures
-          </div>
-          <select class="m10t"
-            ng-model="formData.requiredCopayers" ng-options="requiredCopayers as requiredCopayers for requiredCopayers in RCValues"
-            ng-disabled="formData.totalCopayers == 1">
-          </select>
+          placeholder="{{'Family vacation funds'|translate}}"
+          ng-model="formData.walletName"
+          ng-required="true"
+          ng-focus="formFocus('wallet-name')"
+          ng-blur="formFocus(false)"
+          required>
         </label>
 
         <div class="item item-divider"></div>
@@ -60,7 +29,7 @@
         <div ng-show="showAdv">
           <label class="item item-input item-stacked-label">
             <span class="input-label">Wallet Service URL</span>
-            <input type="text" ng-model="formData.bwsurl">
+            <input type="text" ng-model="formData.bwsurl" placeholder="https://bws.bitpay.com/bws/api">
           </label>
 
           <label class="item item-input item-select">
@@ -136,7 +105,7 @@
             <span class="toggle-label" translate>I have written it down</span>
           </ion-checkbox>
 
-          <label class="item item-input item-stacked-label" ng-show="formData.seedSource.id  == 'set'">
+          <label class="item item-input item-stacked-label" ng-show="formData.seedSource.id == 'set'">
             <span class="input-label" translate>Derivation Path</span>
             <input type="text"
             placeholder="{{'BIP32 path for address derivation'|translate}}"
@@ -144,7 +113,7 @@
           </label>
 
           <ion-toggle ng-show="formData.seedSource.supportsTestnet && formData.coin == 'btc'" ng-model="formData.testnetEnabled" toggle-class="toggle-positive">
-            Testnet
+            <span translate>Testnet</span>
           </ion-toggle>
 
           <ion-toggle ng-model="formData.singleAddressEnabled" toggle-class="toggle-positive">
@@ -157,7 +126,7 @@
 
       <button type="submit" class="button button-standard button-primary"
         ng-disabled="setupForm.$invalid || ((encrypt && !formData.passwordSaved) || encrypt && ((formData.seedSource.id == 'new' && !formData.createPassphrase) || (formData.seedSource.id == 'set' && !formData.passphrase)))">
-        <span translate>Create {{formData.requiredCopayers}}-of-{{formData.totalCopayers}} wallet</span>
+        <span translate>Create new account</span>
       </button>
     </form>
   </ion-content>
