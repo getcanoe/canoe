@@ -292,7 +292,7 @@ angular.module('raiwApp.controllers').controller('topUpController', function($sc
         $scope.rate = r.rate;
       });
 
-      $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
+      $scope.onAccountSelect($scope.accounts[0]); // Default first wallet
     });
   });
 
@@ -325,12 +325,12 @@ angular.module('raiwApp.controllers').controller('topUpController', function($sc
     });
   };
 
-  $scope.showWalletSelector = function() {
+  $scope.showAccountSelector = function() {
     $scope.accountSelectorTitle = gettextCatalog.getString('From');
-    $scope.showWallets = true;
+    $scope.showAccounts = true;
   };
 
-  $scope.onWalletSelect = function(wallet) {
+  $scope.onAccountSelect = function(wallet) {
     $scope.account = wallet;
     ongoingProcess.set('retrievingInputs', true);
     calculateAmount(wallet, function(err, a, c) {
@@ -338,7 +338,7 @@ angular.module('raiwApp.controllers').controller('topUpController', function($sc
       if (err) {
         _resetValues();
         showError(err.title, err.message, function() {
-          $scope.showWalletSelector();
+          $scope.showAccountSelector();
         });
         return;
       }

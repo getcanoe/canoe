@@ -316,7 +316,7 @@ angular.module('raiwApp.controllers').controller('buyMercadoLibreController', fu
       showErrorAndBack(null, gettextCatalog.getString('No wallets available'));
       return;
     }
-    $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
+    $scope.onAccountSelect($scope.accounts[0]); // Default first wallet
   });
 
   $scope.buyConfirm = function() {
@@ -347,12 +347,12 @@ angular.module('raiwApp.controllers').controller('buyMercadoLibreController', fu
     });
   };
 
-  $scope.showWalletSelector = function() {
+  $scope.showAccountSelector = function() {
     $scope.accountSelectorTitle = 'Buy from';
-    $scope.showWallets = true;
+    $scope.showAccounts = true;
   };
 
-  $scope.onWalletSelect = function(wallet) {
+  $scope.onAccountSelect = function(wallet) {
     $scope.account = wallet;
     initialize(wallet);
   };

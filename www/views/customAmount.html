@@ -9,7 +9,7 @@
       {{'Custom Amount' | translate}}
     </ion-nav-title>
     <ion-nav-buttons side="secondary">
-      <button class="button-share ng-hide" ng-show="showShareButton" ng-click="shareAddress()">
+      <button class="button-share ng-hide" ng-show="showShareButton" ng-click="shareAccount()">
         <i class="icon"
           ng-class="{
           'ion-ios-upload-outline': showShareButton == 'iOS',
@@ -21,7 +21,7 @@
   <ion-content scroll="false">
     <div class="address" ng-if="address && amountBtc">
       <div class="qr-code" copy-to-clipboard="copyToClipboard()">
-        <qrcode size="220" data="{{ protocolHandler }}:{{address + '?amount=' + amountBtc}}" color="#334"></qrcode>
+        <qrcode size="220" data="raiblocks:{{address + '?amount=' + amountBtc}}" color="#334"></qrcode>
       </div>
       <div class="info">
         <div class="item single-line" copy-to-clipboard="address">

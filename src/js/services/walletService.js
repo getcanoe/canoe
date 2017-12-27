@@ -72,20 +72,6 @@ angular.module('raiwApp.services').factory('walletService', function ($log, $tim
     }
   }
 
-  root.showReceiveAddressFromHardware = function (wallet, address, cb) {
-    switch (wallet.getPrivKeyExternalSourceName()) {
-      case root.externalSource.intelTEE.id:
-        root.getAddressObj(wallet, address, function (err, addrObj) {
-          if (err) return cb(err)
-          return intelTEE.showReceiveAddress(wallet.credentials.hwInfo.id, addrObj, cb)
-        })
-        break
-      default:
-        cb('Error: unrecognized external source')
-        break
-    }
-  }
-
   root.invalidateCache = function (wallet) {
     if (wallet.cachedStatus)      { wallet.cachedStatus.isValid = false}
 

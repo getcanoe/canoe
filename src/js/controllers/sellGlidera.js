@@ -88,7 +88,7 @@ angular.module('raiwApp.controllers').controller('sellGlideraController', functi
       showErrorAndBack('Insufficient funds');
       return;
     }
-    $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
+    $scope.onAccountSelect($scope.accounts[0]); // Default first wallet
   });
 
   var ask2FaCode = function(mode, cb) {
@@ -222,12 +222,12 @@ angular.module('raiwApp.controllers').controller('sellGlideraController', functi
     });
   };
 
-  $scope.showWalletSelector = function() {
+  $scope.showAccountSelector = function() {
     $scope.accountSelectorTitle = 'Sell From';
-    $scope.showWallets = true;
+    $scope.showAccounts = true;
   };
 
-  $scope.onWalletSelect = function(wallet) {
+  $scope.onAccountSelect = function(wallet) {
     $scope.account = wallet;
     var parsedAmount = txFormatService.parseAmount(
       coin,

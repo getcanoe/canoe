@@ -77,7 +77,7 @@
           </div>
         </div>
 
-        <a class="item item-icon-right" ng-hide="!wallet" ng-click="showWalletSelector()">
+        <a class="item item-icon-right" ng-hide="!wallet" ng-click="showAccountSelector()">
           <span class="label" translate>From</span>
           <div class="wallet" ng-if="wallet">
             <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
@@ -131,11 +131,11 @@
     <span ng-show="!wallet.canSign() && !wallet.isPrivKeyExternal()" translate>Transaction Created</span>
   </slide-to-accept-success>
 
-  <wallet-selector
-    wallet-selector-title="walletSelectorTitle"
-    wallet-selector-wallets="wallets"
-    wallet-selector-selected-wallet="wallet"
-    wallet-selector-show="walletSelector"
-    wallet-selector-on-select="onWalletSelect">
-  </wallet-selector>
+  <account-selector
+    account-selector-title="walletSelectorTitle"
+    account-selector-wallets="wallets"
+    account-selector-selected-wallet="wallet"
+    account-selector-show="walletSelector"
+    account-selector-on-select="onAccountSelect">
+  </account-selector>
 </ion-view>

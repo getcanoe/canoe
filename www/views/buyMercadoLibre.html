@@ -24,7 +24,7 @@
       </div>
 
       <div class="info">
-        <div class="item item-icon-right" ng-click="showWalletSelector()">
+        <div class="item item-icon-right" ng-click="showAccountSelector()">
           <div class="label" translate>From</div>
           <div class="wallet">
             <i class="icon big-icon-svg">
@@ -100,11 +100,11 @@
     </div>
   </slide-to-accept-success>
 
-  <wallet-selector
-    wallet-selector-title="walletSelectorTitle"
-    wallet-selector-wallets="wallets"
-    wallet-selector-selected-wallet="wallet"
-    wallet-selector-show="showWallets"
-    wallet-selector-on-select="onWalletSelect">
-  </wallet-selector>
+  <account-selector
+    account-selector-title="walletSelectorTitle"
+    account-selector-wallets="wallets"
+    account-selector-selected-wallet="wallet"
+    account-selector-show="showWallets"
+    account-selector-on-select="onAccountSelect">
+  </account-selector>
 </ion-view>

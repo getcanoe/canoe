@@ -21,7 +21,7 @@
       <div class="text-center size-12 text-gray">
         <span translate>Funds will be transferred to</span>:
       </div>
-      <div class="list card" ng-click="showWalletSelector()" ng-if="wallets[0]">
+      <div class="list card" ng-click="showAccountSelector()" ng-if="accounts[0]">
         <a ng-if="wallet" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
           <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
           <span>
@@ -37,7 +37,7 @@
           <span class="assertive" ng-if="wallet.error">{{wallet.error}}</span>
           &nbsp;
           </p>
-          <i ng-if="!singleWallet" class="icon bp-arrow-right"></i>
+          <i ng-if="!singleAccount" class="icon bp-arrow-right"></i>
         </a>
       </div>
     </div>
@@ -51,11 +51,11 @@
       <span translate>Funds transferred</span>
     </slide-to-accept-success>
   </ion-content>
-  <wallet-selector
-    wallet-selector-title="walletSelectorTitle"
-    wallet-selector-wallets="wallets"
-    wallet-selector-selected-wallet="wallet"
-    wallet-selector-show="showWallets"
-    wallet-selector-on-select="onWalletSelect">
-  </wallet-selector>
+  <account-selector
+    account-selector-title="walletSelectorTitle"
+    account-selector-wallets="wallets"
+    account-selector-selected-wallet="wallet"
+    account-selector-show="showWallets"
+    account-selector-on-select="onAccountSelect">
+  </account-selector>
 </ion-view>

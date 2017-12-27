@@ -197,7 +197,7 @@ angular.module('raiwApp.controllers').controller('sellCoinbaseController', funct
       showErrorAndBack('No wallet available to operate with Coinbase');
       return;
     }
-    $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
+    $scope.onAccountSelect($scope.accounts[0]); // Default first wallet
   });
 
   $scope.sellRequest = function() {
@@ -303,12 +303,12 @@ angular.module('raiwApp.controllers').controller('sellCoinbaseController', funct
     });
   };
 
-  $scope.showWalletSelector = function() {
+  $scope.showAccountSelector = function() {
     $scope.accountSelectorTitle = 'Sell From';
-    $scope.showWallets = true;
+    $scope.showAccounts = true;
   };
 
-  $scope.onWalletSelect = function(wallet) {
+  $scope.onAccountSelect = function(wallet) {
     $scope.account = wallet;
     var parsedAmount = txFormatService.parseAmount(
       coin,

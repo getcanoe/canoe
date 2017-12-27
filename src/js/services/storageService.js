@@ -332,12 +332,12 @@ angular.module('raiwApp.services')
       storage.remove('coinbaseTxs-' + network, cb)
     }
 
-    root.setBalanceCache = function (cardId, data, cb) {
-      storage.set('balanceCache-' + cardId, data, cb)
+    root.setBalanceCache = function (addr, data, cb) {
+      storage.set('balanceCache-' + addr, data, cb)
     }
 
-    root.getBalanceCache = function (cardId, cb) {
-      storage.get('balanceCache-' + cardId, cb)
+    root.getBalanceCache = function (addr, cb) {
+      storage.get('balanceCache-' + addr, cb)
     }
 
     root.removeBalanceCache = function (cardId, cb) {

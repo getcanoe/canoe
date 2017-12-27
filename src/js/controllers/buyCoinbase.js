@@ -110,7 +110,7 @@ angular.module('raiwApp.controllers').controller('buyCoinbaseController', functi
       showErrorAndBack('No wallets available');
       return;
     }
-    $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
+    $scope.onAccountSelect($scope.accounts[0]); // Default first wallet
   });
 
   $scope.buyRequest = function() {
@@ -235,12 +235,12 @@ angular.module('raiwApp.controllers').controller('buyCoinbaseController', functi
     });
   };
 
-  $scope.showWalletSelector = function() {
+  $scope.showAccountSelector = function() {
     $scope.accountSelectorTitle = 'Receive in';
-    $scope.showWallets = true;
+    $scope.showAccounts = true;
   };
 
-  $scope.onWalletSelect = function(wallet) {
+  $scope.onAccountSelect = function(wallet) {
     $scope.account = wallet;
     var parsedAmount = txFormatService.parseAmount(
       coin,

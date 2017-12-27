@@ -7,10 +7,9 @@ angular.module('raiwApp.controllers').controller('tabReceiveController', functio
 
   $scope.requestSpecificAmount = function () {
     $state.go('tabs.paymentRequest.amount', {
-      id: $scope.account.credentials.walletId,
-      coin: $scope.account.coin
+      id: $scope.account
     })
-  };
+  }
 
   $scope.setAddress = function (newAddr) {
     $scope.addr = null
@@ -29,7 +28,7 @@ angular.module('raiwApp.controllers').controller('tabReceiveController', functio
         $scope.$apply()
       }, 10)
     })
-  };
+  }
 
   $scope.goRaiWers = function () {
     $ionicHistory.removeBackView()
@@ -42,7 +41,7 @@ angular.module('raiwApp.controllers').controller('tabReceiveController', functio
         walletId: $scope.account.credentials.walletId
       })
     }, 100)
-  };
+  }
 
   $scope.openBackupNeededModal = function () {
     $ionicModal.fromTemplateUrl('views/includes/backupNeededPopup.html', {
@@ -53,50 +52,34 @@ angular.module('raiwApp.controllers').controller('tabReceiveController', functio
       $scope.BackupNeededModal = modal
       $scope.BackupNeededModal.show()
     })
-  };
+  }
 
   $scope.close = function () {
     $scope.BackupNeededModal.hide()
     $scope.BackupNeededModal.remove()
-  };
+  }
 
   $scope.doBackup = function () {
     $scope.close()
     $scope.goToBackupFlow()
-  };
+  }
 
   $scope.goToBackupFlow = function () {
     $state.go('tabs.receive.backupWarning', {
       from: 'tabs.receive',
       walletId: $scope.account.credentials.walletId
     })
-  };
-
-  $scope.shouldShowReceiveAddressFromHardware = function () {
-    var wallet = $scope.account
-    if (wallet.isPrivKeyExternal() && wallet.credentials.hwInfo) {
-      return (wallet.credentials.hwInfo.name == walletService.externalSource.intelTEE.id)
-    } else {
-      return false
-    }
-  }
-
-  $scope.showReceiveAddressFromHardware = function () {
-    var wallet = $scope.account
-    if (wallet.isPrivKeyExternal() && wallet.credentials.hwInfo) {
-      walletService.showReceiveAddressFromHardware(wallet, $scope.addr, function () {})
-    }
   }
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     $scope.accounts = profileService.getAccounts()
-    $scope.singleWallet = $scope.accounts.length === 1
+    $scope.singleAccount = $scope.accounts.length === 1
 
     if (!$scope.accounts[0]) return
 
-    // select first wallet if no wallet selected previously
-    var selectedWallet = checkSelectedWallet($scope.account, $scope.accounts)
-    $scope.onWalletSelect(selectedWallet)
+    // select first account if no account selected previously
+    var selectedAccount = checkSelectedAccount($scope.account, $scope.accounts)
+    $scope.onAccountSelect(selectedAccount)
 
     $scope.showShareButton = platformInfo.isCordova ? (platformInfo.isIOS ? 'iOS' : 'Android') : null
 
@@ -114,35 +97,28 @@ angular.module('raiwApp.controllers').controller('tabReceiveController', functio
     })
   })
 
-  var checkSelectedWallet = function (wallet, wallets) {
-    if (!wallet) return wallets[0]
-    var w = lodash.find(wallets, function (w) {
-      return w.id == wallet.id
+  var checkSelectedAccount = function (account, accounts) {
+    if (!account) return accounts[0]
+    var w = lodash.find(accounts, function (w) {
+      return w.id === account.id
     })
-    if (!w) return wallets[0]
-    return wallet
+    if (!w) return accounts[0]
+    return account
   }
 
-  var setProtocolHandler = function () {
-    $scope.protocolHandler = walletService.getProtocolHandler($scope.account)
-  }
-
-  $scope.onWalletSelect = function (wallet) {
-    $scope.account = wallet
-    setProtocolHandler()
+  $scope.onAccountSelect = function (acc) {
+    $scope.account = acc
     $scope.setAddress()
-  };
+  }
 
-  $scope.showWalletSelector = function () {
-    if ($scope.singleWallet) return
-    $scope.accountSelectorTitle = gettextCatalog.getString('Select a wallet')
-    $scope.showWallets = true
-  };
+  $scope.showAccountSelector = function () {
+    if ($scope.singleAccount) return
+    $scope.accountSelectorTitle = gettextCatalog.getString('Select an account')
+    $scope.showAccounts = true
+  }
 
-  $scope.shareAddress = function () {
+  $scope.shareAccount = function () {
     if (!$scope.isCordova) return
-    var protocol = 'bitcoin'
-    if ($scope.account.coin == 'bch') protocol += 'cash'
-    window.plugins.socialsharing.share(protocol + ':' + $scope.addr, null, null, null)
+    window.plugins.socialsharing.share('raiblocks:' + $scope.addr, null, null, null)
   }
 })

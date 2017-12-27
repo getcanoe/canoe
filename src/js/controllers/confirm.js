@@ -29,7 +29,7 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
     }, 10)
   }
 
-  $scope.showWalletSelector = function () {
+  $scope.showAccountSelector = function () {
     $scope.accountSelector = true
     refresh()
   }
@@ -146,7 +146,7 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
       }
 
       if ($scope.accounts.length > 1) {
-        $scope.showWalletSelector()
+        $scope.showAccountSelector()
       } else if ($scope.accounts.length) {
         setWallet($scope.accounts[0], tx)
       }
@@ -326,7 +326,7 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
       showAmount(tx.toAmount)
     }
 
-    $scope.onWalletSelect($scope.account)
+    $scope.onAccountSelect($scope.account)
   }
 
   function setButtonText (isMultisig, isPayPro) {
@@ -382,7 +382,7 @@ angular.module('raiwApp.controllers').controller('confirmController', function (
     popupService.showAlert(null, msg, function () {})
   };
 
-  $scope.onWalletSelect = function (wallet) {
+  $scope.onAccountSelect = function (wallet) {
     setWallet(wallet, tx)
   }
 

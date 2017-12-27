@@ -98,14 +98,14 @@ angular.module('raiwApp.controllers').controller('paperWalletController',
       $state.go('tabs.home')
     }
 
-    $scope.onWalletSelect = function (wallet) {
+    $scope.onAccountSelect = function (wallet) {
       $scope.account = wallet
     }
 
-    $scope.showWalletSelector = function () {
-      if ($scope.singleWallet) return
+    $scope.showAccountSelector = function () {
+      if ($scope.singleAccount) return
       $scope.accountSelectorTitle = gettextCatalog.getString('Transfer to')
-      $scope.showWallets = true
+      $scope.showAccounts = true
     }
 
     $scope.$on('$ionicView.beforeEnter', function (event, data) {
@@ -118,7 +118,7 @@ angular.module('raiwApp.controllers').controller('paperWalletController',
         onlyComplete: true,
         network: 'livenet'
       })
-      $scope.singleWallet = $scope.accounts.length == 1
+      $scope.singleAccount = $scope.accounts.length == 1
 
       if (!$scope.accounts || !$scope.accounts.length) {
         $scope.noMatchingWallet = true       

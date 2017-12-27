@@ -86,7 +86,7 @@ angular.module('raiwApp.controllers').controller('buyGlideraController', functio
       showErrorAndBack('No wallets available');
       return;
     }
-    $scope.onWalletSelect($scope.accounts[0]); // Default first wallet
+    $scope.onAccountSelect($scope.accounts[0]); // Default first wallet
   });
 
   var ask2FaCode = function(mode, cb) {
@@ -154,12 +154,12 @@ angular.module('raiwApp.controllers').controller('buyGlideraController', functio
     });
   };
 
-  $scope.showWalletSelector = function() {
+  $scope.showAccountSelector = function() {
     $scope.accountSelectorTitle = 'Receive in';
-    $scope.showWallets = true;
+    $scope.showAccounts = true;
   };
 
-  $scope.onWalletSelect = function(wallet) {
+  $scope.onAccountSelect = function(wallet) {
     $scope.account = wallet;
     var parsedAmount = txFormatService.parseAmount(
       coin,

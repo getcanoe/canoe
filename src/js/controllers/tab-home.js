@@ -210,36 +210,37 @@ angular.module('raiwApp.controllers').controller('tabHomeController',
 
     // Make sure all accounts are up to date, done on initial entering view and on scroll-update
     var updateAllAccounts = function () {
-      var accounts = profileService.getAccounts()
-      if (lodash.isEmpty(accounts)) return
+      profileService.getAccounts(function (accounts) {
+        if (lodash.isEmpty(accounts)) return
 
-      var i = accounts.length
-      var j = 0
-      var foundMessage = false
+        var i = accounts.length
+        var j = 0
+        var foundMessage = false
 
-      lodash.each(accounts, function (account) {
-        walletService.getStatus(account, {}, function (err, status) {
-          if (err) {
-            account.error = (err === 'WALLET_NOT_REGISTERED') ? gettextCatalog.getString('Wallet not registered') : bwcError.msg(err)
-            $log.error(err)
-          } else {
-            account.error = null
-            account.status = status
+        lodash.each(accounts, function (account) {
+          walletService.getStatus(account, {}, function (err, status) {
+            if (err) {
+              account.error = (err === 'WALLET_NOT_REGISTERED') ? gettextCatalog.getString('Wallet not registered') : bwcError.msg(err)
+              $log.error(err)
+            } else {
+              account.error = null
+              account.status = status
 
-            if (!foundMessage && !lodash.isEmpty(status.serverMessage)) {
-              $scope.serverMessage = status.serverMessage
-              foundMessage = true
+              if (!foundMessage && !lodash.isEmpty(status.serverMessage)) {
+                $scope.serverMessage = status.serverMessage
+                foundMessage = true
+              }
+
+              // TODO service refactor? not in profile service
+              profileService.setLastKnownBalance(account.addr, account.status.totalBalanceStr, function () {})
             }
-
-            // TODO service refactor? not in profile service
-            profileService.setLastKnownBalance(account.addr, account.status.totalBalanceStr, function () {})
-          }
-          if (++j === i) {
-            updateTxps()
-          }
+            if (++j === i) {
+              updateTxps()
+            }
+          })
         })
       })
-    }
+      }
 
     var updateAccount = function (account) {
       $log.debug('Updating account:' + account.name)

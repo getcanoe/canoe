@@ -124,8 +124,7 @@ angular.module('raiwApp.services')
     }
 
     root.bindWallet = function (cb) {
-      // GOKR
-      return cb(null, root.wallet)
+      root.loadWallet(cb)
     }
 
     root.bindProfile = function (profile, cb) {
@@ -279,6 +278,18 @@ angular.module('raiwApp.services')
       raiblocksService.createAccount(root.wallet, accountName)
       storageService.storeWallet(root.wallet, function () {
         cb(null, root.wallet)
+      })
+    }
+
+    // Load wallet from local storage
+    root.loadWallet = function (cb) {
+      storageService.loadWallet(function (err, wallet) {
+        if (err) {
+          $log.warn(err)
+        } else {
+          root.wallet = wallet ? JSON.parse(wallet) : null
+          cb(null, root.wallet)
+        }
       })
     }
 
@@ -496,19 +507,19 @@ angular.module('raiwApp.services')
       storageService.storeProfile(root.profile, cb)
     }
 
-    root.getLastKnownBalance = function (wid, cb) {
-      storageService.getBalanceCache(wid, cb)
+    root.getLastKnownBalance = function (account, cb) {
+      storageService.getBalanceCache(account.id, cb)
     }
 
-    root.addLastKnownBalance = function (wallet, cb) {
+    root.addLastKnownBalance = function (account, cb) {
       var now = Math.floor(Date.now() / 1000)
-      var showRange = 600 // 10min;
+      var showRange = 600 // 10 min
 
-      root.getLastKnownBalance(wallet.id, function (err, data) {
+      root.getLastKnownBalance(account, function (err, data) {
         if (data) {
           data = JSON.parse(data)
-          wallet.cachedBalance = data.balance
-          wallet.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null
+          account.cachedBalance = data.balance
+          account.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null
         }
         return cb()
       })
@@ -521,32 +532,30 @@ angular.module('raiwApp.services')
       }, cb)
     }
 
-    root.getAccounts = function (opts) {
+    root.getAccounts = function (opts, cb) {
       if (opts && !lodash.isObject(opts)) { throw 'bad argument' }
-
       opts = opts || {}
 
-      var ret = lodash.values(root.wallet)
+      // No wallet loaded
+      if (!root.wallet) {
+        return []
+      }
+
+      var ret = root.wallet.accounts
 
       if (opts.hasFunds) {
-        ret = lodash.filter(ret, function (w) {
-          if (!w.status) return
-          return (w.status.availableBalanceSat > 0)
+        ret = lodash.filter(ret, function (a) {
+          if (!a.status) return
+          return (a.status.availableBalanceSat > 0)
         })
       }
 
       if (opts.minAmount) {
-        ret = lodash.filter(ret, function (w) {
-          if (!w.status) return
-          return (w.status.availableBalanceSat > opts.minAmount)
+        ret = lodash.filter(ret, function (a) {
+          if (!a.status) return
+          return (a.status.availableBalanceSat > opts.minAmount)
         })
       }
-
-      if (opts.onlyComplete) {
-        ret = lodash.filter(ret, function (w) {
-          return w.isComplete()
-        })
-      } else {}
 
       // Add cached balance async
       lodash.each(ret, function (x) {
@@ -554,10 +563,7 @@ angular.module('raiwApp.services')
       })
 
       return lodash.sortBy(ret, [
-
-        function (x) {
-          return x.isComplete()
-        }, 'createdOn'
+        'createdOn'
       ])
     }
 
