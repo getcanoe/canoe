@@ -525,14 +525,14 @@ angular.module('raiwApp.services')
       })
     }
 
-    root.setLastKnownBalance = function (wid, balance, cb) {
-      storageService.setBalanceCache(wid, {
+    root.setLastKnownBalance = function (account, balance, cb) {
+      storageService.setBalanceCache(account, {
         balance: balance,
         updatedOn: Math.floor(Date.now() / 1000)
       }, cb)
     }
 
-    root.getAccounts = function (opts, cb) {
+    root.getAccounts = function (opts) {
       if (opts && !lodash.isObject(opts)) { throw 'bad argument' }
       opts = opts || {}
 
