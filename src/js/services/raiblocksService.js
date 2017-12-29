@@ -4,7 +4,7 @@ angular.module('canoeApp.services')
     var root = {}
 
     // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
-    var host = 'https://raiblocks.krampe.se/rpc' // for the beta node
+    var host = 'https://getcanoe.io/rpc' // for the beta node
     var port = 443
     var rai = new Rai(host, port) // connection
 
