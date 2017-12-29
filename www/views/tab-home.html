@@ -86,7 +86,7 @@
         <i class="icon big-icon-svg">
           <img src="img/icon-wallet.svg" class="bg wallet icon-create-wallet"/>
         </i>
-        <span translate>Create RaiBlocks Account</span>
+        <span translate>Create Account</span>
         <i class="icon bp-arrow-right"></i>
       </a>
     </div>
@@ -100,7 +100,7 @@
       <div>
         <a ng-repeat="account in accounts track by $index"
            class="item item-sub item-icon-left item-big-icon-left item-icon-right wallet"
-           ng-click="openWallet(wallet)">
+           ng-click="openAccount(account)">
           <span ng-include="'views/includes/accountList.html'"></span>
         </a>
       </div>

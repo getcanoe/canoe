@@ -22,9 +22,14 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     })
 
     $scope.$on('$ionicView.beforeEnter', function (event, data) {
+      $scope.accounts = profileService.getAccounts()
+      $scope.singleAccount = $scope.accounts.length === 1
+
+      if (!$scope.accounts[0]) return
+
       if (!$scope.homeTip) {
         storageService.getHomeTipAccepted(function (error, value) {
-          $scope.homeTip = value != 'accepted'
+          $scope.homeTip = value !== 'accepted'
         })
       }
 
@@ -157,7 +162,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       wallet = profileService.getAccount(n.walletId)
 
       if (n.txid) {
-        $state.transitionTo('tabs.wallet.tx-details', {
+        $state.transitionTo('tabs.account.tx-details', {
           txid: n.txid,
           walletId: n.walletId
         })
@@ -182,15 +187,9 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       }
     }
 
-    $scope.openWallet = function (wallet) {
-      if (!wallet.isComplete()) {
-        return $state.go('tabs.canoeers', {
-          walletId: wallet.credentials.walletId
-        })
-      }
-
-      $state.go('tabs.wallet', {
-        walletId: wallet.credentials.walletId
+    $scope.openAccount = function (account) {
+      $state.go('tabs.account', {
+        accountId: account.id
       })
     }
 

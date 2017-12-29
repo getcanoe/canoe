@@ -7,7 +7,7 @@
   <span ng-if="account.scanning" translate> Scanning funds... </span>
 
   <span ng-if="account.balanceHidden && !account.scanning" translate>[Balance Hidden]</span>
-  <i ng-if="!account.balanceHidden && (account.status.totalBalanceSat != account.status.spendableAmount)" class="tab-home__wallet__status-icon ion-ios-timer-outline"></i>
+  <i ng-if="!account.balanceHidden" class="tab-home__wallet__status-icon ion-ios-timer-outline"></i>
   <span class="assertive" ng-if="account.error">{{account.error}}</span>
 
   &nbsp;

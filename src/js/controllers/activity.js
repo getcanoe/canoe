@@ -26,9 +26,9 @@ angular.module('canoeApp.controllers').controller('activityController',
 
     $scope.openNotificationModal = function (n) {
       if (n.txid) {
-        $state.transitionTo('tabs.wallet.tx-details', {
+        $state.transitionTo('tabs.account.tx-details', {
           txid: n.txid,
-          walletId: n.walletId
+          accountId: n.accountId
         })
       } else {
         var txp = lodash.find($scope.txps, {

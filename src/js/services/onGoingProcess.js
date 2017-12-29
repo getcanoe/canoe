@@ -15,6 +15,7 @@ angular.module('canoeApp.services').factory('ongoingProcess', function($log, $ti
     'connectingledger': gettext('Waiting for Ledger...'),
     'connectingtrezor': gettext('Waiting for Trezor...'),
     'creatingTx': gettext('Creating transaction'),
+    'creatingAccount': gettext('Creating account...'),
     'creatingWallet': gettext('Creating Wallet...'),
     'deletingWallet': gettext('Deleting Wallet...'),
     'extractingWalletInfo': gettext('Extracting Wallet information...'),

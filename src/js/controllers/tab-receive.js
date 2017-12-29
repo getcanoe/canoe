@@ -11,25 +11,6 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
     })
   }
 
-  $scope.setAddress = function (newAddr) {
-    $scope.addr = null
-    if (!$scope.account || $scope.generatingAddress || !$scope.account.isComplete()) return
-    $scope.generatingAddress = true
-    walletService.getAddress($scope.account, newAddr, function (err, addr) {
-      $scope.generatingAddress = false
-
-      if (err) {
-        // Error is already formated
-        popupService.showAlert(err)
-      }
-
-      $scope.addr = addr
-      $timeout(function () {
-        $scope.$apply()
-      }, 10)
-    })
-  }
-
   $scope.goCanoeers = function () {
     $ionicHistory.removeBackView()
     $ionicHistory.nextViewOptions({
@@ -108,7 +89,6 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
 
   $scope.onAccountSelect = function (acc) {
     $scope.account = acc
-    $scope.setAddress()
   }
 
   $scope.showAccountSelector = function () {

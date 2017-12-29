@@ -8,7 +8,7 @@ angular.module('canoeApp.controllers').controller('createController',
       var defaults = configService.getDefaults()
       var config = configService.getSync()
       $scope.formData.account = 1
-      $scope.formData.bwsurl = defaults.bws.url
+      //$scope.formData.bwsurl = defaults.bws.url
       resetPasswordFields()
     })
 
@@ -46,10 +46,9 @@ angular.module('canoeApp.controllers').controller('createController',
 
     $scope.create = function () {
       var opts = {
-        name: $scope.formData.walletName,
-        bwsurl: $scope.formData.bwsurl
+        name: $scope.formData.walletName
       }
-
+/*
       var setSeed = $scope.formData.seedSource.id === 'set'
       if (setSeed) {
         var words = $scope.formData.privateKey || ''
@@ -66,41 +65,22 @@ angular.module('canoeApp.controllers').controller('createController',
       if (setSeed && !opts.mnemonic && !opts.extendedPrivateKey) {
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter the wallet recovery phrase'))
         return
-      }
+      }*/
       _create(opts)
     }
 
     function _create (opts) {
-      ongoingProcess.set('creatingWallet', true)
+      ongoingProcess.set('creatingAccount', true)
       $timeout(function () {
-        profileService.createWallet(opts, function (err, client) {
-          ongoingProcess.set('creatingWallet', false)
+        profileService.createAccount(opts, function (err, client) {
+          ongoingProcess.set('creatingAccount', false)
           if (err) {
             $log.warn(err)
             popupService.showAlert(gettextCatalog.getString('Error'), err)
             return
           }
-
-          walletService.updateRemotePreferences(client)
-          pushNotificationsService.updateSubscription(client)
-
-          if ($scope.formData.seedSource.id == 'set') {
-            profileService.setBackupFlag(client.credentials.walletId)
-          }
-
           $ionicHistory.removeBackView()
-
-          if (!client.isComplete()) {
-            $ionicHistory.nextViewOptions({
-              disableAnimate: true
-            })
-            $state.go('tabs.home')
-            $timeout(function () {
-              $state.transitionTo('tabs.canoeers', {
-                walletId: client.credentials.walletId
-              })
-            }, 100)
-          } else $state.go('tabs.home')
+          $state.go('tabs.home')
         })
       }, 300)
     }

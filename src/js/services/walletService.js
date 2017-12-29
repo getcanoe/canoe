@@ -27,7 +27,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
 
     ledger.signTx(txp, wallet.credentials.account, function (result) {
       $log.debug('Ledger response', result)
-      if (!result.success)        { return cb(result.message || result.error)}
+      if (!result.success) { return cb(result.message || result.error) }
 
       txp.signatures = lodash.map(result.signatures, function (s) {
         return s.substring(0, s.length - 2)
@@ -73,13 +73,13 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
   }
 
   root.invalidateCache = function (wallet) {
-    if (wallet.cachedStatus)      { wallet.cachedStatus.isValid = false}
+    if (wallet.cachedStatus) { wallet.cachedStatus.isValid = false }
 
-    if (wallet.completeHistory)      { wallet.completeHistory.isValid = false}
+    if (wallet.completeHistory) { wallet.completeHistory.isValid = false }
 
-    if (wallet.cachedActivity)      { wallet.cachedActivity.isValid = false}
+    if (wallet.cachedActivity) { wallet.cachedActivity.isValid = false }
 
-    if (wallet.cachedTxps)      { wallet.cachedTxps.isValid = false}
+    if (wallet.cachedTxps) { wallet.cachedTxps.isValid = false }
   }
 
   root.getStatus = function (wallet, opts, cb) {
@@ -112,7 +112,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
         tx = txFormatService.processTx(wallet.coin, tx)
 
         // no future transactions...
-        if (tx.createdOn > now)          { tx.createdOn = now}
+        if (tx.createdOn > now) { tx.createdOn = now }
 
         tx.account = wallet
 
@@ -137,7 +137,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
           tx.statusForUs = 'pending'
         }
 
-        if (!tx.deleteLockTime)          { tx.canBeRemoved = true}
+        if (!tx.deleteLockTime) { tx.canBeRemoved = true }
       })
 
       wallet.pendingTxps = txps
@@ -317,7 +317,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
     }, function (err, txsFromServer) {
       if (err) return cb(err)
 
-      if (!txsFromServer.length)        { return cb()}
+      if (!txsFromServer.length) { return cb() }
 
       var res = lodash.takeWhile(txsFromServer, function (tx) {
         return tx.txid != endingTxid
@@ -329,7 +329,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
 
   var removeAndMarkSoftConfirmedTx = function (txs) {
     return lodash.filter(txs, function (tx) {
-      if (tx.confirmations >= root.SOFT_CONFIRMATION_LIMIT)        { return tx}
+      if (tx.confirmations >= root.SOFT_CONFIRMATION_LIMIT) { return tx }
       tx.recent = true
     })
   }
@@ -345,7 +345,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
       tx = txFormatService.processTx(wallet.coin, tx)
 
       // no future transactions...
-      if (tx.time > now)        { tx.time = now}
+      if (tx.time > now) { tx.time = now }
 
       if (tx.confirmations >= root.SAFE_CONFIRMATIONS) {
         tx.safeConfirmed = root.SAFE_CONFIRMATIONS + '+'
@@ -652,7 +652,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
   }
 
   root.createTx = function (wallet, txp, cb) {
-    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet))      { return cb('MISSING_PARAMETER')}
+    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet)) { return cb('MISSING_PARAMETER') }
 
     wallet.createTxProposal(txp, function (err, createdTxp) {
       if (err) return cb(err)
@@ -664,7 +664,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
   }
 
   root.publishTx = function (wallet, txp, cb) {
-    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet))      { return cb('MISSING_PARAMETER')}
+    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet)) { return cb('MISSING_PARAMETER') }
 
     wallet.publishTxProposal({
       txp: txp
@@ -678,7 +678,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
   }
 
   root.signTx = function (wallet, txp, password, cb) {
-    if (!wallet || !txp || !cb)      { return cb('MISSING_PARAMETER')}
+    if (!wallet || !txp || !cb) { return cb('MISSING_PARAMETER') }
 
     if (wallet.isPrivKeyExternal()) {
       switch (wallet.getPrivKeyExternalSourceName()) {
@@ -707,12 +707,12 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
   }
 
   root.broadcastTx = function (wallet, txp, cb) {
-    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet))      { return cb('MISSING_PARAMETER')}
+    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet)) { return cb('MISSING_PARAMETER') }
 
-    if (txp.status != 'accepted')      { return cb('TX_NOT_ACCEPTED')}
+    if (txp.status != 'accepted') { return cb('TX_NOT_ACCEPTED') }
 
     wallet.broadcastTxProposal(txp, function (err, broadcastedTxp, memo) {
-      if (err)        { return cb(err)}
+      if (err) { return cb(err) }
 
       $log.debug('Transaction broadcasted')
       if (memo) $log.info(memo)
@@ -722,7 +722,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
   }
 
   root.rejectTx = function (wallet, txp, cb) {
-    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet))      { return cb('MISSING_PARAMETER')}
+    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet)) { return cb('MISSING_PARAMETER') }
 
     wallet.rejectTxProposal(txp, null, function (err, rejectedTxp) {
       $log.debug('Transaction rejected')
@@ -731,7 +731,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
   }
 
   root.removeTx = function (wallet, txp, cb) {
-    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet))      { return cb('MISSING_PARAMETER')}
+    if (lodash.isEmpty(txp) || lodash.isEmpty(wallet)) { return cb('MISSING_PARAMETER') }
 
     wallet.removeTxProposal(txp, function (err) {
       $log.debug('Transaction removed')
@@ -747,7 +747,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
     prefs = prefs || {}
     cb = cb || function () {}
 
-    if (!lodash.isArray(clients))      { clients = [clients]}
+    if (!lodash.isArray(clients)) { clients = [clients] }
 
     function updateRemotePreferencesFor (clients, prefs, next) {
       var wallet = clients.shift()
@@ -948,7 +948,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
 
       if (!forceNew && addr) return cb(null, addr)
 
-      if (!wallet.isComplete())        { return cb('WALLET_NOT_COMPLETE')}
+      if (!wallet.isComplete()) { return cb('WALLET_NOT_COMPLETE') }
 
       createAddress(wallet, function (err, _addr) {
         if (err) return cb(err, addr)
@@ -977,9 +977,9 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
   }
 
   root.isReady = function (wallet, cb) {
-    if (!wallet.isComplete())      { return cb('WALLET_NOT_COMPLETE')}
+    if (!wallet.isComplete()) { return cb('WALLET_NOT_COMPLETE') }
 
-    if (wallet.needsBackup)      { return cb('WALLET_NEEDS_BACKUP')}
+    if (wallet.needsBackup) { return cb('WALLET_NEEDS_BACKUP') }
     return cb()
   }
 
@@ -1003,7 +1003,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
       if (!password) return cb('no password')
       title = gettextCatalog.getString('Confirm your new spending password')
       askPassword(warnMsg, title, function (password2) {
-        if (!password2 || password != password2)          { return cb('password mismatch')}
+        if (!password2 || password != password2) { return cb('password mismatch') }
 
         wallet.encryptPrivateKey(password)
         return cb()
@@ -1134,7 +1134,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
     var info
 
     // not supported yet
-    if (wallet.credentials.derivationStrategy != 'BIP44' || !wallet.canSign())      { return cb(gettextCatalog.getString('Exporting via QR not supported for this wallet'))}
+    if (wallet.credentials.derivationStrategy != 'BIP44' || !wallet.canSign()) { return cb(gettextCatalog.getString('Exporting via QR not supported for this wallet')) }
 
     var keys = root.getKeysWithPassword(wallet, password)
 

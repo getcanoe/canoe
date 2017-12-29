@@ -139,7 +139,7 @@ angular.module('canoeApp.controllers').controller('preferencesHistory',
         $ionicHistory.removeBackView();
         $state.go('tabs.home');
         $timeout(function() {
-          $state.transitionTo('tabs.wallet', {
+          $state.transitionTo('tabs.account', {
             walletId: $scope.account.id,
             clearCache: true
           });

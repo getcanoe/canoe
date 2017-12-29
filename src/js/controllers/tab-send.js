@@ -7,11 +7,11 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   $scope.isChromeApp = platformInfo.isChromeApp
   $scope.serverMessage = null
 
-  var hasWallets = function () {
+  var hasAccounts = function () {
     $scope.accounts = profileService.getAccounts({
       onlyComplete: true
     })
-    $scope.hasWallets = !lodash.isEmpty($scope.accounts)
+    $scope.hasAccounts = !lodash.isEmpty($scope.accounts)
   }
 
   // THIS is ONLY to show the 'buy bitcoins' message
@@ -58,7 +58,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   var updateWalletsList = function () {
     var networkResult = lodash.countBy($scope.accounts, 'network')
 
-    $scope.showTransferCard = $scope.hasWallets && (networkResult.livenet > 1 || networkResult.testnet > 1)
+    $scope.showTransferCard = $scope.hasAccounts && (networkResult.livenet > 1 || networkResult.testnet > 1)
 
     if ($scope.showTransferCard) {
       var walletsToTransfer = $scope.accounts
@@ -222,11 +222,11 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
     originalList = []
     CONTACTS_SHOW_LIMIT = 10
     currentContactsPage = 0
-    hasWallets()
+    hasAccounts()
   })
 
   $scope.$on('$ionicView.enter', function (event, data) {
-    if (!$scope.hasWallets) {
+    if (!$scope.hasAccounts) {
       $scope.checkingBalance = false
       return
     }

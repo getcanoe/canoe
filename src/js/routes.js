@@ -134,8 +134,8 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
        *
        */
 
-      .state('tabs.wallet', {
-        url: '/wallet/:walletId/:fromOnboarding/:clearCache',
+      .state('tabs.account', {
+        url: '/account/:accountId/:fromOnboarding/:clearCache',
         views: {
           'tab-home@tabs': {
             controller: 'walletDetailsController',
@@ -161,7 +161,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.wallet.tx-details', {
+      .state('tabs.account.tx-details', {
         url: '/tx-details/:txid',
         views: {
           'tab-home@tabs': {
@@ -170,7 +170,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.wallet.backupWarning', {
+      .state('tabs.account.backupWarning', {
         url: '/backupWarning/:from/:walletId',
         views: {
           'tab-home@tabs': {
@@ -179,7 +179,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.wallet.backup', {
+      .state('tabs.account.backup', {
         url: '/backup/:walletId',
         views: {
           'tab-home@tabs': {
@@ -189,7 +189,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       })
 
-      .state('tabs.wallet.addresses', {
+      .state('tabs.account.addresses', {
         url: '/addresses/:walletId/:toAddress',
         views: {
           'tab-home@tabs': {
@@ -198,7 +198,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.wallet.allAddresses', {
+      .state('tabs.account.allAddresses', {
         url: '/allAddresses/:walletId',
         views: {
           'tab-home@tabs': {

@@ -309,9 +309,14 @@ angular.module('canoeApp.services')
 
     // Create wallet and default account
     root.createWallet = function (opts, cb) {
-      var accountName = opts.name || gettextCatalog.getString('Default Account')
       // Synchronous now
       root.wallet = raiblocksService.createWallet()
+      root.createAccount(opts, cb)
+    }
+
+    // Create account in wallet
+    root.createAccount = function (opts, cb) {
+      var accountName = opts.name || gettextCatalog.getString('Default Account')
       raiblocksService.createAccount(root.wallet, accountName)
       storageService.storeWallet(root.wallet, function () {
         cb(null, root.wallet)
@@ -667,7 +672,7 @@ angular.module('canoeApp.services')
 
           x.action = function () {
             // TODO?
-            // $state.go('tabs.wallet', {
+            // $state.go('tabs.account', {
             //   walletId: x.walletId,
             //   txpId: x.txpId,
             //   txid: x.txid,

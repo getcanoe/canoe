@@ -35,8 +35,7 @@ angular.module('canoeApp.services')
 
     root.makeAccount = function (wallet, id, accountName) {
       // TODO fix unique naming of discovered accounts
-      var name = accountName || 'Unknown account'
-      var account = {name: name, id: id}
+      var account = {name: accountName, id: id}
       wallet.accounts[id] = account
       return account
     }

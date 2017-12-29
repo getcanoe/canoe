@@ -134,7 +134,7 @@ angular.module('canoeApp.controllers').controller('addressesController', functio
     if (fromView.indexOf('settings') !== -1) {
       path = 'tabs.settings.allAddresses'
     } else {
-      path = 'tabs.wallet.allAddresses'
+      path = 'tabs.account.allAddresses'
     }
     $state.go(path, {
       walletId: $scope.account.id
@@ -163,7 +163,7 @@ angular.module('canoeApp.controllers').controller('addressesController', functio
     })
     $ionicHistory.clearHistory()
     $state.go('tabs.home').then(function () {
-      $state.transitionTo('tabs.wallet', {
+      $state.transitionTo('tabs.account', {
         walletId: $scope.account.credentials.walletId
       })
     })

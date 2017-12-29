@@ -117,7 +117,7 @@ angular.module('canoeApp.controllers').controller('walletDetailsController', fun
   $scope.openTxModal = function (btx) {
     $scope.btx = lodash.cloneDeep(btx)
     $scope.accountId = $scope.account.id
-    $state.transitionTo('tabs.wallet.tx-details', {
+    $state.transitionTo('tabs.account.tx-details', {
       txid: $scope.btx.txid,
       walletId: $scope.accountId
     })
