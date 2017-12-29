@@ -25,9 +25,30 @@ angular.module('canoeApp.services')
     }
 
     root.updateAllAccounts = function () {
-      raiblocksService.updateAllAccounts(function (accounts) {
-        if (lodash.isEmpty(accounts)) return
+      raiblocksService.fetchAccountsAndBalances(root.wallet, function (err, balances) {
+        if (err) $log.error(err)
+        // Loop over balances and create accounts if needed
+        var foundAccounts = []
+        lodash.forOwn(balances, function (bal, id) {
+          foundAccounts.push(id)
+          var acc = root.getAccount(id)
+          if (!acc) {
+            acc = raiblocksService.makeAccount(root.wallet, id, null)
+          }
+          acc.balance = bal.balance
+          acc.pending = bal.pending
+          root.setLastKnownBalance(id, acc.balance, function () {})
+        })
+        // Remove accounts not found
+        // TODO is this kosher?
+        lodash.forOwn(root.wallet.accounts, function (acc, id) {
+          if (!foundAccounts.includes(id)) {
+            $log.debug('Deleting account gone from server ' + JSON.stringify(acc))
+            delete root.wallet.accounts[id]
+          }
+        })
 
+        /*
         // Trick to know when all are done
         var i = accounts.length
         var j = 0
@@ -36,7 +57,7 @@ angular.module('canoeApp.services')
           if (++j === i) {
             //updateTxps()
           }
-        })
+        })*/
       })
     }
 
@@ -574,6 +595,7 @@ angular.module('canoeApp.services')
       }
 
       // Add cached balance async
+      // TODO kinda... odd way to go about it perhaps
       lodash.each(ret, function (x) {
         root.addLastKnownBalance(x, function () {})
       })
@@ -613,7 +635,8 @@ angular.module('canoeApp.services')
       function updateNotifications (wallet, cb2) {
         if (isActivityCached(wallet) && !opts.force) return cb2()
 
-        wallet.getNotifications({
+        $log.debug('GET NOTIFICATIONS?')
+/*        wallet.getNotifications({
           timeSpan: TIME_STAMP,
           includeOwn: true
         }, function (err, n) {
@@ -625,7 +648,7 @@ angular.module('canoeApp.services')
           }
 
           return cb2()
-        })
+        })*/
       };
 
       function process (notifications) {

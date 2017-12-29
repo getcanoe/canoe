@@ -28,25 +28,35 @@ angular.module('canoeApp.services')
       $log.debug('Create wallet')
       var wallet = {}
       wallet.id = rai.wallet_create()
-      wallet.accounts = []
+      wallet.accounts = {}
       $log.debug('Wallet: ' + JSON.stringify(wallet))
       return wallet
     }
 
-    root.createAccount = function (wallet, accountName) {
-      $log.debug('Create account in wallet ' + wallet.id + ' named ' + accountName)
-      var account = {}
-      account.name = accountName
-      account.id = rai.account_create(wallet.id, true) // work = true
-      $log.debug('Account: ' + JSON.stringify(account))
-      wallet.accounts.push(account)
+    root.makeAccount = function (wallet, id, accountName) {
+      // TODO fix unique naming of discovered accounts
+      var name = accountName || 'Unknown account'
+      var account = {name: name, id: id}
+      wallet.accounts[id] = account
       return account
     }
 
-    root.updateAllAccounts = function (wallet, cb) {
-      $log.debug('Update all accounts in wallet ' + wallet.id)
+    root.createAccount = function (wallet, accountName) {
+      $log.debug('Create account in wallet ' + wallet.id + ' named ' + accountName)
+      var id = rai.account_create(wallet.id, true) // work = true
+      var account = root.makeAccount(wallet, id, accountName)
+      $log.debug('Account: ' + JSON.stringify(account))
+      return account
+    }
+
+    root.fetchAccountsAndBalances = function (wallet, cb) {
+      $log.debug('Fetch all balances in wallet ' + wallet.id)
+      // This could discover new ones, or some have been removed
       var accountIds = rai.account_list(wallet.id)
-      var balances = rai.accounts_balances(accountIds)
+      if (accountIds) {
+        var balances = rai.accounts_balances(accountIds)
+      }
+      cb(null, balances)
     }
 
     root.changeSeed = function (walletId, seed) {
