@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.services').factory('buyAndSellService', function ($log, nextStepsService, lodash, $ionicScrollDelegate, $timeout) {
+angular.module('canoeApp.services').factory('buyAndSellService', function ($log, nextStepsService, lodash, $ionicScrollDelegate, $timeout) {
   var root = {}
   var services = []
   var linkedServices = []

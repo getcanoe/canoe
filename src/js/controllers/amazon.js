@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('amazonController',
+angular.module('canoeApp.controllers').controller('amazonController',
   function($scope, $timeout, $ionicModal, $log, $state, $ionicHistory, lodash, amazonService, externalLinkService, popupService) {
 
     $scope.openExternalLink = function(url) {

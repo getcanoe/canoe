@@ -20,4 +20,4 @@ E-Mail Benachrichtigung für Zahlungen und Transaktionen
 Anpasspare Wallets: Eigene Namen und Hintergrundfarben
 Unterstützung von 9 Sprachen (EN, CS, FR, DE, IT, ES, JA, PL, RU)
 
-Copay ist eine kostenlose und quelloffene Software, die auf nicht firmeneigenen Servern läuft und es somit nicht nötig ist, sich auf ein bestimmtes Unternehmen und dessen kontinuierliche Unterstützung zu verlassen. Jeder hat die Möglichkeit den Quelltext zu überprüfen oder auf GitHub (https://github.com/gokr/raiw) eigene Änderungen beizutragen und an der Weiterentwicklung mitzuwirken. 
+Copay ist eine kostenlose und quelloffene Software, die auf nicht firmeneigenen Servern läuft und es somit nicht nötig ist, sich auf ein bestimmtes Unternehmen und dessen kontinuierliche Unterstützung zu verlassen. Jeder hat die Möglichkeit den Quelltext zu überprüfen oder auf GitHub (https://github.com/gokr/canoe) eigene Änderungen beizutragen und an der Weiterentwicklung mitzuwirken. 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('mercadoLibreCardsController',
+angular.module('canoeApp.controllers').controller('mercadoLibreCardsController',
   function($scope, $timeout, $ionicModal, $log, $ionicScrollDelegate, lodash, mercadoLibreService, platformInfo, externalLinkService, popupService, ongoingProcess) {
 
     $scope.openExternalLink = function(url) {

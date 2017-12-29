@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesCoinbaseController', function($scope, $timeout, $log, $state, $ionicHistory, lodash, ongoingProcess, popupService, coinbaseService) {
+angular.module('canoeApp.controllers').controller('preferencesCoinbaseController', function($scope, $timeout, $log, $state, $ionicHistory, lodash, ongoingProcess, popupService, coinbaseService) {
 
   $scope.revokeToken = function() {
     popupService.showConfirm('Coinbase', 'Are you sure you would like to log out of your Coinbase account?', null, null, function(res) {

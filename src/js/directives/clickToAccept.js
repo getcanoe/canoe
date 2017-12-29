@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.directives')
+angular.module('canoeApp.directives')
   .directive('clickToAccept', function() {
     return {
       restrict: 'E',

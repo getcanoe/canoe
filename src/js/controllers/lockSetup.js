@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('lockSetupController', function ($state, $rootScope, $scope, $timeout, $log, configService, gettextCatalog, fingerprintService, profileService, lodash, applicationService) {
+angular.module('canoeApp.controllers').controller('lockSetupController', function ($state, $rootScope, $scope, $timeout, $log, configService, gettextCatalog, fingerprintService, profileService, lodash, applicationService) {
   function init () {
     $scope.options = [
       {

@@ -1,9 +1,9 @@
 'use strict'
 
 angular.element(document).ready(function () {
-  // Run raiwApp after device is ready.
+  // Run canoeApp after device is ready.
   var startAngular = function () {
-    angular.bootstrap(document, ['raiwApp'])
+    angular.bootstrap(document, ['canoeApp'])
   }
 
   function handleOpenURL (url) {

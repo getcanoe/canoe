@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('createController',
+angular.module('canoeApp.controllers').controller('createController',
   function ($scope, $rootScope, $timeout, $log, lodash, $state, $ionicScrollDelegate, $ionicHistory, profileService, configService, gettextCatalog, ongoingProcess, walletService, storageService, popupService, appConfigService, pushNotificationsService) {
   
     $scope.$on('$ionicView.beforeEnter', function (event, data) {
@@ -96,7 +96,7 @@ angular.module('raiwApp.controllers').controller('createController',
             })
             $state.go('tabs.home')
             $timeout(function () {
-              $state.transitionTo('tabs.raiwers', {
+              $state.transitionTo('tabs.canoeers', {
                 walletId: client.credentials.walletId
               })
             }, 100)

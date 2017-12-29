@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('hwWallet', function($log, bwcService) {
     var root = {};
 

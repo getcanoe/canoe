@@ -1,5 +1,5 @@
 'use strict';
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('backupService', function backupServiceFactory($log, $timeout, $stateParams, profileService, sjcl, appConfigService) {
 
     var root = {};

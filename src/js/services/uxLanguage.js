@@ -1,5 +1,5 @@
 'use strict'
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('uxLanguage', function languageService ($log, lodash, gettextCatalog, amMoment, configService) {
     var root = {}
 

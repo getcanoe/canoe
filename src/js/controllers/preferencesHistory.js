@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesHistory',
+angular.module('canoeApp.controllers').controller('preferencesHistory',
   function($scope, $log, $stateParams, $timeout, $state, $ionicHistory, storageService, platformInfo, profileService, lodash, appConfigService, walletService) {
     $scope.account = profileService.getAccount($stateParams.walletId);
     $scope.csvReady = false;
@@ -48,21 +48,21 @@ angular.module('raiwApp.controllers').controller('preferencesHistory',
         var satToBtc = 1 / 100000000;
         $scope.csvContent = [];
         $scope.csvFilename = $scope.appName + '-' + $scope.account.name + '.csv';
-        $scope.csvHeader = ['Date', 'Destination', 'Description', 'Amount', 'Currency', 'Txid', 'Creator', 'RaiWers', 'Comment'];
+        $scope.csvHeader = ['Date', 'Destination', 'Description', 'Amount', 'Currency', 'Txid', 'Creator', 'Canoeers', 'Comment'];
 
-        var _amount, _note, _raiwers, _creator, _comment;
+        var _amount, _note, _canoeers, _creator, _comment;
         data.forEach(function(it, index) {
           var amount = it.amount;
 
           if (it.action == 'moved')
             amount = 0;
 
-          _raiwers = '';
+          _canoeers = '';
           _creator = '';
 
           if (it.actions && it.actions.length > 1) {
             for (var i = 0; i < it.actions.length; i++) {
-              _raiwers += it.actions[i].raiwerName + ':' + it.actions[i].type + ' - ';
+              _canoeers += it.actions[i].canoeerName + ':' + it.actions[i].type + ' - ';
             }
             _creator = (it.creatorName && it.creatorName != 'undefined') ? it.creatorName : '';
           }
@@ -81,7 +81,7 @@ angular.module('raiwApp.controllers').controller('preferencesHistory',
             'Currency': 'BTC',
             'Txid': it.txid,
             'Creator': _creator,
-            'RaiWers': _raiwers,
+            'Canoeers': _canoeers,
             'Comment': _comment
           });
 
@@ -95,7 +95,7 @@ angular.module('raiwApp.controllers').controller('preferencesHistory',
               'Currency': 'BTC',
               'Txid': '',
               'Creator': '',
-              'RaiWers': ''
+              'Canoeers': ''
             });
           }
         });

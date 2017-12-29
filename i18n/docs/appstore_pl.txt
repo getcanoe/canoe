@@ -20,4 +20,4 @@ Powiadomienia o płatnościach i transferach za pośrednictwem poczty elektronic
 Konfigurowanie nazwy i koloru tła portfela
 9 obsługiwanych języków (EN, CS, FR, DE, IT, ES, JA, PL, RU)
 
-Copay jest bezpłatnym oprogramowaniem open source, które działa na niezastrzeżonych serwerach, nie jest zatem konieczne, aby opierać się na konkretnej firmie w celu jego dalszego wsparcia. Każdy ma możliwość sprawdzenia kodu źródłowego i zgłoszenia propozycji zmian w Copay na GitHub (https://github.com/gokr/raiw). 
+Copay jest bezpłatnym oprogramowaniem open source, które działa na niezastrzeżonych serwerach, nie jest zatem konieczne, aby opierać się na konkretnej firmie w celu jego dalszego wsparcia. Każdy ma możliwość sprawdzenia kodu źródłowego i zgłoszenia propozycji zmian w Copay na GitHub (https://github.com/gokr/canoe). 

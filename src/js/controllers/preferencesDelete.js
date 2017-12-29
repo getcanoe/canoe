@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('preferencesDeleteWalletController',
+angular.module('canoeApp.controllers').controller('preferencesDeleteWalletController',
   function ($scope, $ionicHistory, gettextCatalog, lodash, profileService, $state, ongoingProcess, popupService, pushNotificationsService) {
     $scope.$on('$ionicView.beforeEnter', function (event, data) {
       if (!data.stateParams || !data.stateParams.walletId) {

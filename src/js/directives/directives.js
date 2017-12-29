@@ -1,5 +1,5 @@
 'use strict'
-angular.module('raiwApp.directives')
+angular.module('canoeApp.directives')
   .directive('validAddress', ['$rootScope', 'raiblocksService',
     function ($rootScope, raiblocksService) {
       return {

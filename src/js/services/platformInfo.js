@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.services').factory('platformInfo', function ($window) {
+angular.module('canoeApp.services').factory('platformInfo', function ($window) {
   var ua = navigator ? navigator.userAgent : null
 
   if (!ua) {

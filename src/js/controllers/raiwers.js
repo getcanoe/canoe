@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('raiwersController',
+angular.module('canoeApp.controllers').controller('canoeersController',
   function($scope, $log, $timeout, $stateParams, $state, $rootScope, $ionicHistory, appConfigService, lodash, profileService, walletService, popupService, bwcError, platformInfo, gettextCatalog, ongoingProcess, pushNotificationsService) {
 
     var listener;
@@ -14,7 +14,7 @@ angular.module('raiwApp.controllers').controller('raiwersController',
       $scope.shareIcon = platformInfo.isIOS ? 'iOS' : 'Android';
     
       listener = $rootScope.$on('bwsEvent', function(e, walletId, type, n) {
-        if ($scope.account && walletId == $scope.account.id && type == ('NewRaiWer' || 'WalletComplete'))
+        if ($scope.account && walletId == $scope.account.id && type == ('NewCanoeer' || 'WalletComplete'))
           updateWalletDebounced();
       });
     }); 
@@ -30,7 +30,7 @@ angular.module('raiwApp.controllers').controller('raiwersController',
           return popupService.showAlert(bwcError.msg(err, gettextCatalog.getString('Could not update wallet')));
         }
         $scope.account.status = status;
-        $scope.raiwers = $scope.account.status.wallet.raiwers;
+        $scope.canoeers = $scope.account.status.wallet.canoeers;
         $scope.secret = $scope.account.status.wallet.secret;
         $timeout(function() {
           $scope.$apply();

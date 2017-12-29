@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesBwsUrlController',
+angular.module('canoeApp.controllers').controller('preferencesBwsUrlController',
   function($scope, $log, $stateParams, configService, applicationService, profileService, storageService, appConfigService) {
     $scope.success = null;
 

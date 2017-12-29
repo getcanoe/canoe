@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesLogs',
+angular.module('canoeApp.controllers').controller('preferencesLogs',
   function($scope, historicLog, lodash, configService, gettextCatalog) {
 
     var config = configService.getSync();
@@ -34,7 +34,7 @@ angular.module('raiwApp.controllers').controller('preferencesLogs',
     };
 
     $scope.prepareLogs = function() {
-      var log = 'RaiW Session Logs\n Be careful, this could contain sensitive private data\n\n';
+      var log = 'Canoe Session Logs\n Be careful, this could contain sensitive private data\n\n';
       log += '\n\n';
       log += historicLog.get().map(function(v) {
         return '[' + v.timestamp + '][' + v.level + ']' + v.msg;
@@ -48,7 +48,7 @@ angular.module('raiwApp.controllers').controller('preferencesLogs',
 
       window.plugins.socialsharing.shareViaEmail(
         body,
-        'RaiW Logs',
+        'Canoe Logs',
         null, // TO: must be null or an array
         null, // CC: must be null or an array
         null, // BCC: must be null or an array

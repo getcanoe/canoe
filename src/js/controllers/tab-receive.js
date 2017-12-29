@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('tabReceiveController', function ($rootScope, $scope, $timeout, $log, $ionicModal, $state, $ionicHistory, $ionicPopover, storageService, platformInfo, walletService, profileService, configService, lodash, gettextCatalog, popupService, bwcError) {
+angular.module('canoeApp.controllers').controller('tabReceiveController', function ($rootScope, $scope, $timeout, $log, $ionicModal, $state, $ionicHistory, $ionicPopover, storageService, platformInfo, walletService, profileService, configService, lodash, gettextCatalog, popupService, bwcError) {
   var listeners = []
   $scope.isCordova = platformInfo.isCordova
   $scope.isNW = platformInfo.isNW
@@ -30,14 +30,14 @@ angular.module('raiwApp.controllers').controller('tabReceiveController', functio
     })
   }
 
-  $scope.goRaiWers = function () {
+  $scope.goCanoeers = function () {
     $ionicHistory.removeBackView()
     $ionicHistory.nextViewOptions({
       disableAnimate: true
     })
     $state.go('tabs.home')
     $timeout(function () {
-      $state.transitionTo('tabs.raiwers', {
+      $state.transitionTo('tabs.canoeers', {
         walletId: $scope.account.credentials.walletId
       })
     }, 100)

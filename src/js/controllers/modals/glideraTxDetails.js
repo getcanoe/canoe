@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('glideraTxDetailsController', function($scope) {
+angular.module('canoeApp.controllers').controller('glideraTxDetailsController', function($scope) {
 
   $scope.cancel = function() {
     $scope.glideraTxDetailsModal.hide();

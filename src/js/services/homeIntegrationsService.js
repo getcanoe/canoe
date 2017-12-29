@@ -1,5 +1,5 @@
  'use strict';
- angular.module('raiwApp.services').factory('homeIntegrationsService', function(lodash, configService, $log) {
+ angular.module('canoeApp.services').factory('homeIntegrationsService', function(lodash, configService, $log) {
    var root = {};
    var services = [];
 

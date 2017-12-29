@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('payproService',
+angular.module('canoeApp.services').factory('payproService',
   function(profileService, platformInfo, gettextCatalog, ongoingProcess, $log) {
 
     var ret = {};

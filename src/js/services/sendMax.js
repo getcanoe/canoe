@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').service('sendMaxService', function(feeService, configService, walletService) {
+angular.module('canoeApp.services').service('sendMaxService', function(feeService, configService, walletService) {
 
   /**
    * Get sendMaxInfo

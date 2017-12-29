@@ -20,4 +20,4 @@ Email meldingen voor betalingen en overdrachten
 Aanpasbare portemonnee namen en achtergrond kleuren
 10 ondersteunde talen (EN, CZ, FR, DE, IT, ES, JA, PL, RU, NL)
 
-Copay is gratis open source software draaiend op niet-merkgebonden servers, dus het is niet nodig te vertrouwen op enig bedrijf voor blijvende ondersteuning. Iedereen kan de broncode van Copay inzien of er aan bijdragen via GitHub (https://github.com/gokr/raiw). 
+Copay is gratis open source software draaiend op niet-merkgebonden servers, dus het is niet nodig te vertrouwen op enig bedrijf voor blijvende ondersteuning. Iedereen kan de broncode van Copay inzien of er aan bijdragen via GitHub (https://github.com/gokr/canoe). 

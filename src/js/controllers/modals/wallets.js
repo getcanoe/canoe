@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('walletsController', function ($scope, $timeout, bwcError, profileService) {
+angular.module('canoeApp.controllers').controller('walletsController', function ($scope, $timeout, bwcError, profileService) {
   $scope.selectWallet = function (walletId) {
     var client = profileService.getClient(walletId)
     $scope.errorSelectedWallet = {}

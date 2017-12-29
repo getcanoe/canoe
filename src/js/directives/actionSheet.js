@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.directives')
+angular.module('canoeApp.directives')
   .directive('actionSheet', function($rootScope, $timeout) {
     return {
       restrict: 'E',

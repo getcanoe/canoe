@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('bitpayAccountService', function($log, lodash, platformInfo, appIdentityService, bitpayService, bitpayCardService, storageService, gettextCatalog, popupService) {
+angular.module('canoeApp.services').factory('bitpayAccountService', function($log, lodash, platformInfo, appIdentityService, bitpayService, bitpayCardService, storageService, gettextCatalog, popupService) {
   var root = {};
 
   /*

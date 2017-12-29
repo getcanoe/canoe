@@ -1,6 +1,6 @@
-[![Build Status](https://secure.travis-ci.org/gokr/raiw.svg)](http://travis-ci.org/gokr/raiw)
+[![Build Status](https://secure.travis-ci.org/gokr/canoe.svg)](http://travis-ci.org/gokr/canoe)
 
-RaiW is a cross platform RaiBlocks Wallet application. It's based upon the [Copay](https://copay.io) Bitcoin wallet source code released under the MIT license. For binary downloads, see [raiw.krampe.se](https://raiw.krampe.se).
+Canoe is a cross platform RaiBlocks Wallet application. It's based upon the [Copay](https://copay.io) Bitcoin wallet source code released under the MIT license. For binary downloads, see [canoe.krampe.se](https://canoe.krampe.se).
 
 ## Main Features
 
@@ -14,16 +14,16 @@ RaiW is a cross platform RaiBlocks Wallet application. It's based upon the [Copa
 
 ## Testing in a Browser
 
-> **Note:** This method should only be used for development purposes. When running RaiW in a normal browser environment, browser extensions and other malicious code might have access to internal data and private keys. For production use, see the latest official [releases](https://github.com/gokr/raiw/releases/).
+> **Note:** This method should only be used for development purposes. When running Canoe in a normal browser environment, browser extensions and other malicious code might have access to internal data and private keys. For production use, see the latest official [releases](https://github.com/gokr/canoe/releases/).
 
 Clone the repo and open the directory:
 
 ```sh
-git clone https://github.com/gokr/raiw.git
-cd raiw
+git clone https://github.com/gokr/canoe.git
+cd canoe
 ```
 
-Ensure you have [Node](https://nodejs.org/) installed, then install and start RaiW:
+Ensure you have [Node](https://nodejs.org/) installed, then install and start Canoe:
 
 ```sh
 npm install
@@ -85,7 +85,7 @@ npm run start:windows
 
 ### Desktop (Linux, macOS, and Windows)
 
-The desktop version of RaiW currently uses NW.js, an app runtime based on Chromium. To get started, first install NW.js on your system from [the NW.js website](https://nwjs.io/).
+The desktop version of Canoe currently uses NW.js, an app runtime based on Chromium. To get started, first install NW.js on your system from [the NW.js website](https://nwjs.io/).
 
 When NW.js is installed, run the `start:desktop` npm package script.
 
@@ -93,7 +93,7 @@ When NW.js is installed, run the `start:desktop` npm package script.
 npm run start:desktop
 ```
 
-## Build RaiW App Bundles
+## Build Canoe App Bundles
 
 Before building the release version for a platform, run the `clean-all` command to delete any untracked files in your current working directory. (Be sure to stash any uncommited changes you've made.) This guarantees consistency across builds for the current state of this repository.
 
@@ -147,13 +147,13 @@ grunt
 make
 ```
 
-On success, the Chrome extension will be located at: `browser-extensions/chrome/raiw-chrome-extension`.  To install it go to `chrome://extensions/` in your browser and ensure you have the 'developer mode' option enabled in the settings.  Then click on "Load unpacked chrome extension" and choose the directory mentioned above.
+On success, the Chrome extension will be located at: `browser-extensions/chrome/canoe-chrome-extension`.  To install it go to `chrome://extensions/` in your browser and ensure you have the 'developer mode' option enabled in the settings.  Then click on "Load unpacked chrome extension" and choose the directory mentioned above.
 
-## About RaiW
+## About Canoe
 ...details to come...
 
 ## Translations
-RaiW uses standard gettext PO files for translations. We should as soon as RaiW is fully functional start using [Crowdin](https://crowdin.com) as the front-end tool for translators, just like Copay does, more on that follows later. In the meantime, credits to the partial translations RaiW has inherited from Copay:
+Canoe uses standard gettext PO files for translations. We should as soon as Canoe is fully functional start using [Crowdin](https://crowdin.com) as the front-end tool for translators, just like Copay does, more on that follows later. In the meantime, credits to the partial translations Canoe has inherited from Copay:
 
 **Translation Credits:**
 - Japanese: @dabura667
@@ -166,10 +166,10 @@ RaiW uses standard gettext PO files for translations. We should as soon as RaiW 
 *Gracias totales!*
 
 ## Version numbering
-RaiW uses the `MAJOR.MINOR.BATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
+Canoe uses the `MAJOR.MINOR.BATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
 
 ## Contributing to this project
 Anyone and everyone is welcome to contribute.
 
 ## License
-RaiW is released under the MIT License.  Please refer to the [LICENSE](https://github.com/gokr/raiw/blob/master/LICENSE) file that accompanies this project for more information including complete terms and conditions.
+Canoe is released under the MIT License.  Please refer to the [LICENSE](https://github.com/gokr/canoe/blob/master/LICENSE) file that accompanies this project for more information including complete terms and conditions.

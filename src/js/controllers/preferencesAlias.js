@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesAliasController',
+angular.module('canoeApp.controllers').controller('preferencesAliasController',
   function($scope, $timeout, $stateParams, $ionicHistory, configService, profileService, walletService) {
     var wallet = profileService.getAccount($stateParams.walletId);
     var walletId = wallet.credentials.walletId;

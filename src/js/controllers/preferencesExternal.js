@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesExternalController', function($scope, $stateParams, lodash, gettextCatalog, popupService, profileService, walletService) {
+angular.module('canoeApp.controllers').controller('preferencesExternalController', function($scope, $stateParams, lodash, gettextCatalog, popupService, profileService, walletService) {
   var wallet = profileService.getAccount($stateParams.walletId);
 
   $scope.externalSource = lodash.find(walletService.externalSource, function(source) {

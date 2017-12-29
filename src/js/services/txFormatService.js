@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('txFormatService', function($filter, bwcService, rateService, configService, lodash) {
+angular.module('canoeApp.services').factory('txFormatService', function($filter, bwcService, rateService, configService, lodash) {
   var root = {};
 
   root.Utils = bwcService.getUtils();
@@ -157,7 +157,7 @@ angular.module('raiwApp.services').factory('txFormatService', function($filter, 
       tx = txFormatService.processTx(tx.account.coin, tx);
 
       var action = lodash.find(tx.actions, {
-        raiwerId: tx.account.raiwerId
+        canoeerId: tx.account.canoeerId
       });
 
       if (!action && tx.status == 'pending') {

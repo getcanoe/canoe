@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('intelTEE', function($log, $timeout, gettext, lodash, bitcore, hwWallet, bwcService, platformInfo) {
 
     var root = {};

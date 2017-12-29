@@ -13,19 +13,19 @@ var modules = [
   'angular-md5',
   'bwcModule',
   'bitauthModule',
-  'raiwApp.filters',
-  'raiwApp.services',
-  'raiwApp.controllers',
-  'raiwApp.directives',
-  'raiwApp.addons'
+  'canoeApp.filters',
+  'canoeApp.services',
+  'canoeApp.controllers',
+  'canoeApp.directives',
+  'canoeApp.addons'
 ]
 
-var raiwApp = window.raiwApp = angular.module('raiwApp', modules)
+var canoeApp = window.canoeApp = angular.module('canoeApp', modules)
 
 //nw.Window.get().showDevTools()
 
-angular.module('raiwApp.filters', [])
-angular.module('raiwApp.services', [])
-angular.module('raiwApp.controllers', [])
-angular.module('raiwApp.directives', [])
-angular.module('raiwApp.addons', [])
+angular.module('canoeApp.filters', [])
+angular.module('canoeApp.services', [])
+angular.module('canoeApp.controllers', [])
+angular.module('canoeApp.directives', [])
+angular.module('canoeApp.addons', [])

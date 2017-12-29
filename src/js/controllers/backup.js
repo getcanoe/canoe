@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('backupController',
+angular.module('canoeApp.controllers').controller('backupController',
   function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, lodash, profileService, bwcService, walletService, ongoingProcess, popupService, gettextCatalog, $ionicModal) {
     $scope.account = profileService.getAccount($stateParams.walletId)
     $scope.viewTitle = $scope.account.name || $scope.account.credentials.walletName

@@ -20,4 +20,4 @@ Notifiche email per pagamenti o trasferimenti
 Colori di sfondo e nomi dei portafogli personalizzabli
 9 lingue supportate (EN, CS, FR, DE, IT, ES, JA, PL, RU)
 
-Copay è un software gratuito e open source che non dipende da server proprietari, pertanto il supporto del software non dipende da nessuna azienda. Chiunque può rivedere o contribuire al codice sorgente di Copay su GitHub (https://github.com/gokr/raiw). 
+Copay è un software gratuito e open source che non dipende da server proprietari, pertanto il supporto del software non dipende da nessuna azienda. Chiunque può rivedere o contribuire al codice sorgente di Copay su GitHub (https://github.com/gokr/canoe). 

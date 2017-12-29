@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('exportController',
+angular.module('canoeApp.controllers').controller('exportController',
   function ($scope, $timeout, $log, $ionicHistory, $ionicScrollDelegate, backupService, walletService, storageService, profileService, platformInfo, gettextCatalog, $state, $stateParams, popupService, appConfigService) {
     var wallet = profileService.getAccount($stateParams.walletId)
     $scope.account = wallet

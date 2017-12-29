@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('appIdentityService', function($log, lodash, storageService, bitauthService) {
+angular.module('canoeApp.services').factory('appIdentityService', function($log, lodash, storageService, bitauthService) {
   var root = {};
 
   root.getIdentity = function(network, cb) {

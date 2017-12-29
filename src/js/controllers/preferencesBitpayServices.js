@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesBitpayServicesController',
+angular.module('canoeApp.controllers').controller('preferencesBitpayServicesController',
   function($rootScope, $scope, $state, $timeout, $ionicHistory, bitpayAccountService, bitpayCardService, popupService, gettextCatalog) {
 
     $scope.removeAccount = function(account) {

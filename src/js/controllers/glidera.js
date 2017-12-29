@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('glideraController',
+angular.module('canoeApp.controllers').controller('glideraController',
   function($scope, $timeout, $ionicModal, $log, storageService, glideraService, ongoingProcess, platformInfo, externalLinkService, popupService, lodash) {
 
     $scope.openExternalLink = function(url) {

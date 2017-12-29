@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesController',
+angular.module('canoeApp.controllers').controller('preferencesController',
   function($scope, $rootScope, $timeout, $log, $ionicHistory, configService, profileService, fingerprintService, walletService, platformInfo, externalLinkService, gettextCatalog) {
     var wallet;
     var walletId;
@@ -59,7 +59,7 @@ angular.module('raiwApp.controllers').controller('preferencesController',
     };
 
     $scope.openWikiSpendingPassword = function() {
-      var url = 'https://github.com/gokr/raiw/wiki/COPAY---FAQ#what-the-spending-password-does';
+      var url = 'https://github.com/gokr/canoe/wiki/COPAY---FAQ#what-the-spending-password-does';
       var optIn = true;
       var title = null;
       var message = gettextCatalog.getString('Read more in our Wiki');

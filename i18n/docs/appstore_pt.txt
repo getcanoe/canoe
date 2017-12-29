@@ -20,4 +20,4 @@ Notificações por e-mail para pagamentos e transferências
 Nomes e cores de fundo customizáveis para carteiras
 9 idiomas suportados (EN, CS, FR, DE, IT, ES, JA, PL, RU)
 
-Copay é gratuito e um software livre rodando em servidores não-proprietários, que não precisa de nenhuma empresa para o suporte contínuo. Qualquer um pode revisar ou contribuir para o código-fonte da Copay no GitHub (https://github.com/gokr/raiw). 
+Copay é gratuito e um software livre rodando em servidores não-proprietários, que não precisa de nenhuma empresa para o suporte contínuo. Qualquer um pode revisar ou contribuir para o código-fonte da Copay no GitHub (https://github.com/gokr/canoe). 

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('bitpayService', function($log, $http, appIdentityService, bitauthService) {
+angular.module('canoeApp.services').factory('bitpayService', function($log, $http, appIdentityService, bitauthService) {
   var root = {};
 
   var NETWORK = 'livenet';

@@ -1,5 +1,5 @@
 'use strict'
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('storageService', function (logHeader, fileStorageService, localStorageService, sjcl, $log, lodash, platformInfo, $timeout) {
     var root = {}
     var storage
@@ -26,7 +26,7 @@ angular.module('raiwApp.services')
         }, cb)
     }
 
-    // This is only used in RaiW, we used to encrypt profile using device's UUID.
+    // This is only used in Canoe, we used to encrypt profile using device's UUID.
     var decryptOnMobile = function (text, cb) {
       var json
       try {
@@ -187,7 +187,7 @@ angular.module('raiwApp.services')
     }
 
     // for compatibility
-    root.getRaiWDisclaimerFlag = function (cb) {
+    root.getCanoeDisclaimerFlag = function (cb) {
       storage.get('agreeDisclaimer', cb)
     }
 

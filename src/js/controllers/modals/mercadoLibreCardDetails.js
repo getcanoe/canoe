@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('mercadoLibreCardDetailsController', function($scope, mercadoLibreService, externalLinkService, gettextCatalog) {
+angular.module('canoeApp.controllers').controller('mercadoLibreCardDetailsController', function($scope, mercadoLibreService, externalLinkService, gettextCatalog) {
 
   $scope.remove = function() {
     mercadoLibreService.savePendingGiftCard($scope.card, {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.directives')
+angular.module('canoeApp.directives')
   .directive('itemSelector', function($timeout) {
     return {
       restrict: 'E',

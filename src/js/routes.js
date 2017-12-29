@@ -12,7 +12,7 @@ if (window && window.navigator) {
 }
 
 // Setting up route
-angular.module('raiwApp').config(function (historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider) {
+angular.module('canoeApp').config(function (historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider) {
   $urlRouterProvider.otherwise('/starting')
 
     // NO CACHE
@@ -604,16 +604,16 @@ angular.module('raiwApp').config(function (historicLogProvider, $provide, $logPr
 
       /*
        *
-       * RaiWers
+       * Canoeers
        *
        */
 
-      .state('tabs.raiwers', {
-        url: '/raiwers/:walletId',
+      .state('tabs.canoeers', {
+        url: '/canoeers/:walletId',
         views: {
           'tab-home': {
-            templateUrl: 'views/raiwers.html',
-            controller: 'raiwersController'
+            templateUrl: 'views/canoeers.html',
+            controller: 'canoeersController'
           }
         }
       })

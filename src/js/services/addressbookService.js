@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.services').factory('addressbookService', function ($log, bitcore, raiblocksService, storageService, lodash) {
+angular.module('canoeApp.services').factory('addressbookService', function ($log, bitcore, raiblocksService, storageService, lodash) {
   var root = {}
 
   root.get = function (addr, cb) {

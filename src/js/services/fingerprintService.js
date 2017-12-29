@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('fingerprintService', function ($log, gettextCatalog, configService, platformInfo) {
+angular.module('canoeApp.services').factory('fingerprintService', function ($log, gettextCatalog, configService, platformInfo) {
   var root = {};
 
   var _isAvailable = false;
@@ -26,7 +26,7 @@ angular.module('raiwApp.services').factory('fingerprintService', function ($log,
   var requestFinger = function (cb) {
     try {
       FingerprintAuth.encrypt({
-        clientId: 'RaiW'
+        clientId: 'Canoe'
       },
         function (result) {
           if (result.withFingerprint) {

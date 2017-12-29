@@ -1,5 +1,5 @@
 'use strict';
-angular.module('raiwApp.services').factory('txConfirmNotification', function txConfirmNotification($log, storageService) {
+angular.module('canoeApp.services').factory('txConfirmNotification', function txConfirmNotification($log, storageService) {
   var root = {};
 
   root.checkIfEnabled = function(txid, cb) {

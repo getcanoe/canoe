@@ -1,12 +1,12 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesLanguageController',
+angular.module('canoeApp.controllers').controller('preferencesLanguageController',
   function($scope, $log, $ionicHistory, configService, profileService, uxLanguage, walletService, externalLinkService, gettextCatalog) {
 
     $scope.availableLanguages = uxLanguage.getLanguages();
 
     $scope.openExternalLink = function() {
-      var url = 'https://crowdin.com/project/raiw';
+      var url = 'https://crowdin.com/project/canoe';
       var optIn = true;
       var title = gettextCatalog.getString('Open Translation Community');
       var message = gettextCatalog.getString('You can make contributions by signing up on our Crowdin community translation website. We’re looking forward to hearing from you!');

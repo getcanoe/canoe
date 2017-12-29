@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.directives')
+angular.module('canoeApp.directives')
   .directive('logOptions', function($timeout, platformInfo) {
     return {
       restrict: 'E',

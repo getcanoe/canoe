@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('completeController', function($scope, $stateParams, $timeout, $log, $ionicHistory, $state, $ionicNavBarDelegate, $ionicConfig, platformInfo, configService, storageService, lodash, appConfigService, gettextCatalog) {
+angular.module('canoeApp.controllers').controller('completeController', function($scope, $stateParams, $timeout, $log, $ionicHistory, $state, $ionicNavBarDelegate, $ionicConfig, platformInfo, configService, storageService, lodash, appConfigService, gettextCatalog) {
   $scope.isCordova = platformInfo.isCordova;
   $scope.title = gettextCatalog.getString("Share {{appName}}", {
     appName: appConfigService.nameCase
   });
 
   var defaults = configService.getDefaults();
-  var downloadUrl = appConfigService.name == 'raiw' ? defaults.download.raiw.url : defaults.download.bitpay.url;
+  var downloadUrl = appConfigService.name == 'canoe' ? defaults.download.canoe.url : defaults.download.bitpay.url;
 
   function quickFeedback(cb) {
     window.plugins.spinnerDialog.show();

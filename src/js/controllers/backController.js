@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('backController', function ($scope, $state, $stateParams) {
+angular.module('canoeApp.controllers').controller('backController', function ($scope, $state, $stateParams) {
   $scope.importGoBack = function () {
     if ($stateParams.fromOnboarding) $state.go('onboarding.welcome')
     else $state.go('tabs.add')

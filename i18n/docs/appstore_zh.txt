@@ -20,4 +20,4 @@ Copay 户可以单独保管资金或与通过使用多重签名钱包与其他�
 可自定义的钱包名和背景颜色
 支持 9 种语言 (EN, CS, FR, DE, IT, ES, JA, PL, RU)
 
-Copay 是自由和开放源码软件，在非专有服务器上运行，因此无需依靠任何公司以提供永续支持。 任何人都可以查看或对位于 GitHub (https://github.com/gokr/raiw) 的 Copay 源代码作出贡献。 
+Copay 是自由和开放源码软件，在非专有服务器上运行，因此无需依靠任何公司以提供永续支持。 任何人都可以查看或对位于 GitHub (https://github.com/gokr/canoe) 的 Copay 源代码作出贡献。 

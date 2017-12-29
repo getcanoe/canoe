@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('emailService', function($log, configService, lodash, walletService, profileService) {
+angular.module('canoeApp.services').factory('emailService', function($log, configService, lodash, walletService, profileService) {
   var root = {};
 
   root.updateEmail = function(opts) {

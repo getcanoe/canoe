@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('fileStorageService', function(lodash, $log) {
     var root = {},
       _fs, _dir;

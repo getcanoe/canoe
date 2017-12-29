@@ -20,4 +20,4 @@ Email notifications for payments and transfers
 Customizable wallet naming and background colors
 9 supported languages (EN, CS, FR, DE, IT, ES, JA, PL, RU)
 
-Copay is free and open source software run on non-proprietary servers, so there's no need to rely on any company for continuous support. Anyone can review or contribute to Copay's source code on GitHub (https://github.com/gokr/raiw). 
+Copay is free and open source software run on non-proprietary servers, so there's no need to rely on any company for continuous support. Anyone can review or contribute to Copay's source code on GitHub (https://github.com/gokr/canoe). 

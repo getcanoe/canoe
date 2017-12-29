@@ -1,4 +1,4 @@
-angular.module('raiwApp.controllers').controller('paperWalletController',
+angular.module('canoeApp.controllers').controller('paperWalletController',
   function ($scope, $timeout, $log, $ionicModal, $ionicHistory, feeService, popupService, gettextCatalog, platformInfo, configService, profileService, $state, bitcore, ongoingProcess, txFormatService, $stateParams, walletService) {
     function _scanFunds (cb) {
       function getPrivateKey (scannedKey, isPkEncrypted, passphrase, cb) {

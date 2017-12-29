@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('txpDetailsController', function($scope, $rootScope, $timeout, $interval, $log, ongoingProcess, platformInfo, $ionicScrollDelegate, txFormatService, bwcError, gettextCatalog, lodash, walletService, popupService, $ionicHistory, feeService) {
+angular.module('canoeApp.controllers').controller('txpDetailsController', function($scope, $rootScope, $timeout, $interval, $log, ongoingProcess, platformInfo, $ionicScrollDelegate, txFormatService, bwcError, gettextCatalog, lodash, walletService, popupService, $ionicHistory, feeService) {
   var isGlidera = $scope.isGlidera;
   var GLIDERA_LOCK_TIME = 6 * 60 * 60;
   var now = Math.floor(Date.now() / 1000);
@@ -10,8 +10,8 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
     $scope.loading = null;
     $scope.isCordova = platformInfo.isCordova;
     $scope.isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
-    $scope.raiwers = $scope.account.status.wallet.raiwers;
-    $scope.raiwerId = $scope.account.credentials.raiwerId;
+    $scope.canoeers = $scope.account.status.wallet.canoeers;
+    $scope.canoeerId = $scope.account.credentials.canoeerId;
     $scope.isShared = $scope.account.credentials.n > 1;
     $scope.canSign = $scope.account.canSign() || $scope.account.isPrivKeyExternal();
     $scope.color = $scope.account.color;
@@ -76,7 +76,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
         type: action.type,
         time: action.createdOn,
         description: actionDescriptions[action.type],
-        by: action.raiwerName
+        by: action.canoeerName
       });
     });
 
@@ -222,7 +222,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
       }
 
       var action = lodash.find(tx.actions, {
-        raiwerId: $scope.account.credentials.raiwerId
+        canoeerId: $scope.account.credentials.canoeerId
       });
 
       $scope.tx = txFormatService.processTx($scope.account.coin, tx);
@@ -230,7 +230,7 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
       if (!action && tx.status == 'pending')
         $scope.tx.pendingForUs = true;
 
-      $scope.updateRaiWerList();
+      $scope.updateCanoeerList();
       initActionList();
       $scope.$apply();
     });
@@ -251,10 +251,10 @@ angular.module('raiwApp.controllers').controller('txpDetailsController', functio
     });
   });
 
-  $scope.updateRaiWerList = function() {
-    lodash.map($scope.raiwers, function(cp) {
+  $scope.updateCanoeerList = function() {
+    lodash.map($scope.canoeers, function(cp) {
       lodash.each($scope.tx.actions, function(ac) {
-        if (cp.id == ac.raiwerId) {
+        if (cp.id == ac.canoeerId) {
           cp.action = ac.type;
         }
       });

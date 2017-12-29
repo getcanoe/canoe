@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('walletDetailsController', function ($scope, $rootScope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicHistory, profileService, lodash, configService, platformInfo, walletService, txpModalService, externalLinkService, popupService, addressbookService, storageService, $ionicScrollDelegate, $window, bwcError, gettextCatalog, timeService, feeService, appConfigService) {
+angular.module('canoeApp.controllers').controller('walletDetailsController', function ($scope, $rootScope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicHistory, profileService, lodash, configService, platformInfo, walletService, txpModalService, externalLinkService, popupService, addressbookService, storageService, $ionicScrollDelegate, $window, bwcError, gettextCatalog, timeService, feeService, appConfigService) {
   var HISTORY_SHOW_LIMIT = 10
   var currentTxHistoryPage = 0
   var listeners = []
@@ -387,7 +387,7 @@ angular.module('raiwApp.controllers').controller('walletDetailsController', func
 
   $scope.$on('$ionicView.afterLeave', function (event, data) {
     if ($window.StatusBar) {
-      var statusBarColor = appConfigService.name == 'raiw' ? '#192c3a' : '#1e3186'
+      var statusBarColor = appConfigService.name == 'canoe' ? '#192c3a' : '#1e3186'
       $window.StatusBar.backgroundColorByHexString(statusBarColor)
     }
   })
@@ -401,7 +401,7 @@ angular.module('raiwApp.controllers').controller('walletDetailsController', func
   function setAndroidStatusBarColor () {
     var SUBTRACT_AMOUNT = 15
     var walletColor
-    if (!$scope.account.color) walletColor = appConfigService.name == 'raiw' ? '#019477' : '#4a90e2'
+    if (!$scope.account.color) walletColor = appConfigService.name == 'canoe' ? '#019477' : '#4a90e2'
     else walletColor = $scope.account.color
     var rgb = hexToRgb(walletColor)
     var keys = Object.keys(rgb)

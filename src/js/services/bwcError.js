@@ -1,5 +1,5 @@
 'use strict';
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('bwcError', function bwcErrorService($log, gettextCatalog) {
     var root = {};
 
@@ -59,7 +59,7 @@ angular.module('raiwApp.services')
             body = gettextCatalog.getString('Wallet already exists');
             break;
           case 'COPAYER_IN_WALLET':
-            body = gettextCatalog.getString('RaiWer already in this wallet');
+            body = gettextCatalog.getString('Canoeer already in this wallet');
             break;
           case 'WALLET_FULL':
             body = gettextCatalog.getString('Wallet is full');
@@ -74,7 +74,7 @@ angular.module('raiwApp.services')
             body = gettextCatalog.getString('Funds are locked by pending spend proposals');
             break;
           case 'COPAYER_VOTED':
-            body = gettextCatalog.getString('RaiWer already voted on this spend proposal');
+            body = gettextCatalog.getString('Canoeer already voted on this spend proposal');
             break;
           case 'NOT_AUTHORIZED':
             body = gettextCatalog.getString('Not authorized');
@@ -98,13 +98,13 @@ angular.module('raiwApp.services')
             body = gettextCatalog.getString('The spend proposal is not pending');
             break;
           case 'UPGRADE_NEEDED':
-            body = gettextCatalog.getString('Please upgrade RaiW to perform this action');
+            body = gettextCatalog.getString('Please upgrade Canoe to perform this action');
             break;
           case 'BAD_SIGNATURES':
             body = gettextCatalog.getString('Signatures rejected by server');
             break;
           case 'COPAYER_DATA_MISMATCH':
-            body = gettextCatalog.getString('RaiWer data mismatch');
+            body = gettextCatalog.getString('Canoeer data mismatch');
             break;
           case 'DUST_AMOUNT':
             body = gettextCatalog.getString('Amount below minimum allowed');

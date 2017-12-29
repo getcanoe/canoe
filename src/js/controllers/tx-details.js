@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('txDetailsController', function($rootScope, $log, $ionicHistory, $scope, $timeout, walletService, lodash, gettextCatalog, profileService, externalLinkService, popupService, ongoingProcess, txFormatService, txConfirmNotification, feeService, configService) {
+angular.module('canoeApp.controllers').controller('txDetailsController', function($rootScope, $log, $ionicHistory, $scope, $timeout, walletService, lodash, gettextCatalog, profileService, externalLinkService, popupService, ongoingProcess, txFormatService, txConfirmNotification, feeService, configService) {
 
   var txId;
   var listeners = [];
@@ -12,7 +12,7 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
     $scope.title = gettextCatalog.getString('Transaction');
     $scope.account = profileService.getAccount(data.stateParams.walletId);
     $scope.color = $scope.account.color;
-    $scope.raiwerId = $scope.account.credentials.raiwerId;
+    $scope.canoeerId = $scope.account.credentials.canoeerId;
     $scope.isShared = $scope.account.credentials.n > 1;
     $scope.txsUnsubscribedForNotifications = config.confirmedTxsNotifications ? !config.confirmedTxsNotifications.enabled : true;
 
@@ -48,7 +48,7 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
   });
 
   $scope.readMore = function() {
-    var url = 'https://github.com/gokr/raiw/wiki/COPAY---FAQ#amount-too-low-to-spend';
+    var url = 'https://github.com/gokr/canoe/wiki/COPAY---FAQ#amount-too-low-to-spend';
     var optIn = true;
     var title = null;
     var message = gettextCatalog.getString('Read more in our Wiki');
@@ -93,7 +93,7 @@ angular.module('raiwApp.controllers').controller('txDetailsController', function
         type: action.type,
         time: action.createdOn,
         description: actionDescriptions[action.type],
-        by: action.raiwerName
+        by: action.canoeerName
       });
     });
 

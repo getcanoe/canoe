@@ -1,5 +1,5 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('appConfigService', function($window) {
+angular.module('canoeApp.services').factory('appConfigService', function($window) {
   return $window.appConfig;
 });

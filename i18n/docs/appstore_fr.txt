@@ -20,4 +20,4 @@ Nous avons développé les fonctionnalités suivantes dans cette version de Copa
 • Nom de portefeuille et couleurs de fond personnalisables.
 • 9 langues prises en charge (EN, CS, FR, DE, IT, ES, JA, PL, RU)
 
-Copay est un logiciel gratuit et open source qui tourne sur des serveurs non-propriétaires, il n'y a donc pas besoin de compter sur une entreprise pour un support continuel. N'importe qui peut examiner ou contribuer au code source de Copay sur GitHub (https://github.com/gokr/raiw). 
+Copay est un logiciel gratuit et open source qui tourne sur des serveurs non-propriétaires, il n'y a donc pas besoin de compter sur une entreprise pour un support continuel. N'importe qui peut examiner ou contribuer au code source de Copay sur GitHub (https://github.com/gokr/canoe). 

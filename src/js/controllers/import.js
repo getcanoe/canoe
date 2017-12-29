@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('importController',
+angular.module('canoeApp.controllers').controller('importController',
   function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, sjcl, ledger, trezor, derivationPathHelper, platformInfo, bwcService, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService, hwWallet) {
     var reader = new FileReader()
     var defaults = configService.getDefaults()
@@ -17,7 +17,7 @@ angular.module('raiwApp.controllers').controller('importController',
       $scope.formData.account = 1
       //$scope.formData.coin = $stateParams.coin
       $scope.importErr = false
-      $scope.isRaiW = appConfigService.name === 'raiw'
+      $scope.isCanoe = appConfigService.name === 'canoe'
       $scope.fromHardwareWallet = {
         value: false
       }

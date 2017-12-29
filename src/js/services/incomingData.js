@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.services').factory('incomingData', function ($log, $state, $timeout, $ionicHistory, bitcore, $rootScope, payproService, scannerService, appConfigService, popupService, gettextCatalog) {
+angular.module('canoeApp.services').factory('incomingData', function ($log, $state, $timeout, $ionicHistory, bitcore, $rootScope, payproService, scannerService, appConfigService, popupService, gettextCatalog) {
   var root = {}
 
   root.showMenu = function (data) {
@@ -20,7 +20,7 @@ angular.module('raiwApp.services').factory('incomingData', function ($log, $stat
       var value = match[0].replace(',', '.')
       var newUri = data.replace(regex, value)
 
-      // mobile devices, uris like raiw://glidera
+      // mobile devices, uris like canoe://glidera
       newUri.replace('://', ':')
 
       return newUri
@@ -274,7 +274,7 @@ angular.module('raiwApp.services').factory('incomingData', function ($log, $stat
       return true
 
       // Join
-    } else if (data && data.match(/^raiw:[0-9A-HJ-NP-Za-km-z]{70,80}$/)) {
+    } else if (data && data.match(/^canoe:[0-9A-HJ-NP-Za-km-z]{70,80}$/)) {
       $state.go('tabs.home', {}, {
         'reload': true,
         'notify': $state.current.name != 'tabs.home'

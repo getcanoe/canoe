@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('txpModalService', function(configService, profileService, $rootScope, $ionicModal) {
+angular.module('canoeApp.services').factory('txpModalService', function(configService, profileService, $rootScope, $ionicModal) {
 
   var root = {};
 
@@ -17,7 +17,7 @@ angular.module('raiwApp.services').factory('txpModalService', function(configSer
     scope.tx = tx;
     if (!scope.tx.toAddress) scope.tx.toAddress = tx.outputs[0].toAddress;
     scope.wallet = wallet;
-    scope.raiwers = wallet ? wallet.raiwers : null;
+    scope.canoeers = wallet ? wallet.canoeers : null;
     scope.isGlidera = glideraActive;
     scope.currentSpendUnconfirmed = config.spendUnconfirmed;
     // scope.tx.hasMultiplesOutputs = true;  // Uncomment to test multiple outputs

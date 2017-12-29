@@ -1,5 +1,5 @@
 'use strict';
-angular.module('raiwApp.directives')
+angular.module('canoeApp.directives')
 .directive('hideTabs', function($rootScope, $timeout) {
   return {
     restrict: 'A',

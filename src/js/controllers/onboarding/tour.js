@@ -1,5 +1,5 @@
 'use strict'
-angular.module('raiwApp.controllers').controller('tourController',
+angular.module('canoeApp.controllers').controller('tourController',
   function ($scope, $state, $log, $timeout, $filter, ongoingProcess, profileService, rateService, popupService, gettextCatalog) {
     $scope.data = {
       index: 0

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('amazonCardsController',
+angular.module('canoeApp.controllers').controller('amazonCardsController',
   function($scope, $timeout, $ionicModal, $log, $ionicScrollDelegate, lodash, amazonService, platformInfo, externalLinkService, popupService, ongoingProcess) {
 
     $scope.openExternalLink = function(url) {

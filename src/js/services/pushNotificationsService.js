@@ -1,5 +1,5 @@
 'use strict';
-angular.module('raiwApp.services').factory('pushNotificationsService', function pushNotificationsService($log, $state, $ionicHistory, sjcl, platformInfo, lodash, appConfigService, profileService, configService) {
+angular.module('canoeApp.services').factory('pushNotificationsService', function pushNotificationsService($log, $state, $ionicHistory, sjcl, platformInfo, lodash, appConfigService, profileService, configService) {
   var root = {};
   var isIOS = platformInfo.isIOS;
   var isAndroid = platformInfo.isAndroid;
@@ -89,7 +89,7 @@ angular.module('raiwApp.services').factory('pushNotificationsService', function 
     if (!wallet) return;
     
     if (!wallet.isComplete()) {
-      return $state.go('tabs.raiwers', {
+      return $state.go('tabs.canoeers', {
         walletId: wallet.id 
       });
     }

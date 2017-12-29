@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('trezor', function($log, $timeout, lodash, bitcore, hwWallet, platformInfo) {
     var root = {};
 

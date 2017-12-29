@@ -1,6 +1,6 @@
 {
-  "name": "RaiW",
-  "app_id": "se.krampe.raiw",
+  "name": "Canoe",
+  "app_id": "se.krampe.canoe",
   "integrations": {},
   "type": "ionic1",
   "watchPatterns": [

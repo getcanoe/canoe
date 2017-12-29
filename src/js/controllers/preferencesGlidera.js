@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesGlideraController',
+angular.module('canoeApp.controllers').controller('preferencesGlideraController',
   function($scope, $timeout, $state, $ionicHistory, glideraService, popupService) {
 
     $scope.revokeToken = function() {

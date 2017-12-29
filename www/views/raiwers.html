@@ -1,4 +1,4 @@
-<ion-view id="raiwers-invitation" hide-tabs>
+<ion-view id="canoeers-invitation" hide-tabs>
   <ion-nav-bar class="bar-royal">
     <ion-nav-back-button>
     </ion-nav-back-button>
@@ -18,7 +18,7 @@
     <div ng-show="!wallet.notAuthorized">
       <div class="list text-center">
         <div class="item item-heading item-text-wrap" translate>
-          Share this invitation with your raiwers
+          Share this invitation with your canoeers
         </div>
         <div class="item text-center">
           <div copy-to-clipboard="secret">
@@ -28,7 +28,7 @@
               <ion-spinner class="spinner-dark" icon="lines"></ion-spinner>
             </div>
           </div>
-          <div class="raiwers-secret">
+          <div class="canoeers-secret">
             {{secret || ('Loading...'|translate)}}
           </div>
           </div>
@@ -45,9 +45,9 @@
             <span class="text-gray right">
               [ <span translate>{{wallet.m}}-of-{{wallet.n}}</span> ]
             </span>
-            <span translate>Waiting for raiwers</span>
+            <span translate>Waiting for canoeers</span>
           </div>
-          <div ng-include="'views/includes/raiwers.html'"></div>
+          <div ng-include="'views/includes/canoeers.html'"></div>
           <div ng-if="!wallet.isComplete()" class="item item-icon-left">
             <i class="icon ion-loop"></i>
             {{'Waiting...'|translate}}

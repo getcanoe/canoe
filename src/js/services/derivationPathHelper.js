@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('derivationPathHelper', function(lodash) {
+angular.module('canoeApp.services').factory('derivationPathHelper', function(lodash) {
   var root = {};
 
   root.default = "m/44'/0'/0'";

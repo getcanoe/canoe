@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('DevLoginController', function($scope, $rootScope, $routeParams, identityService) {
+angular.module('canoeApp.controllers').controller('DevLoginController', function($scope, $rootScope, $routeParams, identityService) {
 
   var mail = $routeParams.mail;
   var password = $routeParams.password;

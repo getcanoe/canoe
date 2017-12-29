@@ -1,5 +1,5 @@
 'use strict'
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('raiblocksService', function ($log) {
     var root = {}
 
@@ -37,10 +37,16 @@ angular.module('raiwApp.services')
       $log.debug('Create account in wallet ' + wallet.id + ' named ' + accountName)
       var account = {}
       account.name = accountName
-      account.addr = rai.account_create(wallet.id, true) // work = true
+      account.id = rai.account_create(wallet.id, true) // work = true
       $log.debug('Account: ' + JSON.stringify(account))
       wallet.accounts.push(account)
       return account
+    }
+
+    root.updateAllAccounts = function (wallet, cb) {
+      $log.debug('Update all accounts in wallet ' + wallet.id)
+      var accountIds = rai.account_list(wallet.id)
+      var balances = rai.accounts_balances(accountIds)
     }
 
     root.changeSeed = function (walletId, seed) {

@@ -15,7 +15,7 @@
 *
 * set 'url_base' as string. Mask protocol://host:port. Default value is http://localhost:7076. Samples
 *	http://localhost:7076
-*	https://raiwallet.info:7077
+*	https://canoeallet.info:7077
 *
 * set 'async' as boolean. Default value is false
 * Note: Now only sync requests are available. Async for future developments

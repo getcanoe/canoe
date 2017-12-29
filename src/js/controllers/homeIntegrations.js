@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('homeIntegrationsController', function($scope, homeIntegrationsService, $ionicScrollDelegate, $timeout) {
+angular.module('canoeApp.controllers').controller('homeIntegrationsController', function($scope, homeIntegrationsService, $ionicScrollDelegate, $timeout) {
 
   $scope.hide = false;
   $scope.services = homeIntegrationsService.get();

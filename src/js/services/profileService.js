@@ -1,5 +1,5 @@
 'use strict'
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, raiblocksService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, appConfigService) {
     var isChromeApp = platformInfo.isChromeApp
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
@@ -24,13 +24,29 @@ angular.module('raiwApp.services')
       raiblocksService.changeSeed(root.wallet.id, seed)
     }
 
-    root.updateAccountSettings = function (wallet) {
+    root.updateAllAccounts = function () {
+      raiblocksService.updateAllAccounts(function (accounts) {
+        if (lodash.isEmpty(accounts)) return
+
+        // Trick to know when all are done
+        var i = accounts.length
+        var j = 0
+        lodash.each(accounts, function (account) {
+          root.setLastKnownBalance(account.id, account.balance, function () {})
+          if (++j === i) {
+            //updateTxps()
+          }
+        })
+      })
+    }
+
+    root.updateAccountSettings = function (account) {
       var defaults = configService.getDefaults()
       configService.whenAvailable(function (config) {
-        wallet.usingCustomBWS = config.bwsFor && config.bwsFor[wallet.id] && (config.bwsFor[wallet.id] != defaults.bws.url)
-        wallet.name = (config.aliasFor && config.aliasFor[wallet.id]) || wallet.credentials.walletName
-        wallet.color = (config.colorFor && config.colorFor[wallet.id])
-        wallet.email = config.emailFor && config.emailFor[wallet.id]
+        // account.usingCustomBWS = config.bwsFor && config.bwsFor[account.id] && (config.bwsFor[wallet.id] != defaults.bws.url)
+        account.name = (config.aliasFor && config.aliasFor[account.id])
+        account.color = (config.colorFor && config.colorFor[account.id])
+        account.email = config.emailFor && config.emailFor[account.id]
       })
     }
 
@@ -82,7 +98,7 @@ angular.module('raiwApp.services')
       wallet.started = true
       wallet.doNotVerifyPayPro = isChromeApp
       wallet.network = wallet.credentials.network
-      wallet.raiwerId = wallet.credentials.raiwerId
+      wallet.canoeerId = wallet.credentials.canoeerId
       wallet.m = wallet.credentials.m
       wallet.n = wallet.credentials.n
       wallet.coin = wallet.credentials.coin
@@ -417,7 +433,7 @@ angular.module('raiwApp.services')
       str = JSON.parse(str)
 
       if (!str.n) {
-        return cb('Backup format not recognized. If you are using a RaiW Beta backup and version is older than 0.10, please see: https://github.com/gokr/raiw/issues/4730#issuecomment-244522614')
+        return cb('Backup format not recognized. If you are using a Canoe Beta backup and version is older than 0.10, please see: https://github.com/gokr/canoe/issues/4730#issuecomment-244522614')
       }
 
       var addressBook = str.addressBook || {}
@@ -492,7 +508,7 @@ angular.module('raiwApp.services')
       if (disclaimerAccepted) { return cb(true) }
 
       // OLD flag
-      storageService.getRaiWDisclaimerFlag(function (err, val) {
+      storageService.getCanoeDisclaimerFlag(function (err, val) {
         if (val) {
           root.profile.disclaimerAccepted = true
           return cb(true)
@@ -682,7 +698,7 @@ angular.module('raiwApp.services')
 
             var idToName = {}
             if (wallet.cachedStatus) {
-              lodash.each(wallet.cachedStatus.wallet.raiwers, function (c) {
+              lodash.each(wallet.cachedStatus.wallet.canoeers, function (c) {
                 idToName[c.id] = c.name
               })
             }

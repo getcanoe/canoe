@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('rateAppController', function($scope, $state, $stateParams, $window, lodash, externalLinkService, configService, platformInfo, feedbackService, ongoingProcess, popupService, appConfigService) {
+angular.module('canoeApp.controllers').controller('rateAppController', function($scope, $state, $stateParams, $window, lodash, externalLinkService, configService, platformInfo, feedbackService, ongoingProcess, popupService, appConfigService) {
   $scope.score = parseInt($stateParams.score);
   $scope.appName = appConfigService.nameCase;
   var isAndroid = platformInfo.isAndroid;
@@ -39,9 +39,9 @@ angular.module('raiwApp.controllers').controller('rateAppController', function($
     var defaults = configService.getDefaults();
     var url;
     if (isAndroid)
-      url = $scope.appName == 'RaiW' ? defaults.rateApp.raiw.android : defaults.rateApp.bitpay.android;
+      url = $scope.appName == 'Canoe' ? defaults.rateApp.canoe.android : defaults.rateApp.bitpay.android;
     if (isIOS)
-      url = $scope.appName == 'RaiW' ? defaults.rateApp.raiw.ios : defaults.rateApp.bitpay.ios;
+      url = $scope.appName == 'Canoe' ? defaults.rateApp.canoe.ios : defaults.rateApp.bitpay.ios;
 
     externalLinkService.open(url);
     $state.go('tabs.rate.complete', {

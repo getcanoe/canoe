@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('coinbaseService', function($http, $log, $window, $filter, platformInfo, lodash, storageService, configService, appConfigService, txFormatService, buyAndSellService, $rootScope, feeService) {
+angular.module('canoeApp.services').factory('coinbaseService', function($http, $log, $window, $filter, platformInfo, lodash, storageService, configService, appConfigService, txFormatService, buyAndSellService, $rootScope, feeService) {
   var root = {};
   var credentials = {};
   var isCordova = platformInfo.isCordova;
@@ -129,7 +129,7 @@ angular.module('raiwApp.services').factory('coinbaseService', function($http, $l
     _getNetAmount(amount, function(err, reducedAmount) {
       if (err) return cb(err);
 
-      // Check if transaction has enough funds to transfer bitcoin from Coinbase to RaiW
+      // Check if transaction has enough funds to transfer bitcoin from Coinbase to Canoe
       if (reducedAmount < 0) {
         return cb('Not enough funds for fee');
       }

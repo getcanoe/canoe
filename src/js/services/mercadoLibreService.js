@@ -1,5 +1,5 @@
 'use strict';
-angular.module('raiwApp.services').factory('mercadoLibreService', function($http, $log, lodash, moment, storageService, configService, platformInfo, nextStepsService, homeIntegrationsService) {
+angular.module('canoeApp.services').factory('mercadoLibreService', function($http, $log, lodash, moment, storageService, configService, platformInfo, nextStepsService, homeIntegrationsService) {
   var root = {};
   var credentials = {};
 

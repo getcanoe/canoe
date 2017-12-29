@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('configService', function(storageService, lodash, $log, $timeout, $rootScope, platformInfo) {
+angular.module('canoeApp.services').factory('configService', function(storageService, lodash, $log, $timeout, $rootScope, platformInfo) {
   var root = {};
 
   var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
@@ -8,7 +8,7 @@ angular.module('raiwApp.services').factory('configService', function(storageServ
   var defaultConfig = {
     // wallet limits
     limits: {
-      totalRaiWers: 6,
+      totalCanoeers: 6,
       mPlusN: 100,
     },
 
@@ -21,8 +21,8 @@ angular.module('raiwApp.services').factory('configService', function(storageServ
       bitpay: {
         url: 'https://bitpay.com/wallet'
       },
-      raiw: {
-        url: 'https://raiw.io/#download'
+      canoe: {
+        url: 'https://canoe.io/#download'
       }
     },
 
@@ -32,16 +32,16 @@ angular.module('raiwApp.services').factory('configService', function(storageServ
         android: 'https://play.google.com/store/apps/details?id=com.bitpay.wallet',
         wp: ''
       },
-      raiw: {
+      canoe: {
         ios: 'http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=951330296&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8',
-        android: 'https://play.google.com/store/apps/details?id=com.bitpay.raiw',
+        android: 'https://play.google.com/store/apps/details?id=com.bitpay.canoe',
         wp: ''
       }
     },
     // wallet default config
     wallet: {
-      requiredRaiWers: 2,
-      totalRaiWers: 3,
+      requiredCanoeers: 2,
+      totalCanoeers: 3,
       spendUnconfirmed: false,
       reconnectDelay: 5000,
       idleDurationMin: 4,
@@ -74,7 +74,7 @@ angular.module('raiwApp.services').factory('configService', function(storageServ
     },
 
     release: {
-      url: 'https://api.github.com/repos/bitpay/raiw/releases/latest'
+      url: 'https://api.github.com/repos/bitpay/canoe/releases/latest'
     },
 
     pushNotificationsEnabled: true,

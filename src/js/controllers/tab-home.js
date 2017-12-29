@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('tabHomeController',
+angular.module('canoeApp.controllers').controller('tabHomeController',
   function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, txpModalService, appConfigService, startupService, addressbookService, feedbackService, bwcError, nextStepsService, buyAndSellService, homeIntegrationsService, bitpayCardService, pushNotificationsService, timeService) {
     var wallet
     var listeners = []
@@ -139,7 +139,7 @@ angular.module('raiwApp.controllers').controller('tabHomeController',
     }
 
     $scope.goToDownload = function () {
-      var url = 'https://github.com/gokr/raiw/releases/latest'
+      var url = 'https://github.com/gokr/canoe/releases/latest'
       var optIn = true
       var title = gettextCatalog.getString('Update Available')
       var message = gettextCatalog.getString('An update to this app is available. For your security, please update to the latest version.')
@@ -184,7 +184,7 @@ angular.module('raiwApp.controllers').controller('tabHomeController',
 
     $scope.openWallet = function (wallet) {
       if (!wallet.isComplete()) {
-        return $state.go('tabs.raiwers', {
+        return $state.go('tabs.canoeers', {
           walletId: wallet.credentials.walletId
         })
       }
@@ -211,20 +211,6 @@ angular.module('raiwApp.controllers').controller('tabHomeController',
     // Make sure all accounts are up to date, done on initial entering view and on scroll-update
     var updateAllAccounts = function () {
       profileService.updateAllAccounts()
-     /* 
-      var accounts = profileService.getAccounts() // The ones we know of from localstorage
-      if (lodash.isEmpty(accounts)) return
-
-      var i = accounts.length
-      var j = 0
-
-      lodash.each(accounts, function (account) {
-        profileService.setLastKnownBalance(account.addr, balance, function () {})
-          
-        if (++j === i) {
-          updateTxps()
-        }
-      })*/
     }
 
     var updateAccount = function (account) {

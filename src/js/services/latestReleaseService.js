@@ -1,5 +1,5 @@
 'use strict'
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('latestReleaseService', function latestReleaseServiceFactory ($log, $http, configService) {
     var root = {}
 

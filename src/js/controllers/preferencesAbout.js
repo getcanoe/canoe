@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('preferencesAbout',
+angular.module('canoeApp.controllers').controller('preferencesAbout',
   function($scope, $window, appConfigService, gettextCatalog, externalLinkService) {
 
     $scope.title = gettextCatalog.getString('About') + ' ' + appConfigService.nameCase;

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.directives')
+angular.module('canoeApp.directives')
   /**
    * Replaces img tag with its svg content to allow for CSS styling of the svg.
    */

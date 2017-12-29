@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.controllers').controller('confirmationController', function($scope) {
+angular.module('canoeApp.controllers').controller('confirmationController', function($scope) {
 
   $scope.ok = function() {
     $scope.loading = true;

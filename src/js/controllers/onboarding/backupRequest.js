@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('backupRequestController', function ($scope, $state, $stateParams, $ionicConfig, popupService, gettextCatalog) {
+angular.module('canoeApp.controllers').controller('backupRequestController', function ($scope, $state, $stateParams, $ionicConfig, popupService, gettextCatalog) {
   $scope.accountId = $stateParams.walletId
 
   $scope.$on('$ionicView.enter', function () {

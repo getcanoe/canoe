@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.controllers').controller('tabSettingsController', function ($rootScope, $timeout, $scope, appConfigService, $ionicModal, $log, lodash, uxLanguage, platformInfo, profileService, feeService, configService, externalLinkService, bitpayAccountService, bitpayCardService, storageService, glideraService, gettextCatalog, buyAndSellService) {
+angular.module('canoeApp.controllers').controller('tabSettingsController', function ($rootScope, $timeout, $scope, appConfigService, $ionicModal, $log, lodash, uxLanguage, platformInfo, profileService, feeService, configService, externalLinkService, bitpayAccountService, bitpayCardService, storageService, glideraService, gettextCatalog, buyAndSellService) {
   var updateConfig = function () {
     $scope.currentLanguageName = uxLanguage.getCurrentLanguageName()
     $scope.feeOpts = feeService.feeOpts
@@ -40,7 +40,7 @@ angular.module('raiwApp.controllers').controller('tabSettingsController', functi
 
   $scope.openExternalLink = function () {
     var appName = appConfigService.name
-    var url = appName == 'raiw' ? 'https://github.com/gokr/raiw/issues' : 'https://help.bitpay.com/bitpay-app'
+    var url = appName == 'canoe' ? 'https://github.com/gokr/canoe/issues' : 'https://help.bitpay.com/bitpay-app'
     var optIn = true
     var title = null
     var message = gettextCatalog.getString('Help and support information is available at the website.')

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services')
+angular.module('canoeApp.services')
   .factory('ledger', function($log, bwcService, gettext, hwWallet, platformInfo) {
     var root = {};
     var LEDGER_CHROME_ID = "kkdpmhnladdopljabkgpacgpliggeeaf";

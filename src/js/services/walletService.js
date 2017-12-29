@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('raiwApp.services').factory('walletService', function ($log, $timeout, lodash, trezor, ledger, intelTEE, storageService, configService, rateService, uxLanguage, $filter, gettextCatalog, bwcError, $ionicPopup, fingerprintService, ongoingProcess, gettext, $rootScope, txFormatService, $ionicModal, $state, bwcService, bitcore, popupService, feeService) {
+angular.module('canoeApp.services').factory('walletService', function ($log, $timeout, lodash, trezor, ledger, intelTEE, storageService, configService, rateService, uxLanguage, $filter, gettextCatalog, bwcError, $ionicPopup, fingerprintService, ongoingProcess, gettext, $rootScope, txFormatService, $ionicModal, $state, bwcService, bitcore, popupService, feeService) {
   // Ratio low amount warning (fee/amount) in incoming TX
   var LOW_AMOUNT_RATIO = 0.15
 
@@ -122,7 +122,7 @@ angular.module('raiwApp.services').factory('walletService', function ($log, $tim
         }
 
         var action = lodash.find(tx.actions, {
-          raiwerId: tx.account.raiwerId
+          canoeerId: tx.account.canoeerId
         })
 
         if (!action && tx.status == 'pending') {
@@ -805,7 +805,7 @@ angular.module('raiwApp.services').factory('walletService', function ($log, $tim
 
     wallet.scanning = true
     wallet.startScan({
-      includeRaiWerBranches: true
+      includeCanoeerBranches: true
     }, function (err) {
       return cb(err)
     })
@@ -1202,22 +1202,22 @@ angular.module('raiwApp.services').factory('walletService', function ($log, $tim
     else return 'bitcoin'
   }
 
-  root.copyRaiWers = function (wallet, newWallet, cb) {
+  root.copyCanoeers = function (wallet, newWallet, cb) {
     var c = wallet.credentials
 
     var walletPrivKey = bitcore.PrivateKey.fromString(c.walletPrivKey)
 
-    var raiwer = 1,
+    var canoeer = 1,
       i = 0,
       l = c.publicKeyRing.length
     var mainErr = null
 
     lodash.each(c.publicKeyRing, function (item) {
-      var name = item.raiwerName || ('raiwer ' + raiwer++)
+      var name = item.canoeerName || ('canoeer ' + canoeer++)
       newWallet._doJoinWallet(newWallet.credentials.walletId, walletPrivKey, item.xPubKey, item.requestPubKey, name, {
         coin: newWallet.credentials.coin
       }, function (err) {
-        // Ignore error is raiwer already in wallet
+        // Ignore error is canoeer already in wallet
         if (err && !(err instanceof errors.COPAYER_IN_WALLET)) {
           mainErr = err
         }

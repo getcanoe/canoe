@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.services').factory('feeService', function($log, bwcService, configService, gettext, lodash, gettextCatalog) {
+angular.module('canoeApp.services').factory('feeService', function($log, bwcService, configService, gettext, lodash, gettextCatalog) {
   var root = {};
 
   var CACHE_TIME_TS = 60; // 1 min

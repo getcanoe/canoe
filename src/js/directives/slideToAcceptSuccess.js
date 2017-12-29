@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('raiwApp.directives')
+angular.module('canoeApp.directives')
   .directive('slideToAcceptSuccess', function($timeout, platformInfo) {
     return {
       restrict: 'E',
