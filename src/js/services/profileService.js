@@ -57,7 +57,7 @@ angular.module('canoeApp.services')
           if (++j === i) {
             //updateTxps()
           }
-        })*/
+        }) */
       })
     }
 
@@ -189,7 +189,7 @@ angular.module('canoeApp.services')
               }
             })
           })
-        }*/
+        } */
         /*
         bindWallets(function () {
           root.isBound = true
@@ -207,7 +207,7 @@ angular.module('canoeApp.services')
             }
             return cb()
           })
-        })*/
+        }) */
       })
     }
 
@@ -307,6 +307,15 @@ angular.module('canoeApp.services')
       return cb(null, walletClient)
     }
 
+    // Do we have funds? Presuming we are up to date here
+    root.hasFunds = function () {
+      var total = 0
+      lodash.each(root.wallet.accounts, function (acc) {
+        total = total + (acc.balance || 0)
+      })
+      return total > 0
+    }
+
     // Create wallet and default account
     root.createWallet = function (opts, cb) {
       // Synchronous now
@@ -389,8 +398,8 @@ angular.module('canoeApp.services')
 
       if (!root.profile.addWallet(JSON.parse(client.export()))) {
         return cb(gettextCatalog.getString('Wallet already in {{appName}}', {
-   appName: appConfigService.nameCase
- }))
+          appName: appConfigService.nameCase
+        }))
       }
 
       var skipKeyValidation = shouldSkipValidation(walletId)
@@ -653,7 +662,7 @@ angular.module('canoeApp.services')
           }
 
           return cb2()
-        })*/
+        }) */
       };
 
       function process (notifications) {

@@ -7,85 +7,19 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   $scope.isChromeApp = platformInfo.isChromeApp
   $scope.serverMessage = null
 
-  var hasAccounts = function () {
-    $scope.accounts = profileService.getAccounts({
-      onlyComplete: true
-    })
-    $scope.hasAccounts = !lodash.isEmpty($scope.accounts)
-  }
-
-  // THIS is ONLY to show the 'buy bitcoins' message
-  // does not has any other function.
-
-  var updateHasFunds = function () {
-    if ($rootScope.everHasFunds) {
-      $scope.hasFunds = true
-      return
-    }
-
-    $scope.hasFunds = false
-    var foundMessage = false
-    var index = 0
-    lodash.each($scope.accounts, function (w) {
-      walletService.getStatus(w, {}, function (err, status) {
-        ++index
-        if (err && !status) {
-          $log.error(err)
-          // error updating the wallet. Probably a network error, do not show
-          // the 'buy bitcoins' message.
-
-          $scope.hasFunds = true
-        } else if (status.availableBalanceSat > 0) {
-          $scope.hasFunds = true
-          $rootScope.everHasFunds = true
-
-          if (!foundMessage && !lodash.isEmpty(status.serverMessage)) {
-            $scope.serverMessage = status.serverMessage
-            foundMessage = true
-          }
-        }
-
-        if (index == $scope.accounts.length) {
-          $scope.checkingBalance = false
-          $timeout(function () {
-            $scope.$apply()
-          })
-        }
-      })
-    })
-  }
-
-  var updateWalletsList = function () {
-    var networkResult = lodash.countBy($scope.accounts, 'network')
-
-    $scope.showTransferCard = $scope.hasAccounts && (networkResult.livenet > 1 || networkResult.testnet > 1)
-
+  var updateAccountsList = function () {
+    $scope.showTransferCard = $scope.hasAccounts
+    $scope.hasFunds = profileService.hasFunds()
     if ($scope.showTransferCard) {
-      var walletsToTransfer = $scope.accounts
-      if (!(networkResult.livenet > 1)) {
-        walletsToTransfer = lodash.filter(walletsToTransfer, function (item) {
-          return item.network == 'testnet'
-        })
-      }
-      if (!(networkResult.testnet > 1)) {
-        walletsToTransfer = lodash.filter(walletsToTransfer, function (item) {
-          return item.network == 'livenet'
-        })
-      }
-      var walletList = []
-      lodash.each(walletsToTransfer, function (v) {
-        walletList.push({
-          color: v.color,
-          name: v.name,
-          recipientType: 'wallet',
-          coin: v.coin,
-          network: v.network,
-          getAddress: function (cb) {
-            walletService.getAddress(v, false, cb)
-          }
+      var accountList = []
+      lodash.each($scope.accounts, function (acc) {
+        accountList.push({
+          color: acc.color,
+          name: acc.name,
+          address: acc.id
         })
       })
-      originalList = originalList.concat(walletList)
+      originalList = originalList.concat(accountList)
     }
   }
 
@@ -142,7 +76,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
 
   $scope.showMore = function () {
     currentContactsPage++
-    updateWalletsList()
+    updateAccountsList()
   }
 
   $scope.searchInFocus = function () {
@@ -215,6 +149,9 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   }
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
+    $scope.accounts = profileService.getAccounts()
+    $scope.hasAccounts = !lodash.isEmpty($scope.accounts)
+
     $scope.checkingBalance = true
     $scope.formData = {
       search: null
@@ -222,7 +159,6 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
     originalList = []
     CONTACTS_SHOW_LIMIT = 10
     currentContactsPage = 0
-    hasAccounts()
   })
 
   $scope.$on('$ionicView.enter', function (event, data) {
@@ -230,8 +166,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
       $scope.checkingBalance = false
       return
     }
-    updateHasFunds()
-    updateWalletsList()
+    updateAccountsList()
     updateContactsList(function () {
       updateList()
     })

@@ -1,57 +1,57 @@
-'use strict';
+'use strict'
 
 angular.module('canoeApp.controllers').controller('preferencesInformation',
-  function($scope, $log, $ionicHistory, platformInfo, lodash, profileService, configService, $stateParams, $state, walletService) {
-    var wallet = profileService.getAccount($stateParams.walletId);
-    $scope.account = wallet;
+  function ($scope, $log, $ionicHistory, platformInfo, lodash, profileService, configService, $stateParams, $state, walletService) {
+    var wallet = profileService.getAccount($stateParams.walletId)
+    $scope.account = wallet
 
-    var walletId = wallet.id;
-    var config = configService.getSync();
-    var colorCounter = 1;
-    var BLACK_WALLET_COLOR = '#202020';
-    $scope.isCordova = platformInfo.isCordova;
-    config.colorFor = config.colorFor || {};
+    var walletId = wallet.id
+    var config = configService.getSync()
+    var colorCounter = 1
+    var BLACK_WALLET_COLOR = '#202020'
+    $scope.isCordova = platformInfo.isCordova
+    config.colorFor = config.colorFor || {}
 
-    $scope.saveBlack = function() {
-      function save(color) {
+    $scope.saveBlack = function () {
+      function save (color) {
         var opts = {
           colorFor: {}
-        };
-        opts.colorFor[walletId] = color;
+        }
+        opts.colorFor[walletId] = color
 
-        configService.set(opts, function(err) {
-          $ionicHistory.removeBackView();
-          $state.go('tabs.home');
-          if (err) $log.warn(err);
-        });
+        configService.set(opts, function (err) {
+          $ionicHistory.removeBackView()
+          $state.go('tabs.home')
+          if (err) $log.warn(err)
+        })
       };
 
-      if (colorCounter != 5) return colorCounter++;
-      save(BLACK_WALLET_COLOR);
+      if (colorCounter != 5) return colorCounter++
+      save(BLACK_WALLET_COLOR)
     };
 
-    $scope.$on("$ionicView.enter", function(event, data) {
-      var c = wallet.credentials;
-      var basePath = c.getBaseAddressDerivationPath();
+    $scope.$on('$ionicView.enter', function (event, data) {
+      var c = wallet.credentials
+      var basePath = c.getBaseAddressDerivationPath()
 
-      $scope.account = wallet;
-      $scope.accountName = c.walletName;
-      $scope.accountId = c.walletId;
-      $scope.network = c.network;
-      $scope.addressType = c.addressType || 'P2SH';
-      $scope.derivationStrategy = c.derivationStrategy || 'BIP45';
-      $scope.basePath = basePath;
-      $scope.M = c.m;
-      $scope.N = c.n;
-      $scope.pubKeys = lodash.pluck(c.publicKeyRing, 'xPubKey');
-      $scope.externalSource = null;
-      $scope.canSign = wallet.canSign();
+      $scope.account = wallet
+      $scope.accountName = c.walletName
+      $scope.accountId = c.walletId
+      $scope.network = c.network
+      $scope.addressType = c.addressType || 'P2SH'
+      $scope.derivationStrategy = c.derivationStrategy || 'BIP45'
+      $scope.basePath = basePath
+      $scope.M = c.m
+      $scope.N = c.n
+      $scope.pubKeys = lodash.pluck(c.publicKeyRing, 'xPubKey')
+      $scope.externalSource = null
+      $scope.canSign = wallet.canSign()
 
       if (wallet.isPrivKeyExternal()) {
-        $scope.externalSource = lodash.find(walletService.externalSource, function(source) {
-          return source.id == wallet.getPrivKeyExternalSourceName();
-        }).name;
+        $scope.externalSource = lodash.find(walletService.externalSource, function (source) {
+          return source.id == wallet.getPrivKeyExternalSourceName()
+        }).name
       }
-    });
+    })
 
-  });
+  })

@@ -15,14 +15,14 @@
         <div class="item input search-wrapper" ng-class="{'focus': searchFocus}">
           <i class="icon icon-svg abs-v-center"><img class="svg" src="img/icon-bitcoin-symbol.svg"></i>
           <div class="item-icon-right">
-            <input type="text" class="search-input" placeholder="{{'Search or enter bitcoin address' | translate}}" ng-model="formData.search" ng-change="findContact(formData.search)" ng-model-onblur ng-focus="searchInFocus()" ng-blur="searchBlurred()">
+            <input type="text" class="search-input" placeholder="{{'Search or enter account number' | translate}}" ng-model="formData.search" ng-change="findContact(formData.search)" ng-model-onblur ng-focus="searchInFocus()" ng-blur="searchBlurred()">
             <i class="icon icon-svg qr abs-v-center separator-left" on-tap="openScanner()"><img src="img/scan-ico.svg"></i>
           </div>
         </div>
       </div>
     </div>
 
-    <div ng-if="!checkingBalance && (!hasFunds || !hasWallets)">
+    <div ng-if="!(hasFunds && hasAccounts)">
       <div class="list card sendTip">
         <div class="item item-icon-right item-heading"></div>
         <div>
@@ -34,18 +34,18 @@
           Start sending RaiBlocks
         </div>
         <div class="subtitle">
-          <span ng-show="hasWallets" translate>To get started, buy RaiBlocks or share your address. You can receive RaiBlocks from any wallet or service.</span>
-          <span ng-show="!hasWallets" translate>To get started, you'll need to create a RaiBlocks Wallet and get some RaiBlocks.</span>
+          <span ng-show="hasAccounts" translate>To get started, buy RaiBlocks or share your account. You can receive RaiBlocks from any wallet or service.</span>
+          <span ng-show="!hasAccounts" translate>To get started, you'll need to create a RaiBlocks Wallet and get some RaiBlocks.</span>
           <div class="padding">
-            <button class="button button-standard button-primary" ng-click="buyBitcoin()" ng-show="hasWallets" translate>Buy RaiBlocks</button>
-            <button class="button button-standard button-primary" ng-click="createWallet()" ng-show="!hasWallets" translate>Create RaiBlocks Wallet</button>
-            <button class="button button-standard button-secondary" ui-sref="tabs.receive" ng-show="hasWallets" translate>Show RaiBlocks address</button>
+            <button class="button button-standard button-primary" ng-click="buyRaiblocks()" ng-show="hasAccounts" translate>Buy RaiBlocks</button>
+            <button class="button button-standard button-primary" ng-click="createWallet()" ng-show="!hasAccounts" translate>Create RaiBlocks Wallet</button>
+            <button class="button button-standard button-secondary" ui-sref="tabs.receive" ng-show="hasAccounts" translate>Show RaiBlocks account</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="card" ng-if="hasContacts && hasWallets && hasFunds">
+    <div class="card" ng-if="hasContacts && hasAccounts && hasFunds">
       <div class="item item-icon-right item-heading">
         <span translate>Contacts</span>
         <a ng-if="hasContacts" ui-sref="tabs.send.addressbook">
@@ -69,10 +69,10 @@
 
     <div class="card" ng-if="showTransferCard && hasFunds">
       <div class="item item-heading">
-        <span translate>Transfer to Wallet</span>
+        <span translate>Transfer to Account</span>
       </div>
       <div class="list">
-        <a class="item item-icon-left item-icon-right" ng-repeat="item in list" ng-if="hasWallets && item.recipientType == 'wallet'" ng-click="goToAmount(item)">
+        <a class="item item-icon-left item-icon-right" ng-repeat="item in list" ng-if="hasAccounts && item.recipientType == 'wallet'" ng-click="goToAmount(item)">
           <i class="icon big-icon-svg" ng-if="item.recipientType == 'wallet'" ng-init="wallet = item" ng-include="'views/includes/walletIcon.html'"></i>
           {{item.name}}
           <i class="icon bp-arrow-right"></i>
