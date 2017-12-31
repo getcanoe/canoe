@@ -28,7 +28,7 @@ angular.module('canoeApp.controllers').controller('tourController',
         var xrbAmount = 1
         var rate = rateService.toFiat(xrbAmount * 1e9, localCurrency, 'xrb')
         $scope.localCurrencySymbol = '$'
-        $scope.localCurrencyPerBtc = $filter('formatFiatAmount')(parseFloat(rate.toFixed(2), 10))
+        $scope.localCurrencyPerXRB = $filter('formatFiatAmount')(parseFloat(rate.toFixed(2), 10))
         $timeout(function () {
           $scope.$apply()
         })
