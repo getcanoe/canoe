@@ -1,4 +1,4 @@
-<ion-view id="wallet-backup-phrase" hide-tabs>
+<ion-view id="wallet-backup-seed" hide-tabs>
   <ion-nav-bar class="bar-royal">
     <ion-nav-title>
       {{viewTitle}}
@@ -9,40 +9,35 @@
   <ion-content>
     <div class="ng-hide list card" ng-show="deleted">
       <div class="item heading">
-        <span translate>Wallet recovery phrase not available</span>
+        <span translate>Wallet seed not available</span>
       </div>
       <div class="item">
         <span class="comment" translate>You can still export it from Advanced &gt; Export.</span>
       </div>
     </div>
-    <div class="item">
-      <span class="comment" ng-if="wallet.coin == 'bch'" translate>Note: if this BCH wallet was duplicated from a BTC wallet, they share the same recovery phrase.</span>
-    </div>
+
     <!--
       ## STEP 1
     -->
-    <div id="wallet-backup-phrase-step-1" class="ng-hide" ng-show="step == 1 && (mnemonicWords || (!credentialsEncrypted && !deleted))">
-      <div class="initial-prompt" translate>Please carefully write down this phrase.</div>
-      <div class="backup-phrase" copy-to-clipboard="copyRecoveryPhrase()">
-        <div class="backup-phrase-content">
-          <span class="backup-phrase-content-word-readonly" ng-repeat="word in mnemonicWords track by $index"><span style="white-space:nowrap">{{word}}</span><span ng-show="useIdeograms">&#x3000;</span> </span>
+    <div id="wallet-backup-seed-step-1" class="ng-hide" ng-show="step == 1 && (!deleted)">
+      <div class="initial-prompt" translate>Please carefully write down this 64 character seed. Click to copy to clipboard.</div>
+      <div class="backup-seed" copy-to-clipboard="copyWalletSeed()">
+        <div class="backup-seed-content">
+          <span class="backup-seed-content-word-readonly">{{seed1}}  {{seed2}}<span ng-show="useIdeograms">&#x3000;</span> </span>
         </div>
       </div>
-      <div class="password-required" ng-show="mnemonicHasPassphrase" translate>
-        This recovery phrase was created with a password. To recover this wallet both the recovery phrase and password are needed.
-      </div>
       <div class="cta-buttons">
-        <div class="tldr-prompt" translate>We'll confirm on the next screen.</div>
-        <button ng-show="!deleted" ng-disabled="credentialsEncrypted || error" class="button button-standard button-primary" ng-click="goToStep(2);" translate>I've written it down</button>
+        <div class="tldr-prompt" translate>Screenshots leave traces, better to have it on paper.</div>
+        <button ng-show="!deleted" ng-disabled="error" class="button button-standard button-primary" ng-click="goToStep(4);" translate>I've written it down</button>
       </div>
     </div>
     <!--
       ## STEP 2
     -->
-    <div id="wallet-backup-phrase-step-2" class="ng-hide" ng-show="step == 2">
-      <div class="confirmation-prompt" translate>Let's verify your backup phrase.</div>
-      <div class="backup-phrase">
-        <div class="backup-phrase-content">
+    <div id="wallet-backup-seed-step-2" class="ng-hide" ng-show="step == 2">
+      <div class="confirmation-prompt" translate>Let's verify your seed.</div>
+      <div class="backup-seed">
+        <div class="backup-seed-content">
           <span ng-repeat="cword in customWords track by $index" ng-show="customWords[$index]">
           <button class="button select-word" ng-click="removeButton($index, cword)">{{cword.word}}</button>
           </span>
@@ -65,7 +60,7 @@
     <!--
       ## STEP 3
     -->
-    <div id="wallet-backup-phrase-step-3" class="ng-hide" ng-show="step == 3">
+    <div id="wallet-backup-seed-step-3" class="ng-hide" ng-show="step == 3">
       <h3 translate>Enter your password</h3>
       <div class="password-prompt">
         <div class="explanation">

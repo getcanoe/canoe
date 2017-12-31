@@ -256,6 +256,9 @@ random_hex = function() {
 	return hex;
 }
 
+XRB.createSeedHex = function() {
+	return random_hex()
+}
 
 // String output
 XRB.account_get = function(key) {

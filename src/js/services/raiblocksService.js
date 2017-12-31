@@ -24,10 +24,18 @@ angular.module('canoeApp.services')
       return rai.account_validate(addr)
     }
 
+    root.newRandomSeed = function () {
+      return 'A360BD236EA685BC187CD0784F4281BCDAB63291E0ECC795537480968C18DC8C' // XRB.createSeedHex()
+    }
+
     root.createWallet = function () {
       $log.debug('Create wallet')
       var wallet = {}
       wallet.id = rai.wallet_create()
+      // We also need to set the seed, or we can't ever get it out
+      var seed = root.newRandomSeed()
+      root.changeSeed(wallet, seed)
+      wallet.seed = seed
       wallet.accounts = {}
       $log.debug('Wallet: ' + JSON.stringify(wallet))
       return wallet
@@ -58,11 +66,9 @@ angular.module('canoeApp.services')
       cb(null, balances)
     }
 
-    root.changeSeed = function (walletId, seed) {
+    root.changeSeed = function (wallet, seed) {
       $log.debug('Changing seed: ' + seed)
-      if (root.isValidSeed(seed)) {
-        return rai.wallet_change_seed(walletId, seed)
-      }
+      return rai.wallet_change_seed(wallet.id, seed)
     }
 
     /*

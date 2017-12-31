@@ -2,47 +2,19 @@
 
 angular.module('canoeApp.controllers').controller('backupController',
   function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, lodash, profileService, bwcService, walletService, ongoingProcess, popupService, gettextCatalog, $ionicModal) {
-    $scope.account = profileService.getAccount($stateParams.walletId)
-    $scope.viewTitle = $scope.account.name || $scope.account.credentials.walletName
-    $scope.n = $scope.account.n
-    var keys
-
-    $scope.credentialsEncrypted = $scope.account.isPrivKeyEncrypted()
-
-    var isDeletedSeed = function () {
-      if (!$scope.account.credentials.mnemonic && !$scope.account.credentials.mnemonicEncrypted) { return true }
-
-      return false
-    }
-
-    var shuffledWords = function (words) {
-      var sort = lodash.sortBy(words)
-
-      return lodash.map(sort, function (w) {
-        return {
-          word: w,
-          selected: false
-        }
-      })
-    }
+    $scope.wallet = profileService.getWallet()
+    $scope.viewTitle = 'Wallet backup' // $scope.account.name || $scope.account.credentials.walletName
 
     $scope.setFlow = function (step) {
-      if (!keys) return
-
-      var words = keys.mnemonic
       $scope.data = {}
-
-      $scope.mnemonicWords = words.split(/[\u3000\s]+/)
-      $scope.shuffledMnemonicWords = shuffledWords($scope.mnemonicWords)
-      $scope.mnemonicHasPassphrase = $scope.account.mnemonicHasPassphrase()
-      $scope.useIdeograms = words.indexOf('\u3000') >= 0
+      $scope.seed = $scope.wallet.seed
+      $scope.seed1 = $scope.seed.substring(0, 32)
+      $scope.seed2 = $scope.seed.substring(32)
       $scope.data.passphrase = null
-      $scope.customWords = []
       $scope.step = step || 1
       $scope.selectComplete = false
       $scope.backupError = false
 
-      words = lodash.repeat('x', 300)
       $timeout(function () {
         $scope.$apply()
       }, 10)
@@ -72,7 +44,7 @@ angular.module('canoeApp.controllers').controller('backupController',
     var showBackupResult = function () {
       if ($scope.backupError) {
         var title = gettextCatalog.getString('Uh oh...')
-        var message = gettextCatalog.getString("It's important that you write your wallet seed down correctly. If something happens to your wallet, you'll need this seed to recover your money. Please review your seed and try again.")
+        var message = gettextCatalog.getString("It's important that you write your wallet seed down correctly. If something happens to your wallet, you'll need this seed to reconstruct it. Please review your seed and try again.")
         popupService.showAlert(title, message, function () {
           $scope.setFlow(2)
         })
@@ -98,52 +70,22 @@ angular.module('canoeApp.controllers').controller('backupController',
       })
     }
 
-    $scope.copyRecoveryPhrase = function () {
-      if ($scope.account.network === 'livenet') return null
-      else if (!$scope.account.credentials.mnemonic) return null
-      else return $scope.account.credentials.mnemonic
+    $scope.copyWalletSeed = function () {
+      return $scope.seed
     }
 
     var confirm = function (cb) {
       $scope.backupError = false
 
-      var customWordList = lodash.pluck($scope.customWords, 'word')
-
-      if (!lodash.isEqual($scope.mnemonicWords, customWordList)) {
-        return cb('Mnemonic string mismatch')
-      }
-
       $timeout(function () {
-        if ($scope.mnemonicHasPassphrase) {
-          var walletClient = bwcService.getClient()
-          var separator = $scope.useIdeograms ? '\u3000' : ' '
-          var customSentence = customWordList.join(separator)
-          var passphrase = $scope.data.passphrase || ''
-
-          try {
-            walletClient.seedFromMnemonic(customSentence, {
-              network: $scope.account.credentials.network,
-              passphrase: passphrase,
-              account: $scope.account.credentials.account
-            })
-          } catch (err) {
-            walletClient.credentials.xPrivKey = lodash.repeat('x', 64)
-            return cb(err)
-          }
-
-          if (walletClient.credentials.xPrivKey.substr(walletClient.credentials.xPrivKey) != keys.xPrivKey) {
-            delete walletClient.credentials
-            return cb('Private key mismatch')
-          }
-        }
-
-        profileService.setBackupFlag($scope.account.credentials.walletId)
+        profileService.setBackupFlag($scope.wallet.id)
         return cb()
       }, 1)
     }
 
     var finalStep = function () {
-      ongoingProcess.set('validatingWords', true)
+      showBackupResult()
+  /*    ongoingProcess.set('validatingWords', true)
       confirm(function (err) {
         ongoingProcess.set('validatingWords', false)
         if (err) {
@@ -152,16 +94,14 @@ angular.module('canoeApp.controllers').controller('backupController',
         $timeout(function () {
           showBackupResult()
         }, 1)
-      })
+      })*/
     }
 
     $scope.goToStep = function (n) {
-      if (n == 1) { $scope.setFlow() }
-      if (n == 2) { $scope.step = 2 }
-      if (n == 3) {
-        if (!$scope.mnemonicHasPassphrase) { finalStep() } else { $scope.step = 3 }
-      }
-      if (n == 4) { finalStep() }
+      if (n === 1) { $scope.setFlow() }
+      if (n === 2) { $scope.step = 2 }
+      if (n === 3) { $scope.step = 3 }
+      if (n === 4) { finalStep() }
     }
 
     $scope.addButton = function (index, item) {
@@ -186,21 +126,11 @@ angular.module('canoeApp.controllers').controller('backupController',
     }
 
     $scope.$on('$ionicView.enter', function (event, data) {
-      $scope.deleted = isDeletedSeed()
+      $scope.deleted = (profileService.getWallet().seed === null)
       if ($scope.deleted) {
-        $log.debug('no mnemonics')
+        $log.debug('no seed in wallet')
         return
       }
-
-      walletService.getKeys($scope.account, function (err, k) {
-        if (err || !k) {
-          $log.error('Could not get keys: ', err)
-          $ionicHistory.goBack()
-          return
-        }
-        $scope.credentialsEncrypted = false
-        keys = k
-        $scope.setFlow()
-      })
+      $scope.setFlow()
     })
   })

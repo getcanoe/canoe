@@ -60,7 +60,9 @@ angular.module('canoeApp.controllers').controller('tourController',
           };
           ongoingProcess.set('creatingWallet', false)
 
-          $state.go('onboarding.collectEmail', {
+          // We don't want to collect emails
+          // $state.go('onboarding.collectEmail', {
+          $state.go('onboarding.backupRequest', {
             walletId: wallet.id
           })
 

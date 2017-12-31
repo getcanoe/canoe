@@ -1,4 +1,4 @@
-#wallet-backup-phrase {
+#wallet-backup-seed {
   .comment {
     color: #667;
     font-size: 0.9em;
@@ -49,12 +49,12 @@
   }
   background: $v-wallet-backup-bg;
   text-align: center;
-  .backup-phrase {
-    background: $v-wallet-backup-phrase-bg;
+  .backup-seed {
+    background: $v-wallet-backup-seed-bg;
     margin: auto;
     border: 2px dashed darken($v-subtle-gray, 10%);
     border-radius: $v-subtle-radius;
-    color: $v-wallet-backup-phrase-color;
+    color: $v-wallet-backup-seed-color;
     text-align: center;
     max-width: 500px;
     min-height: 9rem;
