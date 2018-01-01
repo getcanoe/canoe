@@ -20,6 +20,26 @@ angular.module('canoeApp.services')
       }
     })
 
+    root.getCurrentCoinmarketcapRate = function (localCurrency, cb) {
+      var local = localCurrency || 'usd'
+      var value = 1
+      var decimals = 2
+      var xhr = new XMLHttpRequest()
+      xhr.open('GET', 'https://api.coinmarketcap.com/v1/ticker/raiblocks/?convert=' + local, true)
+      xhr.send()
+      xhr.onreadystatechange = processRequest
+      function processRequest (e) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText)
+          console.log('Coinmarketcap reply: ' + JSON.stringify(response))
+          var price = response[0]['price_' + local]
+          // var symbol = response[0]['symbol']
+          var answer = (price * value).toFixed(decimals)
+          cb(null, answer)
+        }
+      }
+    }
+
     root.changeSeed = function (seed) {
       raiblocksService.changeSeed(root.wallet.id, seed)
     }

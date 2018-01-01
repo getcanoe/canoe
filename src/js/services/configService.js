@@ -1,20 +1,20 @@
-'use strict';
+'use strict'
 
-angular.module('canoeApp.services').factory('configService', function(storageService, lodash, $log, $timeout, $rootScope, platformInfo) {
-  var root = {};
+angular.module('canoeApp.services').factory('configService', function (storageService, lodash, $log, $timeout, $rootScope, platformInfo) {
+  var root = {}
 
-  var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
+  var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
 
   var defaultConfig = {
     // wallet limits
     limits: {
       totalCanoeers: 6,
-      mPlusN: 100,
+      mPlusN: 100
     },
 
     // Bitcore wallet service URL
     bws: {
-      url: 'https://bws.bitpay.com/bws/api',
+      url: 'https://bws.bitpay.com/bws/api'
     },
 
     download: {
@@ -58,19 +58,19 @@ angular.module('canoeApp.services').factory('configService', function(storageSer
     lock: {
       method: null,
       value: null,
-      bannedUntil: null,
+      bannedUntil: null
     },
 
     recentTransactions: {
-      enabled: true,
+      enabled: true
     },
 
     hideNextSteps: {
-      enabled: isWindowsPhoneApp ? true : false,
+      enabled: !!isWindowsPhoneApp
     },
 
     rates: {
-      url: 'https://insight.bitpay.com:443/api/rates',
+      url: 'https://insight.bitpay.com:443/api/rates'
     },
 
     release: {
@@ -80,131 +80,126 @@ angular.module('canoeApp.services').factory('configService', function(storageSer
     pushNotificationsEnabled: true,
 
     confirmedTxsNotifications: {
-      enabled: true,
+      enabled: true
     },
 
     emailNotifications: {
-      enabled: false,
+      enabled: false
     },
 
     log: {
-      filter: 'debug',
-    },
-  };
-
-  var configCache = null;
-
-  root.getSync = function() {
-    if (!configCache)
-      throw new Error('configService#getSync called when cache is not initialized');
-
-    return configCache;
-  };
-
-  root._queue = [];
-  root.whenAvailable = function(cb) {
-    if (!configCache) {
-      root._queue.push(cb);
-      return;
+      filter: 'debug'
     }
-    return cb(configCache);
-  };
+  }
 
+  var configCache = null
 
-  root.get = function(cb) {
+  root.getSync = function () {
+    if (!configCache) { throw new Error('configService#getSync called when cache is not initialized') }
 
-    storageService.getConfig(function(err, localConfig) {
+    return configCache
+  }
+
+  root._queue = []
+  root.whenAvailable = function (cb) {
+    if (!configCache) {
+      root._queue.push(cb)
+      return
+    }
+    return cb(configCache)
+  }
+
+  root.get = function (cb) {
+    storageService.getConfig(function (err, localConfig) {
       if (localConfig) {
-        configCache = JSON.parse(localConfig);
+        configCache = JSON.parse(localConfig)
 
-        //these ifs are to avoid migration problems
+        // these ifs are to avoid migration problems
         if (!configCache.bws) {
-          configCache.bws = defaultConfig.bws;
+          configCache.bws = defaultConfig.bws
         }
         if (!configCache.wallet) {
-          configCache.wallet = defaultConfig.wallet;
+          configCache.wallet = defaultConfig.wallet
         }
         if (!configCache.wallet.settings.unitCode) {
-          configCache.wallet.settings.unitCode = defaultConfig.wallet.settings.unitCode;
+          configCache.wallet.settings.unitCode = defaultConfig.wallet.settings.unitCode
         }
 
         if (!configCache.hideNextSteps) {
-          configCache.hideNextSteps = defaultConfig.hideNextSteps;
+          configCache.hideNextSteps = defaultConfig.hideNextSteps
         }
 
         if (!configCache.recentTransactions) {
-          configCache.recentTransactions = defaultConfig.recentTransactions;
+          configCache.recentTransactions = defaultConfig.recentTransactions
         }
         if (!configCache.pushNotifications) {
-          configCache.pushNotifications = defaultConfig.pushNotifications;
+          configCache.pushNotifications = defaultConfig.pushNotifications
         }
         if (!configCache.bitpayAccount) {
-          configCache.bitpayAccount = defaultConfig.bitpayAccount;
+          configCache.bitpayAccount = defaultConfig.bitpayAccount
         }
 
         if (configCache.wallet.settings.unitCode == 'bit') {
           // Convert to BTC. Bits will be disabled
-          configCache.wallet.settings.unitName = defaultConfig.wallet.settings.unitName;
-          configCache.wallet.settings.unitToRaw = defaultConfig.wallet.settings.unitToRaw;
-          configCache.wallet.settings.unitDecimals = defaultConfig.wallet.settings.unitDecimals;
-          configCache.wallet.settings.unitCode = defaultConfig.wallet.settings.unitCode;
+          configCache.wallet.settings.unitName = defaultConfig.wallet.settings.unitName
+          configCache.wallet.settings.unitToRaw = defaultConfig.wallet.settings.unitToRaw
+          configCache.wallet.settings.unitDecimals = defaultConfig.wallet.settings.unitDecimals
+          configCache.wallet.settings.unitCode = defaultConfig.wallet.settings.unitCode
         }
-
       } else {
-        configCache = lodash.clone(defaultConfig);
+        configCache = lodash.clone(defaultConfig)
       };
 
-      configCache.bwsFor = configCache.bwsFor || {};
-      configCache.colorFor = configCache.colorFor || {};
-      configCache.aliasFor = configCache.aliasFor || {};
-      configCache.emailFor = configCache.emailFor || {};
+      configCache.bwsFor = configCache.bwsFor || {}
+      configCache.colorFor = configCache.colorFor || {}
+      configCache.aliasFor = configCache.aliasFor || {}
+      configCache.emailFor = configCache.emailFor || {}
 
       $log.debug('Preferences read:', configCache)
 
-      lodash.each(root._queue, function(x) {
-        $timeout(function() {
-          return x(configCache);
-        }, 1);
-      });
-      root._queue = [];
+      lodash.each(root._queue, function (x) {
+        $timeout(function () {
+          return x(configCache)
+        }, 1)
+      })
+      root._queue = []
 
-      return cb(err, configCache);
-    });
-  };
+      return cb(err, configCache)
+    })
+  }
 
-  root.set = function(newOpts, cb) {
-    var config = lodash.cloneDeep(defaultConfig);
-    storageService.getConfig(function(err, oldOpts) {
-      oldOpts = oldOpts || {};
+  root.set = function (newOpts, cb) {
+    var config = lodash.cloneDeep(defaultConfig)
+    storageService.getConfig(function (err, oldOpts) {
+      oldOpts = oldOpts || {}
 
       if (lodash.isString(oldOpts)) {
-        oldOpts = JSON.parse(oldOpts);
+        oldOpts = JSON.parse(oldOpts)
       }
       if (lodash.isString(config)) {
-        config = JSON.parse(config);
+        config = JSON.parse(config)
       }
       if (lodash.isString(newOpts)) {
-        newOpts = JSON.parse(newOpts);
+        newOpts = JSON.parse(newOpts)
       }
 
-      lodash.merge(config, oldOpts, newOpts);
-      configCache = config;
+      lodash.merge(config, oldOpts, newOpts)
+      configCache = config
 
-      $rootScope.$emit('Local/SettingsUpdated');
+      $rootScope.$emit('Local/SettingsUpdated')
 
-      storageService.storeConfig(JSON.stringify(config), cb);
-    });
-  };
+      storageService.storeConfig(JSON.stringify(config), cb)
+    })
+  }
 
-  root.reset = function(cb) {
-    configCache = lodash.clone(defaultConfig);
-    storageService.removeConfig(cb);
-  };
+  root.reset = function (cb) {
+    configCache = lodash.clone(defaultConfig)
+    storageService.removeConfig(cb)
+  }
 
-  root.getDefaults = function() {
-    return lodash.clone(defaultConfig);
-  };
+  root.getDefaults = function () {
+    return lodash.clone(defaultConfig)
+  }
 
-
-  return root;
-});
+  return root
+})

@@ -23,15 +23,16 @@ angular.module('canoeApp.controllers').controller('tourController',
     $scope.$on('$ionicSlides.slideChangeEnd', function (event, data) {})
 
     $scope.$on('$ionicView.enter', function (event, data) {
-      rateService.whenAvailable(function () {
-        var localCurrency = 'USD'
-        var xrbAmount = 1
-        var rate = rateService.toFiat(xrbAmount * 1e9, localCurrency, 'xrb')
-        $scope.localCurrencySymbol = '$'
-        $scope.localCurrencyPerXRB = $filter('formatFiatAmount')(parseFloat(rate.toFixed(2), 10))
-        $timeout(function () {
-          $scope.$apply()
-        })
+      profileService.getCurrentCoinmarketcapRate(null, function (err, str) {
+        if (err) {
+          $log.warn(err)
+        } else {
+          $scope.localCurrencySymbol = '$'
+          $scope.localCurrencyPerXRB = str
+          $timeout(function () {
+            $scope.$apply()
+          })
+        }
       })
     })
 

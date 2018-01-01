@@ -25,6 +25,7 @@ angular.module('canoeApp.services')
     }
 
     root.newRandomSeed = function () {
+      // During dev we reuse the same wallet and accounts
       return 'A360BD236EA685BC187CD0784F4281BCDAB63291E0ECC795537480968C18DC8C' // XRB.createSeedHex()
     }
 
