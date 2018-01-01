@@ -18,16 +18,17 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
   }
   #logo {
-    width: 40%;
-    max-width: 200px;
+    width: 70%;
+    max-width: 300px;
     margin: 5rem auto 0;
   }
   #lead {
     line-height: 1.6;
     font-size: 18px;
+	margin-top: 30px;
   }
   #cta-buttons {
     @extend %cta-buttons;
