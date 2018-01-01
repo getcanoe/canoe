@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="52.91666mm"
+   height="58.208328mm"
+   viewBox="0 0 52.91666 58.208328"
+   version="1.1"
+   id="svg5828"
+   sodipodi:docname="onboarding-tour-phone.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+  <defs
+     id="defs5822" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="29.121849"
+     inkscape:cy="121.94974"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1600"
+     inkscape:window-height="878"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <metadata
+     id="metadata5825">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-79.82841,-110.84442)">
+    <g
+       id="g5776"
+       transform="translate(-171.52576,-384.59308)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path1742-9"
+         d="m 251.35417,511.3125 26.45833,-15.875 26.45833,15.875 v 26.45833 l -26.45833,15.875 -26.45833,-15.875 V 511.3125"
+         style="opacity:0.3;fill:#123238;fill-opacity:1;stroke:none;stroke-width:0.26458326px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="ccccccccccc"
+         inkscape:connector-curvature="0"
+         id="path5604"
+         d="m 277.8125,521.89583 2.64583,-13.22917 -13.22917,13.22916 1e-5,2.64583 2.64583,2.64584 7.9375,10e-6 -2.64583,13.22916 13.22916,-13.22917 v -2.64584 l -2.64584,-2.64583 -7.93749,1e-5"
+         style="fill:#123238;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path5754"
+         d="m 269.875,532.47916 -7.9375,5.29167 v 2.64583 h 2.64583 l 5.29167,-7.9375"
+         style="fill:#2b839a;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path5760"
+         d="m 285.75,516.60416 7.9375,-5.29167 v -2.64583 h -2.64583 l -5.29167,7.9375"
+         style="fill:#2b839a;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path5760-0"
+         d="m 269.875,516.60416 -7.9375,-5.29167 v -2.64583 h 2.64583 l 5.29167,7.9375"
+         style="fill:#2b839a;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path5760-0-6"
+         d="m 285.75,532.47916 7.9375,5.29167 v 2.64583 h -2.64583 l -5.29167,-7.9375"
+         style="fill:#2b839a;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    </g>
+  </g>
+</svg>
