@@ -2,6 +2,7 @@
 
 angular.module('canoeApp.controllers').controller('tabReceiveController', function ($rootScope, $scope, $timeout, $log, $ionicModal, $state, $ionicHistory, $ionicPopover, storageService, platformInfo, walletService, profileService, configService, lodash, gettextCatalog, popupService, bwcError) {
   var listeners = []
+  $scope.wallet = profileService.getWallet()
   $scope.isCordova = platformInfo.isCordova
   $scope.isNW = platformInfo.isNW
 
@@ -9,19 +10,6 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
     $state.go('tabs.paymentRequest.amount', {
       id: $scope.account
     })
-  }
-
-  $scope.goCanoeers = function () {
-    $ionicHistory.removeBackView()
-    $ionicHistory.nextViewOptions({
-      disableAnimate: true
-    })
-    $state.go('tabs.home')
-    $timeout(function () {
-      $state.transitionTo('tabs.canoeers', {
-        walletId: $scope.account.credentials.walletId
-      })
-    }, 100)
   }
 
   $scope.openBackupNeededModal = function () {
@@ -67,7 +55,7 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
     listeners = [
       $rootScope.$on('bwsEvent', function (e, walletId, type, n) {
         // Update current address
-        if ($scope.account && walletId == $scope.account.id && type === 'NewIncomingTx') $scope.setAddress(true)
+        if ($scope.account && walletId === $scope.account.id && type === 'NewIncomingTx') $scope.setAddress(true)
       })
     ]
   })
@@ -88,7 +76,12 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
   }
 
   $scope.onAccountSelect = function (acc) {
-    $scope.account = acc
+    if (!acc) {
+      $state.go('tabs.create-account')
+    } else {
+      $scope.account = acc
+      $scope.addr = acc.id
+    }
   }
 
   $scope.showAccountSelector = function () {

@@ -317,27 +317,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
        *
        */
 
-      .state('tabs.add', {
-        url: '/add',
-        views: {
-          'tab-home@tabs': {
-            templateUrl: 'views/add.html'
-          }
-        },
-        params: {
-          coin: 'btc'
-        }
-      })
-      .state('tabs.add.import', {
-        url: '/import/:code',
-        views: {
-          'tab-home@tabs': {
-            templateUrl: 'views/import.html',
-            controller: 'importController'
-          }
-        }
-      })
-      .state('tabs.add.create-account', {
+      .state('tabs.create-account', {
         url: '/create-account',
         views: {
           'tab-home@tabs': {
@@ -377,6 +357,15 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           'tab-settings@tabs': {
             controller: 'preferencesLanguageController',
             templateUrl: 'views/preferencesLanguage.html'
+          }
+        }
+      })
+      .state('tabs.import', {
+        url: '/import',
+        views: {
+          'tab-settings@tabs': {
+            templateUrl: 'views/import.html',
+            controller: 'importController'
           }
         }
       })

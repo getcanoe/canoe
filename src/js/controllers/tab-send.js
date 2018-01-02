@@ -138,7 +138,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   // This could probably be enhanced refactoring the routes abstract states
   $scope.createWallet = function () {
     $state.go('tabs.home').then(function () {
-      $state.go('tabs.add.create-account')
+      $state.go('tabs.create-account')
     })
   }
 

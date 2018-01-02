@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
 angular.module('canoeApp.directives')
-  .directive('accountSelector', function($timeout) {
+  .directive('accountSelector', function ($timeout) {
     return {
       restrict: 'E',
       templateUrl: 'views/includes/accountSelector.html',
@@ -13,16 +13,16 @@ angular.module('canoeApp.directives')
         selectedAccount: '=accountSelectorSelectedAccount',
         onSelect: '=accountSelectorOnSelect'
       },
-      link: function(scope, element, attrs) {
-        scope.hide = function() {
-          scope.show = false;
-        };
-        scope.selectAccount = function(account) {
-          $timeout(function() {
-            scope.hide();
-          }, 100);
-          scope.onSelect(account);
-        };
+      link: function (scope, element, attrs) {
+        scope.hide = function () {
+          scope.show = false
+        }
+        scope.selectAccount = function (account) {
+          $timeout(function () {
+            scope.hide()
+          }, 100)
+          scope.onSelect(account)
+        }
       }
-    };
-  });
+    }
+  })

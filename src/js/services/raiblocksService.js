@@ -36,8 +36,6 @@ angular.module('canoeApp.services')
       // We also need to set the seed, or we can't ever get it out
       var seed = root.newRandomSeed()
       root.changeSeed(wallet, seed)
-      wallet.seed = seed
-      wallet.accounts = {}
       $log.debug('Wallet: ' + JSON.stringify(wallet))
       return wallet
     }
@@ -68,7 +66,9 @@ angular.module('canoeApp.services')
     }
 
     root.changeSeed = function (wallet, seed) {
-      $log.debug('Changing seed: ' + seed)
+      $log.debug('Changing seed and clearing accounts: ' + seed)
+      wallet.seed = seed
+      wallet.accounts = {}
       return rai.wallet_change_seed(wallet.id, seed)
     }
 

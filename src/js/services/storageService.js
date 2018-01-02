@@ -133,12 +133,12 @@ angular.module('canoeApp.services')
       storage.remove('lastAddress-' + walletId, cb)
     }
 
-    root.setBackupFlag = function (walletId, cb) {
-      storage.set('backup-' + walletId, Date.now(), cb)
+    root.setBackupFlag = function (cb) {
+      storage.set('backup-timestamp', Date.now(), cb)
     }
 
-    root.getBackupFlag = function (walletId, cb) {
-      storage.get('backup-' + walletId, cb)
+    root.getBackupFlag = function (cb) {
+      storage.get('backup-timestamp', cb)
     }
 
     root.clearBackupFlag = function (walletId, cb) {

@@ -41,7 +41,7 @@ angular.module('canoeApp.services')
     }
 
     root.changeSeed = function (seed) {
-      raiblocksService.changeSeed(root.wallet.id, seed)
+      raiblocksService.changeSeed(root.wallet, seed)
     }
 
     root.updateAllAccounts = function () {
@@ -91,26 +91,16 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.setBackupFlag = function (walletId) {
-      storageService.setBackupFlag(walletId, function (err) {
+    root.setBackupFlag = function () {
+      storageService.setBackupFlag(function (err) {
         if (err) $log.error(err)
-        $log.debug('Backup flag stored')
-        root.wallet[walletId].needsBackup = false
+        $log.debug('Backup timestamp stored')
+        root.wallet.needsBackup = false
       })
     }
 
-    function _requiresBackup (wallet) {
-      if (wallet.isPrivKeyExternal()) return false
-      if (!wallet.credentials.mnemonic) return false
-      if (wallet.credentials.network == 'testnet') return false
-
-      return true
-    };
-
     function _needsBackup (wallet, cb) {
-      if (!_requiresBackup(wallet)) { return cb(false) }
-
-      storageService.getBackupFlag(wallet.credentials.walletId, function (err, val) {
+      storageService.getBackupFlag(function (err, val) {
         if (err) $log.error(err)
         if (val) return cb(false)
         return cb(true)
@@ -504,27 +494,9 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.importSeed = function (seed, opts, cb) {
+    root.importSeed = function (seed) {
       $log.debug('Importing Wallet Seed')
-
-      raiblocksService.importFromSeed(seed, {
-        network: opts.networkName,
-        passphrase: opts.passphrase,
-        entropySourcePath: opts.entropySourcePath,
-        derivationStrategy: opts.derivationStrategy || 'BIP44',
-        account: opts.account || 0,
-        coin: opts.coin
-      }, function (err) {
-        if (err) {
-          if (err instanceof errors.NOT_AUTHORIZED) { return cb(err) }
-
-          return bwcError.cb(err, gettextCatalog.getString('Could not import'), cb)
-        }
-
-        addAndBindWalletClient(walletClient, {
-          bwsurl: opts.bwsurl
-        }, cb)
-      })
+      root.changeSeed(seed)
     }
 
     root.createProfile = function (cb) {

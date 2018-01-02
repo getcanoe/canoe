@@ -1,58 +1,22 @@
 'use strict'
 
 angular.module('canoeApp.controllers').controller('importController',
-  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, sjcl, ledger, trezor, derivationPathHelper, platformInfo, bwcService, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService, hwWallet) {
+  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, sjcl, ledger, trezor, raiblocksService, platformInfo, bwcService, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService, hwWallet) {
     var reader = new FileReader()
     var defaults = configService.getDefaults()
     var config = configService.getSync()
     var errors = bwcService.getErrors()
 
     $scope.init = function () {
-      //$scope.supportsLedger = platformInfo.supportsLedger
-      //$scope.supportsTrezor = platformInfo.supportsTrezor
       $scope.isCordova = platformInfo.isCordova
       $scope.formData = {}
-      //$scope.formData.bwsurl = defaults.bws.url
-      //$scope.formData.derivationPath = derivationPathHelper.default
       $scope.formData.account = 1
-      //$scope.formData.coin = $stateParams.coin
       $scope.importErr = false
       $scope.isCanoe = appConfigService.name === 'canoe'
-      $scope.fromHardwareWallet = {
-        value: false
-      }
 
       if ($stateParams.code) { $scope.processWalletInfo($stateParams.code) }
 
       $scope.seedOptions = []
-
-      if ($scope.supportsLedger) {
-        $scope.seedOptions.push({
-          id: walletService.externalSource.ledger.id,
-          label: walletService.externalSource.ledger.longName
-        })
-      }
-
-      if ($scope.supportsTrezor) {
-        $scope.seedOptions.push({
-          id: walletService.externalSource.trezor.id,
-          label: walletService.externalSource.trezor.longName
-        })
-        $scope.formData.seedSource = $scope.seedOptions[0]
-      }
-
-      $scope.seedOptionsAll = []
-
-      $scope.seedOptionsAll.push({
-        id: walletService.externalSource.ledger.id,
-        label: walletService.externalSource.ledger.longName
-      })
-
-      $scope.seedOptionsAll.push({
-        id: walletService.externalSource.trezor.id,
-        label: walletService.externalSource.trezor.longName
-      })
-      $scope.formData.seedSourceAll = $scope.seedOptionsAll[0]
 
       $timeout(function () {
         $scope.$apply()
@@ -87,10 +51,10 @@ angular.module('canoeApp.controllers').controller('importController',
         hasPassphrase: parsedCode[4] === 'true'
       }
 
-      if (info.type == 1 && info.hasPassphrase) { popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Password required. Make sure to enter your password in advanced options')) }
+      if (info.type === 1 && info.hasPassphrase) { popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Password required. Make sure to enter your password in advanced options')) }
 
       $scope.formData.derivationPath = info.derivationPath
-      $scope.formData.testnetEnabled = info.network == 'testnet'
+      $scope.formData.testnetEnabled = info.network === 'testnet'
 
       $timeout(function () {
         $scope.formData.words = info.data
@@ -122,28 +86,6 @@ angular.module('canoeApp.controllers').controller('importController',
           if (err) {
             popupService.showAlert(gettextCatalog.getString('Error'), err)
             return
-          }
-          finish(client)
-        })
-      }, 100)
-    }
-
-    var _importSeed = function (seed, opts) {
-      ongoingProcess.set('importingWallet', true)
-
-      $timeout(function () {
-        profileService.importSeed(seed, opts, function (err, client) {
-          ongoingProcess.set('importingWallet', false)
-
-          if (err) {
-            if (err instanceof errors.NOT_AUTHORIZED) {
-              $scope.importErr = true
-            } else {
-              popupService.showAlert(gettextCatalog.getString('Error'), err)
-            }
-            return $timeout(function () {
-              $scope.$apply()
-            })
           }
           finish(client)
         })
@@ -192,40 +134,27 @@ angular.module('canoeApp.controllers').controller('importController',
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('There is an error in the form'))
         return
       }
-
-      var opts = {}
-
-      opts.account = pathData.account
-      opts.networkName = pathData.networkName
-      opts.derivationStrategy = pathData.derivationStrategy
-      opts.coin = $scope.formData.coin
-
       var seed = $scope.formData.seed || null
-
       if (!seed) {
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter the seed'))
         return
       }
-
-      opts.passphrase = $scope.formData.passphrase || null
-
-      if ($scope.fromHardwareWallet.value) {
-        $log.debug('Importing seed from hardware wallet')
-        $log.warn('This wont work for Intel TEE wallets')
-
-        var id = $scope.formData.seedSourceAll.id
-        var isMultisig = opts.derivationStrategy == 'BIP48'
-        var account = opts.account
-        opts.entropySourcePath = 'm/' + hwWallet.getEntropyPath(id, isMultisig, account)
+      if (!raiblocksService.isValidSeed(seed)) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('The seed is invalid, it should be 64 characters of: 0-9, A-F'))
+        return
       }
-
-      _importSeed(seed, opts)
+      ongoingProcess.set('importingWallet', true)
+      $timeout(function () {
+        profileService.importSeed(seed)
+        finish(wallet)
+      }, 100)
     }
 
     var finish = function (wallet) {
-      walletService.updateRemotePreferences(wallet)
+      $log.debug('WALLETSERVICE...')
+      // walletService.updateRemotePreferences(wallet)
 
-      profileService.setBackupFlag(wallet.credentials.walletId)
+      profileService.setBackupFlag()
       if ($stateParams.fromOnboarding) {
         profileService.setDisclaimerAccepted(function (err) {
           if (err) $log.error(err)

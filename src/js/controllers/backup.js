@@ -20,16 +20,6 @@ angular.module('canoeApp.controllers').controller('backupController',
       }, 10)
     }
 
-    var backupError = function (err) {
-      ongoingProcess.set('validatingWords', false)
-      $log.debug('Failed to verify seed: ', err)
-      $scope.backupError = true
-
-      $timeout(function () {
-        $scope.$apply()
-      }, 1)
-    }
-
     function openConfirmBackupModal () {
       $ionicModal.fromTemplateUrl('views/includes/confirmBackupPopup.html', {
         scope: $scope,
@@ -49,6 +39,7 @@ angular.module('canoeApp.controllers').controller('backupController',
           $scope.setFlow(2)
         })
       } else {
+        profileService.setBackupFlag()
         openConfirmBackupModal()
       }
     }
@@ -74,27 +65,8 @@ angular.module('canoeApp.controllers').controller('backupController',
       return $scope.seed
     }
 
-    var confirm = function (cb) {
-      $scope.backupError = false
-
-      $timeout(function () {
-        profileService.setBackupFlag($scope.wallet.id)
-        return cb()
-      }, 1)
-    }
-
     var finalStep = function () {
       showBackupResult()
-  /*    ongoingProcess.set('validatingWords', true)
-      confirm(function (err) {
-        ongoingProcess.set('validatingWords', false)
-        if (err) {
-          backupError(err)
-        }
-        $timeout(function () {
-          showBackupResult()
-        }, 1)
-      })*/
     }
 
     $scope.goToStep = function (n) {
@@ -102,27 +74,6 @@ angular.module('canoeApp.controllers').controller('backupController',
       if (n === 2) { $scope.step = 2 }
       if (n === 3) { $scope.step = 3 }
       if (n === 4) { finalStep() }
-    }
-
-    $scope.addButton = function (index, item) {
-      var newWord = {
-        word: item.word,
-        prevIndex: index
-      }
-      $scope.customWords.push(newWord)
-      $scope.shuffledMnemonicWords[index].selected = true
-      $scope.shouldContinue()
-    }
-
-    $scope.removeButton = function (index, item) {
-      if ($scope.loading) return
-      $scope.customWords.splice(index, 1)
-      $scope.shuffledMnemonicWords[item.prevIndex].selected = false
-      $scope.shouldContinue()
-    }
-
-    $scope.shouldContinue = function () {
-      if ($scope.customWords.length == $scope.shuffledMnemonicWords.length) { $scope.selectComplete = true } else { $scope.selectComplete = false }
     }
 
     $scope.$on('$ionicView.enter', function (event, data) {

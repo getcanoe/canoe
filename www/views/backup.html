@@ -31,32 +31,7 @@
         <button ng-show="!deleted" ng-disabled="error" class="button button-standard button-primary" ng-click="goToStep(4);" translate>I've written it down</button>
       </div>
     </div>
-    <!--
-      ## STEP 2
-    -->
-    <div id="wallet-backup-seed-step-2" class="ng-hide" ng-show="step == 2">
-      <div class="confirmation-prompt" translate>Let's verify your seed.</div>
-      <div class="backup-seed">
-        <div class="backup-seed-content">
-          <span ng-repeat="cword in customWords track by $index" ng-show="customWords[$index]">
-          <button class="button select-word" ng-click="removeButton($index, cword)">{{cword.word}}</button>
-          </span>
-        </div>
-      </div>
-      <div id="select-phrase" class="cta-buttons">
-        <div id="select-phrase-content">
-          <div ng-show="!selectComplete" class="tldr-prompt" translate>Please tap each word in the correct order.</div>
-          <div ng-show="selectComplete" class="tldr-prompt" translate>Is this correct?</div>
-          <span ng-show="!selectComplete" ng-repeat="shuffledWord in shuffledMnemonicWords track by $index">
-            <button class="button select-word" ng-click="addButton($index, shuffledWord)"
-            ng-disabled="shuffledWord.selected">{{shuffledWord.word}}
-            </button>
-          </span>
-          <button ng-show="selectComplete" class="button button-standard button-primary" ng-click="goToStep(3);" translate>Confirm</button>
-          <button ng-show="selectComplete" class="button button-standard button-secondary button-clear" ng-click="setFlow(2);" translate>Clear</button>
-        </div>
-      </div>
-    </div>
+
     <!--
       ## STEP 3
     -->

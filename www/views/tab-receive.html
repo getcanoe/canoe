@@ -16,7 +16,7 @@
       <span translate>No Account available</span>
     </article>
     <article class="address" ng-if="accounts[0]">
-      <div class="address-info" ng-if="wallet">
+      <div class="address-info" ng-if="account">
         <div copy-to-clipboard="addr">
           <qrcode ng-if="addr" size="220" data="raiblocks:{{addr}}" color="#334"></qrcode>
           <div class="address-label">
@@ -33,17 +33,17 @@
       <i class="icon ion-ios-arrow-thin-right"></i>
     </div>
 
-    <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0] && wallet">
-      <a ng-if="wallet" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
+    <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0]">
+      <a ng-if="account" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
         <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
         <span>
-          {{wallet.name || wallet.id}}
+          {{account.name || account.id}}
         </span>
         <p>
-        <span ng-if="!wallet.balanceHidden"> {{wallet.status.totalBalanceStr}} </span>
+        <span ng-if="!account.balanceHidden"> {{account.totalBalanceStr}} </span>
 
-        <span ng-if="wallet.balanceHidden" translate>[Balance Hidden]</span>
-        <span class="assertive" ng-if="wallet.error">{{wallet.error}}</span>
+        <span ng-if="account.balanceHidden" translate>[Balance Hidden]</span>
+        <span class="assertive" ng-if="account.error">{{account.error}}</span>
         &nbsp;
         </p>
       </a>
@@ -51,10 +51,10 @@
 
   </ion-content>
   <account-selector
-    account-selector-title="walletSelectorTitle"
-    account-selector-wallets="wallets"
-    account-selector-selected-wallet="wallet"
-    account-selector-show="showWallets"
+    account-selector-title="accountSelectorTitle"
+    account-selector-accounts="accounts"
+    account-selector-selected-account="account"
+    account-selector-show="showAccounts"
     account-selector-on-select="onAccountSelect">
   </account-selector>
 </ion-view>
