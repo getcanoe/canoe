@@ -1,16 +1,6 @@
 #!/bin/sh
-#---------------------------------------------------------------
-# Given an xxhdpi image or an App Icon (launcher), this script
-# creates different dpis resources and the necessary folders
-# if they don't exist
-#
-# Place this script, as well as the source image, inside res
-# folder and execute it passing the image filename as argument
-#
-# Example:
-# ./drawables_dpis_creation.sh ic_launcher.png
-# OR
-# ./drawables_dpis_creation.sh my_cool_xxhdpi_image.png
+# Just generates icons, see:
+# https://stackoverflow.com/questions/5849396/hdpi-ldpi-mdpi-icon-menu-resolution
 #---------------------------------------------------------------
 
 
