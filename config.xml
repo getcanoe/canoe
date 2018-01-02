@@ -122,11 +122,10 @@
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
     <plugin name="cordova-plugin-qrscanner" spec="2.5.0" />
     <plugin name="cordova-plugin-customurlscheme" spec="https://github.com/cmgustavo/Custom-URL-scheme.git#v4.0">
-        <variable name="URL_SCHEME" value="bitcoin" />
-        <variable name="SECOND_URL_SCHEME" value="copay" />
+        <variable name="URL_SCHEME" value="raiblocks" />
+        <variable name="SECOND_URL_SCHEME" value="canoe" />
         <variable name="THIRD_URL_SCHEME" value="bitcoincash" />
     </plugin>
     <plugin name="cordova-plugin-ionic-webview" spec="1.1.16" />
     <plugin name="cordova-custom-config" spec="4.0.2" />
-    <plugin name="cordova-plugin-fcm" spec="https://github.com/cmgustavo/cordova-plugin-fcm.git" />
 </widget>

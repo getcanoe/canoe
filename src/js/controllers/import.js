@@ -145,8 +145,10 @@ angular.module('canoeApp.controllers').controller('importController',
       }
       ongoingProcess.set('importingWallet', true)
       $timeout(function () {
-        profileService.importSeed(seed)
-        finish(wallet)
+        profileService.importSeed(seed, function () {
+          ongoingProcess.set('importingWallet', false)
+          finish(null)
+        })
       }, 100)
     }
 

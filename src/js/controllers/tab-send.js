@@ -16,6 +16,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
         accountList.push({
           color: acc.color,
           name: acc.name,
+          recipientType: 'account',
           address: acc.id
         })
       })

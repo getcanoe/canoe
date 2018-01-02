@@ -40,8 +40,12 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.changeSeed = function (seed) {
+    root.changeSeed = function (seed, cb) {
+      $log.debug('Importing Wallet Seed')
       raiblocksService.changeSeed(root.wallet, seed)
+      $log.debug('Recreateing first account')
+      // TODO... ehm
+      root.createAccount({}, cb)
     }
 
     root.updateAllAccounts = function () {
@@ -333,7 +337,7 @@ angular.module('canoeApp.services')
       root.createAccount(opts, cb)
     }
 
-    // Create account in wallet
+    // Create account in wallet and store wallet
     root.createAccount = function (opts, cb) {
       var accountName = opts.name || gettextCatalog.getString('Default Account')
       raiblocksService.createAccount(root.wallet, accountName)
@@ -494,9 +498,8 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.importSeed = function (seed) {
-      $log.debug('Importing Wallet Seed')
-      root.changeSeed(seed)
+    root.importSeed = function (seed, cb) {
+      root.changeSeed(seed, cb)
     }
 
     root.createProfile = function (cb) {

@@ -53,7 +53,7 @@
         </a>
       </div>
       <div class="list">
-        <a class="item item-icon-left item-icon-right" ng-repeat="item in list" ng-if="!item.isWallet && item.recipientType != 'wallet'" ng-click="goToAmount(item)">
+        <a class="item item-icon-left item-icon-right" ng-repeat="item in list" ng-if="item.recipientType != 'account'" ng-click="goToAmount(item)">
           <i class="icon big-icon-svg">
             <img src="img/contact-placeholder.svg" class="bg" ng-if="isChromeApp">
             <gravatar class="send-gravatar" name="{{item.name}}" width="30" email="{{item.email}}" ng-if="!isChromeApp"></gravatar>
@@ -72,8 +72,8 @@
         <span translate>Transfer to Account</span>
       </div>
       <div class="list">
-        <a class="item item-icon-left item-icon-right" ng-repeat="item in list" ng-if="hasAccounts && item.recipientType == 'wallet'" ng-click="goToAmount(item)">
-          <i class="icon big-icon-svg" ng-if="item.recipientType == 'wallet'" ng-init="wallet = item" ng-include="'views/includes/walletIcon.html'"></i>
+        <a class="item item-icon-left item-icon-right" ng-repeat="item in list" ng-if="item.recipientType === 'account'" ng-click="goToAmount(item)">
+          <i class="icon big-icon-svg" ng-if="item.recipientType == 'account'" ng-include="'views/includes/walletIcon.html'"></i>
           {{item.name}}
           <i class="icon bp-arrow-right"></i>
         </a>

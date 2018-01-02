@@ -236,7 +236,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
     function cacheStatus (status) {
       if (status.wallet && status.wallet.scanStatus == 'running') return
 
-      wallet.cachedStatus = status ||  {}
+      wallet.cachedStatus = status || {}
       var cache = wallet.cachedStatus
       cache.statusUpdatedOn = Date.now()
       cache.isValid = true
