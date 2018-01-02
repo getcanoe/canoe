@@ -15,11 +15,11 @@ angular.module('canoeApp.services').factory('pushNotificationsService', function
       $log.debug('Starting push notification registration...')
 
       // Keep in mind the function will return null if the token has not been established yet.
-      FCMPlugin.getToken(function (token) {
+      /*FCMPlugin.getToken(function (token) {
         $log.debug('Get token for push notifications: ' + token)
         _token = token
         root.enable()
-      })
+      })*/
     })
   }
 
@@ -100,7 +100,7 @@ angular.module('canoeApp.services').factory('pushNotificationsService', function
   }
 
   if (usePushNotifications) {
-    FCMPlugin.onTokenRefresh(function (token) {
+    /*FCMPlugin.onTokenRefresh(function (token) {
       if (!_token) return
       $log.debug('Refresh and update token for push notifications...')
       _token = token
@@ -129,7 +129,7 @@ angular.module('canoeApp.services').factory('pushNotificationsService', function
         // TODO
         // Notification was received in foreground. Maybe the user needs to be notified.
       }
-    })
+    })*/
   }
 
   return root
