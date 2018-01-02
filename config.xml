@@ -97,6 +97,9 @@
         <splash height="300" src="resources/canoe/windows/splash/SplashScreen.scale-100.png" width="620" />
         <splash height="1920" src="resources/canoe/windows/splash/SplashScreenPhone.scale-240.png" width="1152" />
     </platform>
+    <engine name="ios" spec="4.5.3" />
+    <engine name="android" spec="6.4.0" />
+    <engine name="windows" spec="5.0.0" />
     <plugin name="cordova-plugin-device" spec="1.1.7" />
     <plugin name="cordova-plugin-globalization" spec="1.0.8" />
     <plugin name="cordova-plugin-splashscreen" spec="4.1.0" />
@@ -126,7 +129,4 @@
     <plugin name="cordova-plugin-ionic-webview" spec="1.1.16" />
     <plugin name="cordova-custom-config" spec="4.0.2" />
     <plugin name="cordova-plugin-fcm" spec="https://github.com/cmgustavo/cordova-plugin-fcm.git" />
-    <engine name="ios" spec="4.5.3" />
-    <engine name="android" spec="6.4.0" />
-    <engine name="windows" spec="5.0.0" />
 </widget>
