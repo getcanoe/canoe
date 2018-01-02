@@ -99,8 +99,7 @@
     "ionic-plugin-keyboard": "2.2.1",
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-plugin-customurlscheme": "https://github.com/cmgustavo/Custom-URL-scheme.git#v4.0",
-    "cordova-plugin-ionic-webview": "1.1.16",
-    "cordova-plugin-fcm": "https://github.com/cmgustavo/cordova-plugin-fcm.git"
+    "cordova-plugin-ionic-webview": "1.1.16"
   },
   "scripts": {
     "postinstall": "sed -i  -e \"s/.*require(...\\/...);//g\" node_modules/asn1.js-rfc5280/index.js;   bower install",
@@ -176,13 +175,12 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-qrscanner": {},
       "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "bitcoin",
-        "SECOND_URL_SCHEME": "copay",
+        "URL_SCHEME": "raiblocks",
+        "SECOND_URL_SCHEME": "canoe",
         "THIRD_URL_SCHEME": "bitcoincash"
       },
       "cordova-plugin-ionic-webview": {},
-      "cordova-custom-config": {},
-      "cordova-plugin-fcm": {}
+      "cordova-custom-config": {}
     }
   }
 }
