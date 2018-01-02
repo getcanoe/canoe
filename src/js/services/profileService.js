@@ -320,7 +320,7 @@ angular.module('canoeApp.services')
     // Do we have funds? Presuming we are up to date here
     root.hasFunds = function () {
       var total = 0
-      lodash.each(root.wallet.accounts, function (acc) {
+      lodash.forOwn(root.wallet.accounts, function (acc) {
         total = total + (acc.balance || 0)
       })
       return total > 0
