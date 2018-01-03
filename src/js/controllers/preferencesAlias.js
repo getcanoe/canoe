@@ -3,7 +3,6 @@
 angular.module('canoeApp.controllers').controller('preferencesAliasController',
   function ($scope, $timeout, $stateParams, $ionicHistory, configService, profileService, walletService) {
     var account = profileService.getAccount($stateParams.accountId)
-    var config = configService.getSync()
     $scope.accountName = account.name
     $scope.alias = {
       value: $scope.accountName

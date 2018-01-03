@@ -619,9 +619,10 @@ angular.module('canoeApp.services')
       ])
     }
 
-    root.toggleHideBalanceFlag = function (walletId, cb) {
-      root.wallet[walletId].balanceHidden = !root.wallet[walletId].balanceHidden
-      storageService.setHideBalanceFlag(walletId, root.wallet[walletId].balanceHidden.toString(), cb)
+    root.toggleHideBalanceFlag = function (accountId, cb) {
+      var acc = root.getAccount(accountId)
+      acc.balanceHidden = !acc.balanceHidden
+      root.saveWallet(cb)
     }
 
     root.getNotifications = function (opts, cb) {
