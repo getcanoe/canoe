@@ -8,6 +8,7 @@ angular.module('canoeApp.services')
     var root = {}
 
     var UPDATE_PERIOD = 15
+    var RAW_PER_XRB = Math.pow(10, 30) // 1 XRB = 1 Mxrb = 10^30 raw
 
     root.profile = null
 
@@ -83,6 +84,16 @@ angular.module('canoeApp.services')
           }
         }) */
       })
+    }
+
+    root.formatAmount = function (raw, decimals) {
+      (raw / RAW_PER_XRB).toFixed(decimals)
+    }
+
+    root.formatAmountWithUnit = function (raw) {
+      if (isNaN(raw)) return
+      // TODO use current unit in settings kxrb, Mxrb etc
+      return root.formatAmount(raw, 2) + ' XRB'
     }
 
     root.updateAccountSettings = function (account) {
@@ -569,6 +580,7 @@ angular.module('canoeApp.services')
       root.getLastKnownBalance(account, function (err, data) {
         if (data) {
           data = JSON.parse(data)
+          account.cachedBalanceStr = root.formatAmountWithUnit(data.balance)
           account.cachedBalance = data.balance
           account.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null
         }

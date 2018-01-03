@@ -493,7 +493,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.preferences.information', {
+/*      .state('tabs.preferences.information', {
         url: '/information',
         views: {
           'tab-settings@tabs': {
@@ -501,7 +501,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
             templateUrl: 'views/preferencesInformation.html'
           }
         }
-      })
+      })*/
       .state('tabs.preferences.export', {
         url: '/export',
         views: {

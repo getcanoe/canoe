@@ -3,7 +3,7 @@
   {{account.name || account.id}}
 </span>
 <p>
-  <span ng-if="!account.balanceHidden  && !account.scanning"> {{account.status.totalBalanceStr ? account.status.totalBalanceStr : ( account.cachedBalance ? account.cachedBalance   + (account.cachedBalanceUpdatedOn ? ' &middot; ' + ( account.cachedBalanceUpdatedOn  * 1000 | amTimeAgo) : '') : ''  ) }} </span>
+  <span ng-if="!account.balanceHidden  && !account.scanning"> {{account.cachedBalanceStr + (account.cachedBalanceUpdatedOn ? ' &middot; ' + (account.cachedBalanceUpdatedOn  * 1000 | amTimeAgo) : '')}} </span>
   <span ng-if="account.scanning" translate> Scanning funds... </span>
 
   <span ng-if="account.balanceHidden && !account.scanning" translate>[Balance Hidden]</span>
