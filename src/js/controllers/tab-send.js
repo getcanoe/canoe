@@ -124,8 +124,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
           toAddress: addr,
           toName: item.name,
           toEmail: item.email,
-          toColor: item.color,
-          coin: item.coin
+          toColor: item.color
         })
       })
     })

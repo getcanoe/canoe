@@ -2,8 +2,8 @@
 
 angular.module('canoeApp.controllers').controller('preferencesController',
   function ($scope, $rootScope, $timeout, $log, $ionicHistory, configService, profileService, fingerprintService, walletService, platformInfo, externalLinkService, gettextCatalog) {
-    var wallet
-    var walletId
+    var account
+    var accountId
 
     $scope.hiddenBalanceChange = function () {
       var opts = {
@@ -11,66 +11,14 @@ angular.module('canoeApp.controllers').controller('preferencesController',
           enabled: $scope.hiddenBalance.value
         }
       }
-      profileService.toggleHideBalanceFlag(walletId, function (err) {
+      profileService.toggleHideBalanceFlag(accountId, function (err) {
         if (err) $log.error(err)
       })
     }
 
-    $scope.encryptChange = function () {
-      if (!wallet) return
-      var val = $scope.encryptEnabled.value
-
-      if (val && !walletService.isEncrypted(wallet)) {
-        $log.debug('Encrypting private key for', wallet.name)
-        walletService.encrypt(wallet, function (err) {
-          if (err) {
-            $log.warn(err)
-
-            // ToDo show error?
-            $scope.encryptEnabled.value = false
-            $timeout(function () {
-              $scope.$apply()
-            })
-            return
-          }
-          profileService.updateCredentials(JSON.parse(wallet.export()), function () {
-            $log.debug('Wallet encrypted')
-            
-          })
-        })
-      } else if (!val && walletService.isEncrypted(wallet)) {
-        walletService.decrypt(wallet, function (err) {
-          if (err) {
-            $log.warn(err)
-
-            // ToDo show error?
-            $scope.encryptEnabled.value = true
-            $timeout(function () {
-              $scope.$apply()
-            })
-            return
-          }
-          profileService.updateCredentials(JSON.parse(wallet.export()), function () {
-            $log.debug('Wallet decrypted')
-            
-          })
-        })
-      }
-    }
-
-    $scope.openWikiSpendingPassword = function () {
-      var url = 'https://github.com/gokr/canoe/wiki/COPAY---FAQ#what-the-spending-password-does'
-      var optIn = true
-      var title = null
-      var message = gettextCatalog.getString('Read more in our Wiki')
-      var okText = gettextCatalog.getString('Open')
-      var cancelText = gettextCatalog.getString('Go Back')
-      externalLinkService.open(url, optIn, title, message, okText, cancelText)
-    }
-
     $scope.touchIdChange = function () {
       var newStatus = $scope.touchIdEnabled.value
-      walletService.setTouchId(wallet, !!newStatus, function (err) {
+      walletService.setTouchId(account, !!newStatus, function (err) {
         if (err) {
           $scope.touchIdEnabled.value = !newStatus
           $timeout(function () {
@@ -83,13 +31,13 @@ angular.module('canoeApp.controllers').controller('preferencesController',
     }
 
     $scope.$on('$ionicView.beforeEnter', function (event, data) {
-      wallet = profileService.getAccount(data.stateParams.walletId)
-      walletId = wallet.credentials.walletId
-      $scope.account = wallet
+      account = profileService.getAccount(data.stateParams.accountId)
+      accountId = account.id
+      $scope.account = account
       $scope.isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
       $scope.externalSource = null
 
-      if (!wallet)        { return $ionicHistory.goBack()}
+      if (!account) { return $ionicHistory.goBack() }
 
       var config = configService.getSync()
 
@@ -97,18 +45,9 @@ angular.module('canoeApp.controllers').controller('preferencesController',
         value: $scope.account.balanceHidden
       }
 
-      $scope.encryptEnabled = {
-        value: walletService.isEncrypted(wallet)
-      }
-
       $scope.touchIdAvailable = fingerprintService.isAvailable()
       $scope.touchIdEnabled = {
-        value: config.touchIdFor ? config.touchIdFor[walletId] : null
-      }
-
-      $scope.deleted = false
-      if (wallet.credentials && !wallet.credentials.mnemonicEncrypted && !wallet.credentials.mnemonic) {
-        $scope.deleted = true
+        value: config.touchIdFor ? config.touchIdFor[accountId] : null
       }
     })
   })

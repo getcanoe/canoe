@@ -341,6 +341,11 @@ angular.module('canoeApp.services')
     root.createAccount = function (opts, cb) {
       var accountName = opts.name || gettextCatalog.getString('Default Account')
       raiblocksService.createAccount(root.wallet, accountName)
+      root.saveWallet(cb)
+    }
+
+    // Store the wallet
+    root.saveWallet = function (cb) {
       storageService.storeWallet(root.wallet, function () {
         cb(null, root.wallet)
       })

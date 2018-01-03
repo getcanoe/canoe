@@ -1,95 +1,71 @@
-'use strict';
+'use strict'
 
-angular.module('canoeApp.controllers').controller('amountController', function($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, rateService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, bwcError, payproService, profileService, bitcore, amazonService, nodeWebkitService) {
-  var _id;
-  var unitToRaw;
-  var satToUnit;
-  var unitDecimals;
-  var satToBtc;
-  var SMALL_FONT_SIZE_LIMIT = 10;
-  var LENGTH_EXPRESSION_LIMIT = 19;
-  var isNW = platformInfo.isNW;
+angular.module('canoeApp.controllers').controller('amountController', function ($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, rateService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, bwcError, payproService, profileService, bitcore, amazonService, nodeWebkitService) {
+  var _id
+  var unitToRaw
+  var satToUnit
+  var unitDecimals
+  var SMALL_FONT_SIZE_LIMIT = 10
+  var LENGTH_EXPRESSION_LIMIT = 19
+  var isNW = platformInfo.isNW
 
-  var unitIndex = 0;
-  var altUnitIndex = 0;
-  var availableUnits = [];
-  var fiatCode;
+  var unitIndex = 0
+  var altUnitIndex = 0
+  var availableUnits = []
+  var fiatCode
 
-  var fixedUnit;
+  var fixedUnit
 
-  $scope.isChromeApp = platformInfo.isChromeApp;
+  $scope.isChromeApp = platformInfo.isChromeApp
 
-  $scope.$on('$ionicView.leave', function() {
-    angular.element($window).off('keydown');
-  });
+  $scope.$on('$ionicView.leave', function () {
+    angular.element($window).off('keydown')
+  })
 
-  $scope.$on("$ionicView.beforeEnter", function(event, data) {
-    var config = configService.getSync().wallet.settings;
+  $scope.$on('$ionicView.beforeEnter', function (event, data) {
+    var config = configService.getSync().wallet.settings
 
-    function setAvailableUnits() {
+    function setAvailableUnits () {
+      availableUnits = []
 
-      availableUnits = [];
+      availableUnits.push({
+        name: 'RaiBlocks',
+        id: 'xrb',
+        shortName: 'XRB'
+      })
 
-      var hasBTCWallets = profileService.getAccounts({
-        coin: 'btc'
-      }).length;
-
-      if (hasBTCWallets) {
-        availableUnits.push({
-          name: 'Bitcoin',
-          id: 'btc',
-          shortName: 'BTC',
-        });
-      }
-
-
-      var hasBCHWallets = profileService.getAccounts({
-        coin: 'bch'
-      }).length;
-
-
-
-      if (hasBCHWallets) {
-        availableUnits.push({
-          name: 'Bitcoin Cash',
-          id: 'bch',
-          shortName: 'BCH',
-        });
-      };
-
-      unitIndex = 0;
+      unitIndex = 0
 
       if (data.stateParams.coin) {
-        var coins = data.stateParams.coin.split(',');
-        var newAvailableUnits = [];
+        var coins = data.stateParams.coin.split(',')
+        var newAvailableUnits = []
 
-        lodash.each(coins, function(c) {
+        lodash.each(coins, function (c) {
           var coin = lodash.find(availableUnits, {
             id: c
-          });
+          })
           if (!coin) {
             $log.warn('Could not find desired coin:' + data.stateParams.coin)
           } else {
-            newAvailableUnits.push(coin);
+            newAvailableUnits.push(coin)
           }
-        });
+        })
 
         if (newAvailableUnits.length > 0) {
-          availableUnits = newAvailableUnits;
+          availableUnits = newAvailableUnits
         }
       }
 
-
       //  currency have preference
-      var fiatName;
+      var fiatName
       if (data.stateParams.currency) {
-        fiatCode = data.stateParams.currency;
+        fiatCode = data.stateParams.currency
         altUnitIndex = unitIndex
-        unitIndex = availableUnits.length;
+        unitIndex = availableUnits.length
       } else {
-        fiatCode = config.alternativeIsoCode || 'USD';
-        fiatName = config.alternanativeName || fiatCode;
-        altUnitIndex = availableUnits.length;
+        fiatCode = config.alternativeIsoCode || 'USD'
+        fiatName = config.alternanativeName || fiatCode
+        altUnitIndex = availableUnits.length
       }
 
       availableUnits.push({
@@ -97,292 +73,283 @@ angular.module('canoeApp.controllers').controller('amountController', function($
         // TODO
         id: fiatCode,
         shortName: fiatCode,
-        isFiat: true,
-      });
+        isFiat: true
+      })
 
       if (data.stateParams.fixedUnit) {
-        fixedUnit = true;
+        fixedUnit = true
       }
     };
 
     // Go to...
-    _id = data.stateParams.id; // Optional (BitPay Card ID or Wallet ID)
-    $scope.nextStep = data.stateParams.nextStep;
+    _id = data.stateParams.id // Optional (BitPay Card ID or Wallet ID)
+    $scope.nextStep = data.stateParams.nextStep
 
+    setAvailableUnits()
+    updateUnitUI()
 
-    setAvailableUnits();
-    updateUnitUI();
-
-    $scope.showMenu = $ionicHistory.backView() && ($ionicHistory.backView().stateName == 'tabs.send' || $ionicHistory.backView().stateName == 'tabs.bitpayCard');
-    $scope.recipientType = data.stateParams.recipientType || null;
-    $scope.toAddress = data.stateParams.toAddress;
-    $scope.toName = data.stateParams.toName;
-    $scope.toEmail = data.stateParams.toEmail;
-    $scope.toColor = data.stateParams.toColor;
-    $scope.showSendMax = false;
+    $scope.showMenu = $ionicHistory.backView() && ($ionicHistory.backView().stateName === 'tabs.send')
+    $scope.recipientType = data.stateParams.recipientType || null
+    $scope.toAddress = data.stateParams.toAddress
+    $scope.toName = data.stateParams.toName
+    $scope.toEmail = data.stateParams.toEmail
+    $scope.toColor = data.stateParams.toColor
+    $scope.showSendMax = false
 
     if (!$scope.nextStep && !data.stateParams.toAddress) {
       $log.error('Bad params at amount')
-      throw ('bad params');
+      throw ('bad params')
     }
 
-    var reNr = /^[1234567890\.]$/;
-    var reOp = /^[\*\+\-\/]$/;
+    var reNr = /^[1234567890\.]$/
+    var reOp = /^[\*\+\-\/]$/
 
-    var disableKeys = angular.element($window).on('keydown', function(e) {
-      if (!e.key) return;
+    var disableKeys = angular.element($window).on('keydown', function (e) {
+      if (!e.key) return
       if (e.which === 8) { // you can add others here inside brackets.
-        e.preventDefault();
-        $scope.removeDigit();
+        e.preventDefault()
+        $scope.removeDigit()
       }
 
       if (e.key.match(reNr)) {
-        $scope.pushDigit(e.key);
+        $scope.pushDigit(e.key)
       } else if (e.key.match(reOp)) {
-        $scope.pushOperator(e.key);
+        $scope.pushOperator(e.key)
       } else if (e.keyCode === 86) {
-        if (e.ctrlKey || e.metaKey) processClipboard();
-      } else if (e.keyCode === 13) $scope.finish();
+        if (e.ctrlKey || e.metaKey) processClipboard()
+      } else if (e.keyCode === 13) $scope.finish()
 
-      $timeout(function() {
-        $scope.$apply();
-      });
-    });
-    $scope.specificAmount = $scope.specificAlternativeAmount = '';
-    $scope.isCordova = platformInfo.isCordova;
-    unitToRaw = config.unitToRaw;
-    satToUnit = 1 / unitToRaw;
-    satToBtc = 1 / 100000000;
-    unitDecimals = config.unitDecimals;
+      $timeout(function () {
+        $scope.$apply()
+      })
+    })
+    $scope.specificAmount = $scope.specificAlternativeAmount = ''
+    $scope.isCordova = platformInfo.isCordova
+    unitToRaw = config.unitToRaw
+    satToUnit = 1 / unitToRaw
+    unitDecimals = config.unitDecimals
 
-    $scope.resetAmount();
+    $scope.resetAmount()
 
     // in SAT ALWAYS
     if ($stateParams.toAmount) {
-      $scope.amount = (($stateParams.toAmount) * satToUnit).toFixed(unitDecimals);
+      $scope.amount = (($stateParams.toAmount) * satToUnit).toFixed(unitDecimals)
     }
 
-    processAmount();
+    processAmount()
 
-    $timeout(function() {
-      $ionicScrollDelegate.resize();
-    }, 10);
-  });
+    $timeout(function () {
+      $ionicScrollDelegate.resize()
+    }, 10)
+  })
 
-  function paste(value) {
-    $scope.amount = value;
-    processAmount();
-    $timeout(function() {
-      $scope.$apply();
-    });
+  function paste (value) {
+    $scope.amount = value
+    processAmount()
+    $timeout(function () {
+      $scope.$apply()
+    })
   };
 
-  function processClipboard() {
-    if (!isNW) return;
-    var value = nodeWebkitService.readFromClipboard();
-    if (value && evaluate(value) > 0) paste(evaluate(value));
+  function processClipboard () {
+    if (!isNW) return
+    var value = nodeWebkitService.readFromClipboard()
+    if (value && evaluate(value) > 0) paste(evaluate(value))
   };
 
-  $scope.showSendMaxMenu = function() {
-    $scope.showSendMax = true;
-  };
+  $scope.showSendMaxMenu = function () {
+    $scope.showSendMax = true
+  }
 
-  $scope.sendMax = function() {
-    $scope.showSendMax = false;
-    $scope.useSendMax = true;
-    $scope.finish();
-  };
+  $scope.sendMax = function () {
+    $scope.showSendMax = false
+    $scope.useSendMax = true
+    $scope.finish()
+  }
 
-
-  $scope.toggleAlternative = function() {
+  $scope.toggleAlternative = function () {
     if ($scope.amount && isExpression($scope.amount)) {
-      var amount = evaluate(format($scope.amount));
-      $scope.globalResult = '= ' + processResult(amount);
+      var amount = evaluate(format($scope.amount))
+      $scope.globalResult = '= ' + processResult(amount)
     }
+  }
+
+  function updateUnitUI () {
+    $scope.unit = availableUnits[unitIndex].shortName
+    $scope.alternativeUnit = availableUnits[altUnitIndex].shortName
+
+    processAmount()
+    $log.debug('Update unit coin @amount unit:' + $scope.unit + ' alternativeUnit:' + $scope.alternativeUnit)
   };
 
-  function updateUnitUI() {
-    $scope.unit = availableUnits[unitIndex].shortName;
-    $scope.alternativeUnit = availableUnits[altUnitIndex].shortName;
+  $scope.changeUnit = function () {
+    if (fixedUnit) return
 
-    processAmount();
-    $log.debug('Update unit coin @amount unit:' + $scope.unit + " alternativeUnit:" + $scope.alternativeUnit);
-  };
-
-  $scope.changeUnit = function() {
-    if (fixedUnit) return;
-
-    unitIndex++;
-    if (unitIndex >= availableUnits.length) unitIndex = 0;
-
+    unitIndex++
+    if (unitIndex >= availableUnits.length) unitIndex = 0
 
     if (availableUnits[unitIndex].isFiat) {
-      // Always return to BTC... TODO?
-      altUnitIndex = 0;
+      // Always return to XRB... TODO?
+      altUnitIndex = 0
     } else {
       altUnitIndex = lodash.findIndex(availableUnits, {
         isFiat: true
-      });
+      })
     }
 
-    updateUnitUI();
-  };
+    updateUnitUI()
+  }
 
+  $scope.changeAlternativeUnit = function () {
+    // Do nothing if fiat is not main unit
+    if (!availableUnits[unitIndex].isFiat) return
 
-  $scope.changeAlternativeUnit = function() {
-
-    // Do nothing is fiat is not main unit
-    if (!availableUnits[unitIndex].isFiat) return;
-
-    var nextCoin = lodash.findIndex(availableUnits, function(x) {
-      if (x.isFiat) return false;
-      if (x.id == availableUnits[altUnitIndex].id) return false;
-      return true;
-    });
+    var nextCoin = lodash.findIndex(availableUnits, function (x) {
+      if (x.isFiat) return false
+      if (x.id === availableUnits[altUnitIndex].id) return false
+      return true
+    })
 
     if (nextCoin >= 0) {
-      altUnitIndex = nextCoin;
-      updateUnitUI();
+      altUnitIndex = nextCoin
+      updateUnitUI()
     }
+  }
+
+  function checkFontSize () {
+    if ($scope.amount && $scope.amount.length >= SMALL_FONT_SIZE_LIMIT) $scope.smallFont = true
+    else $scope.smallFont = false
   };
 
-  function checkFontSize() {
-    if ($scope.amount && $scope.amount.length >= SMALL_FONT_SIZE_LIMIT) $scope.smallFont = true;
-    else $scope.smallFont = false;
-  };
+  $scope.pushDigit = function (digit) {
+    if ($scope.amount && $scope.amount.length >= LENGTH_EXPRESSION_LIMIT) return
+    if ($scope.amount.indexOf('.') > -1 && digit === '.') return
+    if (availableUnits[unitIndex].isFiat && $scope.amount.indexOf('.') > -1 && $scope.amount[$scope.amount.indexOf('.') + 2]) return
 
-  $scope.pushDigit = function(digit) {
-    if ($scope.amount && $scope.amount.length >= LENGTH_EXPRESSION_LIMIT) return;
-    if ($scope.amount.indexOf('.') > -1 && digit == '.') return;
-    if (availableUnits[unitIndex].isFiat && $scope.amount.indexOf('.') > -1 && $scope.amount[$scope.amount.indexOf('.') + 2]) return;
+    $scope.amount = ($scope.amount + digit).replace('..', '.')
+    checkFontSize()
+    processAmount()
+  }
 
-    $scope.amount = ($scope.amount + digit).replace('..', '.');
-    checkFontSize();
-    processAmount();
-  };
+  $scope.pushOperator = function (operator) {
+    if (!$scope.amount || $scope.amount.length == 0) return
+    $scope.amount = _pushOperator($scope.amount)
 
-  $scope.pushOperator = function(operator) {
-    if (!$scope.amount || $scope.amount.length == 0) return;
-    $scope.amount = _pushOperator($scope.amount);
-
-    function _pushOperator(val) {
+    function _pushOperator (val) {
       if (!isOperator(lodash.last(val))) {
-        return val + operator;
+        return val + operator
       } else {
-        return val.slice(0, -1) + operator;
+        return val.slice(0, -1) + operator
       }
     };
+  }
+
+  function isOperator (val) {
+    var regex = /[\/\-\+\x\*]/
+    return regex.test(val)
   };
 
-  function isOperator(val) {
-    var regex = /[\/\-\+\x\*]/;
-    return regex.test(val);
+  function isExpression (val) {
+    var regex = /^\.?\d+(\.?\d+)?([\/\-\+\*x]\d?\.?\d+)+$/
+    return regex.test(val)
   };
 
-  function isExpression(val) {
-    var regex = /^\.?\d+(\.?\d+)?([\/\-\+\*x]\d?\.?\d+)+$/;
-    return regex.test(val);
-  };
+  $scope.removeDigit = function () {
+    $scope.amount = ($scope.amount).toString().slice(0, -1)
+    processAmount()
+    checkFontSize()
+  }
 
-  $scope.removeDigit = function() {
-    $scope.amount = ($scope.amount).toString().slice(0, -1);
-    processAmount();
-    checkFontSize();
-  };
+  $scope.resetAmount = function () {
+    $scope.amount = $scope.alternativeAmount = $scope.globalResult = ''
+    $scope.allowSend = false
+    checkFontSize()
+  }
 
-  $scope.resetAmount = function() {
-    $scope.amount = $scope.alternativeAmount = $scope.globalResult = '';
-    $scope.allowSend = false;
-    checkFontSize();
-  };
-
-  function processAmount() {
-    var formatedValue = format($scope.amount);
-    var result = evaluate(formatedValue);
-    $scope.allowSend = lodash.isNumber(result) && +result > 0;
+  function processAmount () {
+    var formatedValue = format($scope.amount)
+    var result = evaluate(formatedValue)
+    $scope.allowSend = lodash.isNumber(result) && +result > 0
     if (lodash.isNumber(result)) {
-      $scope.globalResult = isExpression($scope.amount) ? '= ' + processResult(result) : '';
+      $scope.globalResult = isExpression($scope.amount) ? '= ' + processResult(result) : ''
 
       if (availableUnits[unitIndex].isFiat) {
-
-        var a = fromFiat(result);
+        var a = fromFiat(result)
         if (a) {
-          $scope.alternativeAmount = txFormatService.formatAmount(a * unitToRaw, true);
+          $scope.alternativeAmount = txFormatService.formatAmount(a * unitToRaw, true)
         } else {
           if (result) {
-            $scope.alternativeAmount = 'N/A'; 
+            $scope.alternativeAmount = 'N/A'
           } else {
-            $scope.alternativeAmount = null;
+            $scope.alternativeAmount = null
           }
-          $scope.allowSend = false;
+          $scope.allowSend = false
         }
       } else {
-        $scope.alternativeAmount = $filter('formatFiatAmount')(toFiat(result));
+        $scope.alternativeAmount = $filter('formatFiatAmount')(toFiat(result))
       }
     }
   };
 
-  function processResult(val) {
-    if (availableUnits[unitIndex].isFiat) return $filter('formatFiatAmount')(val);
-    else return txFormatService.formatAmount(val.toFixed(unitDecimals) * unitToRaw, true);
+  function processResult (val) {
+    if (availableUnits[unitIndex].isFiat) return $filter('formatFiatAmount')(val)
+    else return txFormatService.formatAmount(val.toFixed(unitDecimals) * unitToRaw, true)
   };
 
-  function fromFiat(val) {
-    return parseFloat((rateService.fromFiat(val, fiatCode, availableUnits[altUnitIndex].id) * satToUnit).toFixed(unitDecimals));
+  function fromFiat (val) {
+    return parseFloat((rateService.fromFiat(val, fiatCode, availableUnits[altUnitIndex].id) * satToUnit).toFixed(unitDecimals))
   };
 
-  function toFiat(val) {
-    if (!rateService.getRate(fiatCode)) return;
+  function toFiat (val) {
+    if (!rateService.getRate(fiatCode)) return
 
-    return parseFloat((rateService.toFiat(val * unitToRaw, fiatCode, availableUnits[unitIndex].id)).toFixed(2));
+    return parseFloat((rateService.toFiat(val * unitToRaw, fiatCode, availableUnits[unitIndex].id)).toFixed(2))
   };
 
-  function evaluate(val) {
-    var result;
+  function evaluate (val) {
+    var result
     try {
-      result = $scope.$eval(val);
+      result = $scope.$eval(val)
     } catch (e) {
-      return 0;
+      return 0
     }
-    if (!lodash.isFinite(result)) return 0;
-    return result;
+    if (!lodash.isFinite(result)) return 0
+    return result
   };
 
-  function format(val) {
-    if (!val) return;
+  function format (val) {
+    if (!val) return
 
-    var result = val.toString();
+    var result = val.toString()
 
-    if (isOperator(lodash.last(val))) result = result.slice(0, -1);
+    if (isOperator(lodash.last(val))) result = result.slice(0, -1)
 
-    return result.replace('x', '*');
+    return result.replace('x', '*')
   };
 
-  $scope.finish = function() {
-
-    var unit = availableUnits[unitIndex];
-    var _amount = evaluate(format($scope.amount));
-    var coin = unit.id;
+  $scope.finish = function () {
+    var unit = availableUnits[unitIndex]
+    var _amount = evaluate(format($scope.amount))
+    var coin = unit.id
     if (unit.isFiat) {
-      coin = availableUnits[altUnitIndex].id;
+      coin = availableUnits[altUnitIndex].id
     }
 
     if ($scope.nextStep) {
-
       $state.transitionTo($scope.nextStep, {
         id: _id,
         amount: $scope.useSendMax ? null : _amount,
         currency: unit.id.toUpperCase(),
         coin: coin,
         useSendMax: $scope.useSendMax
-      });
+      })
     } else {
-      var amount = _amount;
+      var amount = _amount
 
       if (unit.isFiat) {
-        amount = (fromFiat(amount) * unitToRaw).toFixed(0);
+        amount = (fromFiat(amount) * unitToRaw).toFixed(0)
       } else {
-        amount = (amount * unitToRaw).toFixed(0);
+        amount = (amount * unitToRaw).toFixed(0)
       }
 
       $state.transitionTo('tabs.send.confirm', {
@@ -392,10 +359,9 @@ angular.module('canoeApp.controllers').controller('amountController', function($
         toName: $scope.toName,
         toEmail: $scope.toEmail,
         toColor: $scope.toColor,
-        coin: coin,
         useSendMax: $scope.useSendMax
-      });
+      })
     }
-    $scope.useSendMax = null;
-  };
-});
+    $scope.useSendMax = null
+  }
+})

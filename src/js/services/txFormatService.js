@@ -7,7 +7,7 @@ angular.module('canoeApp.services').factory('txFormatService', function ($filter
 
   root.formatAmount = function (raw, fullPrecision) {
     var config = configService.getDefaults().wallet.settings
-    if (config.unitCode == 'raw') return raw
+    if (config.unitCode === 'raw') return raw
 
     // TODO : now only works for english, specify opts to change thousand separator and decimal separator
     var opts = {
@@ -18,7 +18,7 @@ angular.module('canoeApp.services').factory('txFormatService', function ($filter
 
   root.formatAmountStr = function (coin, raw) {
     if (isNaN(raw)) return
-    return root.formatAmount(raw) + ' XRB' // + (coin).toUpperCase();
+    return root.formatAmount(raw) + (coin ? coin.toUpperCase() : 'XRB')
   }
 
   root.toFiat = function (coin, raw, code, cb) {

@@ -50,7 +50,7 @@ angular.module('canoeApp.controllers').controller('addressesController', functio
         $scope.latestWithBalance = lodash.slice(withBalance, 0, BALANCE_ADDRESS_LIMIT)
 
         lodash.each(withBalance, function (a) {
-          a.balanceStr = txFormatService.formatAmountStr($scope.account.coin, a.amount)
+          a.balanceStr = txFormatService.formatAmountStr(null, a.amount)
         })
 
         $scope.viewAll = {
