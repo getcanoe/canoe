@@ -87,7 +87,7 @@ angular.module('canoeApp.services')
     }
 
     root.formatAmount = function (raw, decimals) {
-      (raw / RAW_PER_XRB).toFixed(decimals)
+      return (raw / RAW_PER_XRB).toFixed(decimals)
     }
 
     root.formatAmountWithUnit = function (raw) {
@@ -580,7 +580,7 @@ angular.module('canoeApp.services')
       root.getLastKnownBalance(account, function (err, data) {
         if (data) {
           data = JSON.parse(data)
-          account.cachedBalanceStr = root.formatAmountWithUnit(data.balance)
+          account.cachedBalanceStr = root.formatAmountWithUnit(parseInt(data.balance))
           account.cachedBalance = data.balance
           account.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null
         }
