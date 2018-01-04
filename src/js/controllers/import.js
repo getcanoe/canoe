@@ -12,8 +12,8 @@ angular.module('canoeApp.controllers').controller('importController',
       $scope.formData = {}
       $scope.formData.account = 1
       $scope.importErr = false
-      $scope.isCanoe = appConfigService.name === 'canoe'
 
+      $scope.NOTIMPLEMENTEDYET = true
       if ($stateParams.code) { $scope.processWalletInfo($stateParams.code) }
 
       $scope.seedOptions = []

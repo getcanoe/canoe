@@ -10,7 +10,7 @@
     </label>
 
     <label class="item item-input item-stacked-label" ng-show="isSafari || isCordova">
-      <span class="input-label" translate>Paste the backup plain text code</span>
+      <span class="input-label" translate>Paste the backup plain text</span>
       <textarea ng-model="formData.backupText" rows="5"></textarea>
     </label>
 
@@ -21,10 +21,8 @@
         ng-model="formData.password">
     </label>
 
-    <div ng-include="'views/includes/cash.html'"></div>
-
     <div class="item item-divider"></div>
-
+<!--
     <a class="item" ng-click="showAdvChange()">
       <span translate ng-show="!showAdv">Show advanced options</span>
       <span translate ng-show="showAdv">Hide advanced options</span>
@@ -35,10 +33,10 @@
         <span class="input-label">Wallet Service URL</span>
         <input type="text" ng-model="formData.bwsurl">
       </label>
-    </div>
+    </div> -->
   </div>
 
-  <button type="submit" class="button button-standard button-primary" ng-disabled="importForm.$invalid || !formData.password" translate>
-    Import backup
+  <button type="submit" class="button button-standard button-primary" ng-disabled="NOTIMPLEMENTEDYET || importForm.$invalid || !formData.password" translate>
+    Import file (not implemented yet)
   </button>
 </form>
