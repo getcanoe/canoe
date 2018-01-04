@@ -177,7 +177,6 @@ angular.module('canoeApp.controllers').controller('amountController', function (
   function updateUnitUI () {
     $scope.unit = availableUnits[unitIndex].shortName
     $scope.alternativeUnit = availableUnits[altUnitIndex].shortName
-
     processAmount()
     $log.debug('Update unit coin @amount unit:' + $scope.unit + ' alternativeUnit:' + $scope.alternativeUnit)
   };

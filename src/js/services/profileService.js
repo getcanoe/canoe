@@ -49,7 +49,7 @@ angular.module('canoeApp.services')
       root.createAccount({}, cb)
     }
 
-    root.updateAllAccounts = function () {
+    root.updateAllAccounts = function (cb) {
       raiblocksService.fetchAccountsAndBalances(root.wallet, function (err, balances) {
         if (err) $log.error(err)
         // Loop over balances and create accounts if needed
@@ -72,7 +72,9 @@ angular.module('canoeApp.services')
             delete root.wallet.accounts[id]
           }
         })
-
+        if (cb) {
+          cb()
+        }
         /*
         // Trick to know when all are done
         var i = accounts.length
@@ -87,7 +89,16 @@ angular.module('canoeApp.services')
     }
 
     root.formatAmount = function (raw, decimals) {
-      return (raw / RAW_PER_XRB).toFixed(decimals)
+      if (raw === 0) {
+        return raw.toFixed(decimals)
+      } else {
+        var balance = raw / RAW_PER_XRB
+        if (Math.round(balance * Math.pow(10, decimals)) === 0)  {
+          return balance.toString()
+        } else {
+          return balance.toFixed(decimals)
+        }
+      }
     }
 
     root.formatAmountWithUnit = function (raw) {
@@ -382,6 +393,11 @@ angular.module('canoeApp.services')
       return root.wallet.accounts[addr]
     }
 
+    root.send = function (tx, cb) {
+      raiblocksService.send(root.wallet, tx.account, tx.address, tx.amount)
+      cb()
+    }
+
     root.deleteWalletClient = function (client, cb) {
       var walletId = client.credentials.walletId
 
@@ -421,7 +437,7 @@ angular.module('canoeApp.services')
     }
 
     // Adds and bind a new client to the profile
-    var addAndBindWalletClient = function (client, opts, cb) {
+    var NOTUSED_addAndBindWalletClient = function (client, opts, cb) {
       if (!client || !client.credentials) { return cb(gettextCatalog.getString('Could not access wallet')) }
 
       var walletId = client.credentials.walletId
