@@ -5,7 +5,7 @@ app.use(bodyParser.json({
     type: function () { return true; }
 }));
 // list of accounts with the head block
-var testAccount = "xrb_3e3j5tkog48pnny9dmfzj1r16pg8t1e76dz5tmac6iq689wyjfpi00000000";
+var testAccount = "xrb_36ahopo3rrmbpyb6xi3a41idjmpiidg5xgz45uxuc6pw3oubwxaec1pcp11j";
 var testBlock = "000D1BAEC8EC208142C99059B393051BAC8380F9B5A2E6B2489A277D81789F3F";
 function getAccounts(wallet) {
     return [testAccount];
@@ -15,8 +15,8 @@ function getBalances(accounts) {
     accounts.forEach(
       function(account){
         result[account] = {
-          balance: "1234567",
-          pending: "134566"
+          balance: "12345670000000000000000000000000",
+          pending: "13456600000000000000000000000"
         }
       }
     )
