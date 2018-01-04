@@ -122,7 +122,7 @@ $v-onboarding-backup-warning-bg:                     url(../img/backup-warning.s
 $v-onboarding-button-back-color:                     #ffffff !default;
 
 $v-onboarding-button-secondary-bg:                   rgba($v-secondary-color, 0.8) !default;
-$v-onboarding-button-secondary-color:                white !default;
+$v-onboarding-button-secondary-color:                $v-text-secondary-color !default;
 $v-onboarding-button-secondary-border:               transparent !default;
 $v-onboarding-button-secondary-active-bg:            rgba($v-secondary-color, 0.2) !default;
 $v-onboarding-button-secondary-active-border:        transparent !default;
