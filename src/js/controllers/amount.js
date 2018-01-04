@@ -3,7 +3,7 @@
 angular.module('canoeApp.controllers').controller('amountController', function ($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, rateService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, bwcError, payproService, profileService, bitcore, amazonService, nodeWebkitService) {
   var _id
   var unitToRaw
-  var satToUnit
+  var rawToUnit
   var unitDecimals
   var SMALL_FONT_SIZE_LIMIT = 10
   var LENGTH_EXPRESSION_LIMIT = 19
@@ -125,15 +125,15 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     })
     $scope.specificAmount = $scope.specificAlternativeAmount = ''
     $scope.isCordova = platformInfo.isCordova
-    unitToRaw = config.unitToRaw
-    satToUnit = 1 / unitToRaw
+    unitToRaw = new BigNumber(config.unitToRaw)
+    rawToUnit = 1 / unitToRaw
     unitDecimals = config.unitDecimals
 
     $scope.resetAmount()
 
-    // in SAT ALWAYS
+    // in raw always
     if ($stateParams.toAmount) {
-      $scope.amount = (($stateParams.toAmount) * satToUnit).toFixed(unitDecimals)
+      $scope.amount = (($stateParams.toAmount) * rawToUnit).toFixed(unitDecimals)
     }
 
     processAmount()
@@ -288,22 +288,21 @@ angular.module('canoeApp.controllers').controller('amountController', function (
         $scope.alternativeAmount = $filter('formatFiatAmount')(toFiat(result))
       }
     }
-  };
+  }
 
   function processResult (val) {
     if (availableUnits[unitIndex].isFiat) return $filter('formatFiatAmount')(val)
     else return txFormatService.formatAmount(val.toFixed(unitDecimals) * unitToRaw, true)
-  };
+  }
 
   function fromFiat (val) {
-    return parseFloat((rateService.fromFiat(val, fiatCode, availableUnits[altUnitIndex].id) * satToUnit).toFixed(unitDecimals))
-  };
+    return parseFloat((rateService.fromFiat(val, fiatCode, availableUnits[altUnitIndex].id) * rawToUnit).toFixed(unitDecimals))
+  }
 
   function toFiat (val) {
     if (!rateService.getRate(fiatCode)) return
-
     return parseFloat((rateService.toFiat(val * unitToRaw, fiatCode, availableUnits[unitIndex].id)).toFixed(2))
-  };
+  }
 
   function evaluate (val) {
     var result
@@ -314,17 +313,14 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     }
     if (!lodash.isFinite(result)) return 0
     return result
-  };
+  }
 
   function format (val) {
     if (!val) return
-
     var result = val.toString()
-
     if (isOperator(lodash.last(val))) result = result.slice(0, -1)
-
     return result.replace('x', '*')
-  };
+  }
 
   $scope.finish = function () {
     var unit = availableUnits[unitIndex]
@@ -344,11 +340,13 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       })
     } else {
       var amount = _amount
-
+      var big
       if (unit.isFiat) {
-        amount = (fromFiat(amount) * unitToRaw).toFixed(0)
+        big = new BigNumber(fromFiat(amount))
+        amount = (big.dividedBy(unitToRaw)).toFixed(0)
       } else {
-        amount = (amount * unitToRaw).toFixed(0)
+        big = new BigNumber(amount)
+        amount = (big.times(unitToRaw)).toFixed(0)
       }
 
       $state.transitionTo('tabs.send.confirm', {

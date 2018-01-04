@@ -21,11 +21,11 @@ angular.module('canoeApp.controllers').controller('paymentUriController',
       if (uri && uri.address) {
         var config = configService.getSync().wallet.settings
         var unitToRaw = config.unitToRaw
-        var satToUnit = 1 / unitToRaw
+        var rawToUnit = 1 / unitToRaw
         var unitName = config.unitName
 
         if (uri.amount) {
-          uri.amount = strip(uri.amount * satToUnit) + ' ' + unitName
+          uri.amount = strip(uri.amount * rawToUnit) + ' ' + unitName
         }
         uri.network = uri.address.network.name
         this.uri = uri

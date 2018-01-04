@@ -43,7 +43,7 @@ angular.module('canoeApp.controllers').controller('preferencesHistory',
         }
         $log.debug('Wallet Transaction History Length:', txs.length);
 
-        $scope.satToUnit = 1 / $scope.unitToRaw;
+        $scope.rawToUnit = 1 / $scope.unitToRaw;
         var data = txs;
         var satToBtc = 1 / 100000000;
         $scope.csvContent = [];

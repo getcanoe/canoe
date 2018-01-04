@@ -11,7 +11,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   var walletConfig = config.wallet
   // var unitToRaw = walletConfig.settings.unitToRaw
   // var unitDecimals = walletConfig.settings.unitDecimals
-  // var satToUnit = 1 / unitToRaw
+  // var rawToUnit = 1 / unitToRaw
   // var configFeeLevel = walletConfig.settings.feeLevel ? walletConfig.settings.feeLevel : 'normal'
 
   // Platform info
@@ -77,7 +77,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
         var filteredAccounts = []
         lodash.each($scope.accounts, function (acc) {
           if (!acc.balance) { $log.debug('No balance available in: ' + acc.name) }
-          if (acc.balance > minAmount) {
+          if (parseInt(acc.balance) >= minAmount) {
             filteredAccounts.push(acc)
           }
         })
@@ -93,7 +93,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
 
     // Grab stateParams
     tx = {
-      toAmount: parseInt(data.stateParams.toAmount),
+      toAmount: data.stateParams.toAmount,
       sendMax: data.stateParams.useSendMax === 'true',
       toAddress: data.stateParams.toAddress,
       description: data.stateParams.description,
@@ -126,11 +126,12 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   })
 
   function getTxp (tx, account, dryRun, cb) {
+    /*
     if (tx.toAmount > Number.MAX_SAFE_INTEGER) {
       var msg = gettextCatalog.getString('Amount too big')
       $log.warn(msg)
       return setSendError(msg)
-    }
+    }*/
     var txp = {}
     txp.account = account
     txp.address = tx.toAddress
@@ -150,7 +151,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     function updateAmount () {
       if (!tx.toAmount) return
       // Amount
-      tx.amountStr = txFormatService.formatAmountStr(null, tx.toAmount)
+      tx.amountStr = profileService.formatAmountWithUnit(tx.toAmount) // txFormatService.formatAmountStr(null, tx.toAmount)
       tx.amountValueStr = tx.amountStr.split(' ')[0]
       tx.amountUnitStr = tx.amountStr.split(' ')[1]
       txFormatService.formatAlternativeStr(null, tx.toAmount, function (v) {
@@ -277,14 +278,18 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       }
 
       function doSend () {
+        ongoingProcess.set('sendingTx', true, onSendStatusChange)
         profileService.send(txp, function (err) {
           if (err) return setSendError(err)
+          ongoingProcess.set('sendingTx', false, onSendStatusChange)
+
           // TODO ehum
-          txConfirmNotification.subscribe(account, {
+         /* txConfirmNotification.subscribe(account, {
             txid: txp.txid
-          })
+          })*/
         })
 
+        /*
         walletService.publishAndSign(wallet, txp, function (err, txp) {
           if (err) return setSendError(err)
           if (config.confirmedTxsNotifications && config.confirmedTxsNotifications.enabled) {
@@ -292,7 +297,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
               txid: txp.txid
             })
           }
-        }, onSendStatusChange)
+        }, onSendStatusChange)*/
       }
 
       confirmTx(function (nok) {
@@ -312,9 +317,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     $log.debug('statusChangeHandler: ', processName, showName, isOn)
     if (
       (
-        processName === 'broadcastingTx' ||
-        ((processName === 'signingTx') && $scope.account.m > 1) ||
-        (processName == 'sendingTx' && !$scope.account.canSign() && !$scope.account.isPrivKeyExternal())
+        (processName === 'sendingTx')
       ) && !isOn) {
       $scope.sendStatus = 'success'
       $timeout(function () {

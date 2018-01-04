@@ -41,7 +41,7 @@ angular.module('canoeApp.controllers').controller('customAmountController', func
       if (currency != 'BTC' && currency != 'BCH') {
         // Convert to BTC or BCH
         var config = configService.getSync().wallet.settings
-        var amountUnit = txFormatService.satToUnit(parsedAmount.amountSat)
+        var amountUnit = txFormatService.rawToUnit(parsedAmount.amountSat)
         var btcParsedAmount = txFormatService.parseAmount($scope.account.coin, amountUnit, $scope.account.coin)
 
         $scope.amountBtc = btcParsedAmount.amount

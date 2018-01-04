@@ -188,7 +188,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
 
       // Selected unit
       cache.unitToRaw = config.settings.unitToRaw
-      cache.satToUnit = 1 / cache.unitToRaw
+      cache.rawToUnit = 1 / cache.unitToRaw
 
       // STR
       cache.totalBalanceStr = txFormatService.formatAmountStr(wallet.coin, cache.totalBalanceSat)

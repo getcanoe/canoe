@@ -208,12 +208,12 @@ angular.module('canoeApp.services').factory('txFormatService', function ($filter
     }
   }
 
-  root.satToUnit = function (amount) {
+  root.rawToUnit = function (amount) {
     var config = configService.getSync().wallet.settings
     var unitToRaw = config.unitToRaw
-    var satToUnit = 1 / unitToRaw
+    var rawToUnit = 1 / unitToRaw
     var unitDecimals = config.unitDecimals
-    return parseFloat((amount * satToUnit).toFixed(unitDecimals))
+    return parseFloat((amount * rawToUnit).toFixed(unitDecimals))
   }
 
   return root
