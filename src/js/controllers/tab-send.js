@@ -85,7 +85,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   }
 
   $scope.searchBlurred = function () {
-    if ($scope.formData.search == null || $scope.formData.search.length == 0) {
+    if ($scope.formData.search === null || $scope.formData.search.length === 0) {
       $scope.searchFocus = false
     }
   }
@@ -103,9 +103,13 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
       return
     }
 
+    var sea = search.toLowerCase()
     var result = lodash.filter(originalList, function (item) {
       var val = item.name
-      return lodash.includes(val.toLowerCase(), search.toLowerCase())
+      return (
+        lodash.includes(val.toLowerCase(), sea) ||
+        item.address.toLowerCase().startsWith(sea)
+      )
     })
 
     $scope.list = result
