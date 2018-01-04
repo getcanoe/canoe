@@ -38,6 +38,32 @@ A watch task is also available to rebuild components of the app as changes are m
 npm run watch
 ```
 
+## Running the mock backend
+
+By default the code's backend is the Canoe beta server ( see `src/js/services/raiblocksService.js`'s `host` setting). 
+
+If you want to test things out on a local machine without running an entire Raiblocks RPC node, you can instead run our mock backend.
+
+```
+node mock_backend/server.js
+```
+
+You will also want to change the top of `src/js/services/raiblocksService.js` from:
+
+```
+    // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
+    var host = 'https://getcanoe.io/rpc' // for the beta node
+```
+
+to
+
+```
+    var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
+    // var host = 'https://getcanoe.io/rpc' // for the beta node
+```
+
+The mock backend provides placeholder responses to many requests.
+
 ## Testing on Real Devices
 
 It's recommended that all final testing be done on a real device – both to assess performance and to enable features that are unavailable to the emulator (e.g. a device camera).
