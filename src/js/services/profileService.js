@@ -363,7 +363,7 @@ angular.module('canoeApp.services')
     // Create wallet and default account
     root.createWallet = function (opts, cb) {
       // Synchronous now
-      root.wallet = raiblocksService.createWallet()
+      root.wallet = raiblocksService.createWallet(opts.seed)
       root.createAccount(opts, cb)
     }
 
@@ -539,7 +539,11 @@ angular.module('canoeApp.services')
     }
 
     root.importSeed = function (seed, cb) {
-      root.changeSeed(seed, cb)
+      if (root.wallet) {
+        root.changeSeed(seed, cb)
+      } else {
+        root.createDefaultWallet(seed, cb)
+      }
     }
 
     root.createProfile = function (cb) {
@@ -561,9 +565,8 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.createDefaultWallet = function (cb) {
-      var opts = {}
-      root.createWallet(opts, cb)
+    root.createDefaultWallet = function (seed, cb) {
+      root.createWallet({seed: seed}, cb)
     }
 
     root.setDisclaimerAccepted = function (cb) {

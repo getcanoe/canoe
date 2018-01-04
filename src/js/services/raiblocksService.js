@@ -34,13 +34,13 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.createWallet = function () {
+    root.createWallet = function (seed) {
       $log.debug('Create wallet')
       var wallet = {}
       wallet.id = rai.wallet_create()
       // We also need to set the seed, or we can't ever get it out
-      var seed = root.newRandomSeed()
-      root.changeSeed(wallet, seed)
+      var seedToSet = seed || root.newRandomSeed()
+      root.changeSeed(wallet, seedToSet)
       $log.debug('Wallet: ' + JSON.stringify(wallet))
       return wallet
     }
