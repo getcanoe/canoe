@@ -3,25 +3,21 @@
 angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, payproService, feeService, bwcError, txConfirmNotification, externalLinkService) {
   var countDown = null
   var CONFIRM_LIMIT_USD = 20
-  var FEE_TOO_HIGH_LIMIT_PER = 15
 
   var tx = {}
 
   // Config Related values
   var config = configService.getSync()
   var walletConfig = config.wallet
-  var unitToRaw = walletConfig.settings.unitToRaw
-  var unitDecimals = walletConfig.settings.unitDecimals
-  var satToUnit = 1 / unitToRaw
-  var configFeeLevel = walletConfig.settings.feeLevel ? walletConfig.settings.feeLevel : 'normal'
+  // var unitToRaw = walletConfig.settings.unitToRaw
+  // var unitDecimals = walletConfig.settings.unitDecimals
+  // var rawToUnit = 1 / unitToRaw
+  // var configFeeLevel = walletConfig.settings.feeLevel ? walletConfig.settings.feeLevel : 'normal'
 
   // Platform info
   var isChromeApp = platformInfo.isChromeApp
   var isCordova = platformInfo.isCordova
   var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
-
-  // custom fee flag
-  var usingCustomFee = null
 
   function refresh () {
     $timeout(function () {
@@ -44,7 +40,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
 
   function exitWithError (err) {
     $log.info('Error setting wallet selector:' + err)
-    popupService.showAlert(gettextCatalog.getString(), bwcError.msg(err), function () {
+    popupService.showAlert(gettextCatalog.getString(), err, function () {
       $ionicHistory.nextViewOptions({
         disableAnimate: true,
         historyRoot: true
@@ -65,63 +61,42 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   };
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
-    function setWalletSelector (coin, network, minAmount, cb) {
+    function setAccountSelector (minAmount, cb) {
       // no min amount? (sendMax) => look for no empty wallets
       minAmount = minAmount || 1
 
-      $scope.accounts = profileService.getAccounts({
-        onlyComplete: true,
-        network: network,
-        coin: coin
-      })
+      // Make sure we have latest accounts and balances
+      profileService.updateAllAccounts(function () {
+        $scope.accounts = profileService.getAccounts()
 
-      if (!$scope.accounts || !$scope.accounts.length) {
-        setNoWallet(gettextCatalog.getString('No wallets available'), true)
-        return cb()
-      }
+        if (!$scope.accounts || !$scope.accounts.length) {
+          setNoWallet(gettextCatalog.getString('No wallets available'), true)
+          return cb()
+        }
 
-      var filteredWallets = []
-      var index = 0
-      var walletsUpdated = 0
-
-      lodash.each($scope.accounts, function (w) {
-        walletService.getStatus(w, {}, function (err, status) {
-          if (err || !status) {
-            $log.error(err)
-          } else {
-            walletsUpdated++
-            w.status = status
-
-            if (!status.availableBalanceSat) { $log.debug('No balance available in: ' + w.name) }
-
-            if (status.availableBalanceSat > minAmount) {
-              filteredWallets.push(w)
-            }
-          }
-
-          if (++index === $scope.accounts.length) {
-            if (!walletsUpdated) { return cb('Could not update any wallet') }
-
-            if (lodash.isEmpty(filteredWallets)) {
-              setNoWallet(gettextCatalog.getString('Insufficient funds'), true)
-            }
-            $scope.accounts = lodash.clone(filteredWallets)
-            return cb()
+        var filteredAccounts = []
+        lodash.each($scope.accounts, function (acc) {
+          if (!acc.balance) { $log.debug('No balance available in: ' + acc.name) }
+          if (parseInt(acc.balance) >= minAmount) {
+            filteredAccounts.push(acc)
           }
         })
+
+        if (lodash.isEmpty(filteredAccounts)) {
+          setNoWallet(gettextCatalog.getString('Insufficient funds'), true)
+        }
+
+        $scope.accounts = lodash.clone(filteredAccounts)
+        return cb()
       })
-    };
+    }
 
     // Grab stateParams
     tx = {
-      toAmount: parseInt(data.stateParams.toAmount),
+      toAmount: data.stateParams.toAmount,
       sendMax: data.stateParams.useSendMax === 'true',
       toAddress: data.stateParams.toAddress,
       description: data.stateParams.description,
-      paypro: data.stateParams.paypro,
-
-      feeLevel: configFeeLevel,
-      spendUnconfirmed: walletConfig.spendUnconfirmed,
 
       // Vanity tx info (not in the real tx)
       recipientType: data.stateParams.recipientType || null,
@@ -131,8 +106,6 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       txp: {}
     }
 
-    if (tx.coin && tx.coin == 'bch') tx.feeLevel = 'normal'
-
     // Other Scope vars
     $scope.isCordova = isCordova
     $scope.isWindowsPhoneApp = isWindowsPhoneApp
@@ -140,80 +113,35 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
 
     $scope.accountSelectorTitle = gettextCatalog.getString('Send from')
 
-    setWalletSelector(tx.coin, tx.network, tx.toAmount, function (err) {
+    setAccountSelector(tx.toAmount, function (err) {
       if (err) {
-        return exitWithError('Could not update wallets')
+        return exitWithError('Could not update accounts')
       }
-
       if ($scope.accounts.length > 1) {
         $scope.showAccountSelector()
       } else if ($scope.accounts.length) {
-        setWallet($scope.accounts[0], tx)
+        setAccount($scope.accounts[0], tx)
       }
     })
   })
 
-  function getSendMaxInfo (tx, wallet, cb) {
-    if (!tx.sendMax) return cb()
-
-    // ongoingProcess.set('retrievingInputs', true);
-    walletService.getSendMaxInfo(wallet, {
-      feePerKb: tx.feeRate,
-      excludeUnconfirmedUtxos: !tx.spendUnconfirmed,
-      returnInputs: true
-    }, cb)
-  };
-
-  function getTxp (tx, wallet, dryRun, cb) {
-    // ToDo: use a credential's (or fc's) function for this
-    if (tx.description && !wallet.credentials.sharedEncryptingKey) {
-      var msg = gettextCatalog.getString('Could not add message to imported wallet without shared encrypting key')
-      $log.warn(msg)
-      return setSendError(msg)
-    }
-
+  function getTxp (tx, account, dryRun, cb) {
+    /*
     if (tx.toAmount > Number.MAX_SAFE_INTEGER) {
       var msg = gettextCatalog.getString('Amount too big')
       $log.warn(msg)
       return setSendError(msg)
-    }
-
+    }*/
     var txp = {}
-
-    txp.outputs = [{
-      'toAddress': tx.toAddress,
-      'amount': tx.toAmount,
-      'message': tx.description
-    }]
-
-    if (tx.sendMaxInfo) {
-      txp.inputs = tx.sendMaxInfo.inputs
-      txp.fee = tx.sendMaxInfo.fee
-    } else {
-      if (usingCustomFee) {
-        txp.feePerKb = tx.feeRate
-      } else txp.feeLevel = tx.feeLevel
-    }
-
+    txp.account = account
+    txp.address = tx.toAddress
+    txp.amount = tx.toAmount
     txp.message = tx.description
-
-    if (tx.paypro) {
-      txp.payProUrl = tx.paypro.url
-    }
-    txp.excludeUnconfirmedUtxos = !tx.spendUnconfirmed
     txp.dryRun = dryRun
-    walletService.createTx(wallet, txp, function (err, ctxp) {
-      if (err) {
-        setSendError(err)
-        return cb(err)
-      }
-      return cb(null, ctxp)
-    })
-  };
+    return cb(null, txp)
+  }
 
-  function updateTx (tx, wallet, opts, cb) {
-    ongoingProcess.set('calculatingFee', true)
-
+  function updateTx (tx, account, opts, cb) {
     if (opts.clearCache) {
       tx.txp = {}
     }
@@ -222,12 +150,11 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
 
     function updateAmount () {
       if (!tx.toAmount) return
-
       // Amount
-      tx.amountStr = txFormatService.formatAmountStr(wallet.coin, tx.toAmount)
+      tx.amountStr = profileService.formatAmountWithUnit(tx.toAmount) // txFormatService.formatAmountStr(null, tx.toAmount)
       tx.amountValueStr = tx.amountStr.split(' ')[0]
       tx.amountUnitStr = tx.amountStr.split(' ')[1]
-      txFormatService.formatAlternativeStr(wallet.coin, tx.toAmount, function (v) {
+      txFormatService.formatAlternativeStr(null, tx.toAmount, function (v) {
         tx.alternativeAmountStr = v
       })
     }
@@ -236,89 +163,9 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     refresh()
 
     // End of quick refresh, before wallet is selected.
-    if (!wallet) {
-      ongoingProcess.set('calculatingFee', false)
+    if (!account) {
       return cb()
     }
-
-    feeService.getFeeRate(wallet.coin, tx.network, tx.feeLevel, function (err, feeRate) {
-      if (err) {
-        ongoingProcess.set('calculatingFee', false)
-        return cb(err)
-      }
-
-      if (!usingCustomFee) tx.feeRate = feeRate
-      tx.feeLevelName = feeService.feeOpts[tx.feeLevel]
-
-      getSendMaxInfo(lodash.clone(tx), wallet, function (err, sendMaxInfo) {
-        if (err) {
-          ongoingProcess.set('calculatingFee', false)
-          var msg = gettextCatalog.getString('Error getting SendMax information')
-          return setSendError(msg)
-        }
-
-        if (sendMaxInfo) {
-          $log.debug('Send max info', sendMaxInfo)
-
-          if (tx.sendMax && sendMaxInfo.amount == 0) {
-            ongoingProcess.set('calculatingFee', false)
-            setNoWallet(gettextCatalog.getString('Insufficient funds'))
-            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Not enough funds for fee'))
-            return cb('no_funds')
-          }
-
-          tx.sendMaxInfo = sendMaxInfo
-          tx.toAmount = tx.sendMaxInfo.amount
-          updateAmount()
-          ongoingProcess.set('calculatingFee', false)
-          $timeout(function () {
-            showSendMaxWarning(wallet, sendMaxInfo)
-          }, 200)
-        }
-
-        // txp already generated for this wallet?
-        if (tx.txp[wallet.id]) {
-          ongoingProcess.set('calculatingFee', false)
-          refresh()
-          return cb()
-        }
-
-        getTxp(lodash.clone(tx), wallet, opts.dryRun, function (err, txp) {
-          ongoingProcess.set('calculatingFee', false)
-          if (err) {
-            return cb(err)
-          }
-
-          txp.feeStr = txFormatService.formatAmountStr(wallet.coin, txp.fee)
-          txFormatService.formatAlternativeStr(wallet.coin, txp.fee, function (v) {
-            txp.alternativeFeeStr = v
-          })
-
-          var per = (txp.fee / (txp.amount + txp.fee) * 100)
-          txp.feeRatePerStr = per.toFixed(2) + '%'
-          txp.feeTooHigh = per > FEE_TOO_HIGH_LIMIT_PER
-
-          if (txp.feeTooHigh) {
-            $ionicModal.fromTemplateUrl('views/modals/fee-warning.html', {
-              scope: $scope
-            }).then(function (modal) {
-              $scope.feeWarningModal = modal
-              $scope.feeWarningModal.show()
-            })
-
-            $scope.close = function () {
-              $scope.feeWarningModal.hide()
-            }
-          }
-
-          tx.txp[wallet.id] = txp
-          $log.debug('Confirm. TX Fully Updated for wallet:' + wallet.id, tx)
-          refresh()
-
-          return cb()
-        })
-      })
-    })
   }
 
   function useSelectedWallet () {
@@ -329,61 +176,20 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     $scope.onAccountSelect($scope.account)
   }
 
-  function setButtonText (isMultisig, isPayPro) {
-    if (isPayPro) {
-      if (isCordova && !isWindowsPhoneApp) {
-        $scope.buttonText = gettextCatalog.getString('Slide to pay')
-      } else {
-        $scope.buttonText = gettextCatalog.getString('Click to pay')
-      }
-    } else if (isMultisig) {
-      if (isCordova && !isWindowsPhoneApp) {
-        $scope.buttonText = gettextCatalog.getString('Slide to accept')
-      } else {
-        $scope.buttonText = gettextCatalog.getString('Click to accept')
-      }
+  function setButtonText () {
+    if (isCordova && !isWindowsPhoneApp) {
+      $scope.buttonText = gettextCatalog.getString('Slide to send')
     } else {
-      if (isCordova && !isWindowsPhoneApp) {
-        $scope.buttonText = gettextCatalog.getString('Slide to send')
-      } else {
-        $scope.buttonText = gettextCatalog.getString('Click to send')
-      }
+      $scope.buttonText = gettextCatalog.getString('Click to send')
     }
-  };
+  }
 
   $scope.toggleAddress = function () {
     $scope.showAddress = !$scope.showAddress
   }
 
-  function showSendMaxWarning (wallet, sendMaxInfo) {
-    function verifyExcludedUtxos () {
-      var warningMsg = []
-      if (sendMaxInfo.utxosBelowFee > 0) {
-        warningMsg.push(gettextCatalog.getString('A total of {{amountBelowFeeStr}} were excluded. These funds come from UTXOs smaller than the network fee provided.', {
-          amountBelowFeeStr: txFormatService.formatAmountStr(wallet.coin, sendMaxInfo.amountBelowFee)
-        }))
-      }
-
-      if (sendMaxInfo.utxosAboveMaxSize > 0) {
-        warningMsg.push(gettextCatalog.getString('A total of {{amountAboveMaxSizeStr}} were excluded. The maximum size allowed for a transaction was exceeded.', {
-          amountAboveMaxSizeStr: txFormatService.formatAmountStr(wallet.coin, sendMaxInfo.amountAboveMaxSize)
-        }))
-      }
-      return warningMsg.join('\n')
-    };
-
-    var msg = gettextCatalog.getString('{{fee}} will be deducted for bitcoin networking fees.', {
-      fee: txFormatService.formatAmountStr(wallet.coin, sendMaxInfo.fee)
-    })
-    var warningMsg = verifyExcludedUtxos()
-
-    if (!lodash.isEmpty(warningMsg)) { msg += '\n' + warningMsg }
-
-    popupService.showAlert(null, msg, function () {})
-  };
-
-  $scope.onAccountSelect = function (wallet) {
-    setWallet(wallet, tx)
+  $scope.onAccountSelect = function (account) {
+    setAccount(account, tx)
   }
 
   $scope.showDescriptionPopup = function (tx) {
@@ -400,53 +206,13 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     })
   }
 
-  function _paymentTimeControl (expirationTime) {
-    $scope.paymentExpired = false
-    setExpirationTime()
+  // Sets a account on the UI, creates a TXPs for that wallet
+  function setAccount (account, tx) {
+    $scope.account = account
 
-    countDown = $interval(function () {
-      setExpirationTime()
-    }, 1000)
+    setButtonText()
 
-    function setExpirationTime () {
-      var now = Math.floor(Date.now() / 1000)
-
-      if (now > expirationTime) {
-        setExpiredValues()
-        return
-      }
-
-      var totalSecs = expirationTime - now
-      var m = Math.floor(totalSecs / 60)
-      var s = totalSecs % 60
-      $scope.remainingTimeStr = ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2)
-    };
-
-    function setExpiredValues () {
-      $scope.paymentExpired = true
-      $scope.remainingTimeStr = gettextCatalog.getString('Expired')
-      if (countDown) $interval.cancel(countDown)
-      $timeout(function () {
-        $scope.$apply()
-      })
-    };
-  };
-
-  /* sets a wallet on the UI, creates a TXPs for that wallet */
-
-  function setWallet (wallet, tx) {
-    $scope.account = wallet
-
-    // If select another wallet
-    tx.coin = wallet.coin
-    tx.feeLevel = wallet.coin == 'bch' ? 'normal' : configFeeLevel
-    usingCustomFee = null
-
-    setButtonText(wallet.credentials.m > 1, !!tx.paypro)
-
-    if (tx.paypro) { _paymentTimeControl(tx.paypro.expires) }
-
-    updateTx(tx, wallet, {
+    updateTx(tx, account, {
       dryRun: true
     }, function (err) {
       $timeout(function () {
@@ -477,9 +243,10 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     $scope.payproModal.hide()
   }
 
-  $scope.approve = function (tx, wallet, onSendStatusChange) {
-    if (!tx || !wallet) return
+  $scope.approve = function (tx, account, onSendStatusChange) {
+    if (!tx || !account) return
 
+    /*
     if ($scope.paymentExpired) {
       popupService.showAlert(null, gettextCatalog.getString('This bitcoin payment request has expired.'))
       $scope.sendStatus = ''
@@ -487,49 +254,51 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
         $scope.$apply()
       })
       return
-    }
+    } */
 
     ongoingProcess.set('creatingTx', true, onSendStatusChange)
-    getTxp(lodash.clone(tx), wallet, false, function (err, txp) {
+    getTxp(lodash.clone(tx), account, false, function (err, txp) {
       ongoingProcess.set('creatingTx', false, onSendStatusChange)
       if (err) return
 
-      // confirm txs for more that 20usd, if not spending/touchid is enabled
+      // confirm txs for more than 20 usd, if not spending/touchid is enabled
       function confirmTx (cb) {
-        if (walletService.isEncrypted(wallet)) { return cb() }
-
-        var amountUsd = parseFloat(txFormatService.formatToUSD(wallet.coin, txp.amount))
+        var amountUsd = parseFloat(txFormatService.formatToUSD(null, txp.amount))
         if (amountUsd <= CONFIRM_LIMIT_USD) { return cb() }
 
-        var message = gettextCatalog.getString('Sending {{amountStr}} from your {{name}} wallet', {
+        var message = gettextCatalog.getString('Sending {{amountStr}} from your {{name}} account', {
           amountStr: tx.amountStr,
-          name: wallet.name
+          name: account.name
         })
         var okText = gettextCatalog.getString('Confirm')
         var cancelText = gettextCatalog.getString('Cancel')
         popupService.showConfirm(null, message, okText, cancelText, function (ok) {
           return cb(!ok)
         })
-      };
+      }
 
-      function publishAndSign () {
-        if (!wallet.canSign() && !wallet.isPrivKeyExternal()) {
-          $log.info('No signing proposal: No private key')
+      function doSend () {
+        ongoingProcess.set('sendingTx', true, onSendStatusChange)
+        profileService.send(txp, function (err) {
+          if (err) return setSendError(err)
+          ongoingProcess.set('sendingTx', false, onSendStatusChange)
 
-          return walletService.onlyPublish(wallet, txp, function (err) {
-            if (err) setSendError(err)
-          }, onSendStatusChange)
-        }
+          // TODO ehum
+         /* txConfirmNotification.subscribe(account, {
+            txid: txp.txid
+          })*/
+        })
 
+        /*
         walletService.publishAndSign(wallet, txp, function (err, txp) {
           if (err) return setSendError(err)
           if (config.confirmedTxsNotifications && config.confirmedTxsNotifications.enabled) {
-            txConfirmNotification.subscribe(wallet, {
+            txConfirmNotification.subscribe(account, {
               txid: txp.txid
             })
           }
-        }, onSendStatusChange)
-      };
+        }, onSendStatusChange)*/
+      }
 
       confirmTx(function (nok) {
         if (nok) {
@@ -539,7 +308,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
           })
           return
         }
-        publishAndSign()
+        doSend()
       })
     })
   }
@@ -548,9 +317,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     $log.debug('statusChangeHandler: ', processName, showName, isOn)
     if (
       (
-        processName === 'broadcastingTx' ||
-        ((processName === 'signingTx') && $scope.account.m > 1) ||
-        (processName == 'sendingTx' && !$scope.account.canSign() && !$scope.account.isPrivKeyExternal())
+        (processName === 'sendingTx')
       ) && !isOn) {
       $scope.sendStatus = 'success'
       $timeout(function () {
@@ -573,49 +340,5 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       $ionicHistory.clearHistory()
       $state.transitionTo('tabs.home')
     })
-  }
-
-  $scope.chooseFeeLevel = function (tx, wallet) {
-    if (wallet.coin == 'bch') return
-
-    var scope = $rootScope.$new(true)
-    scope.network = tx.network
-    scope.feeLevel = tx.feeLevel
-    scope.noSave = true
-    scope.coin = wallet.coin
-
-    if (usingCustomFee) {
-      scope.customFeePerKB = tx.feeRate
-      scope.feePerSatByte = tx.feeRate / 1000
-    }
-
-    $ionicModal.fromTemplateUrl('views/modals/chooseFeeLevel.html', {
-      scope: scope,
-      backdropClickToClose: false,
-      hardwareBackButtonClose: false
-    }).then(function (modal) {
-      scope.chooseFeeLevelModal = modal
-      scope.openModal()
-    })
-    scope.openModal = function () {
-      scope.chooseFeeLevelModal.show()
-    }
-
-    scope.hideModal = function (newFeeLevel, customFeePerKB) {
-      scope.chooseFeeLevelModal.hide()
-      $log.debug('New fee level choosen:' + newFeeLevel + ' was:' + tx.feeLevel)
-
-      usingCustomFee = newFeeLevel == 'custom'
-
-      if (tx.feeLevel == newFeeLevel && !usingCustomFee) return
-
-      tx.feeLevel = newFeeLevel
-      if (usingCustomFee) tx.feeRate = parseInt(customFeePerKB)
-
-      updateTx(tx, wallet, {
-        clearCache: true,
-        dryRun: true
-      }, function () {})
-    }
   }
 })

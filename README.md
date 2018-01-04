@@ -19,7 +19,7 @@ Canoe is a cross platform RaiBlocks Wallet application. It's based upon the [Cop
 Clone the repo and open the directory:
 
 ```sh
-git clone https://github.com/gokr/canoe.git
+git clone https://github.com/getcanoe/canoe.git
 cd canoe
 ```
 

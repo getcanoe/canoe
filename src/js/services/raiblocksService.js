@@ -1,6 +1,6 @@
 'use strict'
 angular.module('canoeApp.services')
-  .factory('raiblocksService', function ($log) {
+  .factory('raiblocksService', function ($log, platformInfo) {
     var root = {}
 
     // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
@@ -25,8 +25,13 @@ angular.module('canoeApp.services')
     }
 
     root.newRandomSeed = function () {
-      // During dev we reuse the same wallet and accounts
-      return 'A360BD236EA685BC187CD0784F4281BCDAB63291E0ECC795537480968C18DC8C' // XRB.createSeedHex()
+      // During dev we reuse the same wallet seed - DO NOT ADD MONEY TO THIS ONE
+      if (platformInfo.isDevel) {
+        $log.debug('Reusing dev seed')
+        return 'A360BD236EA685BC187CD0784F4281BCDAB63291E0ECC795537480968C18DC8C'
+      } else {
+        return XRB.createSeedHex()
+      }
     }
 
     root.createWallet = function () {
@@ -72,6 +77,10 @@ angular.module('canoeApp.services')
       return rai.wallet_change_seed(wallet.id, seed)
     }
 
+    root.send = function (wallet, account, addr, amount) {
+      $log.debug('Sending ' + amount + ' from ' + account.name + ' to ' + addr)
+      return rai.send(wallet.id, account.id, addr, amount)
+    }
     /*
     // Version
     var ver = rai.node_vendor()

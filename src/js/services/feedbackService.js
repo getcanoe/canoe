@@ -1,7 +1,7 @@
 'use strict'
 angular.module('canoeApp.services').factory('feedbackService', function ($http, $log, $httpParamSerializer, configService) {
   var root = {}
-  var URL = 'http://canoe.krampe.se/feedback.php'
+  var URL = 'https://getcanoe.io/feedback.php'
 
   root.send = function (dataSrc, cb) {
     $log.debug('DATA: ' + JSON.stringify(dataSrc))

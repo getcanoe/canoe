@@ -72,7 +72,7 @@ angular.module('canoeApp.controllers').controller('createController',
     function _create (opts) {
       ongoingProcess.set('creatingAccount', true)
       $timeout(function () {
-        profileService.createAccount(opts, function (err, client) {
+        profileService.createAccount(opts, function (err) {
           ongoingProcess.set('creatingAccount', false)
           if (err) {
             $log.warn(err)

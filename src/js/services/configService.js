@@ -6,50 +6,28 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
   var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
 
   var defaultConfig = {
-    // wallet limits
-    limits: {
-      totalCanoeers: 6,
-      mPlusN: 100
-    },
-
-    // Bitcore wallet service URL
-    bws: {
-      url: 'https://bws.bitpay.com/bws/api'
-    },
-
     download: {
-      bitpay: {
-        url: 'https://bitpay.com/wallet'
-      },
       canoe: {
-        url: 'https://canoe.io/#download'
+        url: 'https://getcanoe.io/download'
       }
     },
 
     rateApp: {
-      bitpay: {
-        ios: 'http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1149581638&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8',
-        android: 'https://play.google.com/store/apps/details?id=com.bitpay.wallet',
-        wp: ''
-      },
       canoe: {
         ios: 'http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=951330296&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8',
-        android: 'https://play.google.com/store/apps/details?id=com.bitpay.canoe',
+        android: 'https://play.google.com/store/apps/details?id=io.getcanoe.canoe',
         wp: ''
       }
     },
     // wallet default config
     wallet: {
-      requiredCanoeers: 2,
-      totalCanoeers: 3,
-      spendUnconfirmed: false,
       reconnectDelay: 5000,
       idleDurationMin: 4,
       settings: {
         unitName: 'XRB',
-        unitToRaw: 100000000,
-        unitDecimals: 8,
-        unitCode: 'btc',
+        unitToRaw: Math.pow(10, 30),
+        unitDecimals: 2,
+        unitCode: 'xrb',
         alternativeName: 'US Dollar',
         alternativeIsoCode: 'USD'
       }
@@ -113,42 +91,9 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
     storageService.getConfig(function (err, localConfig) {
       if (localConfig) {
         configCache = JSON.parse(localConfig)
-
-        // these ifs are to avoid migration problems
-        if (!configCache.bws) {
-          configCache.bws = defaultConfig.bws
-        }
-        if (!configCache.wallet) {
-          configCache.wallet = defaultConfig.wallet
-        }
-        if (!configCache.wallet.settings.unitCode) {
-          configCache.wallet.settings.unitCode = defaultConfig.wallet.settings.unitCode
-        }
-
-        if (!configCache.hideNextSteps) {
-          configCache.hideNextSteps = defaultConfig.hideNextSteps
-        }
-
-        if (!configCache.recentTransactions) {
-          configCache.recentTransactions = defaultConfig.recentTransactions
-        }
-        if (!configCache.pushNotifications) {
-          configCache.pushNotifications = defaultConfig.pushNotifications
-        }
-        if (!configCache.bitpayAccount) {
-          configCache.bitpayAccount = defaultConfig.bitpayAccount
-        }
-
-        if (configCache.wallet.settings.unitCode == 'bit') {
-          // Convert to BTC. Bits will be disabled
-          configCache.wallet.settings.unitName = defaultConfig.wallet.settings.unitName
-          configCache.wallet.settings.unitToRaw = defaultConfig.wallet.settings.unitToRaw
-          configCache.wallet.settings.unitDecimals = defaultConfig.wallet.settings.unitDecimals
-          configCache.wallet.settings.unitCode = defaultConfig.wallet.settings.unitCode
-        }
       } else {
         configCache = lodash.clone(defaultConfig)
-      };
+      }
 
       configCache.bwsFor = configCache.bwsFor || {}
       configCache.colorFor = configCache.colorFor || {}

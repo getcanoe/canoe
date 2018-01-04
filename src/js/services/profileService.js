@@ -8,6 +8,7 @@ angular.module('canoeApp.services')
     var root = {}
 
     var UPDATE_PERIOD = 15
+    var RAW_PER_XRB = Math.pow(10, 30) // 1 XRB = 1 Mxrb = 10^30 raw
 
     root.profile = null
 
@@ -40,11 +41,15 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.changeSeed = function (seed) {
+    root.changeSeed = function (seed, cb) {
+      $log.debug('Importing Wallet Seed')
       raiblocksService.changeSeed(root.wallet, seed)
+      $log.debug('Recreateing first account')
+      // TODO... ehm
+      root.createAccount({}, cb)
     }
 
-    root.updateAllAccounts = function () {
+    root.updateAllAccounts = function (cb) {
       raiblocksService.fetchAccountsAndBalances(root.wallet, function (err, balances) {
         if (err) $log.error(err)
         // Loop over balances and create accounts if needed
@@ -67,7 +72,9 @@ angular.module('canoeApp.services')
             delete root.wallet.accounts[id]
           }
         })
-
+        if (cb) {
+          cb()
+        }
         /*
         // Trick to know when all are done
         var i = accounts.length
@@ -79,6 +86,25 @@ angular.module('canoeApp.services')
           }
         }) */
       })
+    }
+
+    root.formatAmount = function (raw, decimals) {
+      if (raw === 0) {
+        return raw.toFixed(decimals)
+      } else {
+        var balance = raw / RAW_PER_XRB
+        if (Math.round(balance * Math.pow(10, decimals)) === 0)  {
+          return balance.toString()
+        } else {
+          return balance.toFixed(decimals)
+        }
+      }
+    }
+
+    root.formatAmountWithUnit = function (raw) {
+      if (isNaN(raw)) return
+      // TODO use current unit in settings kxrb, Mxrb etc
+      return root.formatAmount(raw, 2) + ' XRB'
     }
 
     root.updateAccountSettings = function (account) {
@@ -328,7 +354,7 @@ angular.module('canoeApp.services')
     // Do we have funds? Presuming we are up to date here
     root.hasFunds = function () {
       var total = 0
-      lodash.each(root.wallet.accounts, function (acc) {
+      lodash.forOwn(root.wallet.accounts, function (acc) {
         total = total + (acc.balance || 0)
       })
       return total > 0
@@ -341,10 +367,15 @@ angular.module('canoeApp.services')
       root.createAccount(opts, cb)
     }
 
-    // Create account in wallet
+    // Create account in wallet and store wallet
     root.createAccount = function (opts, cb) {
       var accountName = opts.name || gettextCatalog.getString('Default Account')
       raiblocksService.createAccount(root.wallet, accountName)
+      root.saveWallet(cb)
+    }
+
+    // Store the wallet
+    root.saveWallet = function (cb) {
       storageService.storeWallet(root.wallet, function () {
         cb(null, root.wallet)
       })
@@ -368,6 +399,11 @@ angular.module('canoeApp.services')
 
     root.getAccount = function (addr) {
       return root.wallet.accounts[addr]
+    }
+
+    root.send = function (tx, cb) {
+      raiblocksService.send(root.wallet, tx.account, tx.address, tx.amount)
+      cb()
     }
 
     root.deleteWalletClient = function (client, cb) {
@@ -409,7 +445,7 @@ angular.module('canoeApp.services')
     }
 
     // Adds and bind a new client to the profile
-    var addAndBindWalletClient = function (client, opts, cb) {
+    var NOTUSED_addAndBindWalletClient = function (client, opts, cb) {
       if (!client || !client.credentials) { return cb(gettextCatalog.getString('Could not access wallet')) }
 
       var walletId = client.credentials.walletId
@@ -502,9 +538,8 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.importSeed = function (seed) {
-      $log.debug('Importing Wallet Seed')
-      root.changeSeed(seed)
+    root.importSeed = function (seed, cb) {
+      root.changeSeed(seed, cb)
     }
 
     root.createProfile = function (cb) {
@@ -569,6 +604,7 @@ angular.module('canoeApp.services')
       root.getLastKnownBalance(account, function (err, data) {
         if (data) {
           data = JSON.parse(data)
+          account.cachedBalanceStr = root.formatAmountWithUnit(parseInt(data.balance))
           account.cachedBalance = data.balance
           account.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null
         }
@@ -619,9 +655,10 @@ angular.module('canoeApp.services')
       ])
     }
 
-    root.toggleHideBalanceFlag = function (walletId, cb) {
-      root.wallet[walletId].balanceHidden = !root.wallet[walletId].balanceHidden
-      storageService.setHideBalanceFlag(walletId, root.wallet[walletId].balanceHidden.toString(), cb)
+    root.toggleHideBalanceFlag = function (accountId, cb) {
+      var acc = root.getAccount(accountId)
+      acc.balanceHidden = !acc.balanceHidden
+      root.saveWallet(cb)
     }
 
     root.getNotifications = function (opts, cb) {

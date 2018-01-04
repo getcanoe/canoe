@@ -16,6 +16,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
         accountList.push({
           color: acc.color,
           name: acc.name,
+          recipientType: 'account',
           address: acc.id
         })
       })
@@ -112,20 +113,12 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
 
   $scope.goToAmount = function (item) {
     $timeout(function () {
-      item.getAddress(function (err, addr) {
-        if (err || !addr) {
-          // Error is already formated
-          return popupService.showAlert(err)
-        }
-        $log.debug('Got toAddress:' + addr + ' | ' + item.name)
-        return $state.transitionTo('tabs.send.amount', {
-          recipientType: item.recipientType,
-          toAddress: addr,
-          toName: item.name,
-          toEmail: item.email,
-          toColor: item.color,
-          coin: item.coin
-        })
+      return $state.transitionTo('tabs.send.amount', {
+        recipientType: item.recipientType,
+        toAddress: item.address,
+        toName: item.name,
+        toEmail: item.email,
+        toColor: item.color
       })
     })
   }

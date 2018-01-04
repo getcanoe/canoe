@@ -2,10 +2,7 @@
 
 angular.module('canoeApp.controllers').controller('preferencesInformation',
   function ($scope, $log, $ionicHistory, platformInfo, lodash, profileService, configService, $stateParams, $state, walletService) {
-    var wallet = profileService.getAccount($stateParams.walletId)
-    $scope.account = wallet
-
-    var walletId = wallet.id
+    var account = profileService.getAccount($stateParams.accountId)
     var config = configService.getSync()
     var colorCounter = 1
     var BLACK_WALLET_COLOR = '#202020'
@@ -14,44 +11,20 @@ angular.module('canoeApp.controllers').controller('preferencesInformation',
 
     $scope.saveBlack = function () {
       function save (color) {
-        var opts = {
-          colorFor: {}
-        }
-        opts.colorFor[walletId] = color
-
-        configService.set(opts, function (err) {
+        account.color = color
+        profileService.saveWallet(function (wallet) {
           $ionicHistory.removeBackView()
           $state.go('tabs.home')
-          if (err) $log.warn(err)
         })
-      };
-
-      if (colorCounter != 5) return colorCounter++
+      }
+      if (colorCounter !== 5) return colorCounter++
       save(BLACK_WALLET_COLOR)
-    };
+    }
 
     $scope.$on('$ionicView.enter', function (event, data) {
-      var c = wallet.credentials
-      var basePath = c.getBaseAddressDerivationPath()
-
-      $scope.account = wallet
-      $scope.accountName = c.walletName
-      $scope.accountId = c.walletId
-      $scope.network = c.network
-      $scope.addressType = c.addressType || 'P2SH'
-      $scope.derivationStrategy = c.derivationStrategy || 'BIP45'
-      $scope.basePath = basePath
-      $scope.M = c.m
-      $scope.N = c.n
-      $scope.pubKeys = lodash.pluck(c.publicKeyRing, 'xPubKey')
-      $scope.externalSource = null
-      $scope.canSign = wallet.canSign()
-
-      if (wallet.isPrivKeyExternal()) {
-        $scope.externalSource = lodash.find(walletService.externalSource, function (source) {
-          return source.id == wallet.getPrivKeyExternalSourceName()
-        }).name
-      }
+      var account = profileService.getAccount(data.stateParams.accountId)
+      $scope.account = account
+      $scope.accountName = account.name
+      $scope.accountId = account.id
     })
-
   })

@@ -281,7 +281,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
        */
 
       .state('tabs.send.amount', {
-        url: '/amount/:recipientType/:toAddress/:toName/:toEmail/:toColor/:coin/:fixedUnit',
+        url: '/amount/:recipientType/:toAddress/:toName/:toEmail/:toColor/:fixedUnit',
         views: {
           'tab-send@tabs': {
             controller: 'amountController',
@@ -440,7 +440,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
        */
 
       .state('tabs.preferences', {
-        url: '/preferences/:walletId',
+        url: '/preferences/:accountId',
         views: {
           'tab-settings@tabs': {
             controller: 'preferencesController',
@@ -493,7 +493,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.preferences.information', {
+/*      .state('tabs.preferences.information', {
         url: '/information',
         views: {
           'tab-settings@tabs': {
@@ -501,7 +501,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
             templateUrl: 'views/preferencesInformation.html'
           }
         }
-      })
+      })*/
       .state('tabs.preferences.export', {
         url: '/export',
         views: {
