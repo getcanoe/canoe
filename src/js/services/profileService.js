@@ -264,6 +264,14 @@ angular.module('canoeApp.services')
         }
         if (!profile) {
           return cb(new Error('NOPROFILE: No profile'))
+        } else if (!profile.disclaimerAccepted) {
+          // Hacky: if the disclaimer wasn't accepted, assume the onboarding didn't complete
+          // so just remove the profile
+          storageService.deleteProfile(
+            () => {
+              root.loadAndBindProfile(cb)
+            }
+          )
         } else {
           $log.debug('Profile read')
           $log.debug('Profile: ' + JSON.stringify(profile))
