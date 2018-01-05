@@ -52,7 +52,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
     },
 
     release: {
-      url: 'https://api.github.com/repos/bitpay/canoe/releases/latest'
+      url: 'https://api.github.com/repos/getcanoe/canoe/releases/latest'
     },
 
     pushNotificationsEnabled: true,
