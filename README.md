@@ -166,7 +166,7 @@ Canoe uses standard gettext PO files for translations. We should as soon as Cano
 *Gracias totales!*
 
 ## Version numbering
-Canoe uses the `MAJOR.MINOR.BATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
+Canoe uses the `MAJOR.MINOR.PATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
 
 ## Contributing to this project
 Anyone and everyone is welcome to contribute.
