@@ -293,7 +293,7 @@ angular.module('canoeApp.services')
           // Hacky: if the disclaimer wasn't accepted, assume the onboarding didn't complete
           // so just remove the profile
           storageService.deleteProfile(
-            () => {
+            function () {
               root.loadAndBindProfile(cb)
             }
           )
