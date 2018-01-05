@@ -40,7 +40,7 @@ angular.module('canoeApp.controllers').controller('tourController',
     $scope.createDefaultWallet = function () {
       ongoingProcess.set('creatingWallet', true)
       $timeout(function () {
-        profileService.createDefaultWallet(function (err, wallet) {
+        profileService.createDefaultWallet(null, function (err, wallet) {
           if (err) {
             $log.warn(err)
 
