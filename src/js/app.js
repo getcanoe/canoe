@@ -22,8 +22,6 @@ var modules = [
 
 var canoeApp = window.canoeApp = angular.module('canoeApp', modules)
 
-//nw.Window.get().menu = null
-
 angular.module('canoeApp.filters', [])
 angular.module('canoeApp.services', [])
 angular.module('canoeApp.controllers', [])
