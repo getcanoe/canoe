@@ -122,7 +122,15 @@
       }
       &__status-icon {
         font-size: 18px;
+        margin-left: 30px;
+        position: relative;
+        top: 1px;
+        color: $v-light-gray;
+      }
+      &__pending-icon {
+        font-size: 14px;
         margin-left: 5px;
+        margin-bottom: 3px;
         position: relative;
         top: 1px;
         color: $v-light-gray;

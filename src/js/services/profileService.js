@@ -10,6 +10,9 @@ angular.module('canoeApp.services')
     var UPDATE_PERIOD = 15
     var RAW_PER_XRB = Math.pow(10, 30) // 1 XRB = 1 Mxrb = 10^30 raw
 
+    var rate = 0 // Current rate fetched every 60 sec
+    var lastTime = 0
+
     root.profile = null
 
     Object.defineProperty(root, 'focusedClient', {
@@ -21,10 +24,33 @@ angular.module('canoeApp.services')
       }
     })
 
+    root.updateRate = function (code) {
+      if (!rate || (Date.now() > (lastTime + 60000))) {
+        root.getCurrentCoinmarketcapRate(code, function (err, rt) {
+          if (err) {
+            $log.warn(err)
+          } else {
+            rate = rt
+            lastTime = Date.now()
+          }
+        })
+      }
+    }
+
+    root.toFiat = function (raw, code) {
+      root.updateRate(code)
+      return (raw * rate) / RAW_PER_XRB 
+    }
+
+    root.fromFiat = function (amount, code) {
+      root.updateRate(code)
+      return (amount / rate) * RAW_PER_XRB
+    }
+
     root.getCurrentCoinmarketcapRate = function (localCurrency, cb) {
       var local = localCurrency || 'usd'
+      local = local.toLowerCase()
       var value = 1
-      var decimals = 2
       var xhr = new XMLHttpRequest()
       xhr.open('GET', 'https://api.coinmarketcap.com/v1/ticker/raiblocks/?convert=' + local, true)
       xhr.send()
@@ -35,8 +61,7 @@ angular.module('canoeApp.services')
           console.log('Coinmarketcap reply: ' + JSON.stringify(response))
           var price = response[0]['price_' + local]
           // var symbol = response[0]['symbol']
-          var answer = (price * value).toFixed(decimals)
-          cb(null, answer)
+          cb(null, (price * value))
         }
       }
     }
@@ -62,7 +87,7 @@ angular.module('canoeApp.services')
           }
           acc.balance = bal.balance
           acc.pending = bal.pending
-          root.setLastKnownBalance(id, acc.balance, function () {})
+          root.setLastKnownBalance(acc, function () {})
         })
         // Remove accounts not found
         // TODO is this kosher?
@@ -609,15 +634,18 @@ angular.module('canoeApp.services')
           data = JSON.parse(data)
           account.cachedBalanceStr = root.formatAmountWithUnit(parseInt(data.balance))
           account.cachedBalance = data.balance
+          account.cachedPendingStr = root.formatAmountWithUnit(parseInt(data.pending))
+          account.cachedPending = data.pending
           account.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null
         }
         return cb()
       })
     }
 
-    root.setLastKnownBalance = function (account, balance, cb) {
-      storageService.setBalanceCache(account, {
-        balance: balance,
+    root.setLastKnownBalance = function (account, cb) {
+      storageService.setBalanceCache(account.id, {
+        balance: account.balance,
+        pending: account.pending,
         updatedOn: Math.floor(Date.now() / 1000)
       }, cb)
     }

@@ -296,12 +296,11 @@ angular.module('canoeApp.controllers').controller('amountController', function (
   }
 
   function fromFiat (val) {
-    return parseFloat((rateService.fromFiat(val, fiatCode, availableUnits[altUnitIndex].id) * rawToUnit).toFixed(unitDecimals))
+    return parseFloat((profileService.fromFiat(val, fiatCode, availableUnits[altUnitIndex].id) * rawToUnit).toFixed(unitDecimals))
   }
 
   function toFiat (val) {
-    if (!rateService.getRate(fiatCode)) return
-    return parseFloat((rateService.toFiat(val * unitToRaw, fiatCode, availableUnits[unitIndex].id)).toFixed(2))
+    return parseFloat((profileService.toFiat(val * unitToRaw, fiatCode, availableUnits[unitIndex].id)).toFixed(2))
   }
 
   function evaluate (val) {
