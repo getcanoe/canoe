@@ -1290,10 +1290,11 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       })
       try {
         nativeMenuBar.createMacBuiltin(appConfigService.nameCase)
+        win.menu = nativeMenuBar
       } catch (e) {
         $log.debug('This is not OSX')
+        win.menu = null
       }
-      win.menu = nativeMenuBar
     }
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
