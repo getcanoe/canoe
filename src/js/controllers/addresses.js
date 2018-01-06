@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.controllers').controller('addressesController', function ($scope, $log, $stateParams, $state, $timeout, $ionicHistory, $ionicScrollDelegate, popupService, gettextCatalog, ongoingProcess, lodash, profileService, walletService, bwcError, platformInfo, appConfigService, txFormatService, feeService) {
+angular.module('canoeApp.controllers').controller('addressesController', function ($scope, $log, $stateParams, $state, $timeout, $ionicHistory, $ionicScrollDelegate, popupService, gettextCatalog, ongoingProcess, lodash, profileService, walletService, bwcError, platformInfo, appConfigService, txFormatService) {
   var UNUSED_ADDRESS_LIMIT = 5
   var BALANCE_ADDRESS_LIMIT = 5
   var withBalance, cachedWallet

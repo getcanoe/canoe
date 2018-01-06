@@ -15,7 +15,7 @@ angular.module('canoeApp.services').service('sendMaxService', function(feeServic
 
       var config = configService.getSync().wallet;
 
-      walletService.getSendMaxInfo(wallet, {
+      /*walletService.getSendMaxInfo(wallet, {
         feePerKb: feePerKb,
         excludeUnconfirmedUtxos: !config.spendUnconfirmed,
         returnInputs: true,
@@ -29,7 +29,7 @@ angular.module('canoeApp.services').service('sendMaxService', function(feeServic
           fee: resp.fee,
           feePerKb: feePerKb,
         });
-      });
+      });*/
     });
   };
 

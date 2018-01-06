@@ -1,5 +1,5 @@
 angular.module('canoeApp.controllers').controller('paperWalletController',
-  function ($scope, $timeout, $log, $ionicModal, $ionicHistory, feeService, popupService, gettextCatalog, platformInfo, configService, profileService, $state, bitcore, ongoingProcess, txFormatService, $stateParams, walletService) {
+  function ($scope, $timeout, $log, $ionicModal, $ionicHistory, popupService, gettextCatalog, platformInfo, configService, profileService, $state, bitcore, ongoingProcess, txFormatService, $stateParams, walletService) {
     function _scanFunds (cb) {
       function getPrivateKey (scannedKey, isPkEncrypted, passphrase, cb) {
         if (!isPkEncrypted) return cb(null, scannedKey)
@@ -57,7 +57,7 @@ angular.module('canoeApp.controllers').controller('paperWalletController',
         $scope.account.buildTxFromPrivateKey($scope.privateKey, destinationAddress, null, function (err, testTx) {
           if (err) return cb(err)
           var rawTxLength = testTx.serialize().length
-          feeService.getCurrentFeeRate('btc', 'livenet', function (err, feePerKb) {
+          /*feeService.getCurrentFeeRate('btc', 'livenet', function (err, feePerKb) {
             var opts = {}
             opts.fee = Math.round((feePerKb * rawTxLength) / 2000)
             $scope.account.buildTxFromPrivateKey($scope.privateKey, destinationAddress, opts, function (err, tx) {
@@ -70,7 +70,7 @@ angular.module('canoeApp.controllers').controller('paperWalletController',
                 return cb(null, destinationAddress, txid)
               })
             })
-          })
+          })*/
         })
       })
     };

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('canoeApp.services').factory('coinbaseService', function($http, $log, $window, $filter, platformInfo, lodash, storageService, configService, appConfigService, txFormatService, buyAndSellService, $rootScope, feeService) {
+angular.module('canoeApp.services').factory('coinbaseService', function($http, $log, $window, $filter, platformInfo, lodash, storageService, configService, appConfigService, txFormatService, buyAndSellService, $rootScope) {
   var root = {};
   var credentials = {};
   var isCordova = platformInfo.isCordova;
@@ -187,12 +187,12 @@ angular.module('canoeApp.services').factory('coinbaseService', function($http, $
   var _getNetAmount = function(amount, cb) {
     // Fee Normal for a single transaction (450 bytes)
     var txNormalFeeKB = 450 / 1000;
-    feeService.getFeeRate('btc', 'livenet', 'normal', function(err, feePerKb) {
+    /*feeService.getFeeRate('btc', 'livenet', 'normal', function(err, feePerKb) {
       if (err) return cb('Could not get fee rate');
       var feeBTC = (feePerKb * txNormalFeeKB / 100000000).toFixed(8);
 
       return cb(null, amount - feeBTC, feeBTC);
-    });
+    });*/
   };
 
   var _refreshToken = function(refreshToken, cb) {

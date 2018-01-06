@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.controllers').controller('walletDetailsController', function ($scope, $rootScope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicHistory, profileService, lodash, configService, platformInfo, walletService, txpModalService, externalLinkService, popupService, addressbookService, storageService, $ionicScrollDelegate, $window, bwcError, gettextCatalog, timeService, feeService, appConfigService) {
+angular.module('canoeApp.controllers').controller('walletDetailsController', function ($scope, $rootScope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicHistory, profileService, lodash, configService, platformInfo, walletService, txpModalService, externalLinkService, popupService, addressbookService, storageService, $ionicScrollDelegate, $window, bwcError, gettextCatalog, timeService, appConfigService) {
   var HISTORY_SHOW_LIMIT = 10
   var currentTxHistoryPage = 0
   var listeners = []

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('canoeApp.controllers').controller('txDetailsController', function($rootScope, $log, $ionicHistory, $scope, $timeout, walletService, lodash, gettextCatalog, profileService, externalLinkService, popupService, ongoingProcess, txFormatService, txConfirmNotification, feeService, configService) {
+angular.module('canoeApp.controllers').controller('txDetailsController', function($rootScope, $log, $ionicHistory, $scope, $timeout, walletService, lodash, gettextCatalog, profileService, externalLinkService, popupService, ongoingProcess, txFormatService, txConfirmNotification, configService) {
 
   var txId;
   var listeners = [];
@@ -138,7 +138,7 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
         $scope.$digest();
       });
 
-      feeService.getFeeLevels($scope.account.coin, function(err, levels) {
+      /*feeService.getFeeLevels($scope.account.coin, function(err, levels) {
         if (err) return;
         walletService.getLowAmount($scope.account, levels, function(err, amount) {
           if (err) return;
@@ -149,7 +149,7 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
           });
 
         });
-      });
+      });*/
     });
   };
 

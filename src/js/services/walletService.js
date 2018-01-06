@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.services').factory('walletService', function ($log, $timeout, lodash, trezor, ledger, intelTEE, storageService, configService, rateService, uxLanguage, $filter, gettextCatalog, bwcError, $ionicPopup, fingerprintService, ongoingProcess, gettext, $rootScope, txFormatService, $ionicModal, $state, bwcService, bitcore, popupService, feeService) {
+angular.module('canoeApp.services').factory('walletService', function ($log, $timeout, lodash, trezor, ledger, intelTEE, storageService, configService, rateService, uxLanguage, $filter, gettextCatalog, bwcError, $ionicPopup, fingerprintService, ongoingProcess, gettext, $rootScope, txFormatService, $ionicModal, $state, bwcService, bitcore, popupService) {
   // Ratio low amount warning (fee/amount) in incoming TX
   var LOW_AMOUNT_RATIO = 0.15
 
@@ -900,7 +900,7 @@ angular.module('canoeApp.services').factory('walletService', function ($log, $ti
 
   // Approx utxo amount, from which the uxto is economically redeemable
   root.getMinFee = function (wallet, nbOutputs) {
-    var levels = feeService.cachedFeeLevels
+    //var levels = feeService.cachedFeeLevels
     var lowLevelRate = (lodash.find(levels[wallet.network], {
       level: 'normal'
     }).feePerKb / 1000).toFixed(0)

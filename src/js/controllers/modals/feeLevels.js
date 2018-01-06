@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('canoeApp.controllers').controller('feeLevelsController', function($scope, $timeout, $log, lodash, gettextCatalog, configService, feeService, ongoingProcess, popupService) {
+angular.module('canoeApp.controllers').controller('feeLevelsController', function($scope, $timeout, $log, lodash, gettextCatalog, configService, ongoingProcess, popupService) {
 
   var FEE_MULTIPLIER = 10;
   var FEE_MIN = 0;
@@ -100,9 +100,9 @@ angular.module('canoeApp.controllers').controller('feeLevelsController', functio
   if (lodash.isEmpty($scope.feeLevel)) showErrorAndClose(null, gettextCatalog.getString('Fee level is not defined') );
   $scope.selectedFee = { value: $scope.feeLevel };
 
-  $scope.feeOpts = feeService.feeOpts;
+  //$scope.feeOpts = feeService.feeOpts;
   $scope.loadingFee = true;
-  feeService.getFeeLevels($scope.coin, function(err, levels) {
+  /*feeService.getFeeLevels($scope.coin, function(err, levels) {
     $scope.loadingFee = false;
     if (err || lodash.isEmpty(levels)) {
       showErrorAndClose(null, err);
@@ -114,6 +114,6 @@ angular.module('canoeApp.controllers').controller('feeLevelsController', functio
     }
     $scope.feeLevels = levels;
     $scope.updateFeeRate();
-  });
+  });*/
 
 });
