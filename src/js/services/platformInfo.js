@@ -59,11 +59,11 @@ angular.module('canoeApp.services').factory('platformInfo', function ($window) {
   ret.isChromeApp = $window.chrome && chrome.runtime && chrome.runtime.id && !ret.isNW
   ret.isDevel = !ret.isMobile && !ret.isChromeApp && !ret.isNW
 
-  ret.supportsLedger = ret.isChromeApp
-  ret.supportsTrezor = ret.isChromeApp || ret.isDevel
+  //ret.supportsLedger = ret.isChromeApp
+  //ret.supportsTrezor = ret.isChromeApp || ret.isDevel
 
-  ret.versionIntelTEE = getVersionIntelTee()
-  ret.supportsIntelTEE = ret.versionIntelTEE.length > 0
+  //ret.versionIntelTEE = getVersionIntelTee()
+  //ret.supportsIntelTEE = ret.versionIntelTEE.length > 0
 
   return ret
 })
