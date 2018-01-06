@@ -6,10 +6,21 @@ angular.module('canoeApp.services')
     // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
     var host = 'https://getcanoe.io/rpc' // for the beta node
     var port = 443
-    var rai = new Rai(host, port) // connection
+    var rai = null
 
-    // Initialization global variables
-    rai.initialize()
+    root.connect = function () {
+      try {
+        rai = new Rai(host, port) // connection
+        rai.initialize()
+      } catch (e) {
+        rai = null
+        $log.warn('Failed to initialize server connection, no network?', e)
+        // Try again
+        setTimeout(function () { root.connect() }, 5000)
+      }
+    }
+
+    root.connect()
 
     root.isValidSeed = function (seedHex) {
       var isValidHash = /^[0123456789ABCDEF]+$/.test(seedHex)
@@ -58,6 +69,19 @@ angular.module('canoeApp.services')
       var account = root.makeAccount(wallet, id, accountName)
       $log.debug('Account: ' + JSON.stringify(account))
       return account
+    }
+
+    root.fetchAccountsAndBalancesAsync = function (wallet, cb) {
+      $log.debug('Fetching all balances in wallet ' + wallet.id)
+      // This could discover new ones, or some have been removed
+      rai.account_list_async(wallet.id, function (accountIds) {
+        if (accountIds) {
+          rai.accounts_balances_async(accountIds, function (balances) {
+            $log.debug('Fetched')
+            cb(null, balances)
+          })
+        }
+      })
     }
 
     root.fetchAccountsAndBalances = function (wallet, cb) {

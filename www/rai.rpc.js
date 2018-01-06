@@ -224,6 +224,11 @@ function Rai (url_base, port) {
     var account_list = this.rpc(JSON.stringify({'action': 'account_list', 'wallet': wallet}))
     return account_list.accounts
   }
+  this.account_list_async = function (wallet, cb) {
+    this.rpc(JSON.stringify({'action': 'account_list', 'wallet': wallet}), function (account_list) {
+      cb(account_list.accounts)
+    })
+  }
 
 // accounts is array
   this.account_move = function (wallet, source, accounts) {
@@ -257,6 +262,11 @@ function Rai (url_base, port) {
   this.accounts_balances = function (accounts) {
     var accounts_balances = this.rpc(JSON.stringify({'action': 'accounts_balances', 'accounts': accounts}))
     return accounts_balances.balances
+  }
+  this.accounts_balances_async = function (accounts, cb) {
+    this.rpc(JSON.stringify({'action': 'accounts_balances', 'accounts': accounts}), function (accounts_balances) {
+      cb(accounts_balances.balances)
+    })
   }
 
   this.accounts_create = function (wallet, count = 1, work = true) {

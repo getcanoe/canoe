@@ -75,7 +75,7 @@ angular.module('canoeApp.services')
     }
 
     root.updateAllAccounts = function (cb) {
-      raiblocksService.fetchAccountsAndBalances(root.wallet, function (err, balances) {
+      raiblocksService.fetchAccountsAndBalancesAsync(root.wallet, function (err, balances) {
         if (err) $log.error(err)
         // Loop over balances and create accounts if needed
         var foundAccounts = []
