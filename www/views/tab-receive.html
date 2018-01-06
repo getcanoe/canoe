@@ -17,10 +17,10 @@
     </article>
     <article class="address" ng-if="accounts[0]">
       <div class="address-info" ng-if="account">
-        <div copy-to-clipboard="addr">
-          <qrcode ng-if="addr" size="220" data="raiblocks:{{addr}}" color="#334"></qrcode>
+        <div copy-to-clipboard="addrUrl">
+          <qrcode ng-if="addr" size="220" data="xrb:{{addr}}" color="#334"></qrcode>
           <div class="address-label">
-            <span class="ellipsis">{{addr}}</span>
+            <span class="ellipsis">xrb:{{addr}}</span>
             <ion-spinner ng-show="!addr" class="spinner-dark" icon="crescent"></ion-spinner>
           </div>
         </div>

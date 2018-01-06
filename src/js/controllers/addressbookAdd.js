@@ -13,30 +13,31 @@ angular.module('canoeApp.controllers').controller('addressbookAddController', fu
     $timeout(function () {
       var form = addressbookForm
       if (data && form) {
-        data = data.replace(/^raiblocks:/, '')
+        // TODO pick out label as name of contact also
+        data = data.replace(/^xrb:/, '')
         form.address.$setViewValue(data)
         form.address.$isValid = true
         form.address.$render()
       }
       $scope.$digest()
     }, 100)
-  };
+  }
 
   $scope.add = function (addressbook) {
     $timeout(function () {
       addressbookService.add(addressbook, function (err, ab) {
         if (err) {
           popupService.showAlert(gettextCatalog.getString('Error'), err)
-          return;
+          return
         }
         if ($scope.fromSendTab) $scope.goHome()
         else $ionicHistory.goBack()
       })
     }, 100)
-  };
+  }
 
   $scope.goHome = function () {
     $ionicHistory.removeBackView()
     $state.go('tabs.home')
-  };
+  }
 })
