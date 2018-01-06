@@ -8,7 +8,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   $scope.serverMessage = null
 
   var updateAccountsList = function () {
-    $scope.showTransferCard = $scope.hasAccounts
+    $scope.showTransferCard = $scope.hasMoreAccounts
     $scope.hasFunds = profileService.hasFunds()
     if ($scope.showTransferCard) {
       var accountList = []
@@ -148,6 +148,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     $scope.accounts = profileService.getAccounts()
     $scope.hasAccounts = !lodash.isEmpty($scope.accounts)
+    $scope.hasMoreAccounts = $scope.accounts.length > 1
 
     $scope.checkingBalance = true
     $scope.formData = {
