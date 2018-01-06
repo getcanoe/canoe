@@ -226,31 +226,31 @@ module.exports = function(grunt) {
         appName: '<%= pkg.title %>',
         platforms: ['win64', 'osx64', 'linux64'],
         buildDir: './webkitbuilds',
-        version: '0.27.2',
+        version: '0.19.5',
         macIcns: './resources/<%= pkg.name %>/mac/app.icns',
         exeIco: './www/img/app/logo.ico',
         macPlist: {
           'CFBundleURLTypes': [
             {
               'CFBundleURLName': 'URI Handler',
-              'CFBundleURLSchemes': ['bitcoin', '<%= pkg.name %>']
+              'CFBundleURLSchemes': ['raiblocks', '<%= pkg.name %>']
             }
           ]
         }
       },
       src: ['./package.json', './www/**/*']
     },
-    compress: {
-      linux: {
-        options: {
-          archive: './webkitbuilds/<%= pkg.title %>-linux.zip'
-        },
-        expand: true,
-        cwd: './webkitbuilds/<%= pkg.title %>/linux64/',
-        src: ['**/*'],
-        dest: '<%= pkg.title %>-linux/'
-      }
-    },
+    //compress: {
+    //  linux: {
+    //    options: {
+    //      archive: './webkitbuilds/<%= pkg.title %>-linux.zip'
+    //    },
+    //    expand: true,
+    //    cwd: './webkitbuilds/<%= pkg.title %>/linux64/',
+    //    src: ['**/*'],
+    //    dest: '<%= pkg.title %>-linux/'
+    //  }
+    //},
     browserify: {
       dist: {
         files: {
@@ -264,7 +264,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['nggettext_compile', 'exec:appConfig', 'exec:externalServices', 'browserify', 'sass', 'concat', 'copy:ionic_fonts', 'copy:ionic_js']);
   grunt.registerTask('prod', ['default', 'uglify']);
   grunt.registerTask('translate', ['nggettext_extract']);
-  grunt.registerTask('desktop', ['prod', 'nwjs', 'copy:linux', 'compress:linux']);
+  grunt.registerTask('desktop', ['prod', 'nwjs', 'copy:linux']);
   grunt.registerTask('osx', ['prod', 'nwjs', 'exec:macos', 'exec:osxsign']);
   grunt.registerTask('osx-debug', ['default', 'nwjs']);
   grunt.registerTask('chrome', ['default','exec:chrome']);
