@@ -14,9 +14,18 @@ $v-mid-gray:                                         #667 !default;
 $v-light-gray:                                       #9b9bab !default;
 $v-subtle-gray:                                      darken(#ffffff, 5%) !default;
 
+/*
 $v-primary-color:                                    #1fafe5 !default;
 $v-secondary-color:                                  #bbd531 !default;
 $v-accent-color:                                     #123238 !default;
+*/
+$v-secondary-color:                                    #20bffb !default;
+$v-primary-color:                                  #19b69c !default;
+$v-accent-color:                                     #565c5e !default;
+
+$canoe-light-blue: #20bffb;
+$canoe-green: #19d69c;
+$canoe-dark: #565c5e;
 
 $v-text-primary-color:                               #123238 !default;
 $v-text-secondary-color:                             rgba(0,0,0,.56) !default;
