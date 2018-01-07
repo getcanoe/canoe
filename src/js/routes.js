@@ -138,8 +138,8 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         url: '/account/:accountId/:fromOnboarding/:clearCache',
         views: {
           'tab-home@tabs': {
-            controller: 'walletDetailsController',
-            templateUrl: 'views/walletDetails.html'
+            controller: 'accountDetailsController',
+            templateUrl: 'views/accountDetails.html'
           }
         }
       })
