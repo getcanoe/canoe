@@ -1,6 +1,6 @@
 'use strict'
 angular.module('canoeApp.services')
-  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, raiblocksService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, appConfigService) {
+  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, raiblocksService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
     var isChromeApp = platformInfo.isChromeApp
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
@@ -39,7 +39,7 @@ angular.module('canoeApp.services')
 
     root.toFiat = function (raw, code) {
       root.updateRate(code)
-      return (raw * rate) / RAW_PER_XRB 
+      return (raw * rate) / RAW_PER_XRB
     }
 
     root.fromFiat = function (amount, code) {
@@ -118,7 +118,7 @@ angular.module('canoeApp.services')
         return raw.toFixed(decimals)
       } else {
         var balance = raw / RAW_PER_XRB
-        if (Math.round(balance * Math.pow(10, decimals)) === 0)  {
+        if (Math.round(balance * Math.pow(10, decimals)) === 0) {
           return balance.toString()
         } else {
           return balance.toFixed(decimals)
@@ -581,10 +581,14 @@ angular.module('canoeApp.services')
         var p = Profile.create()
         storageService.storeNewProfile(p, function (err) {
           if (err) return cb(err)
-          root.bindProfile(p, function (err) {
-            // ignore NONAGREEDDISCLAIMER
-            if (err && err.toString().match('NONAGREEDDISCLAIMER')) return cb()
-            return cb(err)
+
+          // Added this here, not the best place
+          addressbookService.initialize(function () {
+            root.bindProfile(p, function (err) {
+              // ignore NONAGREEDDISCLAIMER
+              if (err && err.toString().match('NONAGREEDDISCLAIMER')) return cb()
+              return cb(err)
+            })
           })
         })
       })

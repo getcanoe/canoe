@@ -1,15 +1,32 @@
 'use strict'
 
-angular.module('canoeApp.controllers').controller('tabSettingsController', function ($rootScope, $timeout, $scope, appConfigService, $ionicModal, $log, lodash, uxLanguage, platformInfo, profileService, configService, externalLinkService, bitpayAccountService, bitpayCardService, storageService, glideraService, gettextCatalog, buyAndSellService) {
+angular.module('canoeApp.controllers').controller('tabSettingsController', function ($rootScope, $timeout, $scope, appConfigService, $ionicModal, $log, lodash, uxLanguage, platformInfo, profileService, configService, externalLinkService, bitpayAccountService, bitpayCardService, storageService, glideraService, gettextCatalog, addressbookService, $state, $ionicHistory) {
   var updateConfig = function () {
     $scope.currentLanguageName = uxLanguage.getCurrentLanguageName()
-    $scope.buyAndSellServices = buyAndSellService.getLinked()
+    //$scope.buyAndSellServices = buyAndSellService.getLinked()
 
     configService.whenAvailable(function (config) {
       $scope.selectedAlternative = {
         name: config.wallet.settings.alternativeName,
         isoCode: config.wallet.settings.alternativeIsoCode
       }
+    })
+  }
+
+  $scope.openDonate = function () {
+    addressbookService.getDonate(function (err, ab) {
+      if (err) $log.error(err)
+      $ionicHistory.removeBackView()
+      $state.go('tabs.send')
+      $timeout(function () {
+        return $state.transitionTo('tabs.send.amount', {
+          recipientType: 'contact',
+          toAddress: ab.address,
+          toName: ab.name,
+          toEmail: ab.email,
+          toColor: ab.color
+        })
+      }, 100)
     })
   }
 

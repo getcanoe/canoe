@@ -3,6 +3,35 @@
 angular.module('canoeApp.services').factory('addressbookService', function ($log, bitcore, raiblocksService, storageService, lodash) {
   var root = {}
 
+  // We initialize with this entry added
+  var DONATE_ADDRESS = 'xrb_1qckwc5o3obkrwbet4amnkya113xq77qpaknsmiq9hwq31tmd5bpyo7sepsw'
+  var DONATE_ENTRY = {
+    name: 'Donate to Canoe',
+    email: 'donate@getcanoe.io',
+    address: DONATE_ADDRESS
+  }
+
+  root.getDonate = function (cb) {
+    return root.get(DONATE_ADDRESS, cb)
+  }
+
+  root.initialize = function (cb) {
+    storageService.getAddressbook(function (err, ab) {
+      if (err) return cb(err)
+      if (ab) ab = JSON.parse(ab)
+      ab = ab || {}
+      if (lodash.isArray(ab)) ab = {} // No array
+      if (ab[DONATE_ADDRESS]) return cb('Entry already exist')
+      ab[DONATE_ADDRESS] = DONATE_ENTRY
+      storageService.setAddressbook(JSON.stringify(ab), function (err, ab) {
+        if (err) return cb('Error adding new entry')
+        root.list(function (err, ab) {
+          return cb(err, ab)
+        })
+      })
+    })
+  }
+
   root.get = function (addr, cb) {
     storageService.getAddressbook(function (err, ab) {
       if (err) return cb(err)

@@ -82,7 +82,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         storageService.setFeedbackInfo(JSON.stringify(feedbackInfo), function () {
           $scope.showRateCard.value = false
         })
-      };
+      }
     })
 
     $scope.$on('$ionicView.enter', function (event, data) {
@@ -256,5 +256,9 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         $scope.$broadcast('scroll.refreshComplete')
       }, 300)
       updateAllAccounts()
+      $timeout(function () {
+        $ionicScrollDelegate.resize()
+        $scope.$apply()
+      }, 10)
     }
   })
