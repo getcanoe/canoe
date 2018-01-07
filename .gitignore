@@ -17,8 +17,7 @@ platforms
 
 # node-webkit
 cache
-webkitbuilds/*
-!webkitbuilds/README.md
+webkitbuilds/Canoe
 
 # chrome extensions
 chrome-app/build/*
