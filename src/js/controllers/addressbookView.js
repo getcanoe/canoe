@@ -18,6 +18,7 @@ angular.module('canoeApp.controllers').controller('addressbookViewController', f
     $state.go('tabs.send')
     $timeout(function () {
       $state.transitionTo('tabs.send.amount', {
+        recipientType: 'contact',
         toAddress: $scope.addressbookEntry.address,
         toName: $scope.addressbookEntry.name,
         toEmail: $scope.addressbookEntry.email
