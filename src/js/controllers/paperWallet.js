@@ -12,7 +12,7 @@ angular.module('canoeApp.controllers').controller('paperWalletController',
 
       function checkPrivateKey (privateKey) {
         try {
-          new bitcore.PrivateKey(privateKey, 'livenet')
+          //new bitcore.PrivateKey(privateKey, 'livenet')
         } catch (err) {
           return false
         }

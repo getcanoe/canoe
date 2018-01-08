@@ -1,6 +1,6 @@
 'use strict'
 angular.module('canoeApp.services')
-  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, raiblocksService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
+  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, raiblocksService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
     var isChromeApp = platformInfo.isChromeApp
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
@@ -314,7 +314,7 @@ angular.module('canoeApp.services')
 
     var seedWallet = function (opts, cb) {
       opts = opts || {}
-      var walletClient = bwcService.getClient(null, opts)
+      // var walletClient = bwcService.getClient(null, opts)
       var network = opts.networkName || 'livenet'
 
       if (opts.mnemonic) {
@@ -528,7 +528,7 @@ angular.module('canoeApp.services')
     }
 
     root.importWallet = function (str, opts, cb) {
-      var walletClient = bwcService.getClient(null, opts)
+      // var walletClient = bwcService.getClient(null, opts)
 
       $log.debug('Importing Wallet:', opts)
 
@@ -789,7 +789,7 @@ angular.module('canoeApp.services')
           }
         })
 
-        var u = bwcService.getUtils()
+        // var u = bwcService.getUtils()
         lodash.each(finale, function (x) {
           if (x.data && x.data.message && x.wallet && x.wallet.credentials.sharedEncryptingKey) {
             // TODO TODO TODO => BWC

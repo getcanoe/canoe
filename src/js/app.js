@@ -11,7 +11,6 @@ var modules = [
   'ngLodash',
   'ngCsv',
   'angular-md5',
-  'bwcModule',
   'bitauthModule',
   'canoeApp.filters',
   'canoeApp.services',

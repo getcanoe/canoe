@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.services').factory('incomingData', function ($log, $state, $timeout, $ionicHistory, bitcore, $rootScope, payproService, scannerService, appConfigService, popupService, gettextCatalog) {
+angular.module('canoeApp.services').factory('incomingData', function ($log, $state, $timeout, $ionicHistory, $rootScope, payproService, scannerService, appConfigService, popupService, gettextCatalog) {
   var root = {}
 
   root.showMenu = function (data) {
@@ -38,7 +38,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
 
     function checkPrivateKey (privateKey) {
       try {
-        new bitcore.PrivateKey(privateKey, 'livenet')
+        //new bitcore.PrivateKey(privateKey, 'livenet')
       } catch (err) {
         return false
       }
@@ -67,8 +67,9 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         }
       }, 100)
     }
+
     // data extensions for Payment Protocol with non-backwards-compatible request
-    if ((/^bitcoin(cash)?:\?r=[\w+]/).exec(data)) {
+    /*if ((/^bitcoin(cash)?:\?r=[\w+]/).exec(data)) {
       var coin = 'btc'
       if (data.indexOf('bitcoincash') === 0) coin = 'bch'
 
@@ -84,9 +85,9 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     }
 
     data = sanitizeUri(data)
-
+*/
     // Bitcoin  URL
-    if (bitcore.URI.isValid(data)) {
+/*    if (bitcore.URI.isValid(data)) {
       var coin = 'btc'
         var parsed = new bitcore.URI(data)
 
@@ -262,7 +263,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         switch (reason) {
           default:
           case '0':
-            /* For BitPay card binding */
+            // For BitPay card binding
             $state.transitionTo('tabs.bitpayCardIntro', {
               secret: secret,
               email: email,
@@ -274,7 +275,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       return true
 
       // Join
-    } else if (data && data.match(/^canoe:[0-9A-HJ-NP-Za-km-z]{70,80}$/)) {
+    } else*/ if (data && data.match(/^canoe:[0-9A-HJ-NP-Za-km-z]{70,80}$/)) {
       $state.go('tabs.home', {}, {
         'reload': true,
         'notify': $state.current.name != 'tabs.home'

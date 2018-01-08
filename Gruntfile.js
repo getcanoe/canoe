@@ -137,8 +137,7 @@ module.exports = function(grunt) {
           'bower_components/angular-md5/angular-md5.js',
           'bower_components/angular-mocks/angular-mocks.js',
           'bower_components/ngtouch/src/ngTouch.js',
-          'angular-bitauth/angular-bitauth.js',
-          'angular-bitcore-wallet-client/angular-bitcore-wallet-client.js'
+          'angular-bitauth/angular-bitauth.js'
         ],
         dest: 'www/lib/angular-components.js'
       },
@@ -155,8 +154,6 @@ module.exports = function(grunt) {
           'src/js/appConfig.js',
           'src/js/externalServices.js',
           'src/js/init.js',
-          'src/js/trezor-url.js',
-          'bower_components/trezor-connect/connect.js',
           'node_modules/bezier-easing/dist/bezier-easing.min.js',
           'node_modules/cordova-plugin-qrscanner/dist/cordova-plugin-qrscanner-lib.min.js'
         ],
@@ -254,7 +251,6 @@ module.exports = function(grunt) {
     browserify: {
       dist: {
         files: {
-          'angular-bitcore-wallet-client/angular-bitcore-wallet-client.js': ['angular-bitcore-wallet-client/index.js'],
           'angular-bitauth/angular-bitauth.js': ['angular-bitauth/index.js']
         },
       }

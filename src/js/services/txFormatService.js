@@ -1,9 +1,9 @@
 'use strict'
 
-angular.module('canoeApp.services').factory('txFormatService', function ($filter, bwcService, rateService, configService, lodash) {
+angular.module('canoeApp.services').factory('txFormatService', function ($filter, rateService, configService, lodash) {
   var root = {}
 
-  root.Utils = bwcService.getUtils()
+  //root.Utils = bwcService.getUtils()
 
   root.formatAmount = function (raw, fullPrecision) {
     var config = configService.getDefaults().wallet.settings
