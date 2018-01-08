@@ -1,6 +1,6 @@
 'use strict'
 angular.module('canoeApp.services')
-  .factory('storageService', function (logHeader, fileStorageService, localStorageService, sjcl, $log, lodash, platformInfo, $timeout) {
+  .factory('storageService', function (logHeader, fileStorageService, localStorageService, $log, lodash, platformInfo, $timeout) {
     var root = {}
     var storage
 
@@ -61,7 +61,7 @@ angular.module('canoeApp.services')
         if (!uuid) { return cb('Could not decrypt storage: could not get device ID') }
 
         try {
-          text = sjcl.decrypt(uuid, text)
+          // TODO text = sjcl.decrypt(uuid, text)
 
           $log.info('Migrating to unencrypted profile')
           return storage.set('profile', text, function (err) {

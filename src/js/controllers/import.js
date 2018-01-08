@@ -1,11 +1,10 @@
 'use strict'
 
 angular.module('canoeApp.controllers').controller('importController',
-  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, sjcl, ledger, trezor, raiblocksService, platformInfo, bwcService, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService, hwWallet) {
+  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, raiblocksService, platformInfo, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService) {
     var reader = new FileReader()
     var defaults = configService.getDefaults()
     var config = configService.getSync()
-    var errors = bwcService.getErrors()
 
     $scope.init = function () {
       $scope.isCordova = platformInfo.isCordova
@@ -65,7 +64,7 @@ angular.module('canoeApp.controllers').controller('importController',
     var _importBlob = function (str, opts) {
       var str2, err
       try {
-        str2 = sjcl.decrypt($scope.formData.password, str)
+        // TODO str2 = sjcl.decrypt($scope.formData.password, str)
       } catch (e) {
         err = gettextCatalog.getString('Could not decrypt file, check your password')
         $log.warn(e)

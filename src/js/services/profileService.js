@@ -1,6 +1,6 @@
 'use strict'
 angular.module('canoeApp.services')
-  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, sjcl, lodash, storageService, raiblocksService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
+  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, raiblocksService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
     var isChromeApp = platformInfo.isChromeApp
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
@@ -23,6 +23,10 @@ angular.module('canoeApp.services')
         throw 'focusedClient is not used any more'
       }
     })
+
+    root.fetchServerStatus = function (cb) {
+      raiblocksService.fetchServerStatus(cb)
+    }
 
     root.updateRate = function (code) {
       if (!rate || (Date.now() > (lastTime + 60000))) {
@@ -76,7 +80,10 @@ angular.module('canoeApp.services')
 
     root.updateAllAccounts = function (cb) {
       raiblocksService.fetchAccountsAndBalancesAsync(root.wallet, function (err, balances) {
-        if (err) $log.error(err)
+        if (err) {
+          $log.error(err)
+          cb(err)
+        }
         // Loop over balances and create accounts if needed
         var foundAccounts = []
         lodash.forOwn(balances, function (bal, id) {
@@ -98,7 +105,7 @@ angular.module('canoeApp.services')
           }
         })
         if (cb) {
-          cb()
+          cb(null, root.wallet.accounts)
         }
         /*
         // Trick to know when all are done
@@ -307,7 +314,7 @@ angular.module('canoeApp.services')
 
     var seedWallet = function (opts, cb) {
       opts = opts || {}
-      var walletClient = bwcService.getClient(null, opts)
+      // var walletClient = bwcService.getClient(null, opts)
       var network = opts.networkName || 'livenet'
 
       if (opts.mnemonic) {
@@ -521,7 +528,7 @@ angular.module('canoeApp.services')
     }
 
     root.importWallet = function (str, opts, cb) {
-      var walletClient = bwcService.getClient(null, opts)
+      // var walletClient = bwcService.getClient(null, opts)
 
       $log.debug('Importing Wallet:', opts)
 
@@ -782,7 +789,7 @@ angular.module('canoeApp.services')
           }
         })
 
-        var u = bwcService.getUtils()
+        // var u = bwcService.getUtils()
         lodash.each(finale, function (x) {
           if (x.data && x.data.message && x.wallet && x.wallet.credentials.sharedEncryptingKey) {
             // TODO TODO TODO => BWC

@@ -1,6 +1,6 @@
 'use strict'
 angular.module('canoeApp.controllers').controller('paymentUriController',
-  function ($rootScope, $scope, $stateParams, $location, $timeout, $ionicHistory, profileService, configService, lodash, bitcore, $state) {
+  function ($rootScope, $scope, $stateParams, $location, $timeout, $ionicHistory, profileService, configService, lodash, $state) {
     function strip (number) {
       return (parseFloat(number.toPrecision(12)))
     };
@@ -10,7 +10,7 @@ angular.module('canoeApp.controllers').controller('paymentUriController',
       var query = []
       this.bitcoinURI = $stateParams.url
 
-      var URI = bitcore.URI
+      //var URI = bitcore.URI
       var isUriValid = URI.isValid(this.bitcoinURI)
       if (!URI.isValid(this.bitcoinURI)) {
         this.error = true

@@ -34,11 +34,11 @@
           Start sending RaiBlocks
         </div>
         <div class="subtitle">
-          <span ng-show="hasAccounts" translate>To get started, share your account to receive RaiBlocks.</span>
-          <span ng-show="!hasAccounts" translate>To get started, you'll need to create a RaiBlocks Wallet and get some RaiBlocks.</span>
+          <span ng-show="hasAccounts" translate>To get started, you need Raiblocks. Share your account to receive RaiBlocks.</span>
+          <span ng-show="!hasAccounts" translate>To get started, you need an Account in your wallet to receive RaiBlocks.</span>
           <div class="padding">
 <!--            <button class="button button-standard button-primary" ng-click="buyRaiblocks()" ng-show="hasAccounts" translate>Buy RaiBlocks</button>-->
-            <button class="button button-standard button-primary" ng-click="createWallet()" ng-show="!hasAccounts" translate>Create Wallet</button>
+            <button class="button button-standard button-primary" ng-click="createAccount()" ng-show="!hasAccounts" translate>Create Account</button>
             <button class="button button-standard button-secondary" ui-sref="tabs.receive" ng-show="hasAccounts" translate>Show Account</button>
           </div>
         </div>

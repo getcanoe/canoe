@@ -1,5 +1,5 @@
 'use strict'
-angular.module('canoeApp.services').factory('pushNotificationsService', function pushNotificationsService ($log, $state, $ionicHistory, sjcl, platformInfo, lodash, appConfigService, profileService, configService) {
+angular.module('canoeApp.services').factory('pushNotificationsService', function pushNotificationsService ($log, $state, $ionicHistory, platformInfo, lodash, appConfigService, profileService, configService) {
   var root = {}
   var isIOS = platformInfo.isIOS
   var isAndroid = platformInfo.isAndroid
@@ -77,25 +77,6 @@ angular.module('canoeApp.services').factory('pushNotificationsService', function
     walletClient.pushNotificationsUnsubscribe(_token, function (err) {
       if (err) $log.error(walletClient.name + ': Unsubscription Push Notifications error. ', JSON.stringify(err))
       else $log.debug(walletClient.name + ': Unsubscription Push Notifications Success.')
-    })
-  }
-
-  var _openWallet = function (walletIdHashed) {
-    var wallets = profileService.getAccounts()
-    var wallet = lodash.find(wallets, function (w) {
-      return (lodash.isEqual(walletIdHashed, sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(w.id))))
-    })
-
-    if (!wallet) return
-
-    if (!wallet.isComplete()) {
-      return $state.go('tabs.canoeers', {
-        walletId: wallet.id
-      })
-    }
-
-    $state.go('tabs.account', {
-      walletId: wallet.id
     })
   }
 

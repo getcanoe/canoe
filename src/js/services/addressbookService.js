@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.services').factory('addressbookService', function ($log, bitcore, raiblocksService, storageService, lodash) {
+angular.module('canoeApp.services').factory('addressbookService', function ($log, raiblocksService, storageService, lodash) {
   var root = {}
 
   // We initialize with this entry added
