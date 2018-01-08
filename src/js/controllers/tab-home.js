@@ -263,14 +263,10 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     }
 
     $scope.onRefresh = function () {
-      $timeout(function () {
-        $scope.$broadcast('scroll.refreshComplete')
-      }, 300)
       performUpdate(function () {
-        $timeout(function () {
-          $ionicScrollDelegate.resize()
-          $scope.$apply()
-        }, 10)
+        $scope.$broadcast('scroll.refreshComplete')
+        $ionicScrollDelegate.resize()
+        $scope.$apply()
       })
     }
   })

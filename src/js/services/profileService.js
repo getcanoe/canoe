@@ -96,9 +96,10 @@ angular.module('canoeApp.services')
           acc.pending = bal.pending
           root.setLastKnownBalance(acc, function () {})
         })
-        // Remove accounts not found
+        // Update cache and remove accounts not found
         // TODO is this kosher?
         lodash.forOwn(root.wallet.accounts, function (acc, id) {
+          root.addLastKnownBalance(acc, function () {})
           if (!foundAccounts.includes(id)) {
             $log.debug('Deleting account gone from server ' + JSON.stringify(acc))
             delete root.wallet.accounts[id]
