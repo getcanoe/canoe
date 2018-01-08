@@ -26,7 +26,7 @@ angular.module('canoeApp.services')
       function verifyTagFormat (tag) {
         var regex = /^v?\d+\.\d+\.\d+$/i
         return regex.exec(tag)
-      };
+      }
 
       function formatTagNumber (tag) {
         var formattedNumber = tag.replace(/^v/i, '').split('.')
