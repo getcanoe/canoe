@@ -342,7 +342,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       var big
       if (unit.isFiat) {
         big = new BigNumber(fromFiat(amount))
-        amount = (big.dividedBy(unitToRaw)).toFixed(0)
+        amount = (big.times(unitToRaw)).toFixed(0)
       } else {
         big = new BigNumber(amount)
         amount = (big.times(unitToRaw)).toFixed(0)
