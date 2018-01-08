@@ -22,6 +22,19 @@ angular.module('canoeApp.services')
 
     root.connect()
 
+    root.fetchServerStatus = function (cb) {
+      var xhr = new XMLHttpRequest()
+      xhr.open('POST', host, true)
+      xhr.send(JSON.stringify({'action': 'canoe_server_status'}))
+      xhr.onreadystatechange = processRequest
+      function processRequest (e) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText)
+          cb(null, response)
+        }
+      }
+    }
+
     root.isValidSeed = function (seedHex) {
       var isValidHash = /^[0123456789ABCDEF]+$/.test(seedHex)
       return (isValidHash && (seedHex.length === 64))
@@ -65,21 +78,25 @@ angular.module('canoeApp.services')
 
     root.createAccount = function (wallet, accountName) {
       $log.debug('Create account in wallet ' + wallet.id + ' named ' + accountName)
-      var id = rai.account_create(wallet.id, true) // work = true
-      var account = root.makeAccount(wallet, id, accountName)
-      $log.debug('Account: ' + JSON.stringify(account))
-      return account
+      var json = rai.account_create(wallet.id, true) // work = true
+      if (json.account) {
+        var account = root.makeAccount(wallet, json.account, accountName)
+        $log.debug('Account: ' + JSON.stringify(account))
+        return account
+      }
     }
 
     root.fetchAccountsAndBalancesAsync = function (wallet, cb) {
       $log.debug('Fetching all balances in wallet ' + wallet.id)
       // This could discover new ones, or some have been removed
-      rai.account_list_async(wallet.id, function (accountIds) {
-        if (accountIds) {
-          rai.accounts_balances_async(accountIds, function (balances) {
+      rai.account_list_async(wallet.id, function (json) {
+        if (json.accounts) {
+          rai.accounts_balances_async(json.accounts, function (json) {
             $log.debug('Fetched')
-            cb(null, balances)
+            cb(null, json.balances)
           })
+        } else {
+          cb(json)
         }
       })
     }
@@ -87,11 +104,13 @@ angular.module('canoeApp.services')
     root.fetchAccountsAndBalances = function (wallet, cb) {
       $log.debug('Fetch all balances in wallet ' + wallet.id)
       // This could discover new ones, or some have been removed
-      var accountIds = rai.account_list(wallet.id)
-      if (accountIds) {
-        var balances = rai.accounts_balances(accountIds)
+      var json = rai.account_list(wallet.id)
+      if (json.accounts) {
+        var balances = rai.accounts_balances(json.accounts)
+        cb(null, balances)
+      } else {
+        cb(json)
       }
-      cb(null, balances)
     }
 
     root.changeSeed = function (wallet, seed) {

@@ -180,19 +180,16 @@ function Rai (url_base, port) {
 
 // Object output
   this.account_balance = function (account) {
-    var account_balance = this.rpc(JSON.stringify({'action': 'account_balance', 'account': account}))
-    return account_balance
+    return this.rpc(JSON.stringify({'action': 'account_balance', 'account': account}))
   }
 
 // String output
   this.account_block_count = function () {
-    var account_block_count = this.rpc(JSON.stringify({'action': 'account_block_count', 'account': account}))
-    return account_block_count.block_count
+    return this.rpc(JSON.stringify({'action': 'account_block_count', 'account': account}))
   }
 
   this.account_create = function (wallet, work = true) {
-    var account_create = this.rpc(JSON.stringify({'action': 'account_create', 'wallet': wallet, 'work': work}))
-    return account_create.account
+    return this.rpc(JSON.stringify({'action': 'account_create', 'wallet': wallet, 'work': work}))
   }
 
   this.account_info = function (account, unit = 'raw', representative = false, weight = false, pending = false) {
@@ -211,8 +208,7 @@ function Rai (url_base, port) {
   }
 
   this.account_get = function (key) {
-    var account_get = this.rpc(JSON.stringify({'action': 'account_get', 'key': key}))
-    return account_get.account
+    return this.rpc(JSON.stringify({'action': 'account_get', 'key': key}))
   }
 
   this.account_key = function (account) {
@@ -221,12 +217,11 @@ function Rai (url_base, port) {
   }
 
   this.account_list = function (wallet) {
-    var account_list = this.rpc(JSON.stringify({'action': 'account_list', 'wallet': wallet}))
-    return account_list.accounts
+    return this.rpc(JSON.stringify({'action': 'account_list', 'wallet': wallet}))
   }
   this.account_list_async = function (wallet, cb) {
     this.rpc(JSON.stringify({'action': 'account_list', 'wallet': wallet}), function (account_list) {
-      cb(account_list.accounts)
+      cb(account_list)
     })
   }
 
@@ -260,12 +255,11 @@ function Rai (url_base, port) {
 
 // Array input
   this.accounts_balances = function (accounts) {
-    var accounts_balances = this.rpc(JSON.stringify({'action': 'accounts_balances', 'accounts': accounts}))
-    return accounts_balances.balances
+    return this.rpc(JSON.stringify({'action': 'accounts_balances', 'accounts': accounts}))
   }
   this.accounts_balances_async = function (accounts, cb) {
     this.rpc(JSON.stringify({'action': 'accounts_balances', 'accounts': accounts}), function (accounts_balances) {
-      cb(accounts_balances.balances)
+      cb(accounts_balances)
     })
   }
 

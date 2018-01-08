@@ -86,13 +86,14 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     })
 
     $scope.$on('$ionicView.enter', function (event, data) {
-      updateAllAccounts()
+      performUpdate(function () {})
 
       addressbookService.list(function (err, ab) {
         if (err) $log.error(err)
         $scope.addressbook = ab || {}
       })
 
+      /*
       listeners = [
         $rootScope.$on('bwsEvent', function (e, walletId, type, n) {
           var wallet = profileService.getAccount(walletId)
@@ -105,7 +106,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
           updateAccount(wallet)
           if ($scope.recentTransactionsEnabled) getNotifications()
         })
-      ]
+      ]*/
 
       $scope.buyAndSellItems = buyAndSellService.getLinked()
       $scope.homeIntegrations = homeIntegrationsService.get()
@@ -208,11 +209,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       })
     }
 
-    // Make sure all accounts are up to date, done on initial entering view and on scroll-update
-    var updateAllAccounts = function () {
-      profileService.updateAllAccounts()
-    }
-
     var updateAccount = function (account) {
       $log.debug('Updating account:' + account.name)
       walletService.getStatus(account, {}, function (err, status) {
@@ -242,6 +238,21 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       })
     }
 
+    var performUpdate = function (cb) {
+      profileService.updateAllAccounts(function (err, accounts) {
+        if (err) {
+          profileService.fetchServerStatus(function (err, status) {
+            // {link: "url", title: "asdasd", body: "saasd"}
+            $scope.serverMessage = status.message
+            cb()
+          })
+        } else {
+          $scope.serverMessage = null
+          cb()
+        }
+      })
+    }
+
     $scope.hideHomeTip = function () {
       storageService.setHomeTipAccepted('accepted', function () {
         $scope.homeTip = false
@@ -255,10 +266,11 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       $timeout(function () {
         $scope.$broadcast('scroll.refreshComplete')
       }, 300)
-      updateAllAccounts()
-      $timeout(function () {
-        $ionicScrollDelegate.resize()
-        $scope.$apply()
-      }, 10)
+      performUpdate(function () {
+        $timeout(function () {
+          $ionicScrollDelegate.resize()
+          $scope.$apply()
+        }, 10)
+      })
     }
   })

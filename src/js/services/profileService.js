@@ -24,6 +24,10 @@ angular.module('canoeApp.services')
       }
     })
 
+    root.fetchServerStatus = function (cb) {
+      raiblocksService.fetchServerStatus(cb)
+    }
+
     root.updateRate = function (code) {
       if (!rate || (Date.now() > (lastTime + 60000))) {
         root.getCurrentCoinmarketcapRate(code, function (err, rt) {
@@ -76,7 +80,10 @@ angular.module('canoeApp.services')
 
     root.updateAllAccounts = function (cb) {
       raiblocksService.fetchAccountsAndBalancesAsync(root.wallet, function (err, balances) {
-        if (err) $log.error(err)
+        if (err) {
+          $log.error(err)
+          cb(err)
+        }
         // Loop over balances and create accounts if needed
         var foundAccounts = []
         lodash.forOwn(balances, function (bal, id) {
@@ -98,7 +105,7 @@ angular.module('canoeApp.services')
           }
         })
         if (cb) {
-          cb()
+          cb(null, root.wallet.accounts)
         }
         /*
         // Trick to know when all are done
