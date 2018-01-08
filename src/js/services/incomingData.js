@@ -5,7 +5,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
 
   root.showMenu = function (data) {
     $rootScope.$broadcast('incomingDataMenu.showMenu', data)
-  };
+  }
 
   root.redir = function (data) {
     $log.debug('Processing incoming data: ' + data)
@@ -38,7 +38,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
 
     function checkPrivateKey (privateKey) {
       try {
-        //new bitcore.PrivateKey(privateKey, 'livenet')
+        // new bitcore.PrivateKey(privateKey, 'livenet')
       } catch (err) {
         return false
       }
@@ -69,7 +69,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     }
 
     // data extensions for Payment Protocol with non-backwards-compatible request
-    /*if ((/^bitcoin(cash)?:\?r=[\w+]/).exec(data)) {
+    /* if ((/^bitcoin(cash)?:\?r=[\w+]/).exec(data)) {
       var coin = 'btc'
       if (data.indexOf('bitcoincash') === 0) coin = 'bch'
 
@@ -82,10 +82,10 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       })
 
       return true
-    }
+    }*/
 
     data = sanitizeUri(data)
-*/
+
     // Bitcoin  URL
 /*    if (bitcore.URI.isValid(data)) {
       var coin = 'btc'
@@ -177,7 +177,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
           }
         )
       return true
-      // Plain URL 
+      // Plain URL
     } else if (/^https?:\/\//.test(data)) {
       payproService.getPayProDetails(data, function (err, details) {
         if (err) {
@@ -275,7 +275,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       return true
 
       // Join
-    } else*/ if (data && data.match(/^canoe:[0-9A-HJ-NP-Za-km-z]{70,80}$/)) {
+    } else if (data && data.match(/^canoe:[0-9A-HJ-NP-Za-km-z]{70,80}$/)) {
       $state.go('tabs.home', {}, {
         'reload': true,
         'notify': $state.current.name != 'tabs.home'
@@ -309,17 +309,16 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         })
       })
       return true
-
-    } else {
+    } else {*/
       if ($state.includes('tabs.scan')) {
         root.showMenu({
           data: data,
           type: 'text'
         })
       }
-    }
+    /* } */
     return false
-  };
+  }
 
   function goToAmountPage (toAddress, coin) {
     $state.go('tabs.send', {}, {
