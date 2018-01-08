@@ -50,12 +50,12 @@ angular.module('canoeApp.services')
 
     root.newRandomSeed = function () {
       // During dev we reuse the same wallet seed - DO NOT ADD MONEY TO THIS ONE
-      if (platformInfo.isDevel) {
-        $log.debug('Reusing dev seed')
-        return 'A360BD236EA685BC187CD0784F4281BCDAB63291E0ECC795537480968C18DC8C'
-      } else {
+      //if (platformInfo.isDevel) {
+      //  $log.debug('Reusing dev seed')
+      //  return '<some seed>'
+      //} else {
         return XRB.createSeedHex()
-      }
+      //}
     }
 
     root.createWallet = function (seed) {
