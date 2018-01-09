@@ -8,7 +8,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
   var defaultConfig = {
     download: {
       canoe: {
-        url: 'https://getcanoe.io/download'
+        url: 'https://getcanoe.io'
       }
     },
 
