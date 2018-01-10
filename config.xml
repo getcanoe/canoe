@@ -15,7 +15,7 @@
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="WindowsStoreIdentityName" value="------" />
     <preference name="WindowsStoreDisplayName" value="Canoe - Secure RaiBlocks Wallet" />
-    <preference name="StatusBarBackgroundColor" value="#192c3a" />
+    <preference name="StatusBarBackgroundColor" value="#1b9883" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="windows-target-version" value="10.0" />
     <preference name="Orientation" value="default" />
