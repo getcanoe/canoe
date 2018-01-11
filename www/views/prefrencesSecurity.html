@@ -6,9 +6,40 @@
   </ion-nav-bar>
 
   <ion-content>
-    <ion-radio ng-repeat="opt in options" ng-value="opt" ng-model="currentOption" ng-click="select(opt.method)" ng-disabled="opt.needsBackup || opt.disabled">
-      <span ng-class="{'disabled': opt.needsBackup || opt.disabled}">{{opt.label}}</span>
-    </ion-radio>
+		<!-- Wallet Password -->
+		<div class="item item-divider" translate=""><span class="" style="">Wallet Password</span>
+			<div class="list settings-list">
+				<p class="item-description">A wallet password is used to encrypt your RaiBlocks wallet when saving it on your device.</p>
+				<div class="item item-icon-left">
+					<i class="icon ion-ios-download-outline"></i>
+					<span translate>Change Password</span>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- App Lock Option -->
+			<div class="item item-divider" translate=""><span class="" style="">App Lock</span>
+				<p class="item-description">Use these settings to secure Canoe from prying eyes.</p>
+
+				<ion-radio ng-repeat="opt in options" ng-value="opt" ng-model="currentOption" ng-click="select(opt.method)" ng-disabled="opt.needsBackup || opt.disabled">
+					<span ng-class="{'disabled': opt.needsBackup || opt.disabled}">{{opt.label}}</span>
+				</ion-radio>
+			</div>
+
+		<!-- Lock Prefrences-->
+		<div class="item item-divider" translate=""><span class="" style="">Lock Prefrences</span>
+			<div class="list settings-list">
+				<p class="item-description">Choose what you want secure with App Lock</p>
+				<ion-toggle ng-model="emailNotifications.value" toggle-class="toggle-balanced" ng-change="">
+					<span class="toggle-label" translate>Hide Balance</span>
+				</ion-toggle>
+				<ion-toggle ng-model="pushNotification.value" toggle-class="toggle-balanced" ng-change="">
+					<span class="toggle-label" translate>Hide Account Number</span>
+				</ion-toggle>
+			</div>
+		</div>
+
 
     <div class="assertive" style="text-align: center; margin: 4rem" ng-if="errorMsg">
       {{errorMsg}}
