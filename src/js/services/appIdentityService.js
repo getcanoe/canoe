@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('canoeApp.services').factory('appIdentityService', function($log, lodash, storageService, bitauthService) {
+angular.module('canoeApp.services').factory('appIdentityService', function($log, lodash, storageService) {
   var root = {};
 
   root.getIdentity = function(network, cb) {
     var pubkey, sin, isNew;
-    storageService.getAppIdentity(network, function(err, data) {
+    /*storageService.getAppIdentity(network, function(err, data) {
       if (err) return cb(err);
       var appIdentity = data || {};
       if (lodash.isEmpty(appIdentity) || (appIdentity && !appIdentity.priv)) {
@@ -23,7 +23,7 @@ angular.module('canoeApp.services').factory('appIdentityService', function($log,
         return cb(e);
       };
       return cb(null, appIdentity);
-    });
+    });*/
   };
 
   return root;
