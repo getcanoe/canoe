@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('canoeApp.controllers').controller('tabScanController', function($scope, $log, $timeout, scannerService, incomingData, $state, $ionicHistory, $rootScope) {
+angular.module('canoeApp.controllers').controller('tabScanController', function($scope, $log, $timeout, scannerService, platformInfo, popupService, gettextCatalog, incomingData, $state, $ionicHistory, $rootScope, $ionicTabsDelegate) {
 
   var scannerStates = {
     unauthorized: 'unauthorized',
@@ -9,7 +9,33 @@ angular.module('canoeApp.controllers').controller('tabScanController', function(
     loading: 'loading',
     visible: 'visible'
   };
+  var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
+
+  if (isWindowsPhoneApp) {
+    scannerService.useOldScanner(function(err, contents) {
+      if (err) {
+        popupService.showAlert(gettextCatalog.getString('Error'), err);
+        return;
+      }
+      incomingData.redir(contents);
+    });
+  }
+
   $scope.scannerStates = scannerStates;
+
+  $scope.swipeForward = function () {
+    var selected = $ionicTabsDelegate.selectedIndex();
+    if (selected != -1) {
+      $ionicTabsDelegate.select(selected + 1);
+    }
+  };
+
+  $scope.swipeBack = function () {
+    var selected = $ionicTabsDelegate.selectedIndex();
+    if (selected != -1 && selected != 0) {
+      $ionicTabsDelegate.select(selected - 1);
+    }
+  };
 
   function _updateCapabilities(){
     var capabilities = scannerService.getCapabilities();
