@@ -413,12 +413,12 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.lockSetup', {
-        url: '/lockSetup',
+      .state('tabs.prefrencesSecurity', {
+        url: '/prefrencesSecurity',
         views: {
           'tab-settings@tabs': {
-            controller: 'lockSetupController',
-            templateUrl: 'views/lockSetup.html'
+            controller: 'prefrencesSecurityController',
+            templateUrl: 'views/prefrencesSecurity.html'
           }
         }
       })
