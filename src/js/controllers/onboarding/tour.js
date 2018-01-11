@@ -1,6 +1,6 @@
 'use strict'
 angular.module('canoeApp.controllers').controller('tourController',
-  function ($scope, $state, $log, $timeout, $filter, ongoingProcess, profileService, rateService, popupService, gettextCatalog) {
+  function ($scope, $state, $log, $timeout, $filter, ongoingProcess, profileService, popupService, gettextCatalog) {
     $scope.data = {
       index: 0
     }
