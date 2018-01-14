@@ -753,6 +753,15 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
+      .state('onboarding.createPassword', {
+				url: '/createPassword',
+        views: {
+          'onboarding': {
+            templateUrl: 'views/onboarding/createPassword.html',
+            controller: 'createPasswordController'
+          }
+        }
+			})
       .state('onboarding.backupRequest', {
         url: '/backupRequest/:walletId',
         views: {
@@ -1200,11 +1209,12 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         var matchWelcome = $ionicHistory.currentStateName() == 'onboarding.welcome'
         var matchCollectEmail = $ionicHistory.currentStateName() == 'onboarding.collectEmail'
         var matchBackupRequest = $ionicHistory.currentStateName() == 'onboarding.backupRequest'
+        var matchCreatePassword = $ionicHistory.currentStateName() == 'onboarding.createPassword'
         var backedUp = $ionicHistory.backView().stateName == 'onboarding.backup'
         var noBackView = $ionicHistory.backView().stateName == 'starting'
         var matchDisclaimer = !!($ionicHistory.currentStateName() == 'onboarding.disclaimer' && (backedUp || noBackView))
 
-        var fromOnboarding = matchCollectEmail | matchBackupRequest | matchWelcome | matchDisclaimer
+        var fromOnboarding = matchCollectEmail | matchBackupRequest | matchCreatePassword | matchWelcome | matchDisclaimer
 
         // views with disable backbutton
         var matchComplete = $ionicHistory.currentStateName() == 'tabs.rate.complete'
