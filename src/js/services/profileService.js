@@ -5,7 +5,6 @@ angular.module('canoeApp.services')
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
 
-    var root = {}
 
     var UPDATE_PERIOD = 15
     var RAW_PER_XRB = Math.pow(10, 30) // 1 XRB = 1 Mxrb = 10^30 raw
@@ -13,7 +12,11 @@ angular.module('canoeApp.services')
     var rate = 0 // Current rate fetched every 60 sec
     var lastTime = 0
 
+    // This is where we hold profile, wallet and password to decrypt it
+    var root = {}
     root.profile = null
+    root.wallet = null
+    root.password = null
 
     Object.defineProperty(root, 'focusedClient', {
       get: function () {
@@ -70,55 +73,24 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.changeSeed = function (seed, cb) {
+    // This creates a new Wallet with the old password and new seed
+    // All accounts are cleared, but we create one new default account.
+    root.importSeed = function (seed, cb) {
       $log.debug('Importing Wallet Seed')
-      raiblocksService.changeSeed(root.wallet, seed)
-      $log.debug('Recreateing first account')
+      raiblocksService.createWallet(root.wallet.password, seed)
+      $log.debug('Recreating first account')
       // TODO... ehm
-      root.createAccount({}, cb)
+      root.createAccount(null, cb)
     }
 
     root.updateAllAccounts = function (cb) {
-      raiblocksService.fetchAccountsAndBalancesAsync(root.wallet, function (err, balances) {
-        if (err) {
-          $log.error(err)
-          cb(err)
-        }
-        // Loop over balances and create accounts if needed
-        var foundAccounts = []
-        lodash.forOwn(balances, function (bal, id) {
-          foundAccounts.push(id)
-          var acc = root.getAccount(id)
-          if (!acc) {
-            acc = raiblocksService.makeAccount(root.wallet, id, null)
-          }
-          acc.balance = bal.balance
-          acc.pending = bal.pending
-          root.setLastKnownBalance(acc, function () {})
-        })
-        // Update cache and remove accounts not found
-        // TODO is this kosher?
-        lodash.forOwn(root.wallet.accounts, function (acc, id) {
-          root.addLastKnownBalance(acc, function () {})
-          if (!foundAccounts.includes(id)) {
-            $log.debug('Deleting account gone from server ' + JSON.stringify(acc))
-            delete root.wallet.accounts[id]
-          }
-        })
-        if (cb) {
-          cb(null, root.wallet.accounts)
-        }
-        /*
-        // Trick to know when all are done
-        var i = accounts.length
-        var j = 0
-        lodash.each(accounts, function (account) {
-          root.setLastKnownBalance(account.id, account.balance, function () {})
-          if (++j === i) {
-            //updateTxps()
-          }
-        }) */
+      var accounts = root.wallet.getAccounts()
+      lodash.each(accounts, function (acc) {
+        root.setLastKnownBalance(acc, function () {})
       })
+      if (cb) {
+        cb(null, accounts)
+      }
     }
 
     root.formatAmount = function (raw, decimals) {
@@ -393,37 +365,25 @@ angular.module('canoeApp.services')
       return total > 0
     }
 
-    // Create wallet and default account
-    root.createWallet = function (opts, cb) {
+    // Create wallet and default account which saves wallet, seed can be null.
+    root.createWallet = function (password, seed, cb) {
       // Synchronous now
-      root.wallet = raiblocksService.createWallet(opts.seed)
-      root.createAccount(opts, cb)
+      root.wallet = raiblocksService.createWallet(password, seed)
+      // Create default acount, will save
+      root.createAccount(null, cb)
     }
 
-    // Create account in wallet and store wallet
-    root.createAccount = function (opts, cb) {
-      var accountName = opts.name || gettextCatalog.getString('Default Account')
+    // Create account in wallet and save wallet
+    root.createAccount = function (name, cb) {
+      var accountName = name || gettextCatalog.getString('Default Account')
       raiblocksService.createAccount(root.wallet, accountName)
-      root.saveWallet(cb)
+      // TODO checkChains? See raiwallet.js
+      raiblocksService.saveWallet(cb)
     }
 
-    // Store the wallet
-    root.saveWallet = function (cb) {
-      storageService.storeWallet(root.wallet, function () {
-        cb(null, root.wallet)
-      })
-    }
-
-    // Load wallet from local storage
+    // Load wallet from local storage using entered password
     root.loadWallet = function (cb) {
-      storageService.loadWallet(function (err, wallet) {
-        if (err) {
-          $log.warn(err)
-        } else {
-          root.wallet = wallet ? JSON.parse(wallet) : null
-          cb(null, root.wallet)
-        }
-      })
+      raiblocksService.loadWallet(root.password)
     }
 
     root.getWallet = function () {
@@ -431,7 +391,7 @@ angular.module('canoeApp.services')
     }
 
     root.getAccount = function (addr) {
-      return root.wallet.accounts[addr]
+      return root.wallet.getAccount(addr)
     }
 
     root.send = function (tx, cb) {
@@ -571,14 +531,6 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.importSeed = function (seed, cb) {
-      if (root.wallet) {
-        root.changeSeed(seed, cb)
-      } else {
-        root.createDefaultWallet(seed, cb)
-      }
-    }
-
     root.createProfile = function (cb) {
       $log.info('Creating profile')
       var defaults = configService.getDefaults()
@@ -602,8 +554,8 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.createDefaultWallet = function (seed, cb) {
-      root.createWallet({seed: seed}, cb)
+    root.createDefaultWallet = function (password, cb) {
+      root.createWallet(password, null, cb)
     }
 
     root.setDisclaimerAccepted = function (cb) {
@@ -646,8 +598,8 @@ angular.module('canoeApp.services')
           data = JSON.parse(data)
           account.cachedBalanceStr = root.formatAmountWithUnit(parseInt(data.balance))
           account.cachedBalance = data.balance
-          account.cachedPendingStr = root.formatAmountWithUnit(parseInt(data.pending))
-          account.cachedPending = data.pending
+          account.cachedPendingBalanceStr = root.formatAmountWithUnit(parseInt(data.pendingBalance))
+          account.cachedPendingBalance = data.pendingBalance
           account.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null
         }
         return cb()
@@ -657,7 +609,7 @@ angular.module('canoeApp.services')
     root.setLastKnownBalance = function (account, cb) {
       storageService.setBalanceCache(account.id, {
         balance: account.balance,
-        pending: account.pending,
+        pendingBalance: account.pendingBalance,
         updatedOn: Math.floor(Date.now() / 1000)
       }, cb)
     }
@@ -700,8 +652,8 @@ angular.module('canoeApp.services')
 
     root.toggleHideBalanceFlag = function (accountId, cb) {
       var acc = root.getAccount(accountId)
-      acc.balanceHidden = !acc.balanceHidden
-      root.saveWallet(cb)
+      acc.meta.balanceHidden = !acc.meta.balanceHidden
+      raiblocksService.saveWallet(cb)
     }
 
     root.getNotifications = function (opts, cb) {

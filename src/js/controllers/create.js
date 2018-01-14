@@ -45,34 +45,10 @@ angular.module('canoeApp.controllers').controller('createController',
     }
 
     $scope.create = function () {
-      var opts = {
-        name: $scope.formData.walletName
-      }
-/*
-      var setSeed = $scope.formData.seedSource.id === 'set'
-      if (setSeed) {
-        var words = $scope.formData.privateKey || ''
-        if (words.indexOf(' ') === -1 && words.indexOf('prv') === 1 && words.length > 108) {
-          opts.extendedPrivateKey = words
-        } else {
-          opts.mnemonic = words
-        }
-        opts.passphrase = $scope.formData.passphrase
-      } else {
-        opts.passphrase = $scope.formData.createPassphrase
-      }
-
-      if (setSeed && !opts.mnemonic && !opts.extendedPrivateKey) {
-        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter the wallet recovery phrase'))
-        return
-      }*/
-      _create(opts)
-    }
-
-    function _create (opts) {
+      var name = $scope.formData.walletName
       ongoingProcess.set('creatingAccount', true)
       $timeout(function () {
-        profileService.createAccount(opts, function (err) {
+        profileService.createAccount(name, function (err) {
           ongoingProcess.set('creatingAccount', false)
           if (err) {
             $log.warn(err)

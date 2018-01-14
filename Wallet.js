@@ -143,8 +143,8 @@ module.exports = function(password)
 	var lastPendingBlock = "";
 	var pendingBlocks = [];             // current account pending blocks
 	var chain = [];                     // current account chain
-	var representative;					// current account representative	
-	var minimumReceive = bigInt(1);		// minimum amount to pocket
+	var representative;									// current account representative	
+	var minimumReceive = bigInt(1);			// minimum amount to pocket
 	
 	var keys = [];                      // wallet keys, accounts, and all necessary data
 	var recentTxs = [];                 
@@ -162,7 +162,7 @@ module.exports = function(password)
 	var iterations = 5000;              // pbkdf2 iterations
 	var checksum;                       // wallet checksum 
 	var ciphered = true;
-	var loginKey = false;				// key to tell the server when the wallet was successfully decrypted
+	var loginKey = false;								// key to tell the server when the wallet was successfully decrypted
 	
 	var logger = new Logger();
  
@@ -335,7 +335,7 @@ module.exports = function(password)
 				subscribed: false,
 				chain: [],
 				representative: "",
-				label : ""
+				meta: { label: "" }
 			}
 		);
 		logger.log("New key added to wallet.");
@@ -365,13 +365,45 @@ module.exports = function(password)
 		for(var i in keys)
 		{
 			accounts.push({
-				account: keys[i].account,
+				id: keys[i].account,
 				balance: bigInt(keys[i].balance), 
 				pendingBalance: bigInt(keys[i].pendingBalance),
-				label: keys[i].label
+				name: keys[i].meta.name,
+				meta: keys[i].meta
 			});
 		}
 		return accounts;
+	}
+
+	/**
+	 * Get a single account in the wallet given account number
+	 * 
+	 * @returns {Array}
+	 */
+	api.getAccount = function(account)
+	{
+		var key = findKey(account)
+		if (!key) return null
+		return {
+				id: key.account,
+				balance: bigInt(key.balance), 
+				pendingBalance: bigInt(key.pendingBalance),
+				name: key.meta.name,
+				meta: key.meta
+			}
+		}
+	}
+
+	/**
+	 * Find key for given account number
+	 */
+	api.findKey = function(account) {
+		for (let i in keys) {
+			if (keys[i].account === acc) {
+				return keys[i]
+			}
+		}
+		return null
 	}
 	
 	/**
@@ -392,6 +424,7 @@ module.exports = function(password)
 			keys[current].chain = chain;
 			keys[current].pendingBlocks = pendingBlocks;
 			keys[current].representative = representative;
+			keys[current].meta = meta;
 		}
 		
 		for(var i in keys)
@@ -406,6 +439,7 @@ module.exports = function(password)
 				lastPendingBlock = keys[i].lastPendingBlock;
 				chain = keys[i].chain;
 				representative = keys[i].representative;
+				meta = keys[i].meta;
 				return;
 			}
 		}
@@ -683,19 +717,25 @@ module.exports = function(password)
 		api.useAccount(keys[temp].account);
 	}
 	
-	api.setLabel = function(acc, label)
-	{
-		for(let i in keys)
-		{
-			if(keys[i].account == acc)
-			{
-				keys[i].label = label;
-				return true;
+	api.setMeta = function(acc, meta) {
+		for(let i in keys) {
+			if(keys[i].account == acc) {
+				keys[i].meta = meta;
+				return true
 			}
 		}
-		return false;
+		return false
 	}
-	
+
+	api.getMeta = function(acc) {
+		for(let i in keys) {
+			if(keys[i].account == acc) {
+				return keys[i].meta
+			}
+		}
+		return null
+	}
+
 	api.removePendingBlocks = function()
 	{
 		pendingBlocks = [];
@@ -1303,7 +1343,7 @@ module.exports = function(password)
 	}
 	
 	/**
-	 * Encrypts an packs the wallet data in a hex string
+	 * Encrypts and packs the wallet data in a hex string
 	 * 
 	 * @returns {string}
 	 */
@@ -1323,7 +1363,7 @@ module.exports = function(password)
 			aux.pendingBlocks = [];
 			aux.chain = [];
 			aux.representative = keys[i].representative;
-			aux.label = keys[i].label;
+			aux.meta = keys[i].meta;
 			
 			for(let j in keys[i].chain)
 			{
@@ -1370,7 +1410,6 @@ module.exports = function(password)
 	
 	/**
 	 * Constructs the wallet from an encrypted base64 encoded wallet
-	 * 
 	 */
 	api.load = function(data)
 	{
@@ -1430,7 +1469,7 @@ module.exports = function(password)
 			aux.pendingBalance = bigInt(walletData.keys[i].pendingBalance ? walletData.keys[i].pendingBalance : 0);
 			aux.pendingBlocks = [];
 			aux.representative = walletData.keys[i].representative != undefined ? walletData.keys[i].representative : aux.account;
-			aux.label = walletData.keys[i].label != undefined ? walletData.keys[i].label : "";
+			aux.meta = walletData.keys[i].meta != undefined ? walletData.keys[i].meta : { label: ""};
 				
 			keys.push(aux);
 			if(lastPendingBlock.length == 64)
@@ -1442,20 +1481,26 @@ module.exports = function(password)
 		return walletData;
 	}
 	
-	api.createWallet = function(setSeed = false)
-	{
-		if(!setSeed)
-			seed = nacl.randomBytes(32);
-		else
-			api.setSeed(setSeed);
-		api.newKeyFromSeed();
-		api.useAccount(keys[0].account);
-		loginKey = uint8_hex(nacl.randomBytes(32));
-		return uint8_hex(seed);
+	api.createSeed = function(setSeed = false) {
+		if (!setSeed) {
+			seed = nacl.randomBytes(32)
+		} else {
+			api.setSeed(setSeed)
+		}
+		loginKey = uint8_hex(nacl.randomBytes(32))
+		return uint8_hex(seed)
+	}
+
+	api.createAccount = function (meta) {
+		var account = api.newKeyFromSeed()
+		api.useAccount()
+		key[current].meta = meta
+		return account
 	}
 	
-	
-	return api;    
+
+
+	return api  
 }
 
 
