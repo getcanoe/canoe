@@ -1,6 +1,6 @@
 'use strict'
 angular.module('canoeApp.services')
-  .factory('raiblocksService', function ($log, platformInfo) {
+  .factory('raiblocksService', function ($log, platformInfo, storageService) {
     var root = {}
 
     // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
@@ -47,6 +47,8 @@ angular.module('canoeApp.services')
       }
       return rai.account_validate(addr)
     }
+
+    /*
 
     root.newRandomSeed = function () {
       // During dev we reuse the same wallet seed - DO NOT ADD MONEY TO THIS ONE
@@ -101,18 +103,6 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.fetchAccountsAndBalances = function (wallet, cb) {
-      $log.debug('Fetch all balances in wallet ' + wallet.id)
-      // This could discover new ones, or some have been removed
-      var json = rai.account_list(wallet.id)
-      if (json.accounts) {
-        var balances = rai.accounts_balances(json.accounts)
-        cb(null, balances)
-      } else {
-        cb(json)
-      }
-    }
-
     root.changeSeed = function (wallet, seed) {
       $log.debug('Changing seed and clearing accounts: ' + seed)
       wallet.seed = seed
@@ -124,16 +114,82 @@ angular.module('canoeApp.services')
       $log.debug('Sending ' + amount + ' from ' + account.name + ' to ' + addr)
       return rai.send(wallet.id, account.id, addr, amount)
     }
-    /*
-    // Version
-    var ver = rai.node_vendor()
-    $log.debug('Version: ' + ver)
 
-    var key = rai.account_key(addr)
-    $log.debug('Key: ' + key)
-
-    var info = rai.account_info(addr)
-    $log.debug('Info: ' + JSON.stringify(info))
     */
+
+//
+// New RaiWebwallet based code. We call functions in src/js/raiwallet.js
+// All new functions start with raiXXX
+//
+
+    // Send amountRaw (bigInt) from account to addr, using wallet.
+    root.send = function (wallet, account, addr, amountRaw) {
+      $log.debug('Sending ' + amountRaw + ' from ' + account.name + ' to ' + addr)
+      try {
+        var blk = wallet.addPendingSendBlock(account.id, addr, amountRaw)
+        //var hash = blk.getHash(true)
+        // refreshBalances()
+        $log.debug('Transaction built successfully. Waiting for work ...')
+        // addRecentSendToGui({date: 'Just now', amount: amountRaw, hash: hash})
+        wallet.workPoolAdd(blk.getPrevious(), account.id, true)
+      } catch (e) {
+        $log.error('Send failed ' + e.message)
+        return false
+      }
+      return true
+    }
+
+    // Create a new wallet given a good password created by the user, and optional seed.
+    root.createWallet = function (password, seed) {
+      $log.debug('Create wallet')
+      var wallet = RAI.createNewWallet(password)
+      wallet.setLogger($log)
+      wallet.createSeed(seed)
+      $log.debug('Wallet: ' + JSON.stringify(wallet))
+      return wallet
+    }
+
+    // Loads wallet from data using password
+    root.createWalletFromData = function (password, data) {
+      $log.debug('Create wallet from data')
+      var wallet = RAI.createNewWallet(password)
+      return root.loadWalletData(wallet, data)
+    }
+
+    // Create a new account in the wallet
+    root.createAccount = function (wallet, accountName) {
+      $log.debug('Create account in wallet ' + wallet.id + ' named ' + accountName)
+      var account = wallet.createAccount({label: accountName})
+      $log.debug('Created account: ' + account)
+      return account
+    }
+
+    // Encrypt and store the wallet in localstorage.
+    // This should be called on every modification to the wallet.
+    root.saveWallet = function (cb) {
+      storageService.storeWallet(root.wallet.pack(), function () {
+        cb(null, root.wallet)
+      })
+    }
+
+    // Loads wallet from local storage using current password in wallet
+    root.loadWallet = function (cb) {
+      storageService.loadWallet(function (data) {
+        root.loadWalletData(root.wallet, data)
+        cb(null, root.wallet)
+      })
+    }
+
+    // Load wallet with given data using current password in wallet
+    root.loadWalletData = function (wallet, data) {
+      try {
+        wallet.load(data)
+      } catch (e) {
+        $log.error('Error decrypting wallet. Check that the password is correct.')
+        return
+      }
+      return wallet
+    }
+
     return root
   })

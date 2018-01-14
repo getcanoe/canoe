@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('canoeApp.services').factory('bitpayCardService', function($log, $rootScope, $filter, lodash, storageService, bitauthService, platformInfo, moment, appIdentityService, bitpayService, nextStepsService, txFormatService, appConfigService) {
+angular.module('canoeApp.services').factory('bitpayCardService', function($log, $rootScope, $filter, lodash, storageService, platformInfo, moment, appIdentityService, bitpayService, nextStepsService, txFormatService, appConfigService) {
   var root = {};
 
   var _setError = function(msg, e) {

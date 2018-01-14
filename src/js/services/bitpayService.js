@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('canoeApp.services').factory('bitpayService', function($log, $http, appIdentityService, bitauthService) {
+angular.module('canoeApp.services').factory('bitpayService', function($log, $http) {
   var root = {};
 
   var NETWORK = 'livenet';
@@ -21,7 +21,7 @@ angular.module('canoeApp.services').factory('bitpayService', function($log, $htt
   };
 
   root.post = function(endpoint, json, successCallback, errorCallback) {
-    appIdentityService.getIdentity(root.getEnvironment().network, function(err, appIdentity) {
+    /*appIdentityService.getIdentity(root.getEnvironment().network, function(err, appIdentity) {
       if (err) {
         return errorCallback(err);
       }
@@ -30,11 +30,11 @@ angular.module('canoeApp.services').factory('bitpayService', function($log, $htt
       }, function(data) {
         errorCallback(data);
       });
-    });
+    });*/
   };
 
   root.postAuth = function(json, successCallback, errorCallback) {
-    appIdentityService.getIdentity(root.getEnvironment().network, function(err, appIdentity) {
+    /*appIdentityService.getIdentity(root.getEnvironment().network, function(err, appIdentity) {
       if (err) {
         return errorCallback(err);
       }
@@ -44,7 +44,7 @@ angular.module('canoeApp.services').factory('bitpayService', function($log, $htt
       }, function(data) {
         errorCallback(data);
       });
-    });
+    });*/
   };
 
   var _get = function(endpoint) {
@@ -59,7 +59,7 @@ angular.module('canoeApp.services').factory('bitpayService', function($log, $htt
 
   var _post = function(endpoint, json, appIdentity) {
     var dataToSign = BITPAY_API_URL + endpoint + JSON.stringify(json);
-    var signedData = bitauthService.sign(dataToSign, appIdentity.priv);
+    //var signedData = bitauthService.sign(dataToSign, appIdentity.priv);
 
     return {
       method: 'POST',
@@ -74,7 +74,7 @@ angular.module('canoeApp.services').factory('bitpayService', function($log, $htt
   };
 
   var _postAuth = function(endpoint, json, appIdentity) {
-    json['params'].signature = bitauthService.sign(JSON.stringify(json.params), appIdentity.priv);
+    //json['params'].signature = bitauthService.sign(JSON.stringify(json.params), appIdentity.priv);
     json['params'].pubkey = appIdentity.pub;
     json['params'] = JSON.stringify(json.params);
 
