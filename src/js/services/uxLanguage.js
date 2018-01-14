@@ -12,6 +12,9 @@ angular.module('canoeApp.services')
       name: 'Español',
       isoCode: 'es'
     }, {
+      name: 'Eesti keelt',
+      isoCode: 'et'
+    }, {
       name: 'Français',
       isoCode: 'fr'
     }, {
