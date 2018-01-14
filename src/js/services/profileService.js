@@ -27,6 +27,14 @@ angular.module('canoeApp.services')
       return root.password
     }
 
+    root.getSeed = function () {
+      try {
+        return root.wallet.getSeed(root.password)
+      } catch (e) {
+        return null // Bad password or no wallet
+      }
+    }
+
     root.fetchServerStatus = function (cb) {
       raiblocksService.fetchServerStatus(cb)
     }
@@ -117,7 +125,7 @@ angular.module('canoeApp.services')
       configService.whenAvailable(function (config) {
         // account.usingCustomBWS = config.bwsFor && config.bwsFor[account.id] && (config.bwsFor[wallet.id] != defaults.bws.url)
         account.name = (config.aliasFor && config.aliasFor[account.id])
-        account.color = (config.colorFor && config.colorFor[account.id])
+        account.meta.color = (config.colorFor && config.colorFor[account.id])
         account.email = config.emailFor && config.emailFor[account.id]
       })
     }
@@ -359,7 +367,7 @@ angular.module('canoeApp.services')
     // Do we have funds? Presuming we are up to date here
     root.hasFunds = function () {
       var total = 0
-      lodash.forOwn(root.wallet.accounts, function (acc) {
+      lodash.forOwn(root.wallet.getAccounts(), function (acc) {
         total = total + (acc.balance || 0)
       })
       return total > 0
@@ -378,7 +386,11 @@ angular.module('canoeApp.services')
       var accountName = name || gettextCatalog.getString('Default Account')
       raiblocksService.createAccount(root.wallet, accountName)
       // TODO checkChains? See raiwallet.js
-      raiblocksService.saveWallet(cb)
+      raiblocksService.saveWallet(root.wallet, cb)
+    }
+
+    root.saveWallet = function (cb) {
+      raiblocksService.saveWallet(root.wallet, cb)
     }
 
     // Load wallet from local storage using entered password
@@ -386,7 +398,13 @@ angular.module('canoeApp.services')
       if (!root.password) {
         return cb('No password entered, can not load wallet from local storage')
       }
-      raiblocksService.createWalletFromStorage(root.password, cb)
+      raiblocksService.createWalletFromStorage(root.password, function (err, wallet) {
+        if (err) {
+          return cb(err)
+        }
+        root.wallet = wallet
+        cb(null, wallet)
+      })
     }
 
     root.getWallet = function () {
@@ -622,7 +640,7 @@ angular.module('canoeApp.services')
         return []
       }
 
-      var ret = root.wallet.accounts
+      var ret = root.wallet.getAccounts()
 
       if (opts.hasFunds) {
         ret = lodash.filter(ret, function (a) {
@@ -652,7 +670,7 @@ angular.module('canoeApp.services')
     root.toggleHideBalanceFlag = function (accountId, cb) {
       var acc = root.getAccount(accountId)
       acc.meta.balanceHidden = !acc.meta.balanceHidden
-      raiblocksService.saveWallet(cb)
+      raiblocksService.saveWallet(root.wallet, cb)
     }
 
     root.getNotifications = function (opts, cb) {

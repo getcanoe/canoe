@@ -17,7 +17,7 @@ angular.module('canoeApp.services').factory('emailService', function ($log, conf
       }
     }, function (err) {
       if (err) $log.warn(err)
-      walletService.updateRemotePreferences(wallets)
+      // walletService.updateRemotePreferences(wallets)
     })
   }
 

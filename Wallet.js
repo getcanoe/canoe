@@ -367,7 +367,7 @@ module.exports = function(password)
 				id: keys[i].account,
 				balance: bigInt(keys[i].balance), 
 				pendingBalance: bigInt(keys[i].pendingBalance),
-				name: keys[i].meta.name,
+				name: keys[i].meta.label,
 				meta: keys[i].meta
 			});
 		}
@@ -381,13 +381,13 @@ module.exports = function(password)
 	 */
 	api.getAccount = function(account)
 	{
-		var key = findKey(account)
+		var key = api.findKey(account)
 		if (!key) return null
 		return {
 				id: key.account,
 				balance: bigInt(key.balance), 
 				pendingBalance: bigInt(key.pendingBalance),
-				name: key.meta.name,
+				name: key.meta.label,
 				meta: key.meta
 			}
 	}
@@ -397,7 +397,7 @@ module.exports = function(password)
 	 */
 	api.findKey = function(account) {
 		for (let i in keys) {
-			if (keys[i].account === acc) {
+			if (keys[i].account === account) {
 				return keys[i]
 			}
 		}
@@ -1492,7 +1492,7 @@ module.exports = function(password)
 	api.createAccount = function (meta) {
 		var account = api.newKeyFromSeed()
 		api.useAccount(account)
-		key[current].meta = meta
+		keys[current].meta = meta
 		return api.getAccount(account)
 	}
 	

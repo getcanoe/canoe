@@ -153,7 +153,10 @@ angular.module('canoeApp.services')
     root.createWalletFromStorage = function (password, cb) {
       $log.debug('Load wallet from local storage')
       var wallet = RAI.createNewWallet(password)
-      storageService.loadWallet(function (data) {
+      storageService.loadWallet(function (err, data) {
+        if (err) {
+          return cb(err)
+        }
         if (!data) {
           return cb('No wallet in local storage')
         }
@@ -178,18 +181,18 @@ angular.module('canoeApp.services')
 
     // Encrypt and store the wallet in localstorage.
     // This should be called on every modification to the wallet.
-    root.saveWallet = function (cb) {
-      storageService.storeWallet(root.wallet.pack(), function () {
-        cb(null, root.wallet)
+    root.saveWallet = function (wallet, cb) {
+      storageService.storeWallet(wallet.pack(), function () {
+        cb(null, wallet)
       })
     }
 
     // Loads wallet from local storage using current password in wallet
-    root.reloadWallet = function (cb) {
+    root.reloadWallet = function (wallet, cb) {
       $log.debug('Reload wallet from local storage')
       storageService.loadWallet(function (data) {
-        root.loadWalletData(root.wallet, data)
-        cb(null, root.wallet)
+        root.loadWalletData(wallet, data)
+        cb(null, wallet)
       })
     }
 

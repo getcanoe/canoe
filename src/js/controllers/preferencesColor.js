@@ -13,8 +13,8 @@ angular.module('canoeApp.controllers').controller('preferencesColorController', 
   $scope.save = function (i) {
     var color = indexToColor(i)
     if (!color) return
-    account.color = color
-    profileService.saveWallet(function (wallet) {
+    account.meta.color = color
+    profileService.saveWallet(function () {
       $ionicHistory.goBack()
     })
   }
@@ -30,7 +30,7 @@ angular.module('canoeApp.controllers').controller('preferencesColorController', 
 
   function setCurrentColorIndex () {
     try {
-      $scope.currentColorIndex = colorToIndex(account.color || getColorDefault())
+      $scope.currentColorIndex = colorToIndex(account.meta.color || getColorDefault())
     } catch (e) {
       // Wait for DOM to render and try again.
       $timeout(function () {

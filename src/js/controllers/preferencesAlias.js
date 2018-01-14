@@ -10,7 +10,7 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
 
     $scope.save = function () {
       account.name = $scope.alias.value
-      profileService.saveWallet(function (wallet) {
+      profileService.saveWallet(function () {
         $ionicHistory.goBack()
       })
     }
