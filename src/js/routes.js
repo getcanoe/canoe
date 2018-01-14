@@ -422,6 +422,15 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
+			.state('tabs.prefrencesSecurity.changePassword', {
+				url: '/prefrencesSecurity/changePassword',
+				views: {
+					'tab-settings@tabs': {
+						controller: 'changePasswordController',
+						templateUrl: 'views/changePassword.html'
+					}
+				}
+			})
       .state('tabs.pin', {
         url: '/pin/:action',
         views: {
