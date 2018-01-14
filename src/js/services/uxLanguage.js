@@ -40,6 +40,9 @@ angular.module('canoeApp.services')
     }, {
       name: 'Português',
       isoCode: 'pt'
+    }, {
+      name: 'Svenska',
+      isoCode: 'sv'
     }]
 
     // }, {
