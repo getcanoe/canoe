@@ -84,6 +84,7 @@ module.exports = function (grunt) {
         files: [
           'src/js/init.js',
           'src/js/app.js',
+          'src/js/raiwallet.js',
           'src/js/directives/*.js',
           'src/js/filters/*.js',
           'src/js/routes.js',
@@ -249,7 +250,7 @@ module.exports = function (grunt) {
     browserify: {
       dist: {
         files: {
-          'www/raiwallet/raiwallet.js': ['src/js/raiwallet.js']
+          'www/raiwallet/braiwallet.js': ['src/js/raiwallet.js']
         }
       }
     }
