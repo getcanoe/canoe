@@ -149,16 +149,28 @@ angular.module('canoeApp.services')
       return wallet
     }
 
+    // Loads wallet from local storage using given password
+    root.createWalletFromStorage = function (password, cb) {
+      $log.debug('Load wallet from local storage')
+      var wallet = RAI.createNewWallet(password)
+      storageService.loadWallet(function (data) {
+        if (!data) {
+          return cb('No wallet in local storage')
+        }
+        root.loadWalletData(wallet, data)
+        cb(null, wallet)
+      })
+    }
+
     // Loads wallet from data using password
     root.createWalletFromData = function (password, data) {
-      $log.debug('Create wallet from data')
       var wallet = RAI.createNewWallet(password)
       return root.loadWalletData(wallet, data)
     }
 
     // Create a new account in the wallet
     root.createAccount = function (wallet, accountName) {
-      $log.debug('Create account in wallet ' + wallet.id + ' named ' + accountName)
+      $log.debug('Create account in wallet named ' + accountName)
       var account = wallet.createAccount({label: accountName})
       $log.debug('Created account: ' + account)
       return account
@@ -173,7 +185,8 @@ angular.module('canoeApp.services')
     }
 
     // Loads wallet from local storage using current password in wallet
-    root.loadWallet = function (cb) {
+    root.reloadWallet = function (cb) {
+      $log.debug('Reload wallet from local storage')
       storageService.loadWallet(function (data) {
         root.loadWalletData(root.wallet, data)
         cb(null, root.wallet)

@@ -1491,9 +1491,9 @@ module.exports = function(password)
 
 	api.createAccount = function (meta) {
 		var account = api.newKeyFromSeed()
-		api.useAccount()
+		api.useAccount(account)
 		key[current].meta = meta
-		return account
+		return api.getAccount(account)
 	}
 	
 	return api  

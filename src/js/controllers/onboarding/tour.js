@@ -40,7 +40,10 @@ angular.module('canoeApp.controllers').controller('tourController',
     $scope.createDefaultWallet = function () {
       ongoingProcess.set('creatingWallet', true)
       $timeout(function () {
-        profileService.createWallet(null, null, function (err, wallet) {
+        // This is the call to create the wallet from onboarding.
+        // profileService.enterPassword() needs to be called first with the password
+        // chosen by the user.
+        profileService.createWallet(profileService.getEnteredPassword(), null, function (err, wallet) {
           if (err) {
             $log.warn(err)
 

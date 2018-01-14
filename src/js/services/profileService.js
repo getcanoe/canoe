@@ -5,7 +5,6 @@ angular.module('canoeApp.services')
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
 
-
     var UPDATE_PERIOD = 15
     var RAW_PER_XRB = Math.pow(10, 30) // 1 XRB = 1 Mxrb = 10^30 raw
 
@@ -16,16 +15,17 @@ angular.module('canoeApp.services')
     var root = {}
     root.profile = null
     root.wallet = null
-    root.password = null
+    root.password = 'canoe' // TODO Hardcoded for testing during dev!!!!
 
-    Object.defineProperty(root, 'focusedClient', {
-      get: function () {
-        throw 'focusedClient is not used any more'
-      },
-      set: function () {
-        throw 'focusedClient is not used any more'
-      }
-    })
+    // This is where we keep the password entered when you start Canoe
+    // or when timeout is reached and it needs to be entered again.
+    root.enteredPassword = function (pw) {
+      root.password = pw
+    }
+
+    root.getEnteredPassword = function (pw) {
+      return root.password
+    }
 
     root.fetchServerStatus = function (cb) {
       raiblocksService.fetchServerStatus(cb)
@@ -383,7 +383,10 @@ angular.module('canoeApp.services')
 
     // Load wallet from local storage using entered password
     root.loadWallet = function (cb) {
-      raiblocksService.loadWallet(root.password)
+      if (!root.password) {
+        return cb('No password entered, can not load wallet from local storage')
+      }
+      raiblocksService.createWalletFromStorage(root.password, cb)
     }
 
     root.getWallet = function () {
@@ -552,10 +555,6 @@ angular.module('canoeApp.services')
           })
         })
       })
-    }
-
-    root.createDefaultWallet = function (password, cb) {
-      root.createWallet(password, null, cb)
     }
 
     root.setDisclaimerAccepted = function (cb) {
