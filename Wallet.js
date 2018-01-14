@@ -127,7 +127,6 @@ var AES = {
 };
 
 
-
 module.exports = function(password)
 {
 	var api = {};                       // wallet public methods
@@ -391,7 +390,6 @@ module.exports = function(password)
 				name: key.meta.name,
 				meta: key.meta
 			}
-		}
 	}
 
 	/**
@@ -1498,11 +1496,5 @@ module.exports = function(password)
 		return account
 	}
 	
-
-
 	return api  
 }
-
-
-
-
