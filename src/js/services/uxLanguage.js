@@ -21,6 +21,9 @@ angular.module('canoeApp.services')
       name: 'Italiano',
       isoCode: 'it'
     }, {
+      name: 'Magyar',
+      isoCode: 'hu'
+    }, {
       name: 'Nederlands',
       isoCode: 'nl'
     }, {
