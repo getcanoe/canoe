@@ -178,6 +178,11 @@ function Rai (url_base, port) {
     return XRB.unit(input, input_unit, output_unit)
   }
 
+  this.quota_full = function (account) {
+    var ans = this.rpc(JSON.stringify({'action': 'quota_full'}))
+    return ans.full
+  }
+
 // Object output
   this.account_balance = function (account) {
     return this.rpc(JSON.stringify({'action': 'account_balance', 'account': account}))

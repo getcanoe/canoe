@@ -39,41 +39,57 @@ angular.module('canoeApp.controllers').controller('tourController',
     var retryCount = 0
     $scope.createDefaultWallet = function () {
       ongoingProcess.set('creatingWallet', true)
-      $timeout(function () {
-        profileService.createDefaultWallet(null, function (err, wallet) {
-          if (err) {
-            $log.warn(err)
-
-            return $timeout(function () {
-              $log.warn('Retrying to create default wallet.....:' + ++retryCount)
-              if (retryCount > 3) {
-                ongoingProcess.set('creatingWallet', false)
-                popupService.showAlert(
-                  gettextCatalog.getString('Cannot Create Wallet'), err,
-                  function () {
-                    retryCount = 0
-                    return $scope.createDefaultWallet()
-                  }, gettextCatalog.getString('Retry'))
-              } else {
-                return $scope.createDefaultWallet()
-              }
-            }, 2000)
-          };
+      profileService.serverNotAvailable(function () {
+        ongoingProcess.set('creatingWallet', false)
+        return popupService.showAlert(
+          gettextCatalog.getString('Cannot reach Getcanoe.io - check networking!')
+        )
+      }, function () {
+        // Ok, server available
+        if (profileService.quotaFull()) {
           ongoingProcess.set('creatingWallet', false)
+          return popupService.showAlert(
+            gettextCatalog.getString('Maximum number of alpha testers reached, sorry!')
+          )
+        } else {
+          // Ok, quota not full
+          $timeout(function () {
+            profileService.createDefaultWallet(null, function (err, wallet) {
+              if (err) {
+                $log.warn(err)
 
-          // We don't want to collect emails
-          // $state.go('onboarding.collectEmail', {
-          $state.go('onboarding.backupRequest', {
-            walletId: wallet.id
-          })
+                return $timeout(function () {
+                  $log.warn('Retrying to create default wallet.....:' + ++retryCount)
+                  if (retryCount > 3) {
+                    ongoingProcess.set('creatingWallet', false)
+                    popupService.showAlert(
+                      gettextCatalog.getString('Cannot Create Wallet'), err,
+                      function () {
+                        retryCount = 0
+                        return $scope.createDefaultWallet()
+                      }, gettextCatalog.getString('Retry'))
+                  } else {
+                    return $scope.createDefaultWallet()
+                  }
+                }, 2000)
+              };
+              ongoingProcess.set('creatingWallet', false)
 
-            /*
-          $state.go('onboarding.backupRequest', {
-            walletId: walletId
-          });
-            */
-        })
-      }, 300)
+              // We don't want to collect emails
+              // $state.go('onboarding.collectEmail', {
+              $state.go('onboarding.backupRequest', {
+                walletId: wallet.id
+              })
+
+                /*
+              $state.go('onboarding.backupRequest', {
+                walletId: walletId
+              });
+                */
+            })
+          }, 300)
+        }
+      })
     }
 
     $scope.goBack = function () {

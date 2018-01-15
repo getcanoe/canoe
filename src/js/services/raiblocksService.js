@@ -22,15 +22,25 @@ angular.module('canoeApp.services')
 
     root.connect()
 
+    root.quotaFull = function () {
+      $log.debug('Check available quota on server')
+      return rai.quota_full()
+    }
+
     root.fetchServerStatus = function (cb) {
       var xhr = new XMLHttpRequest()
+      xhr.timeout = 10000
       xhr.open('POST', host, true)
       xhr.send(JSON.stringify({'action': 'canoe_server_status'}))
       xhr.onreadystatechange = processRequest
       function processRequest (e) {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var response = JSON.parse(xhr.responseText)
-          cb(null, response)
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText)
+            return cb(null, response)
+          } else {
+            return cb(new Error('Failed getting server status'))
+          }
         }
       }
     }

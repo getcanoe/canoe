@@ -24,6 +24,20 @@ angular.module('canoeApp.services')
       }
     })
 
+    root.serverNotAvailable = function (cbNotAvail, cbAvail) {
+      root.fetchServerStatus(function (err, status) {
+        if (err) {
+          return cbNotAvail()
+        } else {
+          return cbAvail()
+        }
+      })
+    }
+
+    root.quotaFull = function () {
+      return raiblocksService.quotaFull()
+    }
+
     root.fetchServerStatus = function (cb) {
       raiblocksService.fetchServerStatus(cb)
     }
