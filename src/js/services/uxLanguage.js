@@ -53,6 +53,9 @@ angular.module('canoeApp.services')
     }, {
       name: 'Svenska',
       isoCode: 'sv'
+    }, {
+      name: 'Tiếng Việt',
+      isoCode: 'vi'
     }]
 
     // }, {
