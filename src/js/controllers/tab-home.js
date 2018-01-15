@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('canoeApp.controllers').controller('tabHomeController',
-  function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, txpModalService, appConfigService, startupService, addressbookService, feedbackService, bwcError, nextStepsService, buyAndSellService, homeIntegrationsService, bitpayCardService, pushNotificationsService, timeService) {
+  function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, txpModalService, appConfigService, startupService, addressbookService, feedbackService, bwcError, nextStepsService, buyAndSellService, homeIntegrationsService, bitpayCardService, pushNotificationsService, timeService, $ionicTabsDelegate) {
     var wallet
     var listeners = []
     var notifications = []
@@ -16,6 +16,20 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     $scope.isNW = platformInfo.isNW
     $scope.showRateCard = {}
     $scope.serverMessage = null
+
+    $scope.goForward = function () {
+      var selected = $ionicTabsDelegate.selectedIndex();
+      if (selected != -1) {
+        $ionicTabsDelegate.select(selected + 1);
+      }
+    };
+
+    $scope.goBack = function () {
+      var selected = $ionicTabsDelegate.selectedIndex();
+      if (selected != -1 && selected != 0) {
+        $ionicTabsDelegate.select(selected - 1);
+      }
+    };
 
     $scope.$on('$ionicView.afterEnter', function () {
       startupService.ready()

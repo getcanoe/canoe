@@ -40,7 +40,7 @@
   <div id="agree-to-terms" ng-if="accepted.first && accepted.second" ng-class="{'header-present': !backedUp}">
     <div id="agree-to-terms-content" class="center-block">
       <ion-checkbox ng-model="terms.accepted"></ion-checkbox>
-      <p translate>I have read, understood, and agree to the <a ng-click="openTerms()" translate>Terms of Use</a>.</p>
+      <p translate>I have read, understood, and agree to the <a href="javascript:void(0)" ng-click="openTerms();" translate>Terms of Use</a>.</p>
       <button ng-disabled="!accepted.first || !accepted.second || !terms.accepted" class="button button-block button-primary" ng-click="confirm()" translate>Confirm &amp; Finish</button>
     </div>
   </div>

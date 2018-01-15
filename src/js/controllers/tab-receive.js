@@ -1,10 +1,24 @@
 'use strict'
 
-angular.module('canoeApp.controllers').controller('tabReceiveController', function ($rootScope, $scope, $timeout, $log, $ionicModal, $state, $ionicHistory, $ionicPopover, storageService, platformInfo, walletService, profileService, configService, lodash, gettextCatalog, popupService, bwcError) {
+angular.module('canoeApp.controllers').controller('tabReceiveController', function ($rootScope, $scope, $timeout, $log, $ionicModal, $state, $ionicHistory, $ionicPopover, storageService, platformInfo, walletService, profileService, configService, lodash, gettextCatalog, popupService, bwcError, $ionicTabsDelegate) {
   var listeners = []
   $scope.wallet = profileService.getWallet()
   $scope.isCordova = platformInfo.isCordova
   $scope.isNW = platformInfo.isNW
+
+  $scope.goForward = function () {
+    var selected = $ionicTabsDelegate.selectedIndex();
+    if (selected != -1) {
+      $ionicTabsDelegate.select(selected + 1);
+    }
+  };
+
+  $scope.goBack = function () {
+    var selected = $ionicTabsDelegate.selectedIndex();
+    if (selected != -1 && selected != 0) {
+      $ionicTabsDelegate.select(selected - 1);
+    }
+  };
 
   $scope.requestSpecificAmount = function () {
     $state.go('tabs.paymentRequest.amount', {

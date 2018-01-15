@@ -3,7 +3,7 @@
     <ion-nav-title><img class="tab-home__logo" src="img/app/canoe-logo.png"></ion-nav-title>
   </ion-nav-bar>
 
-  <ion-content>
+  <ion-content on-swipe-left="goForward()" on-swipe-right="goBack()">
     <ion-refresher
      ng-if="isAndroid"
      pulling-icon="ion-ios-refresh"

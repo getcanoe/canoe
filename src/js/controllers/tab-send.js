@@ -1,11 +1,25 @@
 'use strict'
 
-angular.module('canoeApp.controllers').controller('tabSendController', function ($scope, $rootScope, $log, $timeout, $ionicScrollDelegate, addressbookService, profileService, lodash, $state, walletService, incomingData, popupService, platformInfo, bwcError, gettextCatalog, scannerService, externalLinkService) {
+angular.module('canoeApp.controllers').controller('tabSendController', function ($scope, $rootScope, $log, $timeout, $ionicScrollDelegate, addressbookService, profileService, lodash, $state, walletService, incomingData, popupService, platformInfo, bwcError, gettextCatalog, scannerService, externalLinkService, $ionicTabsDelegate) {
   var originalList
   var CONTACTS_SHOW_LIMIT
   var currentContactsPage
   $scope.isChromeApp = platformInfo.isChromeApp
   $scope.serverMessage = null
+
+  $scope.goForward = function () {
+    var selected = $ionicTabsDelegate.selectedIndex();
+    if (selected != -1) {
+      $ionicTabsDelegate.select(selected + 1);
+    }
+  };
+
+  $scope.goBack = function () {
+    var selected = $ionicTabsDelegate.selectedIndex();
+    if (selected != -1 && selected != 0) {
+      $ionicTabsDelegate.select(selected - 1);
+    }
+  };
 
   var updateAccountsList = function () {
     $scope.showTransferCard = $scope.hasMoreAccounts
