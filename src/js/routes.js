@@ -1243,7 +1243,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
             $state.go('onboarding.welcome')
           } else if (err.message && err.message.match('NONAGREEDDISCLAIMER')) {
             if (lodash.isEmpty(profileService.getAccounts())) {
-              $log.debug('No wallets and no disclaimer... redirecting')
+              $log.debug('No wallet and no disclaimer... redirecting')
               $state.go('onboarding.welcome')
             } else {
               $log.debug('Display disclaimer... redirecting')
@@ -1251,6 +1251,9 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
                 resume: true
               })
             }
+          } else if (err.message && err.message.match('WALLETBROKEN')) {
+            $log.debug('No wallet ... redirecting')
+            $state.go('onboarding.welcome')
           } else {
             throw new Error(err) // TODO
           }
