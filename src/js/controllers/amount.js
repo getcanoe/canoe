@@ -287,6 +287,9 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       } else {
         $scope.alternativeAmount = $filter('formatFiatAmount')(toFiat(result))
       }
+      if ($scope.alternativeAmount) {
+        $scope.alternativeAmountStr = $scope.alternativeAmount + ' ' + $scope.alternativeUnit
+      }
     }
   }
 
@@ -351,6 +354,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       $state.transitionTo('tabs.send.confirm', {
         recipientType: $scope.recipientType,
         toAmount: amount,
+        toAlternativeAmountStr: $scope.alternativeAmountStr,
         toAddress: $scope.toAddress,
         toName: $scope.toName,
         toEmail: $scope.toEmail,

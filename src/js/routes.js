@@ -290,15 +290,12 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       })
       .state('tabs.send.confirm', {
-        url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toEmail/:toColor/:description/:coin/:useSendMax',
+        url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toAlternativeAmountStr/:toEmail/:toColor/:description/:useSendMax',
         views: {
           'tab-send@tabs': {
             controller: 'confirmController',
             templateUrl: 'views/confirm.html'
           }
-        },
-        params: {
-          paypro: null
         }
       })
       .state('tabs.send.addressbook', {

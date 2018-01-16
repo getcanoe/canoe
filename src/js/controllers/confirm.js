@@ -39,7 +39,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   })
 
   function exitWithError (err) {
-    $log.info('Error setting wallet selector:' + err)
+    $log.info('Error setting account selector:' + err)
     popupService.showAlert(gettextCatalog.getString(), err, function () {
       $ionicHistory.nextViewOptions({
         disableAnimate: true,
@@ -50,7 +50,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     })
   };
 
-  function setNoWallet (msg, criticalError) {
+  function setNoAccount (msg, criticalError) {
     $scope.account = null
     $scope.noWalletMessage = msg
     $scope.criticalError = criticalError
@@ -70,7 +70,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
         $scope.accounts = profileService.getAccounts()
 
         if (!$scope.accounts || !$scope.accounts.length) {
-          setNoWallet(gettextCatalog.getString('No wallets available'), true)
+          setNoAccount(gettextCatalog.getString('No accounts available'), true)
           return cb()
         }
 
@@ -83,7 +83,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
         })
 
         if (lodash.isEmpty(filteredAccounts)) {
-          setNoWallet(gettextCatalog.getString('Insufficient funds'), true)
+          setNoAccount(gettextCatalog.getString('Insufficient funds'), true)
         }
 
         $scope.accounts = lodash.clone(filteredAccounts)
@@ -94,6 +94,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     // Grab stateParams
     tx = {
       toAmount: data.stateParams.toAmount,
+      toAlternativeAmountStr: data.stateParams.toAlternativeAmountStr,
       sendMax: data.stateParams.useSendMax === 'true',
       toAddress: data.stateParams.toAddress,
       description: data.stateParams.description,
@@ -154,9 +155,10 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       tx.amountStr = profileService.formatAmountWithUnit(tx.toAmount) // txFormatService.formatAmountStr(null, tx.toAmount)
       tx.amountValueStr = tx.amountStr.split(' ')[0]
       tx.amountUnitStr = tx.amountStr.split(' ')[1]
-      txFormatService.formatAlternativeStr(null, tx.toAmount, function (v) {
-        tx.alternativeAmountStr = v
-      })
+      tx.alternativeAmountStr = tx.toAlternativeAmountStr
+      // txFormatService.formatAlternativeStr(null, tx.toAmount, function (v) {
+      //  tx.alternativeAmountStr = v
+      // })
     }
 
     updateAmount()
@@ -166,14 +168,6 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     if (!account) {
       return cb()
     }
-  }
-
-  function useSelectedWallet () {
-    if (!$scope.useSendMax) {
-      showAmount(tx.toAmount)
-    }
-
-    $scope.onAccountSelect($scope.account)
   }
 
   function setButtonText () {
@@ -246,16 +240,6 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   $scope.approve = function (tx, account, onSendStatusChange) {
     if (!tx || !account) return
 
-    /*
-    if ($scope.paymentExpired) {
-      popupService.showAlert(null, gettextCatalog.getString('This bitcoin payment request has expired.'))
-      $scope.sendStatus = ''
-      $timeout(function () {
-        $scope.$apply()
-      })
-      return
-    } */
-
     ongoingProcess.set('creatingTx', true, onSendStatusChange)
     getTxp(lodash.clone(tx), account, false, function (err, txp) {
       ongoingProcess.set('creatingTx', false, onSendStatusChange)
@@ -282,22 +266,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
         profileService.send(txp, function (err) {
           if (err) return setSendError(err)
           ongoingProcess.set('sendingTx', false, onSendStatusChange)
-
-          // TODO ehum
-         /* txConfirmNotification.subscribe(account, {
-            txid: txp.txid
-          })*/
         })
-
-        /*
-        walletService.publishAndSign(wallet, txp, function (err, txp) {
-          if (err) return setSendError(err)
-          if (config.confirmedTxsNotifications && config.confirmedTxsNotifications.enabled) {
-            txConfirmNotification.subscribe(account, {
-              txid: txp.txid
-            })
-          }
-        }, onSendStatusChange)*/
       }
 
       confirmTx(function (nok) {
