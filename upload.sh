@@ -1,4 +1,4 @@
-VER=0.1.1
+VER=0.2.0
 DESTINATION=website@getcanoe.io:/var/www/html/download/
 
 cd webkitbuilds/Canoe
