@@ -154,109 +154,13 @@ angular.module('canoeApp.services')
       })
     }
 
-    // Adds a wallet client to profileService
-    root.bindWalletClient = function (wallet, opts) {
-      var opts = opts || {}
-      var walletId = wallet.credentials.walletId
-
-      if ((root.wallet[walletId] && root.wallet[walletId].started) && !opts.force) {
-        return false
-      }
-
-      // INIT WALLET VIEWMODEL
-      wallet.id = walletId
-      wallet.started = true
-      wallet.doNotVerifyPayPro = isChromeApp
-      wallet.network = wallet.credentials.network
-      wallet.canoeerId = wallet.credentials.canoeerId
-      wallet.m = wallet.credentials.m
-      wallet.n = wallet.credentials.n
-      wallet.coin = wallet.credentials.coin
-
-      root.updateAccountSettings(wallet)
-      root.wallet[walletId] = wallet
-
-      _needsBackup(wallet, function (val) {
-        wallet.needsBackup = val
-      })
-
-      _balanceIsHidden(wallet, function (val) {
-        wallet.balanceHidden = val
-      })
-
-      wallet.removeAllListeners()
-
-      wallet.initialize({
-        notificationIncludeOwn: true
-      }, function (err) {
-        if (err) {
-          $log.error('Could not init notifications err:', err)
-          return
-        }
-        wallet.setNotificationsInterval(UPDATE_PERIOD)
-        wallet.openWallet(function (err) {
-          if (wallet.status !== true) { $log.debug('Wallet + ' + walletId + ' status:' + wallet.status) }
-        })
-      })
-
-      $rootScope.$on('Local/SettingsUpdated', function (e, walletId) {
-        if (!walletId || walletId == wallet.id) {
-          $log.debug('Updating settings for wallet:' + wallet.id)
-          root.updateAccountSettings(wallet)
-        }
-      })
-
-      return true
-    }
-
-    root.bindWallet = function (cb) {
-      root.loadWallet(cb)
-    }
-
     root.bindProfile = function (profile, cb) {
       root.profile = profile
 
       configService.get(function (err) {
         $log.debug('Preferences read')
         if (err) return cb(err)
-        root.bindWallet(cb)
-
-        /* function bindWallets (cb) {
-          var l = root.profile.credentials.length
-          var i = 0,
-            totalBound = 0
-
-          if (!l) return cb()
-
-          lodash.each(root.profile.credentials, function (credentials) {
-            root.bindWallet(credentials, function (err, bound) {
-              i++
-              totalBound += bound
-              if (i == l) {
-                $log.info('Bound ' + totalBound + ' out of ' + l + ' wallets')
-                return cb()
-              }
-            })
-          })
-        } */
-        /*
-        bindWallets(function () {
-          root.isBound = true
-
-          lodash.each(root._queue, function (x) {
-            $timeout(function () {
-              return x()
-            }, 1)
-          })
-          root._queue = []
-
-          root.isDisclaimerAccepted(function (val) {
-            if (!val) {
-              return cb(new Error('NONAGREEDDISCLAIMER: Non agreed disclaimer'))
-            }
-            return cb()
-          })
-        }) */
+        root.loadWallet(cb)
       })
     }
 
@@ -291,77 +195,6 @@ angular.module('canoeApp.services')
           return root.bindProfile(profile, cb)
         }
       })
-    }
-
-    var seedWallet = function (opts, cb) {
-      opts = opts || {}
-      // var walletClient = bwcService.getClient(null, opts)
-      var network = opts.networkName || 'livenet'
-
-      if (opts.mnemonic) {
-        try {
-          opts.mnemonic = root._normalizeMnemonic(opts.mnemonic)
-          walletClient.seedFromMnemonic(opts.mnemonic, {
-            network: network,
-            passphrase: opts.passphrase,
-            account: opts.account || 0,
-            derivationStrategy: opts.derivationStrategy || 'BIP44',
-            coin: opts.coin
-          })
-        } catch (ex) {
-          $log.info(ex)
-          return cb(gettextCatalog.getString('Could not create: Invalid wallet recovery phrase'))
-        }
-      } else if (opts.extendedPrivateKey) {
-        try {
-          walletClient.seedFromExtendedPrivateKey(opts.extendedPrivateKey, {
-            network: network,
-            account: opts.account || 0,
-            derivationStrategy: opts.derivationStrategy || 'BIP44',
-            coin: opts.coin
-          })
-        } catch (ex) {
-          $log.warn(ex)
-          return cb(gettextCatalog.getString('Could not create using the specified extended private key'))
-        }
-      } else if (opts.extendedPublicKey) {
-        try {
-          walletClient.seedFromExtendedPublicKey(opts.extendedPublicKey, opts.externalSource, opts.entropySource, {
-            account: opts.account || 0,
-            derivationStrategy: opts.derivationStrategy || 'BIP44',
-            coin: opts.coin
-          })
-          walletClient.credentials.hwInfo = opts.hwInfo
-        } catch (ex) {
-          $log.warn('Creating wallet from Extended Public Key Arg:', ex, opts)
-          return cb(gettextCatalog.getString('Could not create using the specified extended public key'))
-        }
-      } else {
-        var lang = uxLanguage.getCurrentLanguage()
-        try {
-          walletClient.seedFromRandomWithMnemonic({
-            network: network,
-            passphrase: opts.passphrase,
-            language: lang,
-            account: 0,
-            coin: opts.coin
-          })
-        } catch (e) {
-          $log.info('Error creating recovery phrase: ' + e.message)
-          if (e.message.indexOf('language') > 0) {
-            $log.info('Using default language for recovery phrase')
-            walletClient.seedFromRandomWithMnemonic({
-              network: network,
-              passphrase: opts.passphrase,
-              account: 0,
-              coin: opts.coin
-            })
-          } else {
-            return cb(e)
-          }
-        }
-      }
-      return cb(null, walletClient)
     }
 
     // Do we have funds? Presuming we are up to date here
@@ -420,29 +253,8 @@ angular.module('canoeApp.services')
       cb()
     }
 
-    root.deleteWalletClient = function (client, cb) {
-      var walletId = client.credentials.walletId
-
-      var config = configService.getSync()
-
-      $log.debug('Deleting Wallet:', client.credentials.walletName)
-      client.removeAllListeners()
-
-      root.profile.deleteWallet(walletId)
-
-      delete root.wallet[walletId]
-
-      storageService.removeAllWalletData(walletId, function (err) {
-        if (err) $log.warn(err)
-      })
-
-      storageService.storeProfile(root.profile, function (err) {
-        if (err) return cb(err)
-        return cb()
-      })
-    }
-
-    root.setMetaData = function (walletClient, addressBook, cb) {
+    // Not used yet but could be useful
+    root.mergeAddressBook = function (walletClient, addressBook, cb) {
       storageService.getAddressbook(function (err, localAddressBook) {
         var localAddressBook1 = {}
         try {
@@ -450,50 +262,10 @@ angular.module('canoeApp.services')
         } catch (ex) {
           $log.warn(ex)
         }
-        var mergeAddressBook = lodash.merge(addressBook, localAddressBook1)
+        lodash.merge(addressBook, localAddressBook1)
         storageService.setAddressbook(JSON.stringify(addressBook), function (err) {
           if (err) return cb(err)
           return cb(null)
-        })
-      })
-    }
-
-    // Adds and bind a new client to the profile
-    var NOTUSED_addAndBindWalletClient = function (client, opts, cb) {
-      if (!client || !client.credentials) { return cb(gettextCatalog.getString('Could not access wallet')) }
-
-      var walletId = client.credentials.walletId
-
-      if (!root.profile.addWallet(JSON.parse(client.export()))) {
-        return cb(gettextCatalog.getString('Wallet already in {{appName}}', {
-          appName: appConfigService.nameCase
-        }))
-      }
-
-      var skipKeyValidation = shouldSkipValidation(walletId)
-      if (!skipKeyValidation) { root.runValidation(client) }
-
-      root.bindWalletClient(client)
-
-      var saveBwsUrl = function (cb) {
-        var defaults = configService.getDefaults()
-        var bwsFor = {}
-        bwsFor[walletId] = opts.bwsurl || defaults.bws.url
-
-        // Dont save the default
-        if (bwsFor[walletId] == defaults.bws.url) { return cb() }
-
-        configService.set({
-          bwsFor: bwsFor
-        }, function (err) {
-          if (err) $log.warn(err)
-          return cb()
-        })
-      }
-
-      saveBwsUrl(function () {
-        storageService.storeProfile(root.profile, function (err) {
-          return cb(err, client)
         })
       })
     }
@@ -506,50 +278,7 @@ angular.module('canoeApp.services')
         })
       } else {
         if (cb) return cb()
-      };
-    }
-
-    root.importWallet = function (str, opts, cb) {
-      // var walletClient = bwcService.getClient(null, opts)
-
-      $log.debug('Importing Wallet:', opts)
-
-      try {
-        var c = JSON.parse(str)
-
-        if (c.xPrivKey && c.xPrivKeyEncrypted) {
-          $log.warn('Found both encrypted and decrypted key. Deleting the encrypted version')
-          delete c.xPrivKeyEncrypted
-          delete c.mnemonicEncrypted
-        }
-
-        str = JSON.stringify(c)
-
-        walletClient.import(str, {
-          compressed: opts.compressed,
-          password: opts.password
-        })
-      } catch (err) {
-        return cb(gettextCatalog.getString('Could not import. Check input file and spending password'))
       }
-
-      str = JSON.parse(str)
-
-      if (!str.n) {
-        return cb('Backup format not recognized. If you are using a Canoe Beta backup and version is older than 0.10, please see: https://github.com/gokr/canoe/issues/4730#issuecomment-244522614')
-      }
-
-      var addressBook = str.addressBook || {}
-
-      addAndBindWalletClient(walletClient, {
-        bwsurl: opts.bwsurl
-      }, function (err, walletId) {
-        if (err) return cb(err)
-        root.setMetaData(walletClient, addressBook, function (error) {
-          if (error) $log.warn(error)
-          return cb(err, walletClient)
-        })
-      })
     }
 
     root.createProfile = function (cb) {
@@ -597,11 +326,6 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.updateCredentials = function (credentials, cb) {
-      root.profile.updateWallet(credentials)
-      storageService.storeProfile(root.profile, cb)
-    }
-
     root.getLastKnownBalance = function (account, cb) {
       storageService.getBalanceCache(account.id, cb)
     }
@@ -631,6 +355,7 @@ angular.module('canoeApp.services')
       }, cb)
     }
 
+    // This is a filtering function for accounts, not used yet
     root.getAccounts = function (opts) {
       if (opts && !lodash.isObject(opts)) { throw 'bad argument' }
       opts = opts || {}
