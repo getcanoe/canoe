@@ -93,6 +93,6 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
 
   $scope.shareAccount = function () {
     if (!$scope.isCordova) return
-    window.plugins.socialsharing.share('xrb:' + $scope.addr, null, null, null)
+    window.plugins.socialsharing.share($scope.addr, null, null, null)
   }
 })

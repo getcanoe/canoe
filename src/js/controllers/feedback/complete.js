@@ -7,7 +7,7 @@ angular.module('canoeApp.controllers').controller('completeController', function
   })
 
   var defaults = configService.getDefaults()
-  var downloadUrl = defaults.download.canoe.url
+  var downloadUrl = defaults.download.canoe.message + defaults.download.canoe.url
 
   function quickFeedback (cb) {
     window.plugins.spinnerDialog.show()
