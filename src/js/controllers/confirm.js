@@ -155,6 +155,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       tx.amountStr = profileService.formatAmountWithUnit(tx.toAmount) // txFormatService.formatAmountStr(null, tx.toAmount)
       tx.amountValueStr = tx.amountStr.split(' ')[0]
       tx.amountUnitStr = tx.amountStr.split(' ')[1]
+      // Picked it from amount.js TODO: for sendMax and switching accounts we need to fix this
       tx.alternativeAmountStr = tx.toAlternativeAmountStr
       // txFormatService.formatAlternativeStr(null, tx.toAmount, function (v) {
       //  tx.alternativeAmountStr = v
@@ -205,6 +206,13 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     $scope.account = account
 
     setButtonText()
+
+    if (tx.sendMax) {
+      // Pick amount from balance
+      tx.toAmount = account.balance
+      // TODO we need to calculate again...
+      tx.toAlternativeAmountStr = ''
+    }
 
     updateTx(tx, account, {
       dryRun: true
