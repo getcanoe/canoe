@@ -33,7 +33,8 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         })
       }
 
-      if ($scope.isNW) {
+      // TODO: For the moment we show new release notice for all platforms
+      if (true) { // ($scope.isNW) {
         latestReleaseService.checkLatestRelease(function (err, newRelease) {
           if (err) {
             $log.warn(err)

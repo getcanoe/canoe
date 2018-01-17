@@ -17,7 +17,10 @@ angular.module('canoeApp.services')
         var current = formatTagNumber(currentVersion)
         var latest = formatTagNumber(latestVersion)
 
-        if (latest.major < current.major || (latest.major == current.major && latest.minor <= current.minor)) { return cb(null, false) }
+        if (latest.major < current.major || (latest.major === current.major && latest.minor <= current.minor)) {
+          // We are already newer or at least up to date - ignoring PATCH level.
+          return cb(null, false)
+        }
 
         $log.debug('A new version is available: ' + latestVersion)
         return cb(null, true)

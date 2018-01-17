@@ -290,15 +290,12 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       })
       .state('tabs.send.confirm', {
-        url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toEmail/:toColor/:description/:coin/:useSendMax',
+        url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toAlternativeAmountStr/:toEmail/:toColor/:description/:useSendMax',
         views: {
           'tab-send@tabs': {
             controller: 'confirmController',
             templateUrl: 'views/confirm.html'
           }
-        },
-        params: {
-          paypro: null
         }
       })
       .state('tabs.send.addressbook', {
@@ -1243,7 +1240,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
             $state.go('onboarding.welcome')
           } else if (err.message && err.message.match('NONAGREEDDISCLAIMER')) {
             if (lodash.isEmpty(profileService.getAccounts())) {
-              $log.debug('No wallets and no disclaimer... redirecting')
+              $log.debug('No wallet and no disclaimer... redirecting')
               $state.go('onboarding.welcome')
             } else {
               $log.debug('Display disclaimer... redirecting')
@@ -1251,6 +1248,9 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
                 resume: true
               })
             }
+          } else if (err.message && err.message.match('WALLETBROKEN')) {
+            $log.debug('No wallet ... redirecting')
+            $state.go('onboarding.welcome')
           } else {
             throw new Error(err) // TODO
           }

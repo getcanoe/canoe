@@ -24,6 +24,20 @@ angular.module('canoeApp.services')
       }
     })
 
+    root.serverNotAvailable = function (cbNotAvail, cbAvail) {
+      root.fetchServerStatus(function (err, status) {
+        if (err) {
+          return cbNotAvail()
+        } else {
+          return cbAvail()
+        }
+      })
+    }
+
+    root.quotaFull = function () {
+      return raiblocksService.quotaFull()
+    }
+
     root.fetchServerStatus = function (cb) {
       raiblocksService.fetchServerStatus(cb)
     }
@@ -419,9 +433,17 @@ angular.module('canoeApp.services')
       storageService.loadWallet(function (err, wallet) {
         if (err) {
           $log.warn(err)
+          cb(new Error('WALLETBROKEN'))
         } else {
-          root.wallet = wallet ? JSON.parse(wallet) : null
-          cb(null, root.wallet)
+          if (wallet) {
+            root.wallet = wallet ? JSON.parse(wallet) : null
+            if (!root.wallet.id || !root.wallet.accounts || root.wallet.accounts.length === 0) {
+              cb(new Error('WALLETBROKEN'))
+            }
+            cb(null, root.wallet)
+          } else {
+            cb(new Error('WALLETBROKEN'))
+          }
         }
       })
     }
