@@ -156,6 +156,8 @@ angular.module('canoeApp.services')
 
     root.bindProfile = function (profile, cb) {
       root.profile = profile
+      // Make sure this service has it, for communicating with the server
+      raiblocksService.setProfileId(profile.id)
 
       configService.get(function (err) {
         $log.debug('Preferences read')
@@ -197,21 +199,20 @@ angular.module('canoeApp.services')
       })
     }
 
-    // Do we have funds? Presuming we are up to date here
+    // Do we have funds? Presuming we are up to date here. It's a bigInt
     root.hasFunds = function () {
-      var total = 0
-      lodash.forOwn(root.wallet.getAccounts(), function (acc) {
-        total = total + (acc.balance || 0)
-      })
-      return total > 0
+      return root.wallet.getWalletBalance().get(0)
     }
 
     // Create wallet and default account which saves wallet, seed can be null.
     root.createWallet = function (password, seed, cb) {
       // Synchronous now
       root.wallet = raiblocksService.createWallet(password, seed)
-      // Create default acount, will save
-      root.createAccount(null, cb)
+      root.setWalletId(root.wallet.getId(), function (err) {
+        if (err) return cb(err)
+        // Create default acount, will save
+        root.createAccount(null, cb)
+      })
     }
 
     // Create account in wallet and save wallet
@@ -236,8 +237,17 @@ angular.module('canoeApp.services')
           return cb(err)
         }
         root.wallet = wallet
+        root.setWalletId(wallet.id)
         cb(null, wallet)
       })
+    }
+
+    root.getId = function () {
+      return root.profile.id
+    }
+
+    root.getWalletId = function () {
+      return root.profile.walletId
     }
 
     root.getWallet = function () {
@@ -270,15 +280,11 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.storeProfileIfDirty = function (cb) {
-      if (root.profile.dirty) {
-        storageService.storeProfile(root.profile, function (err) {
-          $log.debug('Saved modified Profile')
-          if (cb) return cb(err)
-        })
-      } else {
-        if (cb) return cb()
-      }
+    root.storeProfile = function (cb) {
+      storageService.storeProfile(root.profile, function (err) {
+        $log.debug('Saved Profile')
+        if (cb) return cb(err)
+      })
     }
 
     root.createProfile = function (cb) {
@@ -306,6 +312,13 @@ angular.module('canoeApp.services')
 
     root.setDisclaimerAccepted = function (cb) {
       root.profile.disclaimerAccepted = true
+      storageService.storeProfile(root.profile, function (err) {
+        return cb(err)
+      })
+    }
+
+    root.setWalletId = function (id, cb) {
+      root.profile.walletId = id
       storageService.storeProfile(root.profile, function (err) {
         return cb(err)
       })

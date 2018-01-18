@@ -134,6 +134,7 @@ module.exports = function(password)
 	
 	var raiwalletdotcomRepresentative = "xrb_3pczxuorp48td8645bs3m6c3xotxd3idskrenmi65rbrga5zmkemzhwkaznh"; // self explaining
 	
+	var id = getUUID();                 // Unique id of this wallet, to be used as reference when handling
 	var pk;                             // current account public key
 	var sk;                             // current account secret key
 	var pendingBalance;                 // current account pending balance
@@ -211,6 +212,13 @@ module.exports = function(password)
 		return nacl.sign.detached(message, sk);
 	}
 	
+
+	api.getId = function()
+	{
+		return id;
+	}
+	
+
 	api.changePass = function(pswd, newPass)
 	{
 		if(ciphered)
@@ -228,7 +236,7 @@ module.exports = function(password)
 	{
 		newIterationNumber = parseInt(newIterationNumber);
 		if(newIterationNumber < 2)
-			throw "Minumum iteration number is 2.";
+			throw "Minimum iteration number is 2.";
 		
 		iterations = newIterationNumber;
 	}
@@ -372,6 +380,21 @@ module.exports = function(password)
 			});
 		}
 		return accounts;
+	}
+
+	/**
+	 * List all the account ids in the wallet
+	 * 
+	 * @returns {Array}
+	 */
+	api.getAccountIds = function()
+	{
+		var ids = [];
+		for(var i in keys)
+		{
+			ids.push(keys[i].account);
+		}
+		return ids;
 	}
 
 	/**
