@@ -10,14 +10,10 @@ angular
     $http,
     $httpParamSerializer,
     $ionicConfig,
-    profileService,
-    configService,
-    walletService,
-    appConfigService,
-    emailService,
-    passwordCheck,
+    profileService
   ) {
-    $scope.submitForm = function(password) {
-        alert(password);
+    $scope.submitForm = function(pw) {
+      console.log(password)
+      profileService.enteredPassword(pw)
     };
   });
