@@ -907,7 +907,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         var matchWelcome = $ionicHistory.currentStateName() === 'onboarding.welcome'
         var matchCollectEmail = $ionicHistory.currentStateName() === 'onboarding.collectEmail'
         var matchBackupRequest = $ionicHistory.currentStateName() === 'onboarding.backupRequest'
-        var matchCreatePassword = $ionicHistory.currentStateName() =)= 'onboarding.createPassword'
+        var matchCreatePassword = $ionicHistory.currentStateName() === 'onboarding.createPassword'
         var backedUp = $ionicHistory.backView().stateName === 'onboarding.backup'
         var noBackView = $ionicHistory.backView().stateName === 'starting'
         var matchDisclaimer = !!($ionicHistory.currentStateName() === 'onboarding.disclaimer' && (backedUp || noBackView))
