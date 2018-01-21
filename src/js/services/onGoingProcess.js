@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $timeout, $filter, lodash, $ionicLoading, gettext, platformInfo) {
   var root = {}
   var isCordova = platformInfo.isCordova
@@ -9,9 +9,6 @@ angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $t
 
   var processNames = {
     'broadcastingTx': gettext('Broadcasting transaction'),
-    'calculatingFee': gettext('Calculating fee'),
-    'connectingCoinbase': gettext('Connecting to Coinbase...'),
-    'connectingGlidera': gettext('Connecting to Glidera...'),
     'creatingTx': gettext('Creating transaction'),
     'creatingAccount': gettext('Creating account...'),
     'creatingWallet': gettext('Creating Wallet...'),
@@ -19,7 +16,6 @@ angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $t
     'extractingWalletInfo': gettext('Extracting Wallet information...'),
     'generatingCSV': gettext('Generating .csv file...'),
     'importingWallet': gettext('Importing Wallet...'),
-    'joiningWallet': gettext('Joining Wallet...'),
     'recreating': gettext('Recreating Wallet...'),
     'rejectTx': gettext('Rejecting payment proposal'),
     'removeTx': gettext('Deleting payment proposal'),
@@ -31,19 +27,8 @@ angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $t
     'validatingWords': gettext('Validating recovery phrase...'),
     'loadingTxInfo': gettext('Loading transaction info...'),
     'sendingFeedback': gettext('Sending feedback...'),
-    'generatingNewAddress': gettext('Generating new address...'),
     'sendingByEmail': gettext('Preparing addresses...'),
-    'sending2faCode': gettext('Sending 2FA code...'),
-    'buyingBitcoin': gettext('Buying Bitcoin...'),
-    'sellingBitcoin': gettext('Selling Bitcoin...'),
-    'fetchingBitPayAccount': gettext('Fetching BitPay Account...'),
-    'updatingGiftCards': 'Updating Gift Cards...',
-    'updatingGiftCard': 'Updating Gift Card...',
-    'cancelingGiftCard': 'Canceling Gift Card...',
-    'creatingGiftCard': 'Creating Gift Card...',
-    'buyingGiftCard': 'Buying Gift Card...',
-    'topup': gettext('Top up in progress...'),
-    'duplicatingWallet': gettext('Duplicating wallet...')
+    'sending2faCode': gettext('Sending 2FA code...')
   }
 
   root.clear = function () {

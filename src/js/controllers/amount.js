@@ -1,6 +1,6 @@
 'use strict'
-
-angular.module('canoeApp.controllers').controller('amountController', function ($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, bwcError, payproService, profileService, amazonService, nodeWebkitService) {
+/* global angular */
+angular.module('canoeApp.controllers').controller('amountController', function ($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, bwcError, profileService, nodeWebkitService) {
   var _id
   var unitToRaw
   var rawToUnit

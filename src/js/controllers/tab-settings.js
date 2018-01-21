@@ -1,9 +1,9 @@
 'use strict'
-
-angular.module('canoeApp.controllers').controller('tabSettingsController', function ($rootScope, $timeout, $scope, appConfigService, $ionicModal, $log, lodash, uxLanguage, platformInfo, profileService, configService, externalLinkService, bitpayAccountService, bitpayCardService, storageService, glideraService, gettextCatalog, addressbookService, $state, $ionicHistory) {
+/* global angular */
+angular.module('canoeApp.controllers').controller('tabSettingsController', function ($rootScope, $timeout, $scope, appConfigService, $ionicModal, $log, lodash, uxLanguage, platformInfo, profileService, configService, externalLinkService, storageService, gettextCatalog, addressbookService, $state, $ionicHistory) {
   var updateConfig = function () {
     $scope.currentLanguageName = uxLanguage.getCurrentLanguageName()
-    //$scope.buyAndSellServices = buyAndSellService.getLinked()
+    // $scope.buyAndSellServices = buyAndSellService.getLinked()
 
     configService.whenAvailable(function (config) {
       $scope.selectedAlternative = {

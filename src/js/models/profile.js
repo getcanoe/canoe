@@ -1,5 +1,5 @@
 'use strict'
-
+/* global getUUID */
 /**
  * Profile
  */

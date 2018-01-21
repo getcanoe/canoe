@@ -10,9 +10,6 @@ module.exports = function (grunt) {
       appConfig: {
         command: 'node ./util/buildAppConfig.js'
       },
-      externalServices: {
-        command: 'node ./util/buildExternalServices.js'
-      },
       clean: {
         command: 'rm -Rf bower_components node_modules'
       },
@@ -151,7 +148,6 @@ module.exports = function (grunt) {
           'src/js/controllers/**/*.js',
           'src/js/translations.js',
           'src/js/appConfig.js',
-          'src/js/externalServices.js',
           'src/js/init.js',
           'node_modules/bezier-easing/dist/bezier-easing.min.js',
           'node_modules/cordova-plugin-qrscanner/dist/cordova-plugin-qrscanner-lib.min.js'
@@ -256,7 +252,7 @@ module.exports = function (grunt) {
     }
   })
 
-  grunt.registerTask('default', ['nggettext_compile', 'exec:appConfig', 'exec:externalServices', 'browserify', 'sass', 'concat', 'copy:ionic_fonts', 'copy:ionic_js'])
+  grunt.registerTask('default', ['nggettext_compile', 'exec:appConfig', 'browserify', 'sass', 'concat', 'copy:ionic_fonts', 'copy:ionic_js'])
   grunt.registerTask('prod', ['default', 'uglify'])
   grunt.registerTask('translate', ['nggettext_extract'])
   grunt.registerTask('desktop', ['prod', 'nwjs', 'copy:linux'])

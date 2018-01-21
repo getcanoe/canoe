@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('pinController', function ($state, $interval, $stateParams, $ionicHistory, $timeout, $scope, $log, configService, appConfigService, applicationService) {
   var ATTEMPT_LIMIT = 3
   var ATTEMPT_LOCK_OUT_TIME = 5 * 60
@@ -26,7 +26,7 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
     var config = configService.getSync()
     if (config.lock) return config.lock.method
     return 'none'
-  };
+  }
 
   function checkAttempts () {
     $scope.currentAttempts += 1
@@ -36,7 +36,7 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
       var bannedUntil = Math.floor(Date.now() / 1000) + ATTEMPT_LOCK_OUT_TIME
       saveFailedAttempt(bannedUntil)
     }
-  };
+  }
 
   function lockTimeControl (bannedUntil) {
     setExpirationTime()
@@ -56,7 +56,7 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
         var s = totalSecs % 60
         $scope.expires = ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2)
       }
-    };
+    }
 
     function reset () {
       $scope.expires = $scope.error = $scope.disableButtons = null
@@ -65,8 +65,8 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
       $timeout(function () {
         $scope.$apply()
       })
-    };
-  };
+    }
+  }
 
   $scope.getFilledClass = function (limit) {
     return currentPin.length >= limit ? 'filled-' + $scope.appName : null

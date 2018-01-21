@@ -1,11 +1,8 @@
 'use strict'
+/* global angular XMLHttpRequest device Paho RAI Rai getUUID */
 angular.module('canoeApp.services')
   .factory('raiblocksService', function ($log, platformInfo, storageService, lodash) {
     var root = {}
-
-    /* global device */
-    /* global Paho */
-    /* global RAI */
 
     // This is where communication happens. This service is mostly called from profileService.
     // We use either XMLHttpRpc calls via rai (RaiblocksJS modified) or MQTT-over-WSS.
@@ -18,7 +15,7 @@ angular.module('canoeApp.services')
     var rai = null
 
     // port and ip to use for MQTT-over-WSS
-    var mqttHost = 'mqtt.evothings.com'
+    var mqttHost = 'getcanoe.io'
     var mqttPort = 1884
     var mqttClient = null
     var mqttUsername = 'canoe'
@@ -309,8 +306,8 @@ angular.module('canoeApp.services')
 
     // Connect to MQTT. callback when connected or failed.
     root.connect = function (options, callback, callbackFailure) {
-      var port = root.defaultPort
-      var ip = root.defaultIp
+      var port = mqttPort
+      var ip = mqttHost
       var userName = options.userName
       var password = options.password
       var clientId = getUUID()
