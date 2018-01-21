@@ -25,6 +25,11 @@
     color: $link-color;
     font-weight: bold;
   }
+  .item-description {
+    color: $v-light-gray;
+	margin: 6px 0 6px 2px;
+	white-space: pre-wrap;
+  }
   .comment {
     padding: 15px;
     background-color: #fff;

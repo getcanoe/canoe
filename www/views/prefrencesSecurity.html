@@ -6,9 +6,47 @@
   </ion-nav-bar>
 
   <ion-content>
-    <ion-radio ng-repeat="opt in options" ng-value="opt" ng-model="currentOption" ng-click="select(opt.method)" ng-disabled="opt.needsBackup || opt.disabled">
-      <span ng-class="{'disabled': opt.needsBackup || opt.disabled}">{{opt.label}}</span>
-    </ion-radio>
+		<!-- Wallet Password -->
+		<div class="item item-divider" translate=""><span class="" style="">Wallet Password</span>
+			<div class="list settings-list">
+				<p class="item-description">A wallet password is used to encrypt your RaiBlocks wallet when saving it on your device.</p>
+				<a class="item item-icon-left item-icon-right" ui-sref="tabs.prefrencesSecurity.changePassword">
+					<i class="icon ion-ios-download-outline"></i>
+					<span translate>Change Password</span>
+					<i class="icon bp-arrow-right"></i>
+				</a>
+				<div class="item item-icon-left">
+					<i class="icon ion-ios-time-outline"></i>
+					<span translate>Timeout</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- App Lock Option -->
+			<div class="item item-divider" translate=""><span class="" style="">Sneak Peek</span>
+				<p class="item-description">Sneek peek allows you show information without the need of typing your password wallet.</p>
+
+				<ion-toggle ng-model="emailNotifications.value" toggle-class="toggle-balanced" ng-change="">
+					<span class="toggle-label" translate>Show Balance</span>
+				</ion-toggle>
+				<ion-toggle ng-model="pushNotification.value" toggle-class="toggle-balanced" ng-change="">
+					<span class="toggle-label" translate>Show Account Number</span>
+				</ion-toggle>
+			</div>
+
+			<!-- Petty RaiBlocks -->
+			<div class="item item-divider" translate=""><span class="" style="">Petty RaiBlocks</span>
+				<p class="item-description">Petty RaiBlocks allows you to designate an amount to transfer without the need to enter a password. This decreases the security of the petty RaiBlocks, so choose wisely!</p>
+
+				<ion-toggle ng-model="emailNotifications.value" toggle-class="toggle-balanced" ng-change="">
+					<span class="toggle-label" translate>Enable Petty RaiBlocks</span>
+				</ion-toggle>
+				<div class="item ">
+					<span translate>Petty RaiBlocks</span>
+					<span style="float: right;">1.5XRB</span>
+				</div>
+			</div>
+
 
     <div class="assertive" style="text-align: center; margin: 4rem" ng-if="errorMsg">
       {{errorMsg}}
