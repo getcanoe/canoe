@@ -328,14 +328,14 @@ angular.module('canoeApp.services')
     }
 
     root.publish = function (topic, json, qos, retained) {
-      var message = new Paho.MQTT.Message(json)
+      /*var message = new Paho.MQTT.Message(json)
       message.destinationName = topic
       if (qos !== undefined) {
         message.qos = qos
       }
       if (retained !== undefined) {
         message.retained = retained
-      }
+      }*/
       $log.debug('Send ' + topic + ' ' + json)
       // mqttClient.send(message)
     }
