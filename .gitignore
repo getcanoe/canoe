@@ -94,5 +94,8 @@ src/sass/app
 www/css/*
 www/lib/*
 www/js/*
+<<<<<<< HEAD
 www/raiwallet/braiwallet.js
+=======
+>>>>>>> 4986fd127158948e1294d842679e0ab5a7dbf9ba
 
