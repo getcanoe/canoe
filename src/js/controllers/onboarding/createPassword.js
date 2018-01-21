@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular
   .module('canoeApp.controllers')
   .controller('createPasswordController', function (
