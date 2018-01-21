@@ -15,6 +15,7 @@ msgstr "(Pålitlig)"
 msgid "(possible double spend)"
 msgstr "(möjlig dubbel spendering)"
 
+#. not needed
 #: www/views/modals/txp-details.html:159
 msgid "* A payment proposal can be deleted if 1) you are the creator, and no other copayer has signed, or 2) 24 hours have passed since the proposal was created."
 msgstr ""
@@ -31,13 +32,14 @@ msgstr ""
 msgid "5-star ratings help us get {{appName}} into more hands, and more users means more resources can be committed to the app!"
 msgstr ""
 
+#. not needed
 #: www/views/mercadoLibre.html:18 www/views/mercadoLibre.html:40
 msgid "<b>Only</b> redeemable on Mercado Livre (Brazil)"
 msgstr ""
 
 #: src/js/controllers/feedback/send.js:25 www/views/feedback/complete.html:21
 msgid "A member of the team will review your feedback as soon as possible."
-msgstr ""
+msgstr "En medlem i teamet kommer ta del av din feedback så snart som möjligt."
 
 #: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
@@ -90,6 +92,7 @@ msgstr "Aktivitet"
 msgid "Add Account"
 msgstr "Lägg till konto"
 
+#. not needed
 #: src/js/services/bitpayAccountService.js:69
 msgid "Add BitPay Account?"
 msgstr ""
@@ -98,13 +101,14 @@ msgstr ""
 msgid "Add Contact"
 msgstr "Lägg till kontakt"
 
+#. not needed
 #: www/views/bitpayCard.html:28
 msgid "Add Funds"
 msgstr ""
 
 #: www/views/confirm.html:67
 msgid "Add Memo"
-msgstr ""
+msgstr "Lägg till memo"
 
 #: www/views/tab-create-wallet.html:36
 msgid "Add a password"
@@ -114,6 +118,7 @@ msgstr "Lägg till ett lösenord"
 msgid "Add account"
 msgstr "Lägg till konto"
 
+#. not needed
 #: www/views/tab-create-wallet.html:39
 msgid "Add an optional password to secure access to the wallet"
 msgstr ""
@@ -126,10 +131,12 @@ msgstr "Lägg till som kontakt"
 msgid "Add description"
 msgstr "Lägg till beskrivning"
 
+#. not needed
 #: www/views/topup.html:6
 msgid "Add funds"
 msgstr ""
 
+#. not needed
 #: src/js/services/bitpayAccountService.js:78
 msgid "Add this BitPay account ({{email}})?"
 msgstr ""
@@ -137,12 +144,13 @@ msgstr ""
 #: www/views/addressbook.view.html:26 www/views/customAmount.html:28
 #: www/views/modals/paypro.html:24
 msgid "Address"
-msgstr ""
+msgstr "Adress"
 
 #: www/views/addressbook.html:6 www/views/tab-settings.html:13
 msgid "Address Book"
 msgstr "Addressbok"
 
+#. not needed
 #: www/views/addresses.html:64
 msgid "Addresses With Balance"
 msgstr ""
@@ -173,16 +181,17 @@ msgstr "Tillåt kamera"
 
 #: www/views/onboarding/notifications.html:7
 msgid "Allow notifications"
-msgstr ""
+msgstr "Tillåt notifieringar"
 
 #: www/views/onboarding/disclaimer.html:14
 msgid "Almost done! Let's review."
-msgstr ""
+msgstr "Nästan klart! Låt oss summera."
 
 #: www/views/preferencesAltCurrency.html:4 www/views/tab-settings.html:88
 msgid "Alternative Currency"
-msgstr ""
+msgstr "Alternativ valuta"
 
+#. not needed
 #: src/js/controllers/buyAmazon.js:98
 msgid "Amazon.com is not available at this moment. Please try back later."
 msgstr ""
@@ -190,31 +199,32 @@ msgstr ""
 #: www/views/amount.html:44 www/views/customAmount.html:34
 #: www/views/includes/output.html:7
 msgid "Amount"
-msgstr ""
+msgstr "Summa"
 
 #: src/js/services/bwcError.js:110
 msgid "Amount below minimum allowed"
-msgstr ""
+msgstr "Summa under tillåtet minimum"
 
 #: www/views/includes/walletHistory.html:31
 msgid "Amount too low to spend"
-msgstr ""
+msgstr "Summar för låg att spendera"
 
 #: src/js/controllers/tab-home.js:152
 msgid "An update to this app is available. For your security, please update to the latest version."
-msgstr ""
+msgstr "En uppdatering till den här appen är tillgänglig. För din säkerhet, uppdatera till den senaste versionen."
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your raiblocks."
-msgstr ""
+msgstr "Ifall någon tar del av din seed kan de nå och spendera dina RaiBlocks."
 
+#. not needed
 #: www/views/addresses.html:94
 msgid "Approximate Bitcoin network fee to transfer wallet's balance (with normal priority)"
 msgstr ""
 
 #: www/views/backupWarning.html:10
 msgid "Are you being watched?"
-msgstr ""
+msgstr "Är det någon som ser dig?"
 
 #: src/js/controllers/preferencesExternal.js:15
 msgid "Are you being watched? Anyone with your recovery phrase can access or spend your bitcoin."
@@ -226,7 +236,7 @@ msgstr ""
 
 #: src/js/controllers/addressbookView.js:31
 msgid "Are you sure you want to delete this contact?"
-msgstr ""
+msgstr "Är du säker på att du vill ta bort den här kontakten?"
 
 #: src/js/controllers/preferencesDelete.js:24
 msgid "Are you sure you want to delete this wallet?"
@@ -244,10 +254,12 @@ msgstr ""
 msgid "Are you sure you want to skip it?"
 msgstr ""
 
+#. not needed
 #: www/views/modals/bitpay-card-confirmation.html:4
 msgid "Are you sure you would like to log out of your BitPay Card account?"
 msgstr ""
 
+#. not needed
 #: src/js/controllers/preferencesBitpayCard.js:7
 #: src/js/controllers/preferencesBitpayServices.js:20
 msgid "Are you sure you would like to remove your BitPay Card ({{lastFourDigits}}) from this device?"
@@ -467,7 +479,7 @@ msgstr ""
 
 #: www/views/preferencesAbout.html:21
 msgid "Commit hash"
-msgstr ""
+msgstr "Commit hash"
 
 #: www/views/bitpayCard.html:93
 msgid "Completed"
