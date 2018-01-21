@@ -19,9 +19,9 @@ $v-primary-color:                                    #1fafe5 !default;
 $v-secondary-color:                                  #bbd531 !default;
 $v-accent-color:                                     #123238 !default;
 */
-$v-secondary-color:                                    #20bffb !default;
-$v-primary-color:                                  #19b69c !default;
-$v-accent-color:                                     #565c5e !default;
+$v-primary-color:                                  #1B074E !default;
+$v-secondary-color:                                    #0ACA52 !default;
+$v-accent-color:                                     #0DB4F3 !default;
 
 $canoe-light-blue: #20bffb;
 $canoe-green: #19d69c;
@@ -112,10 +112,10 @@ $v-success-bg-color:                                 #11D1A6 !default;
 
 /* Onboarding */
 $v-onboarding-pane-bg:                               $v-primary-color !default;
-$v-onboarding-gradient-top-color:                    #ffffff !default;
-$v-onboarding-gradient-bottom-color:                 #fafafa !default;
+$v-onboarding-gradient-top-color:                    #524988 !default;
+$v-onboarding-gradient-bottom-color:                 #311C67 !default;
 $v-onboarding-welcome-bg:                            url(../img/onboarding-welcome-bg.png) !default;
-$v-onboarding-color:                                 rgba(0,0,0,.56) !default;
+$v-onboarding-color:                                 #ffffff;
 $v-onboarding-bar-header-color:                      #ffffff !default;
 $v-onboarding-bar-header-button-color:               #ffffff !default;
 $v-onboarding-tour-swiper-pagination-bg:             $v-accent-color !default;
@@ -130,8 +130,8 @@ $v-onboarding-backup-warning-bg:                     url(../img/backup-warning.s
 
 $v-onboarding-button-back-color:                     #ffffff !default;
 
-$v-onboarding-button-secondary-bg:                   rgba($v-secondary-color, 0.8) !default;
-$v-onboarding-button-secondary-color:                $v-text-secondary-color !default;
+$v-onboarding-button-secondary-bg:                   rgba($v-accent-color, 0.8) !default;
+$v-onboarding-button-secondary-color:                rgba(255,255,255,1) !default;
 $v-onboarding-button-secondary-border:               transparent !default;
 $v-onboarding-button-secondary-active-bg:            rgba($v-secondary-color, 0.2) !default;
 $v-onboarding-button-secondary-active-border:        transparent !default;
