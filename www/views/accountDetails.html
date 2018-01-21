@@ -1,6 +1,6 @@
 <ion-view id="walletDetails" hide-tabs>
 
-  <ion-nav-bar ng-class="{'wallet-background-color-default': !account.color}" ng-style="{'background-color': account.color}">
+  <ion-nav-bar ng-class="{'wallet-background-color-default': !account.meta.color}" ng-style="{'background-color': account.meta.color}">
     <ion-nav-title>{{account.name}}</ion-nav-title>
     <ion-nav-back-button>
     </ion-nav-back-button>
@@ -22,12 +22,12 @@
     </span>
   </div>
 
-  <div class="amount-wrapper" ng-show="false" ng-class="{'wallet-background-color-default': !account.color}" ng-style="{'background-color':account.color}">
+  <div class="amount-wrapper" ng-show="false" ng-class="{'wallet-background-color-default': !account.meta.color}" ng-style="{'background-color':account.meta.color}">
 
     <div
-      ng-style="{'background-color':account.color, 'height': amountHeight}"
+      ng-style="{'background-color':account.meta.color, 'height': amountHeight}"
       class="amount"
-      ng-class="{collapsible: amountIsCollapsible, 'wallet-background-color-default': !account.color, 'no-alternative': wallet.network != 'livenet'}">
+      ng-class="{collapsible: amountIsCollapsible, 'wallet-background-color-default': !account.meta.color, 'no-alternative': wallet.network != 'livenet'}">
 
       <div class="amount__error" ng-style="{opacity: altAmountOpacity}" ng-show="walletNotRegistered">
         <span translate>This wallet is not registered at the given Bitcore Wallet Service (BWS). You can recreate it from the local information.</span>

@@ -42,7 +42,7 @@ angular.module('canoeApp.controllers').controller('preferencesController',
       var config = configService.getSync()
 
       $scope.hiddenBalance = {
-        value: $scope.account.balanceHidden
+        value: $scope.account.meta.balanceHidden
       }
 
       $scope.touchIdAvailable = fingerprintService.isAvailable()

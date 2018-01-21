@@ -14,7 +14,7 @@ angular.module('canoeApp.controllers').controller('txpDetailsController', functi
     $scope.canoeerId = $scope.account.credentials.canoeerId;
     $scope.isShared = $scope.account.credentials.n > 1;
     $scope.canSign = $scope.account.canSign() || $scope.account.isPrivKeyExternal();
-    $scope.color = $scope.account.color;
+    $scope.color = $scope.account.meta.color;
     $scope.data = {};
     displayFeeValues();
     initActionList();

@@ -11,7 +11,7 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
     txId = data.stateParams.txid;
     $scope.title = gettextCatalog.getString('Transaction');
     $scope.account = profileService.getAccount(data.stateParams.walletId);
-    $scope.color = $scope.account.color;
+    $scope.color = $scope.account.meta.color;
     $scope.canoeerId = $scope.account.credentials.canoeerId;
     $scope.isShared = $scope.account.credentials.n > 1;
     $scope.txsUnsubscribedForNotifications = config.confirmedTxsNotifications ? !config.confirmedTxsNotifications.enabled : true;

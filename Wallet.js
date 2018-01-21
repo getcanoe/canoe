@@ -134,6 +134,7 @@ module.exports = function(password)
 	
 	var raiwalletdotcomRepresentative = "xrb_3pczxuorp48td8645bs3m6c3xotxd3idskrenmi65rbrga5zmkemzhwkaznh"; // self explaining
 	
+	var id = getUUID();                 // Unique id of this wallet, to be used as reference when handling
 	var pk;                             // current account public key
 	var sk;                             // current account secret key
 	var pendingBalance;                 // current account pending balance
@@ -211,6 +212,13 @@ module.exports = function(password)
 		return nacl.sign.detached(message, sk);
 	}
 	
+
+	api.getId = function()
+	{
+		return id;
+	}
+	
+
 	api.changePass = function(pswd, newPass)
 	{
 		if(ciphered)
@@ -228,7 +236,7 @@ module.exports = function(password)
 	{
 		newIterationNumber = parseInt(newIterationNumber);
 		if(newIterationNumber < 2)
-			throw "Minumum iteration number is 2.";
+			throw "Minimum iteration number is 2.";
 		
 		iterations = newIterationNumber;
 	}
@@ -367,11 +375,26 @@ module.exports = function(password)
 				id: keys[i].account,
 				balance: bigInt(keys[i].balance), 
 				pendingBalance: bigInt(keys[i].pendingBalance),
-				name: keys[i].meta.name,
+				name: keys[i].meta.label,
 				meta: keys[i].meta
 			});
 		}
 		return accounts;
+	}
+
+	/**
+	 * List all the account ids in the wallet
+	 * 
+	 * @returns {Array}
+	 */
+	api.getAccountIds = function()
+	{
+		var ids = [];
+		for(var i in keys)
+		{
+			ids.push(keys[i].account);
+		}
+		return ids;
 	}
 
 	/**
@@ -381,13 +404,13 @@ module.exports = function(password)
 	 */
 	api.getAccount = function(account)
 	{
-		var key = findKey(account)
+		var key = api.findKey(account)
 		if (!key) return null
 		return {
 				id: key.account,
 				balance: bigInt(key.balance), 
 				pendingBalance: bigInt(key.pendingBalance),
-				name: key.meta.name,
+				name: key.meta.label,
 				meta: key.meta
 			}
 	}
@@ -397,7 +420,7 @@ module.exports = function(password)
 	 */
 	api.findKey = function(account) {
 		for (let i in keys) {
-			if (keys[i].account === acc) {
+			if (keys[i].account === account) {
 				return keys[i]
 			}
 		}
@@ -1491,9 +1514,9 @@ module.exports = function(password)
 
 	api.createAccount = function (meta) {
 		var account = api.newKeyFromSeed()
-		api.useAccount()
-		key[current].meta = meta
-		return account
+		api.useAccount(account)
+		keys[current].meta = meta
+		return api.getAccount(account)
 	}
 	
 	return api  

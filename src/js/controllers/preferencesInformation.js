@@ -11,8 +11,8 @@ angular.module('canoeApp.controllers').controller('preferencesInformation',
 
     $scope.saveBlack = function () {
       function save (color) {
-        account.color = color
-        profileService.saveWallet(function (wallet) {
+        account.meta.color = color
+        profileService.saveWallet(function () {
           $ionicHistory.removeBackView()
           $state.go('tabs.home')
         })

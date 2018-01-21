@@ -114,10 +114,18 @@ angular.module('canoeApp.services')
     }
 
     root.storeWallet = function (wallet, cb) {
-      storage.set('wallet', wallet, cb)
+      storage.set('raiwallet', wallet, cb)
     }
 
     root.loadWallet = function (cb) {
+      storage.get('raiwallet', cb)
+    }
+
+    root.storeOldWallet = function (wallet, cb) {
+      storage.set('wallet', wallet, cb)
+    }
+
+    root.loadOldWallet = function (cb) {
       storage.get('wallet', cb)
     }
 

@@ -65,7 +65,7 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
 
         $ionicHistory.goBack()
         saveLastUsed(newAltCurrency)
-        walletService.updateRemotePreferences(profileService.getAccounts())
+        //walletService.updateRemotePreferences(profileService.getAccounts())
       })
     }
 

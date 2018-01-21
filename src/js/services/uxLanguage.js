@@ -12,11 +12,21 @@ angular.module('canoeApp.services')
       name: 'Español',
       isoCode: 'es'
     }, {
+      name: 'Eesti keelt',
+      isoCode: 'et'
+    }, {
       name: 'Français',
       isoCode: 'fr'
     }, {
+      name: 'Hrvatski jezik',
+      isoCode: 'hr'
+    },
+    {
       name: 'Italiano',
       isoCode: 'it'
+    }, {
+      name: 'Magyar',
+      isoCode: 'hu'
     }, {
       name: 'Nederlands',
       isoCode: 'nl'
@@ -40,6 +50,12 @@ angular.module('canoeApp.services')
     }, {
       name: 'Português',
       isoCode: 'pt'
+    }, {
+      name: 'Svenska',
+      isoCode: 'sv'
+    }, {
+      name: 'Tiếng Việt',
+      isoCode: 'vi'
     }]
 
     // }, {

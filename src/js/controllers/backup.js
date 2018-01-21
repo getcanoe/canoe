@@ -7,9 +7,7 @@ angular.module('canoeApp.controllers').controller('backupController',
 
     $scope.setFlow = function (step) {
       $scope.data = {}
-      $scope.seed = $scope.wallet.seed
-      $scope.seed1 = $scope.seed.substring(0, 32)
-      $scope.seed2 = $scope.seed.substring(32)
+      $scope.seed = profileService.getSeed()
       $scope.data.passphrase = null
       $scope.step = step || 1
       $scope.selectComplete = false
@@ -77,9 +75,9 @@ angular.module('canoeApp.controllers').controller('backupController',
     }
 
     $scope.$on('$ionicView.enter', function (event, data) {
-      $scope.deleted = (profileService.getWallet().seed === null)
+      $scope.deleted = (profileService.getSeed() === null)
       if ($scope.deleted) {
-        $log.debug('no seed in wallet')
+        $log.debug('Bad password or no wallet')
         return
       }
       $scope.setFlow()

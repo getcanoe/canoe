@@ -87,7 +87,7 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   }
 
   $scope.openSearchModal = function () {
-    $scope.color = $scope.account.color
+    $scope.color = $scope.account.meta.color
     $scope.isSearching = true
     $scope.txHistorySearchResults = []
     $scope.filteredTxHistory = []
@@ -400,8 +400,8 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   function setAndroidStatusBarColor () {
     var SUBTRACT_AMOUNT = 15
     var walletColor
-    if (!$scope.account.color) walletColor = '#019477'
-    else walletColor = $scope.account.color
+    if (!$scope.account.meta.color) walletColor = '#019477'
+    else walletColor = $scope.account.meta.color
     var rgb = hexToRgb(walletColor)
     var keys = Object.keys(rgb)
     keys.forEach(function (k) {

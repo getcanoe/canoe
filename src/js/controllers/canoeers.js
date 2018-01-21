@@ -56,7 +56,7 @@ angular.module('canoeApp.controllers').controller('canoeersController',
       popupService.showConfirm(title, msg, null, null, function (res) {
         if (res) deleteWallet()
       })
-    };
+    }
 
     function deleteWallet () {
       ongoingProcess.set('deletingWallet', true)
@@ -70,7 +70,7 @@ angular.module('canoeApp.controllers').controller('canoeersController',
           $state.go('tabs.home')
         }
       })
-    };
+    }
 
     $scope.copySecret = function () {
       if ($scope.isCordova) {
