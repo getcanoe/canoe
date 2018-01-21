@@ -1,15 +1,11 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Canoe\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Canoe\n"
+"Language: sv\n"
 
 #: www/views/modals/paypro.html:34
 msgid "(Trusted)"
@@ -19,11 +15,9 @@ msgstr "(Pålitlig)"
 msgid "(possible double spend)"
 msgstr "(möjlig dubbel spendering)"
 
+#. not needed
 #: www/views/modals/txp-details.html:159
-msgid ""
-"* A payment proposal can be deleted if 1) you are the creator, and no other "
-"copayer has signed, or 2) 24 hours have passed since the proposal was "
-"created."
+msgid "* A payment proposal can be deleted if 1) you are the creator, and no other copayer has signed, or 2) 24 hours have passed since the proposal was created."
 msgstr ""
 
 #: www/views/tx-details.html:82
@@ -35,20 +29,23 @@ msgid "- {{tx.feeRateStr}} of the transaction"
 msgstr ""
 
 #: www/views/feedback/rateApp.html:7
-msgid ""
-"5-star ratings help us get {{appName}} into more hands, and more users means "
-"more resources can be committed to the app!"
+msgid "5-star ratings help us get {{appName}} into more hands, and more users means more resources can be committed to the app!"
+msgstr ""
+
+#. not needed
+#: www/views/mercadoLibre.html:18 www/views/mercadoLibre.html:40
+msgid "<b>Only</b> redeemable on Mercado Livre (Brazil)"
 msgstr ""
 
 #: src/js/controllers/feedback/send.js:25 www/views/feedback/complete.html:21
 msgid "A member of the team will review your feedback as soon as possible."
-msgstr ""
+msgstr "En medlem i teamet kommer ta del av din feedback så snart som möjligt."
 
 #: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "Om"
 
-#: src/js/controllers/modals/txpDetails.js:60
+#: src/js/controllers/modals/txpDetails.js:62
 #: src/js/controllers/tx-details.js:79
 msgid "Accepted"
 msgstr "Godkänt"
@@ -82,17 +79,36 @@ msgstr "Kontoinställningar"
 msgid "Account name"
 msgstr "Kontonamn"
 
-#: www/views/tab-home.html:83 www/views/tab-home.html:97
+#: www/views/preferencesBitpayServices.html:23 www/views/tab-home.html:83
+#: www/views/tab-home.html:97
 msgid "Accounts"
 msgstr "Konton"
+
+#: www/views/bitpayCard.html:56
+msgid "Activity"
+msgstr "Aktivitet"
+
+#: src/js/services/bitpayAccountService.js:83
+msgid "Add Account"
+msgstr "Lägg till konto"
+
+#. not needed
+#: src/js/services/bitpayAccountService.js:69
+msgid "Add BitPay Account?"
+msgstr ""
 
 #: www/views/addressbook.add.html:4 www/views/addressbook.html:22
 msgid "Add Contact"
 msgstr "Lägg till kontakt"
 
+#. not needed
+#: www/views/bitpayCard.html:28
+msgid "Add Funds"
+msgstr ""
+
 #: www/views/confirm.html:67
 msgid "Add Memo"
-msgstr ""
+msgstr "Lägg till memo"
 
 #: www/views/tab-create-wallet.html:36
 msgid "Add a password"
@@ -102,6 +118,7 @@ msgstr "Lägg till ett lösenord"
 msgid "Add account"
 msgstr "Lägg till konto"
 
+#. not needed
 #: www/views/tab-create-wallet.html:39
 msgid "Add an optional password to secure access to the wallet"
 msgstr ""
@@ -114,19 +131,26 @@ msgstr "Lägg till som kontakt"
 msgid "Add description"
 msgstr "Lägg till beskrivning"
 
+#. not needed
 #: www/views/topup.html:6
 msgid "Add funds"
+msgstr ""
+
+#. not needed
+#: src/js/services/bitpayAccountService.js:78
+msgid "Add this BitPay account ({{email}})?"
 msgstr ""
 
 #: www/views/addressbook.view.html:26 www/views/customAmount.html:28
 #: www/views/modals/paypro.html:24
 msgid "Address"
-msgstr ""
+msgstr "Adress"
 
 #: www/views/addressbook.html:6 www/views/tab-settings.html:13
 msgid "Address Book"
 msgstr "Addressbok"
 
+#. not needed
 #: www/views/addresses.html:64
 msgid "Addresses With Balance"
 msgstr ""
@@ -139,14 +163,16 @@ msgstr "Avancerat"
 msgid "Advanced Settings"
 msgstr "Avancerade inställningar"
 
+#: www/views/bitpayCard.html:62
+msgid "All"
+msgstr "Alla"
+
 #: www/views/allAddresses.html:3
 msgid "All Addresses"
 msgstr "Alla adresser"
 
 #: www/views/modals/wallet-balance.html:18
-msgid ""
-"All of your RaiBlocks Wallet balance may not be available for immediate "
-"spending."
+msgid "All of your RaiBlocks Wallet balance may not be available for immediate spending."
 msgstr ""
 
 #: www/views/tab-scan.html:21
@@ -155,73 +181,88 @@ msgstr "Tillåt kamera"
 
 #: www/views/onboarding/notifications.html:7
 msgid "Allow notifications"
-msgstr ""
+msgstr "Tillåt notifieringar"
 
 #: www/views/onboarding/disclaimer.html:14
 msgid "Almost done! Let's review."
-msgstr ""
+msgstr "Nästan klart! Låt oss summera."
 
 #: www/views/preferencesAltCurrency.html:4 www/views/tab-settings.html:88
 msgid "Alternative Currency"
+msgstr "Alternativ valuta"
+
+#. not needed
+#: src/js/controllers/buyAmazon.js:98
+msgid "Amazon.com is not available at this moment. Please try back later."
 msgstr ""
 
 #: www/views/amount.html:44 www/views/customAmount.html:34
 #: www/views/includes/output.html:7
 msgid "Amount"
-msgstr ""
+msgstr "Summa"
 
 #: src/js/services/bwcError.js:110
 msgid "Amount below minimum allowed"
-msgstr ""
+msgstr "Summa under tillåtet minimum"
 
 #: www/views/includes/walletHistory.html:31
 msgid "Amount too low to spend"
-msgstr ""
+msgstr "Summar för låg att spendera"
 
 #: src/js/controllers/tab-home.js:152
-msgid ""
-"An update to this app is available. For your security, please update to the "
-"latest version."
-msgstr ""
+msgid "An update to this app is available. For your security, please update to the latest version."
+msgstr "En uppdatering till den här appen är tillgänglig. För din säkerhet, uppdatera till den senaste versionen."
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your raiblocks."
-msgstr ""
+msgstr "Ifall någon tar del av din seed kan de nå och spendera dina RaiBlocks."
 
+#. not needed
 #: www/views/addresses.html:94
-msgid ""
-"Approximate Bitcoin network fee to transfer wallet's balance (with normal "
-"priority)"
+msgid "Approximate Bitcoin network fee to transfer wallet's balance (with normal priority)"
 msgstr ""
 
 #: www/views/backupWarning.html:10
 msgid "Are you being watched?"
-msgstr ""
+msgstr "Är det någon som ser dig?"
 
 #: src/js/controllers/preferencesExternal.js:15
-msgid ""
-"Are you being watched? Anyone with your recovery phrase can access or spend "
-"your bitcoin."
+msgid "Are you being watched? Anyone with your recovery phrase can access or spend your bitcoin."
+msgstr ""
+
+#: src/js/controllers/canoeers.js:55
+msgid "Are you sure you want to cancel and delete this wallet?"
 msgstr ""
 
 #: src/js/controllers/addressbookView.js:31
 msgid "Are you sure you want to delete this contact?"
-msgstr ""
+msgstr "Är du säker på att du vill ta bort den här kontakten?"
 
 #: src/js/controllers/preferencesDelete.js:24
 msgid "Are you sure you want to delete this wallet?"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:152
+#: src/js/controllers/modals/txpDetails.js:154
 msgid "Are you sure you want to reject this transaction?"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:169
+#: src/js/controllers/modals/txpDetails.js:171
 msgid "Are you sure you want to remove this transaction?"
 msgstr ""
 
 #: src/js/controllers/onboarding/backupRequest.js:21
 msgid "Are you sure you want to skip it?"
+msgstr ""
+
+#. not needed
+#: www/views/modals/bitpay-card-confirmation.html:4
+msgid "Are you sure you would like to log out of your BitPay Card account?"
+msgstr ""
+
+#. not needed
+#: src/js/controllers/preferencesBitpayCard.js:7
+#: src/js/controllers/preferencesBitpayServices.js:20
+msgid "Are you sure you would like to remove your BitPay Card ({{lastFourDigits}}) from this device?"
 msgstr ""
 
 #: www/views/includes/walletInfo.html:10
@@ -236,7 +277,7 @@ msgstr ""
 msgid "Available Balance"
 msgstr ""
 
-#: www/views/preferencesFee.html:15
+#: www/views/modals/chooseFeeLevel.html:24 www/views/preferencesFee.html:15
 msgid "Average confirmation time"
 msgstr ""
 
@@ -271,9 +312,15 @@ msgid "Balance By Address"
 msgstr ""
 
 #: www/views/includes/confirmBackupPopup.html:7
-msgid ""
-"Be sure to store your seed in a secure place. If this app is deleted, or "
-"your device stolen, the seed is the only way to recreate the wallet."
+msgid "Be sure to store your seed in a secure place. If this app is deleted, or your device stolen, the seed is the only way to recreate the wallet."
+msgstr ""
+
+#: www/views/preferencesBitpayServices.html:9
+msgid "BitPay Visa&reg; Cards"
+msgstr ""
+
+#: www/views/modals/fee-warning.html:7
+msgid "Bitcoin (BTC) miner fees are high due to record demand for limited space on the Bitcoin network. BitPay does not receive and does not control bitcoin miner fees."
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:29
@@ -284,19 +331,27 @@ msgstr ""
 msgid "Bitcoin Cash Wallets"
 msgstr ""
 
-#: www/views/preferencesFee.html:4
+#: www/views/modals/chooseFeeLevel.html:4 www/views/preferencesFee.html:4
 msgid "Bitcoin Network Fee Policy"
+msgstr ""
+
+#: www/views/modals/fee-warning.html:6
+msgid "Bitcoin miner fees unusually high"
 msgstr ""
 
 #: www/views/preferencesFee.html:11
 msgid "Bitcoin transactions include a fee collected by miners on the network."
 msgstr ""
 
+#: www/views/buyAmazon.html:108
+msgid "Bought {{amountUnitStr}}"
+msgstr ""
+
 #: www/views/modals/txp-details.html:36
 msgid "Broadcast Payment"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:62
+#: src/js/controllers/modals/txpDetails.js:64
 #: src/js/controllers/tx-details.js:81
 msgid "Broadcasted"
 msgstr ""
@@ -313,18 +368,45 @@ msgstr ""
 msgid "But do not lose your seed!"
 msgstr ""
 
+#: www/views/buyAmazon.html:5 www/views/buyMercadoLibre.html:6
+msgid "Buy"
+msgstr ""
+
 #: www/views/includes/buyAndSellCard.html:3
 msgid "Buy &amp; Sell Bitcoin"
 msgstr ""
 
-#: src/js/controllers/confirm.js:274 src/js/services/popupService.js:62
+#: www/views/mercadoLibre.html:22 www/views/mercadoLibre.html:50
+msgid "Buy a Gift Card"
+msgstr ""
+
+#: src/js/controllers/buyAmazon.js:357
+msgid "Buy from"
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:37
+msgid "Buying Bitcoin..."
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:12
+msgid "Calculating fee"
+msgstr ""
+
+#: src/js/controllers/buyAmazon.js:336
+#: src/js/controllers/buyMercadoLibre.js:331 src/js/controllers/confirm.js:274
+#: src/js/controllers/topup.js:308 src/js/services/popupService.js:62
 #: src/js/services/popupService.js:73 www/views/addressbook.add.html:10
 #: www/views/feedback/send.html:5 www/views/includes/incomingDataMenu.html:22
 #: www/views/includes/incomingDataMenu.html:54
 #: www/views/includes/incomingDataMenu.html:73
 #: www/views/includes/incomingDataMenu.html:97 www/views/includes/note.html:6
+#: www/views/modals/bitpay-card-confirmation.html:8
 #: www/views/modals/confirmation.html:13
 msgid "Cancel"
+msgstr ""
+
+#: www/views/canoeers.html:36
+msgid "Cancel invitation"
 msgstr ""
 
 #: src/js/controllers/onboarding/tour.js:55
@@ -341,6 +423,10 @@ msgstr ""
 
 #: src/js/services/bwcError.js:107
 msgid "Canoeer data mismatch"
+msgstr ""
+
+#: www/views/includes/bitpayCardsCard.html:2
+msgid "Cards"
 msgstr ""
 
 #: www/views/modals/paypro.html:30
@@ -367,17 +453,19 @@ msgstr ""
 msgid "Clear cache"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:47
+#: src/js/controllers/modals/txpDetails.js:49
 msgid "Click to accept"
 msgstr ""
 
-#: src/js/controllers/confirm.js:183 src/js/controllers/modals/txpDetails.js:40
+#: src/js/controllers/confirm.js:183 src/js/controllers/modals/txpDetails.js:42
 msgid "Click to send"
 msgstr ""
 
-#: www/views/customAmount.html:4 www/views/modals/paypro.html:4
-#: www/views/modals/pin.html:3 www/views/modals/search.html:3
-#: www/views/modals/wallet-balance.html:3 www/views/modals/wallets.html:5
+#: www/views/customAmount.html:4
+#: www/views/modals/mercadolibre-card-details.html:3
+#: www/views/modals/paypro.html:4 www/views/modals/pin.html:3
+#: www/views/modals/search.html:3 www/views/modals/wallet-balance.html:3
+#: www/views/modals/wallets.html:5
 msgid "Close"
 msgstr ""
 
@@ -391,15 +479,26 @@ msgstr ""
 
 #: www/views/preferencesAbout.html:21
 msgid "Commit hash"
+msgstr "Commit hash"
+
+#: www/views/bitpayCard.html:93
+msgid "Completed"
 msgstr ""
 
-#: src/js/controllers/confirm.js:273 www/views/backup.html:48
-#: www/views/confirm.html:4 www/views/onboarding/collectEmail.html:32
+#: src/js/controllers/buyAmazon.js:334
+#: src/js/controllers/buyMercadoLibre.js:329 src/js/controllers/canoeers.js:54
+#: src/js/controllers/confirm.js:273 src/js/controllers/topup.js:306
+#: www/views/backup.html:48 www/views/confirm.html:4
+#: www/views/onboarding/collectEmail.html:32
 msgid "Confirm"
 msgstr ""
 
 #: www/views/modals/terms.html:26 www/views/onboarding/disclaimer.html:44
 msgid "Confirm &amp; Finish"
+msgstr ""
+
+#: www/views/buyAmazon.html:90
+msgid "Confirm purchase"
 msgstr ""
 
 #: www/views/modals/pin.html:10
@@ -414,8 +513,20 @@ msgstr ""
 msgid "Confirmations"
 msgstr ""
 
-#: www/views/modals/wallet-balance.html:61
+#: www/views/bitpayCard.html:68 www/views/modals/wallet-balance.html:61
 msgid "Confirming"
+msgstr ""
+
+#: www/views/bitpayCardIntro.html:37
+msgid "Connect my BitPay Card"
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:13
+msgid "Connecting to Coinbase..."
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:14
+msgid "Connecting to Glidera..."
 msgstr ""
 
 #: src/js/services/bwcError.js:53
@@ -438,7 +549,8 @@ msgstr ""
 msgid "Copayer joined"
 msgstr ""
 
-#: src/js/controllers/export.js:189 www/views/includes/copyToClipboard.html:4
+#: src/js/controllers/canoeers.js:78 src/js/controllers/export.js:189
+#: www/views/includes/copyToClipboard.html:4
 msgid "Copied to clipboard"
 msgstr ""
 
@@ -453,11 +565,23 @@ msgstr ""
 msgid "Copy to clipboard"
 msgstr ""
 
+#: src/js/controllers/buyMercadoLibre.js:103
+msgid "Could not access Gift Card Service"
+msgstr ""
+
 #: www/views/tab-import-phrase.html:2
 msgid "Could not access the wallet at the server. Please check:"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:197
+#: src/js/controllers/buyAmazon.js:102
+msgid "Could not access to Amazon.com"
+msgstr ""
+
+#: src/js/services/profileService.js:445
+msgid "Could not access wallet"
+msgstr ""
+
+#: src/js/controllers/modals/txpDetails.js:199
 msgid "Could not broadcast payment"
 msgstr ""
 
@@ -465,20 +589,68 @@ msgstr ""
 msgid "Could not build transaction"
 msgstr ""
 
+#: src/js/controllers/topup.js:93
+msgid "Could not create the invoice"
+msgstr ""
+
+#: src/js/controllers/buyAmazon.js:164
+#: src/js/controllers/buyMercadoLibre.js:165 src/js/controllers/topup.js:143
+msgid "Could not create transaction"
+msgstr ""
+
+#: src/js/services/profileService.js:317
+msgid "Could not create using the specified extended private key"
+msgstr ""
+
+#: src/js/services/profileService.js:329
+msgid "Could not create using the specified extended public key"
+msgstr ""
+
+#: src/js/services/profileService.js:305
+msgid "Could not create: Invalid wallet recovery phrase"
+msgstr ""
+
 #: src/js/controllers/import.js:69
 msgid "Could not decrypt file, check your password"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:179
+#: src/js/controllers/modals/txpDetails.js:181
 msgid "Could not delete payment proposal"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:159
+#: src/js/controllers/buyAmazon.js:122
+#: src/js/controllers/buyMercadoLibre.js:123 src/js/controllers/topup.js:101
+msgid "Could not get the invoice"
+msgstr ""
+
+#: src/js/controllers/bitpayCard.js:66
+msgid "Could not get transactions"
+msgstr ""
+
+#: src/js/services/profileService.js:515
+msgid "Could not import. Check input file and spending password"
+msgstr ""
+
+#: src/js/controllers/modals/txpDetails.js:161
 msgid "Could not reject payment"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:145
+#: src/js/controllers/preferencesBitpayServices.js:33
+msgid "Could not remove account"
+msgstr ""
+
+#: src/js/controllers/preferencesBitpayCard.js:20
+#: src/js/controllers/preferencesBitpayServices.js:50
+msgid "Could not remove card"
+msgstr ""
+
+#: src/js/controllers/modals/txpDetails.js:147
 msgid "Could not send payment"
+msgstr ""
+
+#: src/js/controllers/buyAmazon.js:348
+#: src/js/controllers/buyMercadoLibre.js:342 src/js/controllers/topup.js:320
+msgid "Could not send transaction"
 msgstr ""
 
 #: www/views/accountDetails.html:214 www/views/walletDetails.html:210
@@ -486,7 +658,7 @@ msgid "Could not update transaction history"
 msgstr ""
 
 #: src/js/controllers/addresses.js:29 src/js/controllers/addresses.js:37
-#: src/js/controllers/walletDetails.js:73
+#: src/js/controllers/canoeers.js:29 src/js/controllers/walletDetails.js:73
 msgid "Could not update wallet"
 msgstr ""
 
@@ -515,19 +687,19 @@ msgstr ""
 msgid "Created by"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:14
+#: src/js/services/onGoingProcess.js:17
 msgid "Creating Wallet..."
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:13
+#: src/js/services/onGoingProcess.js:16
 msgid "Creating account..."
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:12
+#: src/js/services/onGoingProcess.js:15
 msgid "Creating transaction"
 msgstr ""
 
-#: www/views/preferencesFee.html:20
+#: www/views/modals/chooseFeeLevel.html:34 www/views/preferencesFee.html:20
 msgid "Current fee rate for this policy"
 msgstr ""
 
@@ -535,11 +707,12 @@ msgstr ""
 msgid "Custom Amount"
 msgstr ""
 
+#: www/views/modals/mercadolibre-card-details.html:56
 #: www/views/modals/txp-details.html:87 www/views/tx-details.html:66
 msgid "Date"
 msgstr ""
 
-#: src/js/services/profileService.js:220
+#: src/js/services/profileService.js:378
 msgid "Default Account"
 msgstr ""
 
@@ -559,15 +732,20 @@ msgstr ""
 msgid "Delete Wallet"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:15
+#: www/views/canoeers.html:59
+msgid "Delete it and create a new one"
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:18
 msgid "Deleting Wallet..."
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:21
+#: src/js/services/onGoingProcess.js:25
 msgid "Deleting payment proposal"
 msgstr ""
 
-#: www/views/topup.html:45
+#: www/views/buyAmazon.html:39 www/views/buyMercadoLibre.html:38
+#: www/views/modals/mercadolibre-card-details.html:6 www/views/topup.html:45
 msgid "Details"
 msgstr ""
 
@@ -587,9 +765,7 @@ msgid "Do not include private key"
 msgstr ""
 
 #: www/views/preferencesLanguage.html:21
-msgid ""
-"Don't see your language on Crowdin? Contact the Owner on Crowdin! We'd love "
-"to support your language."
+msgid "Don't see your language on Crowdin? Contact the Owner on Crowdin! We'd love to support your language."
 msgstr ""
 
 #: www/views/tab-settings.html:53
@@ -600,11 +776,12 @@ msgstr ""
 msgid "Download"
 msgstr ""
 
+#: src/js/services/onGoingProcess.js:46
+msgid "Duplicating wallet..."
+msgstr ""
+
 #: www/views/addresses.html:19
-msgid ""
-"Each RaiBlocks Wallet can generate billions of addresses from your 12-word "
-"backup. A new address is automatically generated and shown each time you "
-"receive a payment."
+msgid "Each RaiBlocks Wallet can generate billions of addresses from your 12-word backup. A new address is automatically generated and shown each time you receive a payment."
 msgstr ""
 
 #: www/views/onboarding/collectEmail.html:27
@@ -643,8 +820,16 @@ msgstr ""
 msgid "Enter Spending Password"
 msgstr ""
 
+#: src/js/services/bitpayAccountService.js:110
+msgid "Enter Two Factor for your BitPay account"
+msgstr ""
+
 #: www/views/amount.html:4
 msgid "Enter amount"
+msgstr ""
+
+#: www/views/modals/chooseFeeLevel.html:41
+msgid "Enter custom fee"
 msgstr ""
 
 #: src/js/services/walletService.js:27
@@ -670,28 +855,56 @@ msgstr ""
 #. Trying to import a malformed wallet export QR code
 #: src/js/controllers/activity.js:45 src/js/controllers/addressbookAdd.js:30
 #: src/js/controllers/addressbookView.js:36 src/js/controllers/addresses.js:118
-#: src/js/controllers/addresses.js:119 src/js/controllers/create.js:55
-#: src/js/controllers/export.js:105 src/js/controllers/export.js:111
-#: src/js/controllers/export.js:122 src/js/controllers/export.js:150
-#: src/js/controllers/export.js:156 src/js/controllers/export.js:167
-#: src/js/controllers/export.js:45 src/js/controllers/export.js:51
-#: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:108
-#: src/js/controllers/import.js:117 src/js/controllers/import.js:133
-#: src/js/controllers/import.js:138 src/js/controllers/import.js:142
-#: src/js/controllers/import.js:41 src/js/controllers/import.js:53
-#: src/js/controllers/import.js:74 src/js/controllers/import.js:86
-#: src/js/controllers/modals/txpDetails.js:138
+#: src/js/controllers/addresses.js:119 src/js/controllers/bitpayCard.js:66
+#: src/js/controllers/bitpayCardIntro.js:40
+#: src/js/controllers/bitpayCardIntro.js:81 src/js/controllers/buyAmazon.js:24
+#: src/js/controllers/buyAmazon.js:35 src/js/controllers/buyMercadoLibre.js:25
+#: src/js/controllers/buyMercadoLibre.js:36 src/js/controllers/canoeers.js:66
+#: src/js/controllers/create.js:55 src/js/controllers/export.js:105
+#: src/js/controllers/export.js:111 src/js/controllers/export.js:122
+#: src/js/controllers/export.js:150 src/js/controllers/export.js:156
+#: src/js/controllers/export.js:167 src/js/controllers/export.js:45
+#: src/js/controllers/export.js:51 src/js/controllers/feedback/send.js:21
+#: src/js/controllers/import.js:108 src/js/controllers/import.js:117
+#: src/js/controllers/import.js:133 src/js/controllers/import.js:138
+#: src/js/controllers/import.js:142 src/js/controllers/import.js:41
+#: src/js/controllers/import.js:53 src/js/controllers/import.js:74
+#: src/js/controllers/import.js:86 src/js/controllers/modals/feeLevels.js:9
+#: src/js/controllers/modals/txpDetails.js:140
 #: src/js/controllers/paperWallet.js:45
+#: src/js/controllers/preferencesBitpayCard.js:20
+#: src/js/controllers/preferencesBitpayServices.js:33
+#: src/js/controllers/preferencesBitpayServices.js:50
 #: src/js/controllers/preferencesDelete.js:35
 #: src/js/controllers/preferencesExternal.js:20
 #: src/js/controllers/tab-home.js:184 src/js/controllers/tab-send.js:71
 #: src/js/controllers/tabsController.js:36
-#: src/js/controllers/tabsController.js:7 src/js/controllers/tx-details.js:119
+#: src/js/controllers/tabsController.js:7 src/js/controllers/topup.js:22
+#: src/js/controllers/topup.js:33 src/js/controllers/tx-details.js:119
+#: www/views/mercadoLibreCards.html:19
+#: www/views/modals/mercadolibre-card-details.html:45
 msgid "Error"
 msgstr ""
 
 #: src/js/controllers/confirm.js:230
 msgid "Error at confirm"
+msgstr ""
+
+#: src/js/controllers/buyAmazon.js:179
+msgid "Error creating gift card"
+msgstr ""
+
+#: src/js/controllers/buyAmazon.js:94 src/js/controllers/buyMercadoLibre.js:95
+msgid "Error creating the invoice"
+msgstr ""
+
+#: src/js/controllers/buyAmazon.js:136
+#: src/js/controllers/buyMercadoLibre.js:137 src/js/controllers/topup.js:115
+msgid "Error in Payment Protocol"
+msgstr ""
+
+#: src/js/controllers/bitpayCardIntro.js:14
+msgid "Error pairing BitPay Account"
 msgstr ""
 
 #: src/js/controllers/paperWallet.js:40
@@ -702,10 +915,16 @@ msgstr ""
 msgid "Error sweeping wallet:"
 msgstr ""
 
+#: src/js/controllers/bitpayCardIntro.js:20
+msgid "Error updating Debit Cards"
+msgstr ""
+
 #: src/js/services/bwcError.js:143
 msgid "Exceeded daily limit of $500 per user"
 msgstr ""
 
+#: www/views/mercadoLibreCards.html:25
+#: www/views/modals/mercadolibre-card-details.html:34
 #: www/views/modals/txp-details.html:119
 msgid "Expired"
 msgstr ""
@@ -731,7 +950,7 @@ msgstr ""
 msgid "Extended Private Key"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:16
+#: src/js/services/onGoingProcess.js:19
 msgid "Extracting Wallet information..."
 msgstr ""
 
@@ -749,12 +968,24 @@ msgstr ""
 msgid "Fee"
 msgstr ""
 
+#: www/views/modals/chooseFeeLevel.html:75
+msgid "Fee level"
+msgstr ""
+
+#: src/js/controllers/modals/feeLevels.js:100
+msgid "Fee level is not defined"
+msgstr ""
+
 #: www/views/modals/txp-details.html:99
 msgid "Fee:"
 msgstr ""
 
 #: src/js/controllers/feedback/send.js:21
 msgid "Feedback could not be submitted. Please try again later."
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:39
+msgid "Fetching BitPay Account..."
 msgstr ""
 
 #: www/views/export.html:14
@@ -774,15 +1005,19 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-#: www/views/confirm.html:52 www/views/modals/txp-details.html:74
-#: www/views/topup.html:34 www/views/tx-details.html:52
+#: src/js/controllers/topup.js:329 www/views/buyAmazon.html:29
+#: www/views/buyMercadoLibre.html:28 www/views/confirm.html:52
+#: www/views/modals/txp-details.html:74 www/views/topup.html:34
+#: www/views/tx-details.html:52
 msgid "From"
 msgstr ""
 
+#: src/js/controllers/bitpayCardIntro.js:71
+msgid "From BitPay account"
+msgstr ""
+
 #: www/views/tab-export-qrCode.html:5
-msgid ""
-"From the destination device, go to Add wallet &gt; Import wallet and scan "
-"this QR code"
+msgid "From the destination device, go to Add wallet &gt; Import wallet and scan this QR code"
 msgstr ""
 
 #: src/js/services/bwcError.js:74
@@ -809,8 +1044,16 @@ msgstr ""
 msgid "Funds will be transferred to"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:17
+#: src/js/services/onGoingProcess.js:20
 msgid "Generating .csv file..."
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:34
+msgid "Generating new address..."
+msgstr ""
+
+#: www/views/bitpayCardIntro.html:23
+msgid "Get local cash anywhere you go, from any Visa<sup>&reg;</sup> compatible ATM. ATM bank fees may apply."
 msgstr ""
 
 #: www/views/onboarding/collectEmail.html:15
@@ -822,13 +1065,36 @@ msgctxt "button"
 msgid "Get started"
 msgstr ""
 
+#: www/views/bitpayCard.html:49
+msgid "Get started"
+msgstr ""
+
 #: www/views/addressbook.html:20
 msgid "Get started by adding your first one."
 msgstr ""
 
+#: www/views/buyAmazon.html:43 www/views/buyMercadoLibre.html:42
+msgid "Gift Card"
+msgstr ""
+
+#: www/views/modals/mercadolibre-card-details.html:30
+#: www/views/modals/mercadolibre-card-details.html:35
+msgid "Gift Card is not available to use anymore"
+msgstr ""
+
+#: src/js/controllers/buyAmazon.js:204
+msgid "Gift card expired"
+msgstr ""
+
+#: www/views/buyAmazon.html:111
+msgid "Gift card generated and ready to use."
+msgstr ""
+
+#: src/js/controllers/bitpayCard.js:114 src/js/controllers/bitpayCard.js:124
+#: src/js/controllers/modals/mercadoLibreCardDetails.js:27
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
-#: src/js/controllers/preferencesLanguage.js:13
+#: src/js/controllers/preferencesLanguage.js:14
 #: src/js/controllers/tab-home.js:154 src/js/controllers/tab-settings.js:39
 #: src/js/controllers/tx-details.js:193 src/js/controllers/tx-details.js:56
 msgid "Go Back"
@@ -836,6 +1102,7 @@ msgstr ""
 
 #: src/js/controllers/onboarding/backupRequest.js:18
 #: src/js/controllers/onboarding/backupRequest.js:24
+#: src/js/services/bitpayAccountService.js:84
 msgid "Go back"
 msgstr ""
 
@@ -848,10 +1115,13 @@ msgstr ""
 msgid "Hardware not connected."
 msgstr ""
 
+#: www/views/modals/mercadolibre-card-details.html:69
 #: www/views/tab-settings.html:37
 msgid "Help & Support"
 msgstr ""
 
+#: src/js/controllers/bitpayCard.js:112
+#: src/js/controllers/modals/mercadoLibreCardDetails.js:25
 #: src/js/controllers/tab-settings.js:37
 msgid "Help and support information is available at the website."
 msgstr ""
@@ -872,9 +1142,9 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:60
-#: src/js/controllers/feedback/send.js:64
-#: src/js/controllers/feedback/send.js:68
+#: src/js/controllers/feedback/send.js:59
+#: src/js/controllers/feedback/send.js:63
+#: src/js/controllers/feedback/send.js:67
 msgid "How could we improve your experience?"
 msgstr ""
 
@@ -887,9 +1157,7 @@ msgid "I don't like it"
 msgstr ""
 
 #: www/views/onboarding/disclaimer.html:43
-msgid ""
-"I have read, understood, and agree to the <a ng-click=\"openTerms()\" href="
-"\"javascript:void(0)\" translate=\"\">Terms of Use</a>."
+msgid "I have read, understood, and agree to the <a ng-click=\"openTerms()\" translate=\"\">Terms of Use</a>."
 msgstr ""
 
 #: www/views/modals/terms.html:22
@@ -910,19 +1178,16 @@ msgstr ""
 
 #: src/js/controllers/onboarding/backupRequest.js:17
 #: www/views/includes/screenshotWarningModal.html:9
+#: www/views/modals/fee-warning.html:8
 msgid "I understand"
 msgstr ""
 
 #: www/views/onboarding/disclaimer.html:21
-msgid ""
-"I understand that if this app is deleted, my wallet can only be recovered "
-"with the seed."
+msgid "I understand that if this app is deleted, my wallet can only be recovered with the seed."
 msgstr ""
 
 #: www/views/onboarding/disclaimer.html:18
-msgid ""
-"I understand that my funds are held securely on this device, not by a "
-"company."
+msgid "I understand that my funds are held securely on this device, not by a company."
 msgstr ""
 
 #: www/views/backup.html:30
@@ -930,27 +1195,19 @@ msgid "I've written it down"
 msgstr ""
 
 #: www/views/advancedSettings.html:24
-msgid ""
-"If enabled, the Recent Transactions card - a list of transactions occuring "
-"across all wallets - will appear in the Home tab."
+msgid "If enabled, the Recent Transactions card - a list of transactions occuring across all wallets - will appear in the Home tab."
 msgstr ""
 
 #: src/js/controllers/onboarding/backupRequest.js:16
-msgid ""
-"If this device is replaced or this app is deleted, your funds can not be "
-"recovered without a backup."
+msgid "If this device is replaced or this app is deleted, your funds can not be recovered without a backup."
 msgstr ""
 
 #: www/views/feedback/complete.html:23
-msgid ""
-"If you have additional feedback, please let us know by tapping the \"Send "
-"feedback\" option in the Settings tab."
+msgid "If you have additional feedback, please let us know by tapping the \"Send feedback\" option in the Settings tab."
 msgstr ""
 
 #: www/views/includes/screenshotWarningModal.html:8
-msgid ""
-"If you take a screenshot, your backup may be viewed by other apps. You can "
-"make a safe backup with physical paper and a pen."
+msgid "If you take a screenshot, your backup may be viewed by other apps. You can make a safe backup with physical paper and a pen."
 msgstr ""
 
 #: www/views/import.html:3
@@ -969,12 +1226,17 @@ msgstr ""
 msgid "Import wallet"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:18
+#: src/js/services/onGoingProcess.js:21
 msgid "Importing Wallet..."
 msgstr ""
 
 #: www/views/backup.html:41
 msgid "In order to verify your wallet backup, please type your password."
+msgstr ""
+
+#: www/views/mercadoLibreCards.html:24
+#: www/views/modals/mercadolibre-card-details.html:29
+msgid "Inactive"
 msgstr ""
 
 #: www/views/includes/walletListSettings.html:9
@@ -1000,6 +1262,7 @@ msgstr ""
 msgid "Insufficient funds"
 msgstr ""
 
+#: src/js/controllers/topup.js:166 src/js/controllers/topup.js:178
 #: src/js/services/bwcError.js:71
 msgid "Insufficient funds for fee"
 msgstr ""
@@ -1012,6 +1275,11 @@ msgstr ""
 msgid "Invalid"
 msgstr ""
 
+#: src/js/controllers/buyAmazon.js:137
+#: src/js/controllers/buyMercadoLibre.js:138 src/js/controllers/topup.js:116
+msgid "Invalid URL"
+msgstr ""
+
 #: src/js/services/bwcError.js:119
 msgid "Invalid address"
 msgstr ""
@@ -1020,7 +1288,16 @@ msgstr ""
 msgid "Invalid data"
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:78
+#: src/js/controllers/canoeers.js:89
+msgid "Invitation to share a {{appName}} Wallet"
+msgstr ""
+
+#: www/views/mercadoLibreCards.html:20
+#: www/views/modals/mercadolibre-card-details.html:48
+msgid "Invoice expired"
+msgstr ""
+
+#: src/js/controllers/feedback/send.js:77
 msgid "Is there anything we could do better?"
 msgstr ""
 
@@ -1029,22 +1306,24 @@ msgid "Is this email address correct?"
 msgstr ""
 
 #: www/views/addresses.html:25
-msgid ""
-"It's a good idea to avoid reusing addresses - this both protects your "
-"privacy and keeps your bitcoins secure against hypothetical attacks by "
-"quantum computers."
+msgid "It's a good idea to avoid reusing addresses - this both protects your privacy and keeps your bitcoins secure against hypothetical attacks by quantum computers."
 msgstr ""
 
-#: src/js/controllers/backup.js:35
-msgid ""
-"It's important that you write your wallet seed down correctly. If something "
-"happens to your wallet, you'll need this seed to reconstruct it. Please "
-"review your seed and try again."
+#: src/js/controllers/backup.js:37
+msgid "It's important that you write your wallet seed down correctly. If something happens to your wallet, you'll need this seed to reconstruct it. Please review your seed and try again."
+msgstr ""
+
+#: src/js/controllers/canoeers.js:84
+msgid "Join my {{appName}} Wallet. Here is the invitation code: {{secret}} You can download {{appName}} for your phone or desktop at {{appUrl}}"
 msgstr ""
 
 #: www/views/onboarding/welcome.html:5
 msgid "Join the future of crypto money,<br>get started with RaiBlocks."
 msgstr "Gå med i framtidens kryptovaluta,<br>kom igång med RaiBlocks."
+
+#: src/js/services/onGoingProcess.js:22
+msgid "Joining Wallet..."
+msgstr ""
 
 #: www/views/onboarding/tour.html:22
 msgid "Just scan the code to pay."
@@ -1058,6 +1337,10 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+#: www/views/bitpayCard.html:61
+msgid "Last Month"
+msgstr ""
+
 #: www/views/tab-home.html:24 www/views/tx-details.html:94
 msgid "Learn more"
 msgstr ""
@@ -1066,7 +1349,7 @@ msgstr ""
 msgid "Loading addresses..."
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:28
+#: src/js/services/onGoingProcess.js:32
 msgid "Loading transaction info..."
 msgstr ""
 
@@ -1096,6 +1379,10 @@ msgstr ""
 msgid "Log options"
 msgstr ""
 
+#: www/views/modals/bitpay-card-confirmation.html:14
+msgid "Log out"
+msgstr ""
+
 #: www/views/addresses.html:87
 msgid "Low amount inputs"
 msgstr ""
@@ -1108,7 +1395,7 @@ msgstr ""
 msgid "Makes sense"
 msgstr ""
 
-#: src/js/controllers/modals/search.js:59
+#: src/js/controllers/modals/search.js:61
 msgid "Matches:"
 msgstr ""
 
@@ -1125,10 +1412,19 @@ msgstr ""
 msgid "Memo"
 msgstr ""
 
+#: www/views/mercadoLibre.html:6
+msgid "Mercado Livre Brazil Gift Cards"
+msgstr ""
+
+#: src/js/controllers/buyMercadoLibre.js:99
+msgid "Mercadolibre Gift Card Service is not available at this moment. Please try back later."
+msgstr ""
+
 #: www/views/modals/txp-details.html:131
 msgid "Merchant Message"
 msgstr ""
 
+#: www/views/buyAmazon.html:55 www/views/buyMercadoLibre.html:54
 #: www/views/topup.html:63
 msgid "Miner Fee"
 msgstr ""
@@ -1162,6 +1458,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+#: www/views/buyAmazon.html:49 www/views/buyMercadoLibre.html:48
 #: www/views/topup.html:56
 msgid "Network Cost"
 msgstr ""
@@ -1194,6 +1491,11 @@ msgstr ""
 msgid "No Account available"
 msgstr ""
 
+#: src/js/controllers/buyAmazon.js:115
+#: src/js/controllers/buyMercadoLibre.js:116
+msgid "No access key defined"
+msgstr ""
+
 #: www/views/onboarding/backupRequest.html:5
 msgid "No backup, no RaiBlocks."
 msgstr ""
@@ -1218,6 +1520,10 @@ msgstr ""
 msgid "No recent transactions"
 msgstr ""
 
+#: src/js/controllers/buyAmazon.js:44 src/js/controllers/topup.js:48
+msgid "No signing proposal: No private key"
+msgstr ""
+
 #: www/views/accountDetails.html:208 www/views/walletDetails.html:204
 msgid "No transactions yet"
 msgstr ""
@@ -1227,10 +1533,13 @@ msgid "No wallet found"
 msgstr ""
 
 #: src/js/controllers/preferencesDelete.js:7
+#: src/js/controllers/preferencesPrivateKey.js:7
 msgid "No wallet selected"
 msgstr ""
 
-#: src/js/controllers/confirm.js:73
+#: src/js/controllers/buyAmazon.js:323
+#: src/js/controllers/buyMercadoLibre.js:316 src/js/controllers/confirm.js:73
+#: src/js/controllers/topup.js:286
 msgid "No wallets available"
 msgstr ""
 
@@ -1255,8 +1564,7 @@ msgid "Note"
 msgstr ""
 
 #: www/views/modals/wallets.html:25
-msgid ""
-"Notice: only 1-1 (single signature) wallets can be used for sell bitcoin"
+msgid "Notice: only 1-1 (single signature) wallets can be used for sell bitcoin"
 msgstr ""
 
 #: www/views/preferencesNotifications.html:3 www/views/tab-settings.html:70
@@ -1276,23 +1584,21 @@ msgid "Notify me when transactions are confirmed"
 msgstr ""
 
 #: www/views/includes/backupNeededPopup.html:8
-msgid ""
-"Now is a good time to backup your wallet. If this device is lost, it is "
-"impossible to access your funds without a backup."
+msgid "Now is a good time to backup your wallet. If this device is lost, it is impossible to access your funds without a backup."
 msgstr ""
 
 #: www/views/backupWarning.html:11
-msgid ""
-"Now is a perfect time to assess your surroundings. Nearby windows? Hidden "
-"cameras? Shoulder-spies?"
+msgid "Now is a perfect time to assess your surroundings. Nearby windows? Hidden cameras? Shoulder-spies?"
 msgstr ""
 
 #: www/views/tab-import-phrase.html:15
 msgid "Numbers and letters like 904A2CE76..."
 msgstr ""
 
+#: src/js/controllers/buyAmazon.js:335 src/js/controllers/topup.js:307
 #: src/js/services/popupService.js:16 src/js/services/popupService.js:52
 #: src/js/services/popupService.js:61 src/js/services/popupService.js:72
+#: www/views/modals/chooseFeeLevel.html:6
 msgid "OK"
 msgstr ""
 
@@ -1305,19 +1611,25 @@ msgstr ""
 msgid "Official English Disclaimer"
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:63
+#: src/js/controllers/feedback/send.js:62
 msgid "Oh no!"
+msgstr ""
+
+#: src/js/controllers/buyMercadoLibre.js:330
+msgid "Ok"
 msgstr ""
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts."
 msgstr ""
 
+#: src/js/controllers/bitpayCard.js:113
+#: src/js/controllers/modals/mercadoLibreCardDetails.js:26
 #: src/js/controllers/tab-settings.js:38 src/js/controllers/tx-details.js:55
 msgid "Open"
 msgstr ""
 
-#: src/js/controllers/preferencesLanguage.js:12
+#: src/js/controllers/preferencesLanguage.js:13
 msgid "Open Crowdin"
 msgstr ""
 
@@ -1329,7 +1641,7 @@ msgstr ""
 msgid "Open GitHub Project"
 msgstr ""
 
-#: src/js/controllers/tx-details.js:192
+#: src/js/controllers/bitpayCard.js:123 src/js/controllers/tx-details.js:192
 msgid "Open Insight"
 msgstr ""
 
@@ -1337,7 +1649,7 @@ msgstr ""
 msgid "Open Settings"
 msgstr ""
 
-#: src/js/controllers/preferencesLanguage.js:10
+#: src/js/controllers/preferencesLanguage.js:11
 msgid "Open Translation Community"
 msgstr ""
 
@@ -1347,6 +1659,10 @@ msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:19
 msgid "Open website"
+msgstr ""
+
+#: www/views/bitpayCardIntro.html:34
+msgid "Order the BitPay Card"
 msgstr ""
 
 #: www/views/tab-create-account.html:67 www/views/tab-create-account.html:75
@@ -1362,11 +1678,15 @@ msgstr ""
 msgid "Paste the backup plain text"
 msgstr ""
 
+#: www/views/bitpayCardIntro.html:28
+msgid "Pay 0% fees to turn bitcoin into dollars."
+msgstr ""
+
 #: www/views/modals/paypro.html:18
 msgid "Pay To"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:49
+#: src/js/controllers/modals/txpDetails.js:51
 #: www/views/modals/tx-status.html:33
 msgid "Payment Accepted"
 msgstr ""
@@ -1399,7 +1719,7 @@ msgstr ""
 msgid "Payment Rejected"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:42 www/views/confirm.html:100
+#: src/js/controllers/modals/txpDetails.js:44 www/views/confirm.html:100
 #: www/views/includes/walletActivity.html:11
 #: www/views/modals/txp-details.html:42
 msgid "Payment Sent"
@@ -1410,9 +1730,7 @@ msgid "Payment accepted, but not yet broadcasted"
 msgstr ""
 
 #: www/views/modals/txp-details.html:40
-msgid ""
-"Payment accepted. It will be broadcasted by Glidera. In case there is a "
-"problem, it can be deleted 6 hours after it was created."
+msgid "Payment accepted. It will be broadcasted by Glidera. In case there is a problem, it can be deleted 6 hours after it was created."
 msgstr ""
 
 #: www/views/modals/txp-details.html:107
@@ -1421,6 +1739,11 @@ msgstr ""
 
 #: www/views/modals/paypro.html:6
 msgid "Payment request"
+msgstr ""
+
+#: www/views/mercadoLibreCards.html:22
+#: www/views/modals/mercadolibre-card-details.html:39
+msgid "Pending"
 msgstr ""
 
 #: www/views/proposals.html:4
@@ -1432,9 +1755,7 @@ msgid "Permanently delete this wallet."
 msgstr ""
 
 #: www/views/backup.html:23
-msgid ""
-"Please carefully write down this 64 character seed. Click to copy to "
-"clipboard."
+msgid "Please carefully write down this 64 character seed. Click to copy to clipboard."
 msgstr ""
 
 #: www/views/tab-scan.html:20
@@ -1462,11 +1783,15 @@ msgstr ""
 msgid "Please, select your backup file"
 msgstr ""
 
+#: www/views/bitpayCard.html:81
+msgid "Pre-Auth Holds"
+msgstr ""
+
 #: www/views/tab-settings.html:64
 msgid "Preferences"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:30
+#: src/js/services/onGoingProcess.js:35
 msgid "Preparing addresses..."
 msgstr ""
 
@@ -1474,7 +1799,7 @@ msgstr ""
 msgid "Preparing backup..."
 msgstr ""
 
-#: src/js/routes.js:911
+#: src/js/routes.js:1213
 msgid "Press again to exit"
 msgstr ""
 
@@ -1494,7 +1819,7 @@ msgstr ""
 msgid "Proposal Accepted"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:59
+#: src/js/controllers/modals/txpDetails.js:61
 #: src/js/controllers/tx-details.js:78
 msgid "Proposal Created"
 msgstr ""
@@ -1511,14 +1836,20 @@ msgstr ""
 msgid "Proposals"
 msgstr ""
 
+#: src/js/controllers/buyAmazon.js:305
+msgid "Purchase Amount is limited to {{limitPerDay}} {{currency}} per day"
+msgstr ""
+
+#: src/js/controllers/buyMercadoLibre.js:305
+msgid "Purchase amount must be a value between 50 and 2000"
+msgstr ""
+
 #: www/views/onboarding/notifications.html:3
 msgid "Push Notifications"
 msgstr ""
 
 #: www/views/preferencesNotifications.html:17
-msgid ""
-"Push notifications for {{appName}} are currently disabled. Enable them in "
-"the Settings app."
+msgid "Push notifications for {{appName}} are currently disabled. Enable them in the Settings app."
 msgstr ""
 
 #: www/views/export.html:17
@@ -1550,9 +1881,7 @@ msgid "RaiBlocks is instant,<br>digital money."
 msgstr ""
 
 #: www/views/onboarding/disclaimer.html:15
-msgid ""
-"Raiblocks is different &ndash; it cannot be safely held with a bank or web "
-"service."
+msgid "Raiblocks is different &ndash; it cannot be safely held with a bank or web service."
 msgstr ""
 
 #: www/views/feedback/rateApp.html:14
@@ -1591,7 +1920,7 @@ msgstr "Mottagna medel"
 msgid "Receiving"
 msgstr ""
 
-#: www/views/includes/walletHistory.html:3
+#: www/views/bitpayCard.html:60 www/views/includes/walletHistory.html:3
 msgid "Recent"
 msgstr ""
 
@@ -1611,16 +1940,20 @@ msgstr ""
 msgid "Recipients"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:19
+#: src/js/services/onGoingProcess.js:23
 msgid "Recreating Wallet..."
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:61
+#: www/views/modals/mercadolibre-card-details.html:22
+msgid "Redeem now"
+msgstr ""
+
+#: src/js/controllers/modals/txpDetails.js:63
 #: src/js/controllers/tx-details.js:80
 msgid "Rejected"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:20
+#: src/js/services/onGoingProcess.js:24
 msgid "Rejecting payment proposal"
 msgstr ""
 
@@ -1629,7 +1962,20 @@ msgid "Release information"
 msgstr ""
 
 #: www/views/addressbook.view.html:36
+#: www/views/modals/mercadolibre-card-details.html:74
 msgid "Remove"
+msgstr ""
+
+#: src/js/controllers/preferencesBitpayServices.js:7
+msgid "Remove BitPay Account?"
+msgstr ""
+
+#: src/js/controllers/preferencesBitpayServices.js:19
+msgid "Remove BitPay Card?"
+msgstr ""
+
+#: src/js/controllers/preferencesBitpayServices.js:8
+msgid "Removing your BitPay account will remove all associated BitPay account data from this device. Are you sure you would like to remove your BitPay Account ({{email}}) from this device?"
 msgstr ""
 
 #: www/views/tab-create-account.html:84 www/views/tab-create-account.html:92
@@ -1645,7 +1991,7 @@ msgstr ""
 msgid "Restore from backup"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:22
+#: src/js/services/onGoingProcess.js:26
 msgid "Retrieving inputs information"
 msgstr ""
 
@@ -1683,7 +2029,7 @@ msgstr ""
 msgid "Scan your fingerprint please"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:23
+#: src/js/services/onGoingProcess.js:27
 msgid "Scanning Wallet funds..."
 msgstr ""
 
@@ -1711,6 +2057,10 @@ msgstr ""
 msgid "Security Prefrences"
 msgstr ""
 
+#: www/views/modals/mercadolibre-card-details.html:64
+msgid "See invoice"
+msgstr ""
+
 #: www/views/tab-import-file.html:7
 msgid "Select a backup file"
 msgstr ""
@@ -1721,6 +2071,10 @@ msgstr ""
 
 #: www/views/modals/paypro.html:38
 msgid "Self-signed Certificate"
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:38
+msgid "Selling Bitcoin..."
 msgstr ""
 
 #: www/views/feedback/send.html:13 www/views/feedback/send.html:43
@@ -1765,11 +2119,11 @@ msgstr ""
 msgid "Sending"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:31
+#: src/js/services/onGoingProcess.js:36
 msgid "Sending 2FA code..."
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:29
+#: src/js/services/onGoingProcess.js:33
 msgid "Sending feedback..."
 msgstr ""
 
@@ -1777,7 +2131,7 @@ msgstr ""
 msgid "Sending maximum amount"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:24
+#: src/js/services/onGoingProcess.js:28
 msgid "Sending transaction"
 msgstr ""
 
@@ -1796,6 +2150,10 @@ msgstr ""
 
 #: src/js/services/bwcError.js:38
 msgid "Server response could not be verified"
+msgstr ""
+
+#: src/js/controllers/buyAmazon.js:97 src/js/controllers/buyMercadoLibre.js:98
+msgid "Service not available"
 msgstr ""
 
 #: www/views/includes/homeIntegrations.html:3
@@ -1822,6 +2180,10 @@ msgstr ""
 msgid "Share the love by inviting your friends."
 msgstr ""
 
+#: www/views/canoeers.html:20
+msgid "Share this invitation with your canoeers"
+msgstr ""
+
 #: src/js/controllers/feedback/complete.js:5 www/views/tab-settings.html:60
 msgid "Share {{appName}}"
 msgstr ""
@@ -1846,25 +2208,27 @@ msgstr ""
 msgid "Signatures rejected by server"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:25
+#: src/js/services/onGoingProcess.js:29
 msgid "Signing transaction"
 msgstr ""
 
 #: www/views/onboarding/backupRequest.html:6
-msgid ""
-"Since only you control your money, you’ll need to save your wallet seed in "
-"case this app is deleted."
+msgid "Since only you control your money, you’ll need to save your wallet seed in case this app is deleted."
 msgstr ""
 
 #: www/views/onboarding/collectEmail.html:40 www/views/onboarding/tour.html:11
 msgid "Skip"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:45
+#: src/js/controllers/modals/txpDetails.js:47
 msgid "Slide to accept"
 msgstr ""
 
-#: src/js/controllers/confirm.js:181 src/js/controllers/modals/txpDetails.js:38
+#: www/views/buyAmazon.html:96
+msgid "Slide to buy"
+msgstr ""
+
+#: src/js/controllers/confirm.js:181 src/js/controllers/modals/txpDetails.js:40
 msgid "Slide to send"
 msgstr ""
 
@@ -1888,6 +2252,11 @@ msgstr ""
 msgid "Start sending RaiBlocks"
 msgstr ""
 
+#: www/views/mercadoLibreCards.html:21
+#: www/views/modals/mercadolibre-card-details.html:42
+msgid "Still pending"
+msgstr ""
+
 #: www/views/topup.html:101
 msgid "Success"
 msgstr ""
@@ -1900,7 +2269,7 @@ msgstr ""
 msgid "Sweep paper wallet"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:26
+#: src/js/services/onGoingProcess.js:30
 msgid "Sweeping Wallet..."
 msgstr ""
 
@@ -1935,19 +2304,17 @@ msgid "Text"
 msgstr ""
 
 #: src/js/controllers/feedback/send.js:25
-#: src/js/controllers/feedback/send.js:75 www/views/feedback/complete.html:20
+#: src/js/controllers/feedback/send.js:74 www/views/feedback/complete.html:20
 #: www/views/feedback/rateApp.html:4
 msgid "Thank you!"
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:71
+#: src/js/controllers/feedback/send.js:70
 msgid "Thanks!"
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:72
-msgid ""
-"That's exciting to hear. We'd love to earn that fifth star from you – how "
-"could we improve your experience?"
+#: src/js/controllers/feedback/send.js:71
+msgid "That's exciting to hear. We'd love to earn that fifth star from you – how could we improve your experience?"
 msgstr ""
 
 #: www/views/modals/wallet-balance.html:55
@@ -1955,36 +2322,23 @@ msgid "The amount of bitcoin immediately spendable from this wallet."
 msgstr ""
 
 #: www/views/modals/wallet-balance.html:93
-msgid ""
-"The amount of bitcoin stored in this wallet that is allocated as inputs to "
-"your pending transaction proposals. The amount is determined using unspent "
-"transaction outputs associated with this wallet and may be more than the "
-"actual amounts associated with your pending transaction proposals."
+msgid "The amount of bitcoin stored in this wallet that is allocated as inputs to your pending transaction proposals. The amount is determined using unspent transaction outputs associated with this wallet and may be more than the actual amounts associated with your pending transaction proposals."
 msgstr ""
 
 #: www/views/modals/wallet-balance.html:74
-msgid ""
-"The amount of bitcoin stored in this wallet with less than 1 blockchain "
-"confirmation."
+msgid "The amount of bitcoin stored in this wallet with less than 1 blockchain confirmation."
 msgstr ""
 
 #: www/views/preferencesFee.html:12
-msgid ""
-"The higher the fee, the greater the incentive a miner has to include that "
-"transaction in a block. Current fees are determined based on network load "
-"and the selected policy."
+msgid "The higher the fee, the greater the incentive a miner has to include that transaction in a block. Current fees are determined based on network load and the selected policy."
 msgstr ""
 
 #: www/views/addresses.html:51
-msgid ""
-"The maximum number of consecutive unused addresses (20) has been reached. "
-"When one of your unused addresses receives a payment, a new address will be "
-"generated and shown in your Receive tab."
+msgid "The maximum number of consecutive unused addresses (20) has been reached. When one of your unused addresses receives a payment, a new address will be generated and shown in your Receive tab."
 msgstr ""
 
 #: src/js/controllers/onboarding/terms.js:21
-msgid ""
-"The official English Terms of Service are available on the BitPay website."
+msgid "The official English Terms of Service are available on the BitPay website."
 msgstr ""
 
 #: www/views/modals/txp-details.html:26
@@ -1996,10 +2350,7 @@ msgid "The request could not be understood by the server"
 msgstr ""
 
 #: www/views/addresses.html:52
-msgid ""
-"The restore process will stop when 20 addresses are generated in a row which "
-"contain no funds. To safely generate more addresses, make a payment to one "
-"of the unused addresses which has already been generated."
+msgid "The restore process will stop when 20 addresses are generated in a row which contain no funds. To safely generate more addresses, make a payment to one of the unused addresses which has already been generated."
 msgstr ""
 
 #: www/views/tab-import-phrase.html:4
@@ -2019,9 +2370,7 @@ msgid "The total amount of bitcoin stored in this wallet."
 msgstr ""
 
 #: www/views/preferencesHistory.html:27
-msgid ""
-"The transaction history and every new incoming transaction are cached in the "
-"app. This feature clean this up and synchronizes again from the server"
+msgid "The transaction history and every new incoming transaction are cached in the app. This feature clean this up and synchronizes again from the server"
 msgstr ""
 
 #: www/views/tab-import-phrase.html:5
@@ -2036,8 +2385,8 @@ msgstr ""
 msgid "There is an error in the form"
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:60
-#: src/js/controllers/feedback/send.js:64
+#: src/js/controllers/feedback/send.js:59
+#: src/js/controllers/feedback/send.js:63
 msgid "There's obviously something we're doing wrong."
 msgstr ""
 
@@ -2050,22 +2399,15 @@ msgid "This app stores your RaiBlocks with cutting-edge security."
 msgstr ""
 
 #: www/views/tab-create-wallet.html:65
-msgid ""
-"This password cannot be recovered. If the password is lost, there is no way "
-"you could recover your funds."
+msgid "This password cannot be recovered. If the password is lost, there is no way you could recover your funds."
 msgstr ""
 
 #: www/views/tx-details.html:91
-msgid ""
-"This transaction amount is too small compared to current Bitcoin network "
-"fees. Spending these funds will need a Bitcoin network fee cost comparable "
-"to the funds itself."
+msgid "This transaction amount is too small compared to current Bitcoin network fees. Spending these funds will need a Bitcoin network fee cost comparable to the funds itself."
 msgstr ""
 
 #: www/views/tx-details.html:87
-msgid ""
-"This transaction could take a long time to confirm or could be dropped due "
-"to the low fees set by the sender"
+msgid "This transaction could take a long time to confirm or could be dropped due to the low fees set by the sender"
 msgstr ""
 
 #: www/views/accountDetails.html:20
@@ -2074,9 +2416,7 @@ msgstr ""
 
 #: www/views/accountDetails.html:113 www/views/accountDetails.html:33
 #: www/views/walletDetails.html:109 www/views/walletDetails.html:29
-msgid ""
-"This wallet is not registered at the given Bitcore Wallet Service (BWS). You "
-"can recreate it from the local information."
+msgid "This wallet is not registered at the given Bitcore Wallet Service (BWS). You can recreate it from the local information."
 msgstr ""
 
 #: www/views/modals/txp-details.html:136 www/views/tx-details.html:121
@@ -2090,15 +2430,26 @@ msgid "To"
 msgstr ""
 
 #: www/views/tab-send.html:37
-msgid ""
-"To get started, you need Raiblocks. Share your account to receive RaiBlocks."
+msgid "To get started, you need Raiblocks. Share your account to receive RaiBlocks."
 msgstr ""
 
 #: www/views/tab-send.html:38
-msgid ""
-"To get started, you need an Account in your wallet to receive RaiBlocks."
+msgid "To get started, you need an Account in your wallet to receive RaiBlocks."
 msgstr ""
 
+#: src/js/services/bitpayAccountService.js:73
+msgid "To {{reason}} you must first add your BitPay account - {{email}}"
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:45
+msgid "Top up in progress..."
+msgstr ""
+
+#: src/js/controllers/topup.js:224
+msgid "Top up {{amountStr}} to debit card ({{cardLastNumber}})"
+msgstr ""
+
+#: www/views/buyAmazon.html:61 www/views/buyMercadoLibre.html:60
 #: www/views/modals/wallet-balance.html:23 www/views/topup.html:70
 msgid "Total"
 msgstr ""
@@ -2128,6 +2479,11 @@ msgstr ""
 msgid "Transaction already broadcasted"
 msgstr ""
 
+#: src/js/controllers/buyAmazon.js:331
+#: src/js/controllers/buyMercadoLibre.js:325 src/js/controllers/topup.js:302
+msgid "Transaction has not been created"
+msgstr ""
+
 #: www/views/topup.html:104
 msgid "Transaction initiated"
 msgstr ""
@@ -2138,6 +2494,10 @@ msgstr ""
 
 #: src/js/controllers/activity.js:45 src/js/controllers/tab-home.js:184
 msgid "Transaction not found"
+msgstr ""
+
+#: www/views/modals/chooseFeeLevel.html:55
+msgid "Transactions without fee are not supported."
 msgstr ""
 
 #: src/js/controllers/paperWallet.js:107
@@ -2152,7 +2512,11 @@ msgstr ""
 msgid "Try again in {{expires}}"
 msgstr ""
 
-#: src/js/controllers/backup.js:34
+#: www/views/bitpayCardIntro.html:18
+msgid "Turn bitcoin into dollars, swipe anywhere Visa<sup>&reg;</sup> is accepted."
+msgstr ""
+
+#: src/js/controllers/backup.js:36
 msgid "Uh oh..."
 msgstr ""
 
@@ -2188,7 +2552,7 @@ msgstr ""
 msgid "Updating... Please stand by"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:27
+#: src/js/services/onGoingProcess.js:31
 msgid "Validating recovery phrase..."
 msgstr ""
 
@@ -2212,7 +2576,7 @@ msgstr ""
 msgid "View Terms of Service"
 msgstr ""
 
-#: src/js/controllers/tx-details.js:191
+#: src/js/controllers/bitpayCard.js:122 src/js/controllers/tx-details.js:191
 msgid "View Transaction on Insight"
 msgstr ""
 
@@ -2224,26 +2588,20 @@ msgstr ""
 msgid "View on blockchain"
 msgstr ""
 
+#: www/views/mercadoLibre.html:26
+msgid "Visit mercadolivre.com.br &rarr;"
+msgstr ""
+
 #: www/views/accountDetails.html:186 www/views/walletDetails.html:182
-msgid ""
-"WARNING: Key derivation is not working on this device/wallet. Actions cannot "
-"be performed on this wallet."
+msgid "WARNING: Key derivation is not working on this device/wallet. Actions cannot be performed on this wallet."
 msgstr ""
 
 #: www/views/tab-export-file.html:45
-msgid ""
-"WARNING: Not including the private key allows to check the wallet balance, "
-"transaction history, and create spend proposals from the export. However, "
-"does not allow to approve (sign) proposals, so <b>funds will not be "
-"accessible from the export</b>."
+msgid "WARNING: Not including the private key allows to check the wallet balance, transaction history, and create spend proposals from the export. However, does not allow to approve (sign) proposals, so <b>funds will not be accessible from the export</b>."
 msgstr ""
 
 #: www/views/tab-export-file.html:36
-msgid ""
-"WARNING: The private key of this wallet is not available. The export allows "
-"to check the wallet balance, transaction history, and create spend proposals "
-"from the export. However, does not allow to approve (sign) proposals, so "
-"<b>funds will not be accessible from the export</b>."
+msgid "WARNING: The private key of this wallet is not available. The export allows to check the wallet balance, transaction history, and create spend proposals from the export. However, does not allow to approve (sign) proposals, so <b>funds will not be accessible from the export</b>."
 msgstr ""
 
 #: www/views/modals/paypro.html:42
@@ -2251,13 +2609,15 @@ msgid "WARNING: UNTRUSTED CERTIFICATE"
 msgstr ""
 
 #: www/views/preferencesPrivateKey.html:14
-msgid ""
-"WARNING: Your extended private keys are all that is needed to access your "
-"bitcoin funds. Be sure to protect your private keys and store them only on "
-"secure devices. BitPay does not have access to your private keys, so you "
-"alone are responsible for your keys. If you share key access with external "
-"services, you take responsibility for the risk of theft or breach. Only "
-"advanced users should handle extended private keys directly."
+msgid "WARNING: Your extended private keys are all that is needed to access your bitcoin funds. Be sure to protect your private keys and store them only on secure devices. BitPay does not have access to your private keys, so you alone are responsible for your keys. If you share key access with external services, you take responsibility for the risk of theft or breach. Only advanced users should handle extended private keys directly."
+msgstr ""
+
+#: www/views/canoeers.html:48
+msgid "Waiting for canoeers"
+msgstr ""
+
+#: www/views/canoeers.html:53
+msgid "Waiting..."
 msgstr ""
 
 #: www/views/tab-settings.html:102
@@ -2296,8 +2656,16 @@ msgstr ""
 msgid "Wallet already exists"
 msgstr ""
 
+#: src/js/services/profileService.js:450
+msgid "Wallet already in {{appName}}"
+msgstr ""
+
 #: www/views/includes/walletActivity.html:6
 msgid "Wallet created"
+msgstr ""
+
+#: www/views/canoeers.html:58
+msgid "Wallet incomplete and broken"
 msgstr ""
 
 #: src/js/services/bwcError.js:65
@@ -2329,9 +2697,7 @@ msgid "Wallet not found"
 msgstr ""
 
 #: src/js/services/bwcError.js:29
-msgid ""
-"Wallet not registered at the wallet service. Recreate it from \"Create Wallet"
-"\" using \"Advanced Options\" to set your recovery phrase"
+msgid "Wallet not registered at the wallet service. Recreate it from \"Create Wallet\" using \"Advanced Options\" to set your recovery phrase"
 msgstr ""
 
 #: www/views/backup.html:12
@@ -2343,8 +2709,8 @@ msgid "Wallet service not found"
 msgstr ""
 
 #: src/js/controllers/addressbookView.js:30
-#: src/js/controllers/modals/txpDetails.js:151
-#: src/js/controllers/modals/txpDetails.js:168
+#: src/js/controllers/modals/txpDetails.js:153
+#: src/js/controllers/modals/txpDetails.js:170
 #: src/js/controllers/preferencesDelete.js:23
 #: src/js/controllers/preferencesExternal.js:14
 #: www/views/preferencesDeleteWallet.html:11
@@ -2360,18 +2726,16 @@ msgstr ""
 msgid "Watch out!"
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:68
+#: src/js/controllers/feedback/send.js:67
 msgid "We'd love to do better."
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:76
+#: src/js/controllers/feedback/send.js:75
 msgid "We're always looking for ways to improve {{appName}}."
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:82
-msgid ""
-"We're always looking for ways to improve {{appName}}. How could we improve "
-"your experience?"
+#: src/js/controllers/feedback/send.js:81
+msgid "We're always looking for ways to improve {{appName}}. How could we improve your experience?"
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:6
@@ -2379,10 +2743,7 @@ msgid "Website"
 msgstr ""
 
 #: www/views/preferencesLanguage.html:16
-msgid ""
-"We’re always looking for translation contributions! You can make corrections "
-"or help to make this app available in your native language by joining our "
-"community on Crowdin."
+msgid "We’re always looking for translation contributions! You can make corrections or help to make this app available in your native language by joining our community on Crowdin."
 msgstr ""
 
 #: www/views/preferencesAlias.html:11
@@ -2425,21 +2786,16 @@ msgstr ""
 msgid "You can create a backup later from your wallet settings."
 msgstr ""
 
-#: src/js/controllers/preferencesLanguage.js:11
-msgid ""
-"You can make contributions by signing up on our Crowdin community "
-"translation website. We’re looking forward to hearing from you!"
+#: src/js/controllers/preferencesLanguage.js:12
+msgid "You can make contributions by signing up on our Crowdin community translation website. We’re looking forward to hearing from you!"
 msgstr ""
 
 #: www/views/tab-scan.html:16
-msgid ""
-"You can scan bitcoin addresses, payment requests, paper wallets, and more."
+msgid "You can scan bitcoin addresses, payment requests, paper wallets, and more."
 msgstr ""
 
 #: src/js/controllers/preferencesAbout.js:13
-msgid ""
-"You can see the latest developments and contribute to this open source app "
-"by visiting our project on GitHub."
+msgid "You can see the latest developments and contribute to this open source app by visiting our project on GitHub."
 msgstr ""
 
 #: www/views/backup.html:15
@@ -2447,19 +2803,31 @@ msgid "You can still export it from Advanced &gt; Export."
 msgstr ""
 
 #: www/views/onboarding/tour.html:32
-msgid ""
-"You can trade it for other currencies like US Dollars, Euros, or Pounds."
+msgid "You can trade it for other currencies like US Dollars, Euros, or Pounds."
 msgstr ""
 
 #: www/views/onboarding/tour.html:19
 msgid "You can transfer RaiBlocks instantly to anyone worldwide."
+msgstr "Du kan överföra RaiBlocks ögonblickligen till vem som helst i hela världen."
+
+#: www/views/modals/chooseFeeLevel.html:64
+msgid "You should not set a fee higher than {{maxFeeRecommended}} satoshis/byte."
 msgstr ""
-"Du kan överföra RaiBlocks ögonblickligen till vem som helst i hela världen."
+
+#: www/views/modals/bitpay-card-confirmation.html:5
+msgid "You will need to log back for fill in your BitPay Card."
+msgstr ""
 
 #: www/views/preferencesNotifications.html:34
-msgid ""
-"You'll receive email notifications about payments sent and received from "
-"your wallets."
+msgid "You'll receive email notifications about payments sent and received from your wallets."
+msgstr ""
+
+#: www/views/bitpayCard.html:50
+msgid "Your BitPay Card is ready. Add funds to your card to start using it at stores and ATMs worldwide."
+msgstr ""
+
+#: www/views/mercadoLibre.html:57 www/views/mercadoLibreCards.html:6
+msgid "Your Gift Cards"
 msgstr ""
 
 #: www/views/includes/confirmBackupPopup.html:6
@@ -2470,6 +2838,10 @@ msgstr "Din RaiBlocks-plånbok är säkerhetskopierad!"
 msgid "Your RaiBlocks Wallet is ready!"
 msgstr "Din RaiBlocks-plånbok är redo!"
 
+#: www/views/modals/chooseFeeLevel.html:61
+msgid "Your fee is lower than recommended."
+msgstr ""
+
 #: www/views/feedback/send.html:42
 msgid "Your ideas, feedback, or comments"
 msgstr ""
@@ -2478,14 +2850,20 @@ msgstr ""
 msgid "Your password"
 msgstr ""
 
+#: www/views/buyAmazon.html:102
+msgid "Your purchase could not be completed"
+msgstr ""
+
+#: www/views/buyAmazon.html:105
+msgid "Your purchase was added to the list of pending"
+msgstr ""
+
 #: www/views/onboarding/backupRequest.html:10
 msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr ""
 
 #: src/js/services/walletService.js:28
-msgid ""
-"Your wallet key will be encrypted. The Spending Password cannot be "
-"recovered. Be sure to write it down."
+msgid "Your wallet key will be encrypted. The Spending Password cannot be recovered. Be sure to write it down."
 msgstr ""
 
 #: www/views/accountDetails.html:135 www/views/accountDetails.html:55
@@ -2502,6 +2880,10 @@ msgstr ""
 msgid "[Scanning Funds]"
 msgstr ""
 
+#: src/js/controllers/bitpayCardIntro.js:11
+msgid "add your BitPay Visa card(s)"
+msgstr ""
+
 #: www/views/includes/available-balance.html:8
 msgid "locked by pending payments"
 msgstr ""
@@ -2514,27 +2896,23 @@ msgstr ""
 msgid "preparing..."
 msgstr ""
 
+#: src/js/controllers/buyAmazon.js:241
+msgid "{{amountStr}} for Amazon.com Gift Card"
+msgstr ""
+
+#: src/js/controllers/buyMercadoLibre.js:240
+msgid "{{amountStr}} for Mercado Livre Brazil Gift Card"
+msgstr ""
+
 #: www/views/preferencesBwsUrl.html:21
-msgid ""
-"{{appName}} depends on Bitcore Wallet Service (BWS) for blockchain "
-"information, networking and Copayer synchronization. The default "
-"configuration points to https://bws.bitpay.com (BitPay's public BWS "
-"instance)."
+msgid "{{appName}} depends on Bitcore Wallet Service (BWS) for blockchain information, networking and Copayer synchronization. The default configuration points to https://bws.bitpay.com (BitPay's public BWS instance)."
 msgstr ""
 
 #: www/views/accountDetails.html:222 www/views/walletDetails.html:218
 msgid "{{updatingTxHistoryProgress}} transactions downloaded"
 msgstr ""
 
-#: www/views/includes/walletInfo.html:18
+#: www/views/canoeers.html:46 www/views/includes/walletInfo.html:18
 msgid "{{wallet.m}}-of-{{wallet.n}}"
 msgstr ""
 
-#~ msgid "Activity"
-#~ msgstr "Aktivitet"
-
-#~ msgid "Add Account"
-#~ msgstr "Lägg till konto"
-
-#~ msgid "All"
-#~ msgstr "Alla"
