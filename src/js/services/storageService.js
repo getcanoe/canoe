@@ -1,4 +1,5 @@
 'use strict'
+/* global angular */
 angular.module('canoeApp.services')
   .factory('storageService', function (logHeader, fileStorageService, localStorageService, $log, lodash, platformInfo, $timeout) {
     var root = {}
@@ -207,78 +208,6 @@ angular.module('canoeApp.services')
       storage.get('remotePrefStored', cb)
     }
 
-    root.setGlideraToken = function (network, token, cb) {
-      storage.set('glideraToken-' + network, token, cb)
-    }
-
-    root.getGlideraToken = function (network, cb) {
-      storage.get('glideraToken-' + network, cb)
-    }
-
-    root.removeGlideraToken = function (network, cb) {
-      storage.remove('glideraToken-' + network, cb)
-    }
-
-    root.setGlideraPermissions = function (network, p, cb) {
-      storage.set('glideraPermissions-' + network, p, cb)
-    }
-
-    root.getGlideraPermissions = function (network, cb) {
-      storage.get('glideraPermissions-' + network, cb)
-    }
-
-    root.removeGlideraPermissions = function (network, cb) {
-      storage.remove('glideraPermissions-' + network, cb)
-    }
-
-    root.setGlideraStatus = function (network, status, cb) {
-      storage.set('glideraStatus-' + network, status, cb)
-    }
-
-    root.getGlideraStatus = function (network, cb) {
-      storage.get('glideraStatus-' + network, cb)
-    }
-
-    root.removeGlideraStatus = function (network, cb) {
-      storage.remove('glideraStatus-' + network, cb)
-    }
-
-    root.setGlideraTxs = function (network, txs, cb) {
-      storage.set('glideraTxs-' + network, txs, cb)
-    }
-
-    root.getGlideraTxs = function (network, cb) {
-      storage.get('glideraTxs-' + network, cb)
-    }
-
-    root.removeGlideraTxs = function (network, cb) {
-      storage.remove('glideraTxs-' + network, cb)
-    }
-
-    root.setCoinbaseRefreshToken = function (network, token, cb) {
-      storage.set('coinbaseRefreshToken-' + network, token, cb)
-    }
-
-    root.getCoinbaseRefreshToken = function (network, cb) {
-      storage.get('coinbaseRefreshToken-' + network, cb)
-    }
-
-    root.removeCoinbaseRefreshToken = function (network, cb) {
-      storage.remove('coinbaseRefreshToken-' + network, cb)
-    }
-
-    root.setCoinbaseToken = function (network, token, cb) {
-      storage.set('coinbaseToken-' + network, token, cb)
-    }
-
-    root.getCoinbaseToken = function (network, cb) {
-      storage.get('coinbaseToken-' + network, cb)
-    }
-
-    root.removeCoinbaseToken = function (network, cb) {
-      storage.remove('coinbaseToken-' + network, cb)
-    }
-
     root.setAddressbook = function (addressbook, cb) {
       storage.set('addressbook', addressbook, cb)
     }
@@ -328,18 +257,6 @@ angular.module('canoeApp.services')
       storage.remove('txsHistory-' + walletId, cb)
     }
 
-    root.setCoinbaseTxs = function (network, ctx, cb) {
-      storage.set('coinbaseTxs-' + network, ctx, cb)
-    }
-
-    root.getCoinbaseTxs = function (network, cb) {
-      storage.get('coinbaseTxs-' + network, cb)
-    }
-
-    root.removeCoinbaseTxs = function (network, cb) {
-      storage.remove('coinbaseTxs-' + network, cb)
-    }
-
     root.setBalanceCache = function (addr, data, cb) {
       storage.set('balanceCache-' + addr, data, cb)
     }
@@ -350,171 +267,6 @@ angular.module('canoeApp.services')
 
     root.removeBalanceCache = function (cardId, cb) {
       storage.remove('balanceCache-' + cardId, cb)
-    }
-
-    // cards: [
-    //   eid: card id
-    //   id: card id
-    //   lastFourDigits: card number
-    //   token: card token
-    // ]
-    root.setBitpayDebitCards = function (network, email, cards, cb) {
-      root.getBitpayAccounts(network, function (err, allAccounts) {
-        if (err) return cb(err)
-
-        if (!allAccounts[email]) {
-          return cb('Cannot set cards for unknown account ' + email)
-        }
-
-        allAccounts[email].cards = cards
-        storage.set('bitpayAccounts-v2-' + network, allAccounts, cb)
-      })
-    }
-
-    // cb(err, cards)
-    // cards: [
-    //   eid: card id
-    //   id: card id
-    //   lastFourDigits: card number
-    //   token: card token
-    //   email: account email
-    // ]
-    root.getBitpayDebitCards = function (network, cb) {
-      root.getBitpayAccounts(network, function (err, allAccounts) {
-        if (err) return cb(err)
-
-        var allCards = []
-
-        lodash.each(allAccounts, function (account, email) {
-          if (account.cards) {
-            // Add account's email to each card
-            var cards = lodash.clone(account.cards)
-            lodash.each(cards, function (x) {
-              x.email = email
-            })
-
-            allCards = allCards.concat(cards)
-          }
-        })
-
-        return cb(null, allCards)
-      })
-    }
-
-    root.removeBitpayDebitCard = function (network, cardEid, cb) {
-      root.getBitpayAccounts(network, function (err, allAccounts) {
-        lodash.each(allAccounts, function (account) {
-          account.cards = lodash.reject(account.cards, {
-            'eid': cardEid
-          })
-        })
-
-        storage.set('bitpayAccounts-v2-' + network, allAccounts, cb)
-      })
-    }
-
-    // cb(err, accounts)
-    // accounts: {
-    //   email_1: {
-    //     token: account token
-    //     cards: {
-    //       <card-data>
-    //     }
-    //   }
-    //   ...
-    //   email_n: {
-    //    token: account token
-    //    cards: {
-    //       <card-data>
-    //     }
-    //   }
-    // }
-    //
-    root.getBitpayAccounts = function (network, cb) {
-      storage.get('bitpayAccounts-v2-' + network, function (err, allAccountsStr) {
-        if (err) return cb(err)
-
-        if (!allAccountsStr) { return cb(null, {}) }
-
-        var allAccounts = {}
-        try {
-          allAccounts = JSON.parse(allAccountsStr)
-        } catch (e) {
-          $log.error('Bad storage value for bitpayAccount-v2' + allAccountsStr)
-          return cb(null, {})
-        };
-
-        var anyMigration
-
-        lodash.each(allAccounts, function (account, email) {
-          // Migrate old `'bitpayApi-' + network` key, if exists
-          if (!account.token && account['bitpayApi-' + network].token) {
-            $log.info('Migrating all bitpayApi-network branch')
-            account.token = account['bitpayApi-' + network].token
-            account.cards = lodash.clone(account['bitpayApi-' + network].cards)
-            if (!account.cards) {
-              account.cards = lodash.clone(account['bitpayDebitCards-' + network])
-            }
-
-            delete account['bitpayDebitCards-' + network]
-            delete account['bitpayApi-' + network]
-            anyMigration = true
-          }
-        })
-
-        if (anyMigration) {
-          storage.set('bitpayAccounts-v2-' + network, allAccounts, function () {
-            return cb(err, allAccounts)
-          })
-        } else { return cb(err, allAccounts) }
-      })
-    }
-
-    // data: {
-    //   email: account email
-    //   token: account token
-    //   familyName: account family (last) name
-    //   givenName: account given (first) name
-    // }
-    root.setBitpayAccount = function (network, data, cb) {
-      if (!lodash.isObject(data) || !data.email || !data.token) { return cb('No account to set') }
-
-      root.getBitpayAccounts(network, function (err, allAccounts) {
-        if (err) return cb(err)
-
-        allAccounts = allAccounts || {}
-        var account = allAccounts[data.email] || {}
-        account.token = data.token
-        account.familyName = data.familyName
-        account.givenName = data.givenName
-
-        allAccounts[data.email] = account
-
-        $log.info('Storing BitPay accounts with new account:' + data.email)
-        storage.set('bitpayAccounts-v2-' + network, allAccounts, cb)
-      })
-    }
-
-    // account: {
-    //   email: account email
-    //   apiContext: the context needed for making future api calls
-    //   cards: an array of cards
-    // }
-    root.removeBitpayAccount = function (network, account, cb) {
-      if (lodash.isString(account)) {
-        account = JSON.parse(account)
-      }
-      account = account || {}
-      if (lodash.isEmpty(account)) return cb('No account to remove')
-      storage.get('bitpayAccounts-v2-' + network, function (err, bitpayAccounts) {
-        if (err) cb(err)
-        if (lodash.isString(bitpayAccounts)) {
-          bitpayAccounts = JSON.parse(bitpayAccounts)
-        }
-        bitpayAccounts = bitpayAccounts || {}
-        delete bitpayAccounts[account.email]
-        storage.set('bitpayAccounts-v2-' + network, JSON.stringify(bitpayAccounts), cb)
-      })
     }
 
     root.setAppIdentity = function (network, data, cb) {
@@ -544,18 +296,6 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.setAmazonGiftCards = function (network, gcs, cb) {
-      storage.set('amazonGiftCards-' + network, gcs, cb)
-    }
-
-    root.getAmazonGiftCards = function (network, cb) {
-      storage.get('amazonGiftCards-' + network, cb)
-    }
-
-    root.removeAmazonGiftCards = function (network, cb) {
-      storage.remove('amazonGiftCards-' + network, cb)
-    }
-
     root.setTxConfirmNotification = function (txid, val, cb) {
       storage.set('txConfirmNotif-' + txid, val, cb)
     }
@@ -566,18 +306,6 @@ angular.module('canoeApp.services')
 
     root.removeTxConfirmNotification = function (txid, cb) {
       storage.remove('txConfirmNotif-' + txid, cb)
-    }
-
-    root.setMercadoLibreGiftCards = function (network, gcs, cb) {
-      storage.set('mercadoLibreGiftCards-' + network, gcs, cb)
-    }
-
-    root.getMercadoLibreGiftCards = function (network, cb) {
-      storage.get('mercadoLibreGiftCards-' + network, cb)
-    }
-
-    root.removeMercadoLibreGiftCards = function (network, cb) {
-      storage.remove('MercadoLibreGiftCards-' + network, cb)
     }
 
     return root

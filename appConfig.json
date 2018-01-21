@@ -27,8 +27,5 @@
   "androidVersion": "391000",
   "_extraCSS": null,
   "_enabledExtensions": {
-    "coinbase": true,
-    "glidera": true,
-    "amazon": true
   }
 }

@@ -1,4 +1,5 @@
 'use strict'
+/* global screen cordova angular */
 
 var unsupported, isaosp
 
@@ -41,51 +42,51 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
   $logProvider.debugEnabled(true)
   $provide.decorator('$log', ['$delegate', 'platformInfo',
     function ($delegate, platformInfo) {
-        var historicLog = historicLogProvider.$get()
+      var historicLog = historicLogProvider.$get()
 
-        historicLog.getLevels().forEach(function (levelDesc) {
-          var level = levelDesc.level
-          if (platformInfo.isDevel && level == 'error') return
+      historicLog.getLevels().forEach(function (levelDesc) {
+        var level = levelDesc.level
+        if (platformInfo.isDevel && level === 'error') return
 
-          var orig = $delegate[level]
-          $delegate[level] = function () {
-            if (level == 'error') { console.log(arguments) }
+        var orig = $delegate[level]
+        $delegate[level] = function () {
+          if (level === 'error') { console.log(arguments) }
 
-            var args = Array.prototype.slice.call(arguments)
+          var args = Array.prototype.slice.call(arguments)
 
-            args = args.map(function (v) {
-              try {
-                if (typeof v === 'undefined') v = 'undefined'
-                if (!v) v = 'null'
-                if (typeof v === 'object') {
-                  if (v.message) { v = v.message } else { v = JSON.stringify(v) }
-                }
-                // Trim output in mobile
-                if (platformInfo.isCordova) {
-                  v = v.toString()
-                  if (v.length > 3000) {
-                    v = v.substr(0, 2997) + '...'
-                  }
-                }
-              } catch (e) {
-                console.log('Error at log decorator:', e)
-                v = 'undefined'
-              }
-              return v
-            })
-
+          args = args.map(function (v) {
             try {
-              if (platformInfo.isCordova) { console.log(args.join(' ')) }
-
-              historicLog.add(level, args.join(' '))
-              orig.apply(null, args)
+              if (typeof v === 'undefined') v = 'undefined'
+              if (!v) v = 'null'
+              if (typeof v === 'object') {
+                if (v.message) { v = v.message } else { v = JSON.stringify(v) }
+              }
+              // Trim output in mobile
+              if (platformInfo.isCordova) {
+                v = v.toString()
+                if (v.length > 3000) {
+                  v = v.substr(0, 2997) + '...'
+                }
+              }
             } catch (e) {
-              console.log('ERROR (at log decorator):', e, args[0])
+              console.log('Error at log decorator:', e)
+              v = 'undefined'
             }
+            return v
+          })
+
+          try {
+            if (platformInfo.isCordova) { console.log(args.join(' ')) }
+
+            historicLog.add(level, args.join(' '))
+            orig.apply(null, args)
+          } catch (e) {
+            console.log('ERROR (at log decorator):', e, args[0])
           }
-        })
-        return $delegate
-      }
+        }
+      })
+      return $delegate
+    }
   ])
 
     // whitelist 'chrome-extension:' for chromeApp to work with image URLs processed by Angular
@@ -502,7 +503,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-/*      .state('tabs.preferences.information', {
+  /*   .state('tabs.preferences.information', {
         url: '/information',
         views: {
           'tab-settings@tabs': {
@@ -510,7 +511,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
             templateUrl: 'views/preferencesInformation.html'
           }
         }
-      })*/
+      }) */
       .state('tabs.preferences.export', {
         url: '/export',
         views: {
@@ -876,311 +877,8 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-
-      /*
-       *
-       * Buy or Sell Bitcoin
-       *
-       */
-
-      .state('tabs.buyandsell', {
-        url: '/buyandsell',
-        views: {
-          'tab-home': {
-            controller: 'buyandsellController',
-            templateUrl: 'views/buyandsell.html'
-          }
-        }
-      })
-
-      /*
-       *
-       * Glidera
-       *
-       *
-       */
-
-      .state('tabs.buyandsell.glidera', {
-        url: '/glidera/:code',
-        views: {
-          'tab-home@tabs': {
-            controller: 'glideraController',
-            controllerAs: 'glidera',
-            templateUrl: 'views/glidera.html'
-          }
-        },
-        params: {
-          coin: 'btc'
-        }
-      })
-      .state('tabs.buyandsell.glidera.amount', {
-        url: '/amount/:nextStep/:currency',
-        views: {
-          'tab-home@tabs': {
-            controller: 'amountController',
-            templateUrl: 'views/amount.html'
-          }
-        }
-      })
-      .state('tabs.buyandsell.glidera.buy', {
-        url: '/buy/:amount/:currency',
-        views: {
-          'tab-home@tabs': {
-            controller: 'buyGlideraController',
-            templateUrl: 'views/buyGlidera.html'
-          }
-        }
-      })
-      .state('tabs.buyandsell.glidera.sell', {
-        url: '/sell/:amount/:currency',
-        views: {
-          'tab-home@tabs': {
-            controller: 'sellGlideraController',
-            templateUrl: 'views/sellGlidera.html'
-          }
-        }
-      })
-      .state('tabs.preferences.glidera', {
-        url: '/glidera',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesGlideraController',
-            templateUrl: 'views/preferencesGlidera.html'
-          }
-        }
-      })
-
-      /*
-       *
-       * Coinbase
-       *
-       */
-
-      .state('tabs.buyandsell.coinbase', {
-        url: '/coinbase/:code',
-        views: {
-          'tab-home@tabs': {
-            controller: 'coinbaseController',
-            controllerAs: 'coinbase',
-            templateUrl: 'views/coinbase.html'
-          }
-        },
-        params: {
-          coin: 'btc'
-        }
-      })
-      .state('tabs.preferences.coinbase', {
-        url: '/coinbase',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesCoinbaseController',
-            templateUrl: 'views/preferencesCoinbase.html'
-          }
-        }
-      })
-      .state('tabs.buyandsell.coinbase.amount', {
-        url: '/amount/:nextStep/:currency',
-        views: {
-          'tab-home@tabs': {
-            controller: 'amountController',
-            templateUrl: 'views/amount.html'
-          }
-        }
-      })
-      .state('tabs.buyandsell.coinbase.buy', {
-        url: '/buy/:amount/:currency',
-        views: {
-          'tab-home@tabs': {
-            controller: 'buyCoinbaseController',
-            templateUrl: 'views/buyCoinbase.html'
-          }
-        }
-      })
-      .state('tabs.buyandsell.coinbase.sell', {
-        url: '/sell/:amount/:currency',
-        views: {
-          'tab-home@tabs': {
-            controller: 'sellCoinbaseController',
-            templateUrl: 'views/sellCoinbase.html'
-          }
-        }
-      })
-
-      /*
-       *
-       * Gift Cards
-       *
-       */
-
-      .state('tabs.giftcards', {
-        url: '/giftcards',
-        abstract: true
-      })
-
-      /*
-       *
-       * Mercado Libre Gift Card
-       *
-       */
-
-      .state('tabs.giftcards.mercadoLibre', {
-        url: '/mercadoLibre',
-        views: {
-          'tab-home@tabs': {
-            controller: 'mercadoLibreController',
-            templateUrl: 'views/mercadoLibre.html'
-          }
-        }
-      })
-      .state('tabs.giftcards.mercadoLibre.cards', {
-        url: '/cards',
-        views: {
-          'tab-home@tabs': {
-            controller: 'mercadoLibreCardsController',
-            templateUrl: 'views/mercadoLibreCards.html'
-          }
-        },
-        params: {
-          invoiceId: null
-        }
-      })
-      .state('tabs.giftcards.mercadoLibre.amount', {
-        url: '/amount',
-        views: {
-          'tab-home@tabs': {
-            controller: 'amountController',
-            templateUrl: 'views/amount.html'
-          }
-        },
-        params: {
-          nextStep: 'tabs.giftcards.mercadoLibre.buy',
-          currency: 'BRL',
-          coin: 'btc',
-          fixedUnit: 1
-        }
-      })
-      .state('tabs.giftcards.mercadoLibre.buy', {
-        url: '/buy/:amount/:currency',
-        views: {
-          'tab-home@tabs': {
-            controller: 'buyMercadoLibreController',
-            templateUrl: 'views/buyMercadoLibre.html'
-          }
-        }
-      })
-
-      /*
-       *
-       * Amazon.com Gift Card
-       *
-       */
-
-      .state('tabs.giftcards.amazon', {
-        url: '/amazon',
-        views: {
-          'tab-home@tabs': {
-            controller: 'amazonController',
-            templateUrl: 'views/amazon.html'
-          }
-        }
-      })
-      .state('tabs.giftcards.amazon.cards', {
-        url: '/cards',
-        views: {
-          'tab-home@tabs': {
-            controller: 'amazonCardsController',
-            templateUrl: 'views/amazonCards.html'
-          }
-        },
-        params: {
-          invoiceId: null
-        }
-      })
-      .state('tabs.giftcards.amazon.amount', {
-        url: '/amount',
-        views: {
-          'tab-home@tabs': {
-            controller: 'amountController',
-            templateUrl: 'views/amount.html'
-          }
-        },
-        params: {
-          nextStep: 'tabs.giftcards.amazon.buy',
-          currency: 'USD',
-          coin: 'btc',
-          fixedUnit: true
-        }
-      })
-      .state('tabs.giftcards.amazon.buy', {
-        url: '/buy/:amount/:currency',
-        views: {
-          'tab-home@tabs': {
-            controller: 'buyAmazonController',
-            templateUrl: 'views/buyAmazon.html'
-          }
-        }
-      })
-
-      /*
-       *
-       * BitPay Card
-       *
-       */
-
-      .state('tabs.bitpayCardIntro', {
-        url: '/bitpay-card-intro/:secret/:email/:otp',
-        views: {
-          'tab-home@tabs': {
-            controller: 'bitpayCardIntroController',
-            templateUrl: 'views/bitpayCardIntro.html'
-          }
-        }
-      })
-      .state('tabs.bitpayCard', {
-        url: '/bitpay-card',
-        views: {
-          'tab-home@tabs': {
-            controller: 'bitpayCardController',
-            controllerAs: 'bitpayCard',
-            templateUrl: 'views/bitpayCard.html'
-          }
-        },
-        params: {
-          id: null,
-          currency: 'USD',
-          coin: 'btc',
-          useSendMax: null
-        }
-      })
-      .state('tabs.bitpayCard.amount', {
-        url: '/amount/:nextStep',
-        views: {
-          'tab-home@tabs': {
-            controller: 'amountController',
-            templateUrl: 'views/amount.html'
-          }
-        }
-      })
-      .state('tabs.bitpayCard.topup', {
-        url: '/topup/:amount',
-        views: {
-          'tab-home@tabs': {
-            controller: 'topUpController',
-            templateUrl: 'views/topup.html'
-          }
-        }
-      })
-      .state('tabs.preferences.bitpayServices', {
-        url: '/bitpay-services',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesBitpayServicesController',
-            templateUrl: 'views/preferencesBitpayServices.html'
-          }
-        }
-      })
 })
-  .run(function ($rootScope, $state, $location, $log, $timeout, startupService, ionicToast, fingerprintService, $ionicHistory, $ionicPlatform, $window, appConfigService, lodash, platformInfo, profileService, uxLanguage, gettextCatalog, openURLService, storageService, scannerService, configService, emailService, /* plugins START HERE => */ coinbaseService, glideraService, amazonService, bitpayCardService, applicationService, mercadoLibreService) {
+  .run(function ($rootScope, $state, $location, $log, $timeout, startupService, ionicToast, fingerprintService, $ionicHistory, $ionicPlatform, $window, appConfigService, lodash, platformInfo, profileService, uxLanguage, gettextCatalog, openURLService, storageService, scannerService, configService, emailService, /* plugins START HERE => */ applicationService) {
     uxLanguage.init()
 
     $ionicPlatform.ready(function () {
@@ -1197,29 +895,29 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
 
       $ionicPlatform.registerBackButtonAction(function (e) {
         // from root tabs view
-        var matchHome = $ionicHistory.currentStateName() == 'tabs.home'
-        var matchReceive = $ionicHistory.currentStateName() == 'tabs.receive'
-        var matchScan = $ionicHistory.currentStateName() == 'tabs.scan'
-        var matchSend = $ionicHistory.currentStateName() == 'tabs.send'
-        var matchSettings = $ionicHistory.currentStateName() == 'tabs.settings'
+        var matchHome = $ionicHistory.currentStateName() === 'tabs.home'
+        var matchReceive = $ionicHistory.currentStateName() === 'tabs.receive'
+        var matchScan = $ionicHistory.currentStateName() === 'tabs.scan'
+        var matchSend = $ionicHistory.currentStateName() === 'tabs.send'
+        var matchSettings = $ionicHistory.currentStateName() === 'tabs.settings'
 
         var fromTabs = matchHome | matchReceive | matchScan | matchSend | matchSettings
 
         // onboarding with no back views
-        var matchWelcome = $ionicHistory.currentStateName() == 'onboarding.welcome'
-        var matchCollectEmail = $ionicHistory.currentStateName() == 'onboarding.collectEmail'
-        var matchBackupRequest = $ionicHistory.currentStateName() == 'onboarding.backupRequest'
-        var matchCreatePassword = $ionicHistory.currentStateName() == 'onboarding.createPassword'
-        var backedUp = $ionicHistory.backView().stateName == 'onboarding.backup'
-        var noBackView = $ionicHistory.backView().stateName == 'starting'
-        var matchDisclaimer = !!($ionicHistory.currentStateName() == 'onboarding.disclaimer' && (backedUp || noBackView))
+        var matchWelcome = $ionicHistory.currentStateName() === 'onboarding.welcome'
+        var matchCollectEmail = $ionicHistory.currentStateName() === 'onboarding.collectEmail'
+        var matchBackupRequest = $ionicHistory.currentStateName() === 'onboarding.backupRequest'
+        var matchCreatePassword = $ionicHistory.currentStateName() =)= 'onboarding.createPassword'
+        var backedUp = $ionicHistory.backView().stateName === 'onboarding.backup'
+        var noBackView = $ionicHistory.backView().stateName === 'starting'
+        var matchDisclaimer = !!($ionicHistory.currentStateName() === 'onboarding.disclaimer' && (backedUp || noBackView))
 
         var fromOnboarding = matchCollectEmail | matchBackupRequest | matchCreatePassword | matchWelcome | matchDisclaimer
 
         // views with disable backbutton
-        var matchComplete = $ionicHistory.currentStateName() == 'tabs.rate.complete'
-        var matchLockedView = $ionicHistory.currentStateName() == 'lockedView'
-        var matchPin = $ionicHistory.currentStateName() == 'pin'
+        var matchComplete = $ionicHistory.currentStateName() === 'tabs.rate.complete'
+        var matchLockedView = $ionicHistory.currentStateName() === 'lockedView'
+        var matchPin = $ionicHistory.currentStateName() === 'pin'
 
         if ($ionicHistory.backView() && !fromTabs && !fromOnboarding && !matchComplete && !matchPin && !matchLockedView) {
           $ionicHistory.goBack()
@@ -1280,7 +978,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           // Reload tab-home if necessary (from root path: starting)
           $state.go('starting', {}, {
             'reload': true,
-            'notify': $state.current.name != 'starting'
+            'notify': $state.current.name !== 'starting'
           }).then(function () {
             $ionicHistory.nextViewOptions({
               disableAnimate: true,
