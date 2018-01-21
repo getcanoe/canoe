@@ -17,13 +17,7 @@ angular
     emailService,
     passwordCheck,
   ) {
-    $scope.submitForm = function() {
-      if (
-        $scope.signUp.$valid &&
-        $scope.signUp.password.$viewValue ==
-          $scope.signUp.confirmPassword.$viewValue
-      ) {
-        alert('Its a match!');
-      }
+    $scope.submitForm = function(password) {
+        alert(password);
     };
   });
