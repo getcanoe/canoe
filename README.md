@@ -1,16 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/gokr/canoe.svg)](http://travis-ci.org/gokr/canoe)
 
-Canoe is a cross platform RaiBlocks Wallet application. It's based upon the [Copay](https://copay.io) Bitcoin wallet source code released under the MIT license. For binary downloads, when available, see [getcanoe.io](https://getcanoe.io).
-
-## Main Features
-
-- Device-based security: all private keys are stored locally, not in the cloud
-- Synchronous access across all major mobile and desktop platforms
-- Support for over 150 currency pricing options and unit denomination in BTC or bits
-- Email notifications for payments and transfers
-- Push notifications (only available for ios and android versions)
-- Customizable wallet naming and background colors
-- Multiple languages supported
+Canoe is a cross platform RaiBlocks Wallet application. It's based upon the [Copay](https://copay.io) Bitcoin wallet source code released under the MIT license. For binary downloads, see [getcanoe.io](https://getcanoe.io).
 
 ## Testing in a Browser
 
@@ -175,11 +165,10 @@ make
 
 On success, the Chrome extension will be located at: `browser-extensions/chrome/canoe-chrome-extension`.  To install it go to `chrome://extensions/` in your browser and ensure you have the 'developer mode' option enabled in the settings.  Then click on "Load unpacked chrome extension" and choose the directory mentioned above.
 
-## About Canoe
-...details to come...
-
 ## Translations
-Canoe uses standard gettext PO files for translations. We should as soon as Canoe is fully functional start using [Crowdin](https://crowdin.com) as the front-end tool for translators, just like Copay does, more on that follows later. In the meantime, credits to the partial translations Canoe has inherited from Copay:
+Canoe uses standard gettext PO files for translations and we cooperate on the translations on [POEditor](https://poeditor.com/join/project/cnSZa85DRN) where anyone can easily sign up, add a new language translation or help out with existing languages. 
+
+Credits to the partial translations Canoe has inherited from Copay:
 
 **Translation Credits:**
 - Japanese: @dabura667
@@ -195,7 +184,7 @@ Canoe uses standard gettext PO files for translations. We should as soon as Cano
 Canoe uses the `MAJOR.MINOR.PATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
 
 ## Contributing to this project
-Anyone and everyone is welcome to contribute.
+Anyone and everyone is welcome to contribute, just join us on [discord](https://discord.gg/ecVcJM3) and ask away!
 
 ## License
 Canoe is released under the MIT License.  Please refer to the [LICENSE](https://github.com/gokr/canoe/blob/master/LICENSE) file that accompanies this project for more information including complete terms and conditions.
