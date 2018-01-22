@@ -26,7 +26,6 @@ angular
           function (err, wallet) {
             if (err) {
               $log.warn(err)
-
               return $timeout(function () {
                 $log.warn(
                   'Retrying to create default wallet.....:' + ++retryCount
@@ -48,18 +47,9 @@ angular
               }, 2000)
             }
             ongoingProcess.set('creatingWallet', false)
-
-            // We don't want to collect emails
-            // $state.go('onboarding.collectEmail', {
             $state.go('onboarding.backupRequest', {
               walletId: wallet.id
             })
-
-            /*
-          $state.go('onboarding.backupRequest', {
-            walletId: walletId
-          });
-            */
           }
         )
       }, 300)
