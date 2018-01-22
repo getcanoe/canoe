@@ -503,15 +503,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-  /*   .state('tabs.preferences.information', {
-        url: '/information',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesInformation',
-            templateUrl: 'views/preferencesInformation.html'
-          }
-        }
-      }) */
       .state('tabs.preferences.export', {
         url: '/export',
         views: {
