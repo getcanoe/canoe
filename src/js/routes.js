@@ -327,15 +327,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.add.create-wallet', {
-        url: '/create-wallet',
-        views: {
-          'tab-home@tabs': {
-            templateUrl: 'views/tab-create-wallet.html',
-            controller: 'createController'
-          }
-        }
-      })
 
       /*
        *
@@ -545,15 +536,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           'tab-settings@tabs': {
             controller: 'preferencesDeleteWalletController',
             templateUrl: 'views/preferencesDeleteWallet.html'
-          }
-        }
-      })
-      .state('tabs.preferences.preferencesPrivateKey', {
-        url: '/preferencesPrivateKey',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesPrivateKeyController',
-            templateUrl: 'views/preferencesPrivateKey.html'
           }
         }
       })
