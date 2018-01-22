@@ -9,7 +9,7 @@
     cursor: pointer;
     -webkit-appearance: none;
   }
-  color: $v-text-secondary-color;
+  color: $v-light-color;
   height: 100%;
   transition: transform .25s ease;
   &.shrink{
@@ -68,7 +68,7 @@
   .item {
     background: transparent;
     border: none;
-    color: $v-text-primary-color;
+    color: $v-light-color;
     text-align: left;
     .checkbox input:before,
     .checkbox .checkbox-icon:before{
