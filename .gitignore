@@ -54,7 +54,6 @@ bower_components
 .lock-wscript
 
 # OSX
-
 .DS_Store
 .AppleDouble
 .LSOverride
