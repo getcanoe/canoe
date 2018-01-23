@@ -1,7 +1,9 @@
 {
   "name": "Canoe",
   "app_id": "se.krampe.canoe",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic1",
   "watchPatterns": [
     "scss/**/*",
