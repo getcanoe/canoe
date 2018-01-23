@@ -41,7 +41,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
           }
           if (newRelease) {
             $scope.newRelease = true
-            $scope.updateText = gettextCatalog.getString('There is a new version of {{appName}} available', {
+            $scope.updateText = gettextCatalog.getString('There is a new version of Canoe available', {
               appName: $scope.name
             })
           }
