@@ -11,10 +11,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: www/views/modals/paypro.html:34
-msgid "(Trusted)"
-msgstr "(Pålitlig)"
-
 #: www/views/includes/txp.html:23 www/views/includes/walletHistory.html:64
 msgid "(possible double spend)"
 msgstr "(möjlig dubbel spendering)"
@@ -36,13 +32,19 @@ msgstr ""
 
 #: www/views/feedback/rateApp.html:7
 msgid ""
-"5-star ratings help us get {{appName}} into more hands, and more users means "
-"more resources can be committed to the app!"
+"5-star ratings help us get Canoe into more hands, and more users means more "
+"resources can be committed to the app!"
 msgstr ""
 
 #: src/js/controllers/feedback/send.js:25 www/views/feedback/complete.html:21
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "En medlem i teamet kommer ta del av din feedback så snart som möjligt."
+
+#: www/views/preferencesSecurity.html:12
+msgid ""
+"A wallet password is used to encrypt your RaiBlocks wallet when saving it on "
+"your device."
+msgstr ""
 
 #: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
@@ -53,26 +55,13 @@ msgstr "Om"
 msgid "Accepted"
 msgstr "Godkänt"
 
-#: www/views/preferencesInformation.html:25
-msgid "Account"
-msgstr "Konto"
-
-#: www/views/preferencesInformation.html:18
-msgid "Account Id"
-msgstr "Kontoid"
-
 #: www/views/preferencesAdvanced.html:13
-#: www/views/preferencesInformation.html:3
 msgid "Account Information"
 msgstr "Kontoinformation"
 
 #: www/views/preferencesAlias.html:4
 msgid "Account Name"
 msgstr "Kontonamn"
-
-#: www/views/preferencesInformation.html:11
-msgid "Account Name (at creation)"
-msgstr ""
 
 #: www/views/preferences.html:4
 msgid "Account Settings"
@@ -94,17 +83,9 @@ msgstr "Lägg till kontakt"
 msgid "Add Memo"
 msgstr "Lägg till memo"
 
-#: www/views/tab-create-wallet.html:36
-msgid "Add a password"
-msgstr "Lägg till ett lösenord"
-
 #: www/views/add.html:3
 msgid "Add account"
 msgstr "Lägg till konto"
-
-#: www/views/tab-create-wallet.html:39
-msgid "Add an optional password to secure access to the wallet"
-msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:41
 msgid "Add as a contact"
@@ -114,12 +95,7 @@ msgstr "Lägg till som kontakt"
 msgid "Add description"
 msgstr "Lägg till beskrivning"
 
-#: www/views/topup.html:6
-msgid "Add funds"
-msgstr ""
-
 #: www/views/addressbook.view.html:26 www/views/customAmount.html:28
-#: www/views/modals/paypro.html:24
 msgid "Address"
 msgstr "Adress"
 
@@ -226,6 +202,10 @@ msgstr ""
 msgid "Are you sure you want to skip it?"
 msgstr ""
 
+#: www/views/onboarding/createPassword.html:14
+msgid "At least 8 Characters. Make it good!"
+msgstr ""
+
 #: www/views/includes/walletInfo.html:10
 msgid "Auditable"
 msgstr ""
@@ -236,10 +216,6 @@ msgstr ""
 
 #: www/views/includes/available-balance.html:3
 msgid "Available Balance"
-msgstr ""
-
-#: www/views/preferencesFee.html:15
-msgid "Average confirmation time"
 msgstr ""
 
 #: www/views/tab-create-account.html:111
@@ -268,10 +244,6 @@ msgstr ""
 msgid "Backup your wallet before using this function"
 msgstr ""
 
-#: www/views/preferencesInformation.html:41
-msgid "Balance By Address"
-msgstr ""
-
 #: www/views/includes/confirmBackupPopup.html:7
 msgid ""
 "Be sure to store your seed in a secure place. If this app is deleted, or "
@@ -282,16 +254,8 @@ msgstr ""
 msgid "Bitcoin Address"
 msgstr ""
 
-#: www/views/includes/walletSelector.html:42 www/views/tab-settings.html:110
+#: www/views/tab-settings.html:110
 msgid "Bitcoin Cash Wallets"
-msgstr ""
-
-#: www/views/preferencesFee.html:4
-msgid "Bitcoin Network Fee Policy"
-msgstr ""
-
-#: www/views/preferencesFee.html:11
-msgid "Bitcoin transactions include a fee collected by miners on the network."
 msgstr ""
 
 #: www/views/modals/txp-details.html:36
@@ -329,7 +293,8 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/js/controllers/onboarding/tour.js:55
+#: src/js/controllers/onboarding/createPassword.js:36
+#: src/js/controllers/onboarding/tour.js:56
 msgid "Cannot Create Wallet"
 msgstr ""
 
@@ -345,8 +310,12 @@ msgstr ""
 msgid "Canoeer data mismatch"
 msgstr ""
 
-#: www/views/modals/paypro.html:30
-msgid "Certified by"
+#: www/views/changePassword.html:3 www/views/preferencesSecurity.html:15
+msgid "Change Password"
+msgstr ""
+
+#: www/views/changePassword.html:39
+msgid "Change password"
 msgstr ""
 
 #: www/views/preferencesExternal.html:19
@@ -357,16 +326,17 @@ msgstr ""
 msgid "Choose a backup file from your computer"
 msgstr ""
 
+#: www/views/onboarding/createPassword.html:6
+msgid ""
+"Choose a strong password. Your RaiBlocks are on the line; you know the drill!"
+msgstr ""
+
 #: www/views/modals/wallets.html:9
 msgid "Choose your destination wallet"
 msgstr ""
 
 #: www/views/modals/wallets.html:10
 msgid "Choose your source wallet"
-msgstr ""
-
-#: www/views/preferencesHistory.html:24
-msgid "Clear cache"
 msgstr ""
 
 #: src/js/controllers/modals/txpDetails.js:47
@@ -377,9 +347,9 @@ msgstr ""
 msgid "Click to send"
 msgstr ""
 
-#: www/views/customAmount.html:4 www/views/modals/paypro.html:4
-#: www/views/modals/pin.html:3 www/views/modals/search.html:3
-#: www/views/modals/wallet-balance.html:3 www/views/modals/wallets.html:5
+#: www/views/customAmount.html:4 www/views/modals/pin.html:3
+#: www/views/modals/search.html:3 www/views/modals/wallet-balance.html:3
+#: www/views/modals/wallets.html:5
 msgid "Close"
 msgstr ""
 
@@ -402,6 +372,10 @@ msgstr ""
 
 #: www/views/modals/terms.html:26 www/views/onboarding/disclaimer.html:44
 msgid "Confirm &amp; Finish"
+msgstr ""
+
+#: www/views/changePassword.html:30 www/views/onboarding/createPassword.html:22
+msgid "Confirm New Password"
 msgstr ""
 
 #: www/views/modals/pin.html:10
@@ -497,20 +471,12 @@ msgstr ""
 msgid "Create Account"
 msgstr ""
 
-#: www/views/onboarding/tour.html:50
-msgid "Create RaiBlocks Wallet"
-msgstr ""
-
-#: www/views/tab-create-wallet.html:3
-msgid "Create Wallet"
+#: www/views/onboarding/createPassword.html:54
+msgid "Create Password"
 msgstr ""
 
 #: www/views/tab-create-account.html:129
 msgid "Create new account"
-msgstr ""
-
-#: www/views/tab-create-wallet.html:77
-msgid "Create wallet"
 msgstr ""
 
 #: www/views/modals/txp-details.html:81 www/views/tx-details.html:60
@@ -527,10 +493,6 @@ msgstr ""
 
 #: src/js/services/onGoingProcess.js:12
 msgid "Creating transaction"
-msgstr ""
-
-#: www/views/preferencesFee.html:20
-msgid "Current fee rate for this policy"
 msgstr ""
 
 #: www/views/customAmount.html:9
@@ -567,10 +529,6 @@ msgstr ""
 
 #: src/js/services/onGoingProcess.js:21
 msgid "Deleting payment proposal"
-msgstr ""
-
-#: www/views/topup.html:45
-msgid "Details"
 msgstr ""
 
 #: src/js/controllers/prefrencesSecurity.js:8
@@ -623,6 +581,10 @@ msgstr ""
 
 #: src/js/services/bwcError.js:122
 msgid "Empty addresses limit reached. New addresses cannot be generated."
+msgstr ""
+
+#: www/views/preferencesSecurity.html:42
+msgid "Enable Petty RaiBlocks"
 msgstr ""
 
 #: www/views/tab-scan.html:19
@@ -712,12 +674,8 @@ msgstr ""
 msgid "Expired"
 msgstr ""
 
-#: www/views/modals/paypro.html:54 www/views/modals/txp-details.html:125
+#: www/views/modals/txp-details.html:125
 msgid "Expires"
-msgstr ""
-
-#: www/views/preferencesHistory.html:11 www/views/preferencesHistory.html:14
-msgid "Export to file"
 msgstr ""
 
 #: www/views/export.html:3
@@ -726,11 +684,6 @@ msgstr ""
 
 #: src/js/services/walletService.js:88 www/views/tab-export-qrCode.html:9
 msgid "Exporting via QR not supported for this wallet"
-msgstr ""
-
-#: www/views/preferencesInformation.html:35
-#: www/views/preferencesPrivateKey.html:6
-msgid "Extended Private Key"
 msgstr ""
 
 #: src/js/services/onGoingProcess.js:16
@@ -743,7 +696,7 @@ msgstr ""
 msgid "Failed to export"
 msgstr ""
 
-#: www/views/tab-create-account.html:14 www/views/tab-create-wallet.html:14
+#: www/views/tab-create-account.html:14
 msgid "Family vacation funds"
 msgstr ""
 
@@ -777,7 +730,7 @@ msgid "Finish"
 msgstr ""
 
 #: www/views/confirm.html:52 www/views/modals/txp-details.html:74
-#: www/views/topup.html:34 www/views/tx-details.html:52
+#: www/views/tx-details.html:52
 msgid "From"
 msgstr ""
 
@@ -795,16 +748,8 @@ msgstr ""
 msgid "Funds found:"
 msgstr ""
 
-#: www/views/topup.html:49
-msgid "Funds to be added"
-msgstr ""
-
 #: www/views/paperWallet.html:51
 msgid "Funds transferred"
-msgstr ""
-
-#: www/views/topup.html:103
-msgid "Funds were added to debit card"
 msgstr ""
 
 #: www/views/paperWallet.html:22
@@ -866,7 +811,7 @@ msgstr ""
 msgid "Hide Balance"
 msgstr ""
 
-#: www/views/tab-create-wallet.html:25 www/views/tab-export-file.html:25
+#: www/views/tab-export-file.html:25
 msgid "Hide advanced options"
 msgstr ""
 
@@ -881,7 +826,7 @@ msgid "How could we improve your experience?"
 msgstr ""
 
 #: www/views/feedback/rateCard.html:3
-msgid "How do you like {{appName}}?"
+msgid "How do you like Canoe?"
 msgstr ""
 
 #: src/js/controllers/feedback/rateCard.js:29
@@ -896,10 +841,6 @@ msgstr ""
 
 #: www/views/modals/terms.html:22
 msgid "I have read, understood, and agree with the Terms of use."
-msgstr ""
-
-#: www/views/tab-create-wallet.html:69
-msgid "I have written it down"
 msgstr ""
 
 #: src/js/controllers/feedback/rateCard.js:35
@@ -967,7 +908,7 @@ msgstr ""
 msgid "Import seed"
 msgstr ""
 
-#: www/views/add.html:30 www/views/tab-settings.html:21
+#: www/views/add.html:21 www/views/tab-settings.html:21
 msgid "Import wallet"
 msgstr ""
 
@@ -980,8 +921,6 @@ msgid "In order to verify your wallet backup, please type your password."
 msgstr ""
 
 #: www/views/includes/walletListSettings.html:9
-#: www/views/includes/walletSelector.html:25
-#: www/views/includes/walletSelector.html:56
 msgid "Incomplete"
 msgstr ""
 
@@ -996,6 +935,14 @@ msgstr ""
 
 #: src/js/services/bwcError.js:113
 msgid "Incorrect network address"
+msgstr ""
+
+#: www/views/changePassword.html:24
+msgid "Insert your new password. Make it good!"
+msgstr ""
+
+#: www/views/changePassword.html:16
+msgid "Insert your old password"
 msgstr ""
 
 #: src/js/controllers/confirm.js:86 src/js/services/bwcError.js:44
@@ -1045,8 +992,8 @@ msgid ""
 msgstr ""
 
 #: www/views/onboarding/welcome.html:5
-msgid "Join the future of crypto money,<br>get started with RaiBlocks."
-msgstr "Gå med i framtidens kryptovaluta,<br>kom igång med RaiBlocks."
+msgid "Join the future of money,<br>get started with RaiBlocks."
+msgstr ""
 
 #: www/views/onboarding/tour.html:22
 msgid "Just scan the code to pay."
@@ -1062,6 +1009,10 @@ msgstr ""
 
 #: www/views/tab-home.html:24 www/views/tx-details.html:94
 msgid "Learn more"
+msgstr ""
+
+#: www/views/onboarding/tour.html:50
+msgid "Let's Start"
 msgstr ""
 
 #: www/views/addresses.html:45 www/views/allAddresses.html:14
@@ -1114,25 +1065,17 @@ msgstr ""
 msgid "Matches:"
 msgstr ""
 
-#: www/views/includes/canoeers.html:4
-msgid "Me"
-msgstr ""
-
 #: src/js/controllers/feedback/rateCard.js:32
 msgid "Meh - it's alright"
 msgstr ""
 
-#: src/js/controllers/tx-details.js:165 www/views/modals/paypro.html:48
-#: www/views/modals/txp-details.html:93 www/views/tx-details.html:72
+#: src/js/controllers/tx-details.js:165 www/views/modals/txp-details.html:93
+#: www/views/tx-details.html:72
 msgid "Memo"
 msgstr ""
 
 #: www/views/modals/txp-details.html:131
 msgid "Merchant Message"
-msgstr ""
-
-#: www/views/topup.html:63
-msgid "Miner Fee"
 msgstr ""
 
 #: src/js/services/bwcError.js:134
@@ -1164,16 +1107,16 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: www/views/topup.html:56
-msgid "Network Cost"
-msgstr ""
-
 #: src/js/services/bwcError.js:47
 msgid "Network error"
 msgstr ""
 
 #: www/views/onboarding/tour.html:36
 msgid "Never incur fees ever again!"
+msgstr ""
+
+#: www/views/changePassword.html:22 www/views/onboarding/createPassword.html:12
+msgid "New Password"
 msgstr ""
 
 #: www/views/includes/walletActivity.html:43
@@ -1311,8 +1254,20 @@ msgstr ""
 msgid "Oh no!"
 msgstr ""
 
+#: www/views/changePassword.html:14
+msgid "Old Password"
+msgstr ""
+
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts."
+msgstr ""
+
+#: www/views/changePassword.html:32
+msgid "One more time"
+msgstr ""
+
+#: www/views/onboarding/createPassword.html:29
+msgid "One more time."
 msgstr ""
 
 #: src/js/controllers/tab-settings.js:38 src/js/controllers/tx-details.js:55
@@ -1352,7 +1307,7 @@ msgid "Open website"
 msgstr ""
 
 #: www/views/tab-create-account.html:67 www/views/tab-create-account.html:75
-#: www/views/tab-create-wallet.html:45 www/views/tab-import-file.html:18
+#: www/views/tab-import-file.html:18
 msgid "Password"
 msgstr ""
 
@@ -1360,12 +1315,24 @@ msgstr ""
 msgid "Password required. Make sure to enter your password in advanced options"
 msgstr ""
 
-#: www/views/tab-import-file.html:13
-msgid "Paste the backup plain text"
+#: www/views/onboarding/createPassword.html:39
+msgid "Password too short"
 msgstr ""
 
-#: www/views/modals/paypro.html:18
-msgid "Pay To"
+#: www/views/onboarding/createPassword.html:46
+msgid "Passwords don't match"
+msgstr ""
+
+#: www/views/onboarding/createPassword.html:35
+msgid "Passwords match"
+msgstr ""
+
+#: www/views/onboarding/createPassword.html:5
+msgid "Passwords. They are important!"
+msgstr ""
+
+#: www/views/tab-import-file.html:13
+msgid "Paste the backup plain text"
 msgstr ""
 
 #: src/js/controllers/modals/txpDetails.js:49
@@ -1421,16 +1388,16 @@ msgstr ""
 msgid "Payment details"
 msgstr ""
 
-#: www/views/modals/paypro.html:6
-msgid "Payment request"
-msgstr ""
-
 #: www/views/proposals.html:4
 msgid "Pending Proposals"
 msgstr ""
 
 #: www/views/preferencesDeleteWallet.html:13
 msgid "Permanently delete this wallet."
+msgstr ""
+
+#: www/views/preferencesSecurity.html:38 www/views/preferencesSecurity.html:45
+msgid "Petty RaiBlocks"
 msgstr ""
 
 #: www/views/backup.html:23
@@ -1476,7 +1443,7 @@ msgstr ""
 msgid "Preparing backup..."
 msgstr ""
 
-#: src/js/routes.js:911
+#: src/js/routes.js:885
 msgid "Press again to exit"
 msgstr ""
 
@@ -1519,8 +1486,8 @@ msgstr ""
 
 #: www/views/preferencesNotifications.html:17
 msgid ""
-"Push notifications for {{appName}} are currently disabled. Enable them in "
-"the Settings app."
+"Push notifications for Canoe are currently disabled. Enable them in the "
+"Settings app."
 msgstr ""
 
 #: www/views/export.html:17
@@ -1533,10 +1500,6 @@ msgstr ""
 
 #: www/views/addressbook.add.html:38
 msgid "RaiBlocks Account"
-msgstr ""
-
-#: www/views/includes/walletSelector.html:11
-msgid "RaiBlocks Wallets"
 msgstr ""
 
 #: www/views/onboarding/tour.html:45
@@ -1635,7 +1598,7 @@ msgid "Remove"
 msgstr ""
 
 #: www/views/tab-create-account.html:84 www/views/tab-create-account.html:92
-#: www/views/tab-create-wallet.html:55 www/views/tab-export-file.html:17
+#: www/views/tab-export-file.html:17
 msgid "Repeat password"
 msgstr ""
 
@@ -1651,7 +1614,8 @@ msgstr ""
 msgid "Retrieving inputs information"
 msgstr ""
 
-#: src/js/controllers/onboarding/tour.js:59
+#: src/js/controllers/onboarding/createPassword.js:42
+#: src/js/controllers/onboarding/tour.js:60
 msgid "Retry"
 msgstr ""
 
@@ -1660,7 +1624,7 @@ msgid "Retry Camera"
 msgstr ""
 
 #: www/views/addressbook.add.html:56 www/views/includes/note.html:9
-#: www/views/preferencesAlias.html:21 www/views/preferencesBwsUrl.html:25
+#: www/views/preferencesAlias.html:21
 #: www/views/preferencesNotifications.html:46
 msgid "Save"
 msgstr ""
@@ -1709,7 +1673,7 @@ msgstr ""
 msgid "Search your currency"
 msgstr ""
 
-#: www/views/prefrencesSecurity.html:3 www/views/tab-settings.html:98
+#: www/views/preferencesSecurity.html:3 www/views/tab-settings.html:98
 msgid "Security Prefrences"
 msgstr ""
 
@@ -1719,10 +1683,6 @@ msgstr ""
 
 #: src/js/controllers/tab-receive.js:90
 msgid "Select an account"
-msgstr ""
-
-#: www/views/modals/paypro.html:38
-msgid "Self-signed Certificate"
 msgstr ""
 
 #: www/views/feedback/send.html:13 www/views/feedback/send.html:43
@@ -1788,7 +1748,7 @@ msgid "Sending {{amountStr}} from your {{name}} account"
 msgstr ""
 
 #: www/views/includes/walletHistory.html:42 www/views/modals/tx-status.html:9
-#: www/views/topup.html:100 www/views/tx-details.html:17
+#: www/views/tx-details.html:17
 msgid "Sent"
 msgstr ""
 
@@ -1820,23 +1780,31 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: www/views/feedback/complete.html:17 www/views/feedback/complete.html:26
-msgid "Share the love by inviting your friends."
+#: src/js/controllers/feedback/complete.js:5 www/views/tab-settings.html:60
+msgid "Share Canoe"
 msgstr ""
 
-#: src/js/controllers/feedback/complete.js:5 www/views/tab-settings.html:60
-msgid "Share {{appName}}"
+#: www/views/feedback/complete.html:17 www/views/feedback/complete.html:26
+msgid "Share the love by inviting your friends."
 msgstr ""
 
 #: www/views/tab-send.html:42
 msgid "Show Account"
 msgstr ""
 
+#: www/views/preferencesSecurity.html:33
+msgid "Show Account Number"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:30
+msgid "Show Balance"
+msgstr ""
+
 #: www/views/preferencesExternal.html:34
 msgid "Show Recovery Phrase"
 msgstr ""
 
-#: www/views/tab-create-wallet.html:24 www/views/tab-export-file.html:24
+#: www/views/tab-export-file.html:24
 msgid "Show advanced options"
 msgstr ""
 
@@ -1870,6 +1838,16 @@ msgstr ""
 msgid "Slide to send"
 msgstr ""
 
+#: www/views/preferencesSecurity.html:26
+msgid "Sneak Peek"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:27
+msgid ""
+"Sneak peek allows you show information without the need of typing your "
+"password wallet."
+msgstr ""
+
 #: src/js/services/bwcError.js:92
 msgid "Spend proposal is not accepted"
 msgstr ""
@@ -1888,10 +1866,6 @@ msgstr ""
 
 #: www/views/tab-send.html:33
 msgid "Start sending RaiBlocks"
-msgstr ""
-
-#: www/views/topup.html:101
-msgid "Success"
 msgstr ""
 
 #: www/views/paperWallet.html:7
@@ -1970,13 +1944,6 @@ msgid ""
 "confirmation."
 msgstr ""
 
-#: www/views/preferencesFee.html:12
-msgid ""
-"The higher the fee, the greater the incentive a miner has to include that "
-"transaction in a block. Current fees are determined based on network load "
-"and the selected policy."
-msgstr ""
-
 #: www/views/addresses.html:51
 msgid ""
 "The maximum number of consecutive unused addresses (20) has been reached. "
@@ -2020,18 +1987,12 @@ msgstr ""
 msgid "The total amount of bitcoin stored in this wallet."
 msgstr ""
 
-#: www/views/preferencesHistory.html:27
-msgid ""
-"The transaction history and every new incoming transaction are cached in the "
-"app. This feature clean this up and synchronizes again from the server"
-msgstr ""
-
 #: www/views/tab-import-phrase.html:5
 msgid "The wallet server URL"
 msgstr ""
 
 #: src/js/controllers/tab-home.js:44
-msgid "There is a new version of {{appName}} available"
+msgid "There is a new version of Canoe available"
 msgstr ""
 
 #: src/js/controllers/import.js:108 src/js/controllers/import.js:133
@@ -2051,10 +2012,8 @@ msgstr ""
 msgid "This app stores your RaiBlocks with cutting-edge security."
 msgstr ""
 
-#: www/views/tab-create-wallet.html:65
-msgid ""
-"This password cannot be recovered. If the password is lost, there is no way "
-"you could recover your funds."
+#: www/views/onboarding/createPassword.html:53
+msgid "This password will be used to encrypt your wallet from prying eyes."
 msgstr ""
 
 #: www/views/tx-details.html:91
@@ -2085,6 +2044,10 @@ msgstr ""
 msgid "Timeline"
 msgstr ""
 
+#: www/views/preferencesSecurity.html:20
+msgid "Timeout"
+msgstr ""
+
 #: www/views/confirm.html:26 www/views/includes/output.html:2
 #: www/views/modals/txp-details.html:109 www/views/modals/txp-details.html:53
 #: www/views/tx-details.html:41 www/views/tx-details.html:53
@@ -2101,7 +2064,7 @@ msgid ""
 "To get started, you need an Account in your wallet to receive RaiBlocks."
 msgstr ""
 
-#: www/views/modals/wallet-balance.html:23 www/views/topup.html:70
+#: www/views/modals/wallet-balance.html:23
 msgid "Total"
 msgstr ""
 
@@ -2122,16 +2085,8 @@ msgstr ""
 msgid "Transaction"
 msgstr ""
 
-#: www/views/preferencesAdvanced.html:30 www/views/preferencesHistory.html:3
-msgid "Transaction History"
-msgstr ""
-
 #: src/js/services/bwcError.js:83
 msgid "Transaction already broadcasted"
-msgstr ""
-
-#: www/views/topup.html:104
-msgid "Transaction initiated"
 msgstr ""
 
 #: src/js/controllers/tx-details.js:119
@@ -2248,20 +2203,6 @@ msgid ""
 "<b>funds will not be accessible from the export</b>."
 msgstr ""
 
-#: www/views/modals/paypro.html:42
-msgid "WARNING: UNTRUSTED CERTIFICATE"
-msgstr ""
-
-#: www/views/preferencesPrivateKey.html:14
-msgid ""
-"WARNING: Your extended private keys are all that is needed to access your "
-"bitcoin funds. Be sure to protect your private keys and store them only on "
-"secure devices. BitPay does not have access to your private keys, so you "
-"alone are responsible for your keys. If you share key access with external "
-"services, you take responsibility for the risk of theft or breach. Only "
-"advanced users should handle extended private keys directly."
-msgstr ""
-
 #: www/views/tab-settings.html:102
 msgid "Wallet Accounts"
 msgstr ""
@@ -2284,6 +2225,25 @@ msgstr ""
 
 #: www/views/addresses.html:76
 msgid "Wallet Inputs"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:10
+msgid ""
+"Wallet Password\n"
+"\t\t\t<div class=\"list settings-list\">\n"
+"\t\t\t\t<p class=\"item-description\" translate=\"\">A wallet password is "
+"used to encrypt your RaiBlocks wallet when saving it on your device.</p>\n"
+"\t\t\t\t<a class=\"item item-icon-left item-icon-right\" ui-sref=\"tabs."
+"preferencesSecurity.changePassword\">\n"
+"\t\t\t\t\t<i class=\"icon ion-ios-download-outline\"></i>\n"
+"\t\t\t\t\t<span translate=\"\">Change Password</span>\n"
+"\t\t\t\t\t<i class=\"icon bp-arrow-right\"></i>\n"
+"\t\t\t\t</a>\n"
+"\t\t\t\t<div class=\"item item-icon-left\">\n"
+"\t\t\t\t\t<i class=\"icon ion-ios-time-outline\"></i>\n"
+"\t\t\t\t\t<span translate=\"\">Timeout</span>\n"
+"\t\t\t\t</div>\n"
+"\t\t\t</div>"
 msgstr ""
 
 #: src/js/services/bwcError.js:26
@@ -2312,10 +2272,6 @@ msgstr ""
 
 #: src/js/services/bwcError.js:128
 msgid "Wallet is not complete"
-msgstr ""
-
-#: www/views/tab-create-wallet.html:12
-msgid "Wallet name"
 msgstr ""
 
 #: src/js/services/bwcError.js:131
@@ -2350,7 +2306,6 @@ msgstr ""
 #: src/js/controllers/preferencesDelete.js:23
 #: src/js/controllers/preferencesExternal.js:14
 #: www/views/preferencesDeleteWallet.html:11
-#: www/views/preferencesPrivateKey.html:12
 msgid "Warning!"
 msgstr ""
 
@@ -2367,13 +2322,13 @@ msgid "We'd love to do better."
 msgstr ""
 
 #: src/js/controllers/feedback/send.js:76
-msgid "We're always looking for ways to improve {{appName}}."
+msgid "We're always looking for ways to improve Canoe."
 msgstr ""
 
 #: src/js/controllers/feedback/send.js:82
 msgid ""
-"We're always looking for ways to improve {{appName}}. How could we improve "
-"your experience?"
+"We're always looking for ways to improve Canoe. How could we improve your "
+"experience?"
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:6
@@ -2400,7 +2355,7 @@ msgid "Why?"
 msgstr ""
 
 #: www/views/feedback/rateApp.html:10
-msgid "Would you be willing to rate {{appName}} in the app store?"
+msgid "Would you be willing to rate Canoe in the app store?"
 msgstr ""
 
 #: www/views/onboarding/notifications.html:4
@@ -2454,9 +2409,8 @@ msgid ""
 msgstr ""
 
 #: www/views/onboarding/tour.html:19
-msgid "You can transfer RaiBlocks instantly to anyone worldwide."
+msgid "You can transfer RaiBlocks instantly to anyone, anywhere ."
 msgstr ""
-"Du kan överföra RaiBlocks ögonblickligen till vem som helst i hela världen."
 
 #: www/views/preferencesNotifications.html:34
 msgid ""
@@ -2491,9 +2445,7 @@ msgid ""
 msgstr ""
 
 #: www/views/accountDetails.html:135 www/views/accountDetails.html:55
-#: www/views/includes/accountList.html:8
-#: www/views/includes/walletSelector.html:30
-#: www/views/includes/walletSelector.html:61 www/views/paperWallet.html:33
+#: www/views/includes/accountList.html:8 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:45 www/views/walletDetails.html:131
 #: www/views/walletDetails.html:51
 msgid "[Balance Hidden]"
@@ -2512,18 +2464,6 @@ msgstr ""
 msgid "name@example.com"
 msgstr ""
 
-#: www/views/preferencesHistory.html:15
-msgid "preparing..."
-msgstr ""
-
-#: www/views/preferencesBwsUrl.html:21
-msgid ""
-"{{appName}} depends on Bitcore Wallet Service (BWS) for blockchain "
-"information, networking and Copayer synchronization. The default "
-"configuration points to https://bws.bitpay.com (BitPay's public BWS "
-"instance)."
-msgstr ""
-
 #: www/views/accountDetails.html:222 www/views/walletDetails.html:218
 msgid "{{updatingTxHistoryProgress}} transactions downloaded"
 msgstr ""
@@ -2531,6 +2471,26 @@ msgstr ""
 #: www/views/includes/walletInfo.html:18
 msgid "{{wallet.m}}-of-{{wallet.n}}"
 msgstr ""
+
+#~ msgid "(Trusted)"
+#~ msgstr "(Pålitlig)"
+
+#~ msgid "Account"
+#~ msgstr "Konto"
+
+#~ msgid "Account Id"
+#~ msgstr "Kontoid"
+
+#~ msgid "Add a password"
+#~ msgstr "Lägg till ett lösenord"
+
+#~ msgid "Join the future of crypto money,<br>get started with RaiBlocks."
+#~ msgstr "Gå med i framtidens kryptovaluta,<br>kom igång med RaiBlocks."
+
+#~ msgid "You can transfer RaiBlocks instantly to anyone worldwide."
+#~ msgstr ""
+#~ "Du kan överföra RaiBlocks ögonblickligen till vem som helst i hela "
+#~ "världen."
 
 #~ msgid "Activity"
 #~ msgstr "Aktivitet"
