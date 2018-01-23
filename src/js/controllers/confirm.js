@@ -230,14 +230,14 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     popupService.showAlert(gettextCatalog.getString('Error at confirm'), bwcError.msg(msg))
   }
 
-  $scope.openPPModal = function () {
+  /*$scope.openPPModal = function () {
     $ionicModal.fromTemplateUrl('views/modals/paypro.html', {
       scope: $scope
     }).then(function (modal) {
       $scope.payproModal = modal
       $scope.payproModal.show()
     })
-  }
+  }*/
 
   $scope.cancel = function () {
     $scope.payproModal.hide()

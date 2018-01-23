@@ -414,15 +414,15 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-			.state('tabs.prefrencesSecurity.changePassword', {
-				url: '/prefrencesSecurity/changePassword',
-				views: {
-					'tab-settings@tabs': {
-						controller: 'changePasswordController',
-						templateUrl: 'views/changePassword.html'
-					}
-				}
-			})
+      .state('tabs.prefrencesSecurity.changePassword', {
+        url: '/prefrencesSecurity/changePassword',
+        views: {
+          'tab-settings@tabs': {
+            controller: 'changePasswordController',
+            templateUrl: 'views/changePassword.html'
+          }
+        }
+      })
       .state('tabs.pin', {
         url: '/pin/:action',
         views: {
@@ -500,24 +500,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           'tab-settings@tabs': {
             controller: 'exportController',
             templateUrl: 'views/export.html'
-          }
-        }
-      })
-      .state('tabs.preferences.preferencesBwsUrl', {
-        url: '/preferencesBwsUrl',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesBwsUrlController',
-            templateUrl: 'views/preferencesBwsUrl.html'
-          }
-        }
-      })
-      .state('tabs.preferences.preferencesHistory', {
-        url: '/preferencesHistory',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesHistory',
-            templateUrl: 'views/preferencesHistory.html'
           }
         }
       })
@@ -728,14 +710,14 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       })
       .state('onboarding.createPassword', {
-				url: '/createPassword',
+        url: '/createPassword',
         views: {
           'onboarding': {
             templateUrl: 'views/onboarding/createPassword.html',
             controller: 'createPasswordController'
           }
         }
-			})
+      })
       .state('onboarding.backupRequest', {
         url: '/backupRequest/:walletId',
         views: {
