@@ -6,6 +6,9 @@ angular.module('canoeApp.services')
     root.currentLanguage = null
 
     root.availableLanguages = [{
+      name: 'العربية',
+      isoCode: 'ar'
+    }, {
       name: 'English',
       isoCode: 'en'
     }, {
