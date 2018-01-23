@@ -405,17 +405,17 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.prefrencesSecurity', {
-        url: '/prefrencesSecurity',
+      .state('tabs.preferencesSecurity', {
+        url: '/preferencesSecurity',
         views: {
           'tab-settings@tabs': {
-            controller: 'prefrencesSecurityController',
-            templateUrl: 'views/prefrencesSecurity.html'
+            controller: 'preferencesSecurityController',
+            templateUrl: 'views/preferencesSecurity.html'
           }
         }
       })
-      .state('tabs.prefrencesSecurity.changePassword', {
-        url: '/prefrencesSecurity/changePassword',
+      .state('tabs.preferencesSecurity.changePassword', {
+        url: '/preferencesSecurity/changePassword',
         views: {
           'tab-settings@tabs': {
             controller: 'changePasswordController',
