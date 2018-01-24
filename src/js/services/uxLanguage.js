@@ -1,10 +1,12 @@
 'use strict'
+/* global angular */
 angular.module('canoeApp.services')
   .factory('uxLanguage', function languageService ($log, lodash, gettextCatalog, amMoment, configService) {
     var root = {}
 
     root.currentLanguage = null
 
+    // See https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     root.availableLanguages = [{
       name: 'العربية',
       isoCode: 'ar'
@@ -98,7 +100,7 @@ angular.module('canoeApp.services')
       gettextCatalog.setCurrentLanguage(lang)
       root.currentLanguage = lang
 
-      if (lang == 'zh') lang = lang + '-CN' // Fix for Chinese Simplified
+      if (lang === 'zh') lang = lang + '-CN' // Fix for Chinese Simplified
       amMoment.changeLocale(lang)
     }
 
@@ -124,7 +126,7 @@ angular.module('canoeApp.services')
       configService.whenAvailable(function (config) {
         var userLang = config.wallet.settings.defaultLanguage
 
-        if (userLang && userLang != root.currentLanguage) {
+        if (userLang && userLang !== root.currentLanguage) {
           root._set(userLang)
         } else {
           root._detect(function (lang) {

@@ -190,25 +190,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       })
 
-      .state('tabs.account.addresses', {
-        url: '/addresses/:walletId/:toAddress',
-        views: {
-          'tab-home@tabs': {
-            controller: 'addressesController',
-            templateUrl: 'views/addresses.html'
-          }
-        }
-      })
-      .state('tabs.account.allAddresses', {
-        url: '/allAddresses/:walletId',
-        views: {
-          'tab-home@tabs': {
-            controller: 'addressesController',
-            templateUrl: 'views/allAddresses.html'
-          }
-        }
-      })
-
       /*
        *
        * Tabs
