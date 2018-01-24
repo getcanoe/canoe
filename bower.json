@@ -6,7 +6,7 @@
   ],
   "dependencies": {
     "angular-mocks": "1.4.10",
-    "angular-gettext": "2.2.1",
+    "angular-gettext": "^2.3.10",
     "angular-moment": "0.10.1",
     "angular-qrcode": "bitpay/angular-qrcode#~6.3.0",
     "ionic": "https://github.com/ionic-team/ionic-v1.git#8f80afc835",
