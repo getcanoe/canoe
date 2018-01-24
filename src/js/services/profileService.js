@@ -15,7 +15,7 @@ angular.module('canoeApp.services')
     var root = {}
     root.profile = null
     root.wallet = null
-    root.password = 'canoe' // TODO Hardcoded for testing during dev!!!!
+    root.password = 'hubbabubba' // TODO Hardcoded for testing during dev!!!!
 
     // This is where we keep the password entered when you start Canoe
     // or when timeout is reached and it needs to be entered again.
@@ -237,8 +237,10 @@ angular.module('canoeApp.services')
           return cb(err)
         }
         root.wallet = wallet
-        root.setWalletId(wallet.id)
-        cb(null, wallet)
+        root.setWalletId(wallet.id, function (err) {
+          if (err) return cb(err)
+          cb(null, wallet)
+        })
       })
     }
 
