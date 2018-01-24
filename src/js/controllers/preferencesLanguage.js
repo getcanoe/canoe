@@ -1,18 +1,18 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('preferencesLanguageController',
-  function ($scope, $log, $ionicHistory, configService, profileService, uxLanguage, walletService, externalLinkService, gettextCatalog) {
+  function ($scope, $log, $ionicHistory, configService, profileService, uxLanguage, externalLinkService, gettextCatalog) {
     $scope.availableLanguages = uxLanguage.getLanguages()
 
     $scope.openExternalLink = function () {
-      var url = 'https://crowdin.com/project/canoe'
+      var url = 'https://poeditor.com/join/project/cnSZa85DRN'
       var optIn = true
-      var title = gettextCatalog.getString('Open Translation Community')
-      var message = gettextCatalog.getString('You can make contributions by signing up on our Crowdin community translation website. We’re looking forward to hearing from you!')
-      var okText = gettextCatalog.getString('Open Crowdin')
+      var title = gettextCatalog.getString('Open Translation Site')
+      var message = gettextCatalog.getString('You can make contributions by signing up on our POEditor community translation project. We’re looking forward to hearing from you!')
+      var okText = gettextCatalog.getString('Open POEditor')
       var cancelText = gettextCatalog.getString('Go Back')
       externalLinkService.open(url, optIn, title, message, okText, cancelText)
-    };
+    }
 
     $scope.save = function (newLang) {
       var opts = {
