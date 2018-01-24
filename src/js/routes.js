@@ -908,7 +908,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
             throw new Error(err) // TODO
           }
         } else {
-          profileService.storeProfileIfDirty()
           $log.debug('Profile loaded ... Starting UX.')
           scannerService.gentleInitialize()
           // Reload tab-home if necessary (from root path: starting)
