@@ -126,6 +126,9 @@ var AES = {
   }
 };
 
+function hex32Random () {
+	return uint8_hex(nacl.randomBytes(32))
+}
 
 module.exports = function(password)
 {
@@ -134,7 +137,9 @@ module.exports = function(password)
 	
 	var raiwalletdotcomRepresentative = "xrb_3pczxuorp48td8645bs3m6c3xotxd3idskrenmi65rbrga5zmkemzhwkaznh"; // self explaining
 	
-	var id = getUUID();                 // Unique id of this wallet, to be used as reference when handling
+	var id = hex32Random();             // Unique id of this wallet, to be used as reference when handling
+	var token = hex32Random();          // Secret token (used as username in server account)
+	var tokenPass = hex32Random();      // Secret tokenPass (used as password in server account)
 	var pk;                             // current account public key
 	var sk;                             // current account secret key
 	var pendingBalance;                 // current account pending balance
@@ -162,7 +167,6 @@ module.exports = function(password)
 	var iterations = 5000;              // pbkdf2 iterations
 	var checksum;                       // wallet checksum 
 	var ciphered = true;
-	var loginKey = false;								// key to tell the server when the wallet was successfully decrypted
 	
 	var logger = new Logger();
  
@@ -1340,16 +1344,14 @@ module.exports = function(password)
 		}
 	}
 	
-	api.getLoginKey = function()
+	api.getToken = function()
 	{
-		return loginKey;
+		return token;
 	}
 	
-	api.setLoginKey = function(lk)
+	api.getTokenPass = function()
 	{
-		if(loginKey === false)
-			loginKey = lk;
-		// cannot be changed
+		return tokenPass;
 	}
 	
 	private.save = function()
@@ -1406,9 +1408,9 @@ module.exports = function(password)
 		pack.autoWork = autoWork;
 		pack.minimumReceive = minimumReceive.toString();
 		
-		if(loginKey !== false)
-			pack.loginKey = loginKey;
-		
+		pack.token = token;
+		pack.token = tokenPass;
+
 		pack = JSON.stringify(pack);
 		pack = stringToHex(pack);
 		pack = new Buffer(pack, 'hex');
@@ -1460,7 +1462,8 @@ module.exports = function(password)
 		autoWork = walletData.autoWork;
 		readyBlocks = [];
 		minimumReceive = walletData.minimumReceive != undefined ? bigInt(walletData.minimumReceive) : bigInt("1000000000000000000000000");
-		loginKey = walletData.loginKey ? walletData.loginKey : false;
+		token = walletData.token;
+		tokenPass = walletData.tokenPass;
 		
 		for(let i in walletData.readyBlocks)
 		{
@@ -1508,7 +1511,8 @@ module.exports = function(password)
 		} else {
 			api.setSeed(setSeed)
 		}
-		loginKey = uint8_hex(nacl.randomBytes(32))
+		token = uint8_hex(nacl.randomBytes(32))
+		tokenPass = uint8_hex(nacl.randomBytes(32))
 		return uint8_hex(seed)
 	}
 
