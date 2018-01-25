@@ -156,11 +156,19 @@ angular.module('canoeApp.services')
       return true
     }
 
-    // Create a new wallet and tell server the UUID it has
+    // Create a new wallet
     root.createNewWallet = function (password) {
       var wallet = RAI.createNewWallet(password)
-      root.updateServerWallet(wallet)
       return wallet
+    }
+
+    // Create a corresponding account in the server for this wallet
+    root.createServerAccount = function (wallet) {
+      $log.debug('Creating account for wallet ' + wallet.id)
+      var json = rai.create_server_account(wallet.getId(), wallet.getToken(), wallet.getTokenPass())
+      if (json.error) {
+        throw Error(json.error)
+      }
     }
 
     // Create a new wallet given a good password created by the user, and optional seed.
@@ -169,6 +177,7 @@ angular.module('canoeApp.services')
       var wallet = root.createNewWallet(password)
       wallet.setLogger($log)
       wallet.createSeed(seed)
+      root.createServerAccount(wallet)
       $log.debug('Wallet: ' + JSON.stringify(wallet))
       return wallet
     }
@@ -176,7 +185,6 @@ angular.module('canoeApp.services')
     // Loads wallet from local storage using given password
     root.createWalletFromStorage = function (password, cb) {
       $log.debug('Load wallet from local storage')
-      var wallet = root.createNewWallet(password)
       storageService.loadWallet(function (err, data) {
         if (err) {
           return cb(err)
@@ -184,7 +192,7 @@ angular.module('canoeApp.services')
         if (!data) {
           return cb('No wallet in local storage')
         }
-        root.loadWalletData(wallet, data)
+        var wallet = root.createWalletFromData(password, data)
         cb(null, wallet)
       })
     }

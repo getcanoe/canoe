@@ -81,14 +81,10 @@ angular.module('canoeApp.services')
       }
     }
 
-    // This creates a new Wallet with the old password and new seed
-    // All accounts are cleared, but we create one new default account.
+    // Create a new wallet, but reuse existing id, password and tokens
     root.importSeed = function (seed, cb) {
       $log.debug('Importing Wallet Seed')
-      raiblocksService.createWallet(root.wallet.password, seed)
-      $log.debug('Recreating first account')
-      // TODO... ehm
-      root.createAccount(null, cb)
+      return root.createWallet(root.wallet, null, seed, cb)
     }
 
     root.updateAllAccounts = function (cb) {
@@ -204,10 +200,16 @@ angular.module('canoeApp.services')
       return root.wallet.getWalletBalance().get(0)
     }
 
-    // Create wallet and default account which saves wallet, seed can be null.
-    root.createWallet = function (password, seed, cb) {
+    // Create wallet and default account (which saves wallet), seed can be null.
+    // If fromWallet is given we copy id, token and tokenpass from it.
+    root.createWallet = function (fromWallet, password, seed, cb) {
       // Synchronous now
       root.wallet = raiblocksService.createWallet(password, seed)
+      if (fromWallet) {
+        root.wallet.id = fromWallet.id
+        root.wallet.token = fromWallet.token
+        root.wallet.tokenpass = fromWallet.tokenpass
+      }
       root.setWalletId(root.wallet.getId(), function (err) {
         if (err) return cb(err)
         // Create default acount, will save
