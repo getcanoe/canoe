@@ -126,8 +126,8 @@ var AES = {
   }
 };
 
-function hex32Random () {
-	return uint8_hex(nacl.randomBytes(32))
+function hexRandom (bytes) {
+	return uint8_hex(nacl.randomBytes(bytes))
 }
 
 module.exports = function(password)
@@ -137,9 +137,9 @@ module.exports = function(password)
 	
 	var raiwalletdotcomRepresentative = "xrb_3pczxuorp48td8645bs3m6c3xotxd3idskrenmi65rbrga5zmkemzhwkaznh"; // self explaining
 	
-	var id = hex32Random();             // Unique id of this wallet, to be used as reference when handling
-	var token = hex32Random();          // Secret token (used as username in server account)
-	var tokenPass = hex32Random();      // Secret tokenPass (used as password in server account)
+	var id = hexRandom(11);             // Unique id of this wallet, to be used as reference when handling
+	var token = hexRandom(32);          // Secret token (used as username in server account)
+	var tokenPass = hexRandom(32);      // Secret tokenPass (used as password in server account)
 	var pk;                             // current account public key
 	var sk;                             // current account secret key
 	var pendingBalance;                 // current account pending balance
