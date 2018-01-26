@@ -201,19 +201,15 @@ angular.module('canoeApp.services')
     }
 
     // Create wallet and default account (which saves wallet), seed can be null.
-    // If fromWallet is given we copy id, token and tokenpass from it.
-    root.createWallet = function (fromWallet, password, seed, cb) {
+    root.createWallet = function (password, seed, cb) {
       // Synchronous now
-      root.wallet = raiblocksService.createWallet(password, seed)
-      if (fromWallet) {
-        root.wallet.id = fromWallet.id
-        root.wallet.token = fromWallet.token
-        root.wallet.tokenpass = fromWallet.tokenpass
-      }
-      root.setWalletId(root.wallet.getId(), function (err) {
+      root.wallet = raiblocksService.createWallet(password, seed, function (err) {
         if (err) return cb(err)
-        // Create default acount, will save
-        root.createAccount(null, cb)
+        root.setWalletId(root.wallet.getId(), function (err) {
+          if (err) return cb(err)
+          // Create default acount, will save
+          root.createAccount(null, cb)
+        })  
       })
     }
 

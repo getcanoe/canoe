@@ -18,8 +18,9 @@ angular.module('canoeApp.services')
     var mqttHost = 'getcanoe.io'
     var mqttPort = 1884
     var mqttClient = null
-    var mqttUsername = 'canoe'
-    var mqttPassword = 'cn99oe'
+    var mqttClientId = null
+    var mqttUsername = null
+    var mqttPassword = null
 
     root.setProfileId = function (id) {
       profileId = id
@@ -164,21 +165,32 @@ angular.module('canoeApp.services')
 
     // Create a corresponding account in the server for this wallet
     root.createServerAccount = function (wallet) {
-      $log.debug('Creating account for wallet ' + wallet.id)
+      $log.debug('Creating server account for wallet ' + wallet.getId())
       var json = rai.create_server_account(wallet.getId(), wallet.getToken(), wallet.getTokenPass())
       if (json.error) {
         throw Error(json.error)
       }
     }
 
+    // Subscribe to our private topics for incoming messages
+    root.subscribeForWallet = function (wallet) {
+      $log.debug('Subscribing for wallet ' + wallet.getId())
+      root.subscribe('wallet/' + wallet.getId() + '/#')
+    }
+
     // Create a new wallet given a good password created by the user, and optional seed.
-    root.createWallet = function (password, seed) {
-      $log.debug('Create wallet')
+    root.createWallet = function (password, seed, cb) {
+      $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
       wallet.setLogger($log)
       wallet.createSeed(seed)
       root.createServerAccount(wallet)
-      $log.debug('Wallet: ' + JSON.stringify(wallet))
+      root.connectMQTT(wallet, function (connected) {
+        if (connected) {
+          root.subscribeForWallet(wallet)
+        }
+        cb()
+      })
       return wallet
     }
 
@@ -193,7 +205,12 @@ angular.module('canoeApp.services')
           return cb('No wallet in local storage')
         }
         var wallet = root.createWalletFromData(password, data)
-        cb(null, wallet)
+        root.connectMQTT(wallet, function (connected) {
+          if (connected) {
+            root.subscribeForWallet(wallet)
+          }
+          cb(null, wallet)
+        })
       })
     }
 
@@ -207,7 +224,7 @@ angular.module('canoeApp.services')
     root.createAccount = function (wallet, accountName) {
       $log.debug('Create account in wallet named ' + accountName)
       var account = wallet.createAccount({label: accountName})
-      $log.debug('Created account: ' + account)
+      $log.debug('Created account ' + account.id)
       root.updateServerMap(wallet)
       return account
     }
@@ -220,17 +237,12 @@ angular.module('canoeApp.services')
       root.updateServerMap(wallet)
     }
 
-    // Tell server which id our wallet has. The server has a map of Profile id -> wallet id
-    root.updateServerWallet = function (wallet) {
-      root.publish('profile/' + profileId + '/wallet/' + wallet.id, '{}', 2, false)
-    }
-
     // Tell server which accounts this wallet has. The server has a map of wallet id -> accounts
     // This needs to be called when a new account is created or one is removed.
     // We also call it whenever we load a wallet from data.
     root.updateServerMap = function (wallet) {
       var ids = wallet.getAccountIds()
-      root.publish('profile/' + profileId + '/wallet/' + wallet.id + '/accounts', {accounts: ids}, 2, false)
+      root.publish('wallet/' + wallet.getId() + '/accounts', JSON.stringify(ids), 2, false)
     }
 
     // Encrypt and store the wallet in localstorage.
@@ -254,7 +266,7 @@ angular.module('canoeApp.services')
     root.loadWalletData = function (wallet, data) {
       try {
         wallet.load(data)
-        root.updateObserver(wallet)
+        root.updateServerMap(wallet)
       } catch (e) {
         $log.error('Error decrypting wallet. Check that the password is correct.')
         return
@@ -276,25 +288,26 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.connectMQTT = function (cb) {
-      // If no token is set, then we refuse to connect
-      if (mqttUsername) {
-        // Connect to MQTT
-        $log.debug('********** CONNECTING MQTT ***********')
-        root.connect({userName: mqttUsername, password: mqttPassword}, function () {
-          root.silent = false
-          if (cb) {
-            cb(true)
-          }
-          root.subscribe('config')
-        }, function (c, code, msg) {
-          $log.debug('FAILURE', {context: c, code: code, msg: msg})
-          root.disconnect()
-          if (cb) {
-            cb(false)
-          }
-        })
-      }
+    root.connectMQTT = function (wallet, cb) {
+      mqttUsername = wallet.getToken()
+      mqttPassword = wallet.getTokenPass()
+      mqttClientId = wallet.getId()
+      var opts = {userName: mqttUsername, password: mqttPassword, clientId: mqttClientId}
+      // Connect to MQTT
+      $log.debug('********** CONNECTING MQTT ***********')
+      $log.debug('Options: ' + JSON.stringify(opts))
+      root.connect(opts, function () {
+        $log.debug('********** CONNECTED MQTT ***********')
+        if (cb) {
+          cb(true)
+        }
+      }, function (c, code, msg) {
+        $log.debug('FAILURE', {context: c, code: code, msg: msg})
+        root.disconnect()
+        if (cb) {
+          cb(false)
+        }
+      })
     }
 
     // Are we connected to the MQTT server?
@@ -312,13 +325,27 @@ angular.module('canoeApp.services')
       mqttClient = null
     }
 
+    root.onConnectionLost = function (responseObject) {
+      if (responseObject.errorCode !== 0) {
+        $log.info('MQTT connection lost: ' + responseObject.errorMessage)
+      }
+    }
+
+    root.onFailure = function () {
+      $log.info('MQTT failure')
+    }
+
+    root.onMessageArrived = function (message) {
+      $log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
+    }
+
     // Connect to MQTT. callback when connected or failed.
     root.connect = function (options, callback, callbackFailure) {
       var port = mqttPort
       var ip = mqttHost
       var userName = options.userName
       var password = options.password
-      var clientId = getUUID()
+      var clientId = options.clientId
       root.disconnect()
       mqttClient = new Paho.MQTT.Client(ip, port, clientId)
       mqttClient.onConnectionLost = root.onConnectionLost
@@ -336,16 +363,20 @@ angular.module('canoeApp.services')
     }
 
     root.publish = function (topic, json, qos, retained) {
-      /*var message = new Paho.MQTT.Message(json)
-      message.destinationName = topic
-      if (qos !== undefined) {
-        message.qos = qos
+      if (mqttClient) {
+        var message = new Paho.MQTT.Message(json)
+        message.destinationName = topic
+        if (qos !== undefined) {
+          message.qos = qos
+        }
+        if (retained !== undefined) {
+          message.retained = retained
+        }
+        $log.debug('Send ' + topic + ' ' + json)
+        mqttClient.send(message)
+      } else {
+        $log.debug('Should send ' + topic + ' ' + json)
       }
-      if (retained !== undefined) {
-        message.retained = retained
-      }*/
-      $log.debug('Send ' + topic + ' ' + json)
-      // mqttClient.send(message)
     }
 
     root.subscribe = function (topic) {
