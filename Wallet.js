@@ -135,7 +135,7 @@ module.exports = function(password)
 	var api = {};                       // wallet public methods
 	var private = {};                   // wallet private methods
 	
-	var raiwalletdotcomRepresentative = "xrb_3pczxuorp48td8645bs3m6c3xotxd3idskrenmi65rbrga5zmkemzhwkaznh"; // self explaining
+	var canoeRepresentative = "xrb_1qckwc5o3obkrwbet4amnkya113xq77qpaknsmiq9hwq31tmd5bpyo7sepsw"; // self explaining
 	
 	var id = hexRandom(11);             // Unique id of this wallet, to be used as reference when handling
 	var token = hexRandom(32);          // Secret token (used as username in server account)
@@ -157,6 +157,8 @@ module.exports = function(password)
 	var readyBlocks = [];               // wallet blocks signed and worked, ready to broadcast and add to chain
 	var errorBlocks = [];               // blocks which could not be confirmed
 	
+	var broadcastCallback = null        // Callback function to perform broadcast
+
 	var remoteWork = [];                // work pool
 	var autoWork = false;               // generate work automatically on receive transactions (server)
 	
@@ -189,6 +191,11 @@ module.exports = function(password)
 	{
 		logger = loggerObj;
 	}
+
+	api.setBroadcastCallback = function(cb)
+	{
+		broadcastCallback = cb;
+	}
 	
 	/**
 	 * Sets the secret key to do all the signing stuff
@@ -214,14 +221,7 @@ module.exports = function(password)
 	api.sign = function(message)
 	{
 		return nacl.sign.detached(message, sk);
-	}
-	
-
-	api.getId = function()
-	{
-		return id;
-	}
-	
+	}	
 
 	api.changePass = function(pswd, newPass)
 	{
@@ -822,6 +822,7 @@ module.exports = function(password)
 	api.addBlockToReadyBlocks = function(blk)
 	{
 		readyBlocks.push(blk);
+		broadcastCallback(blk);
 		logger.log("Block ready to be broadcasted: " +blk.getHash(true));
 	}
 	
@@ -903,7 +904,7 @@ module.exports = function(password)
 		if(lastPendingBlock.length == 64)
 			blk.setReceiveParameters(lastPendingBlock, sourceBlockHash);
 		else
-			blk.setOpenParameters(sourceBlockHash, acc, raiwalletdotcomRepresentative);
+			blk.setOpenParameters(sourceBlockHash, acc, canoeRepresentative);
 		
 		blk.build();
 		api.signBlock(blk);
@@ -1214,7 +1215,7 @@ module.exports = function(password)
 					if(blk.getType() != 'open')
 						throw "First block needs to be 'open'.";
 					chain.push(blk);
-					readyBlocks.push(blk);
+					api.addBlockToReadyBlocks(blk);
 					api.removePendingBlock(blockHash);
 					private.setPendingBalance(api.getPendingBalance().minus(blk.getAmount()));
 					private.setBalance(api.getBalance().add(blk.getAmount()));
@@ -1252,7 +1253,7 @@ module.exports = function(password)
 						else
 							throw "Invalid block type";
 						chain.push(blk);
-						readyBlocks.push(blk);
+						api.addBlockToReadyBlocks(blk);
 						api.removePendingBlock(blockHash);
 						api.recalculateWalletBalances();
 						private.save();
@@ -1344,6 +1345,11 @@ module.exports = function(password)
 		}
 	}
 	
+	api.getId = function()
+	{
+		return id;
+	}
+
 	api.getToken = function()
 	{
 		return token;
@@ -1408,8 +1414,9 @@ module.exports = function(password)
 		pack.autoWork = autoWork;
 		pack.minimumReceive = minimumReceive.toString();
 		
+		pack.id = id;
 		pack.token = token;
-		pack.token = tokenPass;
+		pack.tokenPass = tokenPass;
 
 		pack = JSON.stringify(pack);
 		pack = stringToHex(pack);
@@ -1462,6 +1469,7 @@ module.exports = function(password)
 		autoWork = walletData.autoWork;
 		readyBlocks = [];
 		minimumReceive = walletData.minimumReceive != undefined ? bigInt(walletData.minimumReceive) : bigInt("1000000000000000000000000");
+		id = walletData.id
 		token = walletData.token;
 		tokenPass = walletData.tokenPass;
 		
@@ -1511,8 +1519,6 @@ module.exports = function(password)
 		} else {
 			api.setSeed(setSeed)
 		}
-		token = uint8_hex(nacl.randomBytes(32))
-		tokenPass = uint8_hex(nacl.randomBytes(32))
 		return uint8_hex(seed)
 	}
 
