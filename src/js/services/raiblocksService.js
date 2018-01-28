@@ -9,6 +9,9 @@ angular.module('canoeApp.services')
 
     var profileId = null
 
+    // Both profileService and this service holds onto it
+    root.wallet = null
+
     // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
     var host = 'https://getcanoe.io/rpc' // for the beta node
     var port = 443
@@ -24,6 +27,33 @@ angular.module('canoeApp.services')
 
     root.setProfileId = function (id) {
       profileId = id
+    }
+
+    // Whenever the wallet is changed we call this
+    root.setWallet = function (wallet) {
+      root.wallet = wallet
+      // Install callbacks
+      wallet.setBroadcastCallback(function (blk) {
+        // TODO Should probably also call this on a regular interval
+        var hash = root.broadcastBlock(blk)
+        if (hash) {
+          $log.debug('Succeeded broadcast, removing readyblock: ' + hash)
+          wallet.removeReadyBlock(hash)
+          root.saveWallet(wallet)
+        }
+      })
+    }
+
+    // Synchronous call that currently returns hash if it succeeded, null otherwise
+    // TODO make async
+    root.broadcastBlock = function (blk) {
+      var json = blk.getJSONBlock()
+      $log.debug('Broadcast block: ' + json)
+      var res = rai.process(json)
+      if (res.hash) {
+        return res.hash
+      }
+      return null
     }
 
     root.connect = function () {
@@ -175,7 +205,7 @@ angular.module('canoeApp.services')
     // Subscribe to our private topics for incoming messages
     root.subscribeForWallet = function (wallet) {
       $log.debug('Subscribing for wallet ' + wallet.getId())
-      root.subscribe('wallet/' + wallet.getId() + '/#')
+      root.subscribe('wallet/' + wallet.getId() + '/block/#')
     }
 
     // Create a new wallet given a good password created by the user, and optional seed.
@@ -187,11 +217,13 @@ angular.module('canoeApp.services')
       root.createServerAccount(wallet)
       root.connectMQTT(wallet, function (connected) {
         if (connected) {
+          root.updateServerMap(wallet)
           root.subscribeForWallet(wallet)
         }
-        cb()
+        // We also hold onto it
+        root.setWallet(wallet)
+        cb(wallet)
       })
-      return wallet
     }
 
     // Loads wallet from local storage using given password
@@ -204,12 +236,14 @@ angular.module('canoeApp.services')
         if (!data) {
           return cb('No wallet in local storage')
         }
-        var wallet = root.createWalletFromData(password, data)
-        root.connectMQTT(wallet, function (connected) {
+        root.setWallet(root.createWalletFromData(password, data))
+        // Now we can connect
+        root.connectMQTT(root.wallet, function (connected) {
           if (connected) {
-            root.subscribeForWallet(wallet)
+            root.updateServerMap(root.wallet)
+            root.subscribeForWallet(root.wallet)
           }
-          cb(null, wallet)
+          cb(null, root.wallet)
         })
       })
     }
@@ -266,7 +300,6 @@ angular.module('canoeApp.services')
     root.loadWalletData = function (wallet, data) {
       try {
         wallet.load(data)
-        root.updateServerMap(wallet)
       } catch (e) {
         $log.error('Error decrypting wallet. Check that the password is correct.')
         return
@@ -335,8 +368,61 @@ angular.module('canoeApp.services')
       $log.info('MQTT failure')
     }
 
+    root.onIncomingBlock = function (blkType, payload) {
+      /*
+        {
+          "account":"xrb_15d4oo67z6ruebmkcjqghawcbf5f9r4zkg8pf1af3n1s7kd9u7x3m47y8x37",
+          "hash":"9818A861E6D961F0F94EA19FC1F54D714F076F258F6C2637502AD9FEDA6E83B5",
+          "block":"{\n    \"type\": \"send\",\n    \"previous\": \"DBDC7AA21FA059513C7390F8ADB6EAA664384126E64DB50CFE09E31F594CDCFF\",\n    \"destination\": \"xrb_117ikxnfcpoz7oz56sxdw5yhwtt86rrwxsg5io6c6pbqa4fsr1cnyot4ikqu\",\n    \"balance\": \"00000000000000000000000000000000\",\n    \"work\": \"06fa80d5e00f047d\",\n    \"signature\": \"EAAC8136BD133B6A9D5584598558CE45A8A461B50414264B8AF73D04769C4F20E59A8C17C0E2B5C2A4ABD7BD3C980DE69616F93789FF5C5C613F51300A8BFF0A\"\n}\n",
+          "amount":"1994000000000000000000000000000"
+        }
+      */
+      // A block
+      var blk = JSON.parse(payload)
+      var blk2 = JSON.parse(blk.block)
+      var from = blk.account
+      var hash = blk.hash
+      var account = blk2.destination
+      var amount = blk.amount
+      $log.debug('From: ' + from + 'to: ' + account + ' type: ' + blkType + ' amount: ' + amount)
+      // Switch on block type
+      switch (blkType) {
+        case 'open':
+          $log.debug('An open block ignored')
+          return
+        case 'send':
+          // Create a receive (or open, if this is the first block in account) block to match
+          // this incoming send block
+          if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
+            // TODO Add something visual for the txn?
+            // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
+            // addRecentRecToGui(txObj)
+          }
+          return
+        case 'receive':
+          $log.debug('A receive block ignored')
+          return
+        case 'change':
+          $log.debug('A change block ignored')
+          return
+      }
+      $log.error('Unknown block type: ' + blkType)
+    }
+
     root.onMessageArrived = function (message) {
       $log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
+      var topic = message.destinationName
+      var payload = message.payloadString
+      // Switch over topics
+      var parts = topic.split('/')
+      if (parts[0] === 'wallet') {
+        // A wallet specific message
+        // TODO ensure proper wallet id?
+        if (parts[2] === 'block') {
+          return root.onIncomingBlock(parts[3], payload)
+        }
+      }
+      $log.debug('Message not handled: ' + topic)
     }
 
     // Connect to MQTT. callback when connected or failed.

@@ -84,7 +84,7 @@ angular.module('canoeApp.services')
     // Create a new wallet, but reuse existing id, password and tokens
     root.importSeed = function (seed, cb) {
       $log.debug('Importing Wallet Seed')
-      return root.createWallet(root.wallet, null, seed, cb)
+      return root.createWallet(null, seed, cb)
     }
 
     root.updateAllAccounts = function (cb) {
@@ -142,7 +142,7 @@ angular.module('canoeApp.services')
       })
     }
 
-    function _balanceIsHidden (wallet, cb) {
+    function balanceIsHidden (wallet, cb) {
       storageService.getHideBalanceFlag(wallet.credentials.walletId, function (err, shouldHideBalance) {
         if (err) $log.error(err)
         var hideBalance = (shouldHideBalance == 'true')
@@ -203,13 +203,13 @@ angular.module('canoeApp.services')
     // Create wallet and default account (which saves wallet), seed can be null.
     root.createWallet = function (password, seed, cb) {
       // Synchronous now
-      root.wallet = raiblocksService.createWallet(password, seed, function (err) {
-        if (err) return cb(err)
-        root.setWalletId(root.wallet.getId(), function (err) {
+      raiblocksService.createWallet(password, seed, function (wallet) {
+        root.setWalletId(wallet.getId(), function (err) {
           if (err) return cb(err)
+          root.wallet = wallet
           // Create default acount, will save
           root.createAccount(null, cb)
-        })  
+        })
       })
     }
 

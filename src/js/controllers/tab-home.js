@@ -240,6 +240,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
 
     var performUpdate = function (cb) {
       profileService.updateAllAccounts(function (err, accounts) {
+        $log.debug('Update accounts: ' + JSON.stringify(accounts))
         if (err) {
           profileService.fetchServerStatus(function (err, status) {
             // {link: "url", title: "asdasd", body: "saasd"}
