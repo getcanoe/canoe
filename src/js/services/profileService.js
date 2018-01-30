@@ -152,9 +152,6 @@ angular.module('canoeApp.services')
 
     root.bindProfile = function (profile, cb) {
       root.profile = profile
-      // Make sure this service has it, for communicating with the server
-      raiblocksService.setProfileId(profile.id)
-
       configService.get(function (err) {
         $log.debug('Preferences read')
         if (err) return cb(err)
@@ -197,7 +194,7 @@ angular.module('canoeApp.services')
 
     // Do we have funds? Presuming we are up to date here. It's a bigInt
     root.hasFunds = function () {
-      return root.wallet.getWalletBalance().get(0)
+      return root.wallet.getWalletBalance().greater(0)
     }
 
     // Create wallet and default account (which saves wallet), seed can be null.
