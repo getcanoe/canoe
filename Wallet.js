@@ -158,6 +158,7 @@ module.exports = function(password)
 	var errorBlocks = [];               // blocks which could not be confirmed
 	
 	var broadcastCallback = null        // Callback function to perform broadcast
+	var enableBroadcast = true          // Flag to enable/disable
 
 	var remoteWork = [];                // work pool
 	var autoWork = false;               // generate work automatically on receive transactions (server)
@@ -190,6 +191,10 @@ module.exports = function(password)
 	api.setLogger = function(loggerObj)
 	{
 		logger = loggerObj;
+	}
+
+	api.enableBroadcast = function (bool) {
+		enableBroadcast = bool
 	}
 
 	api.setBroadcastCallback = function(cb)
@@ -822,8 +827,10 @@ module.exports = function(password)
 	api.addBlockToReadyBlocks = function(blk)
 	{
 		readyBlocks.push(blk);
-		broadcastCallback(blk);
-		logger.log("Block ready to be broadcasted: " +blk.getHash(true));
+		logger.log("Block ready to be broadcasted: " + blk.getHash(true));
+		if (enableBroadcast) {
+			broadcastCallback(blk);
+		}
 	}
 	
 	api.addPendingSendBlock = function(from, to, amount = 0)
@@ -1306,6 +1313,12 @@ module.exports = function(password)
 		api.confirmBlock(blk.getHash(true));
 	}
 	
+	api.createBlockFromJSON = function(jsonOrObj) {
+		var blk = new Block()
+		blk.buildFromJSON(jsonOrObj, blk.getMaxVersion())
+		return blk
+	}
+
 	api.importForkedBlock = function(blk, acc)
 	{
 		api.useAccount(acc);
@@ -1419,6 +1432,7 @@ module.exports = function(password)
 		pack.tokenPass = tokenPass;
 
 		pack = JSON.stringify(pack);
+		console.log('SAVING: ' + pack)
 		pack = stringToHex(pack);
 		pack = new Buffer(pack, 'hex');
 		
@@ -1461,7 +1475,7 @@ module.exports = function(password)
 			throw "Wallet is corrupted or has been tampered.";
 		
 		var walletData = JSON.parse(decryptedBytes.toString('utf8'));
-		
+		console.log('LOADING: ' + JSON.stringify(walletData))
 		seed = hex_uint8(walletData.seed);
 		lastKeyFromSeed = walletData.last;
 		recentTxs = walletData.recent;

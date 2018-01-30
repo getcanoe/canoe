@@ -1,13 +1,11 @@
 'use strict'
-/* global angular XMLHttpRequest device Paho RAI Rai getUUID */
+/* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
   .factory('raiblocksService', function ($log, platformInfo, storageService, lodash) {
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
     // We use either XMLHttpRpc calls via rai (RaiblocksJS modified) or MQTT-over-WSS.
-
-    var profileId = null
 
     // Both profileService and this service holds onto it
     root.wallet = null
@@ -21,12 +19,47 @@ angular.module('canoeApp.services')
     var mqttHost = 'getcanoe.io'
     var mqttPort = 1884
     var mqttClient = null
-    var mqttClientId = null
     var mqttUsername = null
-    var mqttPassword = null
 
-    root.setProfileId = function (id) {
-      profileId = id
+    // See clientPoW below
+    var powWorkers = null
+
+    // Let's call it every second
+    setTimeout(clientPoW, 1000)
+
+    // For testing, every 60 sec
+    //setTimeout(fetchPendingBlocks, 1000)
+
+    // For the moment we do strictly client side PoW,
+    // this function calls itself every sec. It can also be called explicitly.
+    function clientPoW () {
+      // No wallet, no dice
+      if (root.wallet === null) {
+        return setTimeout(clientPoW, 1000)
+      }
+      var pool = root.wallet.getWorkPool()
+      var hash = false
+      if (pool.length > 0) {
+        for (let i in pool) {
+          if (pool[i].needed || !pool[i].requested) {
+            hash = pool[i].hash
+            break
+          }
+        }
+        if (hash === false) {
+          return setTimeout(clientPoW, 1000)
+        }
+        powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
+        pow_callback(powWorkers, hash, function () {
+          $log.log('Working locally on ' + hash)
+        }, function (work) {
+          $log.log('PoW found for ' + hash + ': ' + work)
+          root.wallet.updateWorkPool(hash, work)
+          setTimeout(clientPoW, 1000)
+        })
+      } else {
+        setTimeout(clientPoW, 1000)
+      }
     }
 
     // Whenever the wallet is changed we call this
@@ -39,9 +72,61 @@ angular.module('canoeApp.services')
         if (hash) {
           $log.debug('Succeeded broadcast, removing readyblock: ' + hash)
           wallet.removeReadyBlock(hash)
-          root.saveWallet(wallet)
+          root.saveWallet(wallet, function () {})
         }
       })
+    }
+
+    // Import all chains for the whole wallet from scratch throwing away what we have
+    function resetChains () {
+      if (root.wallet) {
+        var accountIds = root.wallet.getAccountIds()
+        lodash.each(accountIds, function (account) {
+          var hist = rai.account_history(account)
+          var hashes = []
+          lodash.each(hist, function (blk) {
+            hashes.unshift(blk.hash) // Reversing order
+          })
+          var blocks = rai.blocks_info(hashes)
+          root.wallet.enableBroadcast(false)
+          // Unfortunately blocks is an object so to get proper order we use hashes
+          lodash.each(hashes, function (hash) {
+            var block = blocks[hash]
+            var blk = root.wallet.createBlockFromJSON(block.contents)
+            blk.setAmount(block.amount)
+            blk.setAccount(block.block_account)
+            blk.setImmutable(true)
+            try {
+              if (!root.wallet.importForkedBlock(blk, account)) { // Replaces any existing block
+                root.wallet.importBlock(blk, account) // No existing so just import
+              }
+              root.wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
+            } catch (e) {
+              $log.error(e)
+            }
+            // root.handleIncomingSendBlock(blk.hash, account, blk.block_account, blk.amount)
+          })
+          root.saveWallet(root.wallet, function () {})
+          root.wallet.enableBroadcast(true) // Turn back on
+        })
+      }
+    }
+    window.fetchPendingBlocks = fetchPendingBlocks
+    window.resetChains = resetChains
+
+    // Explicitly ask for pending blocks and fetching them to process them as if
+    // they came in live over the rai_node callback
+    function fetchPendingBlocks () {
+      if (root.wallet) {
+        var accountIds = root.wallet.getAccountIds()
+        var accountsAndHashes = rai.accounts_pending(accountIds)
+        lodash.each(accountsAndHashes, function (hashes, account) {
+          var blocks = rai.blocks_info(hashes)
+          lodash.each(blocks, function (blk, hash) {
+            root.handleIncomingSendBlock(hash, account, blk.block_account, blk.amount)
+          })
+        })
+      }
     }
 
     // Synchronous call that currently returns hash if it succeeded, null otherwise
@@ -50,10 +135,8 @@ angular.module('canoeApp.services')
       var json = blk.getJSONBlock()
       $log.debug('Broadcast block: ' + json)
       var res = rai.process(json)
-      if (res.hash) {
-        return res.hash
-      }
-      return null
+      $log.debug('Result ' + JSON.stringify(res))
+      return res
     }
 
     root.connect = function () {
@@ -97,60 +180,6 @@ angular.module('canoeApp.services')
     }
 
     /*
-
-    root.newRandomSeed = function () {
-      // During dev we reuse the same wallet seed - DO NOT ADD MONEY TO THIS ONE
-      //if (platformInfo.isDevel) {
-      //  $log.debug('Reusing dev seed')
-      //  return '<some seed>'
-      //} else {
-        return XRB.createSeedHex()
-      //}
-    }
-
-    root.createWallet = function (seed) {
-      $log.debug('Create wallet')
-      var wallet = {}
-      wallet.id = rai.wallet_create()
-      // We also need to set the seed, or we can't ever get it out
-      var seedToSet = seed || root.newRandomSeed()
-      root.changeSeed(wallet, seedToSet)
-      $log.debug('Wallet: ' + JSON.stringify(wallet))
-      return wallet
-    }
-
-    root.makeAccount = function (wallet, id, accountName) {
-      // TODO fix unique naming of discovered accounts
-      var account = {name: accountName, id: id}
-      wallet.accounts[id] = account
-      return account
-    }
-
-    root.createAccount = function (wallet, accountName) {
-      $log.debug('Create account in wallet ' + wallet.id + ' named ' + accountName)
-      var json = rai.account_create(wallet.id, true) // work = true
-      if (json.account) {
-        var account = root.makeAccount(wallet, json.account, accountName)
-        $log.debug('Account: ' + JSON.stringify(account))
-        return account
-      }
-    }
-
-    root.fetchAccountsAndBalancesAsync = function (wallet, cb) {
-      $log.debug('Fetching all balances in wallet ' + wallet.id)
-      // This could discover new ones, or some have been removed
-      rai.account_list_async(wallet.id, function (json) {
-        if (json.accounts) {
-          rai.accounts_balances_async(json.accounts, function (json) {
-            $log.debug('Fetched')
-            cb(null, json.balances)
-          })
-        } else {
-          cb(json)
-        }
-      })
-    }
-
     root.changeSeed = function (wallet, seed) {
       $log.debug('Changing seed and clearing accounts: ' + seed)
       wallet.seed = seed
@@ -158,17 +187,7 @@ angular.module('canoeApp.services')
       return rai.wallet_change_seed(wallet.id, seed)
     }
 
-    root.send = function (wallet, account, addr, amount) {
-      $log.debug('Sending ' + amount + ' from ' + account.name + ' to ' + addr)
-      return rai.send(wallet.id, account.id, addr, amount)
-    }
-
     */
-
-//
-// New RaiWebwallet based code. We call functions in src/js/raiwallet.js
-// All new functions start with raiXXX
-//
 
     // Send amountRaw (bigInt) from account to addr, using wallet.
     root.send = function (wallet, account, addr, amountRaw) {
@@ -177,7 +196,7 @@ angular.module('canoeApp.services')
         var blk = wallet.addPendingSendBlock(account.id, addr, amountRaw)
         // var hash = blk.getHash(true)
         // refreshBalances()
-        $log.debug('Transaction built successfully. Waiting for work ...')
+        $log.debug('Block built successfully. Waiting for work ...')
         // addRecentSendToGui({date: 'Just now', amount: amountRaw, hash: hash})
         wallet.workPoolAdd(blk.getPrevious(), account.id, true)
       } catch (e) {
@@ -323,8 +342,8 @@ angular.module('canoeApp.services')
 
     root.connectMQTT = function (wallet, cb) {
       mqttUsername = wallet.getToken()
-      mqttPassword = wallet.getTokenPass()
-      mqttClientId = wallet.getId()
+      var mqttPassword = wallet.getTokenPass()
+      var mqttClientId = wallet.getId()
       var opts = {userName: mqttUsername, password: mqttPassword, clientId: mqttClientId}
       // Connect to MQTT
       $log.debug('********** CONNECTING MQTT ***********')
@@ -368,6 +387,18 @@ angular.module('canoeApp.services')
       $log.info('MQTT failure')
     }
 
+    root.handleIncomingSendBlock = function (hash, account, from, amount) {
+      // Create a receive (or open, if this is the first block in account) block to match
+      // this incoming send block
+      if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
+        // TODO Add something visual for the txn?
+        // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
+        // addRecentRecToGui(txObj)
+        root.saveWallet(root.wallet, function () {})
+        clientPoW()
+      }
+    }
+
     root.onIncomingBlock = function (blkType, payload) {
       /*
         {
@@ -388,21 +419,17 @@ angular.module('canoeApp.services')
       // Switch on block type
       switch (blkType) {
         case 'open':
+          // TODO We should match it right?  It can only originate from me unless multiple devices
           $log.debug('An open block ignored')
           return
         case 'send':
-          // Create a receive (or open, if this is the first block in account) block to match
-          // this incoming send block
-          if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
-            // TODO Add something visual for the txn?
-            // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
-            // addRecentRecToGui(txObj)
-          }
-          return
+          return root.handleIncomingSendBlock(hash, account, from, amount)
         case 'receive':
+          // TODO We should match it right? It can only originate from me unless multiple devices
           $log.debug('A receive block ignored')
           return
         case 'change':
+          // TODO We should match it right? It can only originate from me unless multiple devices
           $log.debug('A change block ignored')
           return
       }
