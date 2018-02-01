@@ -2,7 +2,6 @@
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
   .factory('raiblocksService', function ($log, configService, platformInfo, storageService, lodash) {
-
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
@@ -29,7 +28,7 @@ angular.module('canoeApp.services')
     setTimeout(generatePoW, 1000)
 
     // For testing, every 60 sec
-    //setTimeout(fetchPendingBlocks, 1000)
+    // setTimeout(fetchPendingBlocks, 1000)
 
     // This function calls itself every sec. It can also be called explicitly.
     function generatePoW () {
@@ -39,23 +38,27 @@ angular.module('canoeApp.services')
       }
       var pool = root.wallet.getWorkPool()
       var hash = false
+      // Do we have work to do?
       if (pool.length > 0) {
+        // Find one to work on
         for (let i in pool) {
-          if (pool[i].needed || !pool[i].requested) {
+          if (pool[i].needed) {
             hash = pool[i].hash
             break
           }
         }
         if (hash === false) {
-          // No hash to work on, let's check again in 1 sec. This seems nuts btw.
+          // No hash to work on
           return setTimeout(generatePoW, 1000)
         }
+        // Do work server or client side?
         if (configService.getSync().wallet.serverSidePoW) {
           // Server side
           $log.log('Working on server for ' + hash)
           rai.work_generate_async(hash, function (work) {
             $log.log('Server side PoW found for ' + hash + ': ' + work)
             root.wallet.updateWorkPool(hash, work)
+            // Now we can do one more, keeping it one at a time for server side
             setTimeout(generatePoW, 1000)
           })
         } else {
@@ -90,11 +93,13 @@ angular.module('canoeApp.services')
       })
     }
 
-    // Import all chains for the whole wallet from scratch throwing away what we have
+    // Import all chains for the whole wallet from scratch throwing away local forks we have.
+    // If we have extra blocks those are rebroadcasted.
     function resetChains () {
       if (root.wallet) {
         var accountIds = root.wallet.getAccountIds()
         lodash.each(accountIds, function (account) {
+          var currentBlocks = root.wallet.getLastNBlocks(account, 99999)
           var hist = rai.account_history(account)
           var hashes = []
           lodash.each(hist, function (blk) {
@@ -110,18 +115,29 @@ angular.module('canoeApp.services')
             blk.setAccount(block.block_account)
             blk.setImmutable(true)
             try {
+              // First we check if this is a fork and thus adop it if it is
               if (!root.wallet.importForkedBlock(blk, account)) { // Replaces any existing block
-                root.wallet.importBlock(blk, account) // No existing so just import
+                // No fork so we can just import it
+                root.wallet.importBlock(blk, account)
               }
+              // It was added so remove it from currentBlocks
+              lodash.remove(currentBlocks, function (b) {
+                return b.getHash(true) === hash
+              })
               root.wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
             } catch (e) {
               $log.error(e)
             }
-            // root.handleIncomingSendBlock(blk.hash, account, blk.block_account, blk.amount)
           })
-          root.saveWallet(root.wallet, function () {})
+          // Now we add any old blocks and rebroadcast them
+          $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
           root.wallet.enableBroadcast(true) // Turn back on
+          lodash.each(currentBlocks, function (b) {
+            root.wallet.addBlockToReadyBlocks(b)
+          })
         })
+        root.wallet.enableBroadcast(true) // Turn back on
+        root.saveWallet(root.wallet, function () {})
       }
     }
     window.fetchPendingBlocks = fetchPendingBlocks
@@ -209,9 +225,8 @@ angular.module('canoeApp.services')
         var blk = wallet.addPendingSendBlock(account.id, addr, amountRaw)
         // var hash = blk.getHash(true)
         // refreshBalances()
-        $log.debug('Block built successfully. Waiting for work ...')
+        $log.debug('Added send block successfully: ' + blk.getHash(true))
         // addRecentSendToGui({date: 'Just now', amount: amountRaw, hash: hash})
-        wallet.workPoolAdd(blk.getPrevious(), account.id, true)
       } catch (e) {
         $log.error('Send failed ' + e.message)
         return false
