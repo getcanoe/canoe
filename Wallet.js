@@ -161,7 +161,6 @@ module.exports = function(password)
 	var enableBroadcast = true          // Flag to enable/disable
 
 	var remoteWork = [];                // work pool
-	var autoWork = false;               // generate work automatically on receive transactions (server)
 	
 	var current = -1;                   // key being used
 	var seed = "";                      // wallet seed
@@ -833,6 +832,35 @@ module.exports = function(password)
 		}
 	}
 	
+	private.ensureWork = function(blk, acc) {
+		logger.log('Work pool: ' + JSON.stringify(remoteWork))
+		// First check if we have received work already for the previous block
+		var previous = blk.getPrevious()
+		var previousBlk = api.getBlockFromHash(previous)
+		if (!previousBlk.ready()) {
+			// So previous blk still needs work, then we check if it may be done now
+			var worked = false;
+			for(let i in remoteWork)
+			{
+				if(remoteWork[i].hash == previous)
+				{
+					if(remoteWork[i].worked)
+					{
+						worked = api.updateWorkPool(previous, remoteWork[i].work);
+						break;
+					}
+				}
+			}
+			// It was not done, or it was not in the pool at all
+			if(!worked) {
+				// Adding twice is safe, it checks for that
+				api.workPoolAdd(previous, acc, true);
+			}
+		}	
+		// And this block we for sure want to add
+		api.workPoolAdd(blk.getHash(true), acc);		
+	}
+
 	api.addPendingSendBlock = function(from, to, amount = 0)
 	{
 		api.useAccount(from);
@@ -855,22 +883,7 @@ module.exports = function(password)
 		walletPendingBlocks.push(blk);
 		private.save();
 		
-		// check if we have received work already
-		var worked = false;
-		for(let i in remoteWork)
-		{
-			if(remoteWork[i].hash == blk.getPrevious())
-			{
-				if(remoteWork[i].worked)
-				{
-					worked = api.updateWorkPool(blk.getPrevious(), remoteWork[i].work);
-					break;
-				}
-			}
-		}
-		if(!worked)
-			api.workPoolAdd(blk.getPrevious(), from, true);
-		api.workPoolAdd(blk.getHash(true), from);
+		private.ensureWork(blk, from)
 		
 		logger.log("New send block waiting for work: " + blk.getHash(true));
 		
@@ -926,22 +939,7 @@ module.exports = function(password)
 		private.setPendingBalance(api.getPendingBalance().add(amount));
 		private.save();
 		
-		// check if we have received work already
-		var worked = false;
-		for(let i in remoteWork)
-		{
-			if(remoteWork[i].hash == blk.getPrevious())
-			{
-				if(remoteWork[i].worked)
-				{
-					worked = api.updateWorkPool(blk.getPrevious(), remoteWork[i].work);
-					break;
-				}
-			}
-		}
-		if(!worked)
-			api.workPoolAdd(blk.getPrevious(), acc, true);
-		api.workPoolAdd(blk.getHash(true), acc);
+		private.ensureWork(blk, acc);
 		
 		logger.log("New receive block waiting for work: " + blk.getHash(true));
 		
@@ -967,23 +965,8 @@ module.exports = function(password)
 		walletPendingBlocks.push(blk);
 		private.save();
 		
-		// check if we have received work already
-		var worked = false;
-		for(let i in remoteWork)
-		{
-			if(remoteWork[i].hash == blk.getPrevious())
-			{
-				if(remoteWork[i].worked)
-				{
-					worked = api.updateWorkPool(blk.getPrevious(), remoteWork[i].work);
-					break;
-				}
-			}
-		}
-		if(!worked)
-			api.workPoolAdd(blk.getPrevious(), acc, true);
-		api.workPoolAdd(blk.getHash(true), acc);
-		
+		private.ensureWork(blk, acc);
+
 		logger.log("New change block waiting for work: " + blk.getHash(true));
 		
 		return blk;
@@ -1423,8 +1406,7 @@ module.exports = function(password)
 		pack.seed = uint8_hex(seed);
 		pack.last = lastKeyFromSeed;
 		pack.recent = recentTxs;
-		pack.remoteWork = remoteWork;
-		pack.autoWork = autoWork;
+		// This is not read back in on load: pack.remoteWork = remoteWork;
 		pack.minimumReceive = minimumReceive.toString();
 		
 		pack.id = id;
@@ -1480,7 +1462,6 @@ module.exports = function(password)
 		lastKeyFromSeed = walletData.last;
 		recentTxs = walletData.recent;
 		remoteWork = [];
-		autoWork = walletData.autoWork;
 		readyBlocks = [];
 		minimumReceive = walletData.minimumReceive != undefined ? bigInt(walletData.minimumReceive) : bigInt("1000000000000000000000000");
 		id = walletData.id
