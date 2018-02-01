@@ -1,7 +1,8 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('raiblocksService', function ($log, platformInfo, storageService, lodash) {
+  .factory('raiblocksService', function ($log, configService, platformInfo, storageService, lodash) {
+
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
@@ -21,21 +22,20 @@ angular.module('canoeApp.services')
     var mqttClient = null
     var mqttUsername = null
 
-    // See clientPoW below
+    // See generatePoW below
     var powWorkers = null
 
     // Let's call it every second
-    setTimeout(clientPoW, 1000)
+    setTimeout(generatePoW, 1000)
 
     // For testing, every 60 sec
     //setTimeout(fetchPendingBlocks, 1000)
 
-    // For the moment we do strictly client side PoW,
-    // this function calls itself every sec. It can also be called explicitly.
-    function clientPoW () {
+    // This function calls itself every sec. It can also be called explicitly.
+    function generatePoW () {
       // No wallet, no dice
       if (root.wallet === null) {
-        return setTimeout(clientPoW, 1000)
+        return setTimeout(generatePoW, 1000)
       }
       var pool = root.wallet.getWorkPool()
       var hash = false
@@ -47,24 +47,37 @@ angular.module('canoeApp.services')
           }
         }
         if (hash === false) {
-          return setTimeout(clientPoW, 1000)
+          // No hash to work on, let's check again in 1 sec. This seems nuts btw.
+          return setTimeout(generatePoW, 1000)
         }
-        powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
-        pow_callback(powWorkers, hash, function () {
-          $log.log('Working locally on ' + hash)
-        }, function (work) {
-          $log.log('PoW found for ' + hash + ': ' + work)
-          root.wallet.updateWorkPool(hash, work)
-          setTimeout(clientPoW, 1000)
-        })
+        if (configService.getSync().wallet.serverSidePoW) {
+          // Server side
+          $log.log('Working on server for ' + hash)
+          rai.work_generate_async(hash, function (work) {
+            $log.log('Server side PoW found for ' + hash + ': ' + work)
+            root.wallet.updateWorkPool(hash, work)
+            setTimeout(generatePoW, 1000)
+          })
+        } else {
+          // Client side
+          powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
+          pow_callback(powWorkers, hash, function () {
+            $log.log('Working on client for ' + hash)
+          }, function (work) {
+            $log.log('Client side PoW found for ' + hash + ': ' + work)
+            root.wallet.updateWorkPool(hash, work)
+            setTimeout(generatePoW, 1000)
+          })
+        }
       } else {
-        setTimeout(clientPoW, 1000)
+        setTimeout(generatePoW, 1000)
       }
     }
 
     // Whenever the wallet is changed we call this
     root.setWallet = function (wallet) {
       root.wallet = wallet
+      wallet.setLogger($log)
       // Install callbacks
       wallet.setBroadcastCallback(function (blk) {
         // TODO Should probably also call this on a regular interval
@@ -231,7 +244,6 @@ angular.module('canoeApp.services')
     root.createWallet = function (password, seed, cb) {
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
-      wallet.setLogger($log)
       wallet.createSeed(seed)
       root.createServerAccount(wallet)
       root.connectMQTT(wallet, function (connected) {
@@ -395,7 +407,7 @@ angular.module('canoeApp.services')
         // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
         // addRecentRecToGui(txObj)
         root.saveWallet(root.wallet, function () {})
-        clientPoW()
+        generatePoW()
       }
     }
 

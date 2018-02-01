@@ -22,6 +22,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
     },
     // wallet default config
     wallet: {
+      serverSidePoW: true,
       settings: {
         unitName: 'XRB',
         unitToRaw: Math.pow(10, 30),

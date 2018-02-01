@@ -765,6 +765,12 @@ function Rai (url_base, port) {
     return work_generate.work
   }
 
+  this.work_generate_async = function (hash, cb) {
+    this.rpc(JSON.stringify({'action': 'work_generate', 'hash': hash}), function (result) {
+      cb(result.work)
+    })
+  }
+
   this.work_get = function (wallet, account) {
     var work_get = this.rpc(JSON.stringify({'action': 'work_get', 'wallet': wallet, 'account': account}))
     return work_get.work
