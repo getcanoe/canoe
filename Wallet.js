@@ -126,15 +126,20 @@ var AES = {
   }
 };
 
+function hexRandom (bytes) {
+	return uint8_hex(nacl.randomBytes(bytes))
+}
 
 module.exports = function(password)
 {
 	var api = {};                       // wallet public methods
 	var private = {};                   // wallet private methods
 	
-	var raiwalletdotcomRepresentative = "xrb_3pczxuorp48td8645bs3m6c3xotxd3idskrenmi65rbrga5zmkemzhwkaznh"; // self explaining
+	var canoeRepresentative = "xrb_1qckwc5o3obkrwbet4amnkya113xq77qpaknsmiq9hwq31tmd5bpyo7sepsw"; // self explaining
 	
-	var id = getUUID();                 // Unique id of this wallet, to be used as reference when handling
+	var id = hexRandom(11);             // Unique id of this wallet, to be used as reference when handling
+	var token = hexRandom(32);          // Secret token (used as username in server account)
+	var tokenPass = hexRandom(32);      // Secret tokenPass (used as password in server account)
 	var pk;                             // current account public key
 	var sk;                             // current account secret key
 	var pendingBalance;                 // current account pending balance
@@ -152,8 +157,10 @@ module.exports = function(password)
 	var readyBlocks = [];               // wallet blocks signed and worked, ready to broadcast and add to chain
 	var errorBlocks = [];               // blocks which could not be confirmed
 	
+	var broadcastCallback = null        // Callback function to perform broadcast
+	var enableBroadcast = true          // Flag to enable/disable
+
 	var remoteWork = [];                // work pool
-	var autoWork = false;               // generate work automatically on receive transactions (server)
 	
 	var current = -1;                   // key being used
 	var seed = "";                      // wallet seed
@@ -162,7 +169,6 @@ module.exports = function(password)
 	var iterations = 5000;              // pbkdf2 iterations
 	var checksum;                       // wallet checksum 
 	var ciphered = true;
-	var loginKey = false;								// key to tell the server when the wallet was successfully decrypted
 	
 	var logger = new Logger();
  
@@ -184,6 +190,15 @@ module.exports = function(password)
 	api.setLogger = function(loggerObj)
 	{
 		logger = loggerObj;
+	}
+
+	api.enableBroadcast = function (bool) {
+		enableBroadcast = bool
+	}
+
+	api.setBroadcastCallback = function(cb)
+	{
+		broadcastCallback = cb;
 	}
 	
 	/**
@@ -210,14 +225,7 @@ module.exports = function(password)
 	api.sign = function(message)
 	{
 		return nacl.sign.detached(message, sk);
-	}
-	
-
-	api.getId = function()
-	{
-		return id;
-	}
-	
+	}	
 
 	api.changePass = function(pswd, newPass)
 	{
@@ -478,7 +486,6 @@ module.exports = function(password)
 				throw "Invalid chain";
 			if(!api.verifyBlock(blocks[i]))
 			   throw "There is an invalid block";
-			
 		}
 	}
 	
@@ -818,9 +825,39 @@ module.exports = function(password)
 	api.addBlockToReadyBlocks = function(blk)
 	{
 		readyBlocks.push(blk);
-		logger.log("Block ready to be broadcasted: " +blk.getHash(true));
+		logger.log("Block ready to be broadcasted: " + blk.getHash(true));
+		if (enableBroadcast) {
+			broadcastCallback(blk);
+		}
 	}
 	
+	private.ensureWork = function(blk, acc) {
+		logger.log('Work pool: ' + JSON.stringify(remoteWork))
+		// And this block we for sure want to add, needed = false
+		api.workPoolAdd(blk.getHash(true), acc);		
+		// Then check if we have received work already for the previous block hash
+		var previous = blk.getPrevious()
+		var worked = false;
+		for(let i in remoteWork)
+		{
+			if(remoteWork[i].hash == previous)
+			{
+				if(remoteWork[i].worked)
+				{
+					// Yes we have, then we update work pool with this work
+					// which will also cause the blk to be marked as needed
+					worked = api.updateWorkPool(previous, remoteWork[i].work);
+					break;
+				}
+			}
+		}
+		// It was not done, or it was not in the pool at all
+		if(!worked) {
+			// Adding twice is safe, it checks for that, needed = true
+			api.workPoolAdd(previous, acc, true);
+		}
+	}
+
 	api.addPendingSendBlock = function(from, to, amount = 0)
 	{
 		api.useAccount(from);
@@ -842,26 +879,11 @@ module.exports = function(password)
 		pendingBlocks.push(blk);
 		walletPendingBlocks.push(blk);
 		private.save();
-		
-		// check if we have received work already
-		var worked = false;
-		for(let i in remoteWork)
-		{
-			if(remoteWork[i].hash == blk.getPrevious())
-			{
-				if(remoteWork[i].worked)
-				{
-					worked = api.updateWorkPool(blk.getPrevious(), remoteWork[i].work);
-					break;
-				}
-			}
-		}
-		if(!worked)
-			api.workPoolAdd(blk.getPrevious(), from, true);
-		api.workPoolAdd(blk.getHash(true), from);
-		
-		logger.log("New send block waiting for work: " + blk.getHash(true));
-		
+
+		logger.log("New send block ready for work: " + blk.getHash(true));
+
+		private.ensureWork(blk, from)
+				
 		return blk;
 
 	}
@@ -899,7 +921,7 @@ module.exports = function(password)
 		if(lastPendingBlock.length == 64)
 			blk.setReceiveParameters(lastPendingBlock, sourceBlockHash);
 		else
-			blk.setOpenParameters(sourceBlockHash, acc, raiwalletdotcomRepresentative);
+			blk.setOpenParameters(sourceBlockHash, acc, canoeRepresentative);
 		
 		blk.build();
 		api.signBlock(blk);
@@ -913,25 +935,10 @@ module.exports = function(password)
 		walletPendingBlocks.push(blk);
 		private.setPendingBalance(api.getPendingBalance().add(amount));
 		private.save();
-		
-		// check if we have received work already
-		var worked = false;
-		for(let i in remoteWork)
-		{
-			if(remoteWork[i].hash == blk.getPrevious())
-			{
-				if(remoteWork[i].worked)
-				{
-					worked = api.updateWorkPool(blk.getPrevious(), remoteWork[i].work);
-					break;
-				}
-			}
-		}
-		if(!worked)
-			api.workPoolAdd(blk.getPrevious(), acc, true);
-		api.workPoolAdd(blk.getHash(true), acc);
-		
-		logger.log("New receive block waiting for work: " + blk.getHash(true));
+				
+		logger.log("New receive block ready for work: " + blk.getHash(true));
+
+		private.ensureWork(blk, acc);
 		
 		return blk;
 	}
@@ -955,24 +962,9 @@ module.exports = function(password)
 		walletPendingBlocks.push(blk);
 		private.save();
 		
-		// check if we have received work already
-		var worked = false;
-		for(let i in remoteWork)
-		{
-			if(remoteWork[i].hash == blk.getPrevious())
-			{
-				if(remoteWork[i].worked)
-				{
-					worked = api.updateWorkPool(blk.getPrevious(), remoteWork[i].work);
-					break;
-				}
-			}
-		}
-		if(!worked)
-			api.workPoolAdd(blk.getPrevious(), acc, true);
-		api.workPoolAdd(blk.getHash(true), acc);
-		
-		logger.log("New change block waiting for work: " + blk.getHash(true));
+		logger.log("New change block ready for work: " + blk.getHash(true));
+
+		private.ensureWork(blk, acc);
 		
 		return blk;
 	}
@@ -1018,30 +1010,19 @@ module.exports = function(password)
 		
 		if(work !== false)
 		{
-			remoteWork.push({hash: hash, worked: true, work: work, requested: true, needed: needed,  account: acc});
+			remoteWork.push({hash: hash, worked: true, work: work, needed: needed,  account: acc});
 		}
 		else
 		{
-			remoteWork.push({hash: hash, work: "", worked: false, requested: false, needed: needed, account: acc});
+			remoteWork.push({hash: hash, work: "", worked: false, needed: needed, account: acc});
 			logger.log("New work target: " + hash);
 		}
+		logger.log("Current work pool: " + JSON.stringify(remoteWork))
 	}
 	
 	api.getWorkPool = function()
 	{
 		return remoteWork;
-	}
-	
-	api.setWorkRequested = function(hash)
-	{
-		for(let i in remoteWork)
-		{
-			if(remoteWork[i].hash == hash)
-			{
-				remoteWork[i].requested = true;
-				break;
-			}
-		}
 	}
 	
 	api.setWorkNeeded = function(hash)
@@ -1087,7 +1068,6 @@ module.exports = function(password)
 			{
 				remoteWork[i].work = work;
 				remoteWork[i].worked = true;
-				remoteWork[i].requested = true;
 				remoteWork[i].needed = false;
 				
 				found = true;
@@ -1095,16 +1075,20 @@ module.exports = function(password)
 				{
 					if(walletPendingBlocks[j].getPrevious() == hash)
 					{
-						logger.log("Work received for block "+walletPendingBlocks[j].getHash(true)+" previous: "+hash);
-						walletPendingBlocks[j].setWork(work);
 						var aux = walletPendingBlocks[j];
+						var pendingHash = aux.getHash(true);
+						logger.log("Work received for block " + pendingHash + " previous: " + hash);
+						walletPendingBlocks[j].setWork(work);
+						// Now we can confirm the block with pendingHash since we have the work for its
+						// previous block. We can also mark pendingHash as needed, thus making sure we
+						// do PoW in block order.
 						try{
-							api.confirmBlock(aux.getHash(true));
+							api.confirmBlock(pendingHash)
 							remoteWork.splice(i, 1);
-							api.setWorkNeeded(aux.getHash(true));
+							api.setWorkNeeded(pendingHash);
 							return true;
 						}catch(e){
-							logger.error("Error adding block "+aux.getHash(true)+" to chain: " + e.message);
+							logger.error("Error adding block " + pendingHash + " to chain: " + e.message);
 							errorBlocks.push(aux)
 						}
 						break;
@@ -1210,7 +1194,7 @@ module.exports = function(password)
 					if(blk.getType() != 'open')
 						throw "First block needs to be 'open'.";
 					chain.push(blk);
-					readyBlocks.push(blk);
+					api.addBlockToReadyBlocks(blk);
 					api.removePendingBlock(blockHash);
 					private.setPendingBalance(api.getPendingBalance().minus(blk.getAmount()));
 					private.setBalance(api.getBalance().add(blk.getAmount()));
@@ -1248,7 +1232,7 @@ module.exports = function(password)
 						else
 							throw "Invalid block type";
 						chain.push(blk);
-						readyBlocks.push(blk);
+						api.addBlockToReadyBlocks(blk);
 						api.removePendingBlock(blockHash);
 						api.recalculateWalletBalances();
 						private.save();
@@ -1301,6 +1285,12 @@ module.exports = function(password)
 		api.confirmBlock(blk.getHash(true));
 	}
 	
+	api.createBlockFromJSON = function(jsonOrObj) {
+		var blk = new Block()
+		blk.buildFromJSON(jsonOrObj, blk.getMaxVersion())
+		return blk
+	}
+
 	api.importForkedBlock = function(blk, acc)
 	{
 		api.useAccount(acc);
@@ -1340,16 +1330,19 @@ module.exports = function(password)
 		}
 	}
 	
-	api.getLoginKey = function()
+	api.getId = function()
 	{
-		return loginKey;
+		return id;
+	}
+
+	api.getToken = function()
+	{
+		return token;
 	}
 	
-	api.setLoginKey = function(lk)
+	api.getTokenPass = function()
 	{
-		if(loginKey === false)
-			loginKey = lk;
-		// cannot be changed
+		return tokenPass;
 	}
 	
 	private.save = function()
@@ -1403,13 +1396,14 @@ module.exports = function(password)
 		pack.last = lastKeyFromSeed;
 		pack.recent = recentTxs;
 		pack.remoteWork = remoteWork;
-		pack.autoWork = autoWork;
 		pack.minimumReceive = minimumReceive.toString();
 		
-		if(loginKey !== false)
-			pack.loginKey = loginKey;
-		
+		pack.id = id;
+		pack.token = token;
+		pack.tokenPass = tokenPass;
+
 		pack = JSON.stringify(pack);
+		console.log('SAVING: ' + pack)
 		pack = stringToHex(pack);
 		pack = new Buffer(pack, 'hex');
 		
@@ -1452,16 +1446,17 @@ module.exports = function(password)
 			throw "Wallet is corrupted or has been tampered.";
 		
 		var walletData = JSON.parse(decryptedBytes.toString('utf8'));
-		
+		console.log('LOADING: ' + JSON.stringify(walletData))
 		seed = hex_uint8(walletData.seed);
 		lastKeyFromSeed = walletData.last;
 		recentTxs = walletData.recent;
-		remoteWork = [];
-		autoWork = walletData.autoWork;
-		readyBlocks = [];
+		remoteWork = walletData.remoteWork || [];
 		minimumReceive = walletData.minimumReceive != undefined ? bigInt(walletData.minimumReceive) : bigInt("1000000000000000000000000");
-		loginKey = walletData.loginKey ? walletData.loginKey : false;
-		
+		id = walletData.id
+		token = walletData.token;
+		tokenPass = walletData.tokenPass;
+
+		readyBlocks = [];		
 		for(let i in walletData.readyBlocks)
 		{
 			var blk = new Block();
@@ -1493,8 +1488,13 @@ module.exports = function(password)
 			aux.meta = walletData.keys[i].meta != undefined ? walletData.keys[i].meta : { label: ""};
 				
 			keys.push(aux);
-			if(lastPendingBlock.length == 64)
-				api.workPoolAdd(lastPendingBlock, aux.account, true);
+			console.log("LastPendingBlock " + aux.lastPendingBlock)
+			// It can be "" if chain is empty, or a valid hash indicating we have at least one block
+			if(aux.lastPendingBlock.length == 64) {
+				// We want precomputed work for all last blocks
+				console.log("Adding " + aux.lastPendingBlock + " acc: " + aux.account)
+				api.workPoolAdd(aux.lastPendingBlock, aux.account, true);
+			}
 		}
 		api.useAccount(keys[0].account);
 		api.recalculateWalletBalances();
@@ -1508,7 +1508,6 @@ module.exports = function(password)
 		} else {
 			api.setSeed(setSeed)
 		}
-		loginKey = uint8_hex(nacl.randomBytes(32))
 		return uint8_hex(seed)
 	}
 

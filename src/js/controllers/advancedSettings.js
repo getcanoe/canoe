@@ -4,8 +4,8 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
   var updateConfig = function () {
     var config = configService.getSync()
 
-    $scope.spendUnconfirmed = {
-      value: config.wallet.spendUnconfirmed
+    $scope.serverSidePoW = {
+      value: config.wallet.serverSidePoW
     }
     $scope.recentTransactionsEnabled = {
       value: config.recentTransactions.enabled
@@ -15,10 +15,10 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
     }
   }
 
-  $scope.spendUnconfirmedChange = function () {
+  $scope.serverSidePoWChange = function () {
     var opts = {
       wallet: {
-        spendUnconfirmed: $scope.spendUnconfirmed.value
+        serverSidePoW: $scope.serverSidePoW.value
       }
     }
     configService.set(opts, function (err) {

@@ -1,16 +1,18 @@
 'use strict'
-/* global angular XMLHttpRequest device Paho RAI Rai getUUID */
+/* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('raiblocksService', function ($log, platformInfo, storageService, lodash) {
+  .factory('raiblocksService', function ($log, configService, platformInfo, storageService, lodash) {
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
     // We use either XMLHttpRpc calls via rai (RaiblocksJS modified) or MQTT-over-WSS.
 
-    var profileId = null
+    // Both profileService and this service holds onto it
+    root.wallet = null
 
     // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
-    var host = 'https://getcanoe.io/rpc' // for the beta node
+    // var host = 'https://getcanoe.io/rpc' // for the alpha
+    var host = 'https://getcanoe.io/rpc-dev' // for dev
     var port = 443
     var rai = null
 
@@ -18,11 +20,153 @@ angular.module('canoeApp.services')
     var mqttHost = 'getcanoe.io'
     var mqttPort = 1884
     var mqttClient = null
-    var mqttUsername = 'canoe'
-    var mqttPassword = 'cn99oe'
+    var mqttUsername = null
 
-    root.setProfileId = function (id) {
-      profileId = id
+    // See generatePoW below
+    var powWorkers = null
+
+    // Let's call it every second
+    setTimeout(generatePoW, 1000)
+
+    // For testing, every 60 sec
+    // setTimeout(fetchPendingBlocks, 1000)
+
+    // This function calls itself every sec. It can also be called explicitly.
+    function generatePoW () {
+      // No wallet, no dice
+      if (root.wallet === null) {
+        return setTimeout(generatePoW, 1000)
+      }
+      var pool = root.wallet.getWorkPool()
+      var hash = false
+      // Do we have work to do?
+      if (pool.length > 0) {
+        // Find one to work on
+        for (let i in pool) {
+          if (pool[i].needed) {
+            hash = pool[i].hash
+            break
+          }
+        }
+        if (hash === false) {
+          // No hash to work on
+          return setTimeout(generatePoW, 1000)
+        }
+        // Do work server or client side?
+        if (configService.getSync().wallet.serverSidePoW) {
+          // Server side
+          $log.log('Working on server for ' + hash)
+          rai.work_generate_async(hash, function (work) {
+            $log.log('Server side PoW found for ' + hash + ': ' + work)
+            root.wallet.updateWorkPool(hash, work)
+            // Now we can do one more, keeping it one at a time for server side
+            setTimeout(generatePoW, 1000)
+          })
+        } else {
+          // Client side
+          powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
+          pow_callback(powWorkers, hash, function () {
+            $log.log('Working on client for ' + hash)
+          }, function (work) {
+            $log.log('Client side PoW found for ' + hash + ': ' + work)
+            root.wallet.updateWorkPool(hash, work)
+            setTimeout(generatePoW, 1000)
+          })
+        }
+      } else {
+        setTimeout(generatePoW, 1000)
+      }
+    }
+
+    // Whenever the wallet is changed we call this
+    root.setWallet = function (wallet) {
+      root.wallet = wallet
+      wallet.setLogger($log)
+      // Install callbacks
+      wallet.setBroadcastCallback(function (blk) {
+        // TODO Should probably also call this on a regular interval
+        var hash = root.broadcastBlock(blk)
+        if (hash) {
+          $log.debug('Succeeded broadcast, removing readyblock: ' + hash)
+          wallet.removeReadyBlock(hash)
+          root.saveWallet(wallet, function () {})
+        }
+      })
+    }
+
+    // Import all chains for the whole wallet from scratch throwing away local forks we have.
+    // If we have extra blocks those are rebroadcasted.
+    function resetChains () {
+      if (root.wallet) {
+        var accountIds = root.wallet.getAccountIds()
+        lodash.each(accountIds, function (account) {
+          var currentBlocks = root.wallet.getLastNBlocks(account, 99999)
+          var hist = rai.account_history(account)
+          var hashes = []
+          lodash.each(hist, function (blk) {
+            hashes.unshift(blk.hash) // Reversing order
+          })
+          var blocks = rai.blocks_info(hashes)
+          root.wallet.enableBroadcast(false)
+          // Unfortunately blocks is an object so to get proper order we use hashes
+          lodash.each(hashes, function (hash) {
+            var block = blocks[hash]
+            var blk = root.wallet.createBlockFromJSON(block.contents)
+            blk.setAmount(block.amount)
+            blk.setAccount(block.block_account)
+            blk.setImmutable(true)
+            try {
+              // First we check if this is a fork and thus adop it if it is
+              if (!root.wallet.importForkedBlock(blk, account)) { // Replaces any existing block
+                // No fork so we can just import it
+                root.wallet.importBlock(blk, account)
+              }
+              // It was added so remove it from currentBlocks
+              lodash.remove(currentBlocks, function (b) {
+                return b.getHash(true) === hash
+              })
+              root.wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
+            } catch (e) {
+              $log.error(e)
+            }
+          })
+          // Now we add any old blocks and rebroadcast them
+          $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
+          root.wallet.enableBroadcast(true) // Turn back on
+          lodash.each(currentBlocks, function (b) {
+            root.wallet.addBlockToReadyBlocks(b)
+          })
+        })
+        root.wallet.enableBroadcast(true) // Turn back on
+        root.saveWallet(root.wallet, function () {})
+      }
+    }
+    window.fetchPendingBlocks = fetchPendingBlocks
+    window.resetChains = resetChains
+
+    // Explicitly ask for pending blocks and fetching them to process them as if
+    // they came in live over the rai_node callback
+    function fetchPendingBlocks () {
+      if (root.wallet) {
+        var accountIds = root.wallet.getAccountIds()
+        var accountsAndHashes = rai.accounts_pending(accountIds)
+        lodash.each(accountsAndHashes, function (hashes, account) {
+          var blocks = rai.blocks_info(hashes)
+          lodash.each(blocks, function (blk, hash) {
+            root.handleIncomingSendBlock(hash, account, blk.block_account, blk.amount)
+          })
+        })
+      }
+    }
+
+    // Synchronous call that currently returns hash if it succeeded, null otherwise
+    // TODO make async
+    root.broadcastBlock = function (blk) {
+      var json = blk.getJSONBlock()
+      $log.debug('Broadcast block: ' + json)
+      var res = rai.process(json)
+      $log.debug('Result ' + JSON.stringify(res))
+      return res
     }
 
     root.connect = function () {
@@ -66,60 +210,6 @@ angular.module('canoeApp.services')
     }
 
     /*
-
-    root.newRandomSeed = function () {
-      // During dev we reuse the same wallet seed - DO NOT ADD MONEY TO THIS ONE
-      //if (platformInfo.isDevel) {
-      //  $log.debug('Reusing dev seed')
-      //  return '<some seed>'
-      //} else {
-        return XRB.createSeedHex()
-      //}
-    }
-
-    root.createWallet = function (seed) {
-      $log.debug('Create wallet')
-      var wallet = {}
-      wallet.id = rai.wallet_create()
-      // We also need to set the seed, or we can't ever get it out
-      var seedToSet = seed || root.newRandomSeed()
-      root.changeSeed(wallet, seedToSet)
-      $log.debug('Wallet: ' + JSON.stringify(wallet))
-      return wallet
-    }
-
-    root.makeAccount = function (wallet, id, accountName) {
-      // TODO fix unique naming of discovered accounts
-      var account = {name: accountName, id: id}
-      wallet.accounts[id] = account
-      return account
-    }
-
-    root.createAccount = function (wallet, accountName) {
-      $log.debug('Create account in wallet ' + wallet.id + ' named ' + accountName)
-      var json = rai.account_create(wallet.id, true) // work = true
-      if (json.account) {
-        var account = root.makeAccount(wallet, json.account, accountName)
-        $log.debug('Account: ' + JSON.stringify(account))
-        return account
-      }
-    }
-
-    root.fetchAccountsAndBalancesAsync = function (wallet, cb) {
-      $log.debug('Fetching all balances in wallet ' + wallet.id)
-      // This could discover new ones, or some have been removed
-      rai.account_list_async(wallet.id, function (json) {
-        if (json.accounts) {
-          rai.accounts_balances_async(json.accounts, function (json) {
-            $log.debug('Fetched')
-            cb(null, json.balances)
-          })
-        } else {
-          cb(json)
-        }
-      })
-    }
-
     root.changeSeed = function (wallet, seed) {
       $log.debug('Changing seed and clearing accounts: ' + seed)
       wallet.seed = seed
@@ -127,17 +217,7 @@ angular.module('canoeApp.services')
       return rai.wallet_change_seed(wallet.id, seed)
     }
 
-    root.send = function (wallet, account, addr, amount) {
-      $log.debug('Sending ' + amount + ' from ' + account.name + ' to ' + addr)
-      return rai.send(wallet.id, account.id, addr, amount)
-    }
-
     */
-
-//
-// New RaiWebwallet based code. We call functions in src/js/raiwallet.js
-// All new functions start with raiXXX
-//
 
     // Send amountRaw (bigInt) from account to addr, using wallet.
     root.send = function (wallet, account, addr, amountRaw) {
@@ -146,9 +226,8 @@ angular.module('canoeApp.services')
         var blk = wallet.addPendingSendBlock(account.id, addr, amountRaw)
         // var hash = blk.getHash(true)
         // refreshBalances()
-        $log.debug('Transaction built successfully. Waiting for work ...')
+        $log.debug('Added send block successfully: ' + blk.getHash(true))
         // addRecentSendToGui({date: 'Just now', amount: amountRaw, hash: hash})
-        wallet.workPoolAdd(blk.getPrevious(), account.id, true)
       } catch (e) {
         $log.error('Send failed ' + e.message)
         return false
@@ -156,27 +235,47 @@ angular.module('canoeApp.services')
       return true
     }
 
-    // Create a new wallet and tell server the UUID it has
+    // Create a new wallet
     root.createNewWallet = function (password) {
       var wallet = RAI.createNewWallet(password)
-      root.updateServerWallet(wallet)
       return wallet
     }
 
+    // Create a corresponding account in the server for this wallet
+    root.createServerAccount = function (wallet) {
+      $log.debug('Creating server account for wallet ' + wallet.getId())
+      var json = rai.create_server_account(wallet.getId(), wallet.getToken(), wallet.getTokenPass())
+      if (json.error) {
+        throw Error(json.error)
+      }
+    }
+
+    // Subscribe to our private topics for incoming messages
+    root.subscribeForWallet = function (wallet) {
+      $log.debug('Subscribing for wallet ' + wallet.getId())
+      root.subscribe('wallet/' + wallet.getId() + '/block/#')
+    }
+
     // Create a new wallet given a good password created by the user, and optional seed.
-    root.createWallet = function (password, seed) {
-      $log.debug('Create wallet')
+    root.createWallet = function (password, seed, cb) {
+      $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
-      wallet.setLogger($log)
       wallet.createSeed(seed)
-      $log.debug('Wallet: ' + JSON.stringify(wallet))
-      return wallet
+      root.createServerAccount(wallet)
+      root.connectMQTT(wallet, function (connected) {
+        if (connected) {
+          root.updateServerMap(wallet)
+          root.subscribeForWallet(wallet)
+        }
+        // We also hold onto it
+        root.setWallet(wallet)
+        cb(wallet)
+      })
     }
 
     // Loads wallet from local storage using given password
     root.createWalletFromStorage = function (password, cb) {
       $log.debug('Load wallet from local storage')
-      var wallet = root.createNewWallet(password)
       storageService.loadWallet(function (err, data) {
         if (err) {
           return cb(err)
@@ -184,8 +283,15 @@ angular.module('canoeApp.services')
         if (!data) {
           return cb('No wallet in local storage')
         }
-        root.loadWalletData(wallet, data)
-        cb(null, wallet)
+        root.setWallet(root.createWalletFromData(password, data))
+        // Now we can connect
+        root.connectMQTT(root.wallet, function (connected) {
+          if (connected) {
+            root.updateServerMap(root.wallet)
+            root.subscribeForWallet(root.wallet)
+          }
+          cb(null, root.wallet)
+        })
       })
     }
 
@@ -199,7 +305,7 @@ angular.module('canoeApp.services')
     root.createAccount = function (wallet, accountName) {
       $log.debug('Create account in wallet named ' + accountName)
       var account = wallet.createAccount({label: accountName})
-      $log.debug('Created account: ' + account)
+      $log.debug('Created account ' + account.id)
       root.updateServerMap(wallet)
       return account
     }
@@ -212,17 +318,12 @@ angular.module('canoeApp.services')
       root.updateServerMap(wallet)
     }
 
-    // Tell server which id our wallet has. The server has a map of Profile id -> wallet id
-    root.updateServerWallet = function (wallet) {
-      root.publish('profile/' + profileId + '/wallet/' + wallet.id, '{}', 2, false)
-    }
-
     // Tell server which accounts this wallet has. The server has a map of wallet id -> accounts
     // This needs to be called when a new account is created or one is removed.
     // We also call it whenever we load a wallet from data.
     root.updateServerMap = function (wallet) {
       var ids = wallet.getAccountIds()
-      root.publish('profile/' + profileId + '/wallet/' + wallet.id + '/accounts', {accounts: ids}, 2, false)
+      root.publish('wallet/' + wallet.getId() + '/accounts', JSON.stringify(ids), 2, false)
     }
 
     // Encrypt and store the wallet in localstorage.
@@ -246,7 +347,6 @@ angular.module('canoeApp.services')
     root.loadWalletData = function (wallet, data) {
       try {
         wallet.load(data)
-        root.updateObserver(wallet)
       } catch (e) {
         $log.error('Error decrypting wallet. Check that the password is correct.')
         return
@@ -268,25 +368,26 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.connectMQTT = function (cb) {
-      // If no token is set, then we refuse to connect
-      if (mqttUsername) {
-        // Connect to MQTT
-        $log.debug('********** CONNECTING MQTT ***********')
-        root.connect({userName: mqttUsername, password: mqttPassword}, function () {
-          root.silent = false
-          if (cb) {
-            cb(true)
-          }
-          root.subscribe('config')
-        }, function (c, code, msg) {
-          $log.debug('FAILURE', {context: c, code: code, msg: msg})
-          root.disconnect()
-          if (cb) {
-            cb(false)
-          }
-        })
-      }
+    root.connectMQTT = function (wallet, cb) {
+      mqttUsername = wallet.getToken()
+      var mqttPassword = wallet.getTokenPass()
+      var mqttClientId = wallet.getId()
+      var opts = {userName: mqttUsername, password: mqttPassword, clientId: mqttClientId}
+      // Connect to MQTT
+      $log.debug('********** CONNECTING MQTT ***********')
+      $log.debug('Options: ' + JSON.stringify(opts))
+      root.connect(opts, function () {
+        $log.debug('********** CONNECTED MQTT ***********')
+        if (cb) {
+          cb(true)
+        }
+      }, function (c, code, msg) {
+        $log.debug('FAILURE', {context: c, code: code, msg: msg})
+        root.disconnect()
+        if (cb) {
+          cb(false)
+        }
+      })
     }
 
     // Are we connected to the MQTT server?
@@ -304,13 +405,88 @@ angular.module('canoeApp.services')
       mqttClient = null
     }
 
+    root.onConnectionLost = function (responseObject) {
+      if (responseObject.errorCode !== 0) {
+        $log.info('MQTT connection lost: ' + responseObject.errorMessage)
+      }
+    }
+
+    root.onFailure = function () {
+      $log.info('MQTT failure')
+    }
+
+    root.handleIncomingSendBlock = function (hash, account, from, amount) {
+      // Create a receive (or open, if this is the first block in account) block to match
+      // this incoming send block
+      if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
+        // TODO Add something visual for the txn?
+        // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
+        // addRecentRecToGui(txObj)
+        root.saveWallet(root.wallet, function () {})
+        generatePoW()
+      }
+    }
+
+    root.onIncomingBlock = function (blkType, payload) {
+      /*
+        {
+          "account":"xrb_15d4oo67z6ruebmkcjqghawcbf5f9r4zkg8pf1af3n1s7kd9u7x3m47y8x37",
+          "hash":"9818A861E6D961F0F94EA19FC1F54D714F076F258F6C2637502AD9FEDA6E83B5",
+          "block":"{\n    \"type\": \"send\",\n    \"previous\": \"DBDC7AA21FA059513C7390F8ADB6EAA664384126E64DB50CFE09E31F594CDCFF\",\n    \"destination\": \"xrb_117ikxnfcpoz7oz56sxdw5yhwtt86rrwxsg5io6c6pbqa4fsr1cnyot4ikqu\",\n    \"balance\": \"00000000000000000000000000000000\",\n    \"work\": \"06fa80d5e00f047d\",\n    \"signature\": \"EAAC8136BD133B6A9D5584598558CE45A8A461B50414264B8AF73D04769C4F20E59A8C17C0E2B5C2A4ABD7BD3C980DE69616F93789FF5C5C613F51300A8BFF0A\"\n}\n",
+          "amount":"1994000000000000000000000000000"
+        }
+      */
+      // A block
+      var blk = JSON.parse(payload)
+      var blk2 = JSON.parse(blk.block)
+      var from = blk.account
+      var hash = blk.hash
+      var account = blk2.destination
+      var amount = blk.amount
+      $log.debug('From: ' + from + 'to: ' + account + ' type: ' + blkType + ' amount: ' + amount)
+      // Switch on block type
+      switch (blkType) {
+        case 'open':
+          // TODO We should match it right?  It can only originate from me unless multiple devices
+          $log.debug('An open block ignored')
+          return
+        case 'send':
+          return root.handleIncomingSendBlock(hash, account, from, amount)
+        case 'receive':
+          // TODO We should match it right? It can only originate from me unless multiple devices
+          $log.debug('A receive block ignored')
+          return
+        case 'change':
+          // TODO We should match it right? It can only originate from me unless multiple devices
+          $log.debug('A change block ignored')
+          return
+      }
+      $log.error('Unknown block type: ' + blkType)
+    }
+
+    root.onMessageArrived = function (message) {
+      $log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
+      var topic = message.destinationName
+      var payload = message.payloadString
+      // Switch over topics
+      var parts = topic.split('/')
+      if (parts[0] === 'wallet') {
+        // A wallet specific message
+        // TODO ensure proper wallet id?
+        if (parts[2] === 'block') {
+          return root.onIncomingBlock(parts[3], payload)
+        }
+      }
+      $log.debug('Message not handled: ' + topic)
+    }
+
     // Connect to MQTT. callback when connected or failed.
     root.connect = function (options, callback, callbackFailure) {
       var port = mqttPort
       var ip = mqttHost
       var userName = options.userName
       var password = options.password
-      var clientId = getUUID()
+      var clientId = options.clientId
       root.disconnect()
       mqttClient = new Paho.MQTT.Client(ip, port, clientId)
       mqttClient.onConnectionLost = root.onConnectionLost
@@ -328,16 +504,20 @@ angular.module('canoeApp.services')
     }
 
     root.publish = function (topic, json, qos, retained) {
-      /*var message = new Paho.MQTT.Message(json)
-      message.destinationName = topic
-      if (qos !== undefined) {
-        message.qos = qos
+      if (mqttClient) {
+        var message = new Paho.MQTT.Message(json)
+        message.destinationName = topic
+        if (qos !== undefined) {
+          message.qos = qos
+        }
+        if (retained !== undefined) {
+          message.retained = retained
+        }
+        $log.debug('Send ' + topic + ' ' + json)
+        mqttClient.send(message)
+      } else {
+        $log.debug('Should send ' + topic + ' ' + json)
       }
-      if (retained !== undefined) {
-        message.retained = retained
-      }*/
-      $log.debug('Send ' + topic + ' ' + json)
-      // mqttClient.send(message)
     }
 
     root.subscribe = function (topic) {

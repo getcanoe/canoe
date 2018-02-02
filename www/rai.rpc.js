@@ -128,22 +128,22 @@ function Rai (url_base, port) {
         let xhr
         xhr = new XMLHttpRequest()
         xhr.onload = function (e) {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-        let json = JSON.parse(xhr.responseText)
+          if (xhr.readyState === 4 && xhr.status === 200) {
+          let json = JSON.parse(xhr.responseText)
 					// Errors as JSON
-        let error = json.error
-        if (typeof error !== 'undefined') {
-      this.error(error)
-    }
-        async_callback(json)
-      }				else {
-        console.error('XHR Failure')
-      }
-      }
+          let error = json.error
+          if (typeof error !== 'undefined') {
+          this.error(error)
+        }
+          async_callback(json)
+        }				else {
+          console.error('XHR Failure')
+        }
+        }
 
         xhr.onerror = function (e) {
-        console.error(xhr.statusText)
-      }
+          console.error(xhr.statusText)
+        }
 
         xhr.open('POST', url, true)
         xhr.send(request)
@@ -157,17 +157,17 @@ function Rai (url_base, port) {
         xhr.send(request)
 
         if (xhr.readyState == 4 && xhr.status == 200) {
-        let json = JSON.parse(xhr.responseText)
+          let json = JSON.parse(xhr.responseText)
 				// Errors as JSON
-        let error = json.error
-        if (typeof error !== 'undefined') {
-        this.error(error)
-        return false
-      }
-        return json
-      }			else {
-        console.error('XHR Failure')
-      }
+          let error = json.error
+          if (typeof error !== 'undefined') {
+          this.error(error)
+          return false
+        }
+          return json
+        }			else {
+          console.error('XHR Failure')
+        }
       }
     }	catch (ex) {
       this.error(ex.message)
@@ -186,6 +186,15 @@ function Rai (url_base, port) {
 // String output
   this.account_block_count = function () {
     return this.rpc(JSON.stringify({'action': 'account_block_count', 'account': account}))
+  }
+
+  this.create_server_account = function (id, token, tokenPass) {
+    return this.rpc(JSON.stringify(
+      {'action': 'create_server_account',
+        'wallet': id,
+        'token': token,
+        'tokenPass': tokenPass
+      }))
   }
 
   this.account_create = function (wallet, work = true) {
@@ -281,15 +290,15 @@ function Rai (url_base, port) {
     if (source) {
       for (let account in accounts_pending.blocks) {
         for (let hash in accounts_pending.blocks[account]) {
-      accounts_pending.blocks[account][hash].amount = this.unit(accounts_pending.blocks[account][hash].amount, 'raw', unit)
-    }
+          accounts_pending.blocks[account][hash].amount = this.unit(accounts_pending.blocks[account][hash].amount, 'raw', unit)
+        }
       }
     }	else if (threshold != 0) {
       for (let account in accounts_pending.blocks) {
-    for (let hash in accounts_pending.blocks[account]) {
+        for (let hash in accounts_pending.blocks[account]) {
       accounts_pending.blocks[account][hash] = this.unit(accounts_pending.blocks[account][hash], 'raw', unit)
     }
-  }
+      }
     }
     return accounts_pending.blocks
   }
@@ -535,8 +544,8 @@ function Rai (url_base, port) {
       }
     }	else if (threshold != 0) {
       for (let hash in pending.blocks) {
-    pending.blocks[hash] = this.unit(pending.blocks[hash], 'raw', unit)
-  }
+        pending.blocks[hash] = this.unit(pending.blocks[hash], 'raw', unit)
+      }
     }
     return pending.blocks
   }
@@ -708,15 +717,15 @@ function Rai (url_base, port) {
     if (source) {
       for (let account in wallet_pending.blocks) {
         for (let hash in wallet_pending.blocks[account]) {
-      wallet_pending.blocks[account][hash].amount = this.unit(wallet_pending.blocks[account][hash].amount, 'raw', unit)
-    }
+          wallet_pending.blocks[account][hash].amount = this.unit(wallet_pending.blocks[account][hash].amount, 'raw', unit)
+        }
       }
     }	else if (threshold != 0) {
       for (let account in wallet_pending.blocks) {
-    for (let hash in wallet_pending.blocks[account]) {
+        for (let hash in wallet_pending.blocks[account]) {
       wallet_pending.blocks[account][hash] = this.unit(wallet_pending.blocks[account][hash], 'raw', unit)
     }
-  }
+      }
     }
     return wallet_pending.blocks
   }
@@ -754,6 +763,12 @@ function Rai (url_base, port) {
   this.work_generate = function (hash) {
     var work_generate = this.rpc(JSON.stringify({'action': 'work_generate', 'hash': hash}))
     return work_generate.work
+  }
+
+  this.work_generate_async = function (hash, cb) {
+    this.rpc(JSON.stringify({'action': 'work_generate', 'hash': hash}), function (result) {
+      cb(result.work)
+    })
   }
 
   this.work_get = function (wallet, account) {
