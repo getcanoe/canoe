@@ -1450,7 +1450,7 @@ module.exports = function(password)
 		seed = hex_uint8(walletData.seed);
 		lastKeyFromSeed = walletData.last;
 		recentTxs = walletData.recent;
-		remoteWork = []; //walletData.remoteWork || [];
+		remoteWork = walletData.remoteWork || [];
 		minimumReceive = walletData.minimumReceive != undefined ? bigInt(walletData.minimumReceive) : bigInt("1000000000000000000000000");
 		id = walletData.id
 		token = walletData.token;
