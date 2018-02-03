@@ -374,15 +374,15 @@ angular.module('canoeApp.services')
       var mqttClientId = wallet.getId()
       var opts = {userName: mqttUsername, password: mqttPassword, clientId: mqttClientId}
       // Connect to MQTT
-      $log.debug('********** CONNECTING MQTT ***********')
-      $log.debug('Options: ' + JSON.stringify(opts))
+      $log.debug('Connecting to MQTT broker ...')
+      // $log.debug('Options: ' + JSON.stringify(opts))
       root.connect(opts, function () {
-        $log.debug('********** CONNECTED MQTT ***********')
+        $log.debug('Connected to MQTT broker.')
         if (cb) {
           cb(true)
         }
       }, function (c, code, msg) {
-        $log.debug('FAILURE', {context: c, code: code, msg: msg})
+        $log.debug('Failed connecting to MQTT: ', {context: c, code: code, msg: msg})
         root.disconnect()
         if (cb) {
           cb(false)
