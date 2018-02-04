@@ -404,12 +404,12 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.pin', {
-        url: '/pin/:action',
+      .state('tabs.password', {
+        url: '/password',
         views: {
           'tab-settings@tabs': {
-            controller: 'pinController',
-            templateUrl: 'views/pin.html',
+            controller: 'passwordController',
+            templateUrl: 'views/modals/password.html',
             cache: false
           }
         }
