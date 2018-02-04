@@ -1,7 +1,7 @@
 'use strict'
 angular.module('canoeApp.directives')
-  .directive('validAddress', ['$rootScope', 'raiblocksService',
-    function ($rootScope, raiblocksService) {
+  .directive('validAddress', ['$rootScope', 'nanoService',
+    function ($rootScope, nanoService) {
       return {
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
@@ -13,7 +13,7 @@ angular.module('canoeApp.directives')
             }
 
             // Regular Address
-            var isValid = raiblocksService.isValidAccount(value)
+            var isValid = nanoService.isValidAccount(value)
             ctrl.$setValidity('validAddress', isValid)
             return value
           };

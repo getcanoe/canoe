@@ -116,7 +116,7 @@
     <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
     <plugin name="cordova-plugin-qrscanner" spec="2.5.0" />
     <plugin name="cordova-plugin-customurlscheme" spec="https://github.com/cmgustavo/Custom-URL-scheme.git#v4.0">
-        <variable name="URL_SCHEME" value="raiblocks" />
+        <variable name="URL_SCHEME" value="nano" />
         <variable name="SECOND_URL_SCHEME" value="canoe" />
         <variable name="THIRD_URL_SCHEME" value="bitcoincash" />
     </plugin>

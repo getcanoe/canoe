@@ -1,7 +1,7 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('raiblocksService', function ($log, configService, platformInfo, storageService, lodash) {
+  .factory('nanoService', function ($log, configService, platformInfo, storageService, lodash) {
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.

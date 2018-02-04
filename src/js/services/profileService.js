@@ -1,6 +1,6 @@
 'use strict'
 angular.module('canoeApp.services')
-  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, raiblocksService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
+  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, nanoService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
     var isChromeApp = platformInfo.isChromeApp
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
@@ -36,7 +36,7 @@ angular.module('canoeApp.services')
     }
 
     root.fetchServerStatus = function (cb) {
-      raiblocksService.fetchServerStatus(cb)
+      nanoService.fetchServerStatus(cb)
     }
 
     root.updateRate = function (code) {
@@ -203,7 +203,7 @@ angular.module('canoeApp.services')
     // Create wallet and default account (which saves wallet), seed can be null.
     root.createWallet = function (password, seed, cb) {
       // Synchronous now
-      raiblocksService.createWallet(password, seed, function (wallet) {
+      nanoService.createWallet(password, seed, function (wallet) {
         root.setWalletId(wallet.getId(), function (err) {
           if (err) return cb(err)
           root.wallet = wallet
@@ -216,13 +216,13 @@ angular.module('canoeApp.services')
     // Create account in wallet and save wallet
     root.createAccount = function (name, cb) {
       var accountName = name || gettextCatalog.getString('Default Account')
-      raiblocksService.createAccount(root.wallet, accountName)
+      nanoService.createAccount(root.wallet, accountName)
       // TODO checkChains? See raiwallet.js
-      raiblocksService.saveWallet(root.wallet, cb)
+      nanoService.saveWallet(root.wallet, cb)
     }
 
     root.saveWallet = function (cb) {
-      raiblocksService.saveWallet(root.wallet, cb)
+      nanoService.saveWallet(root.wallet, cb)
     }
 
     // Load wallet from local storage using entered password
@@ -230,7 +230,7 @@ angular.module('canoeApp.services')
       if (!root.password) {
         return cb('No password entered, can not load wallet from local storage')
       }
-      raiblocksService.createWalletFromStorage(root.password, function (err, wallet) {
+      nanoService.createWalletFromStorage(root.password, function (err, wallet) {
         if (err) {
           return cb(err)
         }
@@ -259,7 +259,7 @@ angular.module('canoeApp.services')
     }
 
     root.send = function (tx, cb) {
-      raiblocksService.send(root.wallet, tx.account, tx.address, tx.amount)
+      nanoService.send(root.wallet, tx.account, tx.address, tx.amount)
       cb()
     }
 
@@ -408,7 +408,7 @@ angular.module('canoeApp.services')
     root.toggleHideBalanceFlag = function (accountId, cb) {
       var acc = root.getAccount(accountId)
       acc.meta.balanceHidden = !acc.meta.balanceHidden
-      raiblocksService.saveWallet(root.wallet, cb)
+      nanoService.saveWallet(root.wallet, cb)
     }
 
     root.getNotifications = function (opts, cb) {

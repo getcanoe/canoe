@@ -225,7 +225,7 @@ module.exports = function (grunt) {
           'CFBundleURLTypes': [
             {
               'CFBundleURLName': 'URI Handler',
-              'CFBundleURLSchemes': ['raiblocks', '<%= pkg.name %>']
+              'CFBundleURLSchemes': ['nano', '<%= pkg.name %>']
             }
           ]
         }

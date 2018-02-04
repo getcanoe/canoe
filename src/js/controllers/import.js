@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('canoeApp.controllers').controller('importController',
-  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, raiblocksService, platformInfo, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService) {
+  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, nanoService, platformInfo, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService) {
     var reader = new FileReader()
     var defaults = configService.getDefaults()
     var config = configService.getSync()
@@ -138,7 +138,7 @@ angular.module('canoeApp.controllers').controller('importController',
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter the seed'))
         return
       }
-      if (!raiblocksService.isValidSeed(seed)) {
+      if (!nanoService.isValidSeed(seed)) {
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('The seed is invalid, it should be 64 characters of: 0-9, A-F'))
         return
       }

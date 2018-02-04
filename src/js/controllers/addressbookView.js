@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.controllers').controller('addressbookViewController', function ($scope, $state, $timeout, lodash, addressbookService, popupService, $ionicHistory, platformInfo, gettextCatalog, raiblocksService) {
+angular.module('canoeApp.controllers').controller('addressbookViewController', function ($scope, $state, $timeout, lodash, addressbookService, popupService, $ionicHistory, platformInfo, gettextCatalog, nanoService) {
   $scope.isChromeApp = platformInfo.isChromeApp
   $scope.addressbookEntry = {}
 
@@ -10,7 +10,7 @@ angular.module('canoeApp.controllers').controller('addressbookViewController', f
     $scope.addressbookEntry.email = data.stateParams.email
     $scope.addressbookEntry.address = data.stateParams.address
 
-    raiblocksService.isValidAccount($scope.addressbookEntry.address)
+    nanoService.isValidAccount($scope.addressbookEntry.address)
   })
 
   $scope.sendTo = function () {
