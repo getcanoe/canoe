@@ -1,9 +1,9 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('exportController',
   function ($scope, $timeout, $log, $ionicHistory, $ionicScrollDelegate, backupService, walletService, storageService, profileService, platformInfo, gettextCatalog, $state, $stateParams, popupService, appConfigService) {
     var wallet = profileService.getAccount($stateParams.walletId)
-    $scope.account = wallet
+    $scope.wallet = wallet
 
     $scope.showAdvChange = function () {
       $scope.showAdv = !$scope.showAdv
@@ -19,24 +19,23 @@ angular.module('canoeApp.controllers').controller('exportController',
     $scope.checkPassword = function (pw1, pw2) {
       if (pw1.length > 0) {
         if (pw2.length > 0) {
-          if (pw1 == pw2) $scope.result = 'correct'
+          if (pw1 === pw2) $scope.result = 'correct'
           else $scope.result = 'incorrect'
-        } else          { $scope.result = null}
-      } else        { $scope.result = null}
+        } else { $scope.result = null }
+      } else { $scope.result = null }
     }
 
     function getPassword (cb) {
       if ($scope.password) return cb(null, $scope.password)
-
       walletService.prepare(wallet, function (err, password) {
         if (err) return cb(err)
         $scope.password = password
         return cb(null, password)
       })
-    };
+    }
 
     $scope.generateQrCode = function () {
-      if ($scope.formData.exportWalletInfo || !walletService.isEncrypted(wallet)) {
+      if ($scope.formData.exportWalletInfo) {
         $scope.file.value = false
       }
 
@@ -52,7 +51,7 @@ angular.module('canoeApp.controllers').controller('exportController',
             return
           }
 
-          if (!code)            { $scope.formData.supported = false}          else {
+          if (!code) { $scope.formData.supported = false } else {
             $scope.formData.supported = true
             $scope.formData.exportWalletInfo = code
           }
@@ -68,35 +67,10 @@ angular.module('canoeApp.controllers').controller('exportController',
     var init = function () {
       $scope.formData = {}
       $scope.formData.password = $scope.formData.repeatpassword = ''
-      $scope.isEncrypted = wallet.isPrivKeyEncrypted()
       $scope.isCordova = platformInfo.isCordova
       $scope.isSafari = platformInfo.isSafari
-      $scope.formData.noSignEnabled = false
       $scope.showAdvanced = false
-      $scope.account = wallet
-      $scope.canSign = wallet.canSign()
-    }
-
-    /*
-      EXPORT WITHOUT PRIVATE KEY - PENDING
-    */
-
-    $scope.noSignEnabledChange = function () {
-      if (!$scope.formData.supported) return
-
-      walletService.getEncodedWalletInfo(wallet, function (err, code) {
-        if (err) {
-          $log.error(err)
-          $scope.formData.supported = false
-          $scope.formData.exportWalletInfo = null
-        } else {
-          $scope.formData.supported = true
-          $scope.formData.exportWalletInfo = code
-        }
-        $timeout(function () {
-          $scope.$apply()
-        }, 1)
-      })
+      $scope.wallet = wallet
     }
 
     $scope.downloadWalletBackup = function () {
@@ -112,7 +86,6 @@ angular.module('canoeApp.controllers').controller('exportController',
             return
           }
           var opts = {
-            noSign: $scope.formData.noSignEnabled,
             addressBook: localAddressBook,
             password: password
           }
@@ -157,7 +130,6 @@ angular.module('canoeApp.controllers').controller('exportController',
             return cb(null)
           }
           var opts = {
-            noSign: $scope.formData.noSignEnabled,
             addressBook: localAddressBook,
             password: password
           }
@@ -200,7 +172,7 @@ angular.module('canoeApp.controllers').controller('exportController',
         var ew = backup
         if (!ew) return
 
-        if ($scope.formData.noSignEnabled)          { name = name + '(No Private Key)'}
+        if ($scope.formData.noSignEnabled) { name = name + '(No Private Key)' }
 
         var subject = appConfigService.nameCase + ' Wallet Backup: ' + name
         var body = 'Here is the encrypted backup of the wallet ' + name + ': \n\n' + ew + '\n\n To import this backup, copy all text between {...}, including the symbols {}'

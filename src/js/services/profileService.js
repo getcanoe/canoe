@@ -87,6 +87,11 @@ angular.module('canoeApp.services')
       return root.createWallet(null, seed, cb)
     }
 
+    // Return an object with wallet member holding the encrypted hex of wallet
+    root.getExportWallet = function () {
+      return {wallet: root.wallet.pack()}
+    }
+
     root.updateAllAccounts = function () {
       var accounts = root.wallet.getAccounts()
       lodash.each(accounts, function (acc) {

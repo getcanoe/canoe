@@ -1,6 +1,7 @@
 'use strict'
+/* global angular */
 angular.module('canoeApp.services')
-  .factory('backupService', function backupServiceFactory ($log, $timeout, $stateParams, profileService, appConfigService) {
+  .factory('backupService', function backupServiceFactory ($log, $timeout, profileService) {
     var root = {}
 
     var _download = function (ew, filename, cb) {
@@ -23,7 +24,7 @@ angular.module('canoeApp.services')
             bb.append(data)
             out = bb.getBlob(datatype)
             $log.debug('case 2')
-          } else if (e.name == 'InvalidStateError') {
+          } else if (e.name === 'InvalidStateError') {
             // InvalidStateError (tested on FF13 WinXP)
             out = new Blob([data], {
               type: datatype
@@ -43,42 +44,29 @@ angular.module('canoeApp.services')
       a.attr('download', filename)
       a[0].click()
       return cb()
-    };
-
-    root.addMetadata = function (b, opts) {
-      b = JSON.parse(b)
-      if (opts.addressBook) b.addressBook = opts.addressBook
-      return JSON.stringify(b)
     }
 
     root.walletExport = function (password, opts) {
       if (!password) {
         return null
       }
-      var wallet = profileService.getAccount($stateParams.walletId)
       try {
+        var ewallet = profileService.getExportWallet()
         opts = opts || {}
-        var b = wallet.export(opts)
-        if (opts.addressBook) b = root.addMetadata(b, opts)
-
-        // TODO var e = sjcl.encrypt(password, b, {
-        //  iter: 10000
-        // });
-        return e
+        if (opts.addressBook) {
+          ewallet.addressBook = opts.addressBook
+        }
+        return ewallet
       } catch (err) {
         $log.debug('Error exporting wallet: ', err)
         return null
-      };
+      }
     }
 
     root.walletDownload = function (password, opts, cb) {
-      var wallet = profileService.getAccount($stateParams.walletId)
       var ew = root.walletExport(password, opts)
       if (!ew) return cb('Could not create backup')
-
-      var walletName = (wallet.alias || '') + (wallet.alias ? '-' : '') + wallet.credentials.walletName
-      if (opts.noSign) walletName = walletName + '-noSign'
-      var filename = walletName + '-' + appConfigService.nameCase + 'backup.aes.json'
+      var filename = 'canoe-exported-wallet.json'
       _download(ew, filename, cb)
     }
     return root
