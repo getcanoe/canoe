@@ -1,6 +1,6 @@
 {
   "name": "canoe",
-  "description": "A Secure Cross Platform RaiBlocks Wallet",
+  "description": "A Secure Cross Platform Nano Wallet",
   "author": "Göran Krampe",
   "version": "0.1.1",
   "keywords": [
@@ -10,7 +10,7 @@
   "main": "www/index.html",
   "title": "Canoe",
   "window": {
-    "title": "Canoe - RaiBlocks Wallet",
+    "title": "Canoe - Nano Wallet",
     "icon": "www/img/app/icon.png",
     "toolbar": false,
     "show": true,
