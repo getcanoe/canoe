@@ -448,7 +448,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.preferences.backupWarning', {
+      .state('tabs.settings.backupWarning', {
         url: '/backupWarning/:from',
         views: {
           'tab-settings@tabs': {
@@ -457,7 +457,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.preferences.backup', {
+      .state('tabs.settings.backup', {
         url: '/backup',
         views: {
           'tab-settings@tabs': {
@@ -475,7 +475,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.preferences.export', {
+      .state('tabs.export', {
         url: '/export',
         views: {
           'tab-settings@tabs': {
