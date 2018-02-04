@@ -225,7 +225,11 @@ module.exports = function(password)
 	api.sign = function(message)
 	{
 		return nacl.sign.detached(message, sk);
-	}	
+	}
+
+	api.checkPass = function (pswd) {
+		return passPhrase == pswd
+	}
 
 	api.changePass = function(pswd, newPass)
 	{

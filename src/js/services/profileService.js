@@ -27,6 +27,13 @@ angular.module('canoeApp.services')
       return root.password
     }
 
+    root.checkPassword = function (pw) {
+      if (root.wallet) {
+        return root.wallet.checkPass(pw)
+      }
+      return false
+    }
+
     root.getSeed = function () {
       try {
         return root.wallet.getSeed(root.password)

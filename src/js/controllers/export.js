@@ -5,99 +5,81 @@ angular.module('canoeApp.controllers').controller('exportController',
     var wallet = profileService.getAccount($stateParams.walletId)
     $scope.wallet = wallet
 
-    $scope.showAdvChange = function () {
-      $scope.showAdv = !$scope.showAdv
-      $scope.resizeView()
-    }
-
     $scope.resizeView = function () {
       $timeout(function () {
         $ionicScrollDelegate.resize()
       }, 10)
     }
 
-    $scope.checkPassword = function (pw1, pw2) {
-      if (pw1.length > 0) {
-        if (pw2.length > 0) {
-          if (pw1 === pw2) $scope.result = 'correct'
-          else $scope.result = 'incorrect'
-        } else { $scope.result = null }
-      } else { $scope.result = null }
-    }
-
-    function getPassword (cb) {
-      if ($scope.password) return cb(null, $scope.password)
-      walletService.prepare(wallet, function (err, password) {
-        if (err) return cb(err)
-        $scope.password = password
-        return cb(null, password)
-      })
+    $scope.checkPassword = function (pw) {
+      if (profileService.checkPassword(pw)) {
+        $scope.result = 'correct'
+        $scope.passwordCorrect = true
+      } else {
+        $scope.result = 'incorrect'
+        $scope.passwordCorrect = false
+      }
     }
 
     $scope.generateQrCode = function () {
       if ($scope.formData.exportWalletInfo) {
         $scope.file.value = false
       }
+      /*if (err) {
+        popupService.showAlert(gettextCatalog.getString('Error'), err)
+        return
+      }*/
 
-      getPassword(function (err, password) {
+      walletService.getEncodedWalletInfo(wallet, $scope.formData.password, function (err, code) {
         if (err) {
           popupService.showAlert(gettextCatalog.getString('Error'), err)
           return
         }
 
-        walletService.getEncodedWalletInfo(wallet, password, function (err, code) {
-          if (err) {
-            popupService.showAlert(gettextCatalog.getString('Error'), err)
-            return
-          }
+        if (!code) { $scope.formData.supported = false } else {
+          $scope.formData.supported = true
+          $scope.formData.exportWalletInfo = code
+        }
 
-          if (!code) { $scope.formData.supported = false } else {
-            $scope.formData.supported = true
-            $scope.formData.exportWalletInfo = code
-          }
-
-          $scope.file.value = false
-          $timeout(function () {
-            $scope.$apply()
-          })
+        $scope.file.value = false
+        $timeout(function () {
+          $scope.$apply()
         })
       })
     }
 
     var init = function () {
       $scope.formData = {}
-      $scope.formData.password = $scope.formData.repeatpassword = ''
+      $scope.formData.password = ''
+      $scope.passwordCorrect = false
       $scope.isCordova = platformInfo.isCordova
       $scope.isSafari = platformInfo.isSafari
-      $scope.showAdvanced = false
       $scope.wallet = wallet
     }
 
     $scope.downloadWalletBackup = function () {
-      getPassword(function (err, password) {
+      /*if (err) {
+        popupService.showAlert(gettextCatalog.getString('Error'), err)
+        return
+      }*/
+
+      $scope.getAddressbook(function (err, localAddressBook) {
         if (err) {
-          popupService.showAlert(gettextCatalog.getString('Error'), err)
+          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
           return
         }
+        var opts = {
+          addressBook: localAddressBook,
+          password: $scope.password
+        }
 
-        $scope.getAddressbook(function (err, localAddressBook) {
+        backupService.walletDownload($scope.formData.password, opts, function (err) {
           if (err) {
             popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
             return
           }
-          var opts = {
-            addressBook: localAddressBook,
-            password: password
-          }
-
-          backupService.walletDownload($scope.formData.password, opts, function (err) {
-            if (err) {
-              popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
-              return
-            }
-            $ionicHistory.removeBackView()
-            $state.go('tabs.home')
-          })
+          $ionicHistory.removeBackView()
+          $state.go('tabs.home')
         })
       })
     }
@@ -118,28 +100,26 @@ angular.module('canoeApp.controllers').controller('exportController',
     }
 
     $scope.getBackup = function (cb) {
-      getPassword(function (err, password) {
+      /*if (err) {
+        popupService.showAlert(gettextCatalog.getString('Error'), err)
+        return
+      }*/
+
+      $scope.getAddressbook(function (err, localAddressBook) {
         if (err) {
-          popupService.showAlert(gettextCatalog.getString('Error'), err)
-          return
+          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
+          return cb(null)
+        }
+        var opts = {
+          addressBook: localAddressBook,
+          password: $scope.formData.password
         }
 
-        $scope.getAddressbook(function (err, localAddressBook) {
-          if (err) {
-            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
-            return cb(null)
-          }
-          var opts = {
-            addressBook: localAddressBook,
-            password: password
-          }
-
-          var ew = backupService.walletExport($scope.formData.password, opts)
-          if (!ew) {
-            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
-          }
-          return cb(ew)
-        })
+        var ew = backupService.walletExport($scope.formData.password, opts)
+        if (!ew) {
+          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
+        }
+        return cb(ew)
       })
     }
 

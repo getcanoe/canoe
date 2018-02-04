@@ -56,7 +56,7 @@ angular.module('canoeApp.services')
         if (opts.addressBook) {
           ewallet.addressBook = opts.addressBook
         }
-        return ewallet
+        return JSON.stringify(ewallet)
       } catch (err) {
         $log.debug('Error exporting wallet: ', err)
         return null
