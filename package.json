@@ -4,6 +4,7 @@
   "author": "Göran Krampe",
   "version": "0.1.1",
   "keywords": [
+    "nano",
     "raiblocks",
     "wallet"
   ],
@@ -175,7 +176,7 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-qrscanner": {},
       "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "raiblocks",
+        "URL_SCHEME": "nano",
         "SECOND_URL_SCHEME": "canoe",
         "THIRD_URL_SCHEME": "bitcoincash"
       },
