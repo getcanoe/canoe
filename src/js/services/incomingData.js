@@ -20,7 +20,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       var value = match[0].replace(',', '.')
       var newUri = data.replace(regex, value)
 
-      // mobile devices, uris like canoe://glidera
+      // mobile devices, uris
       newUri.replace('://', ':')
 
       return newUri
@@ -29,8 +29,8 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     function getParameterByName (name, url) {
       if (!url) return
       name = name.replace(/[\[\]]/g, '\\$&')
-      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url)
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
+      var results = regex.exec(url)
       if (!results) return null
       if (!results[2]) return ''
       return decodeURIComponent(results[2].replace(/\+/g, ' '))
@@ -45,10 +45,10 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       return true
     }
 
-    function goSend (addr, amount, message, coin) {
+    function goSend (addr, amount, message) {
       $state.go('tabs.send', {}, {
         'reload': true,
-        'notify': $state.current.name != 'tabs.send'
+        'notify': $state.current.name !== 'tabs.send'
       })
       // Timeout is required to enable the "Back" button
       $timeout(function () {
@@ -56,13 +56,11 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
           $state.transitionTo('tabs.send.confirm', {
             toAmount: amount,
             toAddress: addr,
-            description: message,
-            coin: coin
+            description: message
           })
         } else {
           $state.transitionTo('tabs.send.amount', {
-            toAddress: addr,
-            coin: coin
+            toAddress: addr
           })
         }
       }, 100)
@@ -310,6 +308,19 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       })
       return true
     } else {*/
+
+      // Example QR urls, see https://github.com/clemahieu/raiblocks/wiki/URI-and-QR-Code-Standard
+      // Payment:
+      // xrb:xrb_<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
+      // Key import:
+      // xrbkey:<encoded private key>[?][label=<label>][&][message=<message>]
+      // Seed import:
+      // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
+      // We could add:
+      // Contact?
+      // Payment with confirmation
+
+
       if ($state.includes('tabs.scan')) {
         root.showMenu({
           data: data,
@@ -323,7 +334,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
   function goToAmountPage (toAddress, coin) {
     $state.go('tabs.send', {}, {
       'reload': true,
-      'notify': $state.current.name != 'tabs.send'
+      'notify': $state.current.name !== 'tabs.send'
     })
     $timeout(function () {
       $state.transitionTo('tabs.send.amount', {
