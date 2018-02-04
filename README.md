@@ -42,7 +42,7 @@ npm run watch
 
 By default the code's backend is the Canoe beta server ( see `src/js/services/nanoService.js`'s `host` setting). 
 
-If you want to test things out on a local machine without running an entire Raiblocks RPC node, you can instead run our mock backend.
+If you want to test things out on a local machine without running an entire Nano RPC node, you can instead run our mock backend.
 
 ```
 node mock_backend/server.js

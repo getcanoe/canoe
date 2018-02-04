@@ -93,7 +93,7 @@ app.post('/', function (req, res) {
         views[action](req, res);
     }
     else {
-      // if you hit this, then you should check out the Raiblocks RPC documentation and see what a good reply would be
+      // if you hit this, then you should check out the Nano RPC documentation and see what a good reply would be
       // and add it to the views dicitonary
       // https://github.com/clemahieu/raiblocks/wiki/RPC-protocol
       console.log("Action unimplemented in mock server: ", action);
