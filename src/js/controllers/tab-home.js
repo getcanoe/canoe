@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('canoeApp.controllers').controller('tabHomeController',
-  function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, txpModalService, appConfigService, startupService, addressbookService, feedbackService, bwcError, nextStepsService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
+  function ($rootScope, $timeout, $interval, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, txpModalService, appConfigService, startupService, addressbookService, feedbackService, bwcError, nextStepsService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
     var wallet
     var listeners = []
     var notifications = []
@@ -18,6 +18,10 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     $scope.serverMessage = null
 
     $scope.$on('$ionicView.afterEnter', function () {
+      $scope.updateInterval = $interval(function () {
+        console.log('Refreshing')
+        performUpdate()
+      }, 5000)
       startupService.ready()
     })
 
@@ -86,8 +90,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     })
 
     $scope.$on('$ionicView.enter', function (event, data) {
-      performUpdate(function () {})
-
       addressbookService.list(function (err, ab) {
         if (err) $log.error(err)
         $scope.addressbook = ab || {}
@@ -136,6 +138,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     })
 
     $scope.$on('$ionicView.leave', function (event, data) {
+      $interval.cancel($scope.updateInterval)
       lodash.each(listeners, function (x) {
         x()
       })
@@ -239,19 +242,9 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     }
 
     var performUpdate = function (cb) {
-      profileService.updateAllAccounts(function (err, accounts) {
-        $log.debug('Update accounts: ' + JSON.stringify(accounts))
-        if (err) {
-          profileService.fetchServerStatus(function (err, status) {
-            // {link: "url", title: "asdasd", body: "saasd"}
-            $scope.serverMessage = status.message
-            cb()
-          })
-        } else {
-          $scope.serverMessage = null
-          cb()
-        }
-      })
+      profileService.updateAllAccounts()
+      // TODO Call and check server message regularly some other way
+      $scope.serverMessage = null
     }
 
     $scope.hideHomeTip = function () {
@@ -264,10 +257,9 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     }
 
     $scope.onRefresh = function () {
-      performUpdate(function () {
-        $scope.$broadcast('scroll.refreshComplete')
-        $ionicScrollDelegate.resize()
-        $scope.$apply()
-      })
+      performUpdate()
+      $scope.$broadcast('scroll.refreshComplete')
+      $ionicScrollDelegate.resize()
+      $scope.$apply()
     }
   })

@@ -39,7 +39,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   })
 
   function exitWithError (err) {
-    $log.info('Error setting wallet selector:' + err)
+    $log.info('Error setting account selector:' + err)
     popupService.showAlert(gettextCatalog.getString(), err, function () {
       $ionicHistory.nextViewOptions({
         disableAnimate: true,
@@ -66,29 +66,27 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       minAmount = minAmount || 1
 
       // Make sure we have latest accounts and balances
-      profileService.updateAllAccounts(function () {
-        $scope.accounts = profileService.getAccounts()
+      $scope.accounts = profileService.updateAllAccounts()
 
-        if (!$scope.accounts || !$scope.accounts.length) {
-          setNoWallet(gettextCatalog.getString('No wallets available'), true)
-          return cb()
-        }
-
-        var filteredAccounts = []
-        lodash.each($scope.accounts, function (acc) {
-          if (!acc.balance) { $log.debug('No balance available in: ' + acc.name) }
-          if (parseInt(acc.balance) >= minAmount) {
-            filteredAccounts.push(acc)
-          }
-        })
-
-        if (lodash.isEmpty(filteredAccounts)) {
-          setNoWallet(gettextCatalog.getString('Insufficient funds'), true)
-        }
-
-        $scope.accounts = lodash.clone(filteredAccounts)
+      if (!$scope.accounts || !$scope.accounts.length) {
+        setNoWallet(gettextCatalog.getString('No accounts available'), true)
         return cb()
+      }
+
+      var filteredAccounts = []
+      lodash.each($scope.accounts, function (acc) {
+        if (!acc.balance) { $log.debug('No balance available in: ' + acc.name) }
+        if (parseInt(acc.balance) >= minAmount) {
+          filteredAccounts.push(acc)
+        }
       })
+
+      if (lodash.isEmpty(filteredAccounts)) {
+        setNoWallet(gettextCatalog.getString('Insufficient funds'), true)
+      }
+
+      $scope.accounts = lodash.clone(filteredAccounts)
+      return cb()
     }
 
     // Grab stateParams

@@ -87,14 +87,12 @@ angular.module('canoeApp.services')
       return root.createWallet(null, seed, cb)
     }
 
-    root.updateAllAccounts = function (cb) {
+    root.updateAllAccounts = function () {
       var accounts = root.wallet.getAccounts()
       lodash.each(accounts, function (acc) {
         root.setLastKnownBalance(acc, function () {})
       })
-      if (cb) {
-        cb(null, accounts)
-      }
+      return accounts
     }
 
     root.formatAmount = function (raw, decimals) {
@@ -432,8 +430,7 @@ angular.module('canoeApp.services')
 
       function updateNotifications (wallet, cb2) {
         if (isActivityCached(wallet) && !opts.force) return cb2()
-
-        $log.debug('GET NOTIFICATIONS?')
+        // TODO
 /*        wallet.getNotifications({
           timeSpan: TIME_STAMP,
           includeOwn: true

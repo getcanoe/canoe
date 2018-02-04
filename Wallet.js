@@ -1403,7 +1403,6 @@ module.exports = function(password)
 		pack.tokenPass = tokenPass;
 
 		pack = JSON.stringify(pack);
-		console.log('SAVING: ' + pack)
 		pack = stringToHex(pack);
 		pack = new Buffer(pack, 'hex');
 		
@@ -1446,7 +1445,6 @@ module.exports = function(password)
 			throw "Wallet is corrupted or has been tampered.";
 		
 		var walletData = JSON.parse(decryptedBytes.toString('utf8'));
-		console.log('LOADING: ' + JSON.stringify(walletData))
 		seed = hex_uint8(walletData.seed);
 		lastKeyFromSeed = walletData.last;
 		recentTxs = walletData.recent;
@@ -1488,11 +1486,9 @@ module.exports = function(password)
 			aux.meta = walletData.keys[i].meta != undefined ? walletData.keys[i].meta : { label: ""};
 				
 			keys.push(aux);
-			console.log("LastPendingBlock " + aux.lastPendingBlock)
 			// It can be "" if chain is empty, or a valid hash indicating we have at least one block
 			if(aux.lastPendingBlock.length == 64) {
 				// We want precomputed work for all last blocks
-				console.log("Adding " + aux.lastPendingBlock + " acc: " + aux.account)
 				api.workPoolAdd(aux.lastPendingBlock, aux.account, true);
 			}
 		}
