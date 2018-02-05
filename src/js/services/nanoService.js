@@ -264,7 +264,7 @@ angular.module('canoeApp.services')
       root.createServerAccount(wallet)
       // We also hold onto it
       root.setWallet(wallet)
-
+      cb(wallet)
     }
 
     // Loads wallet from local storage using given password
