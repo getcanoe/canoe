@@ -1,6 +1,6 @@
 'use strict'
-
-angular.module('canoeApp.services').factory('incomingData', function ($log, $state, $timeout, $ionicHistory, $rootScope, payproService, scannerService, appConfigService, popupService, gettextCatalog) {
+/* global angular */
+angular.module('canoeApp.services').factory('incomingData', function ($log, $state, $timeout, $ionicHistory, $rootScope, lodash, nanoService, scannerService, appConfigService, popupService, gettextCatalog) {
   var root = {}
 
   root.showMenu = function (data) {
@@ -19,10 +19,8 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       }
       var value = match[0].replace(',', '.')
       var newUri = data.replace(regex, value)
-
       // mobile devices, uris
       newUri.replace('://', ':')
-
       return newUri
     }
 
@@ -34,15 +32,6 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       if (!results) return null
       if (!results[2]) return ''
       return decodeURIComponent(results[2].replace(/\+/g, ' '))
-    }
-
-    function checkPrivateKey (privateKey) {
-      try {
-        // new bitcore.PrivateKey(privateKey, 'livenet')
-      } catch (err) {
-        return false
-      }
-      return true
     }
 
     function goSend (addr, amount, message) {
@@ -66,6 +55,38 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       }, 100)
     }
 
+    // Some smart fixes
+    data = sanitizeUri(data)
+
+    var parts = data.split(':')
+    if (parts[0] === 'xrb') {
+      // A send code
+      // xrb:xrb_<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
+      parts = parts[1].split('?')
+      var acc = parts[0]
+      if (nanoService.isValidAccount(acc)) {
+        if (parts.length === 2) {
+          // We also have key value pairs
+          var kvs = {}
+          var pairs = parts[1].split('&')
+          lodash.each(pairs, function (pair) {
+            var kv = pair.split('=')
+            kvs[kv[0]] = kv[1]
+          })
+        }
+        // TODO label?
+        if (kvs.amount) {
+          goSend(acc, kvs.amount, kvs.message)
+        } else {
+          goToAmountPage(acc)
+        }
+      }
+    } else if (parts[0] === 'xrbkey') {
+      // A private key
+      // xrbkey:<encoded private key>[?][label=<label>][&][message=<message>]
+
+    } else if (parts[0] === 'xrbseed') {
+
     // data extensions for Payment Protocol with non-backwards-compatible request
     /* if ((/^bitcoin(cash)?:\?r=[\w+]/).exec(data)) {
       var coin = 'btc'
@@ -81,8 +102,6 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
 
       return true
     }*/
-
-    data = sanitizeUri(data)
 
     // Bitcoin  URL
 /*    if (bitcore.URI.isValid(data)) {
@@ -320,47 +339,28 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       // Contact?
       // Payment with confirmation
 
-
+    } else {
+      // Offer clipboard
       if ($state.includes('tabs.scan')) {
         root.showMenu({
           data: data,
           type: 'text'
         })
       }
-    /* } */
+    }
     return false
   }
 
-  function goToAmountPage (toAddress, coin) {
+  function goToAmountPage (toAddress) {
     $state.go('tabs.send', {}, {
       'reload': true,
       'notify': $state.current.name !== 'tabs.send'
     })
     $timeout(function () {
       $state.transitionTo('tabs.send.amount', {
-        toAddress: toAddress,
-        coin: coin
+        toAddress: toAddress
       })
     }, 100)
-  }
-
-  function handlePayPro (payProDetails, coin) {
-    var stateParams = {
-      toAmount: payProDetails.amount,
-      toAddress: payProDetails.toAddress,
-      description: payProDetails.memo,
-      paypro: payProDetails,
-      coin: coin
-    }
-    scannerService.pausePreview()
-    $state.go('tabs.send', {}, {
-      'reload': true,
-      'notify': $state.current.name != 'tabs.send'
-    }).then(function () {
-      $timeout(function () {
-        $state.transitionTo('tabs.send.confirm', stateParams)
-      })
-    })
   }
 
   return root
