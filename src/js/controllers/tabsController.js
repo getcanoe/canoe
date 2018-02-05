@@ -1,44 +1,40 @@
-'use strict';
+'use strict'
 
-angular.module('canoeApp.controllers').controller('tabsController', function($rootScope, $log, $scope, $state, $stateParams, $timeout, platformInfo, incomingData, lodash, popupService, gettextCatalog, scannerService) {
-
-  $scope.onScan = function(data) {
+angular.module('canoeApp.controllers').controller('tabsController', function ($rootScope, $log, $scope, $state, $stateParams, $timeout, platformInfo, incomingData, lodash, popupService, gettextCatalog, scannerService) {
+  $scope.onScan = function (data) {
     if (!incomingData.redir(data)) {
-      popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Invalid data'));
+      popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Invalid data'))
     }
-  };
+  }
 
-  $scope.setScanFn = function(scanFn) {
-    $scope.scan = function() {
-      $log.debug('Scanning...');
-      scanFn();
-    };
-  };
+  $scope.setScanFn = function (scanFn) {
+    $scope.scan = function () {
+      $log.debug('Scanning...')
+      scanFn()
+    }
+  }
 
-  $scope.importInit = function() {
-    $scope.fromOnboarding = $stateParams.fromOnboarding;
-    $timeout(function() {
-      $scope.$apply();
-    }, 1);
-  };
+  $scope.importInit = function () {
+    $scope.fromOnboarding = $stateParams.fromOnboarding
+    $timeout(function () {
+      $scope.$apply()
+    }, 1)
+  }
 
-  $scope.chooseScanner = function() {
-
-    var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
+  $scope.chooseScanner = function () {
+    var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
 
     if (!isWindowsPhoneApp) {
-      $state.go('tabs.scan');
-      return;
+      $state.go('tabs.scan')
+      return
     }
 
-    scannerService.useOldScanner(function(err, contents) {
+    scannerService.useOldScanner(function (err, contents) {
       if (err) {
-        popupService.showAlert(gettextCatalog.getString('Error'), err);
-        return;
+        popupService.showAlert(gettextCatalog.getString('Error'), err)
+        return
       }
-      incomingData.redir(contents);
-    });
-
-  };
-
-});
+      incomingData.redir(contents)
+    })
+  }
+})
