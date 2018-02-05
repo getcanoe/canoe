@@ -79,7 +79,9 @@ angular.module('canoeApp.services')
     }
 
     // Whenever the wallet is changed we call this
-    root.setWallet = function (wallet) {
+    root.setWallet = function (wallet, cb) {
+      // Make sure we have an account for this wallet
+      root.createServerAccount(wallet)
       root.wallet = wallet
       wallet.setLogger($log)
       // Install callbacks
@@ -91,6 +93,11 @@ angular.module('canoeApp.services')
           wallet.removeReadyBlock(hash)
           root.saveWallet(wallet, function () {})
         }
+      })
+      root.startMQTT(function () {
+        // Fetch all pending blocks
+        root.fetchPendingBlocks()
+        cb()
       })
     }
 
@@ -141,15 +148,16 @@ angular.module('canoeApp.services')
         root.saveWallet(root.wallet, function () {})
       }
     }
-    window.fetchPendingBlocks = fetchPendingBlocks
+    window.fetchPendingBlocks = root.fetchPendingBlocks
     window.resetChains = resetChains
 
     // Explicitly ask for pending blocks and fetching them to process them as if
     // they came in live over the rai_node callback
-    function fetchPendingBlocks () {
+    root.fetchPendingBlocks = function () {
       if (root.wallet) {
         var accountIds = root.wallet.getAccountIds()
         var accountsAndHashes = rai.accounts_pending(accountIds)
+        $log.info('Pending hashes: ' + accountsAndHashes)
         lodash.each(accountsAndHashes, function (hashes, account) {
           var blocks = rai.blocks_info(hashes)
           lodash.each(blocks, function (blk, hash) {
@@ -201,9 +209,10 @@ angular.module('canoeApp.services')
       return (isValidHash && (seedHex.length === 64))
     }
 
-    root.isValidAccount = function (addr, cb) {
+    root.isValidAccount = function (addr) {
       $log.debug('Validating addr: ' + addr)
       if (addr.startsWith('xrb_') || addr.startsWith('nano_')) {
+        $log.debug('Starts properly')
         return rai.account_validate(addr)
       }
       return false
@@ -261,10 +270,7 @@ angular.module('canoeApp.services')
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
       wallet.createSeed(seed)
-      root.createServerAccount(wallet)
-      // We also hold onto it
-      root.setWallet(wallet)
-      cb(wallet)
+      root.setWallet(wallet, cb)
     }
 
     // Loads wallet from local storage using given password
@@ -277,8 +283,7 @@ angular.module('canoeApp.services')
         if (!data) {
           return cb('No wallet in local storage')
         }
-        root.createWalletFromData(data, password)
-        root.startMQTT(cb)
+        root.createWalletFromData(data, password, cb)
       })
     }
 
@@ -289,18 +294,17 @@ angular.module('canoeApp.services')
         if (connected) {
           root.updateServerMap(root.wallet)
           root.subscribeForWallet(root.wallet)
+          cb()
         }
-        cb(null, root.wallet)
       })
     }
 
     // Loads wallet from data using password
-    root.createWalletFromData = function (data, password) {
+    root.createWalletFromData = function (data, password, cb) {
       $log.debug('Create wallet from data')
       var wallet = root.createNewWallet(password)
       root.loadWalletData(wallet, data)
-      root.setWallet(wallet)
-      return wallet
+      root.setWallet(wallet, cb)
     }
 
     // Create a new account in the wallet
@@ -376,15 +380,15 @@ angular.module('canoeApp.services')
       var mqttClientId = wallet.getId()
       var opts = {userName: mqttUsername, password: mqttPassword, clientId: mqttClientId}
       // Connect to MQTT
-      $log.debug('Connecting to MQTT broker ...')
+      $log.info('Connecting to MQTT broker ...')
       // $log.debug('Options: ' + JSON.stringify(opts))
       root.connect(opts, function () {
-        $log.debug('Connected to MQTT broker.')
+        $log.info('Connected to MQTT broker.')
         if (cb) {
           cb(true)
         }
       }, function (c, code, msg) {
-        $log.debug('Failed connecting to MQTT: ', {context: c, code: code, msg: msg})
+        $log.error('Failed connecting to MQTT: ', {context: c, code: code, msg: msg})
         root.disconnect()
         if (cb) {
           cb(false)
@@ -421,6 +425,7 @@ angular.module('canoeApp.services')
       // Create a receive (or open, if this is the first block in account) block to match
       // this incoming send block
       if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
+        $log.info('Added pending receive block')
         // TODO Add something visual for the txn?
         // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
         // addRecentRecToGui(txObj)
@@ -515,10 +520,10 @@ angular.module('canoeApp.services')
         if (retained !== undefined) {
           message.retained = retained
         }
-        $log.debug('Send ' + topic + ' ' + json)
+        $log.info('Send ' + topic + ' ' + json)
         mqttClient.send(message)
       } else {
-        $log.debug('Should send ' + topic + ' ' + json)
+        $log.error('Not connected to MQTT, should send ' + topic + ' ' + json)
       }
     }
 

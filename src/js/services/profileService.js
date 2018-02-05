@@ -106,10 +106,12 @@ angular.module('canoeApp.services')
         var imported = JSON.parse(json)
         var walletData = imported.wallet
         // Then we try to load wallet
-        nanoService.createWalletFromData(walletData, password)
-        $log.info('Successfully imported wallet')
-        // If that succeeded we consider this entering the password
-        root.enteredPassword(password)
+        nanoService.createWalletFromData(walletData, password, function (err, wallet) {
+          if (err) return $log.error(err)
+          $log.info('Successfully imported wallet')
+          // If that succeeded we consider this entering the password
+          root.enteredPassword(password)
+        })
       } catch (e) {
         $log.warn('Failed importing wallet: ' + e)
         throw e
