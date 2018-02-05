@@ -55,9 +55,9 @@ angular.module('canoeApp.services')
         // Do work server or client side?
         if (configService.getSync().wallet.serverSidePoW) {
           // Server side
-          $log.log('Working on server for ' + hash)
+          $log.info('Working on server for ' + hash)
           rai.work_generate_async(hash, function (work) {
-            $log.log('Server side PoW found for ' + hash + ': ' + work)
+            $log.info('Server side PoW found for ' + hash + ': ' + work)
             root.wallet.updateWorkPool(hash, work)
             // Now we can do one more, keeping it one at a time for server side
             setTimeout(generatePoW, 1000)
@@ -66,9 +66,9 @@ angular.module('canoeApp.services')
           // Client side
           powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
           pow_callback(powWorkers, hash, function () {
-            $log.log('Working on client for ' + hash)
+            $log.info('Working on client for ' + hash)
           }, function (work) {
-            $log.log('Client side PoW found for ' + hash + ': ' + work)
+            $log.info('Client side PoW found for ' + hash + ': ' + work)
             root.wallet.updateWorkPool(hash, work)
             setTimeout(generatePoW, 1000)
           })
