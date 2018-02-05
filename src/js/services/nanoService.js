@@ -203,10 +203,10 @@ angular.module('canoeApp.services')
 
     root.isValidAccount = function (addr, cb) {
       $log.debug('Validating addr: ' + addr)
-      if (!addr.startsWith('xrb_')) {
-        return false
+      if (addr.startsWith('xrb_') || addr.startsWith('nano_')) {
+        return rai.account_validate(addr)
       }
-      return rai.account_validate(addr)
+      return false
     }
 
     /*
