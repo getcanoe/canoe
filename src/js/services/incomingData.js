@@ -57,7 +57,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
 
     // Some smart fixes
     data = sanitizeUri(data)
-
+    $log.debug('Sanitized URI: ' + data)
     var parts = data.split(':')
     if (parts[0] === 'xrb') {
       // A send code
@@ -65,9 +65,10 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       parts = parts[1].split('?')
       var acc = parts[0]
       if (nanoService.isValidAccount(acc)) {
+        $log.debug('Account valid')
+        var kvs = {}
         if (parts.length === 2) {
           // We also have key value pairs
-          var kvs = {}
           var pairs = parts[1].split('&')
           lodash.each(pairs, function (pair) {
             var kv = pair.split('=')
@@ -76,11 +77,15 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         }
         // TODO label?
         if (kvs.amount) {
+          $log.debug('Go send ' + acc + ' ' + JSON.stringify(kvs))
           goSend(acc, kvs.amount, kvs.message)
         } else {
           goToAmountPage(acc)
         }
+        return true
       }
+      popupService.showAlert(gettextCatalog.getString('Error'), 'Invalid account')
+      return true
     } else if (parts[0] === 'xrbkey') {
       // A private key
       // xrbkey:<encoded private key>[?][label=<label>][&][message=<message>]

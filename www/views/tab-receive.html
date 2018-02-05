@@ -20,7 +20,7 @@
         <div copy-to-clipboard="addr">
           <qrcode ng-if="addrUrl" size="220" data="{{addrUrl}}" color="#334"></qrcode>
           <div class="address-label">
-            <span class="ellipsis">{{addr}}</span>
+            <span class="ellipsis">{{addrUrl}}</span>
             <ion-spinner ng-show="!addr" class="spinner-dark" icon="crescent"></ion-spinner>
           </div>
         </div>
