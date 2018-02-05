@@ -262,15 +262,9 @@ angular.module('canoeApp.services')
       var wallet = root.createNewWallet(password)
       wallet.createSeed(seed)
       root.createServerAccount(wallet)
-      root.connectMQTT(wallet, function (connected) {
-        if (connected) {
-          root.updateServerMap(wallet)
-          root.subscribeForWallet(wallet)
-        }
-        // We also hold onto it
-        root.setWallet(wallet)
-        cb(wallet)
-      })
+      // We also hold onto it
+      root.setWallet(wallet)
+
     }
 
     // Loads wallet from local storage using given password
@@ -283,22 +277,30 @@ angular.module('canoeApp.services')
         if (!data) {
           return cb('No wallet in local storage')
         }
-        root.setWallet(root.createWalletFromData(password, data))
-        // Now we can connect
-        root.connectMQTT(root.wallet, function (connected) {
-          if (connected) {
-            root.updateServerMap(root.wallet)
-            root.subscribeForWallet(root.wallet)
-          }
-          cb(null, root.wallet)
-        })
+        root.createWalletFromData(data, password)
+        root.startMQTT(cb)
+      })
+    }
+
+    // Start MQTT
+    root.startMQTT = function (cb) {
+      // Now we can connect
+      root.connectMQTT(root.wallet, function (connected) {
+        if (connected) {
+          root.updateServerMap(root.wallet)
+          root.subscribeForWallet(root.wallet)
+        }
+        cb(null, root.wallet)
       })
     }
 
     // Loads wallet from data using password
-    root.createWalletFromData = function (password, data) {
+    root.createWalletFromData = function (data, password) {
+      $log.debug('Create wallet from data')
       var wallet = root.createNewWallet(password)
-      return root.loadWalletData(wallet, data)
+      root.loadWalletData(wallet, data)
+      root.setWallet(wallet)
+      return wallet
     }
 
     // Create a new account in the wallet
@@ -349,7 +351,7 @@ angular.module('canoeApp.services')
         wallet.load(data)
       } catch (e) {
         $log.error('Error decrypting wallet. Check that the password is correct.')
-        return
+        throw e
       }
       return wallet
     }

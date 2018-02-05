@@ -15,28 +15,16 @@
     </label>
 
     <label class="item item-input item-stacked-label">
-      <span class="input-label" translate>Password</span>
+      <span class="input-label" translate>Password to decrypt</span>
       <input type="password"
         placeholder="{{'Your password'|translate}}"
         ng-model="formData.password">
     </label>
 
     <div class="item item-divider"></div>
-<!--
-    <a class="item" ng-click="showAdvChange()">
-      <span translate ng-show="!showAdv">Show advanced options</span>
-      <span translate ng-show="showAdv">Hide advanced options</span>
-    </a>
-
-    <div ng-show="showAdv">
-      <label class="item item-input item-stacked-label">
-        <span class="input-label">Wallet Service URL</span>
-        <input type="text" ng-model="formData.bwsurl">
-      </label>
-    </div> -->
   </div>
 
-  <button type="submit" class="button button-standard button-primary" ng-disabled="NOTIMPLEMENTEDYET || importForm.$invalid || !formData.password" translate>
-    Import file (not implemented yet)
+  <button type="submit" class="button button-standard button-primary" ng-disabled="importForm.$invalid || !formData.password" translate>
+    Import wallet
   </button>
 </form>

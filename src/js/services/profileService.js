@@ -1,4 +1,5 @@
 'use strict'
+/* global XMLHttpRequest angular Profile */
 angular.module('canoeApp.services')
   .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, nanoService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
     var isChromeApp = platformInfo.isChromeApp
@@ -80,7 +81,7 @@ angular.module('canoeApp.services')
       function processRequest (e) {
         if (xhr.readyState === 4 && xhr.status === 200) {
           var response = JSON.parse(xhr.responseText)
-          console.log('Coinmarketcap reply: ' + JSON.stringify(response))
+          $log.debug('Coinmarketcap reply: ' + JSON.stringify(response))
           var price = response[0]['price_' + local]
           // var symbol = response[0]['symbol']
           cb(null, (price * value))
@@ -88,7 +89,7 @@ angular.module('canoeApp.services')
       }
     }
 
-    // Create a new wallet, but reuse existing id, password and tokens
+    // Create a new wallet from a seed
     root.importSeed = function (seed, cb) {
       $log.debug('Importing Wallet Seed')
       return root.createWallet(null, seed, cb)
@@ -97,6 +98,32 @@ angular.module('canoeApp.services')
     // Return an object with wallet member holding the encrypted hex of wallet
     root.getExportWallet = function () {
       return {wallet: root.wallet.pack()}
+    }
+
+    // Import wallet from JSON and password, throws exception on failure
+    root.importWallet = function (json, password) {
+      try {
+        var imported = JSON.parse(json)
+        var walletData = imported.wallet
+        // Then we try to load wallet
+        nanoService.createWalletFromData(walletData, password)
+        $log.info('Successfully imported wallet')
+        // If that succeeded we consider this entering the password
+        root.enteredPassword(password)
+      } catch (e) {
+        $log.warn('Failed importing wallet: ' + e)
+        throw e
+      }
+      // And we can also try merging addressBook
+      if (imported.addressBook) {
+        root.mergeAddressBook(imported.addressBook, function (err) {
+          if (err) {
+            $log.error(err)
+          } else {
+            $log.info('Merged addressbook with imported addressbook')
+          }
+        })
+      }
     }
 
     root.updateAllAccounts = function () {
@@ -271,8 +298,9 @@ angular.module('canoeApp.services')
     }
 
     // Not used yet but could be useful
-    root.mergeAddressBook = function (walletClient, addressBook, cb) {
+    root.mergeAddressBook = function (addressBook, cb) {
       storageService.getAddressbook(function (err, localAddressBook) {
+        if (err) $log.debug(err)
         var localAddressBook1 = {}
         try {
           localAddressBook1 = JSON.parse(localAddressBook)

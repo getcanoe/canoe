@@ -1,7 +1,7 @@
 'use strict'
-
+/* global angular FileReader */
 angular.module('canoeApp.controllers').controller('importController',
-  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, nanoService, platformInfo, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService) {
+  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, lodash, profileService, configService, nanoService, platformInfo, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService) {
     var reader = new FileReader()
     var defaults = configService.getDefaults()
     var config = configService.getSync()
@@ -12,7 +12,6 @@ angular.module('canoeApp.controllers').controller('importController',
       $scope.formData.account = 1
       $scope.importErr = false
 
-      $scope.NOTIMPLEMENTEDYET = true
       if ($stateParams.code) { $scope.processWalletInfo($stateParams.code) }
 
       $scope.seedOptions = []
@@ -22,83 +21,65 @@ angular.module('canoeApp.controllers').controller('importController',
       })
     }
 
-    $scope.switchTestnetOff = function () {
-      $scope.formData.testnetEnabled = false
-      $scope.resizeView()
-      $timeout(function () {
-        $scope.$apply()
-      })
-    }
-
-    $scope.processWalletInfo = function (code) {
+    $scope.processQRSeed = function (code) {
+      var seed
+      // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
+      // xrbseed:97123971239712937123987129387129873?label=bah&message=hubba&lastindex=9
       if (!code) return
 
-      $scope.importErr = false
-      var parsedCode = code.split('|')
-
-      if (parsedCode.length !== 5) {
-        /// Trying to import a malformed wallet export QR code
-        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Incorrect code format'))
+      $scope.importErr = true
+      var parts = code.split(':')
+      if (parts[0] === 'xrbseed') {
+        parts = parts[1].split('?')
+        if (nanoService.isValidSeed(parts[0])) {
+          $scope.importErr = false
+          if (parts.length === 2) {
+            // We also have key value pairs
+            var kvs = {}
+            var pairs = parts[1].split('&')
+            lodash.each(pairs, function (pair) {
+              var kv = pair.split('=')
+              kvs[kv[0]] = kv[1]
+            })
+          }
+        }
+      }
+      if ($scope.importErr) {
+        /// Trying to import a malformed seed QR code
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Incorrect code format for a seed'))
         return
       }
 
-      var info = {
-        type: parsedCode[0],
-        data: parsedCode[1],
-        network: parsedCode[2],
-        derivationPath: parsedCode[3],
-        hasPassphrase: parsedCode[4] === 'true'
-      }
-
-      if (info.type === 1 && info.hasPassphrase) { popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Password required. Make sure to enter your password in advanced options')) }
-
-      $scope.formData.derivationPath = info.derivationPath
-      $scope.formData.testnetEnabled = info.network === 'testnet'
-
       $timeout(function () {
-        $scope.formData.words = info.data
+        $scope.formData.seed = seed
         $scope.$apply()
       }, 1)
     }
 
-    var _importBlob = function (str, opts) {
-      var str2, err
-      try {
-        // TODO str2 = sjcl.decrypt($scope.formData.password, str)
-      } catch (e) {
-        err = gettextCatalog.getString('Could not decrypt file, check your password')
-        $log.warn(e)
-      };
-
-      if (err) {
-        popupService.showAlert(gettextCatalog.getString('Error'), err)
-        return
-      }
-
+    var _importBlob = function (data, opts) {
+      var err
       ongoingProcess.set('importingWallet', true)
-      opts.compressed = null
-      opts.password = null
-
       $timeout(function () {
-        profileService.importWallet(str2, opts, function (err, client) {
-          ongoingProcess.set('importingWallet', false)
-          if (err) {
-            popupService.showAlert(gettextCatalog.getString('Error'), err)
-            return
-          }
-          finish(client)
-        })
+        try {
+          profileService.importWallet(data, $scope.formData.password)
+        } catch (e) {
+          err = gettextCatalog.getString('Could not decrypt wallet in file, check your password')
+          $log.warn(e)
+        }
+        ongoingProcess.set('importingWallet', false)
+        if (err) {
+          popupService.showAlert(gettextCatalog.getString('Error'), err)
+          return
+        }
+        finish()
       }, 100)
     }
 
     $scope.getFile = function () {
       // If we use onloadend, we need to check the readyState.
       reader.onloadend = function (evt) {
-        if (evt.target.readyState == FileReader.DONE) { // DONE == 2
-          var opts = {}
-          opts.bwsurl = $scope.formData.bwsurl
-          opts.coin = $scope.formData.coin
-          _importBlob(evt.target.result, opts)
+        if (evt.target.readyState === FileReader.DONE) { // DONE == 2
+          _importBlob(evt.target.result)
         }
       }
     }
@@ -111,7 +92,6 @@ angular.module('canoeApp.controllers').controller('importController',
 
       var backupFile = $scope.formData.file
       var backupText = $scope.formData.backupText
-      var password = $scope.formData.password
 
       if (!backupFile && !backupText) {
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please, select your backup file'))
@@ -121,10 +101,7 @@ angular.module('canoeApp.controllers').controller('importController',
       if (backupFile) {
         reader.readAsBinaryString(backupFile)
       } else {
-        var opts = {}
-        opts.bwsurl = $scope.formData.bwsurl
-        opts.coin = $scope.formData.coin
-        _importBlob(backupText, opts)
+        _importBlob(backupText)
       }
     }
 
@@ -146,15 +123,12 @@ angular.module('canoeApp.controllers').controller('importController',
       $timeout(function () {
         profileService.importSeed(seed, function () {
           ongoingProcess.set('importingWallet', false)
-          finish(null)
+          finish()
         })
       }, 100)
     }
 
-    var finish = function (wallet) {
-      $log.debug('WALLETSERVICE...')
-      // walletService.updateRemotePreferences(wallet)
-
+    var finish = function () {
       profileService.setBackupFlag()
       if ($stateParams.fromOnboarding) {
         profileService.setDisclaimerAccepted(function (err) {
@@ -165,13 +139,6 @@ angular.module('canoeApp.controllers').controller('importController',
       $state.go('tabs.home', {
         fromOnboarding: $stateParams.fromOnboarding
       })
-    }
-
-    $scope.showAdvChange = function () {
-      $scope.showAdv = !$scope.showAdv
-      $timeout(function () {
-        $scope.resizeView()
-      }, 100)
     }
 
     $scope.resizeView = function () {
