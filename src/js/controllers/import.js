@@ -12,7 +12,7 @@ angular.module('canoeApp.controllers').controller('importController',
       $scope.formData.account = 1
       $scope.importErr = false
 
-      if ($stateParams.code) { $scope.processWalletInfo($stateParams.code) }
+      if ($stateParams.code) { $scope.processQRSeed($stateParams.code) }
 
       $scope.seedOptions = []
 
