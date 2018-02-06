@@ -183,16 +183,27 @@ angular.module('canoeApp.services')
     root.parseQRCode = function (data) {
       // <protocol>:<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
       var code = {}
-      var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'xrbkey', 'nanoseed', 'nanokey', 'nanocontact']
+      var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'xrbkey', 'nanoseed', 'nanokey']
       try {
         var parts = data.split(':')
-        code.protocol = parts[0]
+        if (parts.length === 1) {
+          // No ':',  perhaps a bare account?
+          if (data.match(/^(xrb_|nano_)/) !== null) {
+            code.protocol = 'nano'
+            parts = parts[0]
+          } else {
+            // Nope, give up
+            return null
+          }
+        } else {
+          code.protocol = parts[0]
+          parts = parts[1]
+        }
         if (!protocols.includes(code.protocol)) {
           return null
-        } else if (parts.length === 1) {
-          return null
         }
-        parts = parts[1].split('?')
+        // Time to check for params
+        parts = parts.split('?')
         code.account = parts[0]
         if (code.account.startsWith('@')) {
           code.alias = code.account

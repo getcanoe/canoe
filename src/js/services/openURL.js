@@ -56,15 +56,11 @@ angular.module('canoeApp.services').factory('openURLService', function ($rootSco
 
       // This event is sent to an existent instance of Canoe (only for standalone apps)
       gui.App.on('open', function (pathData) {
-        if (pathData.indexOf(/^bitcoin(cash)?:/) !== -1) {
-          $log.debug('Bitcoin URL found')
+        // All URL protocols plus bare accounts
+        if (pathData.match(/^(xrb:|nano:|canoe:|xrb_|nano_)/) !== null) {
+          $log.debug('Nano or Canoe URL found')
           handleOpenURL({
-            url: pathData.substring(pathData.indexOf(/^bitcoin(cash)?:/))
-          })
-        } else if (pathData.indexOf(appConfigService.name + '://') !== -1) {
-          $log.debug(appConfigService.name + ' URL found')
-          handleOpenURL({
-            url: pathData.substring(pathData.indexOf(appConfigService.name + '://'))
+            url: pathData
           })
         }
       })
