@@ -19,7 +19,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
 
     $scope.$on('$ionicView.afterEnter', function () {
       $scope.updateInterval = $interval(function () {
-        console.log('Refreshing')
         performUpdate()
       }, 5000)
       startupService.ready()
@@ -260,6 +259,8 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       performUpdate()
       $scope.$broadcast('scroll.refreshComplete')
       $ionicScrollDelegate.resize()
+      $timeout(function () {
       $scope.$apply()
+      })
     }
   })

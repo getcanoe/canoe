@@ -1,4 +1,5 @@
 'use strict'
+/* global angular */
 angular.module('canoeApp.directives')
   .directive('validAddress', ['$rootScope', 'nanoService',
     function ($rootScope, nanoService) {
@@ -16,7 +17,7 @@ angular.module('canoeApp.directives')
             var isValid = nanoService.isValidAccount(value)
             ctrl.$setValidity('validAddress', isValid)
             return value
-          };
+          }
 
           ctrl.$parsers.unshift(validator)
           ctrl.$formatters.unshift(validator)
@@ -32,7 +33,7 @@ angular.module('canoeApp.directives')
           var val = function (value) {
             var settings = configService.getSync().wallet.settings
             var vNum = Number((value * settings.unitToRaw).toFixed(0))
-            if (typeof value === 'undefined' || value == 0) {
+            if (typeof value === 'undefined' || value === 0) {
               ctrl.$pristine = true
             }
 
@@ -41,11 +42,11 @@ angular.module('canoeApp.directives')
                 ctrl.$setValidity('validAmount', false)
               } else {
                 var decimals = Number(settings.unitDecimals)
-                var sep_index = ('' + value).indexOf('.')
-                var str_value = ('' + value).substring(sep_index + 1)
-                if (sep_index >= 0 && str_value.length > decimals) {
+                var sepIndex = ('' + value).indexOf('.')
+                var strValue = ('' + value).substring(sepIndex + 1)
+                if (sepIndex >= 0 && strValue.length > decimals) {
                   ctrl.$setValidity('validAmount', false)
-                  return;
+                  return
                 } else {
                   ctrl.$setValidity('validAmount', true)
                 }
