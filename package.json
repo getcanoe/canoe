@@ -59,7 +59,7 @@
     "cordova-ios": "4.5.3",
     "cordova-ios-requires-fullscreen": "0.0.2",
     "cordova-plugin-android-fingerprint-auth": "1.4.0",
-    "cordova-plugin-customurlscheme": "https://github.com/cmgustavo/Custom-URL-scheme.git#v4.0",
+    "cordova-plugin-customurlscheme": "https://github.com/cmgustavo/Custom-URL-scheme.git#4.1.5",
     "cordova-plugin-device": "1.1.7",
     "cordova-plugin-dialogs": "1.3.4",
     "cordova-plugin-file": "5.0.0",
@@ -177,8 +177,8 @@
       "cordova-plugin-qrscanner": {},
       "cordova-plugin-customurlscheme": {
         "URL_SCHEME": "nano",
-        "SECOND_URL_SCHEME": "canoe",
-        "THIRD_URL_SCHEME": "bitcoincash"
+        "SECOND_URL_SCHEME": "xrb",
+        "THIRD_URL_SCHEME": "canoe"
       },
       "cordova-plugin-ionic-webview": {},
       "cordova-custom-config": {}
