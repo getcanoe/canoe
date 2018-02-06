@@ -157,7 +157,7 @@ angular.module('canoeApp.services')
       if (root.wallet) {
         var accountIds = root.wallet.getAccountIds()
         var accountsAndHashes = rai.accounts_pending(accountIds)
-        $log.info('Pending hashes: ' + accountsAndHashes)
+        $log.info('Pending hashes: ' + JSON.stringify(accountsAndHashes))
         lodash.each(accountsAndHashes, function (hashes, account) {
           var blocks = rai.blocks_info(hashes)
           lodash.each(blocks, function (blk, hash) {
@@ -253,9 +253,7 @@ angular.module('canoeApp.services')
     }
 
     root.isValidAccount = function (addr) {
-      $log.debug('Validating addr: ' + addr)
       if (addr.startsWith('xrb_') || addr.startsWith('nano_')) {
-        $log.debug('Starts properly')
         return rai.account_validate(addr)
       }
       return false
