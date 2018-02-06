@@ -187,7 +187,7 @@ angular.module('canoeApp.services')
       try {
         var parts = data.split(':')
         code.protocol = parts[0]
-        if (!protocols.include(code.protocol)) {
+        if (!protocols.includes(code.protocol)) {
           return null
         } else if (parts.length === 1) {
           return null
@@ -546,7 +546,7 @@ angular.module('canoeApp.services')
       mqttClient.onMessageArrived = root.onMessageArrived
       var opts = {
         reconnect: true,
-        keepAliveInterval: 120,
+        keepAliveInterval: 3600,
         useSSL: true,
         userName: userName,
         password: password,
