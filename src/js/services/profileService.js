@@ -109,8 +109,10 @@ angular.module('canoeApp.services')
         nanoService.createWalletFromData(walletData, password, function (err, wallet) {
           if (err) return $log.error(err)
           $log.info('Successfully imported wallet')
-          // If that succeeded we consider this entering the password
-          root.enteredPassword(password)
+          nanoService.saveWallet(wallet, function () {
+            // If that succeeded we consider this entering the password
+            root.enteredPassword(password)
+          })
         })
       } catch (e) {
         $log.warn('Failed importing wallet: ' + e)
@@ -255,10 +257,6 @@ angular.module('canoeApp.services')
       var accountName = name || gettextCatalog.getString('Default Account')
       nanoService.createAccount(root.wallet, accountName)
       // TODO checkChains? See raiwallet.js
-      nanoService.saveWallet(root.wallet, cb)
-    }
-
-    root.saveWallet = function (cb) {
       nanoService.saveWallet(root.wallet, cb)
     }
 

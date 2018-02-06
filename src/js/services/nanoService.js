@@ -388,6 +388,7 @@ angular.module('canoeApp.services')
     // This should be called on every modification to the wallet.
     root.saveWallet = function (wallet, cb) {
       storageService.storeWallet(wallet.pack(), function () {
+        $log.info('Wallet saved')
         cb(null, wallet)
       })
     }
