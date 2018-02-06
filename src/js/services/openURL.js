@@ -82,8 +82,9 @@ angular.module('canoeApp.services').factory('openURLService', function ($rootSco
 
       if (navigator.registerProtocolHandler) {
         $log.debug('Registering Browser handlers base:' + base)
-        navigator.registerProtocolHandler('nano', url, 'Canoe Nano Handler')
-        navigator.registerProtocolHandler('xrb', url, 'Canoe XRB Handler')
+        // These two not allowed, see: https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler
+        // navigator.registerProtocolHandler('nano', url, 'Canoe Nano Handler')
+        // navigator.registerProtocolHandler('xrb', url, 'Canoe XRB Handler')
         navigator.registerProtocolHandler('web+nano', url, 'Canoe web Nano Handler')
         navigator.registerProtocolHandler('web+canoe', url, 'Canoe Wallet Handler')
         navigator.registerProtocolHandler('web+xrb', url, 'Canoe web XRB Handler')

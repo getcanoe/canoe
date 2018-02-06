@@ -177,6 +177,49 @@ angular.module('canoeApp.services')
       return res
     }
 
+    // Parse out major parts of QR/URL syntax. Returns null on failure,
+    // otherwise something like:
+    // { protocol: 'xrb', account: 'xrb_yaddayadda', params: {label: 'label', amount: '10000'}}
+    root.parseQRCode = function (data) {
+      // <protocol>:<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
+      var code = {}
+      var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'xrbkey', 'nanoseed', 'nanokey', 'nanocontact']
+      try {
+        var parts = data.split(':')
+        code.protocol = parts[0]
+        if (!protocols.include(code.protocol)) {
+          return null
+        } else if (parts.length === 1) {
+          return null
+        }
+        parts = parts[1].split('?')
+        code.account = parts[0]
+        if (code.account.startsWith('@')) {
+          code.alias = code.account
+          code.account = ''
+          // TODO lookup alias in alias server
+        } else {
+          if (!root.isValidAccount(code.account)) {
+            $log.debug('Account invalid')
+            return null
+          }
+        }
+        var kvs = {}
+        if (parts.length === 2) {
+          // We also have key value pairs
+          var pairs = parts[1].split('&')
+          lodash.each(pairs, function (pair) {
+            var kv = pair.split('=')
+            kvs[kv[0]] = kv[1]
+          })
+        }
+        code.params = kvs
+        return code
+      } catch (e) {
+        return null
+      }
+    }
+
     root.connect = function () {
       try {
         rai = new Rai(host, port) // connection

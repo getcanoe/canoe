@@ -58,39 +58,25 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     // Some smart fixes
     data = sanitizeUri(data)
     $log.debug('Sanitized URI: ' + data)
-    var parts = data.split(':')
-    if (parts[0] === 'xrb') {
-      // A send code
-      // xrb:xrb_<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
-      parts = parts[1].split('?')
-      var acc = parts[0]
-      if (nanoService.isValidAccount(acc)) {
-        $log.debug('Account valid')
-        var kvs = {}
-        if (parts.length === 2) {
-          // We also have key value pairs
-          var pairs = parts[1].split('&')
-          lodash.each(pairs, function (pair) {
-            var kv = pair.split('=')
-            kvs[kv[0]] = kv[1]
-          })
-        }
-        // TODO label?
-        if (kvs.amount) {
-          $log.debug('Go send ' + acc + ' ' + JSON.stringify(kvs))
-          goSend(acc, kvs.amount, kvs.message)
-        } else {
-          goToAmountPage(acc)
-        }
-        return true
-      }
-      popupService.showAlert(gettextCatalog.getString('Error'), 'Invalid account')
+    var code = nanoService.parseQRCode(data)
+    if (code === null) {
+      popupService.showAlert(gettextCatalog.getString('Error'), 'Invalid QR code')
       return true
-    } else if (parts[0] === 'xrbkey') {
+    }
+    var protocol = code.protocol
+    if (protocol === 'xrb' || protocol === 'raiblocks' || protocol === 'nano') {
+      if (code.params.amount) {
+        $log.debug('Go send ' + JSON.stringify(code))
+        goSend(code.account, code.params.amount, code.params.message)
+      } else {
+        goToAmountPage(code.account)
+      }
+      return true
+    } else if (protocol === 'xrbkey' || protocol === 'nanokey') {
       // A private key
       // xrbkey:<encoded private key>[?][label=<label>][&][message=<message>]
 
-    } else if (parts[0] === 'xrbseed') {
+    } else if (protocol === 'xrbseed' || protocol === 'nanoseed') {
 
     // data extensions for Payment Protocol with non-backwards-compatible request
     /* if ((/^bitcoin(cash)?:\?r=[\w+]/).exec(data)) {
