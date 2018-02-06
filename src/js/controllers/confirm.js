@@ -1,7 +1,6 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, bwcError, txConfirmNotification, externalLinkService) {
-  var countDown = null
   var CONFIRM_LIMIT_USD = 20
 
   var tx = {}
@@ -50,9 +49,9 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     })
   };
 
-  function setNoWallet (msg, criticalError) {
+  function setNoAccount (msg, criticalError) {
     $scope.account = null
-    $scope.noWalletMessage = msg
+    $scope.noAccountMessage = msg
     $scope.criticalError = criticalError
     $log.warn('Not ready to make the payment:' + msg)
     $timeout(function () {
@@ -69,7 +68,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       $scope.accounts = profileService.updateAllAccounts()
 
       if (!$scope.accounts || !$scope.accounts.length) {
-        setNoWallet(gettextCatalog.getString('No accounts available'), true)
+        setNoAccount(gettextCatalog.getString('No accounts available'), true)
         return cb()
       }
 
@@ -82,7 +81,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       })
 
       if (lodash.isEmpty(filteredAccounts)) {
-        setNoWallet(gettextCatalog.getString('Insufficient funds'), true)
+        setNoAccount(gettextCatalog.getString('Insufficient funds'), true)
       }
 
       $scope.accounts = lodash.clone(filteredAccounts)
@@ -228,31 +227,12 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     popupService.showAlert(gettextCatalog.getString('Error at confirm'), bwcError.msg(msg))
   }
 
-  /*$scope.openPPModal = function () {
-    $ionicModal.fromTemplateUrl('views/modals/paypro.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.payproModal = modal
-      $scope.payproModal.show()
-    })
-  }*/
-
   $scope.cancel = function () {
     $scope.payproModal.hide()
   }
 
   $scope.approve = function (tx, account, onSendStatusChange) {
     if (!tx || !account) return
-
-    /*
-    if ($scope.paymentExpired) {
-      popupService.showAlert(null, gettextCatalog.getString('This bitcoin payment request has expired.'))
-      $scope.sendStatus = ''
-      $timeout(function () {
-        $scope.$apply()
-      })
-      return
-    } */
 
     ongoingProcess.set('creatingTx', true, onSendStatusChange)
     getTxp(lodash.clone(tx), account, false, function (err, txp) {
@@ -324,7 +304,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     } else if (showName) {
       $scope.sendStatus = showName
     }
-  };
+  }
 
   $scope.statusChangeHandler = statusChangeHandler
 
