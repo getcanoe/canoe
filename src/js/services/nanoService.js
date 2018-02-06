@@ -97,7 +97,7 @@ angular.module('canoeApp.services')
       root.startMQTT(function () {
         // Fetch all pending blocks
         root.fetchPendingBlocks()
-        cb()
+        cb(null, wallet)
       })
     }
 
