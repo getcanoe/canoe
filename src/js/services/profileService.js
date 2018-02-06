@@ -239,7 +239,8 @@ angular.module('canoeApp.services')
     // Create wallet and default account (which saves wallet), seed can be null.
     root.createWallet = function (password, seed, cb) {
       // Synchronous now
-      nanoService.createWallet(password, seed, function (wallet) {
+      nanoService.createWallet(password, seed, function (err, wallet) {
+        if (err) return cb(err)
         root.setWalletId(wallet.getId(), function (err) {
           if (err) return cb(err)
           root.wallet = wallet
