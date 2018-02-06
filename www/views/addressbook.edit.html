@@ -1,7 +1,7 @@
 <ion-view id="add-address" hide-tabs>
   <ion-nav-bar class="bar-royal">
     <ion-nav-title>
-      <span translate>Add Contact</span>
+      <span translate>Edit Contact</span>
     </ion-nav-title>
     <ion-nav-back-button>
     </ion-nav-back-button>
@@ -21,6 +21,7 @@
           <span class="input-label" translate>Name</span>
           <input type="text"
                  id="name"
+                 placeholder="{{'Joe Doe' | translate}}"
                  name="name"
                  ng-model="addressbookEntry.name"
                  required>
@@ -29,7 +30,7 @@
           <span class="input-label" translate>Email</span>
           <input type="text"
                  id="email"
-                 placeholder="{{'name@example.com' | translate}}"
+                 placeholder="{{'jode.doe@example.com' | translate}}"
                  name="email"
                  ng-model="addressbookEntry.email">
         </label>
@@ -63,7 +64,7 @@
       <div class="padding">
         <button type="submit"
                 class="button button-standard button-primary"
-                ng-click="add(addressbookEntry)"
+                ng-click="save(addressbookEntry)"
                 ng-disabled="!addressbookForm.$valid" translate>
           Save
         </button>

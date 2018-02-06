@@ -1,13 +1,14 @@
 'use strict'
-
-angular.module('canoeApp.controllers').controller('addressbookAddController', function ($scope, $state, $stateParams, $timeout, $ionicHistory, gettextCatalog, addressbookService, nanoService, popupService) {
+/* global angular */
+angular.module('canoeApp.controllers').controller('addressbookEditController', function ($scope, $state, $stateParams, $timeout, $ionicHistory, gettextCatalog, addressbookService, nanoService, popupService) {
   $scope.fromSendTab = $stateParams.fromSendTab
 
+  $scope.oldAddress = $stateParams.address
   $scope.addressbookEntry = {
-    'address': $stateParams.addressbookEntry || '',
-    'name': '',
-    'email': '',
-    'alias': ''
+    'address': $stateParams.address || '',
+    'name': $stateParams.name || '',
+    'email': $stateParams.email || '',
+    'alias': $stateParams.alias || ''
   }
 
   $scope.onQrCodeScannedAddressBook = function (data, addressbookForm) {
@@ -20,16 +21,14 @@ angular.module('canoeApp.controllers').controller('addressbookAddController', fu
         form.address.$render()
         form.name.$setViewValue(code.params.label || '')
         form.name.$render()
-        form.alias.$setViewValue(code.alias || '')
-        form.alias.$render()
       }
       $scope.$digest()
     }, 100)
   }
 
-  $scope.add = function (entry) {
+  $scope.save = function (entry) {
     $timeout(function () {
-      addressbookService.add(entry, function (err, ab) {
+      addressbookService.save(entry, $scope.oldAddress, function (err, ab) {
         if (err) {
           popupService.showAlert(gettextCatalog.getString('Error'), err)
           return

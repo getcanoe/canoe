@@ -26,10 +26,18 @@
         <span class="address-book-field-label" translate>Address</span>
         <span>{{addressbookEntry.address}}</span>
       </div>
+      <div class="item item-text-wrap" copy-to-clipboard"addressbookEmtry.alias" ng-show="addressbookEntry.alias">
+        <span class="address-book-field-label" translate>Alias</span>
+        <span>{{addressbookEntry.alias}}</span>
+      </div>
       <div class="item item-divider"></div>
       <div class="item item-icon-right has-click" ng-click="sendTo()">
         <span class="positive" translate>Send Nano</span>
         <i class="icon bp-arrow-right"></i>
+      </div>
+      <div class="item item-divider"></div>
+      <div class="item has-click" ng-click="edit(addressbookEntry.address)">
+        <span class="positive" translate>Edit</span>
       </div>
       <div class="item item-divider"></div>
       <div class="item has-click" ng-click="remove(addressbookEntry.address)">

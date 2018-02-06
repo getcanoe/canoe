@@ -527,8 +527,17 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
+      .state('tabs.addressbook.edit', {
+        url: '/edit/:address/:email/:alias/:name',
+        views: {
+          'tab-settings@tabs': {
+            templateUrl: 'views/addressbook.edit.html',
+            controller: 'addressbookEditController'
+          }
+        }
+      })
       .state('tabs.addressbook.view', {
-        url: '/view/:address/:email/:name',
+        url: '/view/:address/:email/:alias/:name',
         views: {
           'tab-settings@tabs': {
             templateUrl: 'views/addressbook.view.html',

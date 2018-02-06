@@ -17,7 +17,8 @@ angular.module('canoeApp.controllers').controller('addressbookListController', f
         contacts.push({
           name: lodash.isObject(v) ? v.name : v,
           address: k,
-          email: lodash.isObject(v) ? v.email : null
+          email: lodash.isObject(v) ? v.email : null,
+          alias: lodash.isObject(v) ? v.alias : null
         })
       })
 

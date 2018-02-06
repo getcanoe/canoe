@@ -1,17 +1,29 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('addressbookViewController', function ($scope, $state, $timeout, lodash, addressbookService, popupService, $ionicHistory, platformInfo, gettextCatalog, nanoService) {
   $scope.isChromeApp = platformInfo.isChromeApp
   $scope.addressbookEntry = {}
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     $scope.addressbookEntry = {}
+    $scope.addressbookEntry.address = data.stateParams.address
     $scope.addressbookEntry.name = data.stateParams.name
     $scope.addressbookEntry.email = data.stateParams.email
-    $scope.addressbookEntry.address = data.stateParams.address
-
+    $scope.addressbookEntry.alias = data.stateParams.alias
     nanoService.isValidAccount($scope.addressbookEntry.address)
   })
+
+  $scope.edit = function () {
+    $ionicHistory.removeBackView()
+    $timeout(function () {
+      $state.transitionTo('tabs.addressbook.edit', {
+        address: $scope.addressbookEntry.address,
+        name: $scope.addressbookEntry.name,
+        email: $scope.addressbookEntry.email,
+        alias: $scope.addressbookEntry.alias
+      })
+    }, 100)
+  }
 
   $scope.sendTo = function () {
     $ionicHistory.removeBackView()
@@ -24,7 +36,7 @@ angular.module('canoeApp.controllers').controller('addressbookViewController', f
         toEmail: $scope.addressbookEntry.email
       })
     }, 100)
-  };
+  }
 
   $scope.remove = function (addr) {
     var title = gettextCatalog.getString('Warning!')
@@ -39,5 +51,5 @@ angular.module('canoeApp.controllers').controller('addressbookViewController', f
         $ionicHistory.goBack()
       })
     })
-  };
+  }
 })
