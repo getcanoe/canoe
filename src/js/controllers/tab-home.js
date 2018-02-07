@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('canoeApp.controllers').controller('tabHomeController',
-  function ($rootScope, $timeout, $interval, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, txpModalService, appConfigService, startupService, addressbookService, feedbackService, bwcError, nextStepsService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
+  function ($rootScope, $timeout, $interval, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, txpModalService, appConfigService, startupService, addressbookService, feedbackService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
     var wallet
     var listeners = []
     var notifications = []
@@ -18,9 +18,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     $scope.serverMessage = null
 
     $scope.$on('$ionicView.afterEnter', function () {
-      $scope.updateInterval = $interval(function () {
-        performUpdate()
-      }, 5000)
       startupService.ready()
     })
 
@@ -94,38 +91,27 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         $scope.addressbook = ab || {}
       })
 
-      /*
       listeners = [
-        $rootScope.$on('bwsEvent', function (e, walletId, type, n) {
-          var wallet = profileService.getAccount(walletId)
-          updateAccount(wallet)
-          if ($scope.recentTransactionsEnabled) getNotifications()
-        }),
-        $rootScope.$on('Local/TxAction', function (e, walletId) {
-          $log.debug('Got action for wallet ' + walletId)
-          var wallet = profileService.getAccount(walletId)
-          updateAccount(wallet)
-          if ($scope.recentTransactionsEnabled) getNotifications()
+        $rootScope.$on('blocks', function (account) {
+          if (account === null) {
+            $log.debug('Got action for all accounts')
+            profileService.updateAllAccounts()
+          } else {
+            $log.debug('Got action for ' + account)
+            profileService.updateAccount(account)
+          }
+          if ($scope.recentTransactionsEnabled) {
+            getNotifications()
+          }
         })
-      ]*/
+      ]
 
       $scope.buyAndSellItems = buyAndSellService.getLinked()
       $scope.homeIntegrations = homeIntegrationsService.get()
 
-      /*bitpayCardService.get({}, function (err, cards) {
-        $scope.bitpayCardItems = cards
-      })*/
-
       configService.whenAvailable(function (config) {
         $scope.recentTransactionsEnabled = config.recentTransactions.enabled
         if ($scope.recentTransactionsEnabled) getNotifications()
-
-        /*
-        if (config.hideNextSteps.enabled) {
-          $scope.nextStepsItems = null
-        } else {
-          $scope.nextStepsItems = nextStepsService.get()
-        }*/
 
         pushNotificationsService.init()
 
@@ -137,7 +123,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     })
 
     $scope.$on('$ionicView.leave', function (event, data) {
-      $interval.cancel($scope.updateInterval)
       lodash.each(listeners, function (x) {
         x()
       })
@@ -196,7 +181,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         accountId: account.id
       })
     }
-
+/*
     var updateTxps = function () {
       profileService.getTxps({
         limit: 3
@@ -222,6 +207,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         updateTxps()
       })
     }
+*/
 
     var getNotifications = function () {
       profileService.getNotifications({
@@ -260,7 +246,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       $scope.$broadcast('scroll.refreshComplete')
       $ionicScrollDelegate.resize()
       $timeout(function () {
-      $scope.$apply()
+        $scope.$apply()
       })
     }
   })

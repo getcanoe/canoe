@@ -1,7 +1,7 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, configService, platformInfo, storageService, gettextCatalog, lodash) {
+  .factory('nanoService', function ($log, $rootScope, configService, platformInfo, storageService, gettextCatalog, lodash) {
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
@@ -420,6 +420,7 @@ angular.module('canoeApp.services')
     // Encrypt and store the wallet in localstorage.
     // This should be called on every modification to the wallet.
     root.saveWallet = function (wallet, cb) {
+      $rootScope.$emit('blocks', null)
       storageService.storeWallet(wallet.pack(), function () {
         $log.info('Wallet saved')
         cb(null, wallet)
