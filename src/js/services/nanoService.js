@@ -59,6 +59,7 @@ angular.module('canoeApp.services')
           rai.work_generate_async(hash, function (work) {
             $log.info('Server side PoW found for ' + hash + ': ' + work)
             root.wallet.updateWorkPool(hash, work)
+            root.saveWallet(root.wallet, function () {})
             // Now we can do one more, keeping it one at a time for server side
             setTimeout(generatePoW, 1000)
           })
@@ -70,6 +71,7 @@ angular.module('canoeApp.services')
           }, function (work) {
             $log.info('Client side PoW found for ' + hash + ': ' + work)
             root.wallet.updateWorkPool(hash, work)
+            root.saveWallet(root.wallet, function () {})
             setTimeout(generatePoW, 1000)
           })
         }
@@ -148,8 +150,15 @@ angular.module('canoeApp.services')
         root.saveWallet(root.wallet, function () {})
       }
     }
+
+    function clearWorkPool () {
+      root.wallet.clearWorkPool()
+      root.saveWallet(root.wallet, function () {})
+    }
+
     window.fetchPendingBlocks = root.fetchPendingBlocks
     window.resetChains = resetChains
+    window.clearWorkPool = clearWorkPool
 
     // Explicitly ask for pending blocks and fetching them to process them as if
     // they came in live over the rai_node callback
@@ -487,7 +496,6 @@ angular.module('canoeApp.services')
         // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
         // addRecentRecToGui(txObj)
         root.saveWallet(root.wallet, function () {})
-        generatePoW()
       }
     }
 
