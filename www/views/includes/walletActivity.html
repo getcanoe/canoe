@@ -1,11 +1,4 @@
 <span class="wallet-activity">
-  <div ng-if="notification.type == 'NewCopayer' && notification.wallet.n>1" translate>
-    Copayer joined
-  </div>
-
-  <div ng-if="notification.type == 'NewCopayer' && notification.wallet.n==1" translate>
-    Wallet created
-  </div>
 
   <div ng-if="notification.type == 'NewOutgoingTx'">
       <span translate>Payment Sent </span>
@@ -14,15 +7,13 @@
       </div>
   </div>
 
-
-
   <div ng-if="notification.type == 'NewIncomingTx'">
       <span translate>Payment Received</span>
       <div class="wallet-activity-amount">
       {{notification.amountStr}}
       </div>
   </div>
-
+<!--
   <div ng-if="notification.type == 'TxProposalRemoved'">
     <span translate>Proposal Deleted</span>:
     <b>{{notification.message}}</b>
@@ -54,7 +45,7 @@
     {{notification.amountStr}}
     </div>
   </span>
-
+-->
   <p class="wallet-activity-note">
 <!-- {{notification.types}} -->
     <i class="icon ion-record wallet-activity-note-child" ng-class="{'wallet-color-default': !notification.wallet.color}" ng-style="{'color':notification.wallet.color}"></i>
