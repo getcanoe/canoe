@@ -1,26 +1,26 @@
 <ion-view class="settings" show-tabs>
   <ion-nav-bar class="bar-royal">
     <ion-nav-title>
-      {{'Account Alias'|translate}}
+      {{'Account Name'|translate}}
     </ion-nav-title>
     <ion-nav-back-button>
     </ion-nav-back-button>
   </ion-nav-bar>
   <ion-content>
     <div class="settings-explanation">
-      <div class="settings-heading" translate>What public alias would you like to reserve?</div>
-      <div class="settings-description" translate>Type below to see if an alias is free to use.</div>
+      <div class="settings-heading" translate>What do you call this account?</div>
+      <div class="settings-description" translate>You can change the name displayed on this device below.</div>
     </div>
-    <form name="aliasForm" ng-submit="save(aliasForm)" novalidate>
+    <form name="nameForm" ng-submit="save(nameForm)" novalidate>
       <div class="list settings-input-group">
         <label class="item item-input item-stacked-label">
-          <span class="input-label" translate>Alias</span>
-          <input type="text" id="alias" name="alias" ng-model="alias.value" placeholder="@joedoe" required>
+          <span class="input-label" translate>Name</span>
+          <input type="text" id="name" name="name" ng-model="name.value" placeholder="Default Account" required>
         </label>
       </div>
       <button type="submit"
               class="button button-standard button-primary"
-              ng-disabled="aliasForm.$invalid" translate>
+              ng-disabled="nameForm.$invalid" translate>
         Save
       </button>
     </form>

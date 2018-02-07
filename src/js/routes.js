@@ -430,6 +430,15 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
+      .state('tabs.preferences.preferencesName', {
+        url: '/preferencesName',
+        views: {
+          'tab-settings@tabs': {
+            controller: 'preferencesNameController',
+            templateUrl: 'views/preferencesName.html'
+          }
+        }
+      })
       .state('tabs.preferences.preferencesAlias', {
         url: '/preferencesAlias',
         views: {
