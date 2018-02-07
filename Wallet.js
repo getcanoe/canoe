@@ -831,7 +831,7 @@ module.exports = function(password)
 		readyBlocks.push(blk);
 		logger.log("Block ready to be broadcasted: " + blk.getHash(true));
 		if (enableBroadcast) {
-			broadcastCallback(blk);
+			broadcastCallback(readyBlocks);
 		}
 	}
 	

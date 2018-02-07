@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.controllers').controller('advancedSettingsController', function ($scope, $log, configService, platformInfo, externalLinkService, gettextCatalog) {
+angular.module('canoeApp.controllers').controller('advancedSettingsController', function ($scope, $log, $ionicHistory, configService, nanoService, popupService, platformInfo, gettextCatalog) {
   var updateConfig = function () {
     var config = configService.getSync()
 
@@ -13,6 +13,16 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
     $scope.hideNextSteps = {
       value: config.hideNextSteps.enabled
     }
+  }
+
+  $scope.repair = function () {
+    var title = gettextCatalog.getString('Warning!')
+    var message = gettextCatalog.getString('Are you sure you want to repair wallet?')
+    popupService.showConfirm(title, message, null, null, function (res) {
+      if (!res) return
+      nanoService.repair()
+      $ionicHistory.goBack()
+    })
   }
 
   $scope.serverSidePoWChange = function () {

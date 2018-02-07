@@ -27,9 +27,8 @@ angular.module('canoeApp.services')
 
     // Let's call it every second
     setTimeout(generatePoW, 1000)
-
-    // For testing, every 60 sec
-    // setTimeout(fetchPendingBlocks, 1000)
+    // Let's call it every 5 seconds
+    setTimeout(regularBroadcast, 5000)
 
     // This function calls itself every sec. It can also be called explicitly.
     function generatePoW () {
@@ -80,6 +79,30 @@ angular.module('canoeApp.services')
       }
     }
 
+    function regularBroadcast () {
+      if (root.wallet) {
+        root.broadcastCallback(root.wallet.getReadyBlocks())
+      }
+      setTimeout(regularBroadcast, 5000)
+    }
+
+    // This is called both from inside Wallet immediately
+    // when a block is ready, and using a timeout, see above.
+    root.broadcastCallback = function (blocks) {
+      var dirty = false
+      lodash.each(blocks, function (blk) {
+        var hash = root.broadcastBlock(blk)
+        if (hash) {
+          $log.debug('Succeeded broadcast, removing readyblock: ' + hash)
+          root.wallet.removeReadyBlock(hash)
+          dirty = true
+        }
+      })
+      if (dirty) {
+        root.saveWallet(root.wallet, function () {})
+      }
+    }
+
     // Whenever the wallet is changed we call this
     root.setWallet = function (wallet, cb) {
       // Make sure we have an account for this wallet
@@ -88,20 +111,19 @@ angular.module('canoeApp.services')
       root.wallet = wallet
       wallet.setLogger($log)
       // Install callback for broadcasting of blocks
-      wallet.setBroadcastCallback(function (blk) {
-        // TODO Should probably also call this on a regular interval
-        var hash = root.broadcastBlock(blk)
-        if (hash) {
-          $log.debug('Succeeded broadcast, removing readyblock: ' + hash)
-          wallet.removeReadyBlock(hash)
-          root.saveWallet(wallet, function () {})
-        }
-      })
+      wallet.setBroadcastCallback(root.broadcastCallback)
       root.startMQTT(function () {
         // Fetch all pending blocks
         root.fetchPendingBlocks()
         cb(null, wallet)
       })
+    }
+
+    // Perform repair tricks, can be chosen in Advanced settings
+    root.repair = function () {
+      clearWorkPool()
+      resetChains()
+      root.fetchPendingBlocks()
     }
 
     // Import all chains for the whole wallet from scratch throwing away local forks we have.
