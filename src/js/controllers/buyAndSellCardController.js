@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('canoeApp.controllers').controller('buyAndSellCardController', function($scope, nextStepsService, $ionicScrollDelegate, buyAndSellService) {
+angular.module('canoeApp.controllers').controller('buyAndSellCardController', function($scope, $ionicScrollDelegate, buyAndSellService) {
 
   $scope.services = buyAndSellService.getLinked();
 

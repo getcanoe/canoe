@@ -43,10 +43,6 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
       enabled: true
     },
 
-    hideNextSteps: {
-      enabled: !!isWindowsPhoneApp
-    },
-
     release: {
       url: 'https://api.github.com/repos/getcanoe/canoe/releases/latest'
     },

@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.services').factory('buyAndSellService', function ($log, nextStepsService, lodash, $ionicScrollDelegate, $timeout) {
+angular.module('canoeApp.services').factory('buyAndSellService', function ($log, lodash, $ionicScrollDelegate, $timeout) {
   var root = {}
   var services = []
   var linkedServices = []
@@ -20,7 +20,7 @@ angular.module('canoeApp.services').factory('buyAndSellService', function ($log,
 
     $log.debug('buyAndSell Service, updating nextSteps. linked/total: ' + linkedServices.length + '/' + services.length)
 
-    if (linkedServices.length == 0) {
+    /*if (linkedServices.length == 0) {
       nextStepsService.register({
         title: 'Buy or Sell Bitcoin',
         name: 'buyandsell',
@@ -31,7 +31,7 @@ angular.module('canoeApp.services').factory('buyAndSellService', function ($log,
       nextStepsService.unregister({
         name: 'buyandsell'
       })
-    };
+    };*/
 
     $timeout(function () {
       $ionicScrollDelegate.resize()

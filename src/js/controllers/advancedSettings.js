@@ -10,9 +10,6 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
     $scope.recentTransactionsEnabled = {
       value: config.recentTransactions.enabled
     }
-    $scope.hideNextSteps = {
-      value: config.hideNextSteps.enabled
-    }
   }
 
   $scope.repair = function () {
@@ -29,17 +26,6 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
     var opts = {
       wallet: {
         serverSidePoW: $scope.serverSidePoW.value
-      }
-    }
-    configService.set(opts, function (err) {
-      if (err) $log.debug(err)
-    })
-  }
-
-  $scope.nextStepsChange = function () {
-    var opts = {
-      hideNextSteps: {
-        enabled: $scope.hideNextSteps.value
       }
     }
     configService.set(opts, function (err) {
