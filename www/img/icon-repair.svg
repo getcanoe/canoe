@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="20.933975"
+   height="20.781494"
+   viewBox="0 0 20.933975 20.781494"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="icon-repair.svg">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="927"
+     inkscape:window-height="541"
+     id="namedview10"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="1"
+     inkscape:cx="29.806442"
+     inkscape:cy="22.023134"
+     inkscape:window-x="352"
+     inkscape:window-y="107"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
+  <g
+     class="nc-icon-wrapper"
+     id="g4"
+     transform="matrix(0.4760891,0,0,0.47260531,-0.02337269,0.01194823)"
+     style="fill:#444444">
+    <title
+       id="title6">repair</title>
+    <path
+       d="M 42.5,8.6 36.6,14.5 29.5,7.4 35.4,1.5 C 34,1.1 32.6,0.9 31,1 25.4,1.5 20.9,6.5 21,12.1 c 0,1.1 0.2,2.2 0.5,3.2 l -19.2,17 c -2.9,2.5 -3,7 -0.3,9.7 2.7,2.7 7.1,2.6 9.7,-0.3 l 17,-19.2 c 1.7,0.5 3.6,0.7 5.6,0.3 4,-0.8 7.3,-3.8 8.4,-7.7 0.5,-2.3 0.4,-4.5 -0.2,-6.5 z"
+       transform="translate(0.5,-0.5)"
+       id="path8"
+       inkscape:connector-curvature="0"
+       style="fill:none;fill-rule:evenodd;stroke:#444444;stroke-width:1" />
+  </g>
+</svg>
