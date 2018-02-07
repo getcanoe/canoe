@@ -13,7 +13,7 @@
       <div class="send-header-wrapper">
         <div class="item item-heading send-heading"><span translate>Recipient</span></div>
         <div class="item input search-wrapper" ng-class="{'focus': searchFocus}">
-          <i class="icon icon-svg abs-v-center"><img class="png" id="Raiblocks_Symbol" src="img/icon-raiblocks-symbol.png"></i>
+          <i class="icon icon-svg abs-v-center"><img class="png" id="Nano_Symbol" src="img/nano-logo-white.png"></i>
           <div class="item-icon-right">
             <input type="text" class="search-input" placeholder="{{'Search or enter account number' | translate}}" ng-model="formData.search" ng-change="findContact(formData.search)" ng-model-onblur ng-focus="searchInFocus()" ng-blur="searchBlurred()">
             <i class="icon icon-svg qr abs-v-center separator-left" on-tap="openScanner()"><img src="img/scan-ico.svg"></i>
@@ -73,7 +73,11 @@
       </div>
       <div class="list">
         <a class="item item-icon-left item-icon-right" ng-repeat="account in list" ng-if="account.recipientType === 'account'" ng-click="goToAmount(account)">
-          <i class="icon big-icon-svg" ng-if="account.recipientType == 'account'" ng-include="'views/includes/walletIcon.html'"></i>
+          <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
+          <i class="icon big-icon-svg">
+            <img src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !account.color}" ng-style="{'background-color': account.color}" class="bg"/>
+          </i>    
+          <!--<i class="icon big-icon-svg" ng-if="account.recipientType == 'account'" ng-include="'views/includes/walletIcon.html'"></i>-->
           {{account.name}}
           <i class="icon bp-arrow-right"></i>
         </a>

@@ -29,7 +29,7 @@ angular.module('canoeApp.controllers').controller('tourController',
           $log.warn(err)
         } else {
           $scope.localCurrencySymbol = '$'
-          $scope.localCurrencyPerXRB = str
+          $scope.localCurrencyPerNANO = str
           $timeout(function () {
             $scope.$apply()
           })

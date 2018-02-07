@@ -24,10 +24,10 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
     wallet: {
       serverSidePoW: true,
       settings: {
-        unitName: 'XRB',
+        unitName: 'NANO',
         unitToRaw: Math.pow(10, 30),
         unitDecimals: 2,
-        unitCode: 'xrb',
+        unitCode: 'NANO',
         alternativeName: 'US Dollar',
         alternativeIsoCode: 'USD'
       }
