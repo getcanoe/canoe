@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('preferencesColorController', function ($scope, $timeout, $log, $stateParams, $ionicHistory, configService, profileService) {
   var account = profileService.getAccount($stateParams.accountId)
   $scope.account = account
@@ -21,12 +21,12 @@ angular.module('canoeApp.controllers').controller('preferencesColorController', 
 
   function getColorDefault () {
     return rgb2hex(window.getComputedStyle(document.getElementsByClassName('wallet-color-default')[0]).color)
-  };
+  }
 
   function getColorCount () {
     var count = window.getComputedStyle(document.getElementsByClassName('wallet-color-count')[0]).content
     return parseInt(count.replace(/[^0-9]/g, ''))
-  };
+  }
 
   function setCurrentColorIndex () {
     try {
@@ -40,7 +40,7 @@ angular.module('canoeApp.controllers').controller('preferencesColorController', 
         }
       }, 100)
     }
-  };
+  }
 
   function colorToIndex (color) {
     for (var i = 0; i < $scope.colorCount; i++) {
@@ -49,12 +49,12 @@ angular.module('canoeApp.controllers').controller('preferencesColorController', 
       }
     }
     return undefined
-  };
+  }
 
   function indexToColor (i) {
     // Expect an exception to be thrown if can't getComputedStyle().
     return rgb2hex(window.getComputedStyle(document.getElementsByClassName('wallet-color-' + i)[0]).backgroundColor)
-  };
+  }
 
   function rgb2hex (rgb) {
     rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i)

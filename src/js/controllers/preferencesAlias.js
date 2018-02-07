@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('preferencesAliasController',
   function ($scope, $timeout, $stateParams, $ionicHistory, configService, profileService, walletService) {
     var account = profileService.getAccount($stateParams.accountId)

@@ -1,4 +1,5 @@
 'use strict'
+/* global angular chrome */
 angular.module('canoeApp.services')
   .factory('applicationService', function ($rootScope, $timeout, $ionicHistory, $ionicModal, platformInfo, fingerprintService, openURLService, configService, $state) {
     var root = {}
@@ -15,7 +16,6 @@ angular.module('canoeApp.services')
         $timeout(function () {
           $rootScope.$digest()
         }, 1)
-
       } else {
         // Go home reloading the application
         if (isChromeApp) {

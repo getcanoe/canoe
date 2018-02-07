@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('tabsController', function ($rootScope, $log, $scope, $state, $stateParams, $timeout, platformInfo, incomingData, lodash, popupService, gettextCatalog, scannerService) {
   $scope.onScan = function (data) {
     if (!incomingData.redir(data)) {
