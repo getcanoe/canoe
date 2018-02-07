@@ -246,8 +246,7 @@ angular.module('canoeApp.services')
         root.setWalletId(wallet.getId(), function (err) {
           if (err) return cb(err)
           root.wallet = wallet
-          // Create default acount, will save
-          root.createAccount(null, cb)
+          nanoService.saveWallet(root.wallet, cb)
         })
       })
     }
@@ -256,7 +255,10 @@ angular.module('canoeApp.services')
     root.createAccount = function (name, cb) {
       var accountName = name || gettextCatalog.getString('Default Account')
       nanoService.createAccount(root.wallet, accountName)
-      // TODO checkChains? See raiwallet.js
+      nanoService.saveWallet(root.wallet, cb)
+    }
+
+    root.saveWallet = function (cb) {
       nanoService.saveWallet(root.wallet, cb)
     }
 

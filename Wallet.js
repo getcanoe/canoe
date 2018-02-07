@@ -1023,7 +1023,12 @@ module.exports = function(password)
 		}
 		logger.log("Current work pool: " + JSON.stringify(remoteWork))
 	}
-	
+
+	api.clearWorkPool = function()
+	{
+		remoteWork = [];
+	}
+
 	api.getWorkPool = function()
 	{
 		return remoteWork;
@@ -1077,12 +1082,13 @@ module.exports = function(password)
 				found = true;
 				for(let j in walletPendingBlocks)
 				{
+					// Is there a pending one that needed this work?
 					if(walletPendingBlocks[j].getPrevious() == hash)
 					{
 						var aux = walletPendingBlocks[j];
 						var pendingHash = aux.getHash(true);
 						logger.log("Work received for block " + pendingHash + " previous: " + hash);
-						walletPendingBlocks[j].setWork(work);
+						aux.setWork(work);
 						// Now we can confirm the block with pendingHash since we have the work for its
 						// previous block. We can also mark pendingHash as needed, thus making sure we
 						// do PoW in block order.

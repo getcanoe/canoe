@@ -1,7 +1,7 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, configService, platformInfo, storageService, lodash) {
+  .factory('nanoService', function ($log, configService, platformInfo, storageService, gettextCatalog, lodash) {
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
@@ -83,10 +83,11 @@ angular.module('canoeApp.services')
     // Whenever the wallet is changed we call this
     root.setWallet = function (wallet, cb) {
       // Make sure we have an account for this wallet
+      // Will only ever create one on the server side
       root.createServerAccount(wallet)
       root.wallet = wallet
       wallet.setLogger($log)
-      // Install callbacks
+      // Install callback for broadcasting of blocks
       wallet.setBroadcastCallback(function (blk) {
         // TODO Should probably also call this on a regular interval
         var hash = root.broadcastBlock(blk)
@@ -331,6 +332,8 @@ angular.module('canoeApp.services')
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
       wallet.createSeed(seed)
+      var accountName = gettextCatalog.getString('Default Account')
+      wallet.createAccount({label: accountName})
       root.setWallet(wallet, cb)
     }
 
@@ -370,7 +373,7 @@ angular.module('canoeApp.services')
 
     // Create a new account in the wallet
     root.createAccount = function (wallet, accountName) {
-      $log.debug('Create account in wallet named ' + accountName)
+      $log.debug('Creating account named ' + accountName)
       var account = wallet.createAccount({label: accountName})
       $log.debug('Created account ' + account.id)
       root.updateServerMap(wallet)
