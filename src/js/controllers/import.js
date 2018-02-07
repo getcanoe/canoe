@@ -119,9 +119,14 @@ angular.module('canoeApp.controllers').controller('importController',
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('The seed is invalid, it should be 64 characters of: 0-9, A-F'))
         return
       }
+      var password = $scope.formData.password || null
+      if (!password) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter a password to use for the wallet'))
+        return
+      }
       ongoingProcess.set('importingWallet', true)
       $timeout(function () {
-        profileService.importSeed(seed, function () {
+        profileService.importSeed(password, seed, function () {
           ongoingProcess.set('importingWallet', false)
           finish()
         })

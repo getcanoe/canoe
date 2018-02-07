@@ -90,9 +90,9 @@ angular.module('canoeApp.services')
     }
 
     // Create a new wallet from a seed
-    root.importSeed = function (seed, cb) {
+    root.importSeed = function (password, seed, cb) {
       $log.debug('Importing Wallet Seed')
-      return root.createWallet(null, seed, cb)
+      return root.createWallet(password, seed, cb)
     }
 
     // Return an object with wallet member holding the encrypted hex of wallet
