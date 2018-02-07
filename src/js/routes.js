@@ -493,15 +493,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.preferences.preferencesExternal', {
-        url: '/preferencesExternal',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesExternalController',
-            templateUrl: 'views/preferencesExternal.html'
-          }
-        }
-      })
       .state('tabs.preferences.delete', {
         url: '/delete',
         views: {
@@ -943,11 +934,14 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
             })
             applicationService.appLockModal('check')
           })
-        };
+        }
         // After everything have been loaded
         $timeout(function () {
+          $log.debug('Before emailService.init')
           emailService.init() // Update email subscription if necessary
+          $log.debug('Before openURLService.init')
           openURLService.init()
+          $log.debug('After openURLService.init')
         }, 1000)
       })
     })
