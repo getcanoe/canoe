@@ -55,6 +55,7 @@
       </div>
     </div>
 
+<!--
     <div class="list card" ng-hide="!txps[0]">
       <a class="item item-icon-right item-heading" ui-sref="tabs.proposals">
         {{'Payment Proposals'|translate}}
@@ -66,7 +67,7 @@
         <a class="wallet-details__item item item-sub" ng-include="'views/includes/txp.html'"></a>
       </div>
     </div>
-
+-->
     <div class="list card" ng-if="notifications[0] && recentTransactionsEnabled">
       <a class="item item-icon-right item-heading" ui-sref="tabs.activity">
         <span translate>Recent Transactions</span>
@@ -108,7 +109,6 @@
 
     <div class="ng-hide list card" ng-show="accounts[0] && buyAndSellItems.length>0" ng-include="'views/includes/buyAndSellCard.html'"></div>
     <div class="ng-hide list card" ng-show="homeIntegrations.length>0" ng-include="'views/includes/homeIntegrations.html'"></div>
-    <div class="ng-hide list card" ng-show="nextStepsItems.length>0 && !isWindowsPhoneApp" ng-include="'views/includes/nextSteps.html'"></div>
 
   </ion-content>
 </ion-view>
