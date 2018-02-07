@@ -92,17 +92,19 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       })
 
       listeners = [
-        $rootScope.$on('blocks', function (account) {
-          if (account === null) {
-            $log.debug('Got action for all accounts')
-            profileService.updateAllAccounts()
-          } else {
-            $log.debug('Got action for ' + account)
-            profileService.updateAccount(account)
-          }
-          if ($scope.recentTransactionsEnabled) {
-            getNotifications()
-          }
+        $rootScope.$on('blocks', function (event, account) {
+          $scope.apply(function () {
+            if (account === null) {
+              $log.debug('Got action for all accounts')
+              profileService.updateAllAccounts()
+            } else {
+              $log.debug('Got action for ' + account)
+              profileService.updateAccount(account)
+            }
+            if ($scope.recentTransactionsEnabled) {
+              getNotifications()
+            }
+          })
         })
       ]
 
