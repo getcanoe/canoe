@@ -103,7 +103,14 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       txp: {}
     }
 
+    $scope.toAddress = data.stateParams.toAddress
+    $scope.toName = data.stateParams.toName
+    $scope.toEmail = data.stateParams.toEmail
+    $scope.toColor = data.stateParams.toColor
+    $scope.recipientType = data.stateParams.recipientType || null
+
     // Other Scope vars
+    $scope.isChromeApp = isChromeApp
     $scope.isCordova = isCordova
     $scope.isWindowsPhoneApp = isWindowsPhoneApp
     $scope.showAddress = false

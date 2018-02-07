@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('tabSendController', function ($scope, $rootScope, $log, $timeout, $ionicScrollDelegate, addressbookService, profileService, lodash, $state, walletService, incomingData, popupService, platformInfo, bwcError, gettextCatalog, scannerService, externalLinkService) {
   var originalList
   var CONTACTS_SHOW_LIMIT
@@ -14,7 +14,8 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
       var accountList = []
       lodash.each($scope.accounts, function (acc) {
         accountList.push({
-          color: acc.color,
+          meta: acc.meta,
+          color: acc.meta.color,
           name: acc.name,
           recipientType: 'account',
           address: acc.id
