@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.services').factory('platformInfo', function ($window) {
   var ua = navigator ? navigator.userAgent : null
 
@@ -22,28 +22,6 @@ angular.module('canoeApp.services').factory('platformInfo', function ($window) {
     }
   }
 
-  var getVersionIntelTee = function () {
-    var v = ''
-    var isWindows = navigator.platform.indexOf('Win') > -1
-
-    if (!isNodeWebkit() || !isWindows) {
-      return v
-    }
-
-    try {
-      var IntelWallet = require('intelWalletCon')
-      if (IntelWallet.getVersion) {
-        v = IntelWallet.getVersion()
-      } else {
-        v = 'Alpha'
-      }
-      if (v.length > 0) {
-        $log.info('Intel TEE library ' + v)
-      }
-    } catch (e) {}
-    return v
-  };
-
   // Detect mobile devices
   var ret = {
     isAndroid: ionic.Platform.isAndroid(),
@@ -52,11 +30,11 @@ angular.module('canoeApp.services').factory('platformInfo', function ($window) {
     isSafari: Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0,
     ua: ua,
     isCordova: !!$window.cordova,
-    isNW: isNodeWebkit()
+    isNW: !!isNodeWebkit()
   }
 
   ret.isMobile = ret.isAndroid || ret.isIOS || ret.isWP
-  ret.isChromeApp = $window.chrome && chrome.runtime && chrome.runtime.id && !ret.isNW
+  ret.isChromeApp = !!($window.chrome && chrome.runtime && chrome.runtime.id && !ret.isNW)
   ret.isDevel = !ret.isMobile && !ret.isChromeApp && !ret.isNW
 
   //ret.supportsLedger = ret.isChromeApp
