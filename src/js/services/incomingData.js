@@ -57,11 +57,9 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
 
     // Some smart fixes
     data = sanitizeUri(data)
-    $log.debug('Sanitized URI: ' + data)
     var code = nanoService.parseQRCode(data)
     if (code === null) {
-      popupService.showAlert(gettextCatalog.getString('Error'), 'Invalid QR code')
-      return true
+      return false
     }
     var protocol = code.protocol
     if (protocol === 'xrb' || protocol === 'raiblocks' || protocol === 'nano') {
