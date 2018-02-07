@@ -109,7 +109,7 @@ module.exports = function()
 	 * Sets the send parameters and builds the block
 	 * 
 	 * @param {string} previousBlockHash - The previous block 32 byte hash hex encoded
-	 * @param {string} destinationAccount - The XRB account receiving the money
+	 * @param {string} destinationAccount - The NANO account receiving the money
 	 * @param {string} balanceRemaining - Remaining balance after sending this block (Raw)
 	 * @throws An exception on invalid block hash
 	 * @throws An exception on invalid destination account
@@ -158,7 +158,7 @@ module.exports = function()
 	 * Sets the open parameters and builds the block
 	 * 
 	 * @param {string} sourceBlockHash - The hash of the send block which is going to be received, 32 byte hex encoded
-	 * @param {string} newAccount - The XRB account which is being created
+	 * @param {string} newAccount - The NANO account which is being created
 	 * @param {string} representativeAccount - The account to be set as representative, if none, its self assigned
 	 * @throws An exception on invalid sourceBlockHash
 	 * @throws An exception on invalid account
@@ -172,7 +172,7 @@ module.exports = function()
 		try{
 			account = keyFromAccount(newAccount);
 		}catch(err){
-			throw "Invalid XRB account.";
+			throw "Invalid NANO account.";
 		}
 		
 		if(representativeAccount)
@@ -262,7 +262,7 @@ module.exports = function()
 	/**
 	 * Sets the account owner of the block 
 	 *
-	 * @param {string} acc - The xrb account 
+	 * @param {string} acc - The NANO account 
 	 */
 	api.setAccount = function(acc)
 	{
@@ -282,7 +282,7 @@ module.exports = function()
 	
 	/**
 	 * Sets the account which sent the block 
-	 * @param {string} acc - The xrb account
+	 * @param {string} acc - The NANO account
 	 */
 	api.setOrigin = function(acc)
 	{

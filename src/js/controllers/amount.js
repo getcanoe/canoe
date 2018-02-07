@@ -30,8 +30,8 @@ angular.module('canoeApp.controllers').controller('amountController', function (
 
       availableUnits.push({
         name: 'Nano',
-        id: 'xrb',
-        shortName: 'XRB'
+        id: 'nano',
+        shortName: 'NANO'
       })
 
       unitIndex = 0

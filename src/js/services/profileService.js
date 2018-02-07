@@ -7,7 +7,7 @@ angular.module('canoeApp.services')
     var isIOS = platformInfo.isIOS
 
     var UPDATE_PERIOD = 15
-    var RAW_PER_XRB = Math.pow(10, 30) // 1 XRB = 1 Mxrb = 10^30 raw
+    var RAW_PER_NANO = Math.pow(10, 30) // 1 NANO = 1 Mnano = 10^30 raw
 
     var rate = 0 // Current rate fetched every 60 sec
     var lastTime = 0
@@ -62,12 +62,12 @@ angular.module('canoeApp.services')
 
     root.toFiat = function (raw, code) {
       root.updateRate(code)
-      return (raw * rate) / RAW_PER_XRB
+      return (raw * rate) / RAW_PER_NANO
     }
 
     root.fromFiat = function (amount, code) {
       root.updateRate(code)
-      return (amount / rate) * RAW_PER_XRB
+      return (amount / rate) * RAW_PER_NANO
     }
 
     root.getCurrentCoinmarketcapRate = function (localCurrency, cb) {
@@ -151,7 +151,7 @@ angular.module('canoeApp.services')
       if (raw === 0) {
         return raw.toFixed(decimals)
       } else {
-        var balance = raw / RAW_PER_XRB
+        var balance = raw / RAW_PER_NANO
         if (Math.round(balance * Math.pow(10, decimals)) === 0) {
           return balance.toString()
         } else {
@@ -162,8 +162,8 @@ angular.module('canoeApp.services')
 
     root.formatAmountWithUnit = function (raw) {
       if (isNaN(raw)) return
-      // TODO use current unit in settings kxrb, Mxrb etc
-      return root.formatAmount(raw, 2) + ' XRB'
+      // TODO use current unit in settings knano, Mnano etc
+      return root.formatAmount(raw, 2) + ' NANO'
     }
 
     root.updateAccountSettings = function (account) {

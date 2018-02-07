@@ -18,7 +18,7 @@ angular.module('canoeApp.services').factory('txFormatService', function ($filter
 
   root.formatAmountStr = function (coin, raw) {
     if (isNaN(raw)) return
-    return root.formatAmount(raw) + (coin ? coin.toUpperCase() : 'XRB')
+    return root.formatAmount(raw) + (coin ? coin.toUpperCase() : 'NANO')
   }
 
   root.toFiat = function (coin, raw, code, cb) {
@@ -204,7 +204,7 @@ angular.module('canoeApp.services').factory('txFormatService', function ($filter
       currency: currency,
       alternativeIsoCode: alternativeIsoCode,
       amountSat: amountSat,
-      amountUnitStr: 'XRB' // amountUnitStr
+      amountUnitStr: 'NANO' // amountUnitStr
     }
   }
 
