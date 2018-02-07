@@ -123,7 +123,6 @@ angular.module('canoeApp.services')
     root.repair = function () {
       clearWorkPool()
       resetChains()
-      root.fetchPendingBlocks()
     }
 
     // Import all chains for the whole wallet from scratch throwing away local forks we have.

@@ -92,7 +92,16 @@ angular.module('canoeApp.services')
     // Create a new wallet from a seed
     root.importSeed = function (password, seed, cb) {
       $log.debug('Importing Wallet Seed')
-      return root.createWallet(password, seed, cb)
+      // Synchronous now
+      nanoService.createWallet(password, seed, function (err, wallet) {
+        if (err) return cb(err)
+        root.setWalletId(wallet.getId(), function (err) {
+          if (err) return cb(err)
+          root.wallet = wallet
+          nanoService.repair() // So we fetch truth from lattice, sync
+          nanoService.saveWallet(root.wallet, cb)
+        })
+      })
     }
 
     // Return an object with wallet member holding the encrypted hex of wallet
