@@ -1,9 +1,8 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('backupController',
   function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, lodash, profileService, walletService, ongoingProcess, popupService, gettextCatalog, $ionicModal) {
     $scope.wallet = profileService.getWallet()
-    $scope.viewTitle = 'Wallet backup' // $scope.account.name || $scope.account.credentials.walletName
 
     $scope.setFlow = function (step) {
       $scope.data = {}
