@@ -1,28 +1,64 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg width="51px" height="51px" viewBox="0 0 51 51" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
-    <title>item-ico-backup</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <path d="M25.1597034,50.388592 C39.0550239,50.388592 50.3194068,39.1087215 50.3194068,25.194296 C50.3194068,11.2798705 39.0550239,0 25.1597034,0 C11.2643829,0 0,11.2798705 0,25.194296 C0,39.1087215 11.2643829,50.388592 25.1597034,50.388592 Z" id="path-1"></path>
-    </defs>
-    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Wallet/Icon/Backup" transform="translate(-1.000000, -1.000000)">
-            <g id="item-ico-backup" transform="translate(1.000000, 1.000000)">
-                <mask id="mask-2" fill="white">
-                    <use xlink:href="#path-1"></use>
-                </mask>
-                <use id="Mask" fill="#647CE8" xlink:href="#path-1"></use>
-                <g id="arrows-24px-outline-4_restore" mask="url(#mask-2)">
-                    <g transform="translate(13.000000, 14.000000)" id="Group">
-                        <g>
-                            <polyline id="Shape" stroke="#FFFFFF" points="12 6 12 12 16.8 16.8"></polyline>
-                            <path d="M0,12 C0,18.6 5.4,24 12,24 C18.6,24 24,18.6 24,12 C24,5.4 18.6,0 12,0 C7.32,0 3.24,2.64 1.32,6.6" id="Shape" stroke="#FFFFFF"></path>
-                            <polyline id="Shape" stroke="#FFFFFF" points="0.3168 0.684 1.32 6.6 7.236 5.5968"></polyline>
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="20px"
+   height="20px"
+   version="1.1"
+   viewBox="0 0 24.4 23.9"
+   style="enable-background:new 0 0 24.4 23.9;"
+   xml:space="preserve"
+   id="svg10"
+   sodipodi:docname="icon-backup.svg"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"><metadata
+     id="metadata16"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+     id="defs14" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1033"
+     inkscape:window-height="733"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="11.8"
+     inkscape:cx="-3.7711864"
+     inkscape:cy="10"
+     inkscape:window-x="411"
+     inkscape:window-y="109"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg10"
+     inkscape:snap-global="false" /><style
+     type="text/css"
+     id="style2">
+	.st0{fill:none;stroke:#000000;}
+</style><path
+     class="st0"
+     d="m 10.781356,14.969492 c 0,0 -0.70396,-2.019663 -1.0338974,-4.547457 -1.4672244,1.19424 -3.6244386,6.023234 -2.3762721,8.78983 0.5756414,1.275926 2.3646391,1.860514 3.7644075,1.861017 1.479341,5.31e-4 3.35791,-0.621686 3.979817,-1.963954 1.105332,-2.385648 -0.730201,-5.657323 -1.910325,-7.652994 -0.559785,1.209414 -2.31728,3.131464 -2.377966,3.616949"
+     id="path4"
+     style="fill:none;stroke:#9b9bab;stroke-width:1.00039995;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="ccaaacc" /><path
+     class="st0"
+     d="M 9.8756436,2.8758377 C 13.712877,3.1408887 13.051729,6.5009617 12.255306,8.1521105 11.550763,9.612773 11.364373,10.27504 11.470559,11.667365"
+     id="path4-6"
+     style="fill:none;stroke:#9b9bab;stroke-width:1;stroke-linecap:round;stroke-opacity:1"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="csc" /><path
+     class="st0"
+     d="m 13.911336,8.6882427 c 1.039213,-2.5661214 4.171795,-3.7121181 5.377968,-2.4779646 0.06888,1.8544924 -2.13161,3.2602179 -5.540679,2.7915259"
+     id="path4-6-6"
+     style="fill:none;stroke:#9b9bab;stroke-width:1;stroke-linecap:round;stroke-opacity:1"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="ccc" /></svg>
