@@ -14,12 +14,12 @@ angular
     gettextCatalog
   ) {
     var retryCount = 0
-    $scope.createDefaultWallet = function () {
+    $scope.createDefaultWallet = function (password) {
+      // Set the password we have selected to use for our wallet
+      profileService.enteredPassword(password)
       ongoingProcess.set('creatingWallet', true)
       $timeout(function () {
-        // This is the call to create the wallet from onboarding.
-        // profileService.enterPassword() needs to be called first with the password
-        // chosen by the user.
+        // This is the call to create the wallet from onboarding
         profileService.createWallet(
           profileService.getEnteredPassword(),
           null,

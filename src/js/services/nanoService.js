@@ -109,6 +109,7 @@ angular.module('canoeApp.services')
       // Will only ever create one on the server side
       root.createServerAccount(wallet)
       root.wallet = wallet
+      $rootScope.$emit('walletloaded')
       wallet.setLogger($log)
       // Install callback for broadcasting of blocks
       wallet.setBroadcastCallback(root.broadcastCallback)
@@ -388,8 +389,10 @@ angular.module('canoeApp.services')
     root.createWalletFromData = function (data, password, cb) {
       $log.debug('Create wallet from data')
       var wallet = root.createNewWallet(password)
-      root.loadWalletData(wallet, data)
-      root.setWallet(wallet, cb)
+      root.loadWalletData(wallet, data, function (err, wallet) {
+        if (err) return cb(err)
+        root.setWallet(wallet, cb)
+      })
     }
 
     // Create a new account in the wallet
@@ -431,20 +434,19 @@ angular.module('canoeApp.services')
     root.reloadWallet = function (wallet, cb) {
       $log.debug('Reload wallet from local storage')
       storageService.loadWallet(function (data) {
-        root.loadWalletData(wallet, data)
-        cb(null, wallet)
+        root.loadWalletData(wallet, data, cb)
       })
     }
 
     // Load wallet with given data using current password in wallet
-    root.loadWalletData = function (wallet, data) {
+    root.loadWalletData = function (wallet, data, cb) {
       try {
         wallet.load(data)
       } catch (e) {
         $log.error('Error decrypting wallet. Check that the password is correct.')
-        throw e
+        return cb(e)
       }
-      return wallet
+      cb(null, wallet)
     }
 
     /* ******************************* MQTT ********************************/

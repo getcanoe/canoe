@@ -92,6 +92,17 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       })
 
       listeners = [
+        $rootScope.$on('walletloaded', function (event) {
+          $timeout(function () {
+            $scope.$apply(function () {
+              $log.debug('Wallet loaded')
+              $scope.accounts = profileService.getAccounts()
+              if ($scope.recentTransactionsEnabled) {
+                getNotifications()
+              }
+            })
+          }, 100)
+        }),
         $rootScope.$on('blocks', function (event, account) {
           $scope.$apply(function () {
             if (account === null) {

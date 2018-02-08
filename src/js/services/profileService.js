@@ -6,7 +6,6 @@ angular.module('canoeApp.services')
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
 
-    var UPDATE_PERIOD = 15
     var RAW_PER_NANO = Math.pow(10, 30) // 1 NANO = 1 Mnano = 10^30 raw
 
     var rate = 0 // Current rate fetched every 60 sec
@@ -16,7 +15,7 @@ angular.module('canoeApp.services')
     var root = {}
     root.profile = null
     root.wallet = null
-    root.password = 'hubbabubba' // TODO Hardcoded for testing during dev!!!!
+    root.password = null
 
     // This is where we keep the password entered when you start Canoe
     // or when timeout is reached and it needs to be entered again.
@@ -197,7 +196,7 @@ angular.module('canoeApp.services')
       configService.get(function (err) {
         $log.debug('Preferences read')
         if (err) return cb(err)
-        root.loadWallet(cb)
+        return cb()
       })
     }
 

@@ -7,6 +7,11 @@ angular.module('canoeApp.controllers').controller('passwordController', function
 
   $scope.match = $scope.error = $scope.disableButton = false
   $scope.currentAttempts = 0
+  $scope.password = ''
+
+  $scope.$on('$ionicView.beforeEnter', function (event, data) {
+    $scope.password = ''
+  })
 
   configService.whenAvailable(function (config) {
     if (!config.lock) return
@@ -64,12 +69,18 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     if ($scope.disableButton) return // Should not happen
     $scope.error = false
     currentPassword = value
-    if (profileService.checkPassword(currentPassword)) {
-      $scope.hideModal()
-      return
-    }
-    showError()
-    checkAttempts()
+    profileService.enteredPassword(currentPassword)
+    // Now we try to load wallet and if it fails, ask user again
+    profileService.loadWallet(function (err) {
+      if (err) {
+        $scope.password = ''
+        $log.debug('Error loading wallet: ' + err)
+        showError()
+        checkAttempts()
+      } else {
+        $scope.hideModal()
+      }
+    })
   }
 
   function showError () {

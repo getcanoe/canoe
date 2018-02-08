@@ -904,8 +904,8 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
             $log.debug('No profile... redirecting')
             $state.go('onboarding.welcome')
           } else if (err.message && err.message.match('NONAGREEDDISCLAIMER')) {
-            if (lodash.isEmpty(profileService.getAccounts())) {
-              $log.debug('No wallets and no disclaimer... redirecting')
+            if (profileService.getWallet() === null) {
+              $log.debug('No wallet and no disclaimer... redirecting')
               $state.go('onboarding.welcome')
             } else {
               $log.debug('Display disclaimer... redirecting')
