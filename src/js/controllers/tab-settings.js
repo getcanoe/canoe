@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('tabSettingsController', function ($rootScope, $timeout, $scope, appConfigService, $ionicModal, $log, lodash, uxLanguage, platformInfo, profileService, configService, externalLinkService, storageService, gettextCatalog, addressbookService, $state, $ionicHistory) {
+angular.module('canoeApp.controllers').controller('tabSettingsController', function ($rootScope, $timeout, $scope, appConfigService, $ionicModal, $log, lodash, uxLanguage, platformInfo, profileService, configService, externalLinkService, gettextCatalog, addressbookService, applicationService, $state, $ionicHistory) {
   var updateConfig = function () {
     $scope.currentLanguageName = uxLanguage.getCurrentLanguageName()
     // $scope.buyAndSellServices = buyAndSellService.getLinked()
@@ -28,6 +28,14 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
         })
       }, 100)
     })
+  }
+
+  $scope.lockCanoe = function () {
+    $state.transitionTo('tabs.home').then(function () {
+      // Clear history
+      $ionicHistory.clearHistory()
+    })
+    applicationService.appLockModal('check')
   }
 
   $scope.openExternalLink = function () {

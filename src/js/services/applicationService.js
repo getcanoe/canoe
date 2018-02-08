@@ -66,6 +66,29 @@ angular.module('canoeApp.services')
       }
     }
 
+    root.passwordModal = function (action) {
+      var scope = $rootScope.$new(true)
+      scope.action = action
+      $ionicModal.fromTemplateUrl('views/modals/password.html', {
+        scope: scope,
+        animation: 'none',
+        backdropClickToClose: false,
+        hardwareBackButtonClose: false
+      }).then(function (modal) {
+        scope.passwordModal = modal
+        root.isModalOpen = true
+        scope.openModal()
+      })
+      scope.openModal = function () {
+        scope.passwordModal.show()
+      }
+      scope.hideModal = function () {
+        scope.$emit('passwordModalClosed')
+        root.isModalOpen = false
+        scope.passwordModal.hide()
+      }
+    }
+
     root.pinModal = function (action) {
       var scope = $rootScope.$new(true)
       scope.action = action
@@ -91,13 +114,16 @@ angular.module('canoeApp.services')
 
     root.appLockModal = function (action) {
       if (root.isModalOpen) return
-
+      root.passwordModal(action)
+/*
       configService.whenAvailable(function (config) {
         var lockMethod = config.lock && config.lock.method
         if (!lockMethod || lockMethod === 'none') return
         if (lockMethod === 'fingerprint' && fingerprintService.isAvailable()) root.fingerprintModal()
+        if (lockMethod === 'password') root.passwordModal(action)
         if (lockMethod === 'pin') root.pinModal(action)
       })
+*/
     }
     return root
   })

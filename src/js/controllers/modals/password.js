@@ -1,14 +1,12 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('passwordController', function ($state, $interval, $stateParams, $ionicHistory, $timeout, $scope, $log, configService, appConfigService, applicationService) {
-  var ATTEMPT_LIMIT = 3
+angular.module('canoeApp.controllers').controller('passwordController', function ($state, $interval, $stateParams, $ionicHistory, $timeout, $scope, $log, configService, profileService, applicationService) {
+  var ATTEMPT_LIMIT = 5
   var ATTEMPT_LOCK_OUT_TIME = 5 * 60
-  var currentPin
-  currentPin = $scope.confirmPin = ''
+  var currentPassword = ''
 
-  $scope.match = $scope.error = $scope.disableButtons = false
+  $scope.match = $scope.error = $scope.disableButton = false
   $scope.currentAttempts = 0
-  $scope.appName = appConfigService.name
 
   configService.whenAvailable(function (config) {
     if (!config.lock) return
@@ -16,17 +14,11 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     if ($scope.bannedUntil) {
       var now = Math.floor(Date.now() / 1000)
       if (now < $scope.bannedUntil) {
-        $scope.error = $scope.disableButtons = true
+        $scope.error = $scope.disableButton = true
         lockTimeControl($scope.bannedUntil)
       }
     }
   })
-
-  function getSavedMethod () {
-    var config = configService.getSync()
-    if (config.lock) return config.lock.method
-    return 'none'
-  }
 
   function checkAttempts () {
     $scope.currentAttempts += 1
@@ -50,7 +42,7 @@ angular.module('canoeApp.controllers').controller('passwordController', function
       if (now > bannedUntil) {
         if (countDown) reset()
       } else {
-        $scope.disableButtons = true
+        $scope.disableButton = true
         var totalSecs = bannedUntil - now
         var m = Math.floor(totalSecs / 60)
         var s = totalSecs % 60
@@ -59,8 +51,8 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     }
 
     function reset () {
-      $scope.expires = $scope.error = $scope.disableButtons = null
-      currentPin = $scope.confirmPin = ''
+      $scope.expires = $scope.error = $scope.disableButton = null
+      currentPassword = ''
       $interval.cancel(countDown)
       $timeout(function () {
         $scope.$apply()
@@ -68,125 +60,27 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     }
   }
 
-  $scope.getFilledClass = function (limit) {
-    return currentPin.length >= limit ? 'filled-' + $scope.appName : null
-  }
-
-  $scope.delete = function () {
-    if ($scope.disableButtons) return
-    if (currentPin.length > 0) {
-      currentPin = currentPin.substring(0, currentPin.length - 1)
-      $scope.error = false
-      $scope.updatePin()
-    }
-  }
-
-  $scope.isComplete = function () {
-    if (currentPin.length < 4) return false
-    else return true
-  }
-
-  $scope.updatePin = function (value) {
-    if ($scope.disableButtons) return
+  $scope.unlock = function (value) {
+    if ($scope.disableButton) return // Should not happen
     $scope.error = false
-    if (value && !$scope.isComplete()) {
-      currentPin = currentPin + value
-      $timeout(function () {
-        $scope.$apply()
-      })
+    currentPassword = value
+    if (profileService.checkPassword(currentPassword)) {
+      $scope.hideModal()
+      return
     }
-    $scope.save()
-  }
-
-  function isMatch (pin) {
-    var config = configService.getSync()
-    return config.lock.value === pin
-  };
-
-  $scope.save = function () {
-    if (!$scope.isComplete()) return
-    var savedMethod = getSavedMethod()
-
-    switch ($scope.action) {
-      case 'setup':
-        applyAndCheckPin()
-        break
-      case 'disable':
-        if (isMatch(currentPin)) {
-          deletePin()
-        } else {
-          showError()
-          checkAttempts()
-        }
-        break
-      case 'check':
-        if (isMatch(currentPin)) {
-          $scope.hideModal()
-          return
-        }
-        showError()
-        checkAttempts()
-        break
-    }
+    showError()
+    checkAttempts()
   }
 
   function showError () {
     $timeout(function () {
-      $scope.confirmPin = currentPin = ''
+      currentPassword = ''
       $scope.error = true
     }, 200)
-
     $timeout(function () {
       $scope.$apply()
     })
-  };
-
-  function applyAndCheckPin () {
-    if (!$scope.confirmPin) {
-      $timeout(function () {
-        $scope.confirmPin = currentPin
-        currentPin = ''
-      }, 200)
-    } else {
-      if ($scope.confirmPin === currentPin) { savePin($scope.confirmPin) } else {
-        $scope.confirmPin = currentPin = ''
-        $scope.error = true
-      }
-    }
-    $timeout(function () {
-      $scope.$apply()
-    })
-  };
-
-  function deletePin () {
-    var opts = {
-      lock: {
-        method: 'none',
-        value: null,
-        bannedUntil: null
-      }
-    }
-
-    configService.set(opts, function (err) {
-      if (err) $log.debug(err)
-      $scope.hideModal()
-    })
-  };
-
-  function savePin (value) {
-    var opts = {
-      lock: {
-        method: 'pin',
-        value: value,
-        bannedUntil: null
-      }
-    }
-
-    configService.set(opts, function (err) {
-      if (err) $log.debug(err)
-      $scope.hideModal()
-    })
-  };
+  }
 
   function saveFailedAttempt (bannedUntil) {
     var opts = {
@@ -194,10 +88,9 @@ angular.module('canoeApp.controllers').controller('passwordController', function
         bannedUntil: bannedUntil
       }
     }
-
     configService.set(opts, function (err) {
       if (err) $log.debug(err)
       lockTimeControl(bannedUntil)
     })
-  };
+  }
 })

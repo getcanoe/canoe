@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.services').factory('configService', function (storageService, lodash, $log, $timeout, $rootScope, platformInfo) {
   var root = {}
 
@@ -34,7 +34,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
     },
 
     lock: {
-      method: null,
+      method: 'password',
       value: null,
       bannedUntil: null
     },
