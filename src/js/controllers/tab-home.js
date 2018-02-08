@@ -93,13 +93,13 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
 
       listeners = [
         $rootScope.$on('blocks', function (event, account) {
-          $scope.apply(function () {
+          $scope.$apply(function () {
             if (account === null) {
               $log.debug('Got action for all accounts')
-              profileService.updateAllAccounts()
+              $scope.accounts = profileService.getAccounts()
             } else {
               $log.debug('Got action for ' + account)
-              profileService.updateAccount(account)
+              //profileService.updateAccount(account)
             }
             if ($scope.recentTransactionsEnabled) {
               getNotifications()
@@ -229,7 +229,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     }
 
     var performUpdate = function (cb) {
-      profileService.updateAllAccounts()
+      $scope.accounts = profileService.getAccounts()
       // TODO Call and check server message regularly some other way
       $scope.serverMessage = null
     }

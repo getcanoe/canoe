@@ -3,12 +3,11 @@
   {{account.name || account.id}}
 </span>
 <p>
-  <span ng-if="!account.meta.balanceHidden"> {{account.cachedBalanceStr + (account.cachedBalanceUpdatedOn ? ' &middot; ' + (account.cachedBalanceUpdatedOn  * 1000 | amTimeAgo) : '')}} </span>
+  <span ng-if="!account.meta.balanceHidden"> {{account.balanceStr}} </span>
 
   <span ng-if="account.meta.balanceHidden" translate>[Balance Hidden]</span>
   <i ng-if="!account.meta.balanceHidden && (account.cachedPendingBalance > 0)" class="tab-home__wallet__pending-icon ion-android-arrow-back"></i>
-  <span ng-if="!account.meta.balanceHidden && (account.cachedPendingBalance > 0)"> {{account.cachedPendingBalanceStr}} </span>
-  <i ng-if="!account.meta.balanceHidden" class="tab-home__wallet__status-icon ion-ios-timer-outline"></i>
+  <span ng-if="!account.meta.balanceHidden && (account.cachedPendingBalance > 0)"> {{account.pendingBalanceStr}} </span>
   <span class="assertive" ng-if="account.error">{{account.error}}</span>
   &nbsp;
 </p>

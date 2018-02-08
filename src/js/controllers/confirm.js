@@ -65,7 +65,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       minAmount = minAmount || 1
 
       // Make sure we have latest accounts and balances
-      $scope.accounts = profileService.updateAllAccounts()
+      $scope.accounts = profileService.getAccounts()
 
       if (!$scope.accounts || !$scope.accounts.length) {
         setNoAccount(gettextCatalog.getString('No accounts available'), true)

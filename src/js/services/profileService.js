@@ -139,14 +139,6 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.updateAllAccounts = function () {
-      var accounts = root.wallet.getAccounts()
-      lodash.each(accounts, function (acc) {
-        root.setLastKnownBalance(acc, function () {})
-      })
-      return accounts
-    }
-
     root.formatAmount = function (raw, decimals) {
       if (raw === 0) {
         return raw.toFixed(decimals)
@@ -386,70 +378,26 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.getLastKnownBalance = function (account, cb) {
-      storageService.getBalanceCache(account.id, cb)
-    }
-
-    root.addLastKnownBalance = function (account, cb) {
-      var now = Math.floor(Date.now() / 1000)
-      var showRange = 600 // 10 min
-
-      root.getLastKnownBalance(account, function (err, data) {
-        if (data) {
-          data = JSON.parse(data)
-          account.cachedBalanceStr = root.formatAmountWithUnit(parseInt(data.balance))
-          account.cachedBalance = data.balance
-          account.cachedPendingBalanceStr = root.formatAmountWithUnit(parseInt(data.pendingBalance))
-          account.cachedPendingBalance = data.pendingBalance
-          account.cachedBalanceUpdatedOn = (data.updatedOn < now - showRange) ? data.updatedOn : null
-        }
-        return cb()
-      })
-    }
-
-    root.setLastKnownBalance = function (account, cb) {
-      storageService.setBalanceCache(account.id, {
-        balance: account.balance,
-        pendingBalance: account.pendingBalance,
-        updatedOn: Math.floor(Date.now() / 1000)
-      }, cb)
-    }
-
-    // This is a filtering function for accounts, not used yet
-    root.getAccounts = function (opts) {
-      if (opts && !lodash.isObject(opts)) { throw 'bad argument' }
-      opts = opts || {}
-
+    // This gets copies of all accounts in the wallet with
+    // additional data attached, like formatted balances etc
+    root.getAccounts = function () {
       // No wallet loaded
       if (!root.wallet) {
         return []
       }
+      var accounts = root.wallet.getAccounts()
 
-      var ret = root.wallet.getAccounts()
-
-      if (opts.hasFunds) {
-        ret = lodash.filter(ret, function (a) {
-          if (!a.status) return
-          return (a.status.availableBalanceSat > 0)
-        })
-      }
-
-      if (opts.minAmount) {
-        ret = lodash.filter(ret, function (a) {
-          if (!a.status) return
-          return (a.status.availableBalanceSat > opts.minAmount)
-        })
-      }
-
-      // Add cached balance async
-      // TODO kinda... odd way to go about it perhaps
-      lodash.each(ret, function (x) {
-        root.addLastKnownBalance(x, function () {})
+      // Add formatted balances and timestamps
+      lodash.each(accounts, function (acc) {
+        acc.balanceStr = root.formatAmountWithUnit(parseInt(acc.balance))
+        acc.pendingBalanceStr = root.formatAmountWithUnit(parseInt(acc.pendingBalance))
       })
 
-      return lodash.sortBy(ret, [
-        'createdOn'
-      ])
+      return accounts
+      // Sorted in creation timestamp
+      // return lodash.sortBy(accounts, [
+      //   'createdOn'
+      // ])
     }
 
     root.toggleHideBalanceFlag = function (accountId, cb) {
