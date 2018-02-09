@@ -339,7 +339,8 @@ angular.module('canoeApp.services')
       $log.debug('Creating server account for wallet ' + wallet.getId())
       var json = rai.create_server_account(wallet.getId(), wallet.getToken(), wallet.getTokenPass())
       if (json.error) {
-        throw Error(json.error)
+        $log.debug('Error from creating server account: ' + json.error)
+        throw new Error(json.error)
       }
     }
 
