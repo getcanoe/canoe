@@ -15,12 +15,13 @@ angular.module('canoeApp.controllers').controller('addressbookEditController', f
     $timeout(function () {
       var form = addressbookForm
       if (data && form) {
-        var code = nanoService.parseQRCode(data)
-        form.address.$setViewValue(code.account)
-        form.address.$isValid = true
-        form.address.$render()
-        form.name.$setViewValue(code.params.label || '')
-        form.name.$render()
+        nanoService.parseQRCode(data, function (code) {
+          form.address.$setViewValue(code.account)
+          form.address.$isValid = true
+          form.address.$render()
+          form.name.$setViewValue(code.params.label || '')
+          form.name.$render()
+        })
       }
       $scope.$digest()
     }, 100)

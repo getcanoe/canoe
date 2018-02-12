@@ -1,7 +1,7 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, $rootScope, configService, platformInfo, storageService, gettextCatalog, lodash) {
+  .factory('nanoService', function ($log, $rootScope, configService, platformInfo, storageService, gettextCatalog, aliasService, lodash) {
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
@@ -209,10 +209,9 @@ angular.module('canoeApp.services')
       return res
     }
 
-    // Parse out major parts of QR/URL syntax. Returns null on failure,
-    // otherwise something like:
+    // Parse out major parts of QR/URL syntax. Calls callback on :
     // { protocol: 'xrb', account: 'xrb_yaddayadda', params: {label: 'label', amount: '10000'}}
-    root.parseQRCode = function (data) {
+    root.parseQRCode = function (data, cb) {
       // <protocol>:<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
       var code = {}
       var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'xrbkey', 'nanoseed', 'nanokey']
@@ -221,32 +220,27 @@ angular.module('canoeApp.services')
         if (parts.length === 1) {
           // No ':',  perhaps a bare account?
           if (data.match(/^(xrb_|nano_)/) !== null) {
+            // A bare account
+            code.protocol = 'nano'
+            parts = parts[0]
+          } else if (data.startsWith('@')) {
+            // A bare alias
             code.protocol = 'nano'
             parts = parts[0]
           } else {
             // Nope, give up
-            return null
+            return cb('Unknown format')
           }
         } else {
           code.protocol = parts[0]
           parts = parts[1]
         }
         if (!protocols.includes(code.protocol)) {
-          return null
+          return cb('Unknown protocol: ' + code.protocol)
         }
         // Time to check for params
         parts = parts.split('?')
         code.account = parts[0]
-        if (code.account.startsWith('@')) {
-          code.alias = code.account
-          code.account = ''
-          // TODO lookup alias in alias server
-        } else {
-          if (!root.isValidAccount(code.account)) {
-            $log.debug('Account invalid')
-            return null
-          }
-        }
         var kvs = {}
         if (parts.length === 2) {
           // We also have key value pairs
@@ -257,9 +251,31 @@ angular.module('canoeApp.services')
           })
         }
         code.params = kvs
-        return code
+        // If the account is an alias, we need to perform a lookup
+        if (code.account.startsWith('@')) {
+          code.alias = code.account
+          aliasService.lookupAlias(code.alias.substr(1), function (err, ans) {
+            if (err) return $log.debug(err)
+            $log.debug('Answer from alias server looking up ' + code.alias + ': ' + JSON.stringify(ans))
+            if (ans) {
+              code.account = ans.alias.address
+              if (!root.isValidAccount(code.account)) {
+                $log.debug('Account invalid')
+                return
+              }
+              // Perform callback now
+              cb(null, code)
+            }
+          })
+        } else {
+          if (!root.isValidAccount(code.account)) {
+            $log.debug('Account invalid')
+            return cb('Account invalid' + code.account)
+          }
+          cb(null, code)
+        }
       } catch (e) {
-        return null
+        // Do nothing
       }
     }
 

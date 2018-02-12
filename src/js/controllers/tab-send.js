@@ -92,6 +92,8 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   }
 
   $scope.findContact = function (search) {
+    // If redir returns true it matched something and
+    // will already have moved us to amount.
     if (incomingData.redir(search)) {
       return
     }
@@ -106,10 +108,13 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
 
     var sea = search.toLowerCase()
     var result = lodash.filter(originalList, function (item) {
-      var val = item.name
       return (
-        lodash.includes(val.toLowerCase(), sea) ||
-        item.address.toLowerCase().startsWith(sea)
+        // If name has substring, or address startsWith, or email startsWith
+        // or alias startsWith
+        lodash.includes(item.name.toLowerCase(), sea) ||
+        (item.address && item.address.toLowerCase().startsWith(sea)) ||
+        (item.alias && item.alias.toLowerCase().startsWith(sea)) ||
+        (item.email && item.email.toLowerCase().startsWith(sea))
       )
     })
 
