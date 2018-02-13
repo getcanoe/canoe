@@ -1,7 +1,7 @@
 'use strict'
 /* global XMLHttpRequest angular Profile */
 angular.module('canoeApp.services')
-  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, nanoService, configService, gettextCatalog, bwcError, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
+  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, nanoService, configService, gettextCatalog, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
     var isChromeApp = platformInfo.isChromeApp
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS

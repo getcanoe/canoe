@@ -475,15 +475,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.preferences.preferencesAdvanced', {
-        url: '/preferencesAdvanced',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesAdvancedController',
-            templateUrl: 'views/preferencesAdvanced.html'
-          }
-        }
-      })
       .state('tabs.export', {
         url: '/export',
         views: {
@@ -558,31 +549,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           'tab-home': {
             templateUrl: 'views/canoeers.html',
             controller: 'canoeersController'
-          }
-        }
-      })
-
-      /*
-       *
-       * Addresses
-       *
-       */
-
-      .state('tabs.settings.addresses', {
-        url: '/addresses/:walletId/:toAddress',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'addressesController',
-            templateUrl: 'views/addresses.html'
-          }
-        }
-      })
-      .state('tabs.settings.allAddresses', {
-        url: '/allAddresses/:walletId',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'addressesController',
-            templateUrl: 'views/allAddresses.html'
           }
         }
       })
