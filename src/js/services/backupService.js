@@ -19,7 +19,7 @@ angular.module('canoeApp.services')
             window.MozBlobBuilder ||
             window.MSBlobBuilder
 
-          if (e.name == 'TypeError' && window.BlobBuilder) {
+          if (e.name === 'TypeError' && window.BlobBuilder) {
             var bb = new BlobBuilder()
             bb.append(data)
             out = bb.getBlob(datatype)

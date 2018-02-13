@@ -240,7 +240,11 @@ angular.module('canoeApp.services')
         }
         // Time to check for params
         parts = parts.split('?')
-        code.account = parts[0]
+        if (code.protocol === 'xrbseed' || code.protocol === 'nanoseed') {
+          code.seed = parts[0]
+        } else {
+          code.account = parts[0]
+        }
         var kvs = {}
         if (parts.length === 2) {
           // We also have key value pairs
@@ -251,27 +255,31 @@ angular.module('canoeApp.services')
           })
         }
         code.params = kvs
-        // If the account is an alias, we need to perform a lookup
-        if (code.account.startsWith('@')) {
-          code.alias = code.account
-          aliasService.lookupAlias(code.alias.substr(1), function (err, ans) {
-            if (err) return $log.debug(err)
-            $log.debug('Answer from alias server looking up ' + code.alias + ': ' + JSON.stringify(ans))
-            if (ans) {
-              code.account = ans.alias.address
-              if (!root.isValidAccount(code.account)) {
-                $log.debug('Account invalid')
-                return
+        if (code.account) {
+          // If the account is an alias, we need to perform a lookup
+          if (code.account.startsWith('@')) {
+            code.alias = code.account
+            aliasService.lookupAlias(code.alias.substr(1), function (err, ans) {
+              if (err) return $log.debug(err)
+              $log.debug('Answer from alias server looking up ' + code.alias + ': ' + JSON.stringify(ans))
+              if (ans) {
+                code.account = ans.alias.address
+                if (!root.isValidAccount(code.account)) {
+                  $log.debug('Account invalid')
+                  return
+                }
+                // Perform callback now
+                cb(null, code)
               }
-              // Perform callback now
-              cb(null, code)
+            })
+          } else {
+            if (!root.isValidAccount(code.account)) {
+              $log.debug('Account invalid')
+              return cb('Account invalid' + code.account)
             }
-          })
-        } else {
-          if (!root.isValidAccount(code.account)) {
-            $log.debug('Account invalid')
-            return cb('Account invalid' + code.account)
+            cb(null, code)
           }
+        } else {
           cb(null, code)
         }
       } catch (e) {
