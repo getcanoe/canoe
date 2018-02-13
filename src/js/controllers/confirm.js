@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, bwcError, txConfirmNotification, externalLinkService) {
+angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, txConfirmNotification, externalLinkService) {
   var CONFIRM_LIMIT_USD = 20
 
   var tx = {}
@@ -231,7 +231,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     $timeout(function () {
       $scope.$apply()
     })
-    popupService.showAlert(gettextCatalog.getString('Error at confirm'), bwcError.msg(msg))
+    popupService.showAlert(gettextCatalog.getString('Error at confirm'), msg)
   }
 
   $scope.cancel = function () {

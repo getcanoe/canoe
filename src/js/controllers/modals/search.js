@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('searchController', function ($scope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicScrollDelegate, bwcError, profileService, lodash, configService, gettext, gettextCatalog, platformInfo, walletService) {
+angular.module('canoeApp.controllers').controller('searchController', function ($scope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicScrollDelegate, profileService, lodash, configService, gettext, gettextCatalog, platformInfo, walletService) {
   var HISTORY_SHOW_LIMIT = 10
   var currentTxHistoryPage = 0
   var isCordova = platformInfo.isCordova
