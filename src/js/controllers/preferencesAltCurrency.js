@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('preferencesAltCurrencyController',
   function ($scope, $log, $timeout, $ionicHistory, configService, rateService, lodash, profileService, walletService, storageService) {
     var next = 10
@@ -74,7 +74,7 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
       $scope.lastUsedAltCurrencyList = lodash.uniq($scope.lastUsedAltCurrencyList, 'isoCode')
       $scope.lastUsedAltCurrencyList = $scope.lastUsedAltCurrencyList.slice(0, 3)
       storageService.setLastCurrencyUsed(JSON.stringify($scope.lastUsedAltCurrencyList), function () {})
-    };
+    }
 
     $scope.$on('$ionicView.beforeEnter', function (event, data) {
       var config = configService.getSync()

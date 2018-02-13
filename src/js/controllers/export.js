@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('exportController',
-  function ($scope, $timeout, $log, $ionicHistory, $ionicScrollDelegate, backupService, walletService, storageService, profileService, platformInfo, gettextCatalog, $state, $stateParams, popupService, appConfigService) {
+  function ($scope, $timeout, $log, $ionicHistory, $ionicScrollDelegate, backupService, walletService, storageService, profileService, platformInfo, gettextCatalog, $state, $stateParams, popupService) {
     var wallet = profileService.getAccount($stateParams.walletId)
     $scope.wallet = wallet
 
@@ -22,29 +22,18 @@ angular.module('canoeApp.controllers').controller('exportController',
     }
 
     $scope.generateQrCode = function () {
-      if ($scope.formData.exportWalletInfo) {
+      if ($scope.formData.seedURI) {
         $scope.file.value = false
       }
-      /*if (err) {
-        popupService.showAlert(gettextCatalog.getString('Error'), err)
+      var seedURI = profileService.getSeedURI($scope.formData.password)
+      if (!seedURI) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to generate seed QR code'))
         return
-      }*/
-
-      walletService.getEncodedWalletInfo(wallet, $scope.formData.password, function (err, code) {
-        if (err) {
-          popupService.showAlert(gettextCatalog.getString('Error'), err)
-          return
-        }
-
-        if (!code) { $scope.formData.supported = false } else {
-          $scope.formData.supported = true
-          $scope.formData.exportWalletInfo = code
-        }
-
-        $scope.file.value = false
-        $timeout(function () {
-          $scope.$apply()
-        })
+      }
+      $scope.formData.seedURI = seedURI
+      $scope.file.value = false
+      $timeout(function () {
+        $scope.$apply()
       })
     }
 
@@ -58,11 +47,6 @@ angular.module('canoeApp.controllers').controller('exportController',
     }
 
     $scope.downloadWalletBackup = function () {
-      /*if (err) {
-        popupService.showAlert(gettextCatalog.getString('Error'), err)
-        return
-      }*/
-
       $scope.getAddressbook(function (err, localAddressBook) {
         if (err) {
           popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
@@ -100,11 +84,6 @@ angular.module('canoeApp.controllers').controller('exportController',
     }
 
     $scope.getBackup = function (cb) {
-      /*if (err) {
-        popupService.showAlert(gettextCatalog.getString('Error'), err)
-        return
-      }*/
-
       $scope.getAddressbook(function (err, localAddressBook) {
         if (err) {
           popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
@@ -114,7 +93,6 @@ angular.module('canoeApp.controllers').controller('exportController',
           addressBook: localAddressBook,
           password: $scope.formData.password
         }
-
         var ew = backupService.walletExport($scope.formData.password, opts)
         if (!ew) {
           popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to export'))
@@ -154,7 +132,7 @@ angular.module('canoeApp.controllers').controller('exportController',
 
         if ($scope.formData.noSignEnabled) { name = name + '(No Private Key)' }
 
-        var subject = appConfigService.nameCase + ' Wallet Backup: ' + name
+        var subject = 'Canoe Wallet Backup: ' + name
         var body = 'Here is the encrypted backup of the wallet ' + name + ': \n\n' + ew + '\n\n To import this backup, copy all text between {...}, including the symbols {}'
         window.plugins.socialsharing.shareViaEmail(
           body,
@@ -174,7 +152,7 @@ angular.module('canoeApp.controllers').controller('exportController',
       $scope.file = {
         value: true
       }
-      $scope.formData.exportWalletInfo = null
+      $scope.formData.seedURI = null
       $scope.password = null
       $scope.result = null
     })

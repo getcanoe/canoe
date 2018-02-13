@@ -21,39 +21,27 @@ angular.module('canoeApp.controllers').controller('importController',
       })
     }
 
-    $scope.processQRSeed = function (code) {
-      var seed
+    $scope.processQRSeed = function (data) {
       // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
       // xrbseed:97123971239712937123987129387129873?label=bah&message=hubba&lastindex=9
-      if (!code) return
+      if (!data) return
 
-      $scope.importErr = true
-      var parts = code.split(':')
-      if (parts[0] === 'xrbseed') {
-        parts = parts[1].split('?')
-        if (nanoService.isValidSeed(parts[0])) {
-          $scope.importErr = false
-          if (parts.length === 2) {
-            // We also have key value pairs
-            var kvs = {}
-            var pairs = parts[1].split('&')
-            lodash.each(pairs, function (pair) {
-              var kv = pair.split('=')
-              kvs[kv[0]] = kv[1]
-            })
-          }
+      nanoService.parseQRCode(data, function (err, code) {
+        if (err) {
+          // Trying to import a malformed seed QR code
+          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Incorrect code format for a seed: ' + code))
+          return
         }
-      }
-      if ($scope.importErr) {
-        /// Trying to import a malformed seed QR code
-        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Incorrect code format for a seed'))
-        return
-      }
-
-      $timeout(function () {
-        $scope.formData.seed = seed
-        $scope.$apply()
-      }, 1)
+        if (code.protocol === 'xrbseed' || code.protocol === 'nanoseed') {
+          $timeout(function () {
+            $scope.formData.seed = code.seed
+            $scope.$apply()
+          }, 1)
+        } else {
+          // Trying to import wrong protocol
+          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Not a seed QR code: ' + code))
+        }
+      })
     }
 
     var _importBlob = function (data, opts) {

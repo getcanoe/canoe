@@ -103,6 +103,12 @@ angular.module('canoeApp.services')
       })
     }
 
+    // Return a URI for the seed given the password
+    root.getSeedURI = function (pwd) {
+      // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
+      return 'xrbseed:' + root.wallet.getSeed(pwd) + '?lastindex=' + (root.wallet.getAccountIds().length - 1)
+    }
+
     // Return an object with wallet member holding the encrypted hex of wallet
     root.getExportWallet = function () {
       return {wallet: root.wallet.pack()}
