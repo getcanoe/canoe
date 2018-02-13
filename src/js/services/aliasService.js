@@ -39,23 +39,22 @@ angular.module('canoeApp.services')
       //xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.withCredentials = false
       xhr.open('GET', host + '/alias/' + alias, true)
+      xhr.onerror = xhr.onabort = xhr.ontimeout = function () { cb('Lookup failed') }
       xhr.onload = function () {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 422) {
-            $log.debug('No such alias')
-            cb('No such alias')
-          } else if (xhr.status === 200) {
-            var response = JSON.parse(xhr.responseText)
-            if (response.status === 'SUCCESS') {
-              $log.debug('Success: ' + JSON.stringify(response.data))
-              cb(null, response.data)
-            } else if (response.status === 'ERROR') {
-              $log.debug('Error: ' + JSON.stringify(response.message))
-              cb(response.message)
-            }
-          } else {
-            cb(xhr.status)
+        if (xhr.status === 422) {
+          $log.debug('No such alias')
+          cb('No such alias')
+        } else if (xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText)
+          if (response.status === 'SUCCESS') {
+            $log.debug('Success: ' + JSON.stringify(response.data))
+            cb(null, response.data)
+          } else if (response.status === 'ERROR') {
+            $log.debug('Error: ' + JSON.stringify(response.message))
+            cb(response.message)
           }
+        } else {
+          cb(xhr.status)
         }
       }
       xhr.send(null)
