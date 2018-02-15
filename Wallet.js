@@ -1517,10 +1517,11 @@ module.exports = function(password)
 		return uint8_hex(seed)
 	}
 
-	api.createAccount = function (meta) {
+	api.createAccount = function (newMeta) {
 		var account = api.newKeyFromSeed()
 		api.useAccount(account)
-		keys[current].meta = meta
+		keys[current].meta = newMeta
+		meta = newMeta
 		return api.getAccount(account)
 	}
 	
