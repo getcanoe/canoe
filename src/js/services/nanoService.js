@@ -21,6 +21,7 @@ angular.module('canoeApp.services')
     var mqttPort = 1884
     var mqttClient = null
     var mqttUsername = null
+    root.connected = false
 
     // See generatePoW below
     var powWorkers = null
@@ -103,16 +104,16 @@ angular.module('canoeApp.services')
       }
     }
 
-    // Whenever the wallet is changed we call this
+    // Whenever the wallet is replaced we call this
     root.setWallet = function (wallet, cb) {
       // Make sure we have an account for this wallet
       // Will only ever create one on the server side
       root.createServerAccount(wallet)
       root.wallet = wallet
-      $rootScope.$emit('walletloaded')
       wallet.setLogger($log)
       // Install callback for broadcasting of blocks
       wallet.setBroadcastCallback(root.broadcastCallback)
+      root.disconnect()
       root.startMQTT(function () {
         // Fetch all pending blocks
         root.fetchPendingBlocks()
@@ -400,12 +401,16 @@ angular.module('canoeApp.services')
 
     // Start MQTT
     root.startMQTT = function (cb) {
-      // Now we can connect
+      var doneIt = false
       root.connectMQTT(root.wallet, function (connected) {
         if (connected) {
           root.updateServerMap(root.wallet)
           root.subscribeForWallet(root.wallet)
+          // Failsafe for reconnects causing this to run many times
+          if (!doneIt) {
+            doneIt = true
           cb()
+        }
         }
       })
     }
@@ -481,13 +486,6 @@ angular.module('canoeApp.services')
       root.publish('broadcast/' + block.getAccount(), JSON.stringify(msg), 2, false)
     }
 
-    root.reconnectMQTT = function (cb) {
-      if (mqttUsername) {
-        root.disconnect()
-        root.connectMQTT(cb)
-      }
-    }
-
     root.connectMQTT = function (wallet, cb) {
       mqttUsername = wallet.getToken()
       var mqttPassword = wallet.getTokenPass()
@@ -516,15 +514,13 @@ angular.module('canoeApp.services')
 
     // Are we connected to the MQTT server?
     root.isConnected = function () {
-      return mqttClient !== null
+      return root.connected
     }
 
     // Disconnects MQTT.
     root.disconnect = function () {
       if (mqttClient) {
-        if (mqttClient.end) {
-          mqttClient.end()
-        }
+        mqttClient.disconnect()
       }
       mqttClient = null
     }
@@ -533,6 +529,11 @@ angular.module('canoeApp.services')
       if (responseObject.errorCode !== 0) {
         $log.info('MQTT connection lost: ' + responseObject.errorMessage)
       }
+      root.connected = false
+    }
+
+    root.onConnected = function (isReconnect) {
+      root.connected = true
     }
 
     root.onFailure = function () {
@@ -614,6 +615,7 @@ angular.module('canoeApp.services')
       root.disconnect()
       mqttClient = new Paho.MQTT.Client(ip, port, clientId)
       mqttClient.onConnectionLost = root.onConnectionLost
+      mqttClient.onConnected = root.onConnected
       mqttClient.onFailure = root.onFailure
       mqttClient.onMessageArrived = root.onMessageArrived
       var opts = {
