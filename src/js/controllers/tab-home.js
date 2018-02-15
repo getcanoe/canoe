@@ -93,29 +93,24 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
 
       listeners = [
         $rootScope.$on('walletloaded', function (event) {
-          $timeout(function () {
-            $scope.$apply(function () {
-              $log.debug('Wallet loaded')
-              $scope.accounts = profileService.getAccounts()
-              if ($scope.recentTransactionsEnabled) {
-                getNotifications()
-              }
-            })
-          }, 100)
+          $log.debug('Wallet loaded')
+          $scope.accounts = profileService.getAccounts()
+          // $log.debug('Accounts: ' + JSON.stringify($scope.accounts))
+          if ($scope.recentTransactionsEnabled) {
+            getNotifications()
+          }
         }),
         $rootScope.$on('blocks', function (event, account) {
-          $scope.$apply(function () {
-            if (account === null) {
-              $log.debug('Got action for all accounts')
-              $scope.accounts = profileService.getAccounts()
-            } else {
-              $log.debug('Got action for ' + account)
-              //profileService.updateAccount(account)
-            }
-            if ($scope.recentTransactionsEnabled) {
-              getNotifications()
-            }
-          })
+          if (account === null) {
+            $log.debug('Got action for all accounts')
+            $scope.accounts = profileService.getAccounts()
+          } else {
+            $log.debug('Got action for ' + account)
+            //profileService.updateAccount(account)
+          }
+          if ($scope.recentTransactionsEnabled) {
+            getNotifications()
+          }
         })
       ]
 

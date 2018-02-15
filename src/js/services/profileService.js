@@ -94,9 +94,8 @@ angular.module('canoeApp.services')
       // Synchronous now
       nanoService.createWallet(password, seed, function (err, wallet) {
         if (err) return cb(err)
-        root.setWalletId(wallet.getId(), function (err) {
+        root.setWallet(wallet, function (err) {
           if (err) return cb(err)
-          root.wallet = wallet
           nanoService.repair() // So we fetch truth from lattice, sync
           nanoService.saveWallet(root.wallet, cb)
         })
@@ -249,9 +248,8 @@ angular.module('canoeApp.services')
       // Synchronous now
       nanoService.createWallet(password, seed, function (err, wallet) {
         if (err) return cb(err)
-        root.setWalletId(wallet.getId(), function (err) {
+        root.setWallet(wallet, function (err) {
           if (err) return cb(err)
-          root.wallet = wallet
           nanoService.saveWallet(root.wallet, cb)
         })
       })
@@ -277,8 +275,7 @@ angular.module('canoeApp.services')
         if (err) {
           return cb(err)
         }
-        root.wallet = wallet
-        root.setWalletId(wallet.id, function (err) {
+        root.setWallet(wallet, function (err) {
           if (err) return cb(err)
           cb(null, wallet)
         })
@@ -361,8 +358,10 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.setWalletId = function (id, cb) {
-      root.profile.walletId = id
+    root.setWallet = function (wallet, cb) {
+      root.wallet = wallet
+      root.profile.walletId = wallet.getId()
+      $rootScope.$emit('walletloaded')
       storageService.storeProfile(root.profile, function (err) {
         return cb(err)
       })
