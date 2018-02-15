@@ -115,32 +115,29 @@ angular.module('canoeApp.services')
 
     // Import wallet from JSON and password, throws exception on failure
     root.importWallet = function (json, password) {
-      try {
-        var imported = JSON.parse(json)
-        var walletData = imported.wallet
-        // Then we try to load wallet
-        nanoService.createWalletFromData(walletData, password, function (err, wallet) {
-          if (err) return $log.error(err)
-          $log.info('Successfully imported wallet')
-          nanoService.saveWallet(wallet, function () {
-            // If that succeeded we consider this entering the password
-            root.enteredPassword(password)
+      var imported = JSON.parse(json)
+      var walletData = imported.wallet
+      // Then we try to load wallet
+      nanoService.createWalletFromData(walletData, password, function (err, wallet) {
+        if (err) {
+          throw new Error(err)
+        }
+        $log.info('Successfully imported wallet')
+        // And we can also try merging addressBook
+        if (imported.addressBook) {
+          root.mergeAddressBook(imported.addressBook, function (err) {
+            if (err) {
+              $log.error(err)
+            } else {
+              $log.info('Merged addressbook with imported addressbook')
+            }
           })
+        }
+        nanoService.saveWallet(wallet, function () {
+          // If that succeeded we consider this entering the password
+          root.enteredPassword(password)
         })
-      } catch (e) {
-        $log.warn('Failed importing wallet: ' + e)
-        throw e
-      }
-      // And we can also try merging addressBook
-      if (imported.addressBook) {
-        root.mergeAddressBook(imported.addressBook, function (err) {
-          if (err) {
-            $log.error(err)
-          } else {
-            $log.info('Merged addressbook with imported addressbook')
-          }
-        })
-      }
+      })
     }
 
     root.formatAmount = function (raw, decimals) {
