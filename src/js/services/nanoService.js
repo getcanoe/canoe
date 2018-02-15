@@ -219,8 +219,8 @@ angular.module('canoeApp.services')
       try {
         var parts = data.split(':')
         if (parts.length === 1) {
-          // No ':',  perhaps a bare account?
-          if (data.match(/^(xrb_|nano_)/) !== null) {
+          // No ':',  perhaps a bare account, alias, seed? TODO bare key
+          if (root.isValidAccount(data)) {
             // A bare account
             code.protocol = 'nano'
             parts = parts[0]
@@ -228,9 +228,13 @@ angular.module('canoeApp.services')
             // A bare alias
             code.protocol = 'nano'
             parts = parts[0]
+          } else if (root.isValidSeed(data)) {
+            // A bare seed
+            code.protocol = 'nanoseed'
+            parts = parts[0]
           } else {
             // Nope, give up
-            return cb('Unknown format')
+            return cb('Unknown format of QR code')
           }
         } else {
           code.protocol = parts[0]
@@ -409,8 +413,8 @@ angular.module('canoeApp.services')
           // Failsafe for reconnects causing this to run many times
           if (!doneIt) {
             doneIt = true
-          cb()
-        }
+            cb()
+          }
         }
       })
     }
