@@ -34,6 +34,15 @@ angular.module('canoeApp.services')
       return false
     }
 
+    root.changePassword = function (pw, currentPw) {
+      if (root.wallet) {
+        $log.info('Changed password for wallet')
+        root.wallet.changePass(pw, currentPw)
+      } else {
+        $log.error('No wallet to change password for')
+      }
+    }
+
     root.getSeed = function () {
       try {
         return root.wallet.getSeed(root.password)

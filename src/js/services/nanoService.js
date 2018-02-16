@@ -190,7 +190,7 @@ angular.module('canoeApp.services')
       if (root.wallet) {
         var accountIds = root.wallet.getAccountIds()
         var accountsAndHashes = rai.accounts_pending(accountIds)
-        $log.info('Pending hashes: ' + JSON.stringify(accountsAndHashes))
+        $log.debug('Pending hashes: ' + JSON.stringify(accountsAndHashes))
         lodash.each(accountsAndHashes, function (hashes, account) {
           var blocks = rai.blocks_info(hashes)
           lodash.each(blocks, function (blk, hash) {
@@ -375,7 +375,6 @@ angular.module('canoeApp.services')
 
     // Subscribe to our private topics for incoming messages
     root.subscribeForWallet = function (wallet) {
-      $log.debug('Subscribing for wallet ' + wallet.getId())
       root.subscribe('wallet/' + wallet.getId() + '/block/#')
     }
 
@@ -644,7 +643,7 @@ angular.module('canoeApp.services')
         if (retained !== undefined) {
           message.retained = retained
         }
-        $log.info('Send ' + topic + ' ' + json)
+        $log.debug('Send ' + topic + ' ' + json)
         mqttClient.send(message)
       } else {
         $log.error('Not connected to MQTT, should send ' + topic + ' ' + json)
