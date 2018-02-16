@@ -111,6 +111,9 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
           if ($scope.recentTransactionsEnabled) {
             getNotifications()
           }
+          $timeout(function () {
+            $scope.$apply()
+          })
         })
       ]
 
