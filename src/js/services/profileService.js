@@ -72,18 +72,27 @@ angular.module('canoeApp.services')
     root.getCurrentCoinmarketcapRate = function (localCurrency, cb) {
       var local = localCurrency || 'usd'
       local = local.toLowerCase()
-      var value = 1
       var xhr = new XMLHttpRequest()
-      xhr.open('GET', 'https://api.coinmarketcap.com/v1/ticker/raiblocks/?convert=' + local, true)
+      xhr.open('GET', 'https://api.coinmarketcap.com/v1/ticker/raiblocks/?convert=BTC', true)
       xhr.send()
       xhr.onreadystatechange = processRequest
       function processRequest (e) {
         if (xhr.readyState === 4 && xhr.status === 200) {
           var response = JSON.parse(xhr.responseText)
-          $log.debug('Coinmarketcap reply: ' + JSON.stringify(response))
-          var price = response[0]['price_' + local]
-          // var symbol = response[0]['symbol']
-          cb(null, (price * value))
+          var btcPrice = response[0]['price_btc']
+
+          var xhr2 = new XMLHttpRequest()
+          xhr2.open('GET', 'https://bitpay.com/api/rates/' + local, true)
+          xhr2.send()
+          xhr2.onreadystatechange = processRequest
+          function processRequest (e) {
+            if (xhr2.readyState === 4 && xhr2.status === 200) {
+              var response = JSON.parse(xhr2.responseText)
+              var localPrice = response['rate']
+              cb(null, (localPrice * btcPrice ))
+            }
+          }
+          //cb(null, (price * value))
         }
       }
     }
@@ -391,6 +400,8 @@ angular.module('canoeApp.services')
       // Add formatted balances and timestamps
       lodash.each(accounts, function (acc) {
         acc.balanceStr = root.formatAmountWithUnit(parseInt(acc.balance))
+        var config = configService.getSync().wallet.settings        
+        acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat((root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano')).toFixed(2))) + ' ' + config.alternativeIsoCode
         acc.pendingBalanceStr = root.formatAmountWithUnit(parseInt(acc.pendingBalance))
       })
 
@@ -408,7 +419,7 @@ angular.module('canoeApp.services')
     }
 
     root.getNotifications = function (opts, cb) {
-      opts = opts || {}
+      opts = opts || {} 
 
       var TIME_STAMP = 60 * 60 * 6
       var MAX = 30
