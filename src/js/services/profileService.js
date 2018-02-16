@@ -34,10 +34,11 @@ angular.module('canoeApp.services')
       return false
     }
 
-    root.changePassword = function (pw, currentPw) {
+    root.changePass = function (pw, currentPw) {
       if (root.wallet) {
         $log.info('Changed password for wallet')
-        root.wallet.changePass(pw, currentPw)
+        root.wallet.changePass(currentPw, pw)
+        nanoService.saveWallet(root.wallet, function () {})
       } else {
         $log.error('No wallet to change password for')
       }

@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('addressbookListController', function ($scope, $log, $timeout, addressbookService, lodash, popupService, gettextCatalog, platformInfo) {
   var contacts
 
