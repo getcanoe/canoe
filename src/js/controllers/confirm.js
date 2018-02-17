@@ -8,7 +8,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   // Config Related values
   var config = configService.getSync()
   var walletConfig = config.wallet
-  // var unitToRaw = walletConfig.settings.unitToRaw
+  var unitToRaw = walletConfig.settings.unitToRaw
   // var unitDecimals = walletConfig.settings.unitDecimals
   // var rawToUnit = 1 / unitToRaw
   // var configFeeLevel = walletConfig.settings.feeLevel ? walletConfig.settings.feeLevel : 'normal'
@@ -17,6 +17,8 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   var isChromeApp = platformInfo.isChromeApp
   var isCordova = platformInfo.isCordova
   var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
+  var unitToRaw
+  var rawToUnit
 
   function refresh () {
     $timeout(function () {
@@ -114,6 +116,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     $scope.isCordova = isCordova
     $scope.isWindowsPhoneApp = isWindowsPhoneApp
     $scope.showAddress = false
+    $scope.data = data
 
     $scope.accountSelectorTitle = gettextCatalog.getString('Send from')
 
@@ -158,9 +161,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       tx.amountStr = profileService.formatAmountWithUnit(tx.toAmount) // txFormatService.formatAmountStr(null, tx.toAmount)
       tx.amountValueStr = tx.amountStr.split(' ')[0]
       tx.amountUnitStr = tx.amountStr.split(' ')[1]
-      txFormatService.formatAlternativeStr(null, tx.toAmount, function (v) {
-        tx.alternativeAmountStr = v
-      })
+      tx.alternativeAmountStr = toFiat(tx.amountValueStr) + ' ' + walletConfig.settings.alternativeIsoCode
     }
 
     updateAmount()
@@ -170,6 +171,10 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     if (!account) {
       return cb()
     }
+  }
+
+  function toFiat (val) {
+    return parseFloat((profileService.toFiat(val * unitToRaw, walletConfig.settings.alternativeIsoCode, 'nano')).toFixed(2))
   }
 
   function useSelectedWallet () {

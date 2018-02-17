@@ -275,7 +275,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       if (availableUnits[unitIndex].isFiat) {
         var a = fromFiat(result)
         if (a) {
-          $scope.alternativeAmount = txFormatService.formatAmount(a * unitToRaw, true)
+          $scope.alternativeAmount = a
         } else {
           if (result) {
             $scope.alternativeAmount = 'N/A'
