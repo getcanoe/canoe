@@ -389,6 +389,10 @@ angular.module('canoeApp.services')
       })
     }
 
+    root.getAccountWithName = function (name) {
+      return lodash.find(root.getAccounts(), function (a) { return a.name === name })
+    }
+
     // This gets copies of all accounts in the wallet with
     // additional data attached, like formatted balances etc
     root.getAccounts = function () {

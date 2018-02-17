@@ -51,7 +51,7 @@ angular.module('canoeApp.controllers').controller('importController',
         try {
           profileService.importWallet(data, $scope.formData.password)
         } catch (e) {
-          err = gettextCatalog.getString('Could not decrypt wallet in file, check your password')
+          err = gettextCatalog.getString('Could not decrypt wallet, check your password')
           $log.warn(e)
         }
         ongoingProcess.set('importingWallet', false)

@@ -15,6 +15,10 @@ angular.module('canoeApp.controllers').controller('createController',
 
     $scope.create = function () {
       var name = $scope.formData.accountName
+      if (profileService.getAccountWithName(name)) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('An account already exists with that name'))
+        return
+      }
       ongoingProcess.set('creatingAccount', true)
       $timeout(function () {
         profileService.createAccount(name, function (err) {
