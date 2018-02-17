@@ -192,6 +192,12 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         accountId: account.id
       })
     }
+
+    $rootScope.$on('rates.loaded', function () {
+      // Display alternative balance
+      $scope.accounts = profileService.getAccounts()
+      $scope.$apply()
+    })
 /*
     var updateTxps = function () {
       profileService.getTxps({
