@@ -46,8 +46,8 @@ angular.module('canoeApp.services')
       nanoService.fetchServerStatus(cb)
     }
 
-    root.updateRate = function (code) {
-      if (!rate || (Date.now() > (lastTime + 60000))) {
+    root.updateRate = function (code, force) {
+      if (!rate || (Date.now() > (lastTime + 60000)) || force) {
         root.getCurrentCoinmarketcapRate(code, function (err, rt) {
           if (err) {
             $log.warn(err)
