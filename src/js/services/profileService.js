@@ -90,6 +90,10 @@ angular.module('canoeApp.services')
               var response = JSON.parse(xhr2.responseText)
               var localPrice = response['rate']
               cb(null, (localPrice * btcPrice ))
+
+              // Refresh ui
+              $rootScope.$broadcast('rates.loaded') 
+              $rootScope.broadcastEvent
             }
           }
           //cb(null, (price * value))
@@ -401,7 +405,13 @@ angular.module('canoeApp.services')
       lodash.each(accounts, function (acc) {
         acc.balanceStr = root.formatAmountWithUnit(parseInt(acc.balance))
         var config = configService.getSync().wallet.settings        
-        acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat((root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano')).toFixed(2))) + ' ' + config.alternativeIsoCode
+        // Don't show unless rate is loaded (so alt balance doesn't show after loging :-/ how to fix that ?)
+        acc.alternativeBalanceStr = 'hide'
+        var altBalance = root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano')
+        if (altBalance != 0){
+          acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat(altBalance).toFixed(2)) + ' ' + config.alternativeIsoCode
+        }
+
         acc.pendingBalanceStr = root.formatAmountWithUnit(parseInt(acc.pendingBalance))
       })
 
