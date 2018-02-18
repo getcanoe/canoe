@@ -43,7 +43,7 @@ before_install:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
 - nvm install 8
 before_script:
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then  ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls ; fi
 script:
 - npm install
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run final:ios ; fi
