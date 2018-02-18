@@ -50,7 +50,7 @@ angular.module('canoeApp.services').factory('addressbookService', function ($log
   }
 
   root.add = function (entry, cb) {
-    if (!raiblocksService.isValidAccount(entry.address)) return cb('Not valid RaiBlocks account')
+    if (!raiblocksService.isValidAccount(entry.address)) return cb('Not valid Nano account')
     storageService.getAddressbook(function (err, ab) {
       if (err) return cb(err)
       if (ab) ab = JSON.parse(ab)
@@ -68,7 +68,7 @@ angular.module('canoeApp.services').factory('addressbookService', function ($log
   }
 
   root.remove = function (addr, cb) {
-    if (!raiblocksService.isValidAccount(addr)) return cb('Not valid RaiBlocks account')
+    if (!raiblocksService.isValidAccount(addr)) return cb('Not valid Nano account')
     storageService.getAddressbook(function (err, ab) {
       if (err) return cb(err)
       if (ab) ab = JSON.parse(ab)

@@ -29,7 +29,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       availableUnits = []
 
       availableUnits.push({
-        name: 'RaiBlocks',
+        name: 'Nano',
         id: 'xrb',
         shortName: 'XRB'
       })

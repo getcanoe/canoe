@@ -8,7 +8,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
   var defaultConfig = {
     download: {
       canoe: {
-				message: 'Manage your RaiBlocks with mobile wallet Canoe! $XRB ',
+				message: 'Manage your Nano with mobile wallet Canoe! $XRB ',
         url: 'https://getcanoe.io'
       }
     },
