@@ -87,6 +87,16 @@ angular.module('canoeApp.services')
       xhr.send()
       xhr.onreadystatechange = processRequest
       function processRequest (e) {
+        function processRequest (e) {
+          if (xhr2.readyState === 4 && xhr2.status === 200) {
+            var response = JSON.parse(xhr2.responseText)
+            var localPrice = response['rate']
+            cb(null, (localPrice * btcPrice))
+
+            // Refresh ui
+            $rootScope.$broadcast('rates.loaded')
+          }
+        }
         if (xhr.readyState === 4 && xhr.status === 200) {
           var response = JSON.parse(xhr.responseText)
           var btcPrice = response[0]['price_btc']
@@ -95,18 +105,6 @@ angular.module('canoeApp.services')
           xhr2.open('GET', 'https://bitpay.com/api/rates/' + local, true)
           xhr2.send()
           xhr2.onreadystatechange = processRequest
-          function processRequest (e) {
-            if (xhr2.readyState === 4 && xhr2.status === 200) {
-              var response = JSON.parse(xhr2.responseText)
-              var localPrice = response['rate']
-              cb(null, (localPrice * btcPrice ))
-
-              // Refresh ui
-              $rootScope.$broadcast('rates.loaded') 
-              $rootScope.broadcastEvent
-            }
-          }
-          //cb(null, (price * value))
         }
       }
     }
@@ -185,34 +183,26 @@ angular.module('canoeApp.services')
     root.updateAccountSettings = function (account) {
       var defaults = configService.getDefaults()
       configService.whenAvailable(function (config) {
-        // account.usingCustomBWS = config.bwsFor && config.bwsFor[account.id] && (config.bwsFor[wallet.id] != defaults.bws.url)
         account.name = (config.aliasFor && config.aliasFor[account.id])
         account.meta.color = (config.colorFor && config.colorFor[account.id])
         account.email = config.emailFor && config.emailFor[account.id]
       })
     }
 
+    // We set this still, but we do not really use it
     root.setBackupFlag = function () {
       storageService.setBackupFlag(function (err) {
         if (err) $log.error(err)
         $log.debug('Backup timestamp stored')
-        root.wallet.needsBackup = false
       })
     }
 
-    function _needsBackup (wallet, cb) {
+    // Not used, but perhaps an idea?
+    root.needsBackup = function (cb) {
       storageService.getBackupFlag(function (err, val) {
         if (err) $log.error(err)
         if (val) return cb(false)
         return cb(true)
-      })
-    }
-
-    function balanceIsHidden (wallet, cb) {
-      storageService.getHideBalanceFlag(wallet.credentials.walletId, function (err, shouldHideBalance) {
-        if (err) $log.error(err)
-        var hideBalance = (shouldHideBalance == 'true')
-        return cb(hideBalance)
       })
     }
 
@@ -418,11 +408,11 @@ angular.module('canoeApp.services')
       // Add formatted balances and timestamps
       lodash.each(accounts, function (acc) {
         acc.balanceStr = root.formatAmountWithUnit(parseInt(acc.balance))
-        var config = configService.getSync().wallet.settings        
+        var config = configService.getSync().wallet.settings
         // Don't show unless rate is loaded (so alt balance doesn't show after loging :-/ how to fix that ?)
         acc.alternativeBalanceStr = 'hide'
         var altBalance = root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano')
-        if (altBalance != 0){
+        if (altBalance !== 0) {
           acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat(altBalance).toFixed(2)) + ' ' + config.alternativeIsoCode
         }
 
@@ -443,7 +433,7 @@ angular.module('canoeApp.services')
     }
 
     root.getNotifications = function (opts, cb) {
-      opts = opts || {} 
+      opts = opts || {}
 
       var TIME_STAMP = 60 * 60 * 6
       var MAX = 30
@@ -566,7 +556,7 @@ angular.module('canoeApp.services')
 
             notifications.push(n)
           }
-          if (j == l) {
+          if (j === l) {
             notifications = lodash.sortBy(notifications, 'createdOn')
             notifications = lodash.compact(lodash.flatten(notifications)).slice(0, MAX)
             var total = notifications.length

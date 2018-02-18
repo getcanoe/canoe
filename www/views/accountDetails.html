@@ -165,11 +165,6 @@
     </div>
     <!-- End Balance view duplicate (for Android compatibility) -->
 
-<!--
-    <a class="wallet-not-backed-up-warning" ng-if="wallet.needsBackup" ui-sref="tabs.wallet.backupWarning({from: 'tabs.wallet'})" translate>
-      Wallet not backed up
-    </a>
-  -->
     <a class="wallet-not-backed-up-warning" ng-if="lowUtxosWarning" ui-sref="tabs.wallet.addresses({walletId:wallet.id,from: 'tabs.wallet'})" translate>
       Spending this balance will need significant Bitcoin network fees
     </a>
