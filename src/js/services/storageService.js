@@ -228,6 +228,14 @@ angular.module('canoeApp.services')
       storage.get('lastCurrencyUsed', cb)
     }
 
+    root.setAmountInputDefaultCurrency = function (amountInputDefaultCurrency, cb) {
+      storage.set('amountInputDefaultCurrency', amountInputDefaultCurrency, cb)
+    }
+
+    root.getAmountInputDefaultCurrency = function (cb) {
+      storage.get('amountInputDefaultCurrency', cb) 
+    }
+
     root.checkQuota = function () {
       var block = ''
       // 50MB

@@ -3,7 +3,7 @@
   {{account.name || account.id}}
 </span>
 <p>
-  <span ng-if="!account.meta.balanceHidden"> {{account.balanceStr}} &asymp; {{account.alternativeBalanceStr}}</span>
+  <span ng-if="!account.meta.balanceHidden && account.alternativeBalanceStr"> {{account.balanceStr}} <span ng-hide="account.alternativeBalanceStr == 'hide'">&asymp; {{account.alternativeBalanceStr}}</span></span>
 
   <span ng-if="account.meta.balanceHidden" translate>[Balance Hidden]</span>
   <i ng-if="!account.meta.balanceHidden && (account.cachedPendingBalance > 0)" class="tab-home__wallet__pending-icon ion-android-arrow-back"></i>
