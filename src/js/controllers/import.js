@@ -115,13 +115,16 @@ angular.module('canoeApp.controllers').controller('importController',
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter a password to use for the wallet'))
         return
       }
-      ongoingProcess.set('importingWallet', true)
-      $timeout(function () {
-        profileService.importSeed(password, seed, function () {
-          ongoingProcess.set('importingWallet', false)
-          finish()
-        })
-      }, 100)
+      importWarning(function (res) {
+        if (!res) return
+        ongoingProcess.set('importingWallet', true)
+        $timeout(function () {
+          profileService.importSeed(password, seed, function () {
+            ongoingProcess.set('importingWallet', false)
+            finish()
+          })
+        }, 100)
+      })
     }
 
     var importWarning = function (cb) {
