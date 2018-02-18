@@ -83,7 +83,7 @@ angular.module('canoeApp.services')
       var local = localCurrency || 'usd'
       local = local.toLowerCase()
       var xhr = new XMLHttpRequest()
-      xhr.open('GET', 'https://api.coinmarketcap.com/v1/ticker/raiblocks/?convert=BTC', true)
+      xhr.open('GET', 'https://api.coinmarketcap.com/v1/ticker/nano/?convert=BTC', true)
       xhr.send()
       xhr.onreadystatechange = processRequest
       function processRequest (e) {
