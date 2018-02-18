@@ -58,7 +58,6 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     // Some smart fixes
     data = sanitizeUri(data)
     nanoService.parseQRCode(data, function (err, code) {
-      if (err) return $log.error(err)
       if (code === null) {
         return false
       }
