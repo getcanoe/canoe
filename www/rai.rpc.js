@@ -1,6 +1,6 @@
 /*
-* RaiBlocks JavaScript RPC requests and basic functions
-* https://github.com/SergiySW/RaiBlocksJS
+* Nano JavaScript RPC requests and basic functions
+* https://github.com/SergiySW/NanoJS
 *
 * Released under the BSD 3-Clause License
 *

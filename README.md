@@ -1,6 +1,6 @@
 [![Build Status](https://secure.travis-ci.org/gokr/canoe.svg)](http://travis-ci.org/gokr/canoe)
 
-Canoe is a cross platform RaiBlocks Wallet application. It's based upon the [Copay](https://copay.io) Bitcoin wallet source code released under the MIT license. For binary downloads, see [getcanoe.io](https://getcanoe.io).
+Canoe is a cross platform Nano Wallet application. It's based upon the [Copay](https://copay.io) Bitcoin wallet source code released under the MIT license. For binary downloads, see [getcanoe.io](https://getcanoe.io).
 
 ## Testing in a Browser
 

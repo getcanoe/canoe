@@ -2,7 +2,7 @@
 <widget android-versionCode="391000" id="io.getcanoe.canoe" ios-CFBundleVersion="0.2.0" version="0.2.0">
     <name>Canoe</name>
     <description>
-      Canoe RaiBlocks Wallet
+      Canoe Nano Wallet
     </description>
     <author email="goran.krampe@gmail.com" href="https://getcanoe.io">
         Göran Krampe
@@ -14,7 +14,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="WindowsStoreIdentityName" value="------" />
-    <preference name="WindowsStoreDisplayName" value="Canoe - Secure RaiBlocks Wallet" />
+    <preference name="WindowsStoreDisplayName" value="Canoe - Secure Nano Wallet" />
     <preference name="StatusBarBackgroundColor" value="#1b9883" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="windows-target-version" value="10.0" />

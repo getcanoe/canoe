@@ -1,13 +1,13 @@
 /*
-* RaiBlocks extended functions in JavaScript
-* https://github.com/SergiySW/RaiBlocksJS
+* Nano extended functions in JavaScript
+* https://github.com/SergiySW/NanoJS
 *
 * Released under the BSD 3-Clause License
 *
 */
 
 // Global variables: block_count, count, unchecked, frontier_count, frontiers, peers
-var RaiBlocks = RaiBlocks || {}
+var Nano = Nano || {}
 
 Rai.prototype.initialize = function () {
 
@@ -17,8 +17,8 @@ Rai.prototype.initialize = function () {
 Rai.prototype.ext_account_history = function (account, count) {
   var rpc_request = this
 	
-	if (typeof RaiBlocks.frontiers === 'undefined') this.initialize() // if not initialized
-	var hash = RaiBlocks.frontiers[account]
+	if (typeof Nano.frontiers === 'undefined') this.initialize() // if not initialized
+	var hash = Nano.frontiers[account]
 
 	if (typeof hash !== 'undefined') {
   var account_history = this.history(hash)
@@ -42,20 +42,20 @@ Rai.prototype.ext_account_history = function (account, count) {
 }
 
 Rai.prototype.load_info = function () {
-	RaiBlocks.available_supply = this.available_supply()
-	RaiBlocks.block_count = this.block_count()
-	RaiBlocks.count = RaiBlocks.block_count.count
-	RaiBlocks.unchecked = RaiBlocks.block_count.unchecked
-	RaiBlocks.frontier_count = this.frontier_count()
-	RaiBlocks.frontiers = this.frontiers()
-	RaiBlocks.peers = this.peers()
+	Nano.available_supply = this.available_supply()
+	Nano.block_count = this.block_count()
+	Nano.count = Nano.block_count.count
+	Nano.unchecked = Nano.block_count.unchecked
+	Nano.frontier_count = this.frontier_count()
+	Nano.frontiers = this.frontiers()
+	Nano.peers = this.peers()
 }
 
 // Extended function, jQuery is required
 Rai.prototype.wallet_accounts_info = function (wallet, count) {
   var rpc_request = this
 	
-	if (typeof RaiBlocks.frontiers === 'undefined') this.initialize() // if not initialized
+	if (typeof Nano.frontiers === 'undefined') this.initialize() // if not initialized
 	
 	var accounts_list = rpc_request.account_list(wallet)
 
