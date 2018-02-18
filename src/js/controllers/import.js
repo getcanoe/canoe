@@ -46,21 +46,24 @@ angular.module('canoeApp.controllers').controller('importController',
 
     var _importBlob = function (data, opts) {
       var err
-      ongoingProcess.set('importingWallet', true)
-      $timeout(function () {
-        try {
-          profileService.importWallet(data, $scope.formData.password)
-        } catch (e) {
-          err = gettextCatalog.getString('Could not decrypt wallet, check your password')
-          $log.warn(e)
-        }
-        ongoingProcess.set('importingWallet', false)
-        if (err) {
-          popupService.showAlert(gettextCatalog.getString('Error'), err)
-          return
-        }
-        finish()
-      }, 100)
+      importWarning(function (res) {
+        if (!res) return
+        ongoingProcess.set('importingWallet', true)
+        $timeout(function () {
+          try {
+            profileService.importWallet(data, $scope.formData.password)
+          } catch (e) {
+            err = gettextCatalog.getString('Could not decrypt wallet, check your password')
+            $log.warn(e)
+          }
+          ongoingProcess.set('importingWallet', false)
+          if (err) {
+            popupService.showAlert(gettextCatalog.getString('Error'), err)
+            return
+          }
+          finish()
+        }, 100)
+      })
     }
 
     $scope.getFile = function () {
@@ -119,6 +122,12 @@ angular.module('canoeApp.controllers').controller('importController',
           finish()
         })
       }, 100)
+    }
+
+    var importWarning = function (cb) {
+      var title = gettextCatalog.getString('Warning!')
+      var message = gettextCatalog.getString('If you import a wallet, your current accounts will not be visible in Canoe anymore, so you could lose your Nanos.<br/><br/>You want to make sure that you backed up your wallet and remember your password or, at least, make sure you know the 64 characters of your seed before you do that.')
+      popupService.showConfirm(title, message, null, null, cb)
     }
 
     var finish = function () {

@@ -139,6 +139,13 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       })
     })
 
+    // Refresh UI after wallet import
+    $rootScope.$on('wallet.imported', function () {
+      $timeout(function () {
+        $scope.$apply()
+      }, 100)
+    })
+
     $scope.createdWithinPastDay = function (time) {
       return timeService.withinPastDay(time)
     }
