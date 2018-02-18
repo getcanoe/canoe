@@ -46,8 +46,8 @@ before_script:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls ; fi
 script:
 - npm install
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run final:ios ; fi
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run final:desktop ; npm run final:android ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run build:ios ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run build:desktop ; npm run build:android ; fi
 env:
   global:
   - JAVA_HOME=/usr/lib/jvm/java-8-oracle
