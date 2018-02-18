@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('preferencesSecurity', function ($state, $rootScope, $scope, $timeout, $log, configService, gettextCatalog, fingerprintService, profileService, lodash, applicationService) {
   function init () {
     $scope.options = [

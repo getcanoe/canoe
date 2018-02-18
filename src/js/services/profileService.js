@@ -14,8 +14,11 @@ angular.module('canoeApp.services')
     // This is where we hold profile, wallet and password to decrypt it
     var root = {}
     root.profile = null
-    root.wallet = null
     root.password = null
+
+    root.getWallet = function () {
+      return nanoService.getWallet()
+    }
 
     // This is where we keep the password entered when you start Canoe
     // or when timeout is reached and it needs to be entered again.
@@ -28,17 +31,17 @@ angular.module('canoeApp.services')
     }
 
     root.checkPassword = function (pw) {
-      if (root.wallet) {
-        return root.wallet.checkPass(pw)
+      if (root.getWallet()) {
+        return root.getWallet().checkPass(pw)
       }
       return false
     }
 
     root.changePass = function (pw, currentPw) {
-      if (root.wallet) {
+      if (root.getWallet()) {
         $log.info('Changed password for wallet')
-        root.wallet.changePass(currentPw, pw)
-        nanoService.saveWallet(root.wallet, function () {})
+        root.getWallet().changePass(currentPw, pw)
+        nanoService.saveWallet(root.getWallet(), function () {})
       } else {
         $log.error('No wallet to change password for')
       }
@@ -46,7 +49,7 @@ angular.module('canoeApp.services')
 
     root.getSeed = function () {
       try {
-        return root.wallet.getSeed(root.password)
+        return root.getWallet().getSeed(root.password)
       } catch (e) {
         return null // Bad password or no wallet
       }
@@ -118,7 +121,7 @@ angular.module('canoeApp.services')
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
           nanoService.repair() // So we fetch truth from lattice, sync
-          nanoService.saveWallet(root.wallet, cb)
+          nanoService.saveWallet(root.getWallet(), cb)
         })
       })
     }
@@ -126,16 +129,16 @@ angular.module('canoeApp.services')
     // Return a URI for the seed given the password
     root.getSeedURI = function (pwd) {
       // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
-      return 'xrbseed:' + root.wallet.getSeed(pwd) + '?lastindex=' + (root.wallet.getAccountIds().length - 1)
+      return 'xrbseed:' + root.getWallet().getSeed(pwd) + '?lastindex=' + (root.getWallet().getAccountIds().length - 1)
     }
 
     // Return an object with wallet member holding the encrypted hex of wallet
     root.getExportWallet = function () {
-      return {wallet: root.wallet.pack()}
+      return {wallet: root.getWallet().pack()}
     }
 
     // Import wallet from JSON and password, throws exception on failure
-    root.importWallet = function (json, password) {
+    root.importWallet = function (json, password, cb) {
       var imported = JSON.parse(json)
       var walletData = imported.wallet
       // Then we try to load wallet
@@ -143,7 +146,6 @@ angular.module('canoeApp.services')
         if (err) {
           throw new Error(err)
         }
-        $log.info('Successfully imported wallet')
         // And we can also try merging addressBook
         if (imported.addressBook) {
           root.mergeAddressBook(imported.addressBook, function (err) {
@@ -157,6 +159,8 @@ angular.module('canoeApp.services')
         nanoService.saveWallet(wallet, function () {
           // If that succeeded we consider this entering the password
           root.enteredPassword(password)
+          $log.info('Successfully imported wallet')
+          cb()
         })
       })
     }
@@ -250,7 +254,7 @@ angular.module('canoeApp.services')
 
     // Do we have funds? Presuming we are up to date here. It's a bigInt
     root.hasFunds = function () {
-      return root.wallet.getWalletBalance().greater(0)
+      return root.getWallet().getWalletBalance().greater(0)
     }
 
     // Create wallet and default account (which saves wallet), seed can be null.
@@ -260,7 +264,7 @@ angular.module('canoeApp.services')
         if (err) return cb(err)
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
-          nanoService.saveWallet(root.wallet, cb)
+          nanoService.saveWallet(root.getWallet(), cb)
         })
       })
     }
@@ -268,12 +272,12 @@ angular.module('canoeApp.services')
     // Create account in wallet and save wallet
     root.createAccount = function (name, cb) {
       var accountName = name || gettextCatalog.getString('Default Account')
-      nanoService.createAccount(root.wallet, accountName)
-      nanoService.saveWallet(root.wallet, cb)
+      nanoService.createAccount(root.getWallet(), accountName)
+      nanoService.saveWallet(root.getWallet(), cb)
     }
 
     root.saveWallet = function (cb) {
-      nanoService.saveWallet(root.wallet, cb)
+      nanoService.saveWallet(root.getWallet(), cb)
     }
 
     // Load wallet from local storage using entered password
@@ -300,16 +304,12 @@ angular.module('canoeApp.services')
       return root.profile.walletId
     }
 
-    root.getWallet = function () {
-      return root.wallet
-    }
-
     root.getAccount = function (addr) {
-      return root.wallet.getAccount(addr)
+      return root.getWallet().getAccount(addr)
     }
 
     root.send = function (tx, cb) {
-      nanoService.send(root.wallet, tx.account, tx.address, tx.amount)
+      nanoService.send(root.getWallet(), tx.account, tx.address, tx.amount)
       cb()
     }
 
@@ -369,7 +369,6 @@ angular.module('canoeApp.services')
     }
 
     root.setWallet = function (wallet, cb) {
-      root.wallet = wallet
       root.profile.walletId = wallet.getId()
       $rootScope.$emit('walletloaded')
       storageService.storeProfile(root.profile, function (err) {
@@ -400,10 +399,10 @@ angular.module('canoeApp.services')
     // additional data attached, like formatted balances etc
     root.getAccounts = function () {
       // No wallet loaded
-      if (!root.wallet) {
+      if (!root.getWallet()) {
         return []
       }
-      var accounts = root.wallet.getAccounts()
+      var accounts = root.getWallet().getAccounts()
 
       // Add formatted balances and timestamps
       lodash.each(accounts, function (acc) {
@@ -429,7 +428,7 @@ angular.module('canoeApp.services')
     root.toggleHideBalanceFlag = function (accountId, cb) {
       var acc = root.getAccount(accountId)
       acc.meta.balanceHidden = !acc.meta.balanceHidden
-      nanoService.saveWallet(root.wallet, cb)
+      nanoService.saveWallet(root.getWallet(), cb)
     }
 
     root.getNotifications = function (opts, cb) {
