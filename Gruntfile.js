@@ -133,7 +133,8 @@ module.exports = function (grunt) {
           'bower_components/angular-clipboard/angular-clipboard.js',
           'bower_components/angular-md5/angular-md5.js',
           'bower_components/angular-mocks/angular-mocks.js',
-          'bower_components/ngtouch/src/ngTouch.js'
+          'bower_components/ngtouch/src/ngTouch.js',
+          'bower_components/string.startsWith/src/string.startsWith.js'
         ],
         dest: 'www/lib/angular-components.js'
       },

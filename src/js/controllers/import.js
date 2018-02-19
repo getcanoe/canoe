@@ -51,17 +51,18 @@ angular.module('canoeApp.controllers').controller('importController',
         ongoingProcess.set('importingWallet', true)
         $timeout(function () {
           try {
-            profileService.importWallet(data, $scope.formData.password)
+            profileService.importWallet(data, $scope.formData.password, function (err) {
+              ongoingProcess.set('importingWallet', false)
+              if (err) {
+                popupService.showAlert(gettextCatalog.getString('Error'), err)
+                return
+              }
+              finish()    
+            })
           } catch (e) {
             err = gettextCatalog.getString('Could not decrypt wallet, check your password')
             $log.warn(e)
           }
-          ongoingProcess.set('importingWallet', false)
-          if (err) {
-            popupService.showAlert(gettextCatalog.getString('Error'), err)
-            return
-          }
-          finish()
         }, 100)
       })
     }

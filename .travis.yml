@@ -1,0 +1,54 @@
+branches:
+  only:
+  - dev
+matrix:
+  include:
+  - os: linux
+    sudo: false
+    language: android
+    android:
+      components:
+      - tools
+      - platform-tools
+      - tools
+      - build-tools-26.0.2
+      - android-26
+      - extra-google-google_play_services
+      - extra-google-m2repository
+      - extra-android-m2repository
+    addons:
+      apt:
+        sources:
+        packages:
+        - oracle-java8-installer
+        - oracle-java8-set-default
+    licenses:
+    - android-sdk-preview-license-.+
+    - android-sdk-license-.+
+    - google-gdk-license-.+
+  - os: osx
+    language: objective-c
+    osx_image: xcode8.3
+before_cache:
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -f  $HOME/.gradle/caches/transforms-1/transforms-1.lock
+- rm -rf $HOME/.gradle/caches/3.5/fileHashes/
+- rm -rf $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+  - $HOME/.gradle/caches/
+  - $HOME/.gradle/wrapper/
+before_install:
+- export LANG=en_US.UTF-8
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
+- nvm install 8
+before_script:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ls ; fi
+script:
+- npm install
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then npm run build:ios ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then npm run build:desktop ; npm run build:android ; fi
+env:
+  global:
+  - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+

@@ -27,12 +27,6 @@
       </div>
     </article>
 
-    <div class="backup" ng-if="accounts[0] && wallet && wallet.needsBackup" ng-click="openBackupNeededModal()">
-      <i class="icon ion-alert"></i>
-      <span translate>Wallet not backed up</span>
-      <i class="icon ion-ios-arrow-thin-right"></i>
-    </div>
-
     <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0] && !singleAccount">
       <a ng-if="account" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
         <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
