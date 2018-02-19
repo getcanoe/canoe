@@ -101,7 +101,7 @@
     "xrb-prettify": "^2.0.4"
   },
   "scripts": {
-    "postinstall": "sed -i  -e \"s/.*require(...\\/...);//g\" node_modules/asn1.js-rfc5280/index.js;   bower install",
+    "postinstall": "bower install",
     "start": "npm run build:www && ionic serve --no-livereload --nogulp -s --address 0.0.0.0",
     "start:ios": "npm run build:www && npm run build:ios && npm run open:ios",
     "start:android": "npm run build:www && npm run build:android && npm run run:android",
