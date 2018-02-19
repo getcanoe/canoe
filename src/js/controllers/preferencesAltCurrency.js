@@ -20,7 +20,7 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
         completeAlternativeList = lodash.reject(rateService.listAlternatives(true), function (c) {
           return idx[c.isoCode] || idx2[c.isoCode]
         })
-        
+
         // #98 Last is first... Sorted by population per country (+ corea and japan) from : https://www.internetworldstats.com/stats8.htm
         completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'JPY')) // Japan
         completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'KRW')) // Korea
@@ -41,23 +41,23 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
     }
 
     function moveElementInArrayToTop (array, value) {
-      var oldIndex = array.indexOf(value);
+      var oldIndex = array.indexOf(value)
       console.log('oldIndex =' + oldIndex)
-      if (oldIndex > -1){
+      if (oldIndex > -1) {
         var newIndex = 0
-       
-        var arrayClone = array.slice();
-        arrayClone.splice(oldIndex,1);
-        arrayClone.splice(newIndex,0,value);
+
+        var arrayClone = array.slice()
+        arrayClone.splice(oldIndex, 1)
+        arrayClone.splice(newIndex, 0, value)
         return arrayClone
       }
       return array
     }
 
-    function findElement(arr, propName, propValue) {
-      for (var i=0; i < arr.length; i++)
-        if (arr[i][propName] == propValue)
-          return arr[i];
+    function findElement (arr, propName, propValue) {
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i][propName] === propValue) { return arr[i] }
+      }
     }
 
     $scope.loadMore = function () {
@@ -100,9 +100,8 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
         $timeout(function () {
           configService.getSync().wallet.settings.alternativeIsoCode = newAltCurrency.isoCode
           profileService.updateRate(newAltCurrency.isoCode, true)
-          $rootScope.$broadcast('rates.loaded') 
-          $rootScope.broadcastEvent
-        }, 30);
+          $rootScope.$broadcast('rates.loaded')
+        }, 30)
       })
     }
 
