@@ -21,6 +21,8 @@ angular.module('canoeApp.controllers').controller('addressbookEditController', f
           form.address.$render()
           form.name.$setViewValue(code.params.label || '')
           form.name.$render()
+          form.alias.$setViewValue(code.alias || '')
+          form.alias.$render()
         })
       }
       $scope.$digest()

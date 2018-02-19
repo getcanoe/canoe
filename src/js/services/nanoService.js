@@ -31,6 +31,10 @@ angular.module('canoeApp.services')
     // Let's call it every 5 seconds
     setTimeout(regularBroadcast, 5000)
 
+    root.getWallet = function () {
+      return root.wallet
+    }
+
     // This function calls itself every sec. It can also be called explicitly.
     function generatePoW () {
       // No wallet, no dice

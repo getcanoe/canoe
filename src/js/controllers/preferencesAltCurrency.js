@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('preferencesAltCurrencyController',
-  function ($scope, $log, $timeout, $ionicHistory, configService, rateService, lodash, profileService, walletService, storageService) {
+  function ($rootScope, $scope, $log, $timeout, $ionicHistory, configService, rateService, lodash, profileService, walletService, storageService) {
     var next = 10
     var completeAlternativeList = []
 
@@ -20,6 +20,17 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
         completeAlternativeList = lodash.reject(rateService.listAlternatives(true), function (c) {
           return idx[c.isoCode] || idx2[c.isoCode]
         })
+        
+        // #98 Last is first... Sorted by population per country (+ corea and japan) from : https://www.internetworldstats.com/stats8.htm
+        completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'JPY')) // Japan
+        completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'KRW')) // Korea
+
+        completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'BRL')) // Brazil
+        completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'IDR')) // Indonesia
+        completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'USD')) // US
+        completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'EUR')) // YUROP
+        completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'INR')) // India
+        completeAlternativeList = moveElementInArrayToTop(completeAlternativeList, findElement(completeAlternativeList, 'isoCode', 'CNY')) // China
 
         $scope.altCurrencyList = completeAlternativeList.slice(0, 10)
 
@@ -27,6 +38,26 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
           $scope.$apply()
         })
       })
+    }
+
+    function moveElementInArrayToTop (array, value) {
+      var oldIndex = array.indexOf(value);
+      console.log('oldIndex =' + oldIndex)
+      if (oldIndex > -1){
+        var newIndex = 0
+       
+        var arrayClone = array.slice();
+        arrayClone.splice(oldIndex,1);
+        arrayClone.splice(newIndex,0,value);
+        return arrayClone
+      }
+      return array
+    }
+
+    function findElement(arr, propName, propValue) {
+      for (var i=0; i < arr.length; i++)
+        if (arr[i][propName] == propValue)
+          return arr[i];
     }
 
     $scope.loadMore = function () {
@@ -65,7 +96,13 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
 
         $ionicHistory.goBack()
         saveLastUsed(newAltCurrency)
-        //walletService.updateRemotePreferences(profileService.getAccounts())
+        // Refresh ui
+        $timeout(function () {
+          configService.getSync().wallet.settings.alternativeIsoCode = newAltCurrency.isoCode
+          profileService.updateRate(newAltCurrency.isoCode, true)
+          $rootScope.$broadcast('rates.loaded') 
+          $rootScope.broadcastEvent
+        }, 30);
       })
     }
 

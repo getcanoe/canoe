@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('amountController', function ($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, profileService, nodeWebkitService) {
+angular.module('canoeApp.controllers').controller('amountController', function ($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, profileService, nodeWebkitService, storageService) {
   var _id
   var unitToRaw
   var rawToUnit
@@ -75,6 +75,17 @@ angular.module('canoeApp.controllers').controller('amountController', function (
         shortName: fiatCode,
         isFiat: true
       })
+
+      storageService.getAmountInputDefaultCurrency(function (err, amountInputDefaultCurrency) {
+        config.amountInputDefaultCurrency = amountInputDefaultCurrency ? amountInputDefaultCurrency : 'NANO'
+      })
+      if (!config.amountInputDefaultCurrency || config.amountInputDefaultCurrency == 'NANO'){
+        unitIndex = 0
+        altUnitIndex = 1
+      } else {
+        unitIndex = 1
+        altUnitIndex = 0
+      }
 
       if (data.stateParams.fixedUnit) {
         fixedUnit = true
@@ -184,17 +195,21 @@ angular.module('canoeApp.controllers').controller('amountController', function (
   $scope.changeUnit = function () {
     if (fixedUnit) return
 
+    var config = configService.getSync().wallet.settings
     unitIndex++
     if (unitIndex >= availableUnits.length) unitIndex = 0
-
+    
     if (availableUnits[unitIndex].isFiat) {
-      // Always return to XRB... TODO?
+      config.amountInputDefaultCurrency = availableUnits[1].shortName
       altUnitIndex = 0
     } else {
+      config.amountInputDefaultCurrency = 'NANO'
       altUnitIndex = lodash.findIndex(availableUnits, {
         isFiat: true
       })
     }
+
+    storageService.setAmountInputDefaultCurrency(config.amountInputDefaultCurrency, function () {})
 
     updateUnitUI()
   }

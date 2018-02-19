@@ -2269,9 +2269,6 @@ msgstr "Saisissez un nouveau mot de passe. Choisissez le bien !"
 msgid "Petty Nano allows you to designate an amount to transfer without the need to enter a password. This decreases the security of the petty Nano, so choose wisely!"
 msgstr "Les gentils Nanos vous permettent de dépenser sans saisir de mot de passe jusqu'à un montant fixé. Les gentils Nanos ont donc une sécurité réduite. Faîtes un choix avisé !"
 
-msgid ""
-msgstr ""
-
 #: www/views/tab-howToBuyNanos.html:11
 msgid "How to buy or sell Nanos"
 msgstr "Comment acheter ou vendre des Nanos"
@@ -2342,3 +2339,6 @@ msgstr "Vous trouverez probablement plus d'informations à propos de tout ça su
 
 msgid "Be carefull with all these steps, keep your seed backed up and you should be all fine. Enjoy feeless and instant payments with Nano and Canoe !"
 msgstr "Soyez attentif à chacune de ces étapes, gardez votre graine (seed) en lieu sûr et tout ira au mieux. <br/>Profitez des payments instantanés et sans frais avec Nano et Canoe !"
+
+msgid "If you import a wallet, your current accounts will not be visible in Canoe anymore, so you could lose your Nanos.<br/><br/>You want to make sure that you backed up your wallet and remember your password or, at least, make sure you know the 64 characters of your seed before you do that."
+msgstr "Si vous importez un portefeuille, vos comptes actuellement chargés ne seront plus visibles dans Canoe, ainsi vous pourriez perdre vos Nanos.<br/><br/>Assurez vous d'avoir préalablement sauvegardé votre portefeuille et n'oubliez pas votre mot de passe. Dans tous les cas, sauvegardez les 64 caractères de votre graine (seed) avant d'aller plus loin.

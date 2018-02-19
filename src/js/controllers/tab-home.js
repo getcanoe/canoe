@@ -139,6 +139,13 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       })
     })
 
+    // Refresh UI after wallet import
+    $rootScope.$on('wallet.imported', function () {
+      $timeout(function () {
+        $scope.$apply()
+      }, 100)
+    })
+
     $scope.createdWithinPastDay = function (time) {
       return timeService.withinPastDay(time)
     }
@@ -192,6 +199,12 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         accountId: account.id
       })
     }
+
+    $rootScope.$on('rates.loaded', function () {
+      // Display alternative balance
+      $scope.accounts = profileService.getAccounts()
+      $scope.$apply()
+    })
 /*
     var updateTxps = function () {
       profileService.getTxps({

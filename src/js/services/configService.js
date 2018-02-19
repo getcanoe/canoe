@@ -29,7 +29,8 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
         unitDecimals: 2,
         unitCode: 'NANO',
         alternativeName: 'US Dollar',
-        alternativeIsoCode: undefined
+        alternativeIsoCode: undefined,
+        amountInputDefaultCurrency : 'NANO'
       }
     },
 

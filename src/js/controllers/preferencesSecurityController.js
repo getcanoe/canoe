@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('preferencesSecurity', function ($state, $rootScope, $scope, $timeout, $log, configService, gettextCatalog, fingerprintService, profileService, lodash, applicationService) {
   function init () {
     $scope.options = [
@@ -11,7 +11,6 @@ angular.module('canoeApp.controllers').controller('preferencesSecurity', functio
       {
         method: 'pin',
         label: gettextCatalog.getString('Lock by PIN'),
-        needsBackup: false,
         disabled: false
       }
     ]
@@ -20,14 +19,12 @@ angular.module('canoeApp.controllers').controller('preferencesSecurity', functio
       $scope.options.push({
         method: 'fingerprint',
         label: gettextCatalog.getString('Lock by Fingerprint'),
-        needsBackup: false,
         disabled: false
       })
     }
 
     initMethodSelector()
-    checkForBackup()
-  };
+  }
 
   $scope.$on('$ionicView.beforeEnter', function (event) {
     init()
@@ -72,31 +69,6 @@ angular.module('canoeApp.controllers').controller('preferencesSecurity', functio
     })
   }
 
-  function checkForBackup () {
-    var wallet = profileService.getWallet()
-
-    if (wallet.needsBackup) {
-      $scope.errorMsg = gettextCatalog.getString('Backup your wallet before using this function')
-      disableOptsUntilBackup()
-    } else {
-      enableOptsAfterBackup()
-      $scope.errorMsg = null
-    }
-
-    function enableOptsAfterBackup () {
-      $scope.options[1].needsBackup = false
-      if ($scope.options[2]) $scope.options[2].needsBackup = false
-    }
-
-    function disableOptsUntilBackup () {
-      $scope.options[1].needsBackup = true
-      if ($scope.options[2]) $scope.options[2].needsBackup = true
-    }
-
-    $timeout(function () {
-      $scope.$apply()
-    })
-  }
 
   $scope.select = function (selectedMethod) {
     var savedMethod = getSavedMethod()

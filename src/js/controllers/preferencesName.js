@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('preferencesNameController',
-  function ($scope, $timeout, $stateParams, $ionicHistory, configService, profileService, walletService) {
+  function ($scope, $timeout, $stateParams, $ionicHistory, configService, profileService, walletService, popupService, gettextCatalog) {
     var account = profileService.getAccount($stateParams.accountId)
     $scope.accountName = account.meta.label
     $scope.name = {
@@ -9,6 +9,10 @@ angular.module('canoeApp.controllers').controller('preferencesNameController',
     }
 
     $scope.save = function () {
+      if (profileService.getAccountWithName($scope.name.value)) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('An account already exists with that name'))
+        return
+      }
       account.meta.label = $scope.name.value
       profileService.saveWallet(function () {
         $ionicHistory.goBack()
