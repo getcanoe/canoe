@@ -2269,5 +2269,76 @@ msgstr "Saisissez un nouveau mot de passe. Choisissez le bien !"
 msgid "Petty Nano allows you to designate an amount to transfer without the need to enter a password. This decreases the security of the petty Nano, so choose wisely!"
 msgstr "Les gentils Nanos vous permettent de dépenser sans saisir de mot de passe jusqu'à un montant fixé. Les gentils Nanos ont donc une sécurité réduite. Faîtes un choix avisé !"
 
+#: www/views/tab-howToBuyNanos.html:11
+msgid "How to buy or sell Nanos"
+msgstr "Comment acheter ou vendre des Nanos"
+
+msgid "How to buy/sell Nanos"
+msgstr "Acheter et vendre des Nanos"
+
+msgid "So, now you want to buy some Nanos and play arround. Or maybe, you've got some in your Canoe wallet and want to get 'real money' ?"
+msgstr "Alors maintenant, vous voulez acheter des Nanos pour jouer un peu. Ou, peut-être, en avez-vous quelques-uns dans votre portefeuille Canoe et vous aimeriez récupérer de la 'vraie monnaie' ?"
+  
+msgid "Here's how to do..."
+msgstr "Voilà comment faire..."
+
+msgid "Disclamer"
+msgstr "Avertissement"
+
+msgid "The Canoe team does not work with any of the web sites listed below. Nano, just like any other cryptocurrency is highly volatile so don't put too much money into this and hodl !"
+msgstr "L'équipe qui développe Canoe ne travaille avec aucun des sites mentionnés ci-dessous. Nano est, comme toutes les crypto-monnaies, hautement volatile. Donc : n'y mettez pas trop d'argent et holdlez !<br/>"
+
+msgid "Warning"
+msgstr "Avertissement"
+
+msgid "If you are used to buying and selling cryptos, don't waste your time, you will probably not learn anything here."
+msgstr "Si vous avez l'habitude d'acheter et de vendre des crypto-monnaies, ne perdez pas votre temps, vous n'apprendrez probablement rien de nouveau en lisant ce qui suit."
+
+msgid "The easy way"
+msgstr "Le plus facile"
+
+msgid "Obviously, you can buy and sell Nanos to a friend. Canoe displays amounts both in NANO and and in your currency so it's easy to convert."
+msgstr "De toute évidence, vous pouvez acheter et vendre des Nanos à vos amis. Canoe montre les montants en Nanos et dans votre monnaie, donc la convertion est facile."
+
+msgid "Buy online"
+msgstr "Acheter en ligne"
+
+msgid "You need to register to a web site that exchanges fiat (your local currency like $) to some crypto currency. This process can take some time, a week or so and they will ask for an id scan, proof of where you live at etc."
+msgstr "Inscrivez vous d'abord sur un site web qui change des fiat (votre monnaie, des € par exemple) pour une crypto-monnaie. L'inscription peut prendre du temps, à peut près une semaine et ils vous demanderons un scan de votre carte d'identité, une attestation de domicile, etc."
+
+msgid "You should find a good reason to trust the web site you want to pick here. Google, speak with friends who are into cryptocurrencies. Then this web site should probably be located in your country. Another important point is : do they sell directly Nanos ?"  
+msgstr "Vous devez avoir une bonne raison de faire confiance au site que vous choisissez ici. Googlelisez le, parlez avec des amis qui s'y connaissent en crypto-monnaies. Ensuite, il vaut mieux que ce site soit dans votre propre pays. Un autre paramètre important : est-ce qu'ils vendent directement des Nanos ?"  
+
+msgid "The ones selling Nanos are pretty rare as for now, so, if you don't find one, being able to buy a fast and low feas cryptocurrency instead : Ether, Litecoin or Bitcoincash can save you money and time."  
+msgstr "Les sites web qui vendent des Nanos directement pour des € sont assez rare aujourd'hui. Si vous n'en trouvez pas, c'est interressant de pouvoir acheter une crypto-monnaie rapide et sans trop de frais : l'Ether, le Litecoin ou le Bitcoincash peuvent vous faire économiser du temps et de l'argent."  
+
+msgid "Once you got some cryptocurrency, say Bitcoins, register to an exchange like"
+msgstr "Une fois que vous avez acheté de la crypto-monnaie, disons des Bitcoins, inscrivez-vous sur un site web d'échange qui vends des Nanos, comme"
+
+msgid "or"
+msgstr "ou"
+
+msgid "that trades Nanos. Send your Bitcoins to your account on this site and trade it for Nanos. Once you get your precious Nanos, send it to your Canoe wallet using your xrb_... address (you can copy it clicking on the receive button below)."
+msgstr ". Envoyez vos Bitcoins sur ce site et changez-les pour des Nanos. Envoyez enfin vos Nanos dans votre portefeuille Canoe en utilisant la clé publique en xrb_... d'uns de vos comptes (vous pouvez la copier à partir du bouton 'Reçevoir', en bas de l'écran)."
+
+
+msgid "Do remember, your Nanos are only safe when in your wallet. If you keep it on an exchange site it could get stolen by hackers or even the site owners."  
+msgstr "Souvenez-vous, vos Nanos ne sont réellement en sécurité que quand ils sont dans votre portefeuille. Si vous les laissez sur un site de change, ils pourraient être volés par des hackers ou même les propriétaires du site."  
+  
+msgid "Sell online"
+msgstr "Vendre en ligne"
+
+msgid "Pretty much the same as to buy, just go the other way. First send Nanos to an exchange or directly to your Nano/local currency gateway if you've found one."  
+msgstr "Plus ou moins la même chose que pour acheter mais dans l'autre sens. Commencez par envoyer vos Nanos sur un site web de change ou directement chez votre vendeur de Nanos pour votre monnaie si vous en avez trouvé un."  
+
+msgid "Once your Nanos are on the exchange, sell it for Bitcoins (or other) and send them to your Bitcoin/local currency gateway. Finally, send your local money to your bank account, and you are done !"  
+msgstr "Une fois vos Nanos sur le site de change, vendez les pour des Bitcoins (ou autre) et envoyez vos Bitcoins à votre site de change Bitcoins/Euros. Pour finir, virez vos euros sur votre compte bancaire et c'est fait !"  
+
+msgid "You can probably find more infos about all this on"
+msgstr "Vous trouverez probablement plus d'informations à propos de tout ça sur"
+
+msgid "Be carefull with all these steps, keep your seed backed up and you should be all fine. Enjoy feeless and instant payments with Nano and Canoe !"
+msgstr "Soyez attentif à chacune de ces étapes, gardez votre graine (seed) en lieu sûr et tout ira au mieux. <br/>Profitez des payments instantanés et sans frais avec Nano et Canoe !"
+
 msgid "If you import a wallet, your current accounts will not be visible in Canoe anymore, so you could lose your Nanos.<br/><br/>You want to make sure that you backed up your wallet and remember your password or, at least, make sure you know the 64 characters of your seed before you do that."
 msgstr "Si vous importez un portefeuille, vos comptes actuellement chargés ne seront plus visibles dans Canoe, ainsi vous pourriez perdre vos Nanos.<br/><br/>Assurez vous d'avoir préalablement sauvegardé votre portefeuille et n'oubliez pas votre mot de passe. Dans tous les cas, sauvegardez les 64 caractères de votre graine (seed) avant d'aller plus loin.
