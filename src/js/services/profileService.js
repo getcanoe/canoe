@@ -72,8 +72,8 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.toFiat = function (raw, code) {
-      root.updateRate(code)
+    root.toFiat = function (raw, code, force) {
+      root.updateRate(code, force)
       return (raw * rate) / RAW_PER_NANO
     }
 
@@ -121,7 +121,10 @@ angular.module('canoeApp.services')
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
           nanoService.repair() // So we fetch truth from lattice, sync
-          nanoService.saveWallet(root.getWallet(), cb)
+          nanoService.saveWallet(root.getWallet(), cb)          
+          // Refresh ui
+          root.loadWallet()
+          $rootScope.$broadcast('wallet.imported') 
         })
       })
     }
@@ -159,6 +162,10 @@ angular.module('canoeApp.services')
         nanoService.saveWallet(wallet, function () {
           // If that succeeded we consider this entering the password
           root.enteredPassword(password)
+            
+          // Refresh ui
+          root.loadWallet()
+          $rootScope.$broadcast('wallet.imported') 
           $log.info('Successfully imported wallet')
           cb()
         })
@@ -407,10 +414,10 @@ angular.module('canoeApp.services')
       // Add formatted balances and timestamps
       lodash.each(accounts, function (acc) {
         acc.balanceStr = root.formatAmountWithUnit(parseInt(acc.balance))
-        var config = configService.getSync().wallet.settings
-        // Don't show unless rate is loaded (so alt balance doesn't show after loging :-/ how to fix that ?)
+        var config = configService.getSync().wallet.settings        
+        // Don't show unless rate is loaded, ui update will be lanched by $broadcast('rates.loaded')
         acc.alternativeBalanceStr = 'hide'
-        var altBalance = root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano')
+        var altBalance = root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano', true)
         if (altBalance !== 0) {
           acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat(altBalance).toFixed(2)) + ' ' + config.alternativeIsoCode
         }
