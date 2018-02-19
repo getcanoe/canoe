@@ -605,7 +605,7 @@ angular.module('canoeApp.services')
     }
 
     root.onMessageArrived = function (message) {
-      $log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
+      //$log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
       var topic = message.destinationName
       var payload = message.payloadString
       // Switch over topics
