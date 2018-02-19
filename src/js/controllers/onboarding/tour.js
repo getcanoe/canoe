@@ -24,7 +24,8 @@ angular.module('canoeApp.controllers').controller('tourController',
     $scope.$on('$ionicSlides.slideChangeEnd', function (event, data) {})
 
     $scope.$on('$ionicView.enter', function (event, data) {
-      profileService.getCurrentCoinmarketcapRate(null, function (err, str) {
+      // This is not used anymore in onboarding
+      /*profileService.getCurrentCoinmarketcapRate(null, function (err, str) {
         if (err) {
           $log.warn(err)
         } else {
@@ -34,7 +35,7 @@ angular.module('canoeApp.controllers').controller('tourController',
             $scope.$apply()
           })
         }
-      })
+      })*/
     })
 
     $scope.goBack = function () {

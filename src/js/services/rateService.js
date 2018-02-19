@@ -1,150 +1,78 @@
 'use strict'
+/* global angular  */
+angular.module('canoeApp.services')
+  .factory('rateService', function ($rootScope, $timeout, $filter, $log, lodash, platformInfo) {
+    // var isChromeApp = platformInfo.isChromeApp
+    // var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
+    // var isIOS = platformInfo.isIOS
 
-// var util = require('util');
-// var _ = require('lodash');
-// var log = require('../util/log');
-// var preconditions = require('preconditions').singleton();
-// var request = require('request');
+    var RAW_PER_NANO = Math.pow(10, 30) // 1 NANO = 1 Mnano = 10^30 raw
 
-/*
-  This class lets interfaces with BitPay's exchange rate API.
-*/
+    var callbacks = []
 
-var RateService = function (opts) {
-  var self = this
+    var root = {}
 
-  opts = opts || {}
-  self.httprequest = opts.httprequest // || request;
-  self.lodash = opts.lodash
-
-  self.SAT_TO_BTC = 1 / 1e8
-  self.BTC_TO_SAT = 1e8
-  self.UNAVAILABLE_ERROR = 'Service is not available - check for service.isAvailable() or use service.whenAvailable()'
-  self.UNSUPPORTED_CURRENCY_ERROR = 'Currency not supported'
-
-  self._isAvailable = false
-  self._rates = {}
-  self._alternatives = []
-  self._ratesBCH = {}
-  self._queued = []
-
-  self.updateRates()
-}
-
-var _instance
-RateService.singleton = function (opts) {
-  if (!_instance) {
-    _instance = new RateService(opts)
-  }
-  return _instance
-}
-
-RateService.prototype.updateRates = function () {
-  var self = this
-
-  var backoffSeconds = 5
-  var updateFrequencySeconds = 5 * 60
-  var rateServiceUrl = 'https://bitpay.com/api/rates'
-
-  function getBTC (cb, tries) {
-    tries = tries || 0
-    if (!self.httprequest) return
-    if (tries > 5) return cb('could not get BTC rates')
-
-    // log.info('Fetching exchange rates');
-    self.httprequest.get(rateServiceUrl).success(function (res) {
-      self.lodash.each(res, function (currency) {
-        self._rates[currency.code] = currency.rate
-        self._alternatives.push({
+    root.updateRates = function (rates) {
+      root.alternatives = []
+      root.rates = rates
+      lodash.each(rates, function (currency, code) {
+        currency.isoCode = code
+        root.alternatives.push({
           name: currency.name,
-          isoCode: currency.code,
+          isoCode: code,
           rate: currency.rate
         })
       })
-
-      return cb()
-    }).error(function () {
-      // log.debug('Error fetching exchange rates', err);
-      setTimeout(function () {
-        backoffSeconds *= 1.5
-        getBTC(cb, tries++)
-      }, backoffSeconds * 1000) 
-    })
-  }
-
-  getBTC(function (err) {
-    if (err) return
-    self._isAvailable = true
-    self.lodash.each(self._queued, function (callback) {
-      setTimeout(callback, 1)
-    })
-    setTimeout(self.updateRates, updateFrequencySeconds * 1000)
-  })
-}
-
-RateService.prototype.getRate = function (code, chain) {
-  if (chain == 'bch')    { return this._ratesBCH[code]}  else    { return this._rates[code]}
-}
-
-RateService.prototype.getAlternatives = function () {
-  return this._alternatives
-}
-
-RateService.prototype.isAvailable = function () {
-  return this._isAvailable
-}
-
-RateService.prototype.whenAvailable = function (callback) {
-  if (this.isAvailable()) {
-    setTimeout(callback, 10)
-  } else {
-    this._queued.push(callback)
-  }
-}
-
-RateService.prototype.toFiat = function (raw, code, chain) {
-  if (!this.isAvailable()) {
-    return null
-  }
-
-  return raw * this.SAT_TO_BTC * this.getRate(code, chain)
-}
-
-RateService.prototype.fromFiat = function (amount, code, chain) {
-  if (!this.isAvailable()) {
-    return null
-  }
-  return amount / this.getRate(code, chain) * this.BTC_TO_SAT
-}
-
-RateService.prototype.listAlternatives = function (sort) {
-  var self = this
-  if (!this.isAvailable()) {
-    return []
-  }
-
-  var alternatives = self.lodash.map(this.getAlternatives(), function (item) {
-    return {
-      name: item.name,
-      isoCode: item.isoCode
+      $rootScope.$broadcast('rates.loaded')
+      // Run all callbacks
+      lodash.each(callbacks, function (callback) {
+        setTimeout(callback, 10)
+      })
+      callbacks = []
     }
+
+    root.getAlternatives = function () {
+      return root.alternatives
+    }
+
+    root.getRate = function (code) {
+      if (root.isAvailable()) {
+        return root.rates[code].rate
+      } else {
+        return 0
+      }
+    }
+
+    root.isAvailable = function () {
+      return !!root.rates
+    }
+
+    root.whenAvailable = function (callback) {
+      if (root.isAvailable()) {
+        setTimeout(callback, 10)
+      } else {
+        callbacks.push(callback)
+      }
+    }
+
+    root.listAlternatives = function (sort) {
+      if (!root.isAvailable()) {
+        return []
+      }
+
+      var alternatives = lodash.map(root.alternatives, function (item) {
+        return {
+          name: item.name,
+          isoCode: item.isoCode
+        }
+      })
+      if (sort) {
+        alternatives.sort(function (a, b) {
+          return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
+        })
+      }
+      return lodash.uniq(alternatives, 'isoCode')
+    }
+
+    return root
   })
-  if (sort) {
-    alternatives.sort(function (a, b) {
-      return a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1
-    })
-  }
-  return self.lodash.uniq(alternatives, 'isoCode')
-}
-
-angular.module('canoeApp.services').factory('rateService', function ($http, lodash) {
-  // var cfg = _.extend(config.rates, {
-  //   httprequest: $http
-  // });
-
-  var cfg = {
-    httprequest: $http,
-    lodash: lodash
-  }
-  return RateService.singleton(cfg)
-})

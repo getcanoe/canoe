@@ -6,19 +6,11 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
     var completeAlternativeList = []
 
     function init () {
-      var unusedCurrencyList = [{
-        isoCode: 'LTL'
-      }, {
-        isoCode: 'BTC'
-      }]
       rateService.whenAvailable(function () {
         $scope.listComplete = false
-
-        var idx = lodash.indexBy(unusedCurrencyList, 'isoCode')
-        var idx2 = lodash.indexBy($scope.lastUsedAltCurrencyList, 'isoCode')
-
+        var idx = lodash.indexBy($scope.lastUsedAltCurrencyList, 'isoCode')
         completeAlternativeList = lodash.reject(rateService.listAlternatives(true), function (c) {
-          return idx[c.isoCode] || idx2[c.isoCode]
+          return idx[c.isoCode]
         })
 
         // #98 Last is first... Sorted by population per country (+ corea and japan) from : https://www.internetworldstats.com/stats8.htm
@@ -42,10 +34,8 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
 
     function moveElementInArrayToTop (array, value) {
       var oldIndex = array.indexOf(value)
-      console.log('oldIndex =' + oldIndex)
       if (oldIndex > -1) {
         var newIndex = 0
-
         var arrayClone = array.slice()
         arrayClone.splice(oldIndex, 1)
         arrayClone.splice(newIndex, 0, value)
@@ -99,8 +89,8 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
         // Refresh ui
         $timeout(function () {
           configService.getSync().wallet.settings.alternativeIsoCode = newAltCurrency.isoCode
-          profileService.updateRate(newAltCurrency.isoCode, true)
-          $rootScope.$broadcast('rates.loaded')
+          //profileService.updateRate(newAltCurrency.isoCode, true)
+          //$rootScope.$broadcast('rates.loaded')
         }, 30)
       })
     }

@@ -1,15 +1,12 @@
 'use strict'
 /* global XMLHttpRequest angular Profile */
 angular.module('canoeApp.services')
-  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, nanoService, configService, gettextCatalog, uxLanguage, platformInfo, txFormatService, addressbookService, appConfigService) {
+  .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, nanoService, configService, gettextCatalog, uxLanguage, platformInfo, txFormatService, addressbookService, rateService) {
     var isChromeApp = platformInfo.isChromeApp
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
 
     var RAW_PER_NANO = Math.pow(10, 30) // 1 NANO = 1 Mnano = 10^30 raw
-
-    var rate = 0 // Current rate fetched every 60 sec
-    var lastTime = 0
 
     // This is where we hold profile, wallet and password to decrypt it
     var root = {}
@@ -58,7 +55,7 @@ angular.module('canoeApp.services')
     root.fetchServerStatus = function (cb) {
       nanoService.fetchServerStatus(cb)
     }
-
+/*
     root.updateRate = function (code, force) {
       if (!rate || (Date.now() > (lastTime + 60000)) || force) {
         root.getCurrentCoinmarketcapRate(code, function (err, rt) {
@@ -71,18 +68,18 @@ angular.module('canoeApp.services')
         })
       }
     }
-
+*/
     root.toFiat = function (raw, code, force) {
-      root.updateRate(code, force)
+      var rate = rateService.getRate(code)
       return (raw * rate) / RAW_PER_NANO
     }
 
     root.fromFiat = function (amount, code) {
-      root.updateRate(code)
+      var rate = rateService.getRate(code)
       return (amount / rate) * RAW_PER_NANO
     }
 
-    root.getCurrentCoinmarketcapRate = function (localCurrency, cb) {
+   /* root.getCurrentCoinmarketcapRate = function (localCurrency, cb) {
       var local = localCurrency || 'usd'
       local = local.toLowerCase()
       var xhr = new XMLHttpRequest()
@@ -111,7 +108,7 @@ angular.module('canoeApp.services')
         }
       }
     }
-
+*/
     // Create a new wallet from a seed
     root.importSeed = function (password, seed, cb) {
       $log.debug('Importing Wallet Seed')

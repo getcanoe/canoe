@@ -1,7 +1,7 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, $rootScope, configService, platformInfo, storageService, gettextCatalog, aliasService, lodash) {
+  .factory('nanoService', function ($log, $rootScope, configService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
@@ -379,6 +379,9 @@ angular.module('canoeApp.services')
 
     // Subscribe to our private topics for incoming messages
     root.subscribeForWallet = function (wallet) {
+      // Subscribe to rate service
+      root.subscribe('rates')
+      // Subscribe to blocks sent to our own wallet id
       root.subscribe('wallet/' + wallet.getId() + '/block/#')
     }
 
@@ -596,18 +599,27 @@ angular.module('canoeApp.services')
       $log.error('Unknown block type: ' + blkType)
     }
 
+    root.handleRate = function (payload) {
+      var rates = JSON.parse(payload)
+      rateService.updateRates(rates)
+    }
+
     root.onMessageArrived = function (message) {
       $log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
       var topic = message.destinationName
       var payload = message.payloadString
       // Switch over topics
       var parts = topic.split('/')
-      if (parts[0] === 'wallet') {
-        // A wallet specific message
-        // TODO ensure proper wallet id?
-        if (parts[2] === 'block') {
-          return root.onIncomingBlock(parts[3], payload)
-        }
+      switch (parts[0]) {
+        case 'wallet':
+          // A wallet specific message
+          // TODO ensure proper wallet id?
+          if (parts[2] === 'block') {
+            return root.onIncomingBlock(parts[3], payload)
+          }
+          break
+        case 'rates':
+          return root.handleRate(payload)
       }
       $log.debug('Message not handled: ' + topic)
     }
