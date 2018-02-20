@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, txConfirmNotification, externalLinkService) {
-  var CONFIRM_LIMIT_USD = 20
+  //var CONFIRM_LIMIT_USD = 20
 
   var tx = {}
 
@@ -253,8 +253,8 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
 
       // confirm txs for more than 20 usd, if not spending/touchid is enabled
       function confirmTx (cb) {
-        var amountUsd = parseFloat(txFormatService.formatToUSD(null, txp.amount))
-        if (amountUsd <= CONFIRM_LIMIT_USD) { return cb() }
+        //var amountUsd = parseFloat(txFormatService.formatToUSD(null, txp.amount))
+        //if (amountUsd <= CONFIRM_LIMIT_USD) { return cb() }
 
         var message = gettextCatalog.getString('Sending {{amountStr}} from your {{name}} account', {
           amountStr: tx.amountStr,

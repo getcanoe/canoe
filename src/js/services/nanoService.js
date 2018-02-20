@@ -35,54 +35,59 @@ angular.module('canoeApp.services')
       return root.wallet
     }
 
-    // This function calls itself every sec. It can also be called explicitly.
+    // This function calls itself every sec and scans
+    // for pending blocks or precalcs in need of work.
     function generatePoW () {
       // No wallet, no dice
       if (root.wallet === null) {
         return setTimeout(generatePoW, 1000)
       }
-      var pool = root.wallet.getWorkPool()
-      var hash = false
-      // Do we have work to do?
-      if (pool.length > 0) {
-        // Find one to work on
-        for (let i in pool) {
-          if (pool[i].needed) {
-            hash = pool[i].hash
-            break
-          }
-        }
-        if (hash === false) {
-          // No hash to work on
-          return setTimeout(generatePoW, 1000)
-        }
-        // Do work server or client side?
-        if (configService.getSync().wallet.serverSidePoW) {
-          // Server side
-          $log.info('Working on server for ' + hash)
-          rai.work_generate_async(hash, function (work) {
-            $log.info('Server side PoW found for ' + hash + ': ' + work)
-            root.wallet.updateWorkPool(hash, work)
+      // Find a pending block in need of work
+      var hash = root.wallet.getNextPendingBlockToWork()
+      if (!hash) {
+        // No hash to work on, do we have one to precalculate?
+        var accAndHash = root.wallet.getNextPrecalcToWork()
+        if (accAndHash) {
+          $log.info('Working on precalc for ' + accAndHash.account)
+          doWork(accAndHash.hash, function (work) {
+            root.wallet.addWorkToPrecalc(accAndHash.account, accAndHash.hash, work)
             root.saveWallet(root.wallet, function () {})
-            // Now we can do one more, keeping it one at a time for server side
             setTimeout(generatePoW, 1000)
           })
         } else {
-          // Client side
-          powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
-          pow_callback(powWorkers, hash, function () {
-            $log.info('Working on client for ' + hash)
-          }, function (work) {
-            $log.info('Client side PoW found for ' + hash + ': ' + work)
-            root.wallet.updateWorkPool(hash, work)
-            root.saveWallet(root.wallet, function () {})
-            setTimeout(generatePoW, 1000)
-          })
+          return setTimeout(generatePoW, 1000)
         }
       } else {
-        setTimeout(generatePoW, 1000)
+        doWork(hash, function (work) {
+          $log.info('Working on pending block ' + hash)
+          root.wallet.addWorkToPendingBlock(hash, work)
+          root.saveWallet(root.wallet, function () {})
+          setTimeout(generatePoW, 1000)
+        })
       }
     }
+
+    function doWork (hash, callback) {
+      // Do work server or client side?
+      if (configService.getSync().wallet.serverSidePoW) {
+        // Server side
+        $log.info('Working on server for ' + hash)
+        rai.work_generate_async(hash, function (work) {
+          $log.info('Server side PoW found for ' + hash + ': ' + work)
+          callback(work)
+        })
+      } else {
+        // Client side
+        powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
+        pow_callback(powWorkers, hash, function () {
+          $log.info('Working on client for ' + hash)
+        }, function (work) {
+          $log.info('Client side PoW found for ' + hash + ': ' + work)
+          callback(work)
+        })
+      }      
+    }
+
 
     function regularBroadcast () {
       if (root.wallet) {
@@ -127,7 +132,7 @@ angular.module('canoeApp.services')
 
     // Perform repair tricks, can be chosen in Advanced settings
     root.repair = function () {
-      clearWorkPool()
+      clearPrecalc()
       resetChains()
     }
 
@@ -135,58 +140,69 @@ angular.module('canoeApp.services')
     // If we have extra blocks those are rebroadcasted.
     function resetChains () {
       if (root.wallet) {
+        root.wallet.enableBroadcast(false)
         var accountIds = root.wallet.getAccountIds()
         lodash.each(accountIds, function (account) {
-          var currentBlocks = root.wallet.getLastNBlocks(account, 99999)
-          var hist = rai.account_history(account)
-          var hashes = []
-          lodash.each(hist, function (blk) {
-            hashes.unshift(blk.hash) // Reversing order
-          })
-          var blocks = rai.blocks_info(hashes)
-          root.wallet.enableBroadcast(false)
-          // Unfortunately blocks is an object so to get proper order we use hashes
-          lodash.each(hashes, function (hash) {
-            var block = blocks[hash]
-            var blk = root.wallet.createBlockFromJSON(block.contents)
-            blk.setAmount(block.amount)
-            blk.setAccount(block.block_account)
-            blk.setImmutable(true)
-            try {
-              // First we check if this is a fork and thus adop it if it is
-              if (!root.wallet.importForkedBlock(blk, account)) { // Replaces any existing block
-                // No fork so we can just import it
-                root.wallet.importBlock(blk, account)
-              }
-              // It was added so remove it from currentBlocks
-              lodash.remove(currentBlocks, function (b) {
-                return b.getHash(true) === hash
-              })
-              root.wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
-            } catch (e) {
-              $log.error(e)
-            }
-          })
-          // Now we add any old blocks and rebroadcast them
-          $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
-          root.wallet.enableBroadcast(true) // Turn back on
-          lodash.each(currentBlocks, function (b) {
-            root.wallet.addBlockToReadyBlocks(b)
-          })
+          resetChainInternal(root.wallet, account)
         })
         root.wallet.enableBroadcast(true) // Turn back on
         root.saveWallet(root.wallet, function () {})
       }
     }
 
-    function clearWorkPool () {
-      root.wallet.clearWorkPool()
+    function resetChain (wallet, account) {
+      wallet.enableBroadcast(false)
+      resetChainInternal(wallet, account)
+      wallet.enableBroadcast(true) // Turn back on
+      root.saveWallet(wallet, function () {})
+    }
+
+    function resetChainInternal (wallet, account) {
+      var currentBlocks = wallet.getLastNBlocks(account, 99999)
+      var hist = rai.account_history(account)
+      var hashes = []
+      lodash.each(hist, function (blk) {
+        hashes.unshift(blk.hash) // Reversing order
+      })
+      var blocks = rai.blocks_info(hashes)
+      // Unfortunately blocks is an object so to get proper order we use hashes
+      lodash.each(hashes, function (hash) {
+        var block = blocks[hash]
+        var blk = wallet.createBlockFromJSON(block.contents)
+        blk.setAmount(block.amount)
+        blk.setAccount(block.block_account)
+        blk.setImmutable(true)
+        try {
+          // First we check if this is a fork and thus adop it if it is
+          if (!wallet.importForkedBlock(blk, account)) { // Replaces any existing block
+            // No fork so we can just import it
+            wallet.importBlock(blk, account)
+          }
+          // It was added so remove it from currentBlocks
+          lodash.remove(currentBlocks, function (b) {
+            return b.getHash(true) === hash
+          })
+          wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
+        } catch (e) {
+          $log.error(e)
+        }
+      })
+      // Now we add any old blocks and rebroadcast them
+      $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
+      wallet.enableBroadcast(true) // Turn back on
+      lodash.each(currentBlocks, function (b) {
+        wallet.addBlockToReadyBlocks(b)
+      })
+    }
+
+    function clearPrecalc () {
+      root.wallet.clearPrecalc()
       root.saveWallet(root.wallet, function () {})
     }
 
     window.fetchPendingBlocks = root.fetchPendingBlocks
     window.resetChains = resetChains
-    window.clearWorkPool = clearWorkPool
+    window.root = root
 
     // Explicitly ask for pending blocks and fetching them to process them as if
     // they came in live over the rai_node callback
@@ -391,7 +407,8 @@ angular.module('canoeApp.services')
       var wallet = root.createNewWallet(password)
       wallet.createSeed(seed)
       var accountName = gettextCatalog.getString('Default Account')
-      wallet.createAccount({label: accountName})
+      var account = wallet.createAccount({label: accountName})
+      resetChain(wallet, account.id) // It may be an already existing account so we want existing blocks
       root.setWallet(wallet, cb)
     }
 
@@ -439,6 +456,7 @@ angular.module('canoeApp.services')
     root.createAccount = function (wallet, accountName) {
       $log.debug('Creating account named ' + accountName)
       var account = wallet.createAccount({label: accountName})
+      resetChain(wallet, account.id) // It may be an already existing account so we want existing blocks
       $log.debug('Created account ' + account.id)
       root.updateServerMap(wallet)
       return account

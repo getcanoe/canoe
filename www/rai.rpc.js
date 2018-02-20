@@ -133,7 +133,7 @@ function Rai (url_base, port) {
 					// Errors as JSON
           let error = json.error
           if (typeof error !== 'undefined') {
-          this.error(error)
+          XRB.error(error)
         }
           async_callback(json)
         }				else {
@@ -161,7 +161,7 @@ function Rai (url_base, port) {
 				// Errors as JSON
           let error = json.error
           if (typeof error !== 'undefined') {
-          this.error(error)
+          XRB.error(error)
           return false
         }
           return json
@@ -170,7 +170,7 @@ function Rai (url_base, port) {
         }
       }
     }	catch (ex) {
-      this.error(ex.message)
+      XRB.error(ex.message)
     }
   }
 
