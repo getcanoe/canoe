@@ -1,30 +1,19 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Canoe\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-
-#: www/views/onboarding/welcome.html:8
-msgctxt "button"
-msgid "Get started"
-msgstr ""
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Canoe\n"
+"Language: sv\n"
 
 #: www/views/includes/txp.html:23 www/views/includes/walletHistory.html:64
 msgid "(possible double spend)"
 msgstr "(möjlig dubbel spendering)"
 
+#. not needed
 #: www/views/modals/txp-details.html:159
-msgid ""
-"* A payment proposal can be deleted if 1) you are the creator, and no other "
-"copayer has signed, or 2) 24 hours have passed since the proposal was "
-"created."
+msgid "* A payment proposal can be deleted if 1) you are the creator, and no other copayer has signed, or 2) 24 hours have passed since the proposal was created."
 msgstr ""
 
 #: www/views/tx-details.html:82
@@ -35,32 +24,9 @@ msgstr ""
 msgid "- {{tx.feeRateStr}} of the transaction"
 msgstr ""
 
-#: www/views/feedback/rateApp.html:7
-msgid ""
-"5-star ratings help us get Canoe into more hands, and more users means more "
-"resources can be committed to the app!"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:46
-msgid ""
-"<span translate=\"\">You can probably find more infos about all this on</"
-"span>&nbsp;<a href=\"https://www.reddit.com/r/nanocurrency/\">reddit "
-"nanocurrency</a>"
-msgstr ""
-
-#: www/views/addressbook.add.html:57 www/views/addressbook.edit.html:58
-msgid "@joedoe"
-msgstr ""
-
 #: src/js/controllers/feedback/send.js:25 www/views/feedback/complete.html:21
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "En medlem i teamet kommer ta del av din feedback så snart som möjligt."
-
-#: www/views/preferencesSecurity.html:12
-msgid ""
-"A wallet password is used to encrypt your Nano wallet when saving it on your "
-"device."
-msgstr ""
 
 #: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:171
 msgid "About"
@@ -70,18 +36,6 @@ msgstr "Om"
 #: src/js/controllers/tx-details.js:79
 msgid "Accepted"
 msgstr "Godkänt"
-
-#: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
-msgid "Account"
-msgstr "Konto"
-
-#: www/views/preferencesAlias.html:4
-msgid "Account Alias"
-msgstr ""
-
-#: www/views/preferencesColor.html:4
-msgid "Account Color"
-msgstr ""
 
 #: www/views/preferencesAdvanced.html:13
 msgid "Account Information"
@@ -135,17 +89,6 @@ msgstr "Avancerat"
 msgid "Advanced Settings"
 msgstr "Avancerade inställningar"
 
-#: www/views/addressbook.add.html:54 www/views/addressbook.edit.html:55
-#: www/views/addressbook.view.html:30 www/views/preferences.html:22
-#: www/views/preferencesAlias.html:17
-msgid "Alias"
-msgstr ""
-
-#: www/views/modals/wallet-balance.html:18
-msgid ""
-"All of your Nano Wallet balance may not be available for immediate spending."
-msgstr ""
-
 #: www/views/tab-scan.html:21
 msgid "Allow Camera Access"
 msgstr "Tillåt kamera"
@@ -171,21 +114,9 @@ msgstr "Summa"
 msgid "Amount too low to spend"
 msgstr "Summar för låg att spendera"
 
-#: src/js/controllers/create.js:19 src/js/controllers/preferencesName.js:13
-msgid "An account already exists with that name"
-msgstr ""
-
 #: src/js/controllers/tab-home.js:157
-msgid ""
-"An update to this app is available. For your security, please update to the "
-"latest version."
-msgstr ""
-"En uppdatering till den här appen är tillgänglig. För din säkerhet, "
-"uppdatera till den senaste versionen."
-
-#: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your nano."
-msgstr ""
+msgid "An update to this app is available. For your security, please update to the latest version."
+msgstr "En uppdatering till den här appen är tillgänglig. För din säkerhet, uppdatera till den senaste versionen."
 
 #: www/views/backupWarning.html:10
 msgid "Are you being watched?"
@@ -197,35 +128,27 @@ msgstr "Är du säker på att du vill ta bort den här kontakten?"
 
 #: src/js/controllers/preferencesDelete.js:24
 msgid "Are you sure you want to delete this wallet?"
-msgstr ""
+msgstr "Är du säker på att du vill ta bort den här plånboken?"
 
 #: src/js/controllers/modals/txpDetails.js:152
 msgid "Are you sure you want to reject this transaction?"
-msgstr ""
+msgstr "Är du säker på att du vill avbryta den här transaktionen?"
 
 #: src/js/controllers/modals/txpDetails.js:168
 msgid "Are you sure you want to remove this transaction?"
-msgstr ""
-
-#: src/js/controllers/advancedSettings.js:17
-msgid "Are you sure you want to repair wallet?"
-msgstr ""
+msgstr "Är du säker på att du vill ta bort den här transaktionen?"
 
 #: src/js/controllers/onboarding/backupRequest.js:21
 msgid "Are you sure you want to skip it?"
 msgstr ""
 
-#: www/views/changePassword.html:24 www/views/onboarding/createPassword.html:13
-msgid "At least 8 Characters. Make it good!"
-msgstr ""
-
 #: www/views/modals/wallet-balance.html:42
 msgid "Available"
-msgstr ""
+msgstr "Tillgängligt"
 
 #: www/views/includes/available-balance.html:3
 msgid "Available Balance"
-msgstr ""
+msgstr "Tillgängligt saldo"
 
 #: www/views/includes/backupNeededPopup.html:7
 msgid "Backup Needed"
@@ -235,25 +158,13 @@ msgstr ""
 msgid "Backup now"
 msgstr ""
 
-#: www/views/backup.html:3 www/views/tab-settings.html:21
-msgid "Backup seed"
-msgstr ""
-
 #: www/views/onboarding/backupRequest.html:11 www/views/tab-export-file.html:52
 msgid "Backup wallet"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:49
-msgid ""
-"Be carefull with all these steps, keep your seed backed up and you should be "
-"all fine. Enjoy feeless and instant payments with Nano and Canoe !"
-msgstr ""
-
 #: www/views/includes/confirmBackupPopup.html:7
-msgid ""
-"Be sure to store your seed in a secure place. If this app is deleted, or "
-"your device stolen, the seed is the only way to recreate the wallet."
-msgstr ""
+msgid "Be sure to store your seed in a secure place. If this app is deleted, or your device stolen, the seed is the only way to recreate the wallet."
+msgstr "Var noga med att förvara din seed på en säker plats. Om den här appen raderas, eller om din enhet blir stulen, är seeden det enda sättet att återskapa plånboken."
 
 #: www/views/includes/incomingDataMenu.html:29
 msgid "Bitcoin Address"
@@ -278,18 +189,14 @@ msgstr ""
 
 #: www/views/unsupported.html:6
 msgid "Browser unsupported"
-msgstr ""
+msgstr "Webbläsaren stöds inte"
 
 #: www/views/onboarding/tour.html:49
 msgid "But do not lose your seed!"
-msgstr ""
+msgstr "Tappa inte bort din seed!"
 
 #: www/views/includes/buyAndSellCard.html:3
 msgid "Buy &amp; Sell Bitcoin"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:30
-msgid "Buy online"
 msgstr ""
 
 #: src/js/controllers/confirm.js:264 src/js/services/popupService.js:62
@@ -301,33 +208,28 @@ msgstr ""
 #: www/views/includes/incomingDataMenu.html:97 www/views/includes/note.html:6
 #: www/views/modals/confirmation.html:13
 msgid "Cancel"
-msgstr ""
+msgstr "Avbryt"
 
 #: src/js/controllers/onboarding/createPassword.js:36
 msgid "Cannot Create Wallet"
-msgstr ""
-
-#: www/views/changePassword.html:3 www/views/changePassword.html:59
-#: www/views/preferencesSecurity.html:15
-msgid "Change Password"
-msgstr ""
+msgstr "Kan inte skapa plånbok"
 
 #: www/views/tab-import-file.html:4
 msgid "Choose a backup file from your computer"
-msgstr ""
+msgstr "Välj en backup fil från din dator"
 
 #: src/js/controllers/modals/txpDetails.js:47
 msgid "Click to accept"
-msgstr ""
+msgstr "Klicka för att ta emot"
 
 #: src/js/controllers/confirm.js:192 src/js/controllers/modals/txpDetails.js:40
 msgid "Click to send"
-msgstr ""
+msgstr "Klicka för att skicka"
 
 #: www/views/customAmount.html:4 www/views/modals/pin.html:3
 #: www/views/modals/search.html:3 www/views/modals/wallet-balance.html:3
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 #: www/views/includes/cash.html:2
 msgid "Coin"
@@ -335,7 +237,7 @@ msgstr ""
 
 #: www/views/preferences.html:29
 msgid "Color"
-msgstr ""
+msgstr "Färg"
 
 #: www/views/preferencesAbout.html:21
 msgid "Commit hash"
@@ -344,18 +246,10 @@ msgstr "Commit hash"
 #: src/js/controllers/confirm.js:263 www/views/backup.html:46
 #: www/views/confirm.html:4 www/views/onboarding/collectEmail.html:32
 msgid "Confirm"
-msgstr ""
+msgstr "Bekräfta"
 
 #: www/views/modals/terms.html:26 www/views/onboarding/disclaimer.html:44
 msgid "Confirm &amp; Finish"
-msgstr ""
-
-#: www/views/changePassword.html:31 www/views/onboarding/createPassword.html:21
-msgid "Confirm New Password"
-msgstr ""
-
-#: www/views/modals/pin.html:10
-msgid "Confirm your PIN"
 msgstr ""
 
 #: src/js/services/walletService.js:31
@@ -364,49 +258,45 @@ msgstr ""
 
 #: www/views/tx-details.html:98
 msgid "Confirmations"
-msgstr ""
+msgstr "Bekräftelser"
 
 #: www/views/modals/wallet-balance.html:61
 msgid "Confirming"
-msgstr ""
+msgstr "Bekräftar"
 
 #: www/views/tab-send.html:50
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakter"
 
 #: www/views/onboarding/notifications.html:9
 msgid "Continue"
-msgstr ""
+msgstr "Fortsätt"
 
 #: www/views/preferencesLanguage.html:26
 msgid "Contribute Translations"
-msgstr ""
+msgstr "Bidra med översättningar"
 
 #: src/js/controllers/export.js:119 www/views/includes/copyToClipboard.html:4
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Kopierad till urklipp"
 
 #: www/views/tab-export-file.html:57
 msgid "Copy this text as it is to a safe place (notepad or email)"
-msgstr ""
+msgstr "Kopiera den här texten till en säker plats"
 
 #: www/views/includes/incomingDataMenu.html:51
 #: www/views/includes/incomingDataMenu.html:70
 #: www/views/includes/incomingDataMenu.html:94
 #: www/views/includes/logOptions.html:9 www/views/tab-export-file.html:41
 msgid "Copy to clipboard"
-msgstr ""
+msgstr "Kopiera till urklipp"
 
 #: www/views/tab-import-phrase.html:2
 msgid "Could not access the wallet at the server. Please check:"
-msgstr ""
+msgstr "Kan inte ansluta till plånboken på servern. Var god se:"
 
 #: src/js/controllers/modals/txpDetails.js:196
 msgid "Could not broadcast payment"
-msgstr ""
-
-#: src/js/controllers/import.js:63
-msgid "Could not decrypt wallet, check your password"
 msgstr ""
 
 #: src/js/controllers/modals/txpDetails.js:178
@@ -415,48 +305,40 @@ msgstr ""
 
 #: src/js/controllers/modals/txpDetails.js:158
 msgid "Could not reject payment"
-msgstr ""
+msgstr "Kan inte avbryta betalning"
 
 #: src/js/controllers/modals/txpDetails.js:145
 msgid "Could not send payment"
-msgstr ""
+msgstr "Kan inte skicka betalning"
 
 #: www/views/accountDetails.html:205
 msgid "Could not update transaction history"
-msgstr ""
+msgstr "Kan inte uppdatera transaktionshistorik"
 
 #: www/views/tab-create-account.html:3 www/views/tab-home.html:90
 #: www/views/tab-send.html:41
 msgid "Create Account"
-msgstr ""
-
-#: www/views/onboarding/createPassword.html:52
-msgid "Create Wallet"
-msgstr ""
+msgstr "Skapa konto"
 
 #: www/views/tab-create-account.html:25
 msgid "Create new account"
-msgstr ""
-
-#: www/views/onboarding/createPassword.html:5
-msgid "Create your Password"
-msgstr ""
+msgstr "Skapa nytt konto"
 
 #: www/views/modals/txp-details.html:81 www/views/tx-details.html:60
 msgid "Created by"
-msgstr ""
+msgstr "Skapad av"
 
 #: src/js/services/onGoingProcess.js:14
 msgid "Creating Wallet..."
-msgstr ""
+msgstr "Skapar plånbok..."
 
 #: src/js/services/onGoingProcess.js:13
 msgid "Creating account..."
-msgstr ""
+msgstr "Skapar konto..."
 
 #: src/js/services/onGoingProcess.js:12
 msgid "Creating transaction"
-msgstr ""
+msgstr "Skapar transaktion"
 
 #: www/views/customAmount.html:9
 msgid "Custom Amount"
@@ -464,7 +346,7 @@ msgstr ""
 
 #: www/views/modals/txp-details.html:87 www/views/tx-details.html:66
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: src/js/services/nanoService.js:393 src/js/services/profileService.js:278
 msgid "Default Account"
@@ -472,11 +354,11 @@ msgstr ""
 
 #: www/views/preferencesDeleteWallet.html:21
 msgid "Delete"
-msgstr ""
+msgstr "Ta bort"
 
 #: www/views/preferencesAdvanced.html:34
 msgid "Delete Account"
-msgstr ""
+msgstr "Ta bort konto"
 
 #: www/views/modals/txp-details.html:164
 msgid "Delete Payment Proposal"
@@ -484,11 +366,11 @@ msgstr ""
 
 #: www/views/preferencesDeleteWallet.html:3
 msgid "Delete Wallet"
-msgstr ""
+msgstr "Ta bort plånbok"
 
 #: src/js/services/onGoingProcess.js:15
 msgid "Deleting Wallet..."
-msgstr ""
+msgstr "Tar bort plånbok..."
 
 #: src/js/services/onGoingProcess.js:21
 msgid "Deleting payment proposal"
@@ -498,44 +380,24 @@ msgstr ""
 #: src/js/controllers/preferencesSecurityController.js:8
 #: src/js/controllers/tab-settings.js:59
 msgid "Disabled"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:18
-msgid "Disclamer"
-msgstr ""
+msgstr "Inaktiverad"
 
 #: www/views/includes/backupNeededPopup.html:10
 #: www/views/onboarding/backupRequest.html:12
 msgid "Do it later"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:36
-msgid ""
-"Do remember, your Nanos are only safe when in your wallet. If you keep it on "
-"an exchange site it could get stolen by hackers or even the site owners."
-msgstr ""
-
-#: www/views/preferencesLanguage.html:21
-msgid ""
-"Don't see your language? Sign up on POEditor! We'd love to support your "
-"language."
-msgstr ""
+msgstr "Gör det senare"
 
 #: www/views/tab-settings.html:61
 msgid "Donate to Canoe"
-msgstr ""
+msgstr "Donera till Canoe"
 
 #: www/views/tab-export-file.html:22 www/views/tab-home.html:36
 msgid "Download"
-msgstr ""
+msgstr "Ladda ner"
 
 #: www/views/addressbook.view.html:40 www/views/onboarding/collectEmail.html:27
 msgid "Edit"
-msgstr ""
-
-#: www/views/addressbook.edit.html:4
-msgid "Edit Contact"
-msgstr ""
+msgstr "Ändra"
 
 #: www/views/addressbook.add.html:29 www/views/addressbook.edit.html:30
 #: www/views/addressbook.view.html:22
@@ -544,10 +406,6 @@ msgstr ""
 
 #: www/views/preferencesNotifications.html:42
 msgid "Email Address"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:42
-msgid "Enable Petty Nano"
 msgstr ""
 
 #: www/views/tab-scan.html:19
@@ -570,34 +428,27 @@ msgstr ""
 msgid "Enter Spending Password"
 msgstr ""
 
-#: www/views/preferencesName.html:18
-msgid "Enter a descriptive name"
-msgstr ""
-
 #: www/views/amount.html:4
 msgid "Enter amount"
-msgstr ""
+msgstr "Ange belopp"
 
 #: src/js/services/walletService.js:27
 msgid "Enter new spending password"
 msgstr ""
 
-#: www/views/tab-export-file.html:10
-msgid "Enter password"
-msgstr ""
-
 #: www/views/tab-import-phrase.html:13
 msgid "Enter wallet seed"
-msgstr ""
+msgstr "Ange plånbokens seed"
 
 #: www/views/onboarding/collectEmail.html:13
 msgid "Enter your email"
-msgstr ""
+msgstr "Ange din email"
 
 #: www/views/backup.html:36
 msgid "Enter your password"
-msgstr ""
+msgstr "Ange ditt lösenord"
 
+#. Trying to import a malformed wallet export QR code
 #: src/js/controllers/activity.js:45 src/js/controllers/addressbookAdd.js:35
 #: src/js/controllers/addressbookEdit.js:36
 #: src/js/controllers/addressbookView.js:48 src/js/controllers/create.js:19
@@ -640,7 +491,7 @@ msgstr ""
 
 #: www/views/export.html:3 www/views/tab-settings.html:37
 msgid "Export wallet"
-msgstr ""
+msgstr "Exportera plånbok"
 
 #: src/js/services/walletService.js:88
 msgid "Exporting via QR not supported for this wallet"
@@ -648,16 +499,12 @@ msgstr ""
 
 #: src/js/services/onGoingProcess.js:16
 msgid "Extracting Wallet information..."
-msgstr ""
+msgstr "Extraherar plånbokens information"
 
 #: src/js/controllers/export.js:52 src/js/controllers/export.js:62
 #: src/js/controllers/export.js:89 src/js/controllers/export.js:98
 #: www/views/tab-export-file.html:4
 msgid "Failed to export"
-msgstr ""
-
-#: src/js/controllers/export.js:30
-msgid "Failed to generate seed QR code"
 msgstr ""
 
 #: www/views/tab-create-account.html:14
@@ -718,6 +565,11 @@ msgstr ""
 msgid "Get news and updates from BitPay"
 msgstr ""
 
+#: www/views/onboarding/welcome.html:8
+msgctxt "button"
+msgid "Get started"
+msgstr ""
+
 #: www/views/addressbook.html:20
 msgid "Get started by adding your first one."
 msgstr ""
@@ -742,23 +594,19 @@ msgstr ""
 
 #: www/views/tab-settings.html:45
 msgid "Help & Support"
-msgstr ""
+msgstr "Hjälp & Support"
 
 #: src/js/controllers/tab-settings.js:45
 msgid "Help and support information is available at the website."
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:15
-msgid "Here's how to do..."
-msgstr ""
-
 #: www/views/preferences.html:34
 msgid "Hide Balance"
-msgstr ""
+msgstr "Göm saldo"
 
 #: www/views/tabs.html:3
 msgid "Home"
-msgstr ""
+msgstr "Hem"
 
 #: src/js/controllers/feedback/send.js:60
 #: src/js/controllers/feedback/send.js:64
@@ -766,31 +614,13 @@ msgstr ""
 msgid "How could we improve your experience?"
 msgstr ""
 
-#: www/views/feedback/rateCard.html:3
-msgid "How do you like Canoe?"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:3
-msgid "How to buy or sell Nanos"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:12 www/views/tab-settings.html:68
-msgid "How to buy/sell Nanos"
-msgstr ""
-
 #: src/js/controllers/feedback/rateCard.js:29
 msgid "I don't like it"
 msgstr ""
 
-#: www/views/onboarding/disclaimer.html:43
-msgid ""
-"I have read, understood, and agree to the <a ng-click=\"openTerms()\" href="
-"\"javascript:void(0)\" translate=\"\">Terms of Use</a>."
-msgstr ""
-
 #: www/views/modals/terms.html:22
 msgid "I have read, understood, and agree with the Terms of use."
-msgstr ""
+msgstr "Jag har läst, förstått och godkänner användarvillkoren."
 
 #: src/js/controllers/feedback/rateCard.js:35
 msgid "I like the app"
@@ -806,107 +636,61 @@ msgid "I understand"
 msgstr ""
 
 #: www/views/onboarding/disclaimer.html:21
-msgid ""
-"I understand that if this app is deleted, my wallet can only be recovered "
-"with the seed."
+msgid "I understand that if this app is deleted, my wallet can only be recovered with the seed."
 msgstr ""
 
 #: www/views/onboarding/disclaimer.html:18
-msgid ""
-"I understand that my funds are held securely on this device, not by a "
-"company."
+msgid "I understand that my funds are held securely on this device, not by a company."
 msgstr ""
 
 #: www/views/backup.html:28
 msgid "I've written it down"
 msgstr ""
 
-#: www/views/advancedSettings.html:14
-msgid "If enabled, Proof Of Work is delegated to the Canoe server side."
-msgstr ""
-
 #: www/views/advancedSettings.html:23
-msgid ""
-"If enabled, the Recent Transactions card - a list of transactions occuring "
-"across all wallets - will appear in the Home tab."
+msgid "If enabled, the Recent Transactions card - a list of transactions occuring across all wallets - will appear in the Home tab."
 msgstr ""
 
 #: src/js/controllers/onboarding/backupRequest.js:16
-msgid ""
-"If this device is replaced or this app is deleted, your funds can not be "
-"recovered without a backup."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:23
-msgid ""
-"If you are used to buying and selling cryptos, don't waste your time, you "
-"will probably not learn anything here."
+msgid "If this device is replaced or this app is deleted, your funds can not be recovered without a backup."
 msgstr ""
 
 #: www/views/feedback/complete.html:23
-msgid ""
-"If you have additional feedback, please let us know by tapping the \"Send "
-"feedback\" option in the Settings tab."
-msgstr ""
-
-#: src/js/controllers/import.js:133
-msgid ""
-"If you import a wallet, your current accounts will not be visible in Canoe "
-"anymore, so you could lose your Nanos.<br/><br/>You want to make sure that "
-"you backed up your wallet and remember your password or, at least, make sure "
-"you know the 64 characters of your seed before you do that."
+msgid "If you have additional feedback, please let us know by tapping the \"Send feedback\" option in the Settings tab."
 msgstr ""
 
 #: www/views/includes/screenshotWarningModal.html:8
-msgid ""
-"If you take a screenshot, your backup may be viewed by other apps. You can "
-"make a safe backup with physical paper and a pen."
+msgid "If you take a screenshot, your backup may be viewed by other apps. You can make a safe backup with physical paper and a pen."
 msgstr ""
 
 #: www/views/import.html:3
 msgid "Import Wallet"
-msgstr ""
+msgstr "Importera plånbok"
 
 #: www/views/tab-import-phrase.html:39
 msgid "Import seed"
-msgstr ""
+msgstr "Importera seed"
 
 #: www/views/add.html:21 www/views/tab-import-file.html:27
 #: www/views/tab-settings.html:29
 msgid "Import wallet"
-msgstr ""
+msgstr "Importera plånbok"
 
 #: src/js/services/onGoingProcess.js:18
 msgid "Importing Wallet..."
-msgstr ""
+msgstr "Importerar plånbok..."
 
 #: www/views/backup.html:39
 msgid "In order to verify your wallet backup, please type your password."
-msgstr ""
+msgstr "För att verifiera din plånbok backup, var god ange ditt lösenord."
 
 #: www/views/includes/walletListSettings.html:9
 msgid "Incomplete"
 msgstr ""
 
-#: www/views/modals/pin.html:12
-msgid "Incorrect PIN, try again."
-msgstr ""
-
-#: src/js/controllers/import.js:32
-msgid "Incorrect code format for a seed:"
-msgstr ""
-
-#: www/views/modals/password.html:8
-msgid "Incorrect password, try again."
-msgstr ""
-
-#: src/js/controllers/changePasswordController.js:6
-msgid "Information"
-msgstr ""
-
 #: src/js/controllers/confirm.js:86
 msgid "Insufficient funds"
-msgstr ""
+msgstr "Otillräckliga medel"
 
 #: www/views/tab-settings.html:138
 msgid "Integrations"
@@ -929,18 +713,7 @@ msgid "Is this email address correct?"
 msgstr ""
 
 #: src/js/controllers/backup.js:34
-msgid ""
-"It's important that you write your wallet seed down correctly. If something "
-"happens to your wallet, you'll need this seed to reconstruct it. Please "
-"review your seed and try again."
-msgstr ""
-
-#: www/views/addressbook.edit.html:24
-msgid "Joe Doe"
-msgstr ""
-
-#: www/views/onboarding/welcome.html:5
-msgid "Join the future of money,<br>get started with Nano."
+msgid "It's important that you write your wallet seed down correctly. If something happens to your wallet, you'll need this seed to reconstruct it. Please review your seed and try again."
 msgstr ""
 
 #: www/views/onboarding/tour.html:22
@@ -949,22 +722,14 @@ msgstr ""
 
 #: www/views/preferencesLanguage.html:4 www/views/tab-settings.html:97
 msgid "Language"
-msgstr ""
+msgstr "Språk"
 
 #: www/views/tab-home.html:24 www/views/tx-details.html:94
 msgid "Learn more"
 msgstr ""
 
-#: www/views/onboarding/tour.html:50
-msgid "Let's Start"
-msgstr ""
-
 #: src/js/services/onGoingProcess.js:28
 msgid "Loading transaction info..."
-msgstr ""
-
-#: www/views/tab-settings.html:73
-msgid "Lock Canoe"
 msgstr ""
 
 #: src/js/controllers/preferencesSecurity.js:21
@@ -1032,34 +797,8 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: www/views/addressbook.add.html:38
-msgid "Nano Account"
-msgstr ""
-
-#: www/views/onboarding/disclaimer.html:15
-msgid ""
-"Nano is different &ndash; it cannot be safely held with a bank or web "
-"service."
-msgstr ""
-
-#: www/views/onboarding/tour.html:31
-msgid "Nano is feeless."
-msgstr ""
-
-#: www/views/onboarding/tour.html:18
-msgid "Nano is instant,<br>digital money."
-msgstr ""
-
-#: www/views/onboarding/tour.html:45
-msgid "Nanos are secure."
-msgstr ""
-
 #: www/views/onboarding/tour.html:36
 msgid "Never incur fees ever again!"
-msgstr ""
-
-#: www/views/changePassword.html:22 www/views/onboarding/createPassword.html:11
-msgid "New Password"
 msgstr ""
 
 #: www/views/add.html:14
@@ -1068,14 +807,6 @@ msgstr ""
 
 #: www/views/tab-receive.html:16
 msgid "No Account available"
-msgstr ""
-
-#: src/js/controllers/confirm.js:73
-msgid "No accounts available"
-msgstr ""
-
-#: www/views/onboarding/backupRequest.html:5
-msgid "No backup, no Nano."
 msgstr ""
 
 #: www/views/addressbook.html:19
@@ -1110,10 +841,6 @@ msgstr ""
 msgid "No wallets available to receive funds"
 msgstr ""
 
-#: src/js/controllers/import.js:42
-msgid "Not a seed QR code:"
-msgstr ""
-
 #: src/js/controllers/paperWallet.js:45
 msgid "Not funds found"
 msgstr ""
@@ -1143,15 +870,11 @@ msgid "Notify me when transactions are confirmed"
 msgstr ""
 
 #: www/views/includes/backupNeededPopup.html:8
-msgid ""
-"Now is a good time to backup your wallet. If this device is lost, it is "
-"impossible to access your funds without a backup."
+msgid "Now is a good time to backup your wallet. If this device is lost, it is impossible to access your funds without a backup."
 msgstr ""
 
 #: www/views/backupWarning.html:11
-msgid ""
-"Now is a perfect time to assess your surroundings. Nearby windows? Hidden "
-"cameras? Shoulder-spies?"
+msgid "Now is a perfect time to assess your surroundings. Nearby windows? Hidden cameras? Shoulder-spies?"
 msgstr ""
 
 #: www/views/tab-import-phrase.html:15
@@ -1168,12 +891,6 @@ msgstr ""
 msgid "OKAY"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:27
-msgid ""
-"Obviously, you can buy and sell Nanos to a friend. Canoe displays amounts "
-"both in NANO and and in your currency so it's easy to convert."
-msgstr ""
-
 #: www/views/modals/terms.html:15
 msgid "Official English Disclaimer"
 msgstr ""
@@ -1182,28 +899,8 @@ msgstr ""
 msgid "Oh no!"
 msgstr ""
 
-#: www/views/changePassword.html:13
-msgid "Old Password"
-msgstr ""
-
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:35
-msgid ""
-"Once you got some cryptocurrency, say Bitcoins, register to an exchange like"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:43
-msgid ""
-"Once your Nanos are on the exchange, sell it for Bitcoins (or other) and "
-"send them to your Bitcoin/local currency gateway. Finally, send your local "
-"money to your bank account, and you are done !"
-msgstr ""
-
-#: www/views/changePassword.html:33 www/views/onboarding/createPassword.html:28
-msgid "One more time."
 msgstr ""
 
 #: src/js/controllers/tab-settings.js:46 src/js/controllers/tx-details.js:55
@@ -1222,16 +919,8 @@ msgstr ""
 msgid "Open Insight"
 msgstr ""
 
-#: src/js/controllers/preferencesLanguage.js:12
-msgid "Open POEditor"
-msgstr ""
-
 #: www/views/tab-scan.html:22
 msgid "Open Settings"
-msgstr ""
-
-#: src/js/controllers/preferencesLanguage.js:10
-msgid "Open Translation Site"
 msgstr ""
 
 #: src/js/controllers/onboarding/terms.js:22
@@ -1244,26 +933,6 @@ msgstr ""
 
 #: www/views/modals/password.html:22
 msgid "Password"
-msgstr ""
-
-#: www/views/tab-import-file.html:18
-msgid "Password to decrypt"
-msgstr ""
-
-#: www/views/tab-import-phrase.html:28
-msgid "Password to encrypt"
-msgstr ""
-
-#: www/views/changePassword.html:46 www/views/onboarding/createPassword.html:38
-msgid "Password too short"
-msgstr ""
-
-#: www/views/changePassword.html:52 www/views/onboarding/createPassword.html:45
-msgid "Passwords don't match"
-msgstr ""
-
-#: www/views/changePassword.html:42 www/views/onboarding/createPassword.html:34
-msgid "Passwords match"
 msgstr ""
 
 #: www/views/tab-import-file.html:13
@@ -1306,9 +975,7 @@ msgid "Payment accepted, but not yet broadcasted"
 msgstr ""
 
 #: www/views/modals/txp-details.html:40
-msgid ""
-"Payment accepted. It will be broadcasted by Glidera. In case there is a "
-"problem, it can be deleted 6 hours after it was created."
+msgid "Payment accepted. It will be broadcasted by Glidera. In case there is a problem, it can be deleted 6 hours after it was created."
 msgstr ""
 
 #: www/views/modals/txp-details.html:107
@@ -1323,41 +990,16 @@ msgstr ""
 msgid "Permanently delete this wallet."
 msgstr ""
 
-#: www/views/preferencesSecurity.html:38 www/views/preferencesSecurity.html:45
-msgid "Petty Nano"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:39
-msgid ""
-"Petty Nano allows you to designate an amount to transfer without the need to "
-"enter a password. This decreases the security of the petty Nano, so choose "
-"wisely!"
-msgstr ""
-
 #: www/views/backup.html:21
-msgid ""
-"Please carefully write down this 64 character seed. Click to copy to "
-"clipboard."
+msgid "Please carefully write down this 64 character seed. Click to copy to clipboard."
 msgstr ""
 
 #: www/views/tab-scan.html:20
 msgid "Please connect a camera to get started."
 msgstr ""
 
-#: src/js/controllers/import.js:116
-msgid "Please enter a password to use for the wallet"
-msgstr ""
-
 #: src/js/controllers/import.js:107
 msgid "Please enter the seed"
-msgstr ""
-
-#: www/views/modals/pin.html:9
-msgid "Please enter your PIN"
-msgstr ""
-
-#: www/views/modals/password.html:6
-msgid "Please enter your password"
 msgstr ""
 
 #: www/views/accountDetails.html:144 www/views/accountDetails.html:66
@@ -1384,13 +1026,6 @@ msgstr ""
 msgid "Press again to exit"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:42
-msgid ""
-"Pretty much the same as to buy, just go the other way. First send Nanos to "
-"an exchange or directly to your Nano/local currency gateway if you've found "
-"one."
-msgstr ""
-
 #: www/views/includes/incomingDataMenu.html:80
 msgid "Private Key"
 msgstr ""
@@ -1410,12 +1045,6 @@ msgstr ""
 
 #: www/views/onboarding/notifications.html:3
 msgid "Push Notifications"
-msgstr ""
-
-#: www/views/preferencesNotifications.html:17
-msgid ""
-"Push notifications for Canoe are currently disabled. Enable them in the "
-"Settings app."
 msgstr ""
 
 #: www/views/export.html:15
@@ -1495,10 +1124,6 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: www/views/advancedSettings.html:31
-msgid "Repair"
-msgstr ""
-
 #: www/views/onboarding/welcome.html:9
 msgid "Restore from backup"
 msgstr ""
@@ -1533,10 +1158,6 @@ msgstr ""
 msgid "Scan again"
 msgstr ""
 
-#: www/views/tab-export-qrCode.html:7
-msgid "Scan this QR code to import seed into another application"
-msgstr ""
-
 #: src/js/services/fingerprintService.js:51
 msgid "Scan your fingerprint please"
 msgstr ""
@@ -1565,20 +1186,12 @@ msgstr ""
 msgid "Search your currency"
 msgstr ""
 
-#: www/views/preferencesSecurity.html:3 www/views/tab-settings.html:118
-msgid "Security Preferences"
-msgstr ""
-
 #: www/views/tab-import-file.html:7
 msgid "Select a backup file"
 msgstr ""
 
 #: src/js/controllers/tab-receive.js:90
 msgid "Select an account"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:40
-msgid "Sell online"
 msgstr ""
 
 #: www/views/feedback/send.html:13 www/views/feedback/send.html:43
@@ -1588,10 +1201,6 @@ msgstr ""
 
 #: www/views/feedback/send.html:3 www/views/tab-settings.html:54
 msgid "Send Feedback"
-msgstr ""
-
-#: www/views/addressbook.view.html:35
-msgid "Send Nano"
 msgstr ""
 
 #: www/views/includes/logOptions.html:17 www/views/tab-export-file.html:45
@@ -1664,24 +1273,12 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/js/controllers/feedback/complete.js:5 www/views/tab-settings.html:80
-msgid "Share Canoe"
-msgstr ""
-
 #: www/views/feedback/complete.html:17 www/views/feedback/complete.html:26
 msgid "Share the love by inviting your friends."
 msgstr ""
 
 #: www/views/tab-send.html:42
 msgid "Show Account"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:33
-msgid "Show Account Number"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:30
-msgid "Show Balance"
 msgstr ""
 
 #: www/views/tab-send.html:64
@@ -1693,9 +1290,7 @@ msgid "Signing transaction"
 msgstr ""
 
 #: www/views/onboarding/backupRequest.html:6
-msgid ""
-"Since only you control your money, you’ll need to save your wallet seed in "
-"case this app is deleted."
+msgid "Since only you control your money, you’ll need to save your wallet seed in case this app is deleted."
 msgstr ""
 
 #: www/views/onboarding/collectEmail.html:40 www/views/onboarding/tour.html:11
@@ -1710,28 +1305,8 @@ msgstr ""
 msgid "Slide to send"
 msgstr ""
 
-#: www/views/preferencesSecurity.html:26
-msgid "Sneak Peek"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:27
-msgid ""
-"Sneak peek allows you show information without the need of typing your "
-"password wallet."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:14
-msgid ""
-"So, now you want to buy some Nanos and play arround. Or maybe, you've got "
-"some in your Canoe wallet and want to get 'real money' ?"
-msgstr ""
-
 #: www/views/accountDetails.html:168
 msgid "Spending this balance will need significant Bitcoin network fees"
-msgstr ""
-
-#: www/views/tab-send.html:33
-msgid "Start sending Nano"
 msgstr ""
 
 #: www/views/paperWallet.html:7
@@ -1778,16 +1353,7 @@ msgid "Thanks!"
 msgstr ""
 
 #: src/js/controllers/feedback/send.js:72
-msgid ""
-"That's exciting to hear. We'd love to earn that fifth star from you – how "
-"could we improve your experience?"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:19
-msgid ""
-"The Canoe team does not work with any of the web sites listed below. Nano, "
-"just like any other cryptocurrency is highly volatile so don't put too much "
-"money into this and hodl !"
+msgid "That's exciting to hear. We'd love to earn that fifth star from you – how could we improve your experience?"
 msgstr ""
 
 #: www/views/modals/wallet-balance.html:55
@@ -1795,33 +1361,15 @@ msgid "The amount of bitcoin immediately spendable from this wallet."
 msgstr ""
 
 #: www/views/modals/wallet-balance.html:93
-msgid ""
-"The amount of bitcoin stored in this wallet that is allocated as inputs to "
-"your pending transaction proposals. The amount is determined using unspent "
-"transaction outputs associated with this wallet and may be more than the "
-"actual amounts associated with your pending transaction proposals."
+msgid "The amount of bitcoin stored in this wallet that is allocated as inputs to your pending transaction proposals. The amount is determined using unspent transaction outputs associated with this wallet and may be more than the actual amounts associated with your pending transaction proposals."
 msgstr ""
 
 #: www/views/modals/wallet-balance.html:74
-msgid ""
-"The amount of bitcoin stored in this wallet with less than 1 blockchain "
-"confirmation."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:26
-msgid "The easy way"
+msgid "The amount of bitcoin stored in this wallet with less than 1 blockchain confirmation."
 msgstr ""
 
 #: src/js/controllers/onboarding/terms.js:21
-msgid ""
-"The official English Terms of Service are available on the BitPay website."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:34
-msgid ""
-"The ones selling Nanos are pretty rare as for now, so, if you don't find "
-"one, being able to buy a fast and low feas cryptocurrency instead : Ether, "
-"Litecoin or Bitcoincash can save you money and time."
+msgid "The official English Terms of Service are available on the BitPay website."
 msgstr ""
 
 #: www/views/modals/txp-details.html:26
@@ -1844,10 +1392,6 @@ msgstr ""
 msgid "The wallet server URL"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:44
-msgid "There is a new version of Canoe available"
-msgstr ""
-
 #: src/js/controllers/import.js:102 src/js/controllers/import.js:81
 msgid "There is an error in the form"
 msgstr ""
@@ -1861,25 +1405,12 @@ msgstr ""
 msgid "This app is fantastic!"
 msgstr ""
 
-#: www/views/onboarding/tour.html:46
-msgid "This app stores your Nanos with cutting-edge security."
-msgstr ""
-
-#: www/views/onboarding/createPassword.html:51
-msgid "This password encrypts your wallet, do not forget it!"
-msgstr ""
-
 #: www/views/tx-details.html:91
-msgid ""
-"This transaction amount is too small compared to current Bitcoin network "
-"fees. Spending these funds will need a Bitcoin network fee cost comparable "
-"to the funds itself."
+msgid "This transaction amount is too small compared to current Bitcoin network fees. Spending these funds will need a Bitcoin network fee cost comparable to the funds itself."
 msgstr ""
 
 #: www/views/tx-details.html:87
-msgid ""
-"This transaction could take a long time to confirm or could be dropped due "
-"to the low fees set by the sender"
+msgid "This transaction could take a long time to confirm or could be dropped due to the low fees set by the sender"
 msgstr ""
 
 #: www/views/accountDetails.html:20
@@ -1887,31 +1418,17 @@ msgid "This view not implemented yet."
 msgstr ""
 
 #: www/views/accountDetails.html:111 www/views/accountDetails.html:33
-msgid ""
-"This wallet is not registered at the given Bitcore Wallet Service (BWS). You "
-"can recreate it from the local information."
+msgid "This wallet is not registered at the given Bitcore Wallet Service (BWS). You can recreate it from the local information."
 msgstr ""
 
 #: www/views/modals/txp-details.html:136 www/views/tx-details.html:121
 msgid "Timeline"
 msgstr ""
 
-#: www/views/preferencesSecurity.html:20
-msgid "Timeout"
-msgstr ""
-
 #: www/views/confirm.html:26 www/views/includes/output.html:2
 #: www/views/modals/txp-details.html:109 www/views/modals/txp-details.html:53
 #: www/views/tx-details.html:41 www/views/tx-details.html:53
 msgid "To"
-msgstr ""
-
-#: www/views/tab-send.html:37
-msgid "To get started, you need Nano. Share your account to receive Nano."
-msgstr ""
-
-#: www/views/tab-send.html:38
-msgid "To get started, you need an Account in your wallet to receive Nano."
 msgstr ""
 
 #: www/views/modals/wallet-balance.html:23
@@ -1951,20 +1468,12 @@ msgstr ""
 msgid "Try again in {{expires}}"
 msgstr ""
 
-#: www/views/preferencesAlias.html:12
-msgid "Type below to see if an alias is free to use."
-msgstr ""
-
 #: src/js/controllers/backup.js:33
 msgid "Uh oh..."
 msgstr ""
 
 #: www/views/tx-details.html:100
 msgid "Unconfirmed"
-msgstr ""
-
-#: www/views/modals/password.html:27
-msgid "Unlock Canoe"
 msgstr ""
 
 #: www/views/accountDetails.html:185
@@ -1985,10 +1494,6 @@ msgstr ""
 
 #: www/views/activity.html:14
 msgid "Updating... Please stand by"
-msgstr ""
-
-#: www/views/advancedSettings.html:12
-msgid "Use Server Side PoW"
 msgstr ""
 
 #: src/js/services/onGoingProcess.js:27
@@ -2024,9 +1529,7 @@ msgid "View on blockchain"
 msgstr ""
 
 #: www/views/accountDetails.html:177
-msgid ""
-"WARNING: Key derivation is not working on this device/wallet. Actions cannot "
-"be performed on this wallet."
+msgid "WARNING: Key derivation is not working on this device/wallet. Actions cannot be performed on this wallet."
 msgstr ""
 
 #: www/views/tab-settings.html:122
@@ -2041,35 +1544,12 @@ msgstr ""
 msgid "Wallet File"
 msgstr ""
 
-#: www/views/preferencesSecurity.html:10
-msgid ""
-"Wallet Password\n"
-"\t\t\t<div class=\"list settings-list\">\n"
-"\t\t\t\t<p class=\"item-description\" translate=\"\">A wallet password is "
-"used to encrypt your Nano wallet when saving it on your device.</p>\n"
-"\t\t\t\t<a class=\"item item-icon-left item-icon-right\" ui-sref=\"tabs."
-"preferencesSecurity.changePassword\">\n"
-"\t\t\t\t\t<i class=\"icon ion-ios-download-outline\"></i>\n"
-"\t\t\t\t\t<span translate=\"\">Change Password</span>\n"
-"\t\t\t\t\t<i class=\"icon bp-arrow-right\"></i>\n"
-"\t\t\t\t</a>\n"
-"\t\t\t\t<div class=\"item item-icon-left\">\n"
-"\t\t\t\t\t<i class=\"icon ion-ios-time-outline\"></i>\n"
-"\t\t\t\t\t<span translate=\"\">Timeout</span>\n"
-"\t\t\t\t</div>\n"
-"\t\t\t</div>"
-msgstr ""
-
 #: www/views/import.html:12
 msgid "Wallet Seed"
 msgstr ""
 
 #: www/views/backup.html:10
 msgid "Wallet seed not available"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:22
-msgid "Warning"
 msgstr ""
 
 #: src/js/controllers/addressbookView.js:42
@@ -2093,41 +1573,16 @@ msgstr ""
 msgid "We'd love to do better."
 msgstr ""
 
-#: src/js/controllers/feedback/send.js:76
-msgid "We're always looking for ways to improve Canoe."
-msgstr ""
-
-#: src/js/controllers/feedback/send.js:82
-msgid ""
-"We're always looking for ways to improve Canoe. How could we improve your "
-"experience?"
-msgstr ""
-
 #: www/views/includes/incomingDataMenu.html:6
 msgid "Website"
-msgstr ""
-
-#: www/views/preferencesLanguage.html:16
-msgid ""
-"We’re always looking for translation contributions! You can make corrections "
-"or help to make this app available in your native language by joining our "
-"community on POEditor."
 msgstr ""
 
 #: www/views/preferencesName.html:11
 msgid "What do you call this account?"
 msgstr ""
 
-#: www/views/preferencesAlias.html:11
-msgid "What public alias would you like to reserve?"
-msgstr ""
-
 #: www/views/onboarding/collectEmail.html:10
 msgid "Where would you like to receive email notifications about payments?"
-msgstr ""
-
-#: www/views/feedback/rateApp.html:10
-msgid "Would you be willing to rate Canoe in the app store?"
 msgstr ""
 
 #: www/views/onboarding/notifications.html:4
@@ -2150,24 +1605,8 @@ msgstr ""
 msgid "You can create a backup later from your wallet settings."
 msgstr ""
 
-#: src/js/controllers/preferencesLanguage.js:11
-msgid ""
-"You can make contributions by signing up on our POEditor community "
-"translation project. We’re looking forward to hearing from you!"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:46
-msgid "You can probably find more infos about all this on"
-msgstr ""
-
-#: www/views/tab-scan.html:16
-msgid "You can scan Nano addresses, payment requests and more."
-msgstr ""
-
 #: src/js/controllers/preferencesAbout.js:13
-msgid ""
-"You can see the latest developments and contribute to this open source app "
-"by visiting our project on GitHub."
+msgid "You can see the latest developments and contribute to this open source app by visiting our project on GitHub."
 msgstr ""
 
 #: www/views/backup.html:13
@@ -2175,45 +1614,11 @@ msgid "You can still export it from Advanced &gt; Export."
 msgstr ""
 
 #: www/views/onboarding/tour.html:32
-msgid ""
-"You can trade it for other currencies like US Dollars, Euros, or Pounds."
-msgstr ""
-
-#: www/views/onboarding/tour.html:19
-msgid "You can transfer Nano instantly to anyone, anywhere ."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:32
-msgid ""
-"You need to register to a web site that exchanges fiat (your local currency "
-"like $) to some crypto currency. This process can take some time, a week or "
-"so and they will ask for an id scan, proof of where you live at etc."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:33
-msgid ""
-"You should find a good reason to trust the web site you want to pick here. "
-"Google, speak with friends who are into cryptocurrencies. Then this web site "
-"should probably be located in your country. Another important point is : do "
-"they sell directly Nanos ?"
+msgid "You can trade it for other currencies like US Dollars, Euros, or Pounds."
 msgstr ""
 
 #: www/views/preferencesNotifications.html:34
-msgid ""
-"You'll receive email notifications about payments sent and received from "
-"your wallets."
-msgstr ""
-
-#: www/views/tab-home.html:50
-msgid "Your Nano Wallet is ready!"
-msgstr ""
-
-#: www/views/includes/confirmBackupPopup.html:6
-msgid "Your Nano wallet seed is backed up!"
-msgstr ""
-
-#: www/views/changePassword.html:15
-msgid "Your current password"
+msgid "You'll receive email notifications about payments sent and received from your wallets."
 msgstr ""
 
 #: www/views/feedback/send.html:42
@@ -2225,18 +1630,12 @@ msgstr ""
 msgid "Your password"
 msgstr ""
 
-#: src/js/controllers/changePasswordController.js:6
-msgid "Your password has been changed"
-msgstr ""
-
 #: www/views/onboarding/backupRequest.html:10
 msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr ""
 
 #: src/js/services/walletService.js:28
-msgid ""
-"Your wallet key will be encrypted. The Spending Password cannot be "
-"recovered. Be sure to write it down."
+msgid "Your wallet key will be encrypted. The Spending Password cannot be recovered. Be sure to write it down."
 msgstr ""
 
 #: www/views/accountDetails.html:133 www/views/accountDetails.html:55
@@ -2249,10 +1648,6 @@ msgstr ""
 msgid "[Scanning Funds]"
 msgstr ""
 
-#: www/views/addressbook.edit.html:33
-msgid "jode.doe@example.com"
-msgstr ""
-
 #: www/views/includes/available-balance.html:8
 msgid "locked by pending payments"
 msgstr ""
@@ -2261,63 +1656,494 @@ msgstr ""
 msgid "name@example.com"
 msgstr ""
 
+#: www/views/accountDetails.html:213
+msgid "{{updatingTxHistoryProgress}} transactions downloaded"
+msgstr ""
+
+#: www/views/onboarding/disclaimer.html:43
+msgid "I have read, understood, and agree to the <a ng-click=\"openTerms()\" href=\"javascript:void(0)\" translate=\"\">Terms of Use</a>."
+msgstr ""
+
+#: www/views/feedback/rateApp.html:7
+msgid "5-star ratings help us get Canoe into more hands, and more users means more resources can be committed to the app!"
+msgstr ""
+
+#: www/views/changePassword.html:24 www/views/onboarding/createPassword.html:13
+msgid "At least 8 Characters. Make it good!"
+msgstr ""
+
+#: www/views/changePassword.html:3 www/views/changePassword.html:59
+#: www/views/preferencesSecurity.html:15
+msgid "Change Password"
+msgstr ""
+
+#: www/views/changePassword.html:31 www/views/onboarding/createPassword.html:21
+msgid "Confirm New Password"
+msgstr ""
+
+#: www/views/feedback/rateCard.html:3
+msgid "How do you like Canoe?"
+msgstr ""
+
+#: www/views/onboarding/tour.html:50
+msgid "Let's Start"
+msgstr ""
+
+#: www/views/changePassword.html:22 www/views/onboarding/createPassword.html:11
+msgid "New Password"
+msgstr ""
+
+#: www/views/changePassword.html:13
+msgid "Old Password"
+msgstr ""
+
+#: www/views/changePassword.html:33 www/views/onboarding/createPassword.html:28
+msgid "One more time."
+msgstr ""
+
+#: www/views/changePassword.html:46 www/views/onboarding/createPassword.html:38
+msgid "Password too short"
+msgstr ""
+
+#: www/views/changePassword.html:52 www/views/onboarding/createPassword.html:45
+msgid "Passwords don't match"
+msgstr ""
+
+#: www/views/changePassword.html:42 www/views/onboarding/createPassword.html:34
+msgid "Passwords match"
+msgstr ""
+
+#: www/views/preferencesNotifications.html:17
+msgid "Push notifications for Canoe are currently disabled. Enable them in the Settings app."
+msgstr ""
+
+#: src/js/controllers/feedback/complete.js:5 www/views/tab-settings.html:80
+msgid "Share Canoe"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:33
+msgid "Show Account Number"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:30
+msgid "Show Balance"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:26
+msgid "Sneak Peek"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:27
+msgid "Sneak peek allows you show information without the need of typing your password wallet."
+msgstr ""
+
+#: src/js/controllers/tab-home.js:44
+msgid "There is a new version of Canoe available"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:20
+msgid "Timeout"
+msgstr ""
+
+#: src/js/controllers/feedback/send.js:76
+msgid "We're always looking for ways to improve Canoe."
+msgstr ""
+
+#: src/js/controllers/feedback/send.js:82
+msgid "We're always looking for ways to improve Canoe. How could we improve your experience?"
+msgstr ""
+
+#: www/views/feedback/rateApp.html:10
+msgid "Would you be willing to rate Canoe in the app store?"
+msgstr ""
+
+#: www/views/addressbook.add.html:57 www/views/addressbook.edit.html:58
+msgid "@joedoe"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:12
+msgid "A wallet password is used to encrypt your Nano wallet when saving it on your device."
+msgstr ""
+
+#: www/views/preferencesAlias.html:4
+msgid "Account Alias"
+msgstr ""
+
+#: www/views/preferencesColor.html:4
+msgid "Account Color"
+msgstr ""
+
+#: www/views/addressbook.add.html:54 www/views/addressbook.edit.html:55
+#: www/views/addressbook.view.html:30 www/views/preferences.html:22
+#: www/views/preferencesAlias.html:17
+msgid "Alias"
+msgstr ""
+
+#: www/views/modals/wallet-balance.html:18
+msgid "All of your Nano Wallet balance may not be available for immediate spending."
+msgstr ""
+
+#: www/views/backupWarning.html:14
+msgid "Anyone with your seed can access or spend your nano."
+msgstr ""
+
+#: src/js/controllers/advancedSettings.js:17
+msgid "Are you sure you want to repair wallet?"
+msgstr ""
+
+#: www/views/backup.html:3 www/views/tab-settings.html:21
+msgid "Backup seed"
+msgstr ""
+
+#: www/views/onboarding/createPassword.html:52
+msgid "Create Wallet"
+msgstr ""
+
+#: www/views/onboarding/createPassword.html:5
+msgid "Create your Password"
+msgstr ""
+
+#: www/views/preferencesLanguage.html:21
+msgid "Don't see your language? Sign up on POEditor! We'd love to support your language."
+msgstr ""
+
+#: www/views/addressbook.edit.html:4
+msgid "Edit Contact"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:42
+msgid "Enable Petty Nano"
+msgstr ""
+
+#: www/views/tab-export-file.html:10
+msgid "Enter password"
+msgstr ""
+
+#: www/views/advancedSettings.html:14
+msgid "If enabled, Proof Of Work is delegated to the Canoe server side."
+msgstr ""
+
+#: www/views/modals/password.html:8
+msgid "Incorrect password, try again."
+msgstr ""
+
+#: www/views/addressbook.edit.html:24
+msgid "Joe Doe"
+msgstr ""
+
+#: www/views/onboarding/welcome.html:5
+msgid "Join the future of money,<br>get started with Nano."
+msgstr ""
+
+#: www/views/tab-settings.html:73
+msgid "Lock Canoe"
+msgstr ""
+
+#: www/views/addressbook.add.html:38
+msgid "Nano Account"
+msgstr ""
+
+#: www/views/onboarding/disclaimer.html:15
+msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
+msgstr ""
+
+#: www/views/onboarding/tour.html:31
+msgid "Nano is feeless."
+msgstr ""
+
+#: www/views/onboarding/tour.html:18
+msgid "Nano is instant,<br>digital money."
+msgstr ""
+
+#: www/views/onboarding/tour.html:45
+msgid "Nanos are secure."
+msgstr ""
+
+#: src/js/controllers/confirm.js:73
+msgid "No accounts available"
+msgstr ""
+
+#: www/views/onboarding/backupRequest.html:5
+msgid "No backup, no Nano."
+msgstr ""
+
+#: src/js/controllers/preferencesLanguage.js:12
+msgid "Open POEditor"
+msgstr ""
+
+#: src/js/controllers/preferencesLanguage.js:10
+msgid "Open Translation Site"
+msgstr ""
+
+#: www/views/tab-import-file.html:18
+msgid "Password to decrypt"
+msgstr ""
+
+#: www/views/tab-import-phrase.html:28
+msgid "Password to encrypt"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:38 www/views/preferencesSecurity.html:45
+msgid "Petty Nano"
+msgstr ""
+
+#: src/js/controllers/import.js:116
+msgid "Please enter a password to use for the wallet"
+msgstr ""
+
+#: www/views/modals/password.html:6
+msgid "Please enter your password"
+msgstr ""
+
+#: www/views/advancedSettings.html:31
+msgid "Repair"
+msgstr ""
+
+#: www/views/addressbook.view.html:35
+msgid "Send Nano"
+msgstr ""
+
+#: www/views/tab-send.html:33
+msgid "Start sending Nano"
+msgstr ""
+
+#: www/views/onboarding/tour.html:46
+msgid "This app stores your Nanos with cutting-edge security."
+msgstr ""
+
+#: www/views/onboarding/createPassword.html:51
+msgid "This password encrypts your wallet, do not forget it!"
+msgstr ""
+
+#: www/views/tab-send.html:37
+msgid "To get started, you need Nano. Share your account to receive Nano."
+msgstr ""
+
+#: www/views/tab-send.html:38
+msgid "To get started, you need an Account in your wallet to receive Nano."
+msgstr ""
+
+#: www/views/preferencesAlias.html:12
+msgid "Type below to see if an alias is free to use."
+msgstr ""
+
+#: www/views/advancedSettings.html:12
+msgid "Use Server Side PoW"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:10
+msgid "Wallet Password\n"
+"\t\t\t<div class=\"list settings-list\">\n"
+"\t\t\t\t<p class=\"item-description\" translate=\"\">A wallet password is used to encrypt your Nano wallet when saving it on your device.</p>\n"
+"\t\t\t\t<a class=\"item item-icon-left item-icon-right\" ui-sref=\"tabs.preferencesSecurity.changePassword\">\n"
+"\t\t\t\t\t<i class=\"icon ion-ios-download-outline\"></i>\n"
+"\t\t\t\t\t<span translate=\"\">Change Password</span>\n"
+"\t\t\t\t\t<i class=\"icon bp-arrow-right\"></i>\n"
+"\t\t\t\t</a>\n"
+"\t\t\t\t<div class=\"item item-icon-left\">\n"
+"\t\t\t\t\t<i class=\"icon ion-ios-time-outline\"></i>\n"
+"\t\t\t\t\t<span translate=\"\">Timeout</span>\n"
+"\t\t\t\t</div>\n"
+"\t\t\t</div>"
+msgstr ""
+
+#: www/views/preferencesLanguage.html:16
+msgid "We’re always looking for translation contributions! You can make corrections or help to make this app available in your native language by joining our community on POEditor."
+msgstr ""
+
+#: www/views/preferencesAlias.html:11
+msgid "What public alias would you like to reserve?"
+msgstr ""
+
+#: src/js/controllers/preferencesLanguage.js:11
+msgid "You can make contributions by signing up on our POEditor community translation project. We’re looking forward to hearing from you!"
+msgstr ""
+
+#: www/views/tab-scan.html:16
+msgid "You can scan Nano addresses, payment requests and more."
+msgstr ""
+
+#: www/views/onboarding/tour.html:19
+msgid "You can transfer Nano instantly to anyone, anywhere ."
+msgstr ""
+
+#: www/views/tab-home.html:50
+msgid "Your Nano Wallet is ready!"
+msgstr ""
+
+#: www/views/includes/confirmBackupPopup.html:6
+msgid "Your Nano wallet seed is backed up!"
+msgstr ""
+
+#: www/views/addressbook.edit.html:33
+msgid "jode.doe@example.com"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:46
+msgid "<span translate=\"\">You can probably find more infos about all this on</span>&nbsp;<a href=\"https://www.reddit.com/r/nanocurrency/\">reddit nanocurrency</a>"
+msgstr ""
+
+#: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
+msgid "Account"
+msgstr "Konto"
+
+#: src/js/controllers/create.js:19 src/js/controllers/preferencesName.js:13
+msgid "An account already exists with that name"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:49
+msgid "Be carefull with all these steps, keep your seed backed up and you should be all fine. Enjoy feeless and instant payments with Nano and Canoe !"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:30
+msgid "Buy online"
+msgstr ""
+
+#: www/views/modals/pin.html:10
+msgid "Confirm your PIN"
+msgstr ""
+
+#: src/js/controllers/import.js:63
+msgid "Could not decrypt wallet, check your password"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:18
+msgid "Disclamer"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:36
+msgid "Do remember, your Nanos are only safe when in your wallet. If you keep it on an exchange site it could get stolen by hackers or even the site owners."
+msgstr ""
+
+#: www/views/preferencesName.html:18
+msgid "Enter a descriptive name"
+msgstr ""
+
+#: src/js/controllers/export.js:30
+msgid "Failed to generate seed QR code"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:15
+msgid "Here's how to do..."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:3
+msgid "How to buy or sell Nanos"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:12 www/views/tab-settings.html:68
+msgid "How to buy/sell Nanos"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:23
+msgid "If you are used to buying and selling cryptos, don't waste your time, you will probably not learn anything here."
+msgstr ""
+
+#: src/js/controllers/import.js:133
+msgid "If you import a wallet, your current accounts will not be visible in Canoe anymore, so you could lose your Nanos.<br/><br/>You want to make sure that you backed up your wallet and remember your password or, at least, make sure you know the 64 characters of your seed before you do that."
+msgstr ""
+
+#: www/views/modals/pin.html:12
+msgid "Incorrect PIN, try again."
+msgstr ""
+
+#: src/js/controllers/import.js:32
+msgid "Incorrect code format for a seed:"
+msgstr ""
+
+#: src/js/controllers/changePasswordController.js:6
+msgid "Information"
+msgstr ""
+
+#: src/js/controllers/import.js:42
+msgid "Not a seed QR code:"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:27
+msgid "Obviously, you can buy and sell Nanos to a friend. Canoe displays amounts both in NANO and and in your currency so it's easy to convert."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:35
+msgid "Once you got some cryptocurrency, say Bitcoins, register to an exchange like"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:43
+msgid "Once your Nanos are on the exchange, sell it for Bitcoins (or other) and send them to your Bitcoin/local currency gateway. Finally, send your local money to your bank account, and you are done !"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:39
+msgid "Petty Nano allows you to designate an amount to transfer without the need to enter a password. This decreases the security of the petty Nano, so choose wisely!"
+msgstr ""
+
+#: www/views/modals/pin.html:9
+msgid "Please enter your PIN"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:42
+msgid "Pretty much the same as to buy, just go the other way. First send Nanos to an exchange or directly to your Nano/local currency gateway if you've found one."
+msgstr ""
+
+#: www/views/tab-export-qrCode.html:7
+msgid "Scan this QR code to import seed into another application"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:3 www/views/tab-settings.html:118
+msgid "Security Preferences"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:40
+msgid "Sell online"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:14
+msgid "So, now you want to buy some Nanos and play arround. Or maybe, you've got some in your Canoe wallet and want to get 'real money' ?"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:19
+msgid "The Canoe team does not work with any of the web sites listed below. Nano, just like any other cryptocurrency is highly volatile so don't put too much money into this and hodl !"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:26
+msgid "The easy way"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:34
+msgid "The ones selling Nanos are pretty rare as for now, so, if you don't find one, being able to buy a fast and low feas cryptocurrency instead : Ether, Litecoin or Bitcoincash can save you money and time."
+msgstr ""
+
+#: www/views/modals/password.html:27
+msgid "Unlock Canoe"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:22
+msgid "Warning"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:46
+msgid "You can probably find more infos about all this on"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:32
+msgid "You need to register to a web site that exchanges fiat (your local currency like $) to some crypto currency. This process can take some time, a week or so and they will ask for an id scan, proof of where you live at etc."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:33
+msgid "You should find a good reason to trust the web site you want to pick here. Google, speak with friends who are into cryptocurrencies. Then this web site should probably be located in your country. Another important point is : do they sell directly Nanos ?"
+msgstr ""
+
+#: www/views/changePassword.html:15
+msgid "Your current password"
+msgstr ""
+
+#: src/js/controllers/changePasswordController.js:6
+msgid "Your password has been changed"
+msgstr ""
+
 #: www/views/tab-howToBuyNanos.html:35
 msgid "or"
 msgstr ""
 
 #: www/views/tab-howToBuyNanos.html:35
-msgid ""
-"that trades Nanos. Send your Bitcoins to your account on this site and trade "
-"it for Nanos. Once you get your precious Nanos, send it to your Canoe wallet "
-"using your xrb_... address (you can copy it clicking on the receive button "
-"below)."
+msgid "that trades Nanos. Send your Bitcoins to your account on this site and trade it for Nanos. Once you get your precious Nanos, send it to your Canoe wallet using your xrb_... address (you can copy it clicking on the receive button below)."
 msgstr ""
 
-#: www/views/accountDetails.html:213
-msgid "{{updatingTxHistoryProgress}} transactions downloaded"
-msgstr ""
-
-#~ msgid "Amount below minimum allowed"
-#~ msgstr "Summa under tillåtet minimum"
-
-#~ msgid "Add Memo"
-#~ msgstr "Lägg till memo"
-
-#~ msgid "All Addresses"
-#~ msgstr "Alla adresser"
-
-#~ msgid "Anyone with your seed can access or spend your raiblocks."
-#~ msgstr ""
-#~ "Ifall någon tar del av din seed kan de nå och spendera dina RaiBlocks."
-
-#~ msgid "Your RaiBlocks Wallet is backed up!"
-#~ msgstr "Din RaiBlocks-plånbok är säkerhetskopierad!"
-
-#~ msgid "Your RaiBlocks Wallet is ready!"
-#~ msgstr "Din RaiBlocks-plånbok är redo!"
-
-#~ msgid "(Trusted)"
-#~ msgstr "(Pålitlig)"
-
-#~ msgid "Account Id"
-#~ msgstr "Kontoid"
-
-#~ msgid "Add a password"
-#~ msgstr "Lägg till ett lösenord"
-
-#~ msgid "Join the future of crypto money,<br>get started with RaiBlocks."
-#~ msgstr "Gå med i framtidens kryptovaluta,<br>kom igång med RaiBlocks."
-
-#~ msgid "You can transfer RaiBlocks instantly to anyone worldwide."
-#~ msgstr ""
-#~ "Du kan överföra RaiBlocks ögonblickligen till vem som helst i hela "
-#~ "världen."
-
-#~ msgid "Activity"
-#~ msgstr "Aktivitet"
-
-#~ msgid "Add Account"
-#~ msgstr "Lägg till konto"
-
-#~ msgid "All"
-#~ msgstr "Alla"

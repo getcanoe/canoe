@@ -27,7 +27,7 @@ msgstr "NOT NEEDED"
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "سيراجع أحد أفراد فريق العمل ردكم في أقرب فرصة."
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:171
 msgid "About"
 msgstr "عنا"
 
@@ -40,7 +40,7 @@ msgstr "مقبول"
 msgid "Account Information"
 msgstr "معلومات الحساب"
 
-#: www/views/preferencesAlias.html:4
+#: www/views/preferencesName.html:4
 msgid "Account Name"
 msgstr "اسم الحساب"
 
@@ -52,17 +52,13 @@ msgstr "اعدادات الحساب"
 msgid "Account name"
 msgstr "اسم الحساب"
 
-#: www/views/tab-home.html:83 www/views/tab-home.html:97
+#: www/views/tab-home.html:84 www/views/tab-home.html:98
 msgid "Accounts"
 msgstr "حسابات"
 
 #: www/views/addressbook.add.html:4 www/views/addressbook.html:22
 msgid "Add Contact"
 msgstr "اضافة جهة اتصال"
-
-#: www/views/confirm.html:67
-msgid "Add Memo"
-msgstr "اضف مذكرة"
 
 #: www/views/add.html:3
 msgid "Add account"
@@ -72,11 +68,11 @@ msgstr "اضف حساب"
 msgid "Add as a contact"
 msgstr "اضف كجهة اتصال"
 
-#: src/js/controllers/confirm.js:196
+#: src/js/controllers/confirm.js:205
 msgid "Add description"
 msgstr "اضف وصف"
 
-#: www/views/addressbook.view.html:26 www/views/customAmount.html:28
+#: www/views/customAmount.html:28
 msgid "Address"
 msgstr "عنوان"
 
@@ -84,25 +80,13 @@ msgstr "عنوان"
 msgid "Address Book"
 msgstr "دفتر العناوين"
 
-#: www/views/addresses.html:64
-msgid "Addresses With Balance"
-msgstr "حسابات ذات أرصدة"
-
-#: www/views/tab-settings.html:144
+#: www/views/tab-settings.html:164
 msgid "Advanced"
 msgstr "متقدم"
 
 #: www/views/advancedSettings.html:3
 msgid "Advanced Settings"
 msgstr "اعدادات متقدمة"
-
-#: www/views/allAddresses.html:3
-msgid "All Addresses"
-msgstr "كل العناوين"
-
-#: www/views/modals/wallet-balance.html:18
-msgid "All of your RaiBlocks Wallet balance may not be available for immediate spending."
-msgstr "يحتمل أن لا يكون كل حسابك متوفر للصرف فوراً"
 
 #: www/views/tab-scan.html:21
 msgid "Allow Camera Access"
@@ -116,7 +100,7 @@ msgstr "السماح للتنبيهات"
 msgid "Almost done! Let's review."
 msgstr "انتهينا تقريبا! لنراجع."
 
-#: www/views/preferencesAltCurrency.html:4 www/views/tab-settings.html:88
+#: www/views/preferencesAltCurrency.html:4 www/views/tab-settings.html:108
 msgid "Alternative Currency"
 msgstr "علمة بديلة"
 
@@ -125,35 +109,19 @@ msgstr "علمة بديلة"
 msgid "Amount"
 msgstr "المبلغ"
 
-#: src/js/services/bwcError.js:110
-msgid "Amount below minimum allowed"
-msgstr "الحد الأدنى المسموح"
-
 #: www/views/includes/walletHistory.html:31
 msgid "Amount too low to spend"
 msgstr "المبلغ قليل"
 
-#: src/js/controllers/tab-home.js:152
+#: src/js/controllers/tab-home.js:157
 msgid "An update to this app is available. For your security, please update to the latest version."
 msgstr "يوجد تحديث للتطبيق. من أجل أمانك, الرجاء التحديث لأخر نسخة."
-
-#: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your raiblocks."
-msgstr "يمكن لأي شخص لديه النواة (seed) أن يصرف عملة الريبلوك التي تملكها."
-
-#: www/views/addresses.html:94
-msgid "Approximate Bitcoin network fee to transfer wallet's balance (with normal priority)"
-msgstr "NOT NEEDED"
 
 #: www/views/backupWarning.html:10
 msgid "Are you being watched?"
 msgstr "هل انت مراقب؟"
 
-#: src/js/controllers/preferencesExternal.js:15
-msgid "Are you being watched? Anyone with your recovery phrase can access or spend your bitcoin."
-msgstr "NOT NEEDED"
-
-#: src/js/controllers/addressbookView.js:31
+#: src/js/controllers/addressbookView.js:43
 msgid "Are you sure you want to delete this contact?"
 msgstr "هل انت متأكد من الغاء جهة الإتصال؟"
 
@@ -165,17 +133,13 @@ msgstr "هل انت متأكد من الغاء المحفظة؟"
 msgid "Are you sure you want to reject this transaction?"
 msgstr "هل انت متأكد من رفض هذه العملية؟"
 
-#: src/js/controllers/modals/txpDetails.js:169
+#: src/js/controllers/modals/txpDetails.js:168
 msgid "Are you sure you want to remove this transaction?"
 msgstr "هل أنت متأكد من حذف هذه العملية؟"
 
 #: src/js/controllers/onboarding/backupRequest.js:21
 msgid "Are you sure you want to skip it?"
 msgstr "هل انت متأكد من التخطي؟"
-
-#: www/views/includes/walletInfo.html:10
-msgid "Auditable"
-msgstr "تدقيق"
 
 #: www/views/modals/wallet-balance.html:42
 msgid "Available"
@@ -185,31 +149,17 @@ msgstr "متوفر"
 msgid "Available Balance"
 msgstr "رصيد متوفر"
 
-#: www/views/tab-create-account.html:111
-msgid "BIP32 path for address derivation"
-msgstr "NOT NEEDED"
-
 #: www/views/includes/backupNeededPopup.html:7
 msgid "Backup Needed"
-msgstr "يجب عليك خلق نسخة احتياطية"
-
-#: www/views/includes/walletListSettings.html:12 www/views/preferences.html:42
-msgid "Backup needed"
 msgstr "يجب عليك خلق نسخة احتياطية"
 
 #: www/views/includes/backupNeededPopup.html:9
 msgid "Backup now"
 msgstr "اخلق نسخة احتياطية الان"
 
-#: www/views/onboarding/backupRequest.html:11 www/views/tab-export-file.html:89
-#: www/views/tab-settings.html:29
+#: www/views/onboarding/backupRequest.html:11 www/views/tab-export-file.html:52
 msgid "Backup wallet"
 msgstr "نسخ احتياطي للمحفظة"
-
-#: src/js/controllers/prefrencesSecurity.js:79
-#: src/js/controllers/prefrencesSecurityController.js:79
-msgid "Backup your wallet before using this function"
-msgstr "تأكد من نسخ محفظتك إحتياطياً قبل استخدام هذه الوظيفة"
 
 #: www/views/includes/confirmBackupPopup.html:7
 msgid "Be sure to store your seed in a secure place. If this app is deleted, or your device stolen, the seed is the only way to recreate the wallet."
@@ -219,7 +169,7 @@ msgstr "تأكد من حفظ النواة (seed) في مكان امن. اذا ح
 msgid "Bitcoin Address"
 msgstr "NOT NEEDED"
 
-#: www/views/tab-settings.html:110
+#: www/views/tab-settings.html:130
 msgid "Bitcoin Cash Wallets"
 msgstr "NOT NEEDED"
 
@@ -248,9 +198,10 @@ msgstr "احذر من فقدان النواة (seed)"
 msgid "Buy &amp; Sell Bitcoin"
 msgstr "NOT NEEDED"
 
-#: src/js/controllers/confirm.js:274 src/js/services/popupService.js:62
+#: src/js/controllers/confirm.js:264 src/js/services/popupService.js:62
 #: src/js/services/popupService.js:73 www/views/addressbook.add.html:10
-#: www/views/feedback/send.html:5 www/views/includes/incomingDataMenu.html:22
+#: www/views/addressbook.edit.html:10 www/views/feedback/send.html:5
+#: www/views/includes/incomingDataMenu.html:22
 #: www/views/includes/incomingDataMenu.html:54
 #: www/views/includes/incomingDataMenu.html:73
 #: www/views/includes/incomingDataMenu.html:97 www/views/includes/note.html:6
@@ -259,49 +210,23 @@ msgid "Cancel"
 msgstr "الغاء"
 
 #: src/js/controllers/onboarding/createPassword.js:36
-#: src/js/controllers/onboarding/tour.js:56
 msgid "Cannot Create Wallet"
 msgstr "لا يمكن خلق محفظة"
-
-#: src/js/services/bwcError.js:62
-msgid "Canoeer already in this wallet"
-msgstr "NOT NEEDED"
-
-#: src/js/services/bwcError.js:77
-msgid "Canoeer already voted on this spend proposal"
-msgstr "NOT NEEDED"
-
-#: src/js/services/bwcError.js:107
-msgid "Canoeer data mismatch"
-msgstr "NOT NEEDED"
-
-#: www/views/preferencesExternal.html:19
-msgid "Check installation and retry."
-msgstr "تأكد من عملية التنصيب ثم قم بإعادة المحاولة."
 
 #: www/views/tab-import-file.html:4
 msgid "Choose a backup file from your computer"
 msgstr "الرجاء اختيار ملف نسخة احتياطية من جهاز الكمبيوتر"
 
-#: www/views/modals/wallets.html:9
-msgid "Choose your destination wallet"
-msgstr "الرجاء اختيار المحفظة الوجهة"
-
-#: www/views/modals/wallets.html:10
-msgid "Choose your source wallet"
-msgstr "الرجاء اختيار المحفظة المصدر"
-
 #: src/js/controllers/modals/txpDetails.js:47
 msgid "Click to accept"
 msgstr "اضغط للموافقة"
 
-#: src/js/controllers/confirm.js:183 src/js/controllers/modals/txpDetails.js:40
+#: src/js/controllers/confirm.js:192 src/js/controllers/modals/txpDetails.js:40
 msgid "Click to send"
 msgstr "اضغط للإرسال"
 
 #: www/views/customAmount.html:4 www/views/modals/pin.html:3
 #: www/views/modals/search.html:3 www/views/modals/wallet-balance.html:3
-#: www/views/modals/wallets.html:5
 msgid "Close"
 msgstr "إغلاق"
 
@@ -309,7 +234,7 @@ msgstr "إغلاق"
 msgid "Coin"
 msgstr "عُملة"
 
-#: www/views/preferences.html:22
+#: www/views/preferences.html:29
 msgid "Color"
 msgstr "لون"
 
@@ -317,7 +242,7 @@ msgstr "لون"
 msgid "Commit hash"
 msgstr "توقيع إيداع البيانات (commit hash)"
 
-#: src/js/controllers/confirm.js:273 www/views/backup.html:48
+#: src/js/controllers/confirm.js:263 www/views/backup.html:46
 #: www/views/confirm.html:4 www/views/onboarding/collectEmail.html:32
 msgid "Confirm"
 msgstr "تأكيد"
@@ -325,10 +250,6 @@ msgstr "تأكيد"
 #: www/views/modals/terms.html:26 www/views/onboarding/disclaimer.html:44
 msgid "Confirm &amp; Finish"
 msgstr "تأكيد وإنهاء"
-
-#: www/views/modals/pin.html:10
-msgid "Confirm your PIN"
-msgstr "تأكيد الرقم السري"
 
 #: src/js/services/walletService.js:31
 msgid "Confirm your new spending password"
@@ -342,10 +263,6 @@ msgstr "عدد التأكيدات"
 msgid "Confirming"
 msgstr "جار التأكد"
 
-#: src/js/services/bwcError.js:53
-msgid "Connection reset by peer"
-msgstr "تم إعادة تعيين الإتصال من قبل النظير"
-
 #: www/views/tab-send.html:50
 msgid "Contacts"
 msgstr "جهات الإتصال"
@@ -358,22 +275,18 @@ msgstr "متابعة"
 msgid "Contribute Translations"
 msgstr "المساعدة بالترجمة"
 
-#: www/views/includes/walletActivity.html:2
-msgid "Copayer joined"
-msgstr "NOT NEEDED"
-
-#: src/js/controllers/export.js:189 www/views/includes/copyToClipboard.html:4
+#: src/js/controllers/export.js:119 www/views/includes/copyToClipboard.html:4
 msgid "Copied to clipboard"
 msgstr "تم النسخ للحافظة"
 
-#: www/views/tab-export-file.html:94
+#: www/views/tab-export-file.html:57
 msgid "Copy this text as it is to a safe place (notepad or email)"
 msgstr "احفظ النص في مكان امن (على ورقة أو البريد الإلكتروني)"
 
 #: www/views/includes/incomingDataMenu.html:51
 #: www/views/includes/incomingDataMenu.html:70
 #: www/views/includes/incomingDataMenu.html:94
-#: www/views/includes/logOptions.html:9 www/views/tab-export-file.html:78
+#: www/views/includes/logOptions.html:9 www/views/tab-export-file.html:41
 msgid "Copy to clipboard"
 msgstr "نسخ للحافظة"
 
@@ -381,23 +294,15 @@ msgstr "نسخ للحافظة"
 msgid "Could not access the wallet at the server. Please check:"
 msgstr "لم نتمكن من الدخول للمحفظة على الخادم. الرجاء التأكد:"
 
-#: src/js/controllers/modals/txpDetails.js:197
+#: src/js/controllers/modals/txpDetails.js:196
 msgid "Could not broadcast payment"
 msgstr "لم نتمكن من بث عملية الدفع"
 
-#: src/js/services/bwcError.js:41
-msgid "Could not build transaction"
-msgstr "لم نتمكن من إنشاء العملية"
-
-#: src/js/controllers/import.js:69
-msgid "Could not decrypt file, check your password"
-msgstr "لم نتمكن من فك شفرة الملف,"
-
-#: src/js/controllers/modals/txpDetails.js:179
+#: src/js/controllers/modals/txpDetails.js:178
 msgid "Could not delete payment proposal"
 msgstr "لم نتمكن من إلغاء مقترح الدفع"
 
-#: src/js/controllers/modals/txpDetails.js:159
+#: src/js/controllers/modals/txpDetails.js:158
 msgid "Could not reject payment"
 msgstr "لم نتمكن من رفض العملية"
 
@@ -405,21 +310,16 @@ msgstr "لم نتمكن من رفض العملية"
 msgid "Could not send payment"
 msgstr "لم نتمكن من الدفع"
 
-#: www/views/accountDetails.html:214 www/views/walletDetails.html:210
+#: www/views/accountDetails.html:205
 msgid "Could not update transaction history"
 msgstr "لم نتمكن من تحديث تاريخ العمليات"
 
-#: src/js/controllers/addresses.js:29 src/js/controllers/addresses.js:37
-#: src/js/controllers/walletDetails.js:73
-msgid "Could not update wallet"
-msgstr "لم نتمكن من تحديث المحفظة"
-
-#: www/views/tab-create-account.html:3 www/views/tab-home.html:89
+#: www/views/tab-create-account.html:3 www/views/tab-home.html:90
 #: www/views/tab-send.html:41
 msgid "Create Account"
 msgstr "إنشاء حساب"
 
-#: www/views/tab-create-account.html:129
+#: www/views/tab-create-account.html:25
 msgid "Create new account"
 msgstr "إنشاء حساب جديد"
 
@@ -447,7 +347,7 @@ msgstr "كمية مخصصة"
 msgid "Date"
 msgstr "تاريخ"
 
-#: src/js/services/profileService.js:220
+#: src/js/services/nanoService.js:393 src/js/services/profileService.js:278
 msgid "Default Account"
 msgstr "حساب افتراضي"
 
@@ -475,9 +375,9 @@ msgstr "جار حذف محفظة .."
 msgid "Deleting payment proposal"
 msgstr "جار إلغاء مقترح الدفع"
 
-#: src/js/controllers/prefrencesSecurity.js:8
-#: src/js/controllers/prefrencesSecurityController.js:8
-#: src/js/controllers/tab-settings.js:51
+#: src/js/controllers/preferencesSecurity.js:8
+#: src/js/controllers/preferencesSecurityController.js:8
+#: src/js/controllers/tab-settings.js:59
 msgid "Disabled"
 msgstr "معطل"
 
@@ -486,41 +386,26 @@ msgstr "معطل"
 msgid "Do it later"
 msgstr "قم بذلك لاحقا"
 
-#: www/views/tab-export-file.html:29
-msgid "Do not include private key"
-msgstr "لا تدخل المفتاح الخاص"
-
-#: www/views/preferencesLanguage.html:21
-msgid "Don't see your language on Crowdin? Contact the Owner on Crowdin! We'd love to support your language."
-msgstr "لا ترى لغتك؟ الرجاء الإتصال بصاحب الحساب في كراود إن! يسعدنا دعم لغتك."
-
-#: www/views/tab-settings.html:53
+#: www/views/tab-settings.html:61
 msgid "Donate to Canoe"
 msgstr "تبرع لـــCanoe"
 
-#: www/views/tab-export-file.html:59 www/views/tab-home.html:36
+#: www/views/tab-export-file.html:22 www/views/tab-home.html:36
 msgid "Download"
 msgstr "تحميل"
 
-#: www/views/addresses.html:19
-msgid "Each RaiBlocks Wallet can generate billions of addresses from your 12-word backup. A new address is automatically generated and shown each time you receive a payment."
-msgstr "NOT NEEDED"
-
-#: www/views/onboarding/collectEmail.html:27
+#: www/views/addressbook.view.html:40 www/views/onboarding/collectEmail.html:27
 msgid "Edit"
 msgstr "تحرير"
 
-#: www/views/addressbook.add.html:29 www/views/addressbook.view.html:22
+#: www/views/addressbook.add.html:29 www/views/addressbook.edit.html:30
+#: www/views/addressbook.view.html:22
 msgid "Email"
 msgstr "البريد الالكتروني"
 
 #: www/views/preferencesNotifications.html:42
 msgid "Email Address"
 msgstr "عنوان البريد الالكتروني"
-
-#: src/js/services/bwcError.js:122
-msgid "Empty addresses limit reached. New addresses cannot be generated."
-msgstr "تم التوصل للحد الأعلى للعناويين الفارغة. لا يمكننا إتناج عناويين جديدة."
 
 #: www/views/tab-scan.html:19
 msgid "Enable camera access in your device settings to get started."
@@ -550,10 +435,6 @@ msgstr "ادخل المبلغ"
 msgid "Enter new spending password"
 msgstr "NOT NEEDED"
 
-#: www/views/tab-create-account.html:49
-msgid "Enter the recovery phrase (BIP39)"
-msgstr "NOT NEEDED"
-
 #: www/views/tab-import-phrase.html:13
 msgid "Enter wallet seed"
 msgstr "ادخل نواة (seed) المحفظة"
@@ -562,34 +443,32 @@ msgstr "ادخل نواة (seed) المحفظة"
 msgid "Enter your email"
 msgstr "ادخل بريدك الاكتروني"
 
-#: www/views/backup.html:38
+#: www/views/backup.html:36
 msgid "Enter your password"
 msgstr "الرجاء إدخال كلمة المرور"
 
 #. Trying to import a malformed wallet export QR code
-#: src/js/controllers/activity.js:45 src/js/controllers/addressbookAdd.js:30
-#: src/js/controllers/addressbookView.js:36 src/js/controllers/addresses.js:118
-#: src/js/controllers/addresses.js:119 src/js/controllers/create.js:55
-#: src/js/controllers/export.js:105 src/js/controllers/export.js:111
-#: src/js/controllers/export.js:122 src/js/controllers/export.js:150
-#: src/js/controllers/export.js:156 src/js/controllers/export.js:167
-#: src/js/controllers/export.js:45 src/js/controllers/export.js:51
-#: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:108
-#: src/js/controllers/import.js:117 src/js/controllers/import.js:133
-#: src/js/controllers/import.js:138 src/js/controllers/import.js:142
-#: src/js/controllers/import.js:41 src/js/controllers/import.js:53
-#: src/js/controllers/import.js:74 src/js/controllers/import.js:86
+#: src/js/controllers/activity.js:45 src/js/controllers/addressbookAdd.js:35
+#: src/js/controllers/addressbookEdit.js:36
+#: src/js/controllers/addressbookView.js:48 src/js/controllers/create.js:19
+#: src/js/controllers/create.js:28 src/js/controllers/export.js:30
+#: src/js/controllers/export.js:52 src/js/controllers/export.js:62
+#: src/js/controllers/export.js:89 src/js/controllers/export.js:98
+#: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:102
+#: src/js/controllers/import.js:107 src/js/controllers/import.js:111
+#: src/js/controllers/import.js:116 src/js/controllers/import.js:32
+#: src/js/controllers/import.js:42 src/js/controllers/import.js:57
+#: src/js/controllers/import.js:81 src/js/controllers/import.js:89
 #: src/js/controllers/modals/txpDetails.js:138
 #: src/js/controllers/paperWallet.js:45
 #: src/js/controllers/preferencesDelete.js:35
-#: src/js/controllers/preferencesExternal.js:20
-#: src/js/controllers/tab-home.js:184 src/js/controllers/tab-send.js:71
-#: src/js/controllers/tabsController.js:36
-#: src/js/controllers/tabsController.js:7 src/js/controllers/tx-details.js:119
+#: src/js/controllers/preferencesName.js:13 src/js/controllers/tab-home.js:189
+#: src/js/controllers/tab-send.js:72 src/js/controllers/tabsController.js:34
+#: src/js/controllers/tabsController.js:6 src/js/controllers/tx-details.js:119
 msgid "Error"
 msgstr "خطأ"
 
-#: src/js/controllers/confirm.js:230
+#: src/js/controllers/confirm.js:239
 msgid "Error at confirm"
 msgstr "خطأ أثناء عملية التأكيد"
 
@@ -601,10 +480,6 @@ msgstr "حدث خطأ في مسح المبالغ:"
 msgid "Error sweeping wallet:"
 msgstr "حدث خطأ في مسح المحفظة:"
 
-#: src/js/services/bwcError.js:143
-msgid "Exceeded daily limit of $500 per user"
-msgstr "تم تعدي الحد اليومي ٥٠٠ دولار أمريكي للمستخدم"
-
 #: www/views/modals/txp-details.html:119
 msgid "Expired"
 msgstr "منتهي"
@@ -613,11 +488,11 @@ msgstr "منتهي"
 msgid "Expires"
 msgstr "ينتهي"
 
-#: www/views/export.html:3
+#: www/views/export.html:3 www/views/tab-settings.html:37
 msgid "Export wallet"
 msgstr "تصدير محفظة"
 
-#: src/js/services/walletService.js:88 www/views/tab-export-qrCode.html:9
+#: src/js/services/walletService.js:88
 msgid "Exporting via QR not supported for this wallet"
 msgstr "التصدير عن طريق الـــQR غير مدعوم لهذه المحفظة"
 
@@ -625,8 +500,8 @@ msgstr "التصدير عن طريق الـــQR غير مدعوم لهذه ا�
 msgid "Extracting Wallet information..."
 msgstr "يتم استخراج معلومات المحفظة"
 
-#: src/js/controllers/export.js:111 src/js/controllers/export.js:122
-#: src/js/controllers/export.js:156 src/js/controllers/export.js:167
+#: src/js/controllers/export.js:52 src/js/controllers/export.js:62
+#: src/js/controllers/export.js:89 src/js/controllers/export.js:98
 #: www/views/tab-export-file.html:4
 msgid "Failed to export"
 msgstr "لم نستطع التصدير"
@@ -647,7 +522,7 @@ msgstr "NOT NEEDED"
 msgid "Feedback could not be submitted. Please try again later."
 msgstr "تعذر إرسال التعليقات. الرجاء معاودة المحاولة في وقت لاحق."
 
-#: www/views/export.html:14
+#: www/views/export.html:12
 msgid "File/Text"
 msgstr "ملف / نص"
 
@@ -655,8 +530,8 @@ msgstr "ملف / نص"
 msgid "Filter setting"
 msgstr "فلتر الإعدادات"
 
-#: src/js/services/fingerprintService.js:42
-#: src/js/services/fingerprintService.js:47
+#: src/js/services/fingerprintService.js:39
+#: src/js/services/fingerprintService.js:44
 msgid "Finger Scan Failed"
 msgstr "عملية مسح الإصبع فاشلة"
 
@@ -664,18 +539,10 @@ msgstr "عملية مسح الإصبع فاشلة"
 msgid "Finish"
 msgstr "انهاء"
 
-#: www/views/confirm.html:52 www/views/modals/txp-details.html:74
+#: www/views/confirm.html:55 www/views/modals/txp-details.html:74
 #: www/views/tx-details.html:52
 msgid "From"
 msgstr "من"
-
-#: www/views/tab-export-qrCode.html:5
-msgid "From the destination device, go to Add wallet &gt; Import wallet and scan this QR code"
-msgstr "من الجهاز المتلقي, إذهب إلى \"أضف محفظة\", ثم \"توريد محفظة\" وامسح كود الـــQR"
-
-#: src/js/services/bwcError.js:74
-msgid "Funds are locked by pending spend proposals"
-msgstr "الأموال محجوزة بسبب عملية إرسال معلقة"
 
 #: www/views/paperWallet.html:16
 msgid "Funds found:"
@@ -709,7 +576,7 @@ msgstr "ابدأ بإضافة أول ملف."
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:154 src/js/controllers/tab-settings.js:39
+#: src/js/controllers/tab-home.js:159 src/js/controllers/tab-settings.js:47
 #: src/js/controllers/tx-details.js:193 src/js/controllers/tx-details.js:56
 msgid "Go Back"
 msgstr "رجوع"
@@ -724,29 +591,17 @@ msgstr "رجوع"
 msgid "Got it"
 msgstr "مفهوم"
 
-#: www/views/preferencesExternal.html:18
-msgid "Hardware not connected."
-msgstr "NOT NEEDED"
-
-#: www/views/tab-settings.html:37
+#: www/views/tab-settings.html:45
 msgid "Help & Support"
 msgstr "الدعم والمساعدة"
 
-#: src/js/controllers/tab-settings.js:37
+#: src/js/controllers/tab-settings.js:45
 msgid "Help and support information is available at the website."
 msgstr "الدعم والمساعدة متوفرة على موقعنا."
 
-#: www/views/addresses.html:25
-msgid "Hide"
-msgstr "إخفاء"
-
-#: www/views/preferences.html:27
+#: www/views/preferences.html:34
 msgid "Hide Balance"
 msgstr "إخفاء الرصيد"
-
-#: www/views/tab-export-file.html:25
-msgid "Hide advanced options"
-msgstr "إخفاء الإعدادات المتقدمة"
 
 #: www/views/tabs.html:3
 msgid "Home"
@@ -787,11 +642,11 @@ msgstr "أنا أقر أنه إذا تم حذف التطبيق، لا يمكن �
 msgid "I understand that my funds are held securely on this device, not by a company."
 msgstr "وأنا أقر أن أموالي محتفظ بها بشكل آمن على هذا الجهاز، وليس من قبل شركة."
 
-#: www/views/backup.html:30
+#: www/views/backup.html:28
 msgid "I've written it down"
 msgstr "لقد كتبته"
 
-#: www/views/advancedSettings.html:24
+#: www/views/advancedSettings.html:23
 msgid "If enabled, the Recent Transactions card - a list of transactions occuring across all wallets - will appear in the Home tab."
 msgstr "إذا تم تفعيلها, سيظهر كارت بأحدث العمليات المجراة على حساباتك في الصفحة الرئيسية."
 
@@ -811,15 +666,12 @@ msgstr "إذا أخذت لقطة من الشاشة, فيمكن للتطبيقا�
 msgid "Import Wallet"
 msgstr "توريد محفظة"
 
-#: www/views/tab-import-file.html:39
-msgid "Import file (not implemented yet)"
-msgstr "توريد ملف (خاصية غير مدعومة بعد)"
-
-#: www/views/tab-import-phrase.html:32
+#: www/views/tab-import-phrase.html:39
 msgid "Import seed"
 msgstr "توريد نواة (seed)"
 
-#: www/views/add.html:21 www/views/tab-settings.html:21
+#: www/views/add.html:21 www/views/tab-import-file.html:27
+#: www/views/tab-settings.html:29
 msgid "Import wallet"
 msgstr "توريد محفظة"
 
@@ -827,7 +679,7 @@ msgstr "توريد محفظة"
 msgid "Importing Wallet..."
 msgstr "جار توريد المحفظة..."
 
-#: www/views/backup.html:41
+#: www/views/backup.html:39
 msgid "In order to verify your wallet backup, please type your password."
 msgstr "من أجل التأكد من النسخة الإحتياطية للمحفظة, الرجاء إدخال كلمة السر."
 
@@ -835,28 +687,11 @@ msgstr "من أجل التأكد من النسخة الإحتياطية للمح
 msgid "Incomplete"
 msgstr "غير مكتمل"
 
-#: www/views/modals/pin.html:12
-msgid "Incorrect PIN, try again."
-msgstr "رقم الــPIN غير سليم, حاول مرة أخرى."
-
-#. Trying to import a malformed wallet export QR code
-#: src/js/controllers/import.js:41
-msgid "Incorrect code format"
-msgstr "صيغة الكود غير سليمة"
-
-#: src/js/services/bwcError.js:113
-msgid "Incorrect network address"
-msgstr "عنوان غير سليم"
-
-#: src/js/controllers/confirm.js:86 src/js/services/bwcError.js:44
+#: src/js/controllers/confirm.js:86
 msgid "Insufficient funds"
 msgstr "الرصيد لا يسمح"
 
-#: src/js/services/bwcError.js:71
-msgid "Insufficient funds for fee"
-msgstr "NOT NEEDED"
-
-#: www/views/tab-settings.html:118
+#: www/views/tab-settings.html:138
 msgid "Integrations"
 msgstr "الدمج"
 
@@ -864,11 +699,7 @@ msgstr "الدمج"
 msgid "Invalid"
 msgstr "لاغ"
 
-#: src/js/services/bwcError.js:119
-msgid "Invalid address"
-msgstr "عنوان خاطئ"
-
-#: src/js/controllers/tabsController.js:7
+#: src/js/controllers/tabsController.js:6
 msgid "Invalid data"
 msgstr "بيانات غير صالحة"
 
@@ -880,11 +711,7 @@ msgstr "هل هناك أي شيء يمكننا القيام به بشكل أفض
 msgid "Is this email address correct?"
 msgstr "هل عنوان البريد الإلكتروني هذا صحيح؟"
 
-#: www/views/addresses.html:25
-msgid "It's a good idea to avoid reusing addresses - this both protects your privacy and keeps your bitcoins secure against hypothetical attacks by quantum computers."
-msgstr "NOT NEEDED"
-
-#: src/js/controllers/backup.js:35
+#: src/js/controllers/backup.js:34
 msgid "It's important that you write your wallet seed down correctly. If something happens to your wallet, you'll need this seed to reconstruct it. Please review your seed and try again."
 msgstr "من المهم كتابة النواة (seed) بطريقة سليمة. إذا حدث شئ ما للمحفظة, ستحتاج للنواة لإسترجاعها. تأكد من صحة النواة وحاول مرة أخرى."
 
@@ -892,11 +719,7 @@ msgstr "من المهم كتابة النواة (seed) بطريقة سليمة. 
 msgid "Just scan the code to pay."
 msgstr "فقط امسح الكود وادفع"
 
-#: src/js/services/bwcError.js:116
-msgid "Key already associated with an existing wallet"
-msgstr "المفتاح مرتبط بمحفظة أخرى"
-
-#: www/views/preferencesLanguage.html:4 www/views/tab-settings.html:77
+#: www/views/preferencesLanguage.html:4 www/views/tab-settings.html:97
 msgid "Language"
 msgstr "لغة"
 
@@ -904,21 +727,17 @@ msgstr "لغة"
 msgid "Learn more"
 msgstr "تعرف على المزيد"
 
-#: www/views/addresses.html:45 www/views/allAddresses.html:14
-msgid "Loading addresses..."
-msgstr "جار تحميل العناوين ..."
-
 #: src/js/services/onGoingProcess.js:28
 msgid "Loading transaction info..."
 msgstr "جار تحميل معلومات المعاملات ..."
 
-#: src/js/controllers/prefrencesSecurity.js:22
-#: src/js/controllers/prefrencesSecurityController.js:22
+#: src/js/controllers/preferencesSecurity.js:21
+#: src/js/controllers/preferencesSecurityController.js:21
 msgid "Lock by Fingerprint"
 msgstr "مقفل بالبصمة"
 
-#: src/js/controllers/prefrencesSecurity.js:13
-#: src/js/controllers/prefrencesSecurityController.js:13
+#: src/js/controllers/preferencesSecurity.js:13
+#: src/js/controllers/preferencesSecurityController.js:13
 msgid "Lock by PIN"
 msgstr "مقفل بواسطة PIN"
 
@@ -926,21 +745,9 @@ msgstr "مقفل بواسطة PIN"
 msgid "Locked"
 msgstr "مقفل"
 
-#: src/js/services/bwcError.js:86
-msgid "Locktime in effect. Please wait to create a new spend proposal"
-msgstr "لوكتيمي في الواقع. يرجى الانتظار لإنشاء اقتراح إنفاق جديد"
-
-#: src/js/services/bwcError.js:89
-msgid "Locktime in effect. Please wait to remove this spend proposal"
-msgstr "لوكتيمي في الواقع. يرجى الانتظار لإزالة اقتراح الإنفاق هذا"
-
 #: www/views/includes/logOptions.html:3
 msgid "Log options"
 msgstr "خيارات السجل"
-
-#: www/views/addresses.html:87
-msgid "Low amount inputs"
-msgstr "كمية المدخلات منخفضة"
 
 #: www/views/includes/walletHistory.html:27
 msgid "Low fees"
@@ -967,14 +774,6 @@ msgstr "مذكرة"
 msgid "Merchant Message"
 msgstr "رسالة التاجر"
 
-#: src/js/services/bwcError.js:134
-msgid "Missing parameter"
-msgstr "معامل مفقود"
-
-#: src/js/services/bwcError.js:32
-msgid "Missing private keys to sign"
-msgstr "مفاتيح خاصة مفقودة يتطلب توقيعها"
-
 #: www/views/preferencesAdvanced.html:3
 msgid "More Options"
 msgstr "المزيد من الخيارات"
@@ -991,42 +790,23 @@ msgstr "الأموال المنقولة"
 msgid "Multiple recipients"
 msgstr "مستلمين متعددين"
 
-#: www/views/addressbook.add.html:21 www/views/addressbook.view.html:18
-#: www/views/preferences.html:15 www/views/preferencesAlias.html:17
+#: www/views/addressbook.add.html:21 www/views/addressbook.edit.html:21
+#: www/views/addressbook.view.html:18 www/views/preferences.html:15
+#: www/views/preferencesName.html:17
 msgid "Name"
 msgstr "اسم"
-
-#: src/js/services/bwcError.js:47
-msgid "Network error"
-msgstr "خطأ في الشبكة"
 
 #: www/views/onboarding/tour.html:36
 msgid "Never incur fees ever again!"
 msgstr "لا تتكبد رسوم بعد اليوم!"
 
-#: www/views/includes/walletActivity.html:43
-msgid "New Proposal"
-msgstr "عرض جديد"
-
 #: www/views/add.html:14
 msgid "New account"
 msgstr "حساب جديد"
 
-#: src/js/controllers/addresses.js:119
-msgid "New address could not be generated. Please try again."
-msgstr "تعذر إنشاء عنوان جديد. حاول مرة اخرى."
-
-#: www/views/includes/nextSteps.html:3
-msgid "Next steps"
-msgstr "الخطوات التالية"
-
 #: www/views/tab-receive.html:16
 msgid "No Account available"
 msgstr "لا يتوفر حساب"
-
-#: www/views/onboarding/backupRequest.html:5
-msgid "No backup, no RaiBlocks."
-msgstr "إذا لم يكن لديك نسخة احتياطية, فريبلوكس في خطر"
 
 #: www/views/addressbook.html:19
 msgid "No contacts yet"
@@ -1036,10 +816,6 @@ msgstr "ليست هناك جهات اتصال حتى الآن"
 msgid "No entries for this log level"
 msgstr "لا توجد إدخالات لمستوى السجل هذا"
 
-#: www/views/preferencesExternal.html:12
-msgid "No hardware information available."
-msgstr "NOT NEEDED"
-
 #: www/views/proposals.html:24
 msgid "No pending proposals"
 msgstr "ليست هناك اقتراحات معلقة"
@@ -1048,7 +824,7 @@ msgstr "ليست هناك اقتراحات معلقة"
 msgid "No recent transactions"
 msgstr "لا توجد معاملات حديثة"
 
-#: www/views/accountDetails.html:208 www/views/walletDetails.html:204
+#: www/views/accountDetails.html:199
 msgid "No transactions yet"
 msgstr "لا توجد معاملات بعد"
 
@@ -1060,17 +836,9 @@ msgstr "لم يتم العثور على محفظة"
 msgid "No wallet selected"
 msgstr "لم يتم تحديد أي محفظة"
 
-#: src/js/controllers/confirm.js:73
-msgid "No wallets available"
-msgstr "لا توجد محافظ"
-
 #: www/views/paperWallet.html:45
 msgid "No wallets available to receive funds"
 msgstr "لا توجد محافظ متاحة لتلقي الأموال"
-
-#: src/js/services/bwcError.js:80
-msgid "Not authorized"
-msgstr "غير مخول"
 
 #: src/js/controllers/paperWallet.js:45
 msgid "Not funds found"
@@ -1084,11 +852,7 @@ msgstr "ليس الان"
 msgid "Note"
 msgstr "ملحوظة"
 
-#: www/views/modals/wallets.html:25
-msgid "Notice: only 1-1 (single signature) wallets can be used for sell bitcoin"
-msgstr "NOT NEEDED"
-
-#: www/views/preferencesNotifications.html:3 www/views/tab-settings.html:70
+#: www/views/preferencesNotifications.html:3 www/views/tab-settings.html:90
 msgid "Notifications"
 msgstr "إخطارات"
 
@@ -1138,13 +902,9 @@ msgstr "أوه لا!"
 msgid "On this screen you can see all your accounts."
 msgstr "في هذه الصفحة يمكنك ان ترى كل حسابتك."
 
-#: src/js/controllers/tab-settings.js:38 src/js/controllers/tx-details.js:55
+#: src/js/controllers/tab-settings.js:46 src/js/controllers/tx-details.js:55
 msgid "Open"
 msgstr "افتح"
-
-#: src/js/controllers/preferencesLanguage.js:12
-msgid "Open Crowdin"
-msgstr "فتح بوإيديتور"
 
 #: src/js/controllers/preferencesAbout.js:14
 msgid "Open GitHub"
@@ -1162,10 +922,6 @@ msgstr "فتح الإحصاءات"
 msgid "Open Settings"
 msgstr "أفتح الإعدادات"
 
-#: src/js/controllers/preferencesLanguage.js:10
-msgid "Open Translation Community"
-msgstr "مجتمع الترجمة المفتوحة"
-
 #: src/js/controllers/onboarding/terms.js:22
 msgid "Open Website"
 msgstr "فتح الموقع"
@@ -1174,14 +930,9 @@ msgstr "فتح الموقع"
 msgid "Open website"
 msgstr "فتح الموقع"
 
-#: www/views/tab-create-account.html:67 www/views/tab-create-account.html:75
-#: www/views/tab-import-file.html:18
+#: www/views/modals/password.html:22
 msgid "Password"
 msgstr "كلمه السر"
-
-#: src/js/controllers/import.js:53
-msgid "Password required. Make sure to enter your password in advanced options"
-msgstr "كلمة المرور مطلوبة. تأكد من إدخال كلمة المرور في الخيارات المتقدمة"
 
 #: www/views/tab-import-file.html:13
 msgid "Paste the backup plain text"
@@ -1200,19 +951,11 @@ msgstr "مقترح دفع"
 msgid "Payment Proposal Created"
 msgstr "اقتراح الدفع المنشئة"
 
-#: www/views/tab-home.html:60
+#: www/views/tab-home.html:61
 msgid "Payment Proposals"
 msgstr "مقترحات الدفع"
 
-#: src/js/services/payproService.js:32
-msgid "Payment Protocol Invalid"
-msgstr "بروتوكول الدفع غير صالح"
-
-#: src/js/services/payproService.js:18
-msgid "Payment Protocol not supported on Chrome App"
-msgstr "بروتوكول الدفع غير متوافق مع تطبيق كروم"
-
-#: www/views/includes/walletActivity.html:20
+#: www/views/includes/walletActivity.html:11
 msgid "Payment Received"
 msgstr "تلقى الدفع"
 
@@ -1220,8 +963,8 @@ msgstr "تلقى الدفع"
 msgid "Payment Rejected"
 msgstr "تم رفض الدفعة"
 
-#: src/js/controllers/modals/txpDetails.js:42 www/views/confirm.html:100
-#: www/views/includes/walletActivity.html:11
+#: src/js/controllers/modals/txpDetails.js:42 www/views/confirm.html:104
+#: www/views/includes/walletActivity.html:4
 #: www/views/modals/txp-details.html:42
 msgid "Payment Sent"
 msgstr "ارسلت الدفعه"
@@ -1246,7 +989,7 @@ msgstr "المقترحات المعلقة"
 msgid "Permanently delete this wallet."
 msgstr "حذف هذه المحفظة نهائيا."
 
-#: www/views/backup.html:23
+#: www/views/backup.html:21
 msgid "Please carefully write down this 64 character seed. Click to copy to clipboard."
 msgstr "يرجى كتابة الــ٦٤ حرفاُ للنواة بعناية. انقر لنسخ إلى الحافظة."
 
@@ -1254,28 +997,19 @@ msgstr "يرجى كتابة الــ٦٤ حرفاُ للنواة بعناية. �
 msgid "Please connect a camera to get started."
 msgstr "الرجاء توصيل كاميرا للبدء."
 
-#: src/js/controllers/import.js:138
+#: src/js/controllers/import.js:107
 msgid "Please enter the seed"
 msgstr "الرجاء إدخال النواة (Seed)"
 
-#: www/views/modals/pin.html:9
-msgid "Please enter your PIN"
-msgstr "الرجاء إدخال رقم التعريف الشخصي (PIN)"
-
-#: src/js/services/bwcError.js:101
-msgid "Please upgrade Canoe to perform this action"
-msgstr "الرجاء ترقية كانوو لتنفيذ هذا الإجراء"
-
-#: www/views/accountDetails.html:146 www/views/accountDetails.html:66
-#: www/views/walletDetails.html:142 www/views/walletDetails.html:62
+#: www/views/accountDetails.html:144 www/views/accountDetails.html:66
 msgid "Please wait"
 msgstr "أرجو الإنتظار"
 
-#: src/js/controllers/import.js:117
+#: src/js/controllers/import.js:89
 msgid "Please, select your backup file"
 msgstr "الرجاء تحديد ملف النسخة الاحتياطية"
 
-#: www/views/tab-settings.html:64
+#: www/views/tab-settings.html:84
 msgid "Preferences"
 msgstr "الإعدادات"
 
@@ -1283,11 +1017,11 @@ msgstr "الإعدادات"
 msgid "Preparing addresses..."
 msgstr "جار تحضير العناوين ..."
 
-#: src/js/controllers/export.js:194
+#: src/js/controllers/export.js:124
 msgid "Preparing backup..."
 msgstr "جار إعداد النسخة الاحتياطية ..."
 
-#: src/js/routes.js:885
+#: src/js/routes.js:849
 msgid "Press again to exit"
 msgstr "اضغط مرة أخرى للخروج"
 
@@ -1299,28 +1033,12 @@ msgstr "مفتاح خاص"
 msgid "Private key encrypted. Enter password"
 msgstr "المفتاح الخاص مشفر. أدخل كلمة المرور"
 
-#: src/js/services/bwcError.js:35
-msgid "Private key is encrypted, cannot sign"
-msgstr "المفتاح الخاص مشفر، لا يمكن التوقيع"
-
-#: www/views/includes/walletActivity.html:51
-msgid "Proposal Accepted"
-msgstr "تم قبول الاقتراح"
-
 #: src/js/controllers/modals/txpDetails.js:59
 #: src/js/controllers/tx-details.js:78
 msgid "Proposal Created"
 msgstr "تم إنشاء الاقتراح"
 
-#: www/views/includes/walletActivity.html:27
-msgid "Proposal Deleted"
-msgstr "تم حذف الاقتراح"
-
-#: www/views/includes/walletActivity.html:35
-msgid "Proposal Rejected"
-msgstr "تم رفض الاقتراح"
-
-#: www/views/accountDetails.html:193 www/views/walletDetails.html:189
+#: www/views/accountDetails.html:184
 msgid "Proposals"
 msgstr "اقتراحات"
 
@@ -1328,7 +1046,7 @@ msgstr "اقتراحات"
 msgid "Push Notifications"
 msgstr "الإخطارات"
 
-#: www/views/export.html:17
+#: www/views/export.html:15
 msgid "QR Code"
 msgstr "رمز الـــQR"
 
@@ -1336,37 +1054,9 @@ msgstr "رمز الـــQR"
 msgid "Quick review!"
 msgstr "مراجعة سريعة!"
 
-#: www/views/addressbook.add.html:38
-msgid "RaiBlocks Account"
-msgstr "حساب ريبلوكس"
-
-#: www/views/onboarding/tour.html:45
-msgid "RaiBlocks are secure."
-msgstr "ريبلوكس آمنة."
-
-#: www/views/onboarding/tour.html:31
-msgid "RaiBlocks is feeless."
-msgstr "ريبلوكس عديمة الرسوم."
-
-#: www/views/onboarding/tour.html:18
-msgid "RaiBlocks is instant,<br>digital money."
-msgstr "ريبلوكس أموال رقمية <br> فورية."
-
-#: www/views/onboarding/disclaimer.html:15
-msgid "Raiblocks is different &ndash; it cannot be safely held with a bank or web service."
-msgstr "رايبلوكس مختلفة؛ فإنه لا يمكن حفطها في بنك أو موقع انترنتي."
-
 #: www/views/feedback/rateApp.html:14
 msgid "Rate on the app store"
 msgstr "تقييم في المتجر"
-
-#: www/views/addresses.html:52
-msgid "Read less"
-msgstr "أقرأ أقل"
-
-#: www/views/addresses.html:51
-msgid "Read more"
-msgstr "اقرأ المزيد"
 
 #: src/js/controllers/tx-details.js:54
 msgid "Read more in our Wiki"
@@ -1396,11 +1086,11 @@ msgstr "يتم التلقي"
 msgid "Recent"
 msgstr "حديث"
 
-#: www/views/advancedSettings.html:22
+#: www/views/advancedSettings.html:21
 msgid "Recent Transaction Card"
 msgstr "بطاقة المعاملات الحديثة"
 
-#: www/views/activity.html:4 www/views/tab-home.html:72
+#: www/views/activity.html:4 www/views/tab-home.html:73
 msgid "Recent Transactions"
 msgstr "التحويلات الحديثة"
 
@@ -1429,18 +1119,9 @@ msgstr "رفض اقتراح الدفع"
 msgid "Release information"
 msgstr "معلومات الإصدار"
 
-#: www/views/addressbook.view.html:36
+#: www/views/addressbook.view.html:44
 msgid "Remove"
 msgstr "إزالة"
-
-#: www/views/tab-create-account.html:84 www/views/tab-create-account.html:92
-#: www/views/tab-export-file.html:17
-msgid "Repeat password"
-msgstr "اعد كلمة السر"
-
-#: www/views/tab-export-file.html:16
-msgid "Repeat the password"
-msgstr "كرر كلمة المرور"
 
 #: www/views/onboarding/welcome.html:9
 msgid "Restore from backup"
@@ -1451,7 +1132,6 @@ msgid "Retrieving inputs information"
 msgstr "استرجاع المدخلات"
 
 #: src/js/controllers/onboarding/createPassword.js:42
-#: src/js/controllers/onboarding/tour.js:60
 msgid "Retry"
 msgstr "إعادة المحاولة"
 
@@ -1459,9 +1139,9 @@ msgstr "إعادة المحاولة"
 msgid "Retry Camera"
 msgstr "إعادة محاولة الكاميرا"
 
-#: www/views/addressbook.add.html:56 www/views/includes/note.html:9
-#: www/views/preferencesAlias.html:21
-#: www/views/preferencesNotifications.html:46
+#: www/views/addressbook.add.html:64 www/views/addressbook.edit.html:65
+#: www/views/includes/note.html:9 www/views/preferencesAlias.html:21
+#: www/views/preferencesName.html:21 www/views/preferencesNotifications.html:46
 msgid "Save"
 msgstr "حفظ"
 
@@ -1473,15 +1153,11 @@ msgstr "تفحص"
 msgid "Scan QR Codes"
 msgstr "مسح رموز QR"
 
-#: www/views/addresses.html:31
-msgid "Scan addresses for funds"
-msgstr "مسح العناوين من أجل الأموال"
-
 #: www/views/modals/fingerprintCheck.html:11
 msgid "Scan again"
 msgstr "امسح مجددا"
 
-#: src/js/services/fingerprintService.js:55
+#: src/js/services/fingerprintService.js:51
 msgid "Scan your fingerprint please"
 msgstr "امسح بصمات إصبعك من فضلك"
 
@@ -1509,10 +1185,6 @@ msgstr "البحث في المعاملات"
 msgid "Search your currency"
 msgstr "ابحث عن عُملتك"
 
-#: www/views/preferencesSecurity.html:3 www/views/tab-settings.html:98
-msgid "Security Prefrences"
-msgstr "اعدادات الأمن"
-
 #: www/views/tab-import-file.html:7
 msgid "Select a backup file"
 msgstr "حدد ملف النسخ الاحتياطي"
@@ -1526,23 +1198,15 @@ msgstr "حدد حساب"
 msgid "Send"
 msgstr "إرسال"
 
-#: www/views/feedback/send.html:3 www/views/tab-settings.html:46
+#: www/views/feedback/send.html:3 www/views/tab-settings.html:54
 msgid "Send Feedback"
 msgstr "ارسل رأيك"
 
-#: www/views/addressbook.view.html:31
-msgid "Send Money"
-msgstr "إرسال الأموال"
-
-#: www/views/allAddresses.html:19
-msgid "Send addresses by email"
-msgstr "إرسال عناوين عبر البريد الإلكتروني"
-
-#: www/views/includes/logOptions.html:17 www/views/tab-export-file.html:82
+#: www/views/includes/logOptions.html:17 www/views/tab-export-file.html:45
 msgid "Send by email"
 msgstr "ارسل بالبريد الإلكترونى"
 
-#: src/js/controllers/confirm.js:114
+#: src/js/controllers/confirm.js:121
 msgid "Send from"
 msgstr "ارسل من"
 
@@ -1579,7 +1243,7 @@ msgstr "إرسال الحد الأقصى"
 msgid "Sending transaction"
 msgstr "إرسال المعاملة"
 
-#: src/js/controllers/confirm.js:269
+#: src/js/controllers/confirm.js:259
 msgid "Sending {{amountStr}} from your {{name}} account"
 msgstr "جار إرسال {{amountStr}} من حسابك {{name}}"
 
@@ -1591,10 +1255,6 @@ msgstr "تم الإرسال"
 #: src/js/controllers/tx-details.js:129
 msgid "Sent Funds"
 msgstr "الأموال المرسلة"
-
-#: src/js/services/bwcError.js:38
-msgid "Server response could not be verified"
-msgstr "تعذر التحقق من رد الخادم"
 
 #: www/views/includes/homeIntegrations.html:3
 msgid "Services"
@@ -1608,10 +1268,6 @@ msgstr "سجل الجلسة"
 msgid "Session log"
 msgstr "سجل الجلسة"
 
-#: www/views/tab-export-file.html:10
-msgid "Set up a password"
-msgstr "اعداد كلمة المرور"
-
 #: www/views/tab-settings.html:3 www/views/tabs.html:19
 msgid "Settings"
 msgstr "اعدادات"
@@ -1624,21 +1280,9 @@ msgstr "شارك حبك لكانو. ادع أصدقائك."
 msgid "Show Account"
 msgstr "اظهر الحساب"
 
-#: www/views/preferencesExternal.html:34
-msgid "Show Recovery Phrase"
-msgstr "NOT NEEDED"
-
-#: www/views/tab-export-file.html:24
-msgid "Show advanced options"
-msgstr "اظهر الإعدادات المتقدمة"
-
 #: www/views/tab-send.html:64
 msgid "Show more"
 msgstr "اظهر المزيد"
-
-#: src/js/services/bwcError.js:104
-msgid "Signatures rejected by server"
-msgstr "التواقيع مرفوضة من الخادم"
 
 #: src/js/services/onGoingProcess.js:25
 msgid "Signing transaction"
@@ -1656,29 +1300,13 @@ msgstr "تخطي"
 msgid "Slide to accept"
 msgstr "ازلق اصبعك للموافقة"
 
-#: src/js/controllers/confirm.js:181 src/js/controllers/modals/txpDetails.js:38
+#: src/js/controllers/confirm.js:190 src/js/controllers/modals/txpDetails.js:38
 msgid "Slide to send"
 msgstr "ازلق اصبعك للإرسال"
 
-#: src/js/services/bwcError.js:92
-msgid "Spend proposal is not accepted"
-msgstr "اقتراح الإنفاق غير مقبول"
-
-#: src/js/services/bwcError.js:95
-msgid "Spend proposal not found"
-msgstr "لم يتم العثور على اقتراح الإنفاق"
-
-#: src/js/services/bwcError.js:137
-msgid "Spending Password needed"
-msgstr "كلمة مرور الإرسال لازمة"
-
-#: www/views/accountDetails.html:177 www/views/walletDetails.html:173
+#: www/views/accountDetails.html:168
 msgid "Spending this balance will need significant Bitcoin network fees"
 msgstr "NOT NEEDED"
-
-#: www/views/tab-send.html:33
-msgid "Start sending RaiBlocks"
-msgstr "ابدأ بإرسال عملة الريبلوك"
 
 #: www/views/paperWallet.html:7
 msgid "Sweep"
@@ -1696,18 +1324,9 @@ msgstr "مسح المحفظة..."
 msgid "THIS ACTION CANNOT BE REVERSED"
 msgstr "لا يمكن عكس هذه العملية!"
 
-#: www/views/accountDetails.html:136 www/views/accountDetails.html:56
-#: www/views/walletDetails.html:132 www/views/walletDetails.html:52
+#: www/views/accountDetails.html:134 www/views/accountDetails.html:56
 msgid "Tap and hold to show"
 msgstr "انقر وثبت اصبعك للمعاينة"
-
-#: www/views/includes/walletInfo.html:3
-msgid "Tap to recreate"
-msgstr "انقر لإعادة الخلق"
-
-#: www/views/includes/walletInfo.html:4
-msgid "Tap to retry"
-msgstr "انقر لإعادة المحاولة"
 
 #: www/views/termsOfUse.html:3
 msgid "Terms Of Use"
@@ -1748,10 +1367,6 @@ msgstr "NOT NEEDED"
 msgid "The amount of bitcoin stored in this wallet with less than 1 blockchain confirmation."
 msgstr "NOT NEEDED"
 
-#: www/views/addresses.html:51
-msgid "The maximum number of consecutive unused addresses (20) has been reached. When one of your unused addresses receives a payment, a new address will be generated and shown in your Receive tab."
-msgstr "NOT NEEDED"
-
 #: src/js/controllers/onboarding/terms.js:21
 msgid "The official English Terms of Service are available on the BitPay website."
 msgstr "NOT NEEDED"
@@ -1760,25 +1375,13 @@ msgstr "NOT NEEDED"
 msgid "The payment was removed by creator"
 msgstr "تمت إزالة الدفعة بواسطة المصدر"
 
-#: src/js/services/bwcError.js:56
-msgid "The request could not be understood by the server"
-msgstr "تعذر فهم الطلب من قبل الخادم"
-
-#: www/views/addresses.html:52
-msgid "The restore process will stop when 20 addresses are generated in a row which contain no funds. To safely generate more addresses, make a payment to one of the unused addresses which has already been generated."
-msgstr "NOT NEEDED"
-
 #: www/views/tab-import-phrase.html:4
 msgid "The seed"
 msgstr "النواة (seed)"
 
-#: src/js/controllers/import.js:142
+#: src/js/controllers/import.js:111
 msgid "The seed is invalid, it should be 64 characters of: 0-9, A-F"
 msgstr "النواة (seed) غير صالحة، ينبغي أن تتكون من 64 حرفا من: 0-9، A-F"
-
-#: src/js/services/bwcError.js:98
-msgid "The spend proposal is not pending"
-msgstr "اقتراح الإنفاق غير معلق"
 
 #: www/views/modals/wallet-balance.html:36
 msgid "The total amount of bitcoin stored in this wallet."
@@ -1788,7 +1391,7 @@ msgstr "NOT NEEDED"
 msgid "The wallet server URL"
 msgstr "عنوان خادم المحفظة (URL)"
 
-#: src/js/controllers/import.js:108 src/js/controllers/import.js:133
+#: src/js/controllers/import.js:102 src/js/controllers/import.js:81
 msgid "There is an error in the form"
 msgstr "هناك خطأ في النموذج"
 
@@ -1800,10 +1403,6 @@ msgstr "من الواضح اننا اخطأنا في شئ ما."
 #: src/js/controllers/feedback/rateCard.js:38
 msgid "This app is fantastic!"
 msgstr "التطبيق رائع!"
-
-#: www/views/onboarding/tour.html:46
-msgid "This app stores your RaiBlocks with cutting-edge security."
-msgstr "هذا التطبيق يحفظ الريبلوكس الخاص بك بخواص أمنية عالية التطور."
 
 #: www/views/tx-details.html:91
 msgid "This transaction amount is too small compared to current Bitcoin network fees. Spending these funds will need a Bitcoin network fee cost comparable to the funds itself."
@@ -1817,8 +1416,7 @@ msgstr "NOT NEEDED"
 msgid "This view not implemented yet."
 msgstr "لم يتم تنفيذ هذا العرض بعد."
 
-#: www/views/accountDetails.html:113 www/views/accountDetails.html:33
-#: www/views/walletDetails.html:109 www/views/walletDetails.html:29
+#: www/views/accountDetails.html:111 www/views/accountDetails.html:33
 msgid "This wallet is not registered at the given Bitcore Wallet Service (BWS). You can recreate it from the local information."
 msgstr "NOT NEEDED"
 
@@ -1832,28 +1430,16 @@ msgstr "الجدول الزمني"
 msgid "To"
 msgstr "الى"
 
-#: www/views/tab-send.html:37
-msgid "To get started, you need Raiblocks. Share your account to receive RaiBlocks."
-msgstr "للبدء، تحتاج لشئ من الرايبلوكس. شارك حسابك لتتلقى القليل من الريبلوكس."
-
-#: www/views/tab-send.html:38
-msgid "To get started, you need an Account in your wallet to receive RaiBlocks."
-msgstr "للبدء، تحتاج إلى حساب في محفظتك لتتلقي ريبلوكس."
-
 #: www/views/modals/wallet-balance.html:23
 msgid "Total"
 msgstr "المجموع"
 
-#: www/views/accountDetails.html:200 www/views/walletDetails.html:196
+#: www/views/accountDetails.html:191
 msgid "Total Locked Balance"
 msgstr "إجمالي الرصيد المقفل"
 
-#: www/views/addresses.html:81
-msgid "Total wallet inputs"
-msgstr "إجمالي مدخلات المحفظة"
-
-#: src/js/services/fingerprintService.js:62
-#: src/js/services/fingerprintService.js:67
+#: src/js/services/fingerprintService.js:58
+#: src/js/services/fingerprintService.js:63
 msgid "Touch ID Failed"
 msgstr "فشلت محاولة اللمس"
 
@@ -1861,15 +1447,11 @@ msgstr "فشلت محاولة اللمس"
 msgid "Transaction"
 msgstr "عملية"
 
-#: src/js/services/bwcError.js:83
-msgid "Transaction already broadcasted"
-msgstr "تم بث المعاملة"
-
 #: src/js/controllers/tx-details.js:119
 msgid "Transaction not available at this time"
 msgstr "المعاملة غير متوفرة في الوقت الحالي"
 
-#: src/js/controllers/activity.js:45 src/js/controllers/tab-home.js:184
+#: src/js/controllers/activity.js:45 src/js/controllers/tab-home.js:189
 msgid "Transaction not found"
 msgstr "العملية غير موجودة"
 
@@ -1881,11 +1463,11 @@ msgstr "تحويل الى"
 msgid "Transfer to Account"
 msgstr "تحويل الى حساب"
 
-#: www/views/modals/pin.html:13
+#: www/views/modals/password.html:9 www/views/modals/pin.html:13
 msgid "Try again in {{expires}}"
 msgstr "إعادة المحاولة في {{expires}}"
 
-#: src/js/controllers/backup.js:34
+#: src/js/controllers/backup.js:33
 msgid "Uh oh..."
 msgstr "تباً..."
 
@@ -1893,19 +1475,11 @@ msgstr "تباً..."
 msgid "Unconfirmed"
 msgstr "غير مؤكد"
 
-#: www/views/accountDetails.html:194 www/views/walletDetails.html:190
+#: www/views/accountDetails.html:185
 msgid "Unsent transactions"
 msgstr "المعاملات الغير مُرسلة"
 
-#: www/views/addresses.html:39
-msgid "Unused Addresses"
-msgstr "العناوين غير المستخدمة"
-
-#: www/views/addresses.html:50
-msgid "Unused Addresses Limit"
-msgstr "حدود العناوين غير المستخدمة"
-
-#: src/js/controllers/tab-home.js:151
+#: src/js/controllers/tab-home.js:156
 msgid "Update Available"
 msgstr "تحديث جديد متوفر"
 
@@ -1913,7 +1487,7 @@ msgstr "تحديث جديد متوفر"
 msgid "Updating pending proposals. Please stand by"
 msgstr "جار تحديث المقترحات المعلقة. فضلا انتظر"
 
-#: www/views/accountDetails.html:221 www/views/walletDetails.html:217
+#: www/views/accountDetails.html:212
 msgid "Updating transaction history. Please stand by."
 msgstr "يتم تحديث سجل العمليات. الرجاء الإنتظار."
 
@@ -1929,17 +1503,13 @@ msgstr "جار التحقق من صحة عبارة الاسترداد ..."
 msgid "Verify your identity"
 msgstr "وثق هويتك"
 
-#: www/views/preferencesAbout.html:14 www/views/preferencesExternal.html:25
+#: www/views/preferencesAbout.html:14
 msgid "Version"
 msgstr "نسخة"
 
-#: www/views/tab-export-file.html:69
+#: www/views/tab-export-file.html:32
 msgid "View"
 msgstr "عاين"
-
-#: www/views/addresses.html:34
-msgid "View All Addresses"
-msgstr "عاين جميع العناوين"
 
 #: src/js/controllers/onboarding/terms.js:20
 msgid "View Terms of Service"
@@ -1949,7 +1519,7 @@ msgstr "عاين شروط الخدمة"
 msgid "View Transaction on Insight"
 msgstr "عرض إحصاءات المعاملات"
 
-#: src/js/controllers/tab-home.js:153
+#: src/js/controllers/tab-home.js:158
 msgid "View Update"
 msgstr "عاين التحديث"
 
@@ -1957,29 +1527,13 @@ msgstr "عاين التحديث"
 msgid "View on blockchain"
 msgstr "NOT NEEDED"
 
-#: www/views/accountDetails.html:186 www/views/walletDetails.html:182
+#: www/views/accountDetails.html:177
 msgid "WARNING: Key derivation is not working on this device/wallet. Actions cannot be performed on this wallet."
 msgstr "تحذير: لا يعمل الاشتقاق على هذا الجهاز / المحفظة. لا يمكن تنفيذ الإجراءات على هذه المحفظة."
 
-#: www/views/tab-export-file.html:45
-msgid "WARNING: Not including the private key allows to check the wallet balance, transaction history, and create spend proposals from the export. However, does not allow to approve (sign) proposals, so <b>funds will not be accessible from the export</b>."
-msgstr "تحذير: عدم إدخال المفتاح الخاص يسمح التحقق من رصيد المحفظة, وتاريخ المعاملات, وإنشاء مقترحات الإنفاق من التصدير. ومع ذلك، لا يسمح بالموافقة على اقتراحات (توقيع)، لذا لن تتمكن من الوصول إلى <b> الأموال من التصدير </ b>."
-
-#: www/views/tab-export-file.html:36
-msgid "WARNING: The private key of this wallet is not available. The export allows to check the wallet balance, transaction history, and create spend proposals from the export. However, does not allow to approve (sign) proposals, so <b>funds will not be accessible from the export</b>."
-msgstr "تحذير: المفتاح الخاص لهذه المحفظة غير متوفر. يسمح التصدير للتحقق من رصيد المحفظة، وتاريخ المعاملات، وإنشاء مقترحات الإنفاق من التصدير. ومع ذلك، لا يسمح بالموافقة على اقتراحات (توقيع)، لذا لن تتمكن من الوصول إلى <b> الأموال من التصدير </ b>."
-
-#: www/views/tab-settings.html:102
+#: www/views/tab-settings.html:122
 msgid "Wallet Accounts"
 msgstr "حسابات المحفظة"
-
-#: www/views/addresses.html:3
-msgid "Wallet Addresses"
-msgstr "عنوان المحفظة"
-
-#: www/views/preferencesColor.html:4
-msgid "Wallet Color"
-msgstr "لون المحفظة"
 
 #: www/views/onboarding/collectEmail.html:5
 msgid "Wallet Created"
@@ -1989,67 +1543,19 @@ msgstr "تم خلق المحفظة"
 msgid "Wallet File"
 msgstr "ملف المحفظة"
 
-#: www/views/addresses.html:76
-msgid "Wallet Inputs"
-msgstr "مدخلات المحفظة"
-
-#: src/js/services/bwcError.js:26
-msgid "Wallet Recovery Phrase is invalid"
-msgstr "عبارة استرداد المحفظة غير صالحة"
-
 #: www/views/import.html:12
 msgid "Wallet Seed"
 msgstr "نواة المحفظة (seed)"
 
-#: src/js/services/bwcError.js:59
-msgid "Wallet already exists"
-msgstr "المحفظة موجودة من قبل"
-
-#: www/views/includes/walletActivity.html:6
-msgid "Wallet created"
-msgstr "تم خلق المحفظة"
-
-#: src/js/services/bwcError.js:65
-msgid "Wallet is full"
-msgstr "المحفظة مليئة"
-
-#: src/js/services/bwcError.js:125
-msgid "Wallet is locked"
-msgstr "المحفظة مغلقة"
-
-#: src/js/services/bwcError.js:128
-msgid "Wallet is not complete"
-msgstr "المحفظة غير مكتملة"
-
-#: src/js/services/bwcError.js:131
-msgid "Wallet needs backup"
-msgstr "يجب خلق نسخة احتياطية للمحفظة"
-
-#: www/views/tab-receive.html:32
-msgid "Wallet not backed up"
-msgstr "لم يتم خلق نسخة احتياطية للمحفظة"
-
-#: src/js/services/bwcError.js:68
-msgid "Wallet not found"
-msgstr "لا يمكن ايجاد المحفظة"
-
-#: src/js/services/bwcError.js:29
-msgid "Wallet not registered at the wallet service. Recreate it from \"Create Wallet\" using \"Advanced Options\" to set your recovery phrase"
-msgstr "المحفظة غير مسجلة في خدمات المحفظة. يمكنك إعادة إنشائها من خلال \"إنشاء محفظة\" في \"خيارات متقدمة\" لتعيين عبارة الاسترداد"
-
-#: www/views/backup.html:12
+#: www/views/backup.html:10
 msgid "Wallet seed not available"
 msgstr "نواة المحفظة (seed) غير متوفرة"
 
-#: src/js/services/bwcError.js:50
-msgid "Wallet service not found"
-msgstr "خدمات المحفظة غير متوفرة"
-
-#: src/js/controllers/addressbookView.js:30
+#: src/js/controllers/addressbookView.js:42
+#: src/js/controllers/advancedSettings.js:16 src/js/controllers/import.js:132
 #: src/js/controllers/modals/txpDetails.js:151
-#: src/js/controllers/modals/txpDetails.js:168
+#: src/js/controllers/modals/txpDetails.js:167
 #: src/js/controllers/preferencesDelete.js:23
-#: src/js/controllers/preferencesExternal.js:14
 #: www/views/preferencesDeleteWallet.html:11
 msgid "Warning!"
 msgstr "تنبيه"
@@ -2070,11 +1576,7 @@ msgstr "نتطلع دائما للأفضل."
 msgid "Website"
 msgstr "الموقع"
 
-#: www/views/preferencesLanguage.html:16
-msgid "We’re always looking for translation contributions! You can make corrections or help to make this app available in your native language by joining our community on Crowdin."
-msgstr "نبحث دائما عن المساهمات في الترجمة! يمكنك إجراء التصحيحات أو المساعدة في جعل هذا التطبيق متاح بلغتك الأم من خلال الانضمام إلى مجتمعنا على بوإيديتور."
-
-#: www/views/preferencesAlias.html:11
+#: www/views/preferencesName.html:11
 msgid "What do you call this account?"
 msgstr "ماذا تريد أن تسمي هذا الحساب؟"
 
@@ -2082,17 +1584,9 @@ msgstr "ماذا تريد أن تسمي هذا الحساب؟"
 msgid "Where would you like to receive email notifications about payments?"
 msgstr "أين تريد تلقي إشعارات البريد الإلكتروني حول الدفعات؟"
 
-#: www/views/addresses.html:19
-msgid "Why?"
-msgstr "لماذا؟"
-
 #: www/views/onboarding/notifications.html:4
 msgid "Would you like to receive push notifications about payments?"
 msgstr "هل ترغب في تلقي إشعارات حول المدفوعات؟"
-
-#: src/js/services/bwcError.js:140
-msgid "Wrong spending password"
-msgstr "كلمة مرور غير صحيحة"
 
 #: www/views/modals/confirmation.html:7
 msgid "Yes"
@@ -2102,7 +1596,7 @@ msgstr "نعم"
 msgid "Yes, skip"
 msgstr "نعم, تخطي"
 
-#: www/views/preferencesAlias.html:12
+#: www/views/preferencesName.html:12
 msgid "You can change the name displayed on this device below."
 msgstr "يمكنك تغيير الاسم المعروض على هذا الجهاز أدناه."
 
@@ -2110,19 +1604,11 @@ msgstr "يمكنك تغيير الاسم المعروض على هذا الجها
 msgid "You can create a backup later from your wallet settings."
 msgstr "يمكنك إنشاء نسخة احتياطية لاحقا في إعدادات المحفظة."
 
-#: src/js/controllers/preferencesLanguage.js:11
-msgid "You can make contributions by signing up on our Crowdin community translation website. We’re looking forward to hearing from you!"
-msgstr "يمكنك تقديم مساهمات عن طريق الاشتراك في موقع بوايديتور للترجمة الموقع. ونحن نتطلع إلى الاستماع منك!"
-
-#: www/views/tab-scan.html:16
-msgid "You can scan bitcoin addresses, payment requests, paper wallets, and more."
-msgstr "NOT NEEDED"
-
 #: src/js/controllers/preferencesAbout.js:13
 msgid "You can see the latest developments and contribute to this open source app by visiting our project on GitHub."
 msgstr "يمكنكم متابعة اخر التطورات ودعم هذا التطبيق المفتوح على موقع جيت هاب (Github)."
 
-#: www/views/backup.html:15
+#: www/views/backup.html:13
 msgid "You can still export it from Advanced &gt; Export."
 msgstr "لا يزال بإمكانك تصديره من إعدادات متقدمة -> تصدير."
 
@@ -2134,19 +1620,12 @@ msgstr "يمكنكم تحويلها لأي عملة مثل الدولار أو �
 msgid "You'll receive email notifications about payments sent and received from your wallets."
 msgstr "سوف يتم تنبيهكم عن طريق البريد الالكتروني عن أي مدفوعات صادرة أو واردة من المحفظة."
 
-#: www/views/includes/confirmBackupPopup.html:6
-msgid "Your RaiBlocks Wallet is backed up!"
-msgstr "تم خلق نسخة احتياطية للمحفظة بنجاح!"
-
-#: www/views/tab-home.html:50
-msgid "Your RaiBlocks Wallet is ready!"
-msgstr "محفظة عملة الريبلوك جاهزة!"
-
 #: www/views/feedback/send.html:42
 msgid "Your ideas, feedback, or comments"
 msgstr "مقترحاتكم"
 
 #: www/views/tab-export-file.html:11 www/views/tab-import-file.html:20
+#: www/views/tab-import-phrase.html:30
 msgid "Your password"
 msgstr "كلمة مرورك"
 
@@ -2158,15 +1637,13 @@ msgstr "لا يتم حفظ محفظتك في أي من الخدمات السحا
 msgid "Your wallet key will be encrypted. The Spending Password cannot be recovered. Be sure to write it down."
 msgstr "سيتم تشفير مفتاح المحفظة. ولا يمكن استرداد كلمة مرورالإنفاق في المستقبل. لذا تأكد من كتابتها."
 
-#: www/views/accountDetails.html:135 www/views/accountDetails.html:55
+#: www/views/accountDetails.html:133 www/views/accountDetails.html:55
 #: www/views/includes/accountList.html:8 www/views/paperWallet.html:33
-#: www/views/tab-receive.html:45 www/views/walletDetails.html:131
-#: www/views/walletDetails.html:51
+#: www/views/tab-receive.html:39
 msgid "[Balance Hidden]"
 msgstr "[الرصيد مخفي]"
 
-#: www/views/accountDetails.html:145 www/views/accountDetails.html:65
-#: www/views/walletDetails.html:141 www/views/walletDetails.html:61
+#: www/views/accountDetails.html:143 www/views/accountDetails.html:65
 msgid "[Scanning Funds]"
 msgstr "[تفحص الأموال]"
 
@@ -2178,13 +1655,9 @@ msgstr "مقفل بسبب المدفوعات المعلقة"
 msgid "name@example.com"
 msgstr "name@example.com"
 
-#: www/views/accountDetails.html:222 www/views/walletDetails.html:218
+#: www/views/accountDetails.html:213
 msgid "{{updatingTxHistoryProgress}} transactions downloaded"
 msgstr " المعاملات التي تم تنزيلها {{updatingTxProgress}}"
-
-#: www/views/includes/walletInfo.html:18
-msgid "{{wallet.m}}-of-{{wallet.n}}"
-msgstr "{{wallet.m}}-من-{{wallet.n}}"
 
 #: www/views/onboarding/disclaimer.html:43
 msgid "I have read, understood, and agree to the <a ng-click=\"openTerms()\" href=\"javascript:void(0)\" translate=\"\">Terms of Use</a>."
@@ -2194,99 +1667,56 @@ msgstr "لقد قرأت وفهمت وأوافق على <a ng-click=\"openTerms()
 msgid "5-star ratings help us get Canoe into more hands, and more users means more resources can be committed to the app!"
 msgstr "تصنيف كانوو بـ٥ نجوم يساعدنا على إيصال التطبيق لأكبر عدد من المستخدمين. وزيادة المستخدمين يزيد من الموارد المتاحة لنا, مما يزيد من تركيزنا على تطوير التطبيق!"
 
-#: www/views/preferencesSecurity.html:12
-msgid "A wallet password is used to encrypt your RaiBlocks wallet when saving it on your device."
-msgstr "يتم استخدام كلمة المرور لتشفيرمحفظة الريبلوكس الخاصة بك عند حفظها على الجهاز."
-
-#: www/views/onboarding/createPassword.html:14
+#: www/views/changePassword.html:24 www/views/onboarding/createPassword.html:13
 msgid "At least 8 Characters. Make it good!"
 msgstr "٨ أحرف على الأقل. اجعلها معقدة!"
 
-#: www/views/changePassword.html:3 www/views/preferencesSecurity.html:15
+#: www/views/changePassword.html:3 www/views/changePassword.html:59
+#: www/views/preferencesSecurity.html:15
 msgid "Change Password"
 msgstr "تغيير كلمة السر"
 
-#: www/views/changePassword.html:39
-msgid "Change password"
-msgstr "تغيير كلمة السر"
-
-#: www/views/onboarding/createPassword.html:6
-msgid "Choose a strong password. Your RaiBlocks are on the line; you know the drill!"
-msgstr "اختر كلمة مرور قوية. رايبلوكس الخاص محفوفة بالخطر!"
-
-#: www/views/changePassword.html:30 www/views/onboarding/createPassword.html:22
+#: www/views/changePassword.html:31 www/views/onboarding/createPassword.html:21
 msgid "Confirm New Password"
 msgstr "تأكيد كلمة المرور الجديدة"
-
-#: www/views/onboarding/createPassword.html:54
-msgid "Create Password"
-msgstr "إنشاء كلمة مرور"
-
-#: www/views/preferencesSecurity.html:42
-msgid "Enable Petty RaiBlocks"
-msgstr "تفعيل خاصية حساب ذو مبالغ بسيطة"
 
 #: www/views/feedback/rateCard.html:3
 msgid "How do you like Canoe?"
 msgstr "هل تحب كانوو؟"
 
-#: www/views/changePassword.html:24
-msgid "Insert your new password. Make it good!"
-msgstr "أدخل كلمة المرور الجديدة. اجعلها مُعقدة!"
-
-#: www/views/changePassword.html:16
-msgid "Insert your old password"
-msgstr "أدخل كلمة المرور القديمة"
-
-#: www/views/onboarding/welcome.html:5
-msgid "Join the future of money,<br>get started with RaiBlocks."
-msgstr "انضم إلى مستقبل المال، <br> ابدأ مع ريبلوكس."
-
 #: www/views/onboarding/tour.html:50
 msgid "Let's Start"
 msgstr "لنبدأ"
 
-#: www/views/changePassword.html:22 www/views/onboarding/createPassword.html:12
+#: www/views/changePassword.html:22 www/views/onboarding/createPassword.html:11
 msgid "New Password"
 msgstr "كلمة السر الجديدة"
 
-#: www/views/changePassword.html:14
+#: www/views/changePassword.html:13
 msgid "Old Password"
 msgstr "كلمة المرور القديمة"
 
-#: www/views/changePassword.html:32
-msgid "One more time"
-msgstr "مرة أخرى"
-
-#: www/views/onboarding/createPassword.html:29
+#: www/views/changePassword.html:33 www/views/onboarding/createPassword.html:28
 msgid "One more time."
 msgstr "مرة أخرى."
 
-#: www/views/onboarding/createPassword.html:39
+#: www/views/changePassword.html:46 www/views/onboarding/createPassword.html:38
 msgid "Password too short"
 msgstr "كلمة المرور قصيرة جدا"
 
-#: www/views/onboarding/createPassword.html:46
+#: www/views/changePassword.html:52 www/views/onboarding/createPassword.html:45
 msgid "Passwords don't match"
 msgstr "كلمتي المرور غير متطابقة"
 
-#: www/views/onboarding/createPassword.html:35
+#: www/views/changePassword.html:42 www/views/onboarding/createPassword.html:34
 msgid "Passwords match"
 msgstr "كلمتي المرور متطابقة"
-
-#: www/views/onboarding/createPassword.html:5
-msgid "Passwords. They are important!"
-msgstr "كلمة المرور. انها ذات أهمية مطلقة!"
-
-#: www/views/preferencesSecurity.html:38 www/views/preferencesSecurity.html:45
-msgid "Petty RaiBlocks"
-msgstr "حساب ذو مبالغ بسيطة"
 
 #: www/views/preferencesNotifications.html:17
 msgid "Push notifications for Canoe are currently disabled. Enable them in the Settings app."
 msgstr "إشعارات كانوو معطلة حالياً. يمكنك تفعيلها في اعدادات التطبيق."
 
-#: src/js/controllers/feedback/complete.js:5 www/views/tab-settings.html:60
+#: src/js/controllers/feedback/complete.js:5 www/views/tab-settings.html:80
 msgid "Share Canoe"
 msgstr "شارك كانوو"
 
@@ -2310,41 +1740,9 @@ msgstr "خاصية  النظرة الخاطفة تسمح لك بإظهار بع�
 msgid "There is a new version of Canoe available"
 msgstr "هناك نسخة جديدة من كانوو"
 
-#: www/views/onboarding/createPassword.html:53
-msgid "This password will be used to encrypt your wallet from prying eyes."
-msgstr "سيتم استخدام كلمة المرور هذه لتشفير محفظتك من أعين المتطفلين."
-
 #: www/views/preferencesSecurity.html:20
 msgid "Timeout"
 msgstr "مقدار نفاذ الوقت"
-
-#: www/views/preferencesSecurity.html:10
-msgid "Wallet Password\n"
-"\t\t\t<div class=\"list settings-list\">\n"
-"\t\t\t\t<p class=\"item-description\" translate=\"\">A wallet password is used to encrypt your RaiBlocks wallet when saving it on your device.</p>\n"
-"\t\t\t\t<a class=\"item item-icon-left item-icon-right\" ui-sref=\"tabs.preferencesSecurity.changePassword\">\n"
-"\t\t\t\t\t<i class=\"icon ion-ios-download-outline\"></i>\n"
-"\t\t\t\t\t<span translate=\"\">Change Password</span>\n"
-"\t\t\t\t\t<i class=\"icon bp-arrow-right\"></i>\n"
-"\t\t\t\t</a>\n"
-"\t\t\t\t<div class=\"item item-icon-left\">\n"
-"\t\t\t\t\t<i class=\"icon ion-ios-time-outline\"></i>\n"
-"\t\t\t\t\t<span translate=\"\">Timeout</span>\n"
-"\t\t\t\t</div>\n"
-"\t\t\t</div>"
-msgstr "كلمة المرور المحفظة\n"
-"<ديف كلاس = \"ليست سيتينغس-ليست\">\n"
-"<p كلاس = \"إيتم-دسكريبتيون\" ترانزلات = \"\"> يتم استخدام كلمة مرور المحفظة لتشفير محفظة ريبلوكس عند حفظها على جهازك. </ p>\n"
-"<a class=\"item item-icon-left item-icon-right\" ui-sref=\"tabs.preferencesSecurity.changePassword\">\n"
-"<i كلاس = \"إيكون أيون-يوس-دونلواد-أوتلين\"> </ i>\n"
-"<سبان ترانزلات = \"\"> تغيير كلمة المرور </ سبان>\n"
-"<i كلاس = \"إيكون بب-أرو-رايت\"> </ i>\n"
-"</A>\n"
-"<ديف كلاس = \"إيتم إيتم-إيكون-ليفت\">\n"
-"<i كلاس = \"إيكون أيون-يوس-تايم-أوتلين\"> </ i>\n"
-"<سبان ترانزلات = \"\"> المهلة </ سبان>\n"
-"</ div>\n"
-"</ div>"
 
 #: src/js/controllers/feedback/send.js:76
 msgid "We're always looking for ways to improve Canoe."
@@ -2358,7 +1756,393 @@ msgstr "نحن نبحث دائما عن طرق لتحسين كانوو. كيف �
 msgid "Would you be willing to rate Canoe in the app store?"
 msgstr "هل انت مستعد لتقييم كانوو في المتجر؟"
 
+#: www/views/addressbook.add.html:57 www/views/addressbook.edit.html:58
+msgid "@joedoe"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:12
+msgid "A wallet password is used to encrypt your Nano wallet when saving it on your device."
+msgstr ""
+
+#: www/views/preferencesAlias.html:4
+msgid "Account Alias"
+msgstr ""
+
+#: www/views/preferencesColor.html:4
+msgid "Account Color"
+msgstr ""
+
+#: www/views/addressbook.add.html:54 www/views/addressbook.edit.html:55
+#: www/views/addressbook.view.html:30 www/views/preferences.html:22
+#: www/views/preferencesAlias.html:17
+msgid "Alias"
+msgstr ""
+
+#: www/views/modals/wallet-balance.html:18
+msgid "All of your Nano Wallet balance may not be available for immediate spending."
+msgstr ""
+
+#: www/views/backupWarning.html:14
+msgid "Anyone with your seed can access or spend your nano."
+msgstr ""
+
+#: src/js/controllers/advancedSettings.js:17
+msgid "Are you sure you want to repair wallet?"
+msgstr ""
+
+#: www/views/backup.html:3 www/views/tab-settings.html:21
+msgid "Backup seed"
+msgstr ""
+
+#: www/views/onboarding/createPassword.html:52
+msgid "Create Wallet"
+msgstr ""
+
+#: www/views/onboarding/createPassword.html:5
+msgid "Create your Password"
+msgstr ""
+
+#: www/views/preferencesLanguage.html:21
+msgid "Don't see your language? Sign up on POEditor! We'd love to support your language."
+msgstr ""
+
+#: www/views/addressbook.edit.html:4
+msgid "Edit Contact"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:42
+msgid "Enable Petty Nano"
+msgstr ""
+
+#: www/views/tab-export-file.html:10
+msgid "Enter password"
+msgstr ""
+
+#: www/views/advancedSettings.html:14
+msgid "If enabled, Proof Of Work is delegated to the Canoe server side."
+msgstr ""
+
+#: www/views/modals/password.html:8
+msgid "Incorrect password, try again."
+msgstr ""
+
+#: www/views/addressbook.edit.html:24
+msgid "Joe Doe"
+msgstr ""
+
+#: www/views/onboarding/welcome.html:5
+msgid "Join the future of money,<br>get started with Nano."
+msgstr ""
+
+#: www/views/tab-settings.html:73
+msgid "Lock Canoe"
+msgstr ""
+
+#: www/views/addressbook.add.html:38
+msgid "Nano Account"
+msgstr ""
+
+#: www/views/onboarding/disclaimer.html:15
+msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
+msgstr ""
+
+#: www/views/onboarding/tour.html:31
+msgid "Nano is feeless."
+msgstr ""
+
+#: www/views/onboarding/tour.html:18
+msgid "Nano is instant,<br>digital money."
+msgstr ""
+
+#: www/views/onboarding/tour.html:45
+msgid "Nanos are secure."
+msgstr ""
+
+#: src/js/controllers/confirm.js:73
+msgid "No accounts available"
+msgstr ""
+
+#: www/views/onboarding/backupRequest.html:5
+msgid "No backup, no Nano."
+msgstr ""
+
+#: src/js/controllers/preferencesLanguage.js:12
+msgid "Open POEditor"
+msgstr ""
+
+#: src/js/controllers/preferencesLanguage.js:10
+msgid "Open Translation Site"
+msgstr ""
+
+#: www/views/tab-import-file.html:18
+msgid "Password to decrypt"
+msgstr ""
+
+#: www/views/tab-import-phrase.html:28
+msgid "Password to encrypt"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:38 www/views/preferencesSecurity.html:45
+msgid "Petty Nano"
+msgstr ""
+
+#: src/js/controllers/import.js:116
+msgid "Please enter a password to use for the wallet"
+msgstr ""
+
+#: www/views/modals/password.html:6
+msgid "Please enter your password"
+msgstr ""
+
+#: www/views/advancedSettings.html:31
+msgid "Repair"
+msgstr ""
+
+#: www/views/addressbook.view.html:35
+msgid "Send Nano"
+msgstr ""
+
+#: www/views/tab-send.html:33
+msgid "Start sending Nano"
+msgstr ""
+
+#: www/views/onboarding/tour.html:46
+msgid "This app stores your Nanos with cutting-edge security."
+msgstr ""
+
+#: www/views/onboarding/createPassword.html:51
+msgid "This password encrypts your wallet, do not forget it!"
+msgstr ""
+
+#: www/views/tab-send.html:37
+msgid "To get started, you need Nano. Share your account to receive Nano."
+msgstr ""
+
+#: www/views/tab-send.html:38
+msgid "To get started, you need an Account in your wallet to receive Nano."
+msgstr ""
+
+#: www/views/preferencesAlias.html:12
+msgid "Type below to see if an alias is free to use."
+msgstr ""
+
+#: www/views/advancedSettings.html:12
+msgid "Use Server Side PoW"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:10
+msgid "Wallet Password\n"
+"\t\t\t<div class=\"list settings-list\">\n"
+"\t\t\t\t<p class=\"item-description\" translate=\"\">A wallet password is used to encrypt your Nano wallet when saving it on your device.</p>\n"
+"\t\t\t\t<a class=\"item item-icon-left item-icon-right\" ui-sref=\"tabs.preferencesSecurity.changePassword\">\n"
+"\t\t\t\t\t<i class=\"icon ion-ios-download-outline\"></i>\n"
+"\t\t\t\t\t<span translate=\"\">Change Password</span>\n"
+"\t\t\t\t\t<i class=\"icon bp-arrow-right\"></i>\n"
+"\t\t\t\t</a>\n"
+"\t\t\t\t<div class=\"item item-icon-left\">\n"
+"\t\t\t\t\t<i class=\"icon ion-ios-time-outline\"></i>\n"
+"\t\t\t\t\t<span translate=\"\">Timeout</span>\n"
+"\t\t\t\t</div>\n"
+"\t\t\t</div>"
+msgstr ""
+
+#: www/views/preferencesLanguage.html:16
+msgid "We’re always looking for translation contributions! You can make corrections or help to make this app available in your native language by joining our community on POEditor."
+msgstr ""
+
+#: www/views/preferencesAlias.html:11
+msgid "What public alias would you like to reserve?"
+msgstr ""
+
+#: src/js/controllers/preferencesLanguage.js:11
+msgid "You can make contributions by signing up on our POEditor community translation project. We’re looking forward to hearing from you!"
+msgstr ""
+
+#: www/views/tab-scan.html:16
+msgid "You can scan Nano addresses, payment requests and more."
+msgstr ""
+
 #: www/views/onboarding/tour.html:19
-msgid "You can transfer RaiBlocks instantly to anyone, anywhere ."
-msgstr "يمكنك نقل ريبلوكس على الفور إلى أي شخص، في أي مكان."
+msgid "You can transfer Nano instantly to anyone, anywhere ."
+msgstr ""
+
+#: www/views/tab-home.html:50
+msgid "Your Nano Wallet is ready!"
+msgstr ""
+
+#: www/views/includes/confirmBackupPopup.html:6
+msgid "Your Nano wallet seed is backed up!"
+msgstr ""
+
+#: www/views/addressbook.edit.html:33
+msgid "jode.doe@example.com"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:46
+msgid "<span translate=\"\">You can probably find more infos about all this on</span>&nbsp;<a href=\"https://www.reddit.com/r/nanocurrency/\">reddit nanocurrency</a>"
+msgstr ""
+
+#: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
+msgid "Account"
+msgstr ""
+
+#: src/js/controllers/create.js:19 src/js/controllers/preferencesName.js:13
+msgid "An account already exists with that name"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:49
+msgid "Be carefull with all these steps, keep your seed backed up and you should be all fine. Enjoy feeless and instant payments with Nano and Canoe !"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:30
+msgid "Buy online"
+msgstr ""
+
+#: www/views/modals/pin.html:10
+msgid "Confirm your PIN"
+msgstr ""
+
+#: src/js/controllers/import.js:63
+msgid "Could not decrypt wallet, check your password"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:18
+msgid "Disclamer"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:36
+msgid "Do remember, your Nanos are only safe when in your wallet. If you keep it on an exchange site it could get stolen by hackers or even the site owners."
+msgstr ""
+
+#: www/views/preferencesName.html:18
+msgid "Enter a descriptive name"
+msgstr ""
+
+#: src/js/controllers/export.js:30
+msgid "Failed to generate seed QR code"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:15
+msgid "Here's how to do..."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:3
+msgid "How to buy or sell Nanos"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:12 www/views/tab-settings.html:68
+msgid "How to buy/sell Nanos"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:23
+msgid "If you are used to buying and selling cryptos, don't waste your time, you will probably not learn anything here."
+msgstr ""
+
+#: src/js/controllers/import.js:133
+msgid "If you import a wallet, your current accounts will not be visible in Canoe anymore, so you could lose your Nanos.<br/><br/>You want to make sure that you backed up your wallet and remember your password or, at least, make sure you know the 64 characters of your seed before you do that."
+msgstr ""
+
+#: www/views/modals/pin.html:12
+msgid "Incorrect PIN, try again."
+msgstr ""
+
+#: src/js/controllers/import.js:32
+msgid "Incorrect code format for a seed:"
+msgstr ""
+
+#: src/js/controllers/changePasswordController.js:6
+msgid "Information"
+msgstr ""
+
+#: src/js/controllers/import.js:42
+msgid "Not a seed QR code:"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:27
+msgid "Obviously, you can buy and sell Nanos to a friend. Canoe displays amounts both in NANO and and in your currency so it's easy to convert."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:35
+msgid "Once you got some cryptocurrency, say Bitcoins, register to an exchange like"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:43
+msgid "Once your Nanos are on the exchange, sell it for Bitcoins (or other) and send them to your Bitcoin/local currency gateway. Finally, send your local money to your bank account, and you are done !"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:39
+msgid "Petty Nano allows you to designate an amount to transfer without the need to enter a password. This decreases the security of the petty Nano, so choose wisely!"
+msgstr ""
+
+#: www/views/modals/pin.html:9
+msgid "Please enter your PIN"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:42
+msgid "Pretty much the same as to buy, just go the other way. First send Nanos to an exchange or directly to your Nano/local currency gateway if you've found one."
+msgstr ""
+
+#: www/views/tab-export-qrCode.html:7
+msgid "Scan this QR code to import seed into another application"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:3 www/views/tab-settings.html:118
+msgid "Security Preferences"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:40
+msgid "Sell online"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:14
+msgid "So, now you want to buy some Nanos and play arround. Or maybe, you've got some in your Canoe wallet and want to get 'real money' ?"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:19
+msgid "The Canoe team does not work with any of the web sites listed below. Nano, just like any other cryptocurrency is highly volatile so don't put too much money into this and hodl !"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:26
+msgid "The easy way"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:34
+msgid "The ones selling Nanos are pretty rare as for now, so, if you don't find one, being able to buy a fast and low feas cryptocurrency instead : Ether, Litecoin or Bitcoincash can save you money and time."
+msgstr ""
+
+#: www/views/modals/password.html:27
+msgid "Unlock Canoe"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:22
+msgid "Warning"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:46
+msgid "You can probably find more infos about all this on"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:32
+msgid "You need to register to a web site that exchanges fiat (your local currency like $) to some crypto currency. This process can take some time, a week or so and they will ask for an id scan, proof of where you live at etc."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:33
+msgid "You should find a good reason to trust the web site you want to pick here. Google, speak with friends who are into cryptocurrencies. Then this web site should probably be located in your country. Another important point is : do they sell directly Nanos ?"
+msgstr ""
+
+#: www/views/changePassword.html:15
+msgid "Your current password"
+msgstr ""
+
+#: src/js/controllers/changePasswordController.js:6
+msgid "Your password has been changed"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:35
+msgid "or"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:35
+msgid "that trades Nanos. Send your Bitcoins to your account on this site and trade it for Nanos. Once you get your precious Nanos, send it to your Canoe wallet using your xrb_... address (you can copy it clicking on the receive button below)."
+msgstr ""
 
