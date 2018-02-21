@@ -12,6 +12,8 @@ angular.module('canoeApp.services')
 
     var root = {}
 
+    root.rates = null
+
     root.updateRates = function (rates) {
       root.alternatives = []
       root.rates = rates
@@ -37,14 +39,19 @@ angular.module('canoeApp.services')
 
     root.getRate = function (code) {
       if (root.isAvailable()) {
-        return root.rates[code].rate
+        var rate = root.rates[code]
+        if (rate) {
+          return rate.rate
+        } else {
+          return 0
+        }
       } else {
         return 0
       }
     }
 
     root.isAvailable = function () {
-      return !!root.rates
+      return root.rates !== null
     }
 
     root.whenAvailable = function (callback) {
