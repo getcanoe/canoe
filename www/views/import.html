@@ -6,6 +6,10 @@
   </ion-nav-bar>
 
   <ion-content ng-init="phrase = true">
+    <div class="settings-explanation">
+      <div class="settings-heading" translate>Caution</div>
+      <div class="settings-description" translate>Importing a wallet removes your current wallet and all its accounts. You may wish to first backup your current seed or make a file backup of the wallet.</div>
+    </div>
     <div class="row text-center top-tabs">
       <div class="col" ng-click="phrase = true; file = hardware = false" ng-style="phrase &&
         {'border-bottom-style': 'solid'}">

@@ -130,7 +130,7 @@ angular.module('canoeApp.controllers').controller('importController',
 
     var importWarning = function (cb) {
       var title = gettextCatalog.getString('Warning!')
-      var message = gettextCatalog.getString('If you import a wallet, your current accounts will not be visible in Canoe anymore, so you could lose your Nanos.<br/><br/>You want to make sure that you backed up your wallet and remember your password or, at least, make sure you know the 64 characters of your seed before you do that.')
+      var message = gettextCatalog.getString('Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from.')
       popupService.showConfirm(title, message, null, null, cb)
     }
 
