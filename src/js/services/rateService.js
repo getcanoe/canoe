@@ -38,6 +38,9 @@ angular.module('canoeApp.services')
     }
 
     root.getRate = function (code) {
+      if (!code) {
+        return 0
+      }
       if (root.isAvailable()) {
         var rate = root.rates[code]
         if (rate) {

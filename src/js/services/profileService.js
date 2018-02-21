@@ -55,20 +55,7 @@ angular.module('canoeApp.services')
     root.fetchServerStatus = function (cb) {
       nanoService.fetchServerStatus(cb)
     }
-/*
-    root.updateRate = function (code, force) {
-      if (!rate || (Date.now() > (lastTime + 60000)) || force) {
-        root.getCurrentCoinmarketcapRate(code, function (err, rt) {
-          if (err) {
-            $log.warn(err)
-          } else {
-            rate = rt
-            lastTime = Date.now()
-          }
-        })
-      }
-    }
-*/
+
     root.toFiat = function (raw, code, force) {
       var rate = rateService.getRate(code)
       return (raw * rate) / RAW_PER_NANO
@@ -79,36 +66,6 @@ angular.module('canoeApp.services')
       return (amount / rate) * RAW_PER_NANO
     }
 
-   /* root.getCurrentCoinmarketcapRate = function (localCurrency, cb) {
-      var local = localCurrency || 'usd'
-      local = local.toLowerCase()
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', 'https://api.coinmarketcap.com/v1/ticker/nano/?convert=BTC', true)
-      xhr.send()
-      xhr.onreadystatechange = processRequest
-      function processRequest (e) {
-        function processRequest (e) {
-          if (xhr2.readyState === 4 && xhr2.status === 200) {
-            var response = JSON.parse(xhr2.responseText)
-            var localPrice = response['rate']
-            cb(null, (localPrice * btcPrice))
-
-            // Refresh ui
-            $rootScope.$broadcast('rates.loaded')
-          }
-        }
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var response = JSON.parse(xhr.responseText)
-          var btcPrice = response[0]['price_btc']
-
-          var xhr2 = new XMLHttpRequest()
-          xhr2.open('GET', 'https://bitpay.com/api/rates/' + local, true)
-          xhr2.send()
-          xhr2.onreadystatechange = processRequest
-        }
-      }
-    }
-*/
     // Create a new wallet from a seed
     root.importSeed = function (password, seed, cb) {
       $log.debug('Importing Wallet Seed')

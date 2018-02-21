@@ -29,7 +29,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
         unitDecimals: 2,
         unitCode: 'NANO',
         alternativeName: 'US Dollar',
-        alternativeIsoCode: 'USD',
+        alternativeIsoCode: undefined,
         amountInputDefaultCurrency: 'NANO'
       }
     },
@@ -116,7 +116,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
         //  console.log('Pretending there is no alternativeIsoCode in wallet = ' + configCache.wallet.settings.alternativeIsoCode)
         //  configCache.wallet.settings.alternativeIsoCode = undefined
         //}
-        if (!configCache.wallet.settings.alternativeIsoCode){
+        if (!configCache.wallet.settings.alternativeIsoCode) {
           // We don't have an alternative currency set in the wallet, so let's try to guess it
           // Let's get country code first, then currency
           $.getJSON('//freegeoip.net/json/?callback=?', function(response) {
