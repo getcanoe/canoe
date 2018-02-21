@@ -860,7 +860,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       })
 
       $ionicPlatform.on('resume', function () {
-        applicationService.appLockModal('check')
+        // Only if we actually have it loaded
+        if (profileService.getWallet()) {
+          applicationService.appLockModal('check')
+        }
       })
 
       $ionicPlatform.on('menubutton', function () {
