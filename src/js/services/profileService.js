@@ -411,7 +411,7 @@ angular.module('canoeApp.services')
       // Add formatted balances and timestamps
       lodash.each(accounts, function (acc) {
         acc.balanceStr = root.formatAmountWithUnit(parseInt(acc.balance))
-        var config = configService.getSync().wallet.settings        
+        var config = configService.getSync().wallet.settings
         // Don't show unless rate is loaded, ui update will be lanched by $broadcast('rates.loaded')
         acc.alternativeBalanceStr = 'hide'
         var altBalance = root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano', true)
