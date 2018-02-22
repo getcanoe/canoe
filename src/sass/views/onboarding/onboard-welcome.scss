@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
   }
   #qrcode {
-    content: url("../img/onboarding-welcome-qrcode.png");
+    content: url('../img/onboarding-welcome-qrcode.png');
     position: absolute;
     top: 5%;
     right: 5%;
@@ -27,11 +27,21 @@
   }
   #lead {
     line-height: 1.6;
-    font-size: 18px;
-	margin-top: 30px;
+    font-size: 22px;
+    margin-top: 30px;
+    font-family: 'Roboto-Thin';
+    text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1),
+      0px 18px 23px rgba(0, 0, 0, 0.1);
   }
   #cta-buttons {
     @extend %cta-buttons;
     padding-bottom: 4vw;
+  }
+
+  #restore span{
+    border-bottom: .5px dotted white;
+    padding: 1.5px;
+    width: 80%;
+    font-family:"Roboto-Thin"
   }
 }
