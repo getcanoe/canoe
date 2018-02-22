@@ -66,6 +66,7 @@
     "cordova-plugin-globalization": "1.0.9",
     "cordova-plugin-inappbrowser": "2.0.2",
     "cordova-plugin-ionic-webview": "1.1.16",
+    "cordova-plugin-media": "^5.0.2",
     "cordova-plugin-network-information": "2.0.1",
     "cordova-plugin-qrscanner": "2.5.0",
     "cordova-plugin-screen-orientation": "3.0.1",
