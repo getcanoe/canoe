@@ -39,7 +39,7 @@ angular.module('canoeApp.controllers').controller('importController',
           }, 1)
         } else {
           // Trying to import wrong protocol
-          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Not a seed QR code: ' + code))
+          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Not a seed QR code: ' + data))
         }
       })
     }

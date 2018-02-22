@@ -1,59 +1,57 @@
-'use strict';
-
+'use strict'
+/* global angular */
 angular.module('canoeApp.directives')
-  .directive('qrScanner', function($state, $rootScope, $log, $ionicHistory, platformInfo, scannerService, popupService) {
-
+  .directive('qrScanner', function ($state, $rootScope, $log, $ionicHistory, platformInfo, scannerService, gettextCatalog, popupService) {
     return {
       restrict: 'E',
       scope: {
-        onScan: "&"
+        onScan: '&'
       },
       replace: true,
       template: '<a on-tap="chooseScanner()" nav-transition="none"><i class="icon ion-qr-scanner"></i></a>',
-      link: function(scope, el, attrs) {
-
-        scope.chooseScanner = function() {
-          var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
+      link: function (scope, el, attrs) {
+        scope.chooseScanner = function () {
+          var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
 
           if (!isWindowsPhoneApp) {
-            scope.openScanner();
-            return;
+            scope.openScanner()
+            return
           }
 
-          scannerService.useOldScanner(function(err, contents) {
+          scannerService.useOldScanner(function (err, contents) {
             if (err) {
-              popupService.showAlert(gettextCatalog.getString('Error'), err);
-              return;
+              popupService.showAlert(gettextCatalog.getString('Error'), err)
+              return
             }
             scope.onScan({
               data: contents
-            });
-          });
-        };
+            })
+          })
+        }
 
-        scope.openScanner = function() {
-          $log.debug('Opening scanner by directive...');
+        scope.openScanner = function () {
+          $log.debug('Opening scanner by directive...')
           $ionicHistory.nextViewOptions({
             disableAnimate: true
-          });
+          })
           $state.go('scanner', {
             passthroughMode: 1
-          });
-        };
+          })
+        }
 
-        var afterEnter = $rootScope.$on('$ionicView.afterEnter', function() {
+        var afterEnter = $rootScope.$on('$ionicView.afterEnter', function () {
           if ($rootScope.scanResult) {
             scope.onScan({
               data: $rootScope.scanResult
-            });
-            $rootScope.scanResult = null;
+            })
+            $rootScope.scanResult = null
           }
-        });
+        })
 
         // Destroy event
-        scope.$on('$destroy', function() {
-          afterEnter();
-        });
+        scope.$on('$destroy', function () {
+          afterEnter()
+        })
       }
     }
-  });
+  })

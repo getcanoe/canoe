@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('addressbookAddController', function ($scope, $state, $stateParams, $timeout, $ionicHistory, gettextCatalog, addressbookService, nanoService, popupService) {
   $scope.fromSendTab = $stateParams.fromSendTab
 
@@ -14,14 +14,23 @@ angular.module('canoeApp.controllers').controller('addressbookAddController', fu
     $timeout(function () {
       var form = addressbookForm
       if (data && form) {
-        nanoService.parseQRCode(data, function (code) {
+        nanoService.parseQRCode(data, function (err, code) {
+          if (err) {
+            // Trying to scan an incorrect QR code
+            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Incorrect code format for an account: ' + code))
+            return
+          }
           form.address.$setViewValue(code.account)
           form.address.$isValid = true
           form.address.$render()
-          form.name.$setViewValue(code.params.label || '')
-          form.name.$render()
-          form.alias.$setViewValue(code.alias || '')
-          form.alias.$render()
+          if (code.params.label) {
+            form.name.$setViewValue(code.params.label)
+            form.name.$render()
+          }
+          if (code.params.alias) {
+            form.alias.$setViewValue(code.alias)
+            form.alias.$render()
+          }
         })
       }
       $scope.$digest()
