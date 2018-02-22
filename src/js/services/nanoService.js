@@ -88,7 +88,6 @@ angular.module('canoeApp.services')
       }      
     }
 
-
     function regularBroadcast () {
       if (root.wallet) {
         root.broadcastCallback(root.wallet.getReadyBlocks())
@@ -159,11 +158,11 @@ angular.module('canoeApp.services')
 
     function resetChainInternal (wallet, account) {
       var currentBlocks = wallet.getLastNBlocks(account, 99999)
-      var hist = rai.account_history(account)
-      var hashes = []
-      lodash.each(hist, function (blk) {
-        hashes.unshift(blk.hash) // Reversing order
-      })
+      var ledger = rai.ledger(account, 1)
+      var count = ledger.block_count
+      var frontier = ledger.frontier
+      var hashes = rai.chain(frontier, count)
+      hashes.reverse()
       var blocks = rai.blocks_info(hashes)
       // Unfortunately blocks is an object so to get proper order we use hashes
       lodash.each(hashes, function (hash) {
