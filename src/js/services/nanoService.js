@@ -159,8 +159,8 @@ angular.module('canoeApp.services')
     function resetChainInternal (wallet, account) {
       var currentBlocks = wallet.getLastNBlocks(account, 99999)
       var ledger = rai.ledger(account, 1)
-      var count = ledger.block_count
-      var frontier = ledger.frontier
+      var count = ledger[account].block_count
+      var frontier = ledger[account].frontier
       var hashes = rai.chain(frontier, count)
       hashes.reverse()
       var blocks = rai.blocks_info(hashes)
