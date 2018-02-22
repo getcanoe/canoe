@@ -1,6 +1,6 @@
 'use strict'
-
-angular.module('canoeApp.controllers').controller('tabScanController', function ($scope, $log, $timeout, scannerService, incomingData, $state, $ionicHistory, $rootScope) {
+/* global angular */
+angular.module('canoeApp.controllers').controller('tabScanController', function ($scope, $log, $timeout, scannerService, soundService, incomingData, $state, $ionicHistory, $rootScope) {
   var scannerStates = {
     unauthorized: 'unauthorized',
     denied: 'denied',
@@ -56,6 +56,7 @@ angular.module('canoeApp.controllers').controller('tabScanController', function 
 
   $scope.$on('$ionicView.afterEnter', function () {
     // try initializing and refreshing status any time the view is entered
+    soundService.playBling()
     if (!scannerService.isInitialized()) {
       scannerService.gentleInitialize()
     }
@@ -70,19 +71,19 @@ angular.module('canoeApp.controllers').controller('tabScanController', function 
       $scope.currentState = scannerStates.visible
         // pause to update the view
       $timeout(function () {
-          scannerService.scan(function (err, contents) {
-            if (err) {
-              $log.debug('Scan canceled.')
-            } else if ($state.params.passthroughMode) {
+        scannerService.scan(function (err, contents) {
+          if (err) {
+            $log.debug('Scan canceled.')
+          } else if ($state.params.passthroughMode) {
             $rootScope.scanResult = contents
             goBack()
           } else {
             handleSuccessfulScan(contents)
           }
-          })
-          // resume preview if paused
-          scannerService.resumePreview()
         })
+        // resume preview if paused
+        scannerService.resumePreview()
+      })
     })
   }
   $scope.activate = activate

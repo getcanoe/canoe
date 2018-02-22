@@ -1,11 +1,8 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, $rootScope, configService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
+  .factory('nanoService', function ($log, $rootScope, configService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
-
-    var isCordova = platformInfo.isCordova
-    var isNW = platformInfo.isNW
 
     // This is where communication happens. This service is mostly called from profileService.
     // We use either XMLHttpRpc calls via rai (RaiblocksJS modified) or MQTT-over-WSS.
@@ -574,32 +571,11 @@ angular.module('canoeApp.services')
       $log.info('MQTT failure')
     }
 
-    root.playBling = function () {
-      /*if (isCordova) {
-        // Play the audio file at url
-        var bling = new Media('sounds/bling1.mp3',
-          // success callback
-          function () {
-            $log.debug("playAudio():Audio Success");
-          },
-          // error callback
-          function (err) {
-            $log.debug("playAudio():Audio Error: " + err);
-          }
-        )
-        // Play audio
-        bling.play()
-      } else {
-        // HTML5 sound
-
-      }*/
-    }
-
     root.handleIncomingSendBlock = function (hash, account, from, amount) {
       // Create a receive (or open, if this is the first block in account) block to match
       // this incoming send block
       // For fun
-      root.playBling()
+      soundService.playBling()
       if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
         $log.info('Added pending receive block')
         // TODO Add something visual for the txn?
@@ -652,7 +628,7 @@ angular.module('canoeApp.services')
     }
 
     root.onMessageArrived = function (message) {
-      //$log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
+      // $log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
       var topic = message.destinationName
       var payload = message.payloadString
       // Switch over topics
