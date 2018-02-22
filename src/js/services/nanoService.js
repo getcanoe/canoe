@@ -159,8 +159,11 @@ angular.module('canoeApp.services')
     function resetChainInternal (wallet, account) {
       var currentBlocks = wallet.getLastNBlocks(account, 99999)
       var ledger = rai.ledger(account, 1)
-      var count = ledger.block_count
-      var frontier = ledger.frontier
+      // We always get one account, but we don't get the one we asked for if
+      // it doesn't exist. Weird API!
+      if (ledger[account]) {
+      var count = ledger[account].block_count
+      var frontier = ledger[account].frontier
       var hashes = rai.chain(frontier, count)
       hashes.reverse()
       var blocks = rai.blocks_info(hashes)
@@ -192,6 +195,7 @@ angular.module('canoeApp.services')
       lodash.each(currentBlocks, function (b) {
         wallet.addBlockToReadyBlocks(b)
       })
+    }
     }
 
     function clearPrecalc () {
