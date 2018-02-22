@@ -18,6 +18,10 @@
     width: 140px;
     z-index: 1;
   }
+  .onboarding-description {
+    font-family: 'Roboto-Thin';
+    font-size: 20px;
+  }
   .swiper-pagination {
     &-bullet {
       background: $v-onboarding-tour-swiper-pagination-bg;
