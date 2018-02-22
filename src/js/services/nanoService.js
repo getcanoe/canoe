@@ -4,6 +4,9 @@ angular.module('canoeApp.services')
   .factory('nanoService', function ($log, $rootScope, configService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
 
+    var isCordova = platformInfo.isCordova
+    var isNW = platformInfo.isNW
+
     // This is where communication happens. This service is mostly called from profileService.
     // We use either XMLHttpRpc calls via rai (RaiblocksJS modified) or MQTT-over-WSS.
 
@@ -85,7 +88,7 @@ angular.module('canoeApp.services')
           $log.info('Client side PoW found for ' + hash + ': ' + work)
           callback(work)
         })
-      }      
+      }
     }
 
     function regularBroadcast () {
@@ -162,40 +165,40 @@ angular.module('canoeApp.services')
       // We always get one account, but we don't get the one we asked for if
       // it doesn't exist. Weird API!
       if (ledger[account]) {
-      var count = ledger[account].block_count
-      var frontier = ledger[account].frontier
-      var hashes = rai.chain(frontier, count)
-      hashes.reverse()
-      var blocks = rai.blocks_info(hashes)
-      // Unfortunately blocks is an object so to get proper order we use hashes
-      lodash.each(hashes, function (hash) {
-        var block = blocks[hash]
-        var blk = wallet.createBlockFromJSON(block.contents)
-        blk.setAmount(block.amount)
-        blk.setAccount(block.block_account)
-        blk.setImmutable(true)
-        try {
-          // First we check if this is a fork and thus adop it if it is
-          if (!wallet.importForkedBlock(blk, account)) { // Replaces any existing block
-            // No fork so we can just import it
-            wallet.importBlock(blk, account)
+        var count = ledger[account].block_count
+        var frontier = ledger[account].frontier
+        var hashes = rai.chain(frontier, count)
+        hashes.reverse()
+        var blocks = rai.blocks_info(hashes)
+        // Unfortunately blocks is an object so to get proper order we use hashes
+        lodash.each(hashes, function (hash) {
+          var block = blocks[hash]
+          var blk = wallet.createBlockFromJSON(block.contents)
+          blk.setAmount(block.amount)
+          blk.setAccount(block.block_account)
+          blk.setImmutable(true)
+          try {
+            // First we check if this is a fork and thus adop it if it is
+            if (!wallet.importForkedBlock(blk, account)) { // Replaces any existing block
+              // No fork so we can just import it
+              wallet.importBlock(blk, account)
+            }
+            // It was added so remove it from currentBlocks
+            lodash.remove(currentBlocks, function (b) {
+              return b.getHash(true) === hash
+            })
+            wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
+          } catch (e) {
+            $log.error(e)
           }
-          // It was added so remove it from currentBlocks
-          lodash.remove(currentBlocks, function (b) {
-            return b.getHash(true) === hash
-          })
-          wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
-        } catch (e) {
-          $log.error(e)
-        }
-      })
-      // Now we add any old blocks and rebroadcast them
-      $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
-      wallet.enableBroadcast(true) // Turn back on
-      lodash.each(currentBlocks, function (b) {
-        wallet.addBlockToReadyBlocks(b)
-      })
-    }
+        })
+        // Now we add any old blocks and rebroadcast them
+        $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
+        wallet.enableBroadcast(true) // Turn back on
+        lodash.each(currentBlocks, function (b) {
+          wallet.addBlockToReadyBlocks(b)
+        })
+      }
     }
 
     function clearPrecalc () {
@@ -571,9 +574,32 @@ angular.module('canoeApp.services')
       $log.info('MQTT failure')
     }
 
+    root.playBling = function () {
+      /*if (isCordova) {
+        // Play the audio file at url
+        var bling = new Media('sounds/bling1.mp3',
+          // success callback
+          function () {
+            $log.debug("playAudio():Audio Success");
+          },
+          // error callback
+          function (err) {
+            $log.debug("playAudio():Audio Error: " + err);
+          }
+        )
+        // Play audio
+        bling.play()
+      } else {
+        // HTML5 sound
+
+      }*/
+    }
+
     root.handleIncomingSendBlock = function (hash, account, from, amount) {
       // Create a receive (or open, if this is the first block in account) block to match
       // this incoming send block
+      // For fun
+      root.playBling()
       if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
         $log.info('Added pending receive block')
         // TODO Add something visual for the txn?
