@@ -15,8 +15,7 @@ platforms
 
 # node-webkit
 cache
-webkitbuilds/Canoe
-
+build
 # chrome extensions
 chrome-app/build/*
 chrome-app/*zip
