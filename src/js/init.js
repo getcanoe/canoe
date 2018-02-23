@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular cordova */
 angular.element(document).ready(function () {
   // Run canoeApp after device is ready.
   var startAngular = function () {
@@ -15,7 +15,7 @@ angular.element(document).ready(function () {
     } else {
       console.log('ERROR: Cannont handle open URL in non-cordova apps')
     }
-  };
+  }
 
   /* Cordova specific Init */
   if ('cordova' in window) {

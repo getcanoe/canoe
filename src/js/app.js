@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular device */
 var modules = [
   'angularMoment',
   'monospaced.qrcode',
@@ -18,7 +18,7 @@ var modules = [
   'canoeApp.addons'
 ]
 
-var canoeApp = window.canoeApp = angular.module('canoeApp', modules)
+window.canoeApp = angular.module('canoeApp', modules)
 
 angular.module('canoeApp.filters', [])
 angular.module('canoeApp.services', [])
