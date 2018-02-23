@@ -8,7 +8,7 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     exec: {
       desktopLinux: {
-        command: 'sed s/VERSION/<%= pkg.version %>/g < build/desktop > build/.desktop'
+        command: 'sed s/VERSION/<%= pkg.version %>/g < resources/canoe/linux/desktop > build/.desktop'
       },
       appConfig: {
         command: 'node ./util/buildAppConfig.js'
@@ -242,7 +242,7 @@ module.exports = function (grunt) {
         },
         expand: true,
         cwd: './build/canoe/linux64/',
-        src: ['**/*'],
+        src: ['**/*', '.desktop'],
         dest: 'canoe-linux64-<%= pkg.version %>'
       },
       win: {
