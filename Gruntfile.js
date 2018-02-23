@@ -7,6 +7,9 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     exec: {
+      desktopLinux: {
+        command: 'sed s/VERSION/<%= pkg.version %>/g < build/desktop > build/.desktop'
+      },
       appConfig: {
         command: 'node ./util/buildAppConfig.js'
       },
@@ -17,7 +20,7 @@ module.exports = function (grunt) {
         command: 'make -C cordova clean'
       },
       macos: {
-        command: 'sh webkitbuilds/build-macos.sh sign'
+        command: 'sh build/build-macos.sh sign'
       },
       coveralls: {
         command: 'cat  coverage/report-lcov/lcov.info |./node_modules/coveralls/bin/coveralls.js'
@@ -57,13 +60,13 @@ module.exports = function (grunt) {
         stdin: true
       },
       desktopsign: {
-        cmd: 'gpg -u 1112CFA1 --output webkitbuilds/<%= pkg.title %>-linux.zip.sig --detach-sig webkitbuilds/<%= pkg.title %>-linux.zip ; gpg -u 1112CFA1 --output webkitbuilds/<%= pkg.title %>.exe.sig --detach-sig webkitbuilds/<%= pkg.title %>.exe'
+        cmd: 'gpg -u 2357B81F --output build/canoe-linux64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-linux64-<%= pkg.version %>.zip ; gpg -u 2357B81F --output build/canoe-win64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-win64-<%= pkg.version %>.zip ; gpg -u 2357B81F --output build/canoe-osx64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-osx64-<%= pkg.version %>.zip'
       },
       desktopverify: {
-        cmd: 'gpg --verify webkitbuilds/<%= pkg.title %>-linux.zip.sig webkitbuilds/<%= pkg.title %>-linux.zip; gpg --verify webkitbuilds/<%= pkg.title %>.exe.sig webkitbuilds/<%= pkg.title %>.exe'
+        cmd: 'gpg --verify build/canoe-linux64-<%= pkg.version %>.zip.sig build/canoe-linux64-<%= pkg.version %>.zip; gpg --verify build/canoe-win64-<%= pkg.version %>.zip.sig build/canoe-win64-<%= pkg.version %>.zip ; gpg --verify build/canoe-osx64-<%= pkg.version %>.zip.sig build/canoe-osx64-<%= pkg.version %>.zip'
       },
       osxsign: {
-        cmd: 'gpg -u 1112CFA1 --output webkitbuilds/<%= pkg.title %>.dmg.sig --detach-sig webkitbuilds/<%= pkg.title %>.dmg'
+        cmd: 'gpg -u 2357B81F --output build/canoe.dmg.sig --detach-sig build/canoe.dmg'
       }
     },
     watch: {
@@ -206,9 +209,9 @@ module.exports = function (grunt) {
       linux: {
         files: [{
           expand: true,
-          cwd: 'webkitbuilds/',
-          src: ['.desktop', '../www/img/app/favicon.ico', '../resources/<%= pkg.name %>/linux/512x512.png'],
-          dest: 'webkitbuilds/<%= pkg.title %>/linux64/',
+          cwd: 'build/',
+          src: ['.desktop', '../www/img/app/favicon.ico', '../resources/canoe/linux/512x512.png'],
+          dest: 'build/canoe/linux64/',
           flatten: true,
           filter: 'isFile'
         }]
@@ -216,34 +219,51 @@ module.exports = function (grunt) {
     },
     nwjs: {
       options: {
-        appName: '<%= pkg.title %>',
         platforms: ['win64', 'osx64', 'linux64'],
-        buildDir: './webkitbuilds',
+        flavor: 'normal',
         version: '0.28.2',
-        macIcns: './resources/<%= pkg.name %>/mac/app.icns',
+        macIcns: './resources/canoe/mac/app.icns',
         exeIco: './www/img/app/logo.ico',
         macPlist: {
           'CFBundleURLTypes': [
             {
               'CFBundleURLName': 'URI Handler',
-              'CFBundleURLSchemes': ['nano', '<%= pkg.name %>']
+              'CFBundleURLSchemes': ['nano', 'canoe']
             }
           ]
         }
       },
       src: ['./package.json', './www/**/*']
     },
-    // compress: {
-    //  linux: {
-    //    options: {
-    //      archive: './webkitbuilds/<%= pkg.title %>-linux.zip'
-    //    },
-    //    expand: true,
-    //    cwd: './webkitbuilds/<%= pkg.title %>/linux64/',
-    //    src: ['**/*'],
-    //    dest: '<%= pkg.title %>-linux/'
-    //  }
-    // },
+    compress: {
+      linux: {
+        options: {
+          archive: './build/canoe-linux64-<%= pkg.version %>.zip'
+        },
+        expand: true,
+        cwd: './build/canoe/linux64/',
+        src: ['**/*'],
+        dest: 'canoe-linux64-<%= pkg.version %>'
+      },
+      win: {
+        options: {
+          archive: './build/canoe-win64-<%= pkg.version %>.zip'
+        },
+        expand: true,
+        cwd: './build/canoe/win64/',
+        src: ['**/*'],
+        dest: 'canoe-win64-<%= pkg.version %>/'
+      },
+      osx: {
+        options: {
+          archive: './build/canoe-osx64-<%= pkg.version %>.zip'
+        },
+        expand: true,
+        cwd: './build/canoe/osx64/',
+        src: ['**/*'],
+        dest: 'canoe-osx64-<%= pkg.version %>/'
+      }
+    },
     browserify: {
       dist: {
         files: {
@@ -256,7 +276,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['nggettext_compile', 'exec:appConfig', 'browserify', 'sass', 'concat', 'copy:ionic_fonts', 'copy:ionic_js'])
   grunt.registerTask('prod', ['default', 'uglify'])
   grunt.registerTask('translate', ['nggettext_extract'])
-  grunt.registerTask('desktop', ['prod', 'nwjs', 'copy:linux'])
+  grunt.registerTask('desktop', ['prod', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'compress'])
   grunt.registerTask('osx', ['prod', 'nwjs', 'exec:macos', 'exec:osxsign'])
   grunt.registerTask('osx-debug', ['default', 'nwjs'])
   grunt.registerTask('chrome', ['default', 'exec:chrome'])
