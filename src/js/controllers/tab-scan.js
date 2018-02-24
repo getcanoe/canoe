@@ -56,7 +56,6 @@ angular.module('canoeApp.controllers').controller('tabScanController', function 
 
   $scope.$on('$ionicView.afterEnter', function () {
     // try initializing and refreshing status any time the view is entered
-    soundService.playBling()
     if (!scannerService.isInitialized()) {
       scannerService.gentleInitialize()
     }
