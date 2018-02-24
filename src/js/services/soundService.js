@@ -8,8 +8,9 @@ angular.module('canoeApp.services').factory('soundService', function ($log, plat
   var bling = makeMedia('sounds/bling1.mp3')
 
   function makeMedia (path) {
-    /* if (isCordova) {
-      // Play the audio file at url
+    if (isCordova) {
+      return null
+/*      // Play the audio file at url
       return Media(path,
         // success callback
         function () {
@@ -19,13 +20,16 @@ angular.module('canoeApp.services').factory('soundService', function ($log, plat
         function (err) {
           $log.debug('playAudio():Audio Error: ' + err)
         })
-    } else {*/
+*/
+    } else {
       return new Audio(path)
-    /*} */
+    }
   }
 
   root.playBling = function () {
-    bling.play()
+    if (bling) {
+      bling.play()
+    }
   }
 
   return root
