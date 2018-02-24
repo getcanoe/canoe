@@ -3,15 +3,14 @@
 angular.module('canoeApp.services').factory('soundService', function ($log, platformInfo) {
   var root = {}
   var isCordova = platformInfo.isCordova
-  //var isNW = platformInfo.isNW
+  // var isNW = platformInfo.isNW
 
-  var bling = 'sounds/bling1.mp3'
+  var bling = makeMedia('sounds/bling1.mp3')
 
-  root.playSound = function (path) {
-    var sound
-    if (isCordova) {
+  function makeMedia (path) {
+    /* if (isCordova) {
       // Play the audio file at url
-      sound = new Media(path,
+      return Media(path,
         // success callback
         function () {
           $log.debug('playAudio():Audio Success')
@@ -19,19 +18,14 @@ angular.module('canoeApp.services').factory('soundService', function ($log, plat
         // error callback
         function (err) {
           $log.debug('playAudio():Audio Error: ' + err)
-        }
-      )
-      // Play audio
-      sound.play()
-    } else {
-      // HTML5 sound
-      sound = new Audio(path)
-      sound.play()
-    }
+        })
+    } else {*/
+      return new Audio(path)
+    /*} */
   }
 
   root.playBling = function () {
-    root.playSound(bling)
+    bling.play()
   }
 
   return root
