@@ -924,6 +924,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       $ionicPlatform.on('resume', function () {
         // Only if we actually have it loaded
         if (profileService.getWallet()) {
+          profileService.unloadWallet()
           applicationService.appLockModal('check')
         }
       })

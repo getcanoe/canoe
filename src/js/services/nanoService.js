@@ -31,6 +31,10 @@ angular.module('canoeApp.services')
     // Let's call it every 5 seconds
     setTimeout(regularBroadcast, 5000)
 
+    root.unloadWallet = function () {
+      root.wallet = null
+    }
+
     root.getWallet = function () {
       return root.wallet
     }
@@ -574,14 +578,15 @@ angular.module('canoeApp.services')
     root.handleIncomingSendBlock = function (hash, account, from, amount) {
       // Create a receive (or open, if this is the first block in account) block to match
       // this incoming send block
-      // For fun
       soundService.playBling()
-      if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
-        $log.info('Added pending receive block')
-        // TODO Add something visual for the txn?
-        // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
-        // addRecentRecToGui(txObj)
-        root.saveWallet(root.wallet, function () {})
+      if (root.wallet) {
+        if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
+          $log.info('Added pending receive block')
+          // TODO Add something visual for the txn?
+          // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
+          // addRecentRecToGui(txObj)
+          root.saveWallet(root.wallet, function () {})
+        }
       }
     }
 

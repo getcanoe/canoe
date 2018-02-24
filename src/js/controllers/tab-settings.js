@@ -35,6 +35,7 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
       // Clear history
       $ionicHistory.clearHistory()
     })
+    profileService.unloadWallet()
     applicationService.appLockModal('check')
   }
 

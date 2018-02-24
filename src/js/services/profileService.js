@@ -17,6 +17,12 @@ angular.module('canoeApp.services')
       return nanoService.getWallet()
     }
 
+    // Removed wallet from RAM
+    root.unloadWallet = function () {
+      nanoService.unloadWallet()
+      root.enteredPassword(null)
+    }
+
     // This is where we keep the password entered when you start Canoe
     // or when timeout is reached and it needs to be entered again.
     root.enteredPassword = function (pw) {
