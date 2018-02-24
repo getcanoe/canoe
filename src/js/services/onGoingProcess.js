@@ -28,7 +28,8 @@ angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $t
     'loadingTxInfo': gettext('Loading transaction info...'),
     'sendingFeedback': gettext('Sending feedback...'),
     'sendingByEmail': gettext('Preparing addresses...'),
-    'sending2faCode': gettext('Sending 2FA code...')
+    'sending2faCode': gettext('Sending 2FA code...'),
+    'decryptingWallet': gettext('Decrypting wallet...')
   }
 
   root.clear = function () {

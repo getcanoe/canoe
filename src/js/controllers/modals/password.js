@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('passwordController', function ($state, $interval, $stateParams, $ionicHistory, $timeout, $scope, $log, configService, profileService, applicationService) {
+angular.module('canoeApp.controllers').controller('passwordController', function ($state, $interval, $stateParams, $ionicHistory, $timeout, $scope, $log, configService, profileService, gettextCatalog, popupService, ongoingProcess, applicationService) {
   var ATTEMPT_LIMIT = 5
   var ATTEMPT_LOCK_OUT_TIME = 5 * 60
   var currentPassword = ''
@@ -69,16 +69,22 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     if ($scope.disableButton) return // Should not happen
     $scope.error = false
     currentPassword = value
+    ongoingProcess.set('decryptingWallet', true)
     profileService.enteredPassword(currentPassword)
     // Now we try to load wallet and if it fails, ask user again
     profileService.loadWallet(function (err) {
-      if (err) {
+      if (profileService.getWallet()) {
+        $scope.hideModal()
+        ongoingProcess.set('decryptingWallet', false)
+        if (err) {
+          // Some other error though, we need to show it
+          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Error after loading wallet: ' + err))
+        }
+      } else {
+        ongoingProcess.set('decryptingWallet', false)
         $scope.password = ''
-        $log.debug('Error loading wallet: ' + err)
         showError()
         checkAttempts()
-      } else {
-        $scope.hideModal()
       }
     })
   }
