@@ -504,7 +504,7 @@ angular.module('canoeApp.services')
       try {
         wallet.load(data)
       } catch (e) {
-        $log.error('Error decrypting wallet. Check that the password is correct.')
+        $log.error('Error decrypting wallet. Check that the password is correct: ' + e)
         return cb(e)
       }
       cb(null, wallet)
