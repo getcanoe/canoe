@@ -110,7 +110,7 @@ $v-success-bg-color:                                 #11D1A6 !default;
 $v-onboarding-pane-bg:                               $v-primary-color !default;
 $v-onboarding-gradient-top-color:                    #524988 !default;
 $v-onboarding-gradient-bottom-color:                 #311C67 !default;
-$v-onboarding-welcome-bg:                            url(../img/onboarding-welcome-bg.png) !default;
+$v-onboarding-welcome-bg:                            url(../img/app/onboarding/onboarding-welcome-bg.png) !default;
 $v-onboarding-color:                                 #ffffff;
 $v-onboarding-bar-header-color:                      #ffffff !default;
 $v-onboarding-bar-header-button-color:               #ffffff !default;
@@ -119,10 +119,10 @@ $v-onboarding-backup-alert-icon-color:               $v-accent-color !default;
 $v-onboarding-checkbox-off-border:                   $v-accent-color !default;
 $v-onboarding-checkbox-on-border:                    $v-success-color !default;
 
-$v-onboarding-tour-phone-bg:                         url(../img/onboarding-tour-phone.svg) !default;
-$v-onboarding-tour-currency-bg:                      url(../img/onboarding-tour-currency-bg.svg) !default;
-$v-onboarding-tour-control-bg:                       url(../img/onboarding-tour-control.svg) !default;
-$v-onboarding-backup-warning-bg:                     url(../img/backup-warning.svg) !default;
+$v-onboarding-tour-phone-bg:                         url(../img/app/onboarding/onboarding-tour-phone.svg) !default;
+$v-onboarding-tour-currency-bg:                      url(../img/app/onboarding/onboarding-tour-currency-bg.svg) !default;
+$v-onboarding-tour-control-bg:                       url(../img/app/onboarding/onboarding-tour-control.svg) !default;
+$v-onboarding-backup-warning-bg:                     url(../img/app/onboarding/backup-warning.svg) !default;
 
 $v-onboarding-button-back-color:                     #ffffff !default;
 
@@ -140,16 +140,16 @@ $v-onboarding-button-secondary-outline-active-bg:    #ffffff !default;
 $v-onboarding-button-secondary-outline-active-color: #ffffff !default;
 
 /* Main tabs */
-$v-tab-home-icon:                                    url('../img/tab-icons/ico-home.svg') !default;
-$v-tab-home-selected-icon:                           url('../img/tab-icons/ico-home-selected.svg') !default;
-$v-tab-receive-icon:                                 url('../img/tab-icons/ico-receive.svg') !default;
-$v-tab-receive-selected-icon:                        url('../img/tab-icons/ico-receive-selected.svg') !default;
-$v-tab-settings-icon:                                url('../img/tab-icons/ico-settings.svg') !default;
-$v-tab-settings-selected-icon:                       url('../img/tab-icons/ico-settings-selected.svg') !default;
-$v-tab-scan-icon:                                    url('../img/tab-icons/ico-scan.svg') !default;
-$v-tab-scan-selected-icon:                           url('../img/tab-icons/ico-scan-selected.svg') !default;
-$v-tab-send-icon:                                    url('../img/tab-icons/ico-send.svg') !default;
-$v-tab-send-selected-icon:                           url('../img/tab-icons/ico-send-selected.svg') !default;
+$v-tab-home-icon:                                    url('../img/app/tab-icons/ico-home.svg') !default;
+$v-tab-home-selected-icon:                           url('../img/app/tab-icons/ico-home-selected.svg') !default;
+$v-tab-receive-icon:                                 url('../img/app/tab-icons/ico-receive.svg') !default;
+$v-tab-receive-selected-icon:                        url('../img/app/tab-icons/ico-receive-selected.svg') !default;
+$v-tab-settings-icon:                                url('../img/app/tab-icons/ico-settings.svg') !default;
+$v-tab-settings-selected-icon:                       url('../img/app/tab-icons/ico-settings-selected.svg') !default;
+$v-tab-scan-icon:                                    url('../img/app/tab-icons/ico-scan.svg') !default;
+$v-tab-scan-selected-icon:                           url('../img/app/tab-icons/ico-scan-selected.svg') !default;
+$v-tab-send-icon:                                    url('../img/app/tab-icons/ico-send.svg') !default;
+$v-tab-send-selected-icon:                           url('../img/app/tab-icons/ico-send-selected.svg') !default;
 
 /*
  * Ionic variables
