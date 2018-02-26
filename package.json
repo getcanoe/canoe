@@ -2,7 +2,7 @@
   "name": "canoe",
   "description": "A Secure Cross Platform Nano Wallet",
   "author": "Göran Krampe",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "keywords": [
     "nano",
     "raiblocks",
@@ -27,6 +27,9 @@
     "fullscreen": false
   },
   "chromium-args": "--disable-devtools",
+  "build": {
+    "nwVersion": "0.28.2"
+  },
   "webkit": {
     "page-cache": false,
     "java": false,
@@ -135,7 +138,8 @@
     "test": "echo \"no package tests configured\"",
     "clean": "trash platforms && trash plugins && cordova prepare",
     "unstage-package": "git reset package.json",
-    "clean-all": "git clean -dfx"
+    "clean-all": "git clean -dfx",
+    "phoenix": "build --tasks win-x64,linux-x64,mac-x64 --mirror https://dl.nwjs.io/ ."
   },
   "devDependencies": {
     "browserify": "^16.1.0",
@@ -144,6 +148,7 @@
     "grunt-contrib-uglify-es": "^3.3.0",
     "ionic": "3.19.1",
     "lodash": "^4.17.5",
+    "nwjs-builder-phoenix": "^1.14.6",
     "pre-commit": "^1.2.2",
     "trash-cli": "^1.4.0"
   },
