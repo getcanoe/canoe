@@ -1951,7 +1951,7 @@ msgstr "Échec de la génération du QR code de la graine (seed)"
 
 #: www/views/tab-settings.html:134
 msgid "How to buy/sell Nanos"
-msgstr "Acheter et vendre du Nano"
+msgstr "Acheter ou vendre du Nano"
 
 #: www/views/modals/pin.html:12
 msgid "Incorrect PIN, try again."
@@ -1987,7 +1987,7 @@ msgstr "Vendre en ligne"
 
 #: www/views/modals/password.html:27
 msgid "Unlock Canoe"
-msgstr "Déverrouiller Canoe"
+msgstr "Déverrouiller mon Canoe"
 
 #: www/views/changePassword.html:15
 msgid "Your current password"
@@ -2003,7 +2003,7 @@ msgstr "ou"
 
 #: www/views/tab-howToBuyNanos.html:47
 msgid "Be careful with all these steps; keep your seed backed up for safety. Enjoy fee-less and instant payments with Nano and Canoe!"
-msgstr "Soyer attentifs à chacune de ces étapes et conservez votre graine (seed) en lieu sûr. Profitez des paiements instantanés et sans frais avec Nano et Canoe !"
+msgstr "Soyez attentifs à chacune de ces étapes et conservez votre graine (seed) en lieu sûr. Et maintenant, profitez des paiements instantanés et sans frais avec Nano et Canoe !"
 
 #: www/views/tab-howToBuyNanos.html:19
 msgid "Buy Online"
@@ -2060,7 +2060,7 @@ msgstr "Gérer"
 
 #: www/views/tab-howToBuyNanos.html:45
 msgid "More information can be found on the"
-msgstr "Plus d'information peuvent être trouvées ici"
+msgstr "Vous pouvez trouver plus d'informations sur tout ça ici (en anglais)"
 
 #: www/views/onboarding/tour.html:31
 msgid "Nano is Feeless"
@@ -2112,7 +2112,7 @@ msgstr "Le plus facile"
 
 #: www/views/tab-howToBuyNanos.html:27
 msgid "This is usually quick, however many exchanges have Know Your Customer (KYC) requirements, and you may be required to provide a form of ID, such as a passport, driver’s license, or national ID."
-msgstr "C'est en général assez rapide. Par contre, la plupart des sites de change ont des contraintes légales, ils doivent connaître leurs clients. Il est probable qu'ils vous demandent un scan de votre passeport (ou carte d'identité), un justificatif de domicile, etc."
+msgstr "C'est, en général, assez rapide. Par contre, la plupart des sites de change ont des contraintes légales, ils doivent connaître leurs clients. Il est probable qu'ils vous demandent un scan de votre passeport (ou carte d'identité), un justificatif de domicile, etc."
 
 #: www/views/onboarding/tour.html:32
 msgid "Trade Nano for other currencies like USD or Euros."
@@ -2132,7 +2132,7 @@ msgstr "Vous pouvez échanger des Nano avec vos amis et votre famille. Canoe aff
 
 #: www/views/tab-howToBuyNanos.html:32
 msgid "You can get started with free Nano by visiting the"
-msgstr "Vous pouvez acquérir quelques millièmes de Nanos gratuitement sur un site robinet comme "
+msgstr "Sinon, pour essayer, vous pouvez acquérir quelques millièmes de Nanos gratuitement sur un site robinet comme "
 
 #: www/views/tab-howToBuyNanos.html:27
 msgid "You will need to sign up for an exchange that will sell you Bitcoin or Ethereum in return for your fiat currency. Some examples are"
@@ -2140,5 +2140,5 @@ msgstr "Vous devez vous inscrire sur un site de change, qui vends des Bitcoins o
 
 #: www/views/tab-howToBuyNanos.html:32
 msgid "and entering your public wallet address (the one that starts with xrb_)!"
-msgstr "et saisissez votre adresse publique de compte (celle qui commence par xrb_...) !"
+msgstr ". Saisissez juste sur ce site votre adresse publique de compte (celle qui commence par xrb_...)"
 
