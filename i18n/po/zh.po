@@ -27,7 +27,7 @@ msgstr "-{{tx.feeRateStr}} 的交易记录"
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "团队的成员将尽快查阅您的反馈意见。"
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:171
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
 msgid "About"
 msgstr "关于"
 
@@ -76,11 +76,11 @@ msgstr "添加描述"
 msgid "Address"
 msgstr "地址"
 
-#: www/views/addressbook.html:6 www/views/tab-settings.html:13
+#: www/views/addressbook.html:6 www/views/tab-settings.html:15
 msgid "Address Book"
 msgstr "地址簿"
 
-#: www/views/tab-settings.html:164
+#: www/views/tab-settings.html:100
 msgid "Advanced"
 msgstr "進階"
 
@@ -100,7 +100,7 @@ msgstr "允许通知"
 msgid "Almost done! Let's review."
 msgstr "差不多完成了 ！让我们回顾一下。"
 
-#: www/views/preferencesAltCurrency.html:4 www/views/tab-settings.html:108
+#: www/views/preferencesAltCurrency.html:4 www/views/tab-settings.html:82
 msgid "Alternative Currency"
 msgstr "替代货币"
 
@@ -168,10 +168,6 @@ msgstr ""
 #: www/views/includes/incomingDataMenu.html:29
 msgid "Bitcoin Address"
 msgstr "比特币地址"
-
-#: www/views/tab-settings.html:130
-msgid "Bitcoin Cash Wallets"
-msgstr "比特币现金钱包"
 
 #: www/views/modals/txp-details.html:36
 msgid "Broadcast Payment"
@@ -347,7 +343,7 @@ msgstr "自定义金额"
 msgid "Date"
 msgstr "日期"
 
-#: src/js/services/nanoService.js:393 src/js/services/profileService.js:278
+#: src/js/services/nanoService.js:416 src/js/services/profileService.js:241
 msgid "Default Account"
 msgstr ""
 
@@ -377,7 +373,7 @@ msgstr "删除付款方案"
 
 #: src/js/controllers/preferencesSecurity.js:8
 #: src/js/controllers/preferencesSecurityController.js:8
-#: src/js/controllers/tab-settings.js:59
+#: src/js/controllers/tab-settings.js:60
 msgid "Disabled"
 msgstr "禁用"
 
@@ -386,7 +382,7 @@ msgstr "禁用"
 msgid "Do it later"
 msgstr "以后再做"
 
-#: www/views/tab-settings.html:61
+#: www/views/tab-settings.html:142
 msgid "Donate to Canoe"
 msgstr ""
 
@@ -448,8 +444,10 @@ msgid "Enter your password"
 msgstr "请输入你的密码"
 
 #. Trying to import a malformed wallet export QR code
-#: src/js/controllers/activity.js:45 src/js/controllers/addressbookAdd.js:35
-#: src/js/controllers/addressbookEdit.js:36
+#: src/js/controllers/activity.js:45 src/js/controllers/addressbookAdd.js:20
+#: src/js/controllers/addressbookAdd.js:44
+#: src/js/controllers/addressbookEdit.js:21
+#: src/js/controllers/addressbookEdit.js:45
 #: src/js/controllers/addressbookView.js:48 src/js/controllers/create.js:19
 #: src/js/controllers/create.js:28 src/js/controllers/export.js:30
 #: src/js/controllers/export.js:52 src/js/controllers/export.js:62
@@ -459,6 +457,7 @@ msgstr "请输入你的密码"
 #: src/js/controllers/import.js:116 src/js/controllers/import.js:32
 #: src/js/controllers/import.js:42 src/js/controllers/import.js:57
 #: src/js/controllers/import.js:81 src/js/controllers/import.js:89
+#: src/js/controllers/modals/password.js:81
 #: src/js/controllers/modals/txpDetails.js:138
 #: src/js/controllers/paperWallet.js:45
 #: src/js/controllers/preferencesDelete.js:35
@@ -488,7 +487,7 @@ msgstr "已过期"
 msgid "Expires"
 msgstr "到期"
 
-#: www/views/export.html:3 www/views/tab-settings.html:37
+#: www/views/export.html:3 www/views/tab-settings.html:39
 msgid "Export wallet"
 msgstr "导出钱包"
 
@@ -576,7 +575,7 @@ msgstr "通过添加您的第一个开始。"
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:159 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:159 src/js/controllers/tab-settings.js:48
 #: src/js/controllers/tx-details.js:193 src/js/controllers/tx-details.js:56
 msgid "Go Back"
 msgstr "返回\t#"
@@ -591,11 +590,11 @@ msgstr "上一页"
 msgid "Got it"
 msgstr "收到！"
 
-#: www/views/tab-settings.html:45
+#: www/views/tab-settings.html:116
 msgid "Help & Support"
 msgstr "帮助与支持"
 
-#: src/js/controllers/tab-settings.js:45
+#: src/js/controllers/tab-settings.js:46
 msgid "Help and support information is available at the website."
 msgstr "已在网站上提供帮助和支持"
 
@@ -634,10 +633,6 @@ msgstr "这个应用程序是可怕。"
 msgid "I understand"
 msgstr "我知道了"
 
-#: www/views/onboarding/disclaimer.html:21
-msgid "I understand that if this app is deleted, my wallet can only be recovered with the seed."
-msgstr ""
-
 #: www/views/onboarding/disclaimer.html:18
 msgid "I understand that my funds are held securely on this device, not by a company."
 msgstr "我明白，我的资金安全地在此设备上，不由公司举行。"
@@ -671,7 +666,7 @@ msgid "Import seed"
 msgstr ""
 
 #: www/views/add.html:21 www/views/tab-import-file.html:27
-#: www/views/tab-settings.html:29
+#: www/views/tab-settings.html:31
 msgid "Import wallet"
 msgstr "导入钱包"
 
@@ -690,10 +685,6 @@ msgstr "不完整"
 #: src/js/controllers/confirm.js:86
 msgid "Insufficient funds"
 msgstr "资金不足"
-
-#: www/views/tab-settings.html:138
-msgid "Integrations"
-msgstr "积分"
 
 #: www/views/includes/walletHistory.html:49
 msgid "Invalid"
@@ -715,11 +706,7 @@ msgstr "此电子邮件地址是正确的？"
 msgid "It's important that you write your wallet seed down correctly. If something happens to your wallet, you'll need this seed to reconstruct it. Please review your seed and try again."
 msgstr ""
 
-#: www/views/onboarding/tour.html:22
-msgid "Just scan the code to pay."
-msgstr "只是扫描代码来支付。"
-
-#: www/views/preferencesLanguage.html:4 www/views/tab-settings.html:97
+#: www/views/preferencesLanguage.html:4 www/views/tab-settings.html:71
 msgid "Language"
 msgstr "语言"
 
@@ -796,10 +783,6 @@ msgstr "多个接收者"
 msgid "Name"
 msgstr "名称"
 
-#: www/views/onboarding/tour.html:36
-msgid "Never incur fees ever again!"
-msgstr ""
-
 #: www/views/add.html:14
 msgid "New account"
 msgstr ""
@@ -852,7 +835,7 @@ msgstr "不是现在"
 msgid "Note"
 msgstr "备注"
 
-#: www/views/preferencesNotifications.html:3 www/views/tab-settings.html:90
+#: www/views/preferencesNotifications.html:3 www/views/tab-settings.html:63
 msgid "Notifications"
 msgstr "通知"
 
@@ -902,7 +885,7 @@ msgstr "出错。"
 msgid "On this screen you can see all your accounts."
 msgstr ""
 
-#: src/js/controllers/tab-settings.js:46 src/js/controllers/tx-details.js:55
+#: src/js/controllers/tab-settings.js:47 src/js/controllers/tx-details.js:55
 msgid "Open"
 msgstr "打开"
 
@@ -1009,7 +992,7 @@ msgstr "請等等"
 msgid "Please, select your backup file"
 msgstr "请选择你的备份文件"
 
-#: www/views/tab-settings.html:84
+#: www/views/tab-settings.html:57
 msgid "Preferences"
 msgstr "偏好"
 
@@ -1021,7 +1004,7 @@ msgstr "正在准备地址..."
 msgid "Preparing backup..."
 msgstr "正在准备备份..."
 
-#: src/js/routes.js:849
+#: src/js/routes.js:911
 msgid "Press again to exit"
 msgstr "再按一次退出"
 
@@ -1198,7 +1181,7 @@ msgstr ""
 msgid "Send"
 msgstr "发送"
 
-#: www/views/feedback/send.html:3 www/views/tab-settings.html:54
+#: www/views/feedback/send.html:3 www/views/tab-settings.html:126
 msgid "Send Feedback"
 msgstr "发送反馈"
 
@@ -1531,7 +1514,7 @@ msgstr "在 blockchain 上查看"
 msgid "WARNING: Key derivation is not working on this device/wallet. Actions cannot be performed on this wallet."
 msgstr "警告︰此设备/钱包无法运行钥匙衍生。无法在此钱包上执行操作。"
 
-#: www/views/tab-settings.html:122
+#: www/views/tab-settings.html:104
 msgid "Wallet Accounts"
 msgstr ""
 
@@ -1539,11 +1522,11 @@ msgstr ""
 msgid "Wallet Created"
 msgstr "创建的钱包"
 
-#: www/views/import.html:16
+#: www/views/import.html:20
 msgid "Wallet File"
 msgstr ""
 
-#: www/views/import.html:12
+#: www/views/import.html:16
 msgid "Wallet Seed"
 msgstr ""
 
@@ -1611,10 +1594,6 @@ msgstr "你可以看到最新的事态发展和贡献这个开放源码应用程
 #: www/views/backup.html:13
 msgid "You can still export it from Advanced &gt; Export."
 msgstr "你仍然可以将其导出从高级 &gt; 出口。"
-
-#: www/views/onboarding/tour.html:32
-msgid "You can trade it for other currencies like US Dollars, Euros, or Pounds."
-msgstr "你可以换其他货币，如美元、 欧元或英镑。"
 
 #: www/views/preferencesNotifications.html:34
 msgid "You'll receive email notifications about payments sent and received from your wallets."
@@ -1716,24 +1695,8 @@ msgstr ""
 msgid "Push notifications for Canoe are currently disabled. Enable them in the Settings app."
 msgstr ""
 
-#: src/js/controllers/feedback/complete.js:5 www/views/tab-settings.html:80
+#: src/js/controllers/feedback/complete.js:5 www/views/tab-settings.html:53
 msgid "Share Canoe"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:33
-msgid "Show Account Number"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:30
-msgid "Show Balance"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:26
-msgid "Sneak Peek"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:27
-msgid "Sneak peek allows you show information without the need of typing your password wallet."
 msgstr ""
 
 #: src/js/controllers/tab-home.js:44
@@ -1790,7 +1753,7 @@ msgstr ""
 msgid "Are you sure you want to repair wallet?"
 msgstr ""
 
-#: www/views/backup.html:3 www/views/tab-settings.html:21
+#: www/views/backup.html:3 www/views/tab-settings.html:23
 msgid "Backup seed"
 msgstr ""
 
@@ -1808,10 +1771,6 @@ msgstr ""
 
 #: www/views/addressbook.edit.html:4
 msgid "Edit Contact"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:42
-msgid "Enable Petty Nano"
 msgstr ""
 
 #: www/views/tab-export-file.html:10
@@ -1834,7 +1793,7 @@ msgstr ""
 msgid "Join the future of money,<br>get started with Nano."
 msgstr ""
 
-#: www/views/tab-settings.html:73
+#: www/views/tab-settings.html:45
 msgid "Lock Canoe"
 msgstr ""
 
@@ -1844,18 +1803,6 @@ msgstr ""
 
 #: www/views/onboarding/disclaimer.html:15
 msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
-msgstr ""
-
-#: www/views/onboarding/tour.html:31
-msgid "Nano is feeless."
-msgstr ""
-
-#: www/views/onboarding/tour.html:18
-msgid "Nano is instant,<br>digital money."
-msgstr ""
-
-#: www/views/onboarding/tour.html:45
-msgid "Nanos are secure."
 msgstr ""
 
 #: src/js/controllers/confirm.js:73
@@ -1882,10 +1829,6 @@ msgstr ""
 msgid "Password to encrypt"
 msgstr ""
 
-#: www/views/preferencesSecurity.html:38 www/views/preferencesSecurity.html:45
-msgid "Petty Nano"
-msgstr ""
-
 #: src/js/controllers/import.js:116
 msgid "Please enter a password to use for the wallet"
 msgstr ""
@@ -1904,10 +1847,6 @@ msgstr ""
 
 #: www/views/tab-send.html:33
 msgid "Start sending Nano"
-msgstr ""
-
-#: www/views/onboarding/tour.html:46
-msgid "This app stores your Nanos with cutting-edge security."
 msgstr ""
 
 #: www/views/onboarding/createPassword.html:51
@@ -1962,10 +1901,6 @@ msgstr ""
 msgid "You can scan Nano addresses, payment requests and more."
 msgstr ""
 
-#: www/views/onboarding/tour.html:19
-msgid "You can transfer Nano instantly to anyone, anywhere ."
-msgstr ""
-
 #: www/views/tab-home.html:50
 msgid "Your Nano Wallet is ready!"
 msgstr ""
@@ -1978,24 +1913,12 @@ msgstr ""
 msgid "jode.doe@example.com"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:46
-msgid "<span translate=\"\">You can probably find more infos about all this on</span>&nbsp;<a href=\"https://www.reddit.com/r/nanocurrency/\">reddit nanocurrency</a>"
-msgstr ""
-
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr ""
 
 #: src/js/controllers/create.js:19 src/js/controllers/preferencesName.js:13
 msgid "An account already exists with that name"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:49
-msgid "Be carefull with all these steps, keep your seed backed up and you should be all fine. Enjoy feeless and instant payments with Nano and Canoe !"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:30
-msgid "Buy online"
 msgstr ""
 
 #: www/views/modals/pin.html:10
@@ -2006,14 +1929,6 @@ msgstr ""
 msgid "Could not decrypt wallet, check your password"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:18
-msgid "Disclamer"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:36
-msgid "Do remember, your Nanos are only safe when in your wallet. If you keep it on an exchange site it could get stolen by hackers or even the site owners."
-msgstr ""
-
 #: www/views/preferencesName.html:18
 msgid "Enter a descriptive name"
 msgstr ""
@@ -2022,24 +1937,8 @@ msgstr ""
 msgid "Failed to generate seed QR code"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:15
-msgid "Here's how to do..."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:3
-msgid "How to buy or sell Nanos"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:12 www/views/tab-settings.html:68
+#: www/views/tab-settings.html:134
 msgid "How to buy/sell Nanos"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:23
-msgid "If you are used to buying and selling cryptos, don't waste your time, you will probably not learn anything here."
-msgstr ""
-
-#: src/js/controllers/import.js:133
-msgid "If you import a wallet, your current accounts will not be visible in Canoe anymore, so you could lose your Nanos.<br/><br/>You want to make sure that you backed up your wallet and remember your password or, at least, make sure you know the 64 characters of your seed before you do that."
 msgstr ""
 
 #: www/views/modals/pin.html:12
@@ -2058,76 +1957,24 @@ msgstr ""
 msgid "Not a seed QR code:"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:27
-msgid "Obviously, you can buy and sell Nanos to a friend. Canoe displays amounts both in NANO and and in your currency so it's easy to convert."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:35
-msgid "Once you got some cryptocurrency, say Bitcoins, register to an exchange like"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:43
-msgid "Once your Nanos are on the exchange, sell it for Bitcoins (or other) and send them to your Bitcoin/local currency gateway. Finally, send your local money to your bank account, and you are done !"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:39
-msgid "Petty Nano allows you to designate an amount to transfer without the need to enter a password. This decreases the security of the petty Nano, so choose wisely!"
-msgstr ""
-
 #: www/views/modals/pin.html:9
 msgid "Please enter your PIN"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:42
-msgid "Pretty much the same as to buy, just go the other way. First send Nanos to an exchange or directly to your Nano/local currency gateway if you've found one."
 msgstr ""
 
 #: www/views/tab-export-qrCode.html:7
 msgid "Scan this QR code to import seed into another application"
 msgstr ""
 
-#: www/views/preferencesSecurity.html:3 www/views/tab-settings.html:118
+#: www/views/preferencesSecurity.html:3 www/views/tab-settings.html:92
 msgid "Security Preferences"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:40
+#: www/views/tab-howToBuyNanos.html:37
 msgid "Sell online"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:14
-msgid "So, now you want to buy some Nanos and play arround. Or maybe, you've got some in your Canoe wallet and want to get 'real money' ?"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:19
-msgid "The Canoe team does not work with any of the web sites listed below. Nano, just like any other cryptocurrency is highly volatile so don't put too much money into this and hodl !"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:26
-msgid "The easy way"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:34
-msgid "The ones selling Nanos are pretty rare as for now, so, if you don't find one, being able to buy a fast and low feas cryptocurrency instead : Ether, Litecoin or Bitcoincash can save you money and time."
 msgstr ""
 
 #: www/views/modals/password.html:27
 msgid "Unlock Canoe"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:22
-msgid "Warning"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:46
-msgid "You can probably find more infos about all this on"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:32
-msgid "You need to register to a web site that exchanges fiat (your local currency like $) to some crypto currency. This process can take some time, a week or so and they will ask for an id scan, proof of where you live at etc."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:33
-msgid "You should find a good reason to trust the web site you want to pick here. Google, speak with friends who are into cryptocurrencies. Then this web site should probably be located in your country. Another important point is : do they sell directly Nanos ?"
 msgstr ""
 
 #: www/views/changePassword.html:15
@@ -2138,11 +1985,148 @@ msgstr ""
 msgid "Your password has been changed"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:35
+#: www/views/tab-howToBuyNanos.html:27 www/views/tab-howToBuyNanos.html:30
 msgid "or"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:35
-msgid "that trades Nanos. Send your Bitcoins to your account on this site and trade it for Nanos. Once you get your precious Nanos, send it to your Canoe wallet using your xrb_... address (you can copy it clicking on the receive button below)."
+#: www/views/tab-howToBuyNanos.html:47
+msgid "Be careful with all these steps; keep your seed backed up for safety. Enjoy fee-less and instant payments with Nano and Canoe!"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:19
+msgid "Buy Online"
+msgstr ""
+
+#: www/views/onboarding/tour.html:46
+msgid "Canoe stores your Nano using cutting-edge security."
+msgstr ""
+
+#: www/views/import.html:10
+msgid "Caution"
+msgstr ""
+
+#: src/js/services/onGoingProcess.js:32
+msgid "Decrypting wallet..."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:20
+msgid "Disclaimer: The Canoe team does not work with any of the web sites listed below. Nano, just like any other cryptocurrency, is highly volatile so don’t invest money you are not OK with losing (Your house and your kid’s college funds are definitely a no-no)."
+msgstr ""
+
+#: src/js/controllers/modals/password.js:81
+msgid "Error after loading wallet:"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:3
+msgid "How to Buy or Sell Nanos"
+msgstr ""
+
+#: www/views/onboarding/disclaimer.html:21
+msgid "I understand that if this app is deleted, my wallet can only be recovered with the seed or a wallet file backup."
+msgstr ""
+
+#: www/views/import.html:11
+msgid "Importing a wallet removes your current wallet and all its accounts. You may wish to first backup your current seed or make a file backup of the wallet."
+msgstr ""
+
+#: src/js/controllers/import.js:133
+msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from."
+msgstr ""
+
+#: src/js/controllers/addressbookAdd.js:20
+#: src/js/controllers/addressbookEdit.js:21
+msgid "Incorrect code format for an account:"
+msgstr ""
+
+#: www/views/onboarding/tour.html:22
+msgid "Just scan and pay."
+msgstr ""
+
+#: www/views/tab-settings.html:9
+msgid "Manage"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:45
+msgid "More information can be found on the"
+msgstr ""
+
+#: www/views/onboarding/tour.html:31
+msgid "Nano is Feeless"
+msgstr ""
+
+#: www/views/onboarding/tour.html:18
+msgid "Nano is Instant"
+msgstr ""
+
+#: www/views/onboarding/tour.html:45
+msgid "Nano is Secure"
+msgstr ""
+
+#: www/views/onboarding/tour.html:36
+msgid "Never pay transfer fees again!"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:30
+msgid "Once you have secured your Bitcoin or Ethereum, register to an exchange that offers Nano, such as"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:41
+msgid "Once your Nano are on the exchange, sell it for Bitcoin (or another fiat-paired cryptocurrency) and send them to your crypto/fiat gateway. Finally, sell your Bitcoin/crypto for fiat, transfer the money to your bank account, and you are done!"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:38
+msgid "Pretty much the same as buying, just in reverse. First send Nano to an exchange, or directly to your Nano/fiat gateway if you’ve found one."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:33
+msgid "Remember, your Nano are only safe when they are in your wallet. If you keep them on an exchange site it could get stolen by hackers or crooked exchange owners."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:30
+msgid "Send your Bitcoin or Ethereum to your account in Kucoin or Nanex (usually under the deposit function). Once the transfer is complete, you will then be able to trade for Nano."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:11
+msgid "So, you want to buy some Nano? Are you ready to experience the wonders of feeless & instant commerce? Maybe you’ve already invested in Nano (or RaiBlocks, if you’ve been around a while!) and want to ‘cash out’? Well, here is a simple guide on how to buy or sell Nano."
+msgstr ""
+
+#: www/views/tab-settings.html:110
+msgid "Support"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:14
+msgid "The Easiest Way"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:27
+msgid "This is usually quick, however many exchanges have Know Your Customer (KYC) requirements, and you may be required to provide a form of ID, such as a passport, driver’s license, or national ID."
+msgstr ""
+
+#: www/views/onboarding/tour.html:32
+msgid "Trade Nano for other currencies like USD or Euros."
+msgstr ""
+
+#: www/views/onboarding/tour.html:19
+msgid "Transfer Nano instantly to anyone, anywhere."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:23
+msgid "Unfortunately, there is currently not a way to buy Nano directly from fiat currency. This is the case with most cryptocurrencies. The ‘gateway’ currencies are primarily Bitcoin and Ethereum. You will need to get your hands on one of these first."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:15
+msgid "You can exchange Nano with friends and family. Canoe displays amounts in both Nano and your chosen fiat currency (Fiat is a fancy word for the currency of your country: USD, EUR, GBP, etc). Nano can be sent almost instantly by either providing your wallet address to the payer, or by them scanning the wallet’s QR code."
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:32
+msgid "You can get started with free Nano by visiting the"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:27
+msgid "You will need to sign up for an exchange that will sell you Bitcoin or Ethereum in return for your fiat currency. Some examples are"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:32
+msgid "and entering your public wallet address (the one that starts with xrb_)!"
 msgstr ""
 
