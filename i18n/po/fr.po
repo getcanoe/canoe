@@ -2099,7 +2099,7 @@ msgid "Send your Bitcoin or Ethereum to your account in Kucoin or Nanex (usually
 msgstr "Envoyez vos Bitcoins ou vos Ethers vers votre compte sur Kucoin ou Nanex (dans la rubrique dépôts). Une fois le transfert effectué, vous avez la possibilité d'acheter des Nano."
 
 #: www/views/tab-howToBuyNanos.html:11
-msgid "So, you want to buy some Nano? Are you ready to experience the wonders of feeless & instant commerce? Maybe you’ve already invested in Nano (or RaiBlocks, if you’ve been around a while!) and want to ‘cash out’? Well, here is a simple guide on how to buy or sell Nano."
+msgid "So, you want to buy some Nano? Are you ready to experience the wonders of feeless &amp; instant commerce? Maybe you’ve already invested in Nano (or RaiBlocks, if you’ve been around a while!) and want to ‘cash out’? Well, here is a simple guide on how to buy or sell Nano."
 msgstr "Alors, vous voulez acheter des Nano ? Etes-vous prêts à faire l’expérience du commerce instantané et sans frais ? Vous avez peut-être déjà des Nano (ou des Raiblocks si vous êtes de la partie depuis longtemps) et vous voulez 'récupérer la monnaie' ? Et bien voici un petit guide sur la manière d'acheter et de vendre des Nano."
 
 #: www/views/tab-settings.html:110
