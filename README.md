@@ -191,6 +191,18 @@ Canoe uses standard gettext PO files for translations. We should as soon as Cano
 
 *Gracias totales!*
 
+## Splash Screens & Icons
+
+We use [cordova-splash](https://github.com/AlexDisler/cordova-splash) & [cordova-icon](https://github.com/AlexDisler/cordova-icon)
+
+For splash screens run:
+
+     cordova-splash
+
+Then:
+
+    cp -r platforms/android/app/src/main/res/* resources/canoe/android/splash
+
 ## Version numbering
 Canoe uses the `MAJOR.MINOR.PATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
 

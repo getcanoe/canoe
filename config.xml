@@ -66,18 +66,18 @@
     </platform>
     <platform name="android">
         <preference name="android-manifest/application/@android:allowBackup" value="false" />
-        <icon density="ldpi" src="resources/canoe/android/icon/drawable-ldpi-icon.png" />
-        <icon density="mdpi" src="resources/canoe/android/icon/drawable-mdpi-icon.png" />
-        <icon density="hdpi" src="resources/canoe/android/icon/drawable-hdpi-icon.png" />
-        <icon density="xhdpi" src="resources/canoe/android/icon/drawable-xhdpi-icon.png" />
-        <icon density="xxhdpi" src="resources/canoe/android/icon/drawable-xxhdpi-icon.png" />
-        <icon density="xxxhdpi" src="resources/canoe/android/icon/drawable-xxxhdpi-icon.png" />
-        <splash density="port-hdpi" src="resources/canoe/android/splash/drawable-port-hdpi-screen.png" />
-        <splash density="port-ldpi" src="resources/canoe/android/splash/drawable-port-ldpi-screen.png" />
-        <splash density="port-mdpi" src="resources/canoe/android/splash/drawable-port-mdpi-screen.png" />
-        <splash density="port-xhdpi" src="resources/canoe/android/splash/drawable-port-xhdpi-screen.png" />
-        <splash density="port-xxhdpi" src="resources/canoe/android/splash/drawable-port-xxhdpi-screen.png" />
-        <splash density="port-xxxhdpi" src="resources/canoe/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <icon density="ldpi" src="resources/canoe/android/icon/drawable-ldpi/icon.png" />
+        <icon density="mdpi" src="resources/canoe/android/icon/drawable-mdpi/icon.png" />
+        <icon density="hdpi" src="resources/canoe/android/icon/drawable-hdpi/icon.png" />
+        <icon density="xhdpi" src="resources/canoe/android/icon/drawable-xhdpi/icon.png" />
+        <icon density="xxhdpi" src="resources/canoe/android/icon/drawable-xxhdpi/icon.png" />
+        <icon density="xxxhdpi" src="resources/canoe/android/icon/drawable-xxxhdpi/icon.png" />
+        <splash density="port-hdpi" src="resources/canoe/android/splash/drawable-port-hdpi/screen.png" />
+        <splash density="port-ldpi" src="resources/canoe/android/splash/drawable-port-ldpi/screen.png" />
+        <splash density="port-mdpi" src="resources/canoe/android/splash/drawable-port-mdpi/screen.png" />
+        <splash density="port-xhdpi" src="resources/canoe/android/splash/drawable-port-xhdpi/screen.png" />
+        <splash density="port-xxhdpi" src="resources/canoe/android/splash/drawable-port-xxhdpi/screen.png" />
+        <splash density="port-xxxhdpi" src="resources/canoe/android/splash/drawable-port-xxxhdpi/screen.png" />
     </platform>
     <platform name="windows">
         <icon src="resources/canoe/windows/icon/StoreLogo.png" target="StoreLogo" />
