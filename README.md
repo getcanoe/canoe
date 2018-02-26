@@ -197,11 +197,11 @@ We use [cordova-splash](https://github.com/AlexDisler/cordova-splash) & [cordova
 
 For splash screens run:
 
-  cordova-splash
+     cordova-splash
 
 Then:
 
-  cp -r platforms/android/app/src/main/res/* resources/canoe/android/splash
+    cp -r platforms/android/app/src/main/res/* resources/canoe/android/splash
 
 ## Version numbering
 Canoe uses the `MAJOR.MINOR.PATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
