@@ -30,10 +30,6 @@ msgstr ""
 msgid "5-star ratings help us get Canoe into more hands, and more users means more resources can be committed to the app!"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:46
-msgid "<span translate=\"\">You can probably find more infos about all this on</span>&nbsp;<a href=\"https://www.reddit.com/r/nanocurrency/\">reddit nanocurrency</a>"
-msgstr ""
-
 #: www/views/addressbook.add.html:57
 #: www/views/addressbook.edit.html:58
 msgid "@joedoe"
@@ -49,7 +45,7 @@ msgid "A wallet password is used to encrypt your Nano wallet when saving it on y
 msgstr ""
 
 #: src/js/controllers/preferencesAbout.js:5
-#: www/views/tab-settings.html:171
+#: www/views/tab-settings.html:150
 msgid "About"
 msgstr ""
 
@@ -114,11 +110,11 @@ msgid "Address"
 msgstr ""
 
 #: www/views/addressbook.html:6
-#: www/views/tab-settings.html:13
+#: www/views/tab-settings.html:15
 msgid "Address Book"
 msgstr ""
 
-#: www/views/tab-settings.html:164
+#: www/views/tab-settings.html:100
 msgid "Advanced"
 msgstr ""
 
@@ -151,7 +147,7 @@ msgid "Almost done! Let's review."
 msgstr ""
 
 #: www/views/preferencesAltCurrency.html:4
-#: www/views/tab-settings.html:108
+#: www/views/tab-settings.html:82
 msgid "Alternative Currency"
 msgstr ""
 
@@ -228,7 +224,7 @@ msgid "Backup now"
 msgstr ""
 
 #: www/views/backup.html:3
-#: www/views/tab-settings.html:21
+#: www/views/tab-settings.html:23
 msgid "Backup seed"
 msgstr ""
 
@@ -237,8 +233,8 @@ msgstr ""
 msgid "Backup wallet"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:49
-msgid "Be carefull with all these steps, keep your seed backed up and you should be all fine. Enjoy feeless and instant payments with Nano and Canoe !"
+#: www/views/tab-howToBuyNanos.html:47
+msgid "Be careful with all these steps; keep your seed backed up for safety. Enjoy fee-less and instant payments with Nano and Canoe!"
 msgstr ""
 
 #: www/views/includes/confirmBackupPopup.html:7
@@ -247,10 +243,6 @@ msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:29
 msgid "Bitcoin Address"
-msgstr ""
-
-#: www/views/tab-settings.html:130
-msgid "Bitcoin Cash Wallets"
 msgstr ""
 
 #: www/views/modals/txp-details.html:36
@@ -278,8 +270,8 @@ msgstr ""
 msgid "Buy &amp; Sell Bitcoin"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:30
-msgid "Buy online"
+#: www/views/tab-howToBuyNanos.html:19
+msgid "Buy Online"
 msgstr ""
 
 #: src/js/controllers/confirm.js:264
@@ -299,6 +291,14 @@ msgstr ""
 
 #: src/js/controllers/onboarding/createPassword.js:36
 msgid "Cannot Create Wallet"
+msgstr ""
+
+#: www/views/onboarding/tour.html:46
+msgid "Canoe stores your Nano using cutting-edge security."
+msgstr ""
+
+#: www/views/import.html:10
+msgid "Caution"
 msgstr ""
 
 #: www/views/changePassword.html:3
@@ -473,8 +473,12 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: src/js/services/nanoService.js:393
-#: src/js/services/profileService.js:278
+#: src/js/services/onGoingProcess.js:32
+msgid "Decrypting wallet..."
+msgstr ""
+
+#: src/js/services/nanoService.js:416
+#: src/js/services/profileService.js:241
 msgid "Default Account"
 msgstr ""
 
@@ -504,12 +508,12 @@ msgstr ""
 
 #: src/js/controllers/preferencesSecurity.js:8
 #: src/js/controllers/preferencesSecurityController.js:8
-#: src/js/controllers/tab-settings.js:59
+#: src/js/controllers/tab-settings.js:60
 msgid "Disabled"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:18
-msgid "Disclamer"
+#: www/views/tab-howToBuyNanos.html:20
+msgid "Disclaimer: The Canoe team does not work with any of the web sites listed below. Nano, just like any other cryptocurrency, is highly volatile so don’t invest money you are not OK with losing (Your house and your kid’s college funds are definitely a no-no)."
 msgstr ""
 
 #: www/views/includes/backupNeededPopup.html:10
@@ -517,15 +521,11 @@ msgstr ""
 msgid "Do it later"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:36
-msgid "Do remember, your Nanos are only safe when in your wallet. If you keep it on an exchange site it could get stolen by hackers or even the site owners."
-msgstr ""
-
 #: www/views/preferencesLanguage.html:21
 msgid "Don't see your language? Sign up on POEditor! We'd love to support your language."
 msgstr ""
 
-#: www/views/tab-settings.html:61
+#: www/views/tab-settings.html:142
 msgid "Donate to Canoe"
 msgstr ""
 
@@ -551,10 +551,6 @@ msgstr ""
 
 #: www/views/preferencesNotifications.html:42
 msgid "Email Address"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:42
-msgid "Enable Petty Nano"
 msgstr ""
 
 #: www/views/tab-scan.html:19
@@ -607,8 +603,10 @@ msgid "Enter your password"
 msgstr ""
 
 #: src/js/controllers/activity.js:45
-#: src/js/controllers/addressbookAdd.js:35
-#: src/js/controllers/addressbookEdit.js:36
+#: src/js/controllers/addressbookAdd.js:20
+#: src/js/controllers/addressbookAdd.js:44
+#: src/js/controllers/addressbookEdit.js:21
+#: src/js/controllers/addressbookEdit.js:45
 #: src/js/controllers/addressbookView.js:48
 #: src/js/controllers/create.js:19
 #: src/js/controllers/create.js:28
@@ -627,6 +625,7 @@ msgstr ""
 #: src/js/controllers/import.js:57
 #: src/js/controllers/import.js:81
 #: src/js/controllers/import.js:89
+#: src/js/controllers/modals/password.js:81
 #: src/js/controllers/modals/txpDetails.js:138
 #: src/js/controllers/paperWallet.js:45
 #: src/js/controllers/preferencesDelete.js:35
@@ -637,6 +636,10 @@ msgstr ""
 #: src/js/controllers/tabsController.js:6
 #: src/js/controllers/tx-details.js:119
 msgid "Error"
+msgstr ""
+
+#: src/js/controllers/modals/password.js:81
+msgid "Error after loading wallet:"
 msgstr ""
 
 #: src/js/controllers/confirm.js:239
@@ -660,7 +663,7 @@ msgid "Expires"
 msgstr ""
 
 #: www/views/export.html:3
-#: www/views/tab-settings.html:37
+#: www/views/tab-settings.html:39
 msgid "Export wallet"
 msgstr ""
 
@@ -752,7 +755,7 @@ msgstr ""
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
 #: src/js/controllers/tab-home.js:159
-#: src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-settings.js:48
 #: src/js/controllers/tx-details.js:193
 #: src/js/controllers/tx-details.js:56
 msgid "Go Back"
@@ -769,16 +772,12 @@ msgstr ""
 msgid "Got it"
 msgstr ""
 
-#: www/views/tab-settings.html:45
+#: www/views/tab-settings.html:116
 msgid "Help & Support"
 msgstr ""
 
-#: src/js/controllers/tab-settings.js:45
+#: src/js/controllers/tab-settings.js:46
 msgid "Help and support information is available at the website."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:15
-msgid "Here's how to do..."
 msgstr ""
 
 #: www/views/preferences.html:34
@@ -800,11 +799,10 @@ msgid "How do you like Canoe?"
 msgstr ""
 
 #: www/views/tab-howToBuyNanos.html:3
-msgid "How to buy or sell Nanos"
+msgid "How to Buy or Sell Nanos"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:12
-#: www/views/tab-settings.html:68
+#: www/views/tab-settings.html:134
 msgid "How to buy/sell Nanos"
 msgstr ""
 
@@ -834,7 +832,7 @@ msgid "I understand"
 msgstr ""
 
 #: www/views/onboarding/disclaimer.html:21
-msgid "I understand that if this app is deleted, my wallet can only be recovered with the seed."
+msgid "I understand that if this app is deleted, my wallet can only be recovered with the seed or a wallet file backup."
 msgstr ""
 
 #: www/views/onboarding/disclaimer.html:18
@@ -857,16 +855,8 @@ msgstr ""
 msgid "If this device is replaced or this app is deleted, your funds can not be recovered without a backup."
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:23
-msgid "If you are used to buying and selling cryptos, don't waste your time, you will probably not learn anything here."
-msgstr ""
-
 #: www/views/feedback/complete.html:23
 msgid "If you have additional feedback, please let us know by tapping the \"Send feedback\" option in the Settings tab."
-msgstr ""
-
-#: src/js/controllers/import.js:133
-msgid "If you import a wallet, your current accounts will not be visible in Canoe anymore, so you could lose your Nanos.<br/><br/>You want to make sure that you backed up your wallet and remember your password or, at least, make sure you know the 64 characters of your seed before you do that."
 msgstr ""
 
 #: www/views/includes/screenshotWarningModal.html:8
@@ -883,12 +873,20 @@ msgstr ""
 
 #: www/views/add.html:21
 #: www/views/tab-import-file.html:27
-#: www/views/tab-settings.html:29
+#: www/views/tab-settings.html:31
 msgid "Import wallet"
 msgstr ""
 
 #: src/js/services/onGoingProcess.js:18
 msgid "Importing Wallet..."
+msgstr ""
+
+#: www/views/import.html:11
+msgid "Importing a wallet removes your current wallet and all its accounts. You may wish to first backup your current seed or make a file backup of the wallet."
+msgstr ""
+
+#: src/js/controllers/import.js:133
+msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from."
 msgstr ""
 
 #: www/views/backup.html:39
@@ -907,6 +905,11 @@ msgstr ""
 msgid "Incorrect code format for a seed:"
 msgstr ""
 
+#: src/js/controllers/addressbookAdd.js:20
+#: src/js/controllers/addressbookEdit.js:21
+msgid "Incorrect code format for an account:"
+msgstr ""
+
 #: www/views/modals/password.html:8
 msgid "Incorrect password, try again."
 msgstr ""
@@ -917,10 +920,6 @@ msgstr ""
 
 #: src/js/controllers/confirm.js:86
 msgid "Insufficient funds"
-msgstr ""
-
-#: www/views/tab-settings.html:138
-msgid "Integrations"
 msgstr ""
 
 #: www/views/includes/walletHistory.html:49
@@ -952,11 +951,11 @@ msgid "Join the future of money,<br>get started with Nano."
 msgstr ""
 
 #: www/views/onboarding/tour.html:22
-msgid "Just scan the code to pay."
+msgid "Just scan and pay."
 msgstr ""
 
 #: www/views/preferencesLanguage.html:4
-#: www/views/tab-settings.html:97
+#: www/views/tab-settings.html:71
 msgid "Language"
 msgstr ""
 
@@ -973,7 +972,7 @@ msgstr ""
 msgid "Loading transaction info..."
 msgstr ""
 
-#: www/views/tab-settings.html:73
+#: www/views/tab-settings.html:45
 msgid "Lock Canoe"
 msgstr ""
 
@@ -1003,6 +1002,10 @@ msgstr ""
 msgid "Makes sense"
 msgstr ""
 
+#: www/views/tab-settings.html:9
+msgid "Manage"
+msgstr ""
+
 #: src/js/controllers/modals/search.js:59
 msgid "Matches:"
 msgstr ""
@@ -1023,6 +1026,10 @@ msgstr ""
 
 #: www/views/preferencesAdvanced.html:3
 msgid "More Options"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:45
+msgid "More information can be found on the"
 msgstr ""
 
 #: www/views/includes/walletHistory.html:47
@@ -1050,24 +1057,24 @@ msgstr ""
 msgid "Nano Account"
 msgstr ""
 
+#: www/views/onboarding/tour.html:31
+msgid "Nano is Feeless"
+msgstr ""
+
+#: www/views/onboarding/tour.html:18
+msgid "Nano is Instant"
+msgstr ""
+
+#: www/views/onboarding/tour.html:45
+msgid "Nano is Secure"
+msgstr ""
+
 #: www/views/onboarding/disclaimer.html:15
 msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
 msgstr ""
 
-#: www/views/onboarding/tour.html:31
-msgid "Nano is feeless."
-msgstr ""
-
-#: www/views/onboarding/tour.html:18
-msgid "Nano is instant,<br>digital money."
-msgstr ""
-
-#: www/views/onboarding/tour.html:45
-msgid "Nanos are secure."
-msgstr ""
-
 #: www/views/onboarding/tour.html:36
-msgid "Never incur fees ever again!"
+msgid "Never pay transfer fees again!"
 msgstr ""
 
 #: www/views/changePassword.html:22
@@ -1141,7 +1148,7 @@ msgid "Note"
 msgstr ""
 
 #: www/views/preferencesNotifications.html:3
-#: www/views/tab-settings.html:90
+#: www/views/tab-settings.html:63
 msgid "Notifications"
 msgstr ""
 
@@ -1183,10 +1190,6 @@ msgstr ""
 msgid "OKAY"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:27
-msgid "Obviously, you can buy and sell Nanos to a friend. Canoe displays amounts both in NANO and and in your currency so it's easy to convert."
-msgstr ""
-
 #: www/views/modals/terms.html:15
 msgid "Official English Disclaimer"
 msgstr ""
@@ -1203,12 +1206,12 @@ msgstr ""
 msgid "On this screen you can see all your accounts."
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:35
-msgid "Once you got some cryptocurrency, say Bitcoins, register to an exchange like"
+#: www/views/tab-howToBuyNanos.html:30
+msgid "Once you have secured your Bitcoin or Ethereum, register to an exchange that offers Nano, such as"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:43
-msgid "Once your Nanos are on the exchange, sell it for Bitcoins (or other) and send them to your Bitcoin/local currency gateway. Finally, send your local money to your bank account, and you are done !"
+#: www/views/tab-howToBuyNanos.html:41
+msgid "Once your Nano are on the exchange, sell it for Bitcoin (or another fiat-paired cryptocurrency) and send them to your crypto/fiat gateway. Finally, sell your Bitcoin/crypto for fiat, transfer the money to your bank account, and you are done!"
 msgstr ""
 
 #: www/views/changePassword.html:33
@@ -1216,7 +1219,7 @@ msgstr ""
 msgid "One more time."
 msgstr ""
 
-#: src/js/controllers/tab-settings.js:46
+#: src/js/controllers/tab-settings.js:47
 #: src/js/controllers/tx-details.js:55
 msgid "Open"
 msgstr ""
@@ -1337,15 +1340,6 @@ msgstr ""
 msgid "Permanently delete this wallet."
 msgstr ""
 
-#: www/views/preferencesSecurity.html:38
-#: www/views/preferencesSecurity.html:45
-msgid "Petty Nano"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:39
-msgid "Petty Nano allows you to designate an amount to transfer without the need to enter a password. This decreases the security of the petty Nano, so choose wisely!"
-msgstr ""
-
 #: www/views/backup.html:21
 msgid "Please carefully write down this 64 character seed. Click to copy to clipboard."
 msgstr ""
@@ -1379,7 +1373,7 @@ msgstr ""
 msgid "Please, select your backup file"
 msgstr ""
 
-#: www/views/tab-settings.html:84
+#: www/views/tab-settings.html:57
 msgid "Preferences"
 msgstr ""
 
@@ -1391,12 +1385,12 @@ msgstr ""
 msgid "Preparing backup..."
 msgstr ""
 
-#: src/js/routes.js:849
+#: src/js/routes.js:911
 msgid "Press again to exit"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:42
-msgid "Pretty much the same as to buy, just go the other way. First send Nanos to an exchange or directly to your Nano/local currency gateway if you've found one."
+#: www/views/tab-howToBuyNanos.html:38
+msgid "Pretty much the same as buying, just in reverse. First send Nano to an exchange, or directly to your Nano/fiat gateway if you’ve found one."
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:80
@@ -1502,6 +1496,10 @@ msgstr ""
 msgid "Release information"
 msgstr ""
 
+#: www/views/tab-howToBuyNanos.html:33
+msgid "Remember, your Nano are only safe when they are in your wallet. If you keep them on an exchange site it could get stolen by hackers or crooked exchange owners."
+msgstr ""
+
 #: www/views/addressbook.view.html:44
 msgid "Remove"
 msgstr ""
@@ -1581,7 +1579,7 @@ msgid "Search your currency"
 msgstr ""
 
 #: www/views/preferencesSecurity.html:3
-#: www/views/tab-settings.html:118
+#: www/views/tab-settings.html:92
 msgid "Security Preferences"
 msgstr ""
 
@@ -1593,7 +1591,7 @@ msgstr ""
 msgid "Select an account"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:40
+#: www/views/tab-howToBuyNanos.html:37
 msgid "Sell online"
 msgstr ""
 
@@ -1605,7 +1603,7 @@ msgid "Send"
 msgstr ""
 
 #: www/views/feedback/send.html:3
-#: www/views/tab-settings.html:54
+#: www/views/tab-settings.html:126
 msgid "Send Feedback"
 msgstr ""
 
@@ -1632,6 +1630,10 @@ msgstr ""
 
 #: www/views/feedback/rateApp.html:17
 msgid "Send us feedback instead"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:30
+msgid "Send your Bitcoin or Ethereum to your account in Kucoin or Nanex (usually under the deposit function). Once the transfer is complete, you will then be able to trade for Nano."
 msgstr ""
 
 #: www/views/confirm.html:15
@@ -1689,7 +1691,7 @@ msgid "Settings"
 msgstr ""
 
 #: src/js/controllers/feedback/complete.js:5
-#: www/views/tab-settings.html:80
+#: www/views/tab-settings.html:53
 msgid "Share Canoe"
 msgstr ""
 
@@ -1700,14 +1702,6 @@ msgstr ""
 
 #: www/views/tab-send.html:42
 msgid "Show Account"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:33
-msgid "Show Account Number"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:30
-msgid "Show Balance"
 msgstr ""
 
 #: www/views/tab-send.html:64
@@ -1736,16 +1730,8 @@ msgstr ""
 msgid "Slide to send"
 msgstr ""
 
-#: www/views/preferencesSecurity.html:26
-msgid "Sneak Peek"
-msgstr ""
-
-#: www/views/preferencesSecurity.html:27
-msgid "Sneak peek allows you show information without the need of typing your password wallet."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:14
-msgid "So, now you want to buy some Nanos and play arround. Or maybe, you've got some in your Canoe wallet and want to get 'real money' ?"
+#: www/views/tab-howToBuyNanos.html:11
+msgid "So, you want to buy some Nano? Are you ready to experience the wonders of feeless & instant commerce? Maybe you’ve already invested in Nano (or RaiBlocks, if you’ve been around a while!) and want to ‘cash out’? Well, here is a simple guide on how to buy or sell Nano."
 msgstr ""
 
 #: www/views/accountDetails.html:168
@@ -1754,6 +1740,10 @@ msgstr ""
 
 #: www/views/tab-send.html:33
 msgid "Start sending Nano"
+msgstr ""
+
+#: www/views/tab-settings.html:110
+msgid "Support"
 msgstr ""
 
 #: www/views/paperWallet.html:7
@@ -1808,8 +1798,8 @@ msgstr ""
 msgid "That's exciting to hear. We'd love to earn that fifth star from you – how could we improve your experience?"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:19
-msgid "The Canoe team does not work with any of the web sites listed below. Nano, just like any other cryptocurrency is highly volatile so don't put too much money into this and hodl !"
+#: www/views/tab-howToBuyNanos.html:14
+msgid "The Easiest Way"
 msgstr ""
 
 #: www/views/modals/wallet-balance.html:55
@@ -1824,16 +1814,8 @@ msgstr ""
 msgid "The amount of bitcoin stored in this wallet with less than 1 blockchain confirmation."
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:26
-msgid "The easy way"
-msgstr ""
-
 #: src/js/controllers/onboarding/terms.js:21
 msgid "The official English Terms of Service are available on the BitPay website."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:34
-msgid "The ones selling Nanos are pretty rare as for now, so, if you don't find one, being able to buy a fast and low feas cryptocurrency instead : Ether, Litecoin or Bitcoincash can save you money and time."
 msgstr ""
 
 #: www/views/modals/txp-details.html:26
@@ -1874,8 +1856,8 @@ msgstr ""
 msgid "This app is fantastic!"
 msgstr ""
 
-#: www/views/onboarding/tour.html:46
-msgid "This app stores your Nanos with cutting-edge security."
+#: www/views/tab-howToBuyNanos.html:27
+msgid "This is usually quick, however many exchanges have Know Your Customer (KYC) requirements, and you may be required to provide a form of ID, such as a passport, driver’s license, or national ID."
 msgstr ""
 
 #: www/views/onboarding/createPassword.html:51
@@ -1938,6 +1920,10 @@ msgstr ""
 msgid "Touch ID Failed"
 msgstr ""
 
+#: www/views/onboarding/tour.html:32
+msgid "Trade Nano for other currencies like USD or Euros."
+msgstr ""
+
 #: src/js/controllers/tx-details.js:12
 msgid "Transaction"
 msgstr ""
@@ -1949,6 +1935,10 @@ msgstr ""
 #: src/js/controllers/activity.js:45
 #: src/js/controllers/tab-home.js:189
 msgid "Transaction not found"
+msgstr ""
+
+#: www/views/onboarding/tour.html:19
+msgid "Transfer Nano instantly to anyone, anywhere."
 msgstr ""
 
 #: src/js/controllers/paperWallet.js:107
@@ -1974,6 +1964,10 @@ msgstr ""
 
 #: www/views/tx-details.html:100
 msgid "Unconfirmed"
+msgstr ""
+
+#: www/views/tab-howToBuyNanos.html:23
+msgid "Unfortunately, there is currently not a way to buy Nano directly from fiat currency. This is the case with most cryptocurrencies. The ‘gateway’ currencies are primarily Bitcoin and Ethereum. You will need to get your hands on one of these first."
 msgstr ""
 
 #: www/views/modals/password.html:27
@@ -2040,7 +2034,7 @@ msgstr ""
 msgid "WARNING: Key derivation is not working on this device/wallet. Actions cannot be performed on this wallet."
 msgstr ""
 
-#: www/views/tab-settings.html:122
+#: www/views/tab-settings.html:104
 msgid "Wallet Accounts"
 msgstr ""
 
@@ -2048,7 +2042,7 @@ msgstr ""
 msgid "Wallet Created"
 msgstr ""
 
-#: www/views/import.html:16
+#: www/views/import.html:20
 msgid "Wallet File"
 msgstr ""
 
@@ -2069,16 +2063,12 @@ msgid ""
 "\t\t\t</div>"
 msgstr ""
 
-#: www/views/import.html:12
+#: www/views/import.html:16
 msgid "Wallet Seed"
 msgstr ""
 
 #: www/views/backup.html:10
 msgid "Wallet seed not available"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:22
-msgid "Warning"
 msgstr ""
 
 #: src/js/controllers/addressbookView.js:42
@@ -2155,12 +2145,16 @@ msgstr ""
 msgid "You can create a backup later from your wallet settings."
 msgstr ""
 
-#: src/js/controllers/preferencesLanguage.js:11
-msgid "You can make contributions by signing up on our POEditor community translation project. We’re looking forward to hearing from you!"
+#: www/views/tab-howToBuyNanos.html:15
+msgid "You can exchange Nano with friends and family. Canoe displays amounts in both Nano and your chosen fiat currency (Fiat is a fancy word for the currency of your country: USD, EUR, GBP, etc). Nano can be sent almost instantly by either providing your wallet address to the payer, or by them scanning the wallet’s QR code."
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:46
-msgid "You can probably find more infos about all this on"
+#: www/views/tab-howToBuyNanos.html:32
+msgid "You can get started with free Nano by visiting the"
+msgstr ""
+
+#: src/js/controllers/preferencesLanguage.js:11
+msgid "You can make contributions by signing up on our POEditor community translation project. We’re looking forward to hearing from you!"
 msgstr ""
 
 #: www/views/tab-scan.html:16
@@ -2175,20 +2169,8 @@ msgstr ""
 msgid "You can still export it from Advanced &gt; Export."
 msgstr ""
 
-#: www/views/onboarding/tour.html:32
-msgid "You can trade it for other currencies like US Dollars, Euros, or Pounds."
-msgstr ""
-
-#: www/views/onboarding/tour.html:19
-msgid "You can transfer Nano instantly to anyone, anywhere ."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:32
-msgid "You need to register to a web site that exchanges fiat (your local currency like $) to some crypto currency. This process can take some time, a week or so and they will ask for an id scan, proof of where you live at etc."
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:33
-msgid "You should find a good reason to trust the web site you want to pick here. Google, speak with friends who are into cryptocurrencies. Then this web site should probably be located in your country. Another important point is : do they sell directly Nanos ?"
+#: www/views/tab-howToBuyNanos.html:27
+msgid "You will need to sign up for an exchange that will sell you Bitcoin or Ethereum in return for your fiat currency. Some examples are"
 msgstr ""
 
 #: www/views/preferencesNotifications.html:34
@@ -2242,6 +2224,10 @@ msgstr ""
 msgid "[Scanning Funds]"
 msgstr ""
 
+#: www/views/tab-howToBuyNanos.html:32
+msgid "and entering your public wallet address (the one that starts with xrb_)!"
+msgstr ""
+
 #: www/views/addressbook.edit.html:33
 msgid "jode.doe@example.com"
 msgstr ""
@@ -2254,12 +2240,9 @@ msgstr ""
 msgid "name@example.com"
 msgstr ""
 
-#: www/views/tab-howToBuyNanos.html:35
+#: www/views/tab-howToBuyNanos.html:27
+#: www/views/tab-howToBuyNanos.html:30
 msgid "or"
-msgstr ""
-
-#: www/views/tab-howToBuyNanos.html:35
-msgid "that trades Nanos. Send your Bitcoins to your account on this site and trade it for Nanos. Once you get your precious Nanos, send it to your Canoe wallet using your xrb_... address (you can copy it clicking on the receive button below)."
 msgstr ""
 
 #: www/views/accountDetails.html:213
