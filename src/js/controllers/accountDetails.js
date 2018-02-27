@@ -1,10 +1,9 @@
 'use strict'
-
-angular.module('canoeApp.controllers').controller('accountDetailsController', function ($scope, $rootScope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicHistory, profileService, lodash, configService, platformInfo, walletService, txpModalService, externalLinkService, popupService, addressbookService, storageService, $ionicScrollDelegate, $window, gettextCatalog, timeService, appConfigService) {
+/* global angular */
+angular.module('canoeApp.controllers').controller('accountDetailsController', function ($scope, $rootScope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicHistory, profileService, nanoService, lodash, configService, platformInfo, walletService, txpModalService, externalLinkService, popupService, addressbookService, $ionicScrollDelegate, $window, gettextCatalog, timeService) {
   var HISTORY_SHOW_LIMIT = 10
   var currentTxHistoryPage = 0
   var listeners = []
-  $scope.txps = []
   $scope.completeTxHistory = []
   $scope.openTxpModal = txpModalService.open
   $scope.isCordova = platformInfo.isCordova
@@ -17,73 +16,8 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     externalLinkService.open(url, target)
   }
 
-  var setPendingTxps = function (txps) {
-    /* Uncomment to test multiple outputs */
-
-    // var txp = {
-    //   message: 'test multi-output',
-    //   fee: 1000,
-    //   createdOn: new Date() / 1000,
-    //   outputs: [],
-    //   wallet: $scope.account
-    // };
-    //
-    // function addOutput(n) {
-    //   txp.outputs.push({
-    //     amount: 600,
-    //     toAddress: '2N8bhEwbKtMvR2jqMRcTCQqzHP6zXGToXcK',
-    //     message: 'output #' + (Number(n) + 1)
-    //   });
-    // };
-    // lodash.times(15, addOutput);
-    // txps.push(txp);
-
-    if (!txps) {
-      $scope.txps = []
-      return
-    }
-    $scope.txps = lodash.sortBy(txps, 'createdOn').reverse()
-  }
-
-  var analyzeUtxosDone
-
-  var analyzeUtxos = function () {
-    if (analyzeUtxosDone) return
-
-    walletService.getLowUtxos($scope.account, function (err, resp) {
-      if (err || !resp) return
-      analyzeUtxosDone = true
-      $scope.lowUtxosWarning = resp.warning
-    })
-  }
-
   var updateStatus = function (force) {
     $scope.updatingStatus = true
-    $scope.updateStatusError = null
-    $scope.accountNotRegistered = false
-/*
-    walletService.getStatus($scope.account, {
-      force: !!force
-    }, function (err, status) {
-      $scope.updatingStatus = false
-      if (err) {
-        if (err === 'WALLET_NOT_REGISTERED') {
-          $scope.accountNotRegistered = true
-        } else {
-          $scope.updateStatusError = bwcError.msg(err, gettextCatalog.getString('Could not update wallet'))
-        }
-        $scope.status = null
-      } else {
-        setPendingTxps(status.pendingTxps)
-        $scope.status = status
-      }
-      refreshAmountSection()
-      $timeout(function () {
-        $scope.$apply()
-      })
-
-      analyzeUtxos()
-    })*/
   }
 
   $scope.openSearchModal = function () {
@@ -148,42 +82,17 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     })
   }
 
-  var updateTxHistory = function (cb) {
-    if (!cb) cb = function () {}
-    $scope.updatingTxHistory = true
-
-    $scope.updateTxHistoryError = false
-    $scope.updatingTxHistoryProgress = 0
-
-    var progressFn = function (txs, newTxs) {
-      if (newTxs > 5) $scope.txHistory = null
-      $scope.updatingTxHistoryProgress = newTxs
-      $timeout(function () {
-        $scope.$apply()
-      })
+  var updateTxHistory = function () {
+    $scope.completeTxHistory = profileService.getTxHistory($scope.account.id)
+    if ($scope.completeTxHistory[0]) {
+      $scope.showNoTransactionsYetMsg = false
+    } else {
+      $scope.showNoTransactionsYetMsg = true
     }
-
-    /*walletService.getTxHistory($scope.account, {
-      progressFn: progressFn
-    }, function (err, txHistory) {
-      $scope.updatingTxHistory = false
-      if (err) {
-        $scope.txHistory = null
-        $scope.updateTxHistoryError = true
-        return
-      }
-
-      var hasTx = txHistory[0]
-      if (hasTx) $scope.showNoTransactionsYetMsg = false
-      else $scope.showNoTransactionsYetMsg = true
-
-      $scope.completeTxHistory = txHistory
-      $scope.showHistory()
-      $timeout(function () {
-        $scope.$apply()
-      })
-      return cb()
-    })*/
+    $scope.showHistory()
+    $timeout(function () {
+      $scope.$apply()
+    })
   }
 
   $scope.showHistory = function () {
@@ -226,10 +135,6 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     return timeService.isDateInCurrentMonth(date)
   }
 
-  $scope.isUnconfirmed = function (tx) {
-    return !tx.confirmations || tx.confirmations === 0
-  }
-
   $scope.showMore = function () {
     $timeout(function () {
       currentTxHistoryPage++
@@ -251,7 +156,7 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   }
 
   $scope.hideToggle = function () {
-    profileService.toggleHideBalanceFlag($scope.account.credentials.walletId, function (err) {
+    profileService.toggleHideBalanceFlag($scope.account.id, function (err) {
       if (err) $log.error(err)
     })
   }
