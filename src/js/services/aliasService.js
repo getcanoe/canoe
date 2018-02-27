@@ -4,8 +4,9 @@ angular.module('canoeApp.services')
   .factory('aliasService', function ($log, $rootScope, configService, platformInfo, storageService, gettextCatalog, lodash) {
     var root = {}
 
-    var host = 'https://alias.getcanoe.io/api'
+    // var host = 'https://alias.getcanoe.io/api'
     // var host = 'https://alias.getcanoe.io/api-dev' // for dev
+    var host = 'http://localhost:3000' // for local dev
 
     var timer = null
 /*
@@ -66,16 +67,16 @@ angular.module('canoeApp.services')
       var xhr = new XMLHttpRequest()
       //xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.withCredentials = false
-      xhr.open('POST', 'http://localhost:3000' + '/alias/create', true)
+      xhr.open('POST', host + '/alias/create', true)
       xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
       xhr.onerror = xhr.onabort = xhr.ontimeout = function () { cb('Creation failed') }
-      xhr.onload = function () {
-        if (xhr.status === 422) {
-          var response = JSON.parse(xhr.responseText)
+      xhr.onreadystatechange = function () {
+        if (this.status === 422) {
+          var response = JSON.parse(this.responseText)
           $log.debug(response.message)
           cb(response.message)
-        } else if (xhr.status === 200) {
-          var response = JSON.parse(xhr.responseText)
+        } else if (this.status === 200) {
+          var response = JSON.parse(this.responseText)
           if (response.status === 'SUCCESS') {
             $log.debug('Success: ' + JSON.stringify(response.data))
             cb(null, response.data)
