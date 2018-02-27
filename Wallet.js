@@ -134,9 +134,9 @@ module.exports = function(password)
 {
 	var api = {};                       // wallet public methods
 	var private = {};                   // wallet private methods
-	
+
 	var canoeRepresentative = "xrb_1qckwc5o3obkrwbet4amnkya113xq77qpaknsmiq9hwq31tmd5bpyo7sepsw"; // self explaining
-	
+
 	var id = hexRandom(11);             // Unique id of this wallet, to be used as reference when handling
 	var token = hexRandom(32);          // Secret token (used as username in server account)
 	var tokenPass = hexRandom(32);      // Secret tokenPass (used as password in server account)
@@ -148,15 +148,15 @@ module.exports = function(password)
 	var lastPendingBlock = "";
 	var pendingBlocks = [];             // current account pending blocks
 	var chain = [];                     // current account chain
-	var representative;									// current account representative	
+	var representative;									// current account representative
 	var minimumReceive = bigInt(1);			// minimum amount to pocket
-	
+
 	var keys = [];                      // wallet keys, accounts, and all necessary data
-	var recentTxs = [];                 
+	var recentTxs = [];
 	var walletPendingBlocks = [];       // wallet pending blocks
 	var readyBlocks = [];               // wallet blocks signed and worked, ready to broadcast and add to chain
 	var errorBlocks = [];               // blocks which could not be confirmed
-	
+
 	var broadcastCallback = null        // Callback function to perform broadcast
 	var enableBroadcast = true          // Flag to enable/disable
 
@@ -166,16 +166,16 @@ module.exports = function(password)
 	var lastKeyFromSeed = -1;           // seed index
 	var passPhrase = password;          // wallet password
 	var iterations = 5000;              // pbkdf2 iterations
-	var checksum;                       // wallet checksum 
+	var checksum;                       // wallet checksum
 	var ciphered = true;
-	
+
 	var logger = new Logger();
- 
+
 	api.debug = function()
 	{
 		console.log(readyBlocks);
 	}
-	
+
 	api.debugChain = function()
 	{
 		api.useAccount(keys[1].account);
@@ -185,7 +185,7 @@ module.exports = function(password)
 			console.log(chain[i].getPrevious());
 		}
 	}
-	
+
 	api.setLogger = function(loggerObj)
 	{
 		logger = loggerObj;
@@ -199,10 +199,10 @@ module.exports = function(password)
 	{
 		broadcastCallback = cb;
 	}
-	
+
 	/**
 	 * Sets the secret key to do all the signing stuff
-	 * 
+	 *
 	 * @param {Array} hex - The secret key byte array
 	 * @throws An exception on invalid secret key length
 	 */
@@ -210,14 +210,14 @@ module.exports = function(password)
 	{
 		if(bytes.length != 32)
 			throw "Invalid Secret Key length. Should be 32 bytes.";
-			
+
 		sk = bytes;
 		pk = nacl.sign.keyPair.fromSecretKey(sk).publicKey;
 	}
-	
+
 	/**
 	 * Signs a message with the secret key
-	 * 
+	 *
 	 * @param {Array} message - The message to be signed in a byte array
 	 * @returns {Array} The 64 byte signature
 	 */
@@ -225,6 +225,30 @@ module.exports = function(password)
 	{
 		return nacl.sign.detached(message, sk);
 	}
+
+  /**
+   * Signs an alias request with the secret key
+   *
+   * @param {Array} fields - The fields to be signed in an array of strings for public signatures its [alias,address] for private signatures its [alias,address,seed]
+   * @returns {String} The Hex Signature
+   */
+  api.aliasSignature = function(fields)
+  {
+    if(current != -1) {
+      var context = blake2bInit(32);
+      for (let i = 0; i < fields.length; i++) {
+        blake2bUpdate(context, hex_uint8(fields[i]));
+      }
+      var data = {
+        hash: uint8_hex(blake2bFinal(context))
+      };
+      data.signature = uint8_hex(nacl.sign.detached(hex_uint8(data.hash), keys[current].priv));
+      return data;
+    } else {
+      logger.log("No current account");
+      return null;
+    }
+  }
 
 	api.checkPass = function (pswd) {
 		return passPhrase == pswd
@@ -242,16 +266,16 @@ module.exports = function(password)
 		else
 			throw "Incorrect password.";
 	}
-	
+
 	api.setIterations = function(newIterationNumber)
 	{
 		newIterationNumber = parseInt(newIterationNumber);
 		if(newIterationNumber < 2)
 			throw "Minimum iteration number is 2.";
-		
+
 		iterations = newIterationNumber;
 	}
-	
+
 	api.setMinimumReceive = function(raw_amount)
 	{
 		raw_amount = bigInt(raw_amount);
@@ -260,15 +284,15 @@ module.exports = function(password)
 		minimumReceive = raw_amount;
 		return true;
 	}
-	
+
 	api.getMinimumReceive = function()
 	{
 		return minimumReceive;
 	}
-	
+
 	/**
 	 * Sets a seed for the wallet
-	 * 
+	 *
 	 * @param {string} hexSeed - The 32 byte seed hex encoded
 	 * @throws An exception on malformed seed
 	 */
@@ -278,17 +302,17 @@ module.exports = function(password)
 			throw "Invalid Hex Seed.";
 		seed = hex_uint8(hexSeed);
 	}
-	
+
 	api.getSeed = function(pswd)
 	{
 		if(pswd == passPhrase)
 			return uint8_hex(seed);
 		throw "Incorrect password.";
 	}
-	
+
 	/**
 	 * Sets a random seed for the wallet
-	 * 
+	 *
 	 * @param {boolean} overwrite - Set to true to overwrite an existing seed
 	 * @throws An exception on existing seed
 	 */
@@ -298,37 +322,37 @@ module.exports = function(password)
 			throw "Seed already exists. To overwrite use setSeed or set overwrite to true";
 		seed = nacl.randomBytes(32);
 	}
-	
+
 	/**
 	 * Derives a new secret key from the seed and adds it to the wallet
-	 * 
+	 *
 	 * @throws An exception if theres no seed
 	 */
 	api.newKeyFromSeed = function()
 	{
 		if(seed.length != 32)
 			throw "Seed should be set first.";
-		
+
 		var index = lastKeyFromSeed + 1;
 		index = hex_uint8(dec2hex(index, 4));
-		
+
 		var context = blake2bInit(32);
 		blake2bUpdate(context, seed);
 		blake2bUpdate(context, index);
-		
+
 		var newKey = blake2bFinal(context);
-		
+
 		lastKeyFromSeed++;
-		
+
 		logger.log("New key generated");
 		api.addSecretKey(uint8_hex(newKey));
-		
+
 		return accountFromHexKey(uint8_hex(nacl.sign.keyPair.fromSecretKey(newKey).publicKey));
 	}
-	
+
 	/**
 	 * Adds a key to the wallet
-	 * 
+	 *
 	 * @param {string} hex - The secret key hex encoded
 	 * @throws An exception on invalid secret key length
 	 * @throws An exception on invalid hex format
@@ -337,16 +361,16 @@ module.exports = function(password)
 	{
 		if(hex.length != 64)
 			throw "Invalid Secret Key length. Should be 32 bytes.";
-		
+
 		if(!/[0-9A-F]{64}/i.test(hex))
 			throw "Invalid Hex Secret Key.";
-		
+
 		keys.push(
 			{
 				priv: hex_uint8(hex),
 				pub: nacl.sign.keyPair.fromSecretKey(hex_uint8(hex)).publicKey,
-				account: accountFromHexKey(uint8_hex(nacl.sign.keyPair.fromSecretKey(hex_uint8(hex)).publicKey)), 
-				balance: bigInt(0), 
+				account: accountFromHexKey(uint8_hex(nacl.sign.keyPair.fromSecretKey(hex_uint8(hex)).publicKey)),
+				balance: bigInt(0),
 				pendingBalance: bigInt(0),
 				lastBlock: "",
 				lastPendingBlock: "",
@@ -358,9 +382,9 @@ module.exports = function(password)
 		);
 		logger.log("New key added to wallet.");
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param {boolean} hex - To return the result hex encoded
 	 * @returns {string} The public key hex encoded
 	 * @returns {Array} The public key in a byte array
@@ -371,10 +395,21 @@ module.exports = function(password)
 			return uint8_hex(pk);
 		return pk;
 	}
-	
+
+	/**
+	 *
+	 * @returns {string} The current account
+	 */
+	api.getCurrentAccount = function()
+	{
+		if(current != -1)
+      return keys[current].account;
+    return null;
+	}
+
 	/**
 	 * List all the accounts in the wallet
-	 * 
+	 *
 	 * @returns {Array}
 	 */
 	api.getAccounts = function()
@@ -384,7 +419,7 @@ module.exports = function(password)
 		{
 			accounts.push({
 				id: keys[i].account,
-				balance: bigInt(keys[i].balance), 
+				balance: bigInt(keys[i].balance),
 				pendingBalance: bigInt(keys[i].pendingBalance),
 				name: keys[i].meta.label,
 				meta: keys[i].meta
@@ -395,7 +430,7 @@ module.exports = function(password)
 
 	/**
 	 * List all the account ids in the wallet
-	 * 
+	 *
 	 * @returns {Array}
 	 */
 	api.getAccountIds = function()
@@ -410,7 +445,7 @@ module.exports = function(password)
 
 	/**
 	 * Get a single account in the wallet given account number
-	 * 
+	 *
 	 * @returns {Array}
 	 */
 	api.getAccount = function(account)
@@ -419,7 +454,7 @@ module.exports = function(password)
 		if (!key) return null
 		return {
 				id: key.account,
-				balance: bigInt(key.balance), 
+				balance: bigInt(key.balance),
 				pendingBalance: bigInt(key.pendingBalance),
 				name: key.meta.label,
 				meta: key.meta
@@ -437,10 +472,10 @@ module.exports = function(password)
 		}
 		return null
 	}
-	
+
 	/**
 	 * Switches the account being used by the wallet
-	 * 
+	 *
 	 * @param {string} accountToUse
 	 * @throws An exception if the account is not found in the wallet
 	 */
@@ -458,7 +493,7 @@ module.exports = function(password)
 			keys[current].representative = representative;
 			keys[current].meta = meta;
 		}
-		
+
 		for(var i in keys)
 		{
 			if(keys[i].account == accountToUse)
@@ -477,7 +512,7 @@ module.exports = function(password)
 		}
 		throw "Account not found in wallet ("+accountToUse+") "+JSON.stringify(api.getAccounts());
 	}
-	
+
 	api.importChain = function(blocks, acc)
 	{
 		api.useAccount(acc);
@@ -491,16 +526,16 @@ module.exports = function(password)
 			   throw "There is an invalid block";
 		}
 	}
-	
+
 	api.getLastNBlocks = function(acc, n, offset = 0)
 	{
 		var temp = keys[current].account;
 		api.useAccount(acc);
 		var blocks = [];
-		
+
 		if(n > chain.length)
 			n = chain.length;
-		
+
 		for(let i = chain.length - 1 - offset; i > chain.length - 1 - n - offset; i--)
 		{
 			blocks.push(chain[i]);
@@ -508,12 +543,12 @@ module.exports = function(password)
 		api.useAccount(temp);
 		return blocks;
 	}
-	
-	api.getBlocksUpTo = function(acc, hash) 
+
+	api.getBlocksUpTo = function(acc, hash)
 	{
 		var temp = keys[current].account;
 		api.useAccount(acc);
-		
+
 		var blocks = [];
 		for(let i = chain.length - 1; i > 0; i--)
 		{
@@ -523,20 +558,20 @@ module.exports = function(password)
 		}
 		return blocks;
 	}
-	
+
 	api.getAccountBlockCount = function(acc)
 	{
 		var temp = keys[current].account;
 		api.useAccount(acc);
-		
+
 		var n = chain.length;
 		api.useAccount(temp);
 		return n;
 	}
-	
+
 	/**
 	 * Generates a block signature from the block hash using the secret key
-	 * 
+	 *
 	 * @param {string} blockHash - The block hash hex encoded
 	 * @throws An exception on invalid block hash length
 	 * @throws An exception on invalid block hash hex encoding
@@ -545,19 +580,19 @@ module.exports = function(password)
 	api.signBlock = function(block)
 	{
 		var blockHash = block.getHash();
-		
+
 		if(blockHash.length != 32)
 			throw "Invalid block hash length. It should be 32 bytes.";
-		
+
 		block.setSignature(uint8_hex(api.sign(blockHash)));
 		block.setAccount(keys[current].account);
-		
+
 		logger.log("Block " + block.getHash(true) + " signed.");
 	}
-	
+
 	/**
 	 * Verifies a block signature given its hash, sig and NANO account
-	 * 
+	 *
 	 * @param {string} blockHash - 32 byte hex encoded block hash
 	 * @param {string} blockSignature - 64 byte hex encoded signature
 	 * @param {string} account - A NANO account supposed to have signed the block
@@ -566,26 +601,26 @@ module.exports = function(password)
 	api.verifyBlockSignature = function(blockHash, blockSignature, account)
 	{
 		var pubKey = hex_uint8(keyFromAccount(account));
-		
+
 		return nacl.sign.detached.verify(hex_uint8(blockHash), hex_uint8(blockSignature), pubKey);
 	}
-	
+
 	api.verifyBlock = function(block, acc = "")
 	{
 		var account = block.getAccount() ? block.getAccount() : acc;
 		return api.verifyBlockSignature(block.getHash(true), block.getSignature(), block.getAccount());
 	}
-	
+
 	/**
 	 * Returns current account balance
-	 * 
+	 *
 	 * @returns {number} balance
 	 */
 	api.getBalance = function()
 	{
 		return balance ? balance : keys[current].balance;
 	}
-	
+
 	/**
 	 * Returns current account pending balance (not pocketed)
 	 *
@@ -602,7 +637,7 @@ module.exports = function(password)
 		}
 		return am;
 	}
-	
+
 	api.getRepresentative = function(acc = false)
 	{
 		if(!acc)
@@ -610,16 +645,16 @@ module.exports = function(password)
 		api.useAccount(acc);
 		return representative;
 	}
-	
+
 	private.setRepresentative = function(repr)
 	{
 		representative = repr;
 		keys[current].representative = repr;
 	}
-	
+
 	/**
 	 * Updates current account balance
-	 * 
+	 *
 	 * @param {number} newBalance - The new balance in rai units
 	 */
 	private.setBalance = function(newBalance)
@@ -627,19 +662,19 @@ module.exports = function(password)
 		balance = bigInt(newBalance);
 		keys[current].balance = balance;
 	}
-	
+
 	private.setPendingBalance = function(newBalance)
 	{
 		pendingBalance = bigInt(newBalance);
 		keys[current].pendingBalance = pendingBalance;
 	}
-	
+
 	api.getAccountBalance = function(acc)
 	{
 		api.useAccount(acc);
 		return api.getBalanceUpToBlock(0);
 	}
-	
+
 	api.getWalletPendingBalance = function()
 	{
 		var pending = bigInt(0);
@@ -650,7 +685,7 @@ module.exports = function(password)
 		}
 		return pending;
 	}
-	
+
 	api.getWalletBalance = function()
 	{
 		var bal = bigInt(0);
@@ -662,7 +697,7 @@ module.exports = function(password)
 		}
 		return bal;
 	}
-	
+
 	api.recalculateWalletBalances = function()
 	{
 		for(let i in keys)
@@ -671,24 +706,24 @@ module.exports = function(password)
 			private.setBalance(api.getBalanceUpToBlock(0));
 		}
 	}
-	
+
 	api.getBalanceUpToBlock = function(blockHash)
 	{
 		if(chain.length <= 0)
 			return 0;
-		
+
 		var sum = bigInt(0);
 		var found = blockHash === 0 ? true : false;
 		var blk;
-		
+
 		// check pending blocks first
 		for(let i = pendingBlocks.length - 1; i >= 0; i--)
 		{
 			blk = pendingBlocks[i];
-			
+
 			if(blk.getHash(true) == blockHash)
 				found = true;
-			
+
 			if(found)
 			{
 				if(blk.getType() == 'open' || blk.getType() == 'receive')
@@ -702,14 +737,14 @@ module.exports = function(password)
 				}
 			}
 		}
-		
+
 		for(let i = chain.length - 1; i >= 0; i--)
 		{
 			blk = chain[i];
 
 			if(blk.getHash(true) == blockHash)
 				found = true;
-			
+
 			if(found)
 			{
 				if(blk.getType() == 'open' || blk.getType() == 'receive')
@@ -725,10 +760,10 @@ module.exports = function(password)
 		}
 		return sum;
 	}
-	
+
 	/**
 	 * Updates an account balance
-	 * 
+	 *
 	 * @param {number} - The new balance in raw units
 	 * @param {string} Account - The account whose balance is being updated
 	 */
@@ -739,7 +774,7 @@ module.exports = function(password)
 		private.setBalance(newBalance);
 		api.useAccount(keys[temp].account);
 	}
-	
+
 	private.sumAccountPending = function(acc, amount)
 	{
 		var temp = current;
@@ -747,7 +782,7 @@ module.exports = function(password)
 		private.setPendingBalance(api.getPendingBalance().sum(amount));
 		api.useAccount(keys[temp].account);
 	}
-	
+
 	api.setMeta = function(acc, meta) {
 		for(let i in keys) {
 			if(keys[i].account == acc) {
@@ -771,7 +806,7 @@ module.exports = function(password)
 	{
 		pendingBlocks = [];
 	}
-	
+
 	api.removePendingBlock = function(blockHash)
 	{
 		var found = false;
@@ -799,7 +834,7 @@ module.exports = function(password)
 			}
 		}
 	}
-	
+
 	api.getBlockFromHash = function(blockHash, acc = 0)
 	{
 		var found = false;
@@ -808,7 +843,7 @@ module.exports = function(password)
 			api.useAccount(acc);
 		else
 			api.useAccount(keys[0].account);
-			
+
 		for(let i = 0; i < keys.length; i++)
 		{
 			api.useAccount(keys[i].account);
@@ -824,7 +859,7 @@ module.exports = function(password)
 		}
 		return false;
 	}
-	
+
 	api.addBlockToReadyBlocks = function(blk)
 	{
 		readyBlocks.push(blk);
@@ -833,7 +868,7 @@ module.exports = function(password)
 			broadcastCallback(readyBlocks);
 		}
 	}
-	
+
 	// Check if we already have a precalculated PoW and if so consume it, otherwise
 	// we will have to wait for work coming in from outside via addWorkToPendingBlock
 	private.checkPrecalculated = function(blk, acc) {
@@ -848,17 +883,17 @@ module.exports = function(password)
 	{
 		api.useAccount(from);
 		amount = bigInt(amount);
-		
+
 		var bal = api.getBalanceUpToBlock(0);
 		var remaining = bal.minus(amount);
 		var blk = new Block();
-		
+
 		blk.setSendParameters(lastPendingBlock, to, remaining);
 		blk.build();
 		api.signBlock(blk);
 		blk.setAmount(amount);
 		blk.setAccount(from);
-		
+
 		lastPendingBlock = blk.getHash(true);
 		keys[current].lastPendingBlock = lastPendingBlock;
 		private.setBalance(remaining);
@@ -869,11 +904,11 @@ module.exports = function(password)
 		logger.log("New send block ready for work: " + blk.getHash(true));
 
 		private.checkPrecalculated(blk, from)
-				
+
 		return blk;
 
 	}
-	
+
 	api.addPendingReceiveBlock = function(sourceBlockHash, acc, from, amount = 0)
 	{
 		amount = bigInt(amount);
@@ -883,83 +918,83 @@ module.exports = function(password)
 			logger.log("Receive block rejected due to minimum receive amount (" + sourceBlockHash + ")");
 			return false;
 		}
-		
+
 		// make sure this source has not been redeemed yet
 		for(let i in walletPendingBlocks)
 		{
 			if(walletPendingBlocks[i].getSource() == sourceBlockHash)
 				return false;
 		}
-		
+
 		for(let i in readyBlocks)
 		{
 			if(readyBlocks[i].getSource() == sourceBlockHash)
 				return false;
 		}
-		
+
 		for(let i in chain)
 		{
 			if(chain[i].getSource() == sourceBlockHash)
 				return false;
 		}
-		
+
 		var blk = new Block();
 		if(lastPendingBlock.length == 64)
 			blk.setReceiveParameters(lastPendingBlock, sourceBlockHash);
 		else
 			blk.setOpenParameters(sourceBlockHash, acc, canoeRepresentative);
-		
+
 		blk.build();
 		api.signBlock(blk);
 		blk.setAmount(amount);
 		blk.setAccount(acc);
 		blk.setOrigin(from);
-		
+
 		lastPendingBlock = blk.getHash(true);
 		keys[current].lastPendingBlock = lastPendingBlock;
 		pendingBlocks.push(blk);
 		walletPendingBlocks.push(blk);
 		private.setPendingBalance(api.getPendingBalance().add(amount));
 		private.save();
-				
+
 		logger.log("New receive block ready for work: " + blk.getHash(true));
 
 		private.checkPrecalculated(blk, acc);
-		
+
 		return blk;
 	}
-	
+
 	api.addPendingChangeBlock = function(acc, repr)
 	{
 		api.useAccount(acc);
-		
+
 		if(!lastPendingBlock)
 			throw "There needs to be at least 1 block in the chain.";
-		
+
 		var blk = new Block();
 		blk.setChangeParameters(lastPendingBlock, repr);
 		blk.build();
 		api.signBlock(blk);
 		blk.setAccount(acc);
-		
+
 		lastPendingBlock = blk.getHash(true);
 		keys[current].lastPendingBlock = lastPendingBlock;
 		pendingBlocks.push(blk);
 		walletPendingBlocks.push(blk);
 		private.save();
-		
+
 		logger.log("New change block ready for work: " + blk.getHash(true));
 
 		private.checkPrecalculated(blk, acc);
-		
+
 		return blk;
 	}
-	
+
 	api.getPendingBlocks = function()
 	{
 		return pendingBlocks;
 	}
-	
+
 	api.getPendingBlockByHash = function(blockHash)
 	{
 		for(let i in walletPendingBlocks)
@@ -969,25 +1004,25 @@ module.exports = function(password)
 		}
 		return false;
 	}
-	
+
 	api.getNextWorkBlockHash = function(acc)
 	{
 		var aux = current;
 		api.useAccount(acc);
-		
+
 		if(lastBlock.length > 0)
 			return lastBlock;
 		else
 			return uint8_hex(pk);
 		api.useAccount(keys[current].account);
 	}
-	
+
 	private.setLastBlockHash = function(blockHash)
 	{
 		lastBlock = blockHash;
 		keys[current].lastBlock = blockHash;
 	}
-	
+
 	api.clearPrecalc = function()
 	{
 		pows = {};
@@ -1000,7 +1035,7 @@ module.exports = function(password)
 		blake2bUpdate(context, hex_uint8(work).reverse());
 		blake2bUpdate(context, hex_uint8(blockHash));
 		var threshold = blake2bFinal(context).reverse();
-	
+
 		if(threshold[0] == t[0])
 			if(threshold[1] == t[1])
 				if(threshold[2] == t[2])
@@ -1062,9 +1097,9 @@ module.exports = function(password)
 
 	api.getReadyBlocks = function()
 	{
-		return readyBlocks;	
+		return readyBlocks;
 	}
-	
+
 	api.getNextReadyBlock = function()
 	{
 		if(readyBlocks.length > 0)
@@ -1072,19 +1107,19 @@ module.exports = function(password)
 		else
 			return false;
 	}
-	
+
 	api.getReadyBlockByHash = function(blockHash)
 	{
 		for(let i in pendingBlocks)
 		{
-			if(readyBlocks[i].getHash(true) == blockHash)        
+			if(readyBlocks[i].getHash(true) == blockHash)
 			{
 				return readyBlocks[i];
 			}
 		}
 		return false;
 	}
-	
+
 	api.removeReadyBlock = function(blockHash)
 	{
 		for(let i in readyBlocks)
@@ -1098,14 +1133,14 @@ module.exports = function(password)
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Adds block to account chain
 	 *
 	 * @param {string} - blockHash The block hash
 	 * @throws An exception if the block is not found in the ready blocks array
-	 * @throws An exception if the previous block does not match the last chain block 
-	 * @throws An exception if the chain is empty and the block is not of type open 
+	 * @throws An exception if the previous block does not match the last chain block
+	 * @throws An exception if the chain is empty and the block is not of type open
 	 */
 	api.confirmBlock = function(blockHash)
 	{
@@ -1115,7 +1150,7 @@ module.exports = function(password)
 			if(blk.ready())
 			{
 				api.useAccount(blk.getAccount());
-				if(chain.length == 0) 
+				if(chain.length == 0)
 				{
 					// open block
 					if(blk.getType() != 'open')
@@ -1185,18 +1220,18 @@ module.exports = function(password)
 			throw 'Block not found';
 		}
 	}
-	
+
 	api.importBlock = function(blk, acc)
 	{
 		api.useAccount(acc);
 		blk.setAccount(acc);
 		if(!blk.ready())
 			throw "Block should be complete.";
-		
+
 		lastPendingBlock = blk.getHash(true);
 		keys[current].lastPendingBlock = blk.getHash(true);
-		
-		// check if there is a conflicting block pending 
+
+		// check if there is a conflicting block pending
 		for(let i in pendingBlocks)
 		{
 			if(pendingBlocks[i].getPrevious() == blk.getPrevious())
@@ -1205,13 +1240,13 @@ module.exports = function(password)
 				private.fixPreviousChange(blk.getPrevious(), blk.getHash(true), acc);
 			}
 		}
-		
+
 		pendingBlocks.push(blk);
 		walletPendingBlocks.push(blk);
-		private.save();	
+		private.save();
 		api.confirmBlock(blk.getHash(true));
 	}
-	
+
 	api.createBlockFromJSON = function(jsonOrObj) {
 		var blk = new Block()
 		blk.buildFromJSON(jsonOrObj, blk.getMaxVersion())
@@ -1222,17 +1257,17 @@ module.exports = function(password)
 	{
 		api.useAccount(acc);
 		var prev = blk.getPrevious();
-		
+
 		for(let i = chain.length - 1; i >= 0; i--)
 		{
 			if(chain[i].getPrevious() == prev)
 			{
 				// fork found, delete block and its successors
 				chain.splice(i, chain.length);
-				
+
 				// delete pending blocks if any
 				pendingBlocks = [];
- 				
+
 				// import new block
 				api.importBlock(blk, acc);
 				return true;
@@ -1240,7 +1275,7 @@ module.exports = function(password)
 		}
 		return false;
 	}
-	
+
 	private.fixPreviousChange = function(oldPrevious, newPrevious, acc)
 	{
 		api.useAccount(acc);
@@ -1256,7 +1291,7 @@ module.exports = function(password)
 			}
 		}
 	}
-	
+
 	api.getId = function()
 	{
 		return id;
@@ -1266,12 +1301,12 @@ module.exports = function(password)
 	{
 		return token;
 	}
-	
+
 	api.getTokenPass = function()
 	{
 		return tokenPass;
 	}
-	
+
 	private.save = function()
 	{
 		// save current account status
@@ -1282,10 +1317,10 @@ module.exports = function(password)
 		keys[current].pendingBlocks = pendingBlocks;
 		keys[current].representative = representative;
 	}
-	
+
 	/**
 	 * Encrypts and packs the wallet data in a hex string
-	 * 
+	 *
 	 * @returns {string}
 	 */
 	api.pack = function()
@@ -1305,7 +1340,7 @@ module.exports = function(password)
 			aux.chain = [];
 			aux.representative = keys[i].representative;
 			aux.meta = keys[i].meta;
-			
+
 			for(let j in keys[i].chain)
 			{
 				aux.chain.push(keys[i].chain[j].getEntireJSON());
@@ -1313,7 +1348,7 @@ module.exports = function(password)
 			tempKeys.push(aux);
 		}
 		pack.readyBlocks = []
-		
+
 		for(let i in readyBlocks)
 		{
 			pack.readyBlocks.push(readyBlocks[i].getEntireJSON());
@@ -1324,7 +1359,7 @@ module.exports = function(password)
 		pack.recent = recentTxs;
 		pack.pows = pows;
 		pack.minimumReceive = minimumReceive.toString();
-		
+
 		pack.id = id;
 		pack.token = token;
 		pack.tokenPass = tokenPass;
@@ -1332,23 +1367,23 @@ module.exports = function(password)
 		pack = JSON.stringify(pack);
 		pack = stringToHex(pack);
 		pack = new Buffer(pack, 'hex');
-		
+
 		var context = blake2bInit(32);
 		blake2bUpdate(context, pack);
 		checksum = blake2bFinal(context);
-		
+
 		var salt = new Buffer(nacl.randomBytes(16));
 		var key = pbkdf2.pbkdf2Sync(passPhrase, salt, iterations, 32, 'sha1');
-		
-		
+
+
 		var options = { mode: AES.CBC, padding: Iso10126 };
 		var encryptedBytes = AES.encrypt(pack, key, salt, options);
-		
-		
+
+
 		var payload = Buffer.concat([new Buffer(checksum), salt, encryptedBytes]);
 		return payload.toString('hex');
 	}
-	
+
 	/**
 	 * Constructs the wallet from an encrypted base64 encoded wallet
 	 */
@@ -1359,18 +1394,18 @@ module.exports = function(password)
 		var salt = bytes.slice(32, 48);
 		var payload = bytes.slice(48);
 		var key = pbkdf2.pbkdf2Sync(passPhrase, salt, iterations, 32, 'sha1');
-		
+
 		var options = {};
 		options.padding = options.padding || Iso10126;
 		var decryptedBytes = AES.decrypt(payload, key, salt, options);
-		
+
 		var context = blake2bInit(32);
 		blake2bUpdate(context, decryptedBytes);
 		var hash = uint8_hex(blake2bFinal(context));
-		
+
 		if(hash != checksum.toString('hex').toUpperCase())
 			throw "Wallet is corrupted or has been tampered.";
-		
+
 		var walletData = JSON.parse(decryptedBytes.toString('utf8'));
 		seed = hex_uint8(walletData.seed);
 		lastKeyFromSeed = walletData.last;
@@ -1381,18 +1416,18 @@ module.exports = function(password)
 		token = walletData.token;
 		tokenPass = walletData.tokenPass;
 
-		readyBlocks = [];		
+		readyBlocks = [];
 		for(let i in walletData.readyBlocks)
 		{
 			var blk = new Block();
 			blk.buildFromJSON(walletData.readyBlocks[i]);
 			readyBlocks.push(blk);
 		}
-		
+
 		for(let i in walletData.keys)
 		{
 			var aux = {};
-			
+
 			aux.chain = [];
 			for(let j in walletData.keys[i].chain)
 			{
@@ -1400,7 +1435,7 @@ module.exports = function(password)
 				blk.buildFromJSON(walletData.keys[i].chain[j]);
 				aux.chain.push(blk);
 			}
-			
+
 			aux.priv = hex_uint8(walletData.keys[i].priv);
 			aux.pub = hex_uint8(walletData.keys[i].pub);
 			aux.account = walletData.keys[i].account;
@@ -1411,7 +1446,7 @@ module.exports = function(password)
 			aux.pendingBlocks = [];
 			aux.representative = walletData.keys[i].representative != undefined ? walletData.keys[i].representative : aux.account;
 			aux.meta = walletData.keys[i].meta != undefined ? walletData.keys[i].meta : { label: ""};
-				
+
 			keys.push(aux);
 		}
 		api.useAccount(keys[0].account);
@@ -1419,7 +1454,7 @@ module.exports = function(password)
 		ciphered = false;
 		return walletData;
 	}
-	
+
 	api.createSeed = function(setSeed = false) {
 		if (!setSeed) {
 			seed = nacl.randomBytes(32)
@@ -1436,6 +1471,6 @@ module.exports = function(password)
 		meta = newMeta
 		return api.getAccount(account)
 	}
-	
-	return api  
+
+	return api
 }

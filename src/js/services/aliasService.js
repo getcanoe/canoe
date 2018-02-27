@@ -60,5 +60,35 @@ angular.module('canoeApp.services')
       xhr.send(null)
     }
 
+    root.createAlias = function (alias, address, email, isPrivate, signature, cb) {
+      $log.debug('Perform Alias Creation')
+      var params = `alias=${alias}&address=${address}&email=${email}&listed=${!isPrivate}&signature=${signature}`;
+      var xhr = new XMLHttpRequest()
+      //xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.withCredentials = false
+      xhr.open('POST', 'http://localhost:3000' + '/alias/create', true)
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+      xhr.onerror = xhr.onabort = xhr.ontimeout = function () { cb('Creation failed') }
+      xhr.onload = function () {
+        if (xhr.status === 422) {
+          var response = JSON.parse(xhr.responseText)
+          $log.debug(response.message)
+          cb(response.message)
+        } else if (xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText)
+          if (response.status === 'SUCCESS') {
+            $log.debug('Success: ' + JSON.stringify(response.data))
+            cb(null, response.data)
+          } else if (response.status === 'ERROR') {
+            $log.debug('Error: ' + JSON.stringify(response.message))
+            cb(response.message)
+          }
+        } else {
+          cb(xhr.status)
+        }
+      }
+      xhr.send(params)
+    }
+
     return root
   })

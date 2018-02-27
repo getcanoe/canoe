@@ -771,6 +771,15 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
+      .state('onboarding.aliasRequest', {
+        url: '/alias/:walletId/:backedUp',
+        views: {
+          'onboarding': {
+            templateUrl: 'views/onboarding/alias.html',
+            controller: 'createAliasController'
+          }
+        }
+      })
       .state('onboarding.disclaimer', {
         url: '/disclaimer/:walletId/:backedUp/:resume',
         views: {

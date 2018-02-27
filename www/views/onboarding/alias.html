@@ -1,0 +1,52 @@
+<ion-slides class="slides"  slider="data.slider" options="{pagination: false}">
+    <ion-slide-page>
+      <ion-view id="onboarding-create-alias" class="onboarding">
+        <ion-content scroll="false">
+          <div class="onboarding-topic" translate>Let People Easily Find you With Aliases</div>
+          <img src='img/onboarding/onboarding-password.svg' id="alias" />
+          <form name='createAlias' novalidate>
+            <div class="list settings-list settings-input-group">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label" translate>Alias</span>
+                <input type="text"
+                  placeholder="{{'At least 3 Characters.'|translate}}"
+                  ng-model="alias"
+                  name="alias"
+                  required
+                >
+              </label>
+
+              <label class="item item-input item-stacked-label">
+                <span class="input-label" translate>Email</span>
+                <input type="text"
+                  placeholder="{{'Email for recovering your alias'|translate}}"
+                  ng-model="email"
+                  name="email"
+                  required
+                >
+              </label>
+              <ion-list>
+                <ion-checkbox ng-model="isPrivate">
+                  <span translate>Make my alias private.</span>
+                </ion-checkbox>
+                <ion-checkbox ng-model="createPhoneAlias">
+                  <span translate>Link my wallet to my phone number.</span>
+                </ion-checkbox>
+              </ion-list>
+            </div>
+            <div class="cta-buttons">
+              <button
+                class="button button-standard button-primary"
+                ng-disabled="!alias || !email"
+                type="submit"
+                ng-click="create(alias,email,isPrivate,createPhoneAlias)"
+                translate>
+                Create Alias
+              </button>
+              <button class="button button-standard button-secondary" ng-click="skipAlias()" translate>Do it later</button>
+            </div>
+          </form>
+        </ion-content>
+      </ion-view>
+  </ion-slides>
+</ion-slide-page>
