@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, txConfirmNotification, externalLinkService) {
+angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, txConfirmNotification, externalLinkService, addressbookService) {
   //var CONFIRM_LIMIT_USD = 20
 
   var tx = {}
@@ -328,7 +328,24 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     })
     $state.go('tabs.send').then(function () {
       $ionicHistory.clearHistory()
-      $state.transitionTo('tabs.home')
+        addressbookService.get($scope.tx.toAddress, function (err, addr) {
+        // Popup : proposal to add new address to address book, if it's not already there
+        if (!addr){
+          var title = gettextCatalog.getString('Add to address book?')
+          var msg = gettextCatalog.getString('Do you want to add this new address to your address book?')
+          popupService.showConfirm(title, msg, null, null, function (res) {
+            if (res) {
+              $state.transitionTo('tabs.send.addressbook', {
+                addressbookEntry: $scope.tx.toAddress
+              })
+            } else {
+              $state.transitionTo('tabs.home')
+            }
+          })
+        } else {
+          $state.transitionTo('tabs.home')
+        }
+      })
     })
   }
 })
