@@ -20,17 +20,15 @@ angular.module('canoeApp.controllers').controller('createAliasController',
           //TODO SAVE ALIAS IN WALLET
         }
         ongoingProcess.set('creatingAlias', false);
-        $state.go('onboarding.disclaimer', {
-          walletId: $scope.accountId,
-          backedUp: false
+        $state.go('onboarding.backupRequest', {
+          walletId: $scope.accountId
         })
       });
     }
 
     $scope.skipAlias = function () {
-      $state.go('onboarding.disclaimer', {
-        walletId: $scope.accountId,
-        backedUp: false
+      $state.go('onboarding.backupRequest', {
+        walletId: $scope.accountId
       })
     }
 

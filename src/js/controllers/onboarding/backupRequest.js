@@ -24,7 +24,7 @@ angular.module('canoeApp.controllers').controller('backupRequestController', fun
         var cancelText = gettextCatalog.getString('Go back')
         popupService.showConfirm(title, message, okText, cancelText, function (val) {
           if (val) {
-            $state.go('onboarding.aliasRequest', {
+            $state.go('onboarding.disclaimer', {
               walletId: $scope.accountId,
               backedUp: false
             })
