@@ -335,7 +335,8 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       $ionicHistory.clearHistory()
         addressbookService.get($scope.tx.toAddress, function (err, addr) {
         // Popup : proposal to add new address to address book, if it's not already there
-        if (!addr){
+        // and if it's not the address of one of wallet accounts
+        if (!addr && !profileService.getAccount($scope.tx.toAddress)){
           var title = gettextCatalog.getString('Add to address book?')
           var msg = gettextCatalog.getString('Do you want to add this new address to your address book?')
           popupService.showConfirm(title, msg, null, null, function (res) {
