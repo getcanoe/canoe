@@ -470,3 +470,7 @@ input[type=file] {
 .platform-android .toggle .handle::before {
   top: 6px !important;
 }
+
+.big-icon-svg > .bg {
+  box-shadow: none !important;
+}
