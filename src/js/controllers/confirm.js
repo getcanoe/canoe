@@ -221,6 +221,11 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
 
     setButtonText()
 
+    // Send max fix
+    if (tx.sendMax){
+      tx.toAmount = $scope.account.balance
+    }
+
     updateTx(tx, account, {
       dryRun: true
     }, function (err) {
