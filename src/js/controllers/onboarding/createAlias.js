@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('createAliasController',
-  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, lodash, profileService, aliasService, walletService, ongoingProcess, popupService, gettextCatalog, $ionicModal) {
+  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, lodash, profileService, nanoService, aliasService, walletService, ongoingProcess, popupService, gettextCatalog, $ionicModal) {
     var letterRegex = XRegExp('^\\p{Ll}+$');
     var lnRegex = XRegExp('^(\\p{Ll}|\\pN)+$');
     $scope.accountId = $stateParams.walletId
@@ -43,15 +43,17 @@ angular.module('canoeApp.controllers').controller('createAliasController',
         $log.debug('Answer from alias server creation: ' + JSON.stringify(ans));
         if (ans) {
           var meta = $scope.wallet.getMeta(account);
-          meta.alias = ans;
+          meta.alias = ans.alias;
           $scope.wallet.setMeta(account,meta);
-          profileService.setWallet($scope.wallet, function(err) {
-            if (err) $log.debug(err);
-            $log.info("Finished Creating and storing your alias");
-            $state.go('onboarding.backupRequest', {
-              walletId: $scope.accountId
+          nanoService.saveWallet($scope.wallet, function(err, wallet) {
+            profileService.setWallet($scope.wallet, function(err) {
+              if (err) $log.debug(err);
+              $log.info("Finished Creating and storing your alias");
+              $state.go('onboarding.backupRequest', {
+                walletId: $scope.accountId
+              })
             })
-          })
+          });
         }
         ongoingProcess.set('creatingAlias', false);
       });

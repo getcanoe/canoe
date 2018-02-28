@@ -11,7 +11,7 @@
 
       <div ng-include="'views/includes/accountItem.html'"></div>
 
-      <a class="item item-icon-right" ui-sref="tabs.preferences.preferencesName">
+      <a ng-if="!account.meta.alias" class="item item-icon-right" ui-sref="tabs.preferences.preferencesName">
         <span translate>Name</span>
         <span class="item-note ellipsis">
           {{account.name}}
@@ -20,8 +20,8 @@
       </a>
       <a class="item item-icon-right" ui-sref="tabs.preferences.preferencesAlias">
         <span translate>Alias</span>
-        <span class="item-note ellipsis">
-          {{account.meta.alias}}
+        <span ng-if="account.meta.alias" class="item-note">
+          @{{account.meta.alias.alias}}
         </span>
         <i class="icon bp-arrow-right"></i>
       </a>
