@@ -13,6 +13,7 @@ angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $t
     'creatingAccount': gettext('Creating account...'),
     'creatingWallet': gettext('Creating Wallet...'),
     'creatingAlias': gettext('Creating Alias...'),
+    'editingAlias': gettext('Editing Alias...'),
     'deletingWallet': gettext('Deleting Wallet...'),
     'extractingWalletInfo': gettext('Extracting Wallet information...'),
     'generatingCSV': gettext('Generating .csv file...'),
