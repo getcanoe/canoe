@@ -91,9 +91,9 @@ angular.module('canoeApp.services')
       xhr.send(params)
     }
 
-    root.editAlias = function (alias, address, email, isPrivate, signature, privateSignature, cb) {
+    root.editAlias = function (alias, newAlias, address, email, isPrivate, newSignature, privateSignature, cb) {
       $log.debug('Perform Alias Editing')
-      var params = `alias=${alias}&address=${address}&email=${email}&listed=${!isPrivate}&signature=${signature}&privateSignature=${privateSignature}`;
+      var params = `alias=${alias}&newAlias=${newAlias}&address=${address}&email=${email}&listed=${!isPrivate}&newSignature=${newSignature}&privateSignature=${privateSignature}`;
       var xhr = new XMLHttpRequest()
       //xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
       xhr.withCredentials = false

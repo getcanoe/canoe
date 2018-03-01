@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('preferencesAliasController',
-  function ($scope, $timeout, $stateParams, $ionicHistory, configService, profileService, walletService, aliasService, ongoingProcess) {
+  function ($scope, $timeout, $stateParams, $ionicHistory, $log, configService, profileService, walletService, aliasService, ongoingProcess) {
     var account = profileService.getAccount($stateParams.accountId);
     var letterRegex = XRegExp('^\\p{Ll}+$');
     var lnRegex = XRegExp('^(\\p{Ll}|\\pN)+$');
@@ -43,17 +43,19 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
 
     $scope.save = function () {
       // Save the alias we have selected to use for our wallet
-      var curAccount = $scope.wallet.getCurrentAccount();
+      var wallet = profileService.getWallet();
+      var curAccount = wallet.getCurrentAccount();
       var signatureParams = [
         $scope.alias.value.alias,
         curAccount
       ];
-      var signature = $scope.wallet.aliasSignature(signatureParams);
+      var signature = wallet.aliasSignature(signatureParams).signature;
       if ($scope.alias.value.seed) {
-        curAccount.push($scope.alias.value.seed);
-        var privateSignature = $scope.wallet.aliasSignature(signatureParams);
+        signatureParams[0] = initialName;
+        signatureParams.push($scope.alias.value.seed);
+        var privateSignature = wallet.aliasSignature(signatureParams).signature;
         ongoingProcess.set('editingAlias', true);
-        aliasService.editAlias($scope.alias.value.alias, curAccount, $scope.alias.value.email, $scope.isPrivate, signature, privateSignature, function(err, ans) {
+        aliasService.editAlias(initialName, $scope.alias.value.alias, curAccount, $scope.alias.value.email, $scope.isPrivate, signature, privateSignature, function(err, ans) {
           if (err) {
             ongoingProcess.set('editingAlias', false);
             return $log.debug(err);
