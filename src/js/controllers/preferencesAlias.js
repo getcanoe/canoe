@@ -6,7 +6,9 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
     var letterRegex = XRegExp('^\\p{Ll}+$');
     var lnRegex = XRegExp('^(\\p{Ll}|\\pN)+$');
     $scope.accountAlias = account.meta.alias || null;
-    var initialName = account.meta.alias.alias || null;
+    var initialName = null;
+    if ($scope.accountAlias !== null)
+      initialName = $scope.accountAlias.alias;
     $scope.emailValid = null;
     $scope.aliasValid = null;
     $scope.aliasRegistered = null;
@@ -37,7 +39,7 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
       value: $scope.accountAlias
     }
     $scope.isPrivate = false;
-    if ($scope.alias.value.listed === false) {
+    if ($scope.alias.value !== null && $scope.alias.value.listed === false) {
       $scope.isPrivate = true;
     }
 
