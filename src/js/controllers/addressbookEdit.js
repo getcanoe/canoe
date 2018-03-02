@@ -52,7 +52,7 @@ angular.module('canoeApp.controllers').controller('addressbookEditController', f
           $scope.aliasRegistered = true;
           $scope.addressbookEntry.address = alias.alias.address;
           if (!$scope.addressbookEntry.name || $scope.addressbookEntry.name.length === 0) {
-            $scope.addressbookEntry.name = alias.alias.alias;
+            $scope.addressbookEntry.name = "@"+alias.alias.alias;
           }
         } else {
           $scope.aliasRegistered = false;
