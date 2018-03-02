@@ -69,7 +69,7 @@
           <i class="fa fa-check-circle-o" aria-hidden="true"></i>
           <span translate>Alias Found!</span>
         </label>
-        <label class="item item-input item-stacked-label not-matching" ng-show="addressbookEntry.alias && (aliasValid === false || !aliasRegistered)">
+        <label class="item item-input item-stacked-label not-matching" ng-show="addressbookEntry.alias && (aliasValid === false || aliasRegistered === false)">
           <i class="fa fa-times-circle-o" aria-hidden="true"></i>
           <span translate>Invalid Alias!</span>
         </label>

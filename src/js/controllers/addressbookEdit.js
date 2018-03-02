@@ -39,7 +39,7 @@ angular.module('canoeApp.controllers').controller('addressbookEditController', f
   }
   var letterRegex = XRegExp('^\\p{Ll}+$');
   var lnRegex = XRegExp('^(\\p{Ll}|\\pN)+$');
-  $scope.aliasValid = false;
+  $scope.aliasValid = null;
   $scope.aliasRegistered = null;
   $scope.checkingAlias = false;
   $scope.validateAlias = function(alias) {
@@ -51,9 +51,7 @@ angular.module('canoeApp.controllers').controller('addressbookEditController', f
         if (err === null) {
           $scope.aliasRegistered = true;
           $scope.addressbookEntry.address = alias.alias.address;
-          if (!$scope.addressbookEntry.name || $scope.addressbookEntry.name.length === 0) {
-            $scope.addressbookEntry.name = "@"+alias.alias.alias;
-          }
+          $scope.addressbookEntry.name = "@"+alias.alias.alias;
         } else {
           $scope.aliasRegistered = false;
         }
@@ -72,8 +70,11 @@ angular.module('canoeApp.controllers').controller('addressbookEditController', f
           popupService.showAlert(gettextCatalog.getString('Error'), err)
           return
         }
-        if ($scope.fromSendTab) $scope.goHome()
-        else $ionicHistory.goBack()
+        if ($scope.fromSendTab) {
+          $scope.goHome();
+        } else {
+          $state.go('tabs.addressbook');
+        }
       })
     }, 100)
   }
