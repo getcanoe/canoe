@@ -275,6 +275,23 @@ angular.module('canoeApp.services')
       return root.getWallet().getAccount(addr)
     }
 
+    root.getTxHistory = function (addr) {
+      var acc = root.getAccount(addr)
+      var blocks = root.getWallet().getLastNBlocks(addr, 100000)
+      var txs = []
+      lodash.each(blocks, function (blk) {
+        var type = blk.getType()
+        var tx = {type: type}
+        tx.time = Date.now() / 1000 // Faking timestamps
+        tx.amount = blk.getAmount()
+        tx.amountStr = root.formatAmount(tx.amount, 2)
+        tx.destination = blk.getDestination()
+        txs.push(tx)
+      })
+      txs.reverse()
+      return txs
+    }
+
     root.send = function (tx, cb) {
       nanoService.send(root.getWallet(), tx.account, tx.address, tx.amount)
       cb()

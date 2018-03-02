@@ -48,6 +48,7 @@ angular.module('canoeApp.services').factory('addressbookService', function ($log
       if (err) return cb(err)
       if (ab) ab = JSON.parse(ab)
       if (ab && ab[addr]) return cb(null, ab[addr])
+      return cb(null, null)
     })
   }
 
