@@ -21,6 +21,7 @@
           <span class="input-label" translate>Name</span>
           <input type="text"
                  id="name"
+                 placeholder="{{'Joe Doe' | translate}}"
                  name="name"
                  ng-model="addressbookEntry.name"
                  required>
@@ -29,13 +30,13 @@
           <span class="input-label" translate>Email</span>
           <input type="text"
                  id="email"
-                 placeholder="{{'name@example.com' | translate}}"
+                 placeholder="{{'joe.doe@example.com' | translate}}"
                  name="email"
                  ng-model="addressbookEntry.email">
         </label>
         <div>
           <label class="item item-input item-stacked-label">
-            <span class="input-label" translate>Nano Account</span>
+            <span class="input-label" translate>Account</span>
             <div class="input-notification">
               <i ng-show="!addressbookForm.address.$invalid" class="icon ion-checkmark-circled valid"></i>
               <i ng-show="addressbookForm.address.$invalid && addressbookEntry.address" class="icon ion-close-circled invalid"></i>
@@ -44,19 +45,33 @@
                    id="address"
                    name="address"
                    ng-model="addressbookEntry.address"
+                   ng-disabled="addressbookEntry.alias"
                    valid-address required>
           </label>
           <div class="qr-scan-icon">
-            <qr-scanner on-scan="onQrCodeScannedAddressBook(data, addressbookForm)"></qr-scanner>
+            <qr-scanner ng-show="!addressbookEntry.alias" on-scan="onQrCodeScannedAddressBook(data, addressbookForm)"></qr-scanner>
           </div>
         </div>
         <label class="item item-input item-stacked-label">
           <span class="input-label" translate>Alias</span>
           <input type="text"
                  id="alias"
-                 placeholder="{{'@joedoe' | translate}}"
+                 placeholder="{{'joedoe' | translate}}"
                  name="alias"
+                 ng-change="validateAlias(addressbookEntry.alias)"
                  ng-model="addressbookEntry.alias">
+        </label>
+        <label class="item item-input item-stacked-label pending" ng-show="addressbookEntry.alias && aliasValid && checkingAlias">
+          <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+          <span translate>Looking up @{{addressbookEntry.alias}}</span>
+        </label>
+        <label class="item item-input item-stacked-label matching" ng-show="addressbookEntry.alias && aliasValid && aliasRegistered">
+          <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+          <span translate>Alias Found!</span>
+        </label>
+        <label class="item item-input item-stacked-label not-matching" ng-show="addressbookEntry.alias && (aliasValid === false || aliasRegistered === false)">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+          <span translate>Invalid Alias!</span>
         </label>
       </div>
 
@@ -64,7 +79,7 @@
         <button type="submit"
                 class="button button-standard button-primary"
                 ng-click="add(addressbookEntry)"
-                ng-disabled="!addressbookForm.$valid" translate>
+                ng-disabled="!addressbookForm.$valid || (addressbookEntry.alias && (!aliasValid || !aliasRegistered))" translate>
           Save
         </button>
       </div>

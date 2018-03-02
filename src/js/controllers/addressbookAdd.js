@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('addressbookAddController', function ($scope, $state, $stateParams, $timeout, $ionicHistory, gettextCatalog, addressbookService, nanoService, popupService) {
+angular.module('canoeApp.controllers').controller('addressbookAddController', function ($scope, $state, $stateParams, $timeout, $ionicHistory, gettextCatalog, aliasService, addressbookService, nanoService, popupService) {
   $scope.fromSendTab = $stateParams.fromSendTab
 
   $scope.addressbookEntry = {
@@ -35,6 +35,32 @@ angular.module('canoeApp.controllers').controller('addressbookAddController', fu
       }
       $scope.$digest()
     }, 100)
+  }
+
+  var letterRegex = XRegExp('^\\p{Ll}+$');
+  var lnRegex = XRegExp('^(\\p{Ll}|\\pN)+$');
+  $scope.aliasValid = null;
+  $scope.aliasRegistered = null;
+  $scope.checkingAlias = false;
+  $scope.validateAlias = function(alias) {
+    $scope.aliasRegistered = null;
+    $scope.aliasValid = alias.length >= 4 && letterRegex.test(alias.charAt(0)) && lnRegex.test(alias);
+    $scope.checkingAlias = true;
+    if ($scope.aliasValid === true) {
+      aliasService.lookupAlias(alias, function(err, alias) {
+        if (err === null) {
+          $scope.aliasRegistered = true;
+          $scope.addressbookEntry.address = alias.alias.address;
+          $scope.addressbookEntry.name = "@"+alias.alias.alias;
+        } else {
+          $scope.aliasRegistered = false;
+        }
+        $scope.checkingAlias = false;
+        $scope.$apply()
+      });
+    } else {
+      $scope.checkingAlias = false;
+    }
   }
 
   $scope.add = function (entry) {
