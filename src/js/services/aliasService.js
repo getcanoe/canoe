@@ -4,9 +4,9 @@ angular.module('canoeApp.services')
   .factory('aliasService', function ($log, $rootScope, configService, platformInfo, storageService, gettextCatalog, lodash) {
     var root = {}
 
-    // var host = 'https://alias.getcanoe.io/api'
+    var host = 'https://alias.getcanoe.io/api'
     // var host = 'https://alias.getcanoe.io/api-dev' // for dev
-    var host = 'http://localhost:3000' // for local dev
+    // var host = 'http://localhost:3000' // for local dev
 
     var timer = null
 /*
