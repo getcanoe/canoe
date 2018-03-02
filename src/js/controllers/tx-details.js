@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('canoeApp.controllers').controller('txDetailsController', function($rootScope, $log, $ionicHistory, $scope, $timeout, walletService, lodash, gettextCatalog, profileService, externalLinkService, popupService, ongoingProcess, txFormatService, txConfirmNotification, configService) {
+angular.module('canoeApp.controllers').controller('txDetailsController', function($rootScope, $log, $ionicHistory, $scope, $state, $timeout, $stateParams, walletService, lodash, gettextCatalog, profileService, externalLinkService, popupService, ongoingProcess, txFormatService, txConfirmNotification, configService, addressbookService) {
 
   var txId;
   var listeners = [];
@@ -9,26 +9,9 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
 
   $scope.$on("$ionicView.beforeEnter", function(event, data) {
     txId = data.stateParams.txid;
+    $scope.ntx = $stateParams.ntx
     $scope.title = gettextCatalog.getString('Transaction');
     $scope.account = profileService.getAccount(data.stateParams.walletId);
-    $scope.color = $scope.account.meta.color;
-    $scope.canoeerId = $scope.account.credentials.canoeerId;
-    $scope.isShared = $scope.account.credentials.n > 1;
-    $scope.txsUnsubscribedForNotifications = config.confirmedTxsNotifications ? !config.confirmedTxsNotifications.enabled : true;
-
-    if ($scope.account.coin == 'bch') {
-      blockexplorerUrl = 'bch-insight.bitpay.com';
-    } else {
-      blockexplorerUrl = 'insight.bitpay.com';
-    }
-
-    txConfirmNotification.checkIfEnabled(txId, function(res) {
-      $scope.txNotification = {
-        value: res
-      };
-    });
-
-    updateTx();
 
     listeners = [
       $rootScope.$on('bwsEvent', function(e, walletId, type, n) {
@@ -40,6 +23,29 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
       })
     ];
   });
+
+  addressbookService.list(function (err, ab) {
+    if (err) $log.error(err)
+    $scope.addressbook = ab || {}
+  })
+
+  $scope.refund = function () {
+    addressbookService.get($scope.ntx.origin, function (err, addr) {
+      // The 3 next lines are required to get the "Back" button of 'confirm.html' to work properly
+      $ionicHistory.clearHistory()
+      $state.go('tabs.home').then(function() {
+        $timeout(function() {
+          $state.transitionTo('tabs.send.confirm', {
+            recipientType: addr ? 'contact' : null,
+            toAmount: $scope.ntx.amount,
+            toName: addr ? addr.name : null,
+            toAddress: $scope.ntx.origin,
+            //description: ''
+          })
+        }, 50)
+      })
+    })
+  }
 
   $scope.$on("$ionicView.leave", function(event, data) {
     lodash.each(listeners, function(x) {

@@ -49,13 +49,13 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   }
 
   $scope.openTxModal = function (btx) {
-    $scope.btx = lodash.cloneDeep(btx)
+    //$scope.btx = lodash.cloneDeep(btx) // this messes up the amount field received in confirm.js, dunno why
     $scope.accountId = $scope.account.id
     $state.transitionTo('tabs.account.tx-details', {
-      txid: $scope.btx.txid,
-      walletId: $scope.accountId
+      ntx: btx,
+      accountId: $scope.accountId
     })
-  }
+  }  
 
   $scope.openBalanceModal = function () {
     $ionicModal.fromTemplateUrl('views/modals/wallet-balance.html', {

@@ -17,7 +17,8 @@
     <div class="wallet-details__tx-title">
       <div ng-show="btx.type == 'receive'" class="ellipsis">
         <div ng-if="btx.note" class="wallet-details__tx-message ellipsis">{{btx.note}}</div>
-        <div ng-if="!btx.note" class="wallet-details__tx-message ellipsis" translate>Received</div>
+        <div ng-if="!btx.note && addressbook[btx.origin]" class="wallet-details__tx-message ellipsis" translate>{{addressbook[btx.origin].name || addressbook[btx.origin]}}</div>
+        <div ng-if="!btx.note && !addressbook[btx.origin]" class="wallet-details__tx-message ellipsis" translate>Received</div>
         <div class="low-fees" ng-if="false">
           <i class="icon"><img src="img/icon-warning.png" width="20px"></i>
           <span class="comment" translate>Some warning</span>

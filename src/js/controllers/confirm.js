@@ -69,6 +69,9 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       // Make sure we have latest accounts and balances
       $scope.accounts = profileService.getAccounts()
 
+      // Needed to show back button when comming from tx-details (refund)
+      data.enableBack = true
+
       if (!$scope.accounts || !$scope.accounts.length) {
         setNoAccount(gettextCatalog.getString('No accounts available'), true)
         return cb()

@@ -65,6 +65,7 @@ module.exports = function()
 				data += MAGIC_NUMBER + VERSION_MAX + VERSION_USING + VERSION_MIN + uint8_hex(blockID[type]) + EXTENSIONS;
 				data += previous;
 				data += source;
+				data += origin;
 				
 				var context = blake2bInit(32, null);
 				blake2bUpdate(context, hex_uint8(previous));
@@ -78,6 +79,7 @@ module.exports = function()
 				data += source;
 				data += representative;
 				data += account;
+				data += origin;
 				
 				var context = blake2bInit(32, null);
 				blake2bUpdate(context, hex_uint8(source));
@@ -510,6 +512,7 @@ module.exports = function()
 				type = 'receive';
 				previous = obj.previous;
 				source = obj.source;
+				if (obj.origin) origin = keyFromAccount(obj.origin);
 				break;
 			
 			case 'open':
@@ -517,6 +520,7 @@ module.exports = function()
 				source = obj.source;
 				representative = keyFromAccount(obj.representative);
 				account = keyFromAccount(obj.account);
+				if (obj.origin) origin = keyFromAccount(obj.origin);
 				break;
 			
 			case 'change':

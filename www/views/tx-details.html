@@ -8,6 +8,13 @@
   </ion-nav-bar>
 
   <ion-content class="tx-details-content">
+    Amount : <span ng-if="ntx.type == 'send'">–</span>{{ntx.amountStr}} NANO<br/>
+    <span ng-if="ntx.type != 'send'">From : {{addressbook[ntx.origin].name || addressbook[ntx.origin]}}<br/></span>
+    <span ng-if="ntx.type == 'send' && addressbook[ntx.destination]">To : {{addressbook[ntx.destination].name || addressbook[ntx.destination]}}<br/></span>
+    <span ng-if="ntx.type == 'send' && !addressbook[ntx.destination]">To : ntx.destination<br/></span>
+    <button ng-if="ntx.origin && ntx.type != 'send'" class="button button-standard button-primary" ng-click="refund()" ng-show="!hasAccounts" translate>Refund</button>
+
+    <!-- the rest is from Copay, not used for the momment -->
     <div class="list" ng-if="btx">
       <div class="item head">
         <div class="sending-label" ng-if="btx.confirmations > 0">
