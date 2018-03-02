@@ -8,7 +8,18 @@ angular.module('canoeApp.services').factory('addressbookService', function ($log
   var DONATE_ENTRY = {
     name: 'Donate to Canoe',
     email: 'donate@getcanoe.io',
-    address: DONATE_ADDRESS
+    address: DONATE_ADDRESS,
+    alias: {
+      "id": 1,
+      "alias": "canoe",
+      "address": "xrb_1qckwc5o3obkrwbet4amnkya113xq77qpaknsmiq9hwq31tmd5bpyo7sepsw",
+      "listed": true,
+      "verified": false,
+      "signature": "3EEB693EC4F28655518FB7EC804B730203DC2D3C4CF316BE492242CCFFC0294B22DD020D0AA9F7640D90B0876B6F3A55B60F0DF7F3D32F448ABEBA3F23D86F01",
+      "createdAt": "2018-02-28T05:29:00.367Z",
+      "updatedAt": "2018-03-01T05:55:13.511Z",
+      "avatar": "iVBORw0KGgoAAAANSUhEUgAAAEYAAABGCAMAAABG8BK2AAAABGdBTUEAALGPC/xhBQAAABJ0RVh0U29mdHdhcmUASmRlbnRpY29um8oJfgAAAHtQTFRFAAAATExMTExMTExMnMxmnMxmnMxmTExMTExMTExMnMxmnMxmnMxmTExMTExMnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmnMxmb+LL+QAAACl0Uk5TACa/GSa/GeX/2OX/2MyyzLIsmRPrbAbSP6wf+H+MZlml8kzfcjMMklJnT9lcAAABrElEQVR4nO2X2VaEMAyGowIiVWcBGRxwFsft/Z9QKEtD2mR6Ub0iN0Pm//JT2qbnFGCJf4yb2zucRnEipARGwn36gKQoU48JmxJ4JqRIassUKiQpgYmLkXSZKSQpgS2XURrKxkKSEtjh0ktTWV9IUgI7XToJlXWFJCUwsnlKcTyvFI41SQkcfjSB5ibUSoXaN6F2caieCtXhFASI+3n1gydhPuw2NryNDRtBUWnL2bhgI1ApL9w2ThgJVHpx2jCwtd2nKHcOGw4G0nxIqWwbHiZHAS56tWx4mH8B7Ou5TRQLMPu5AA22yd/awQkwO/lQZub5UOip4mF+K8BxfKhW427kYX5jDpGchiFcgdk20Z/WnBWykWC2aQHeL2ZxrsGTgtaz4ow9DorRpPjgTLwOisFlm0su1w8K/RR/jpL9YX4HRfuTHY22E2GnoCVVN19IVAcJdgudtN7PylSRCzBShIOis1Hf4AULva9t6o0fLPS+nvHYExZ6X6//jycs9H73/6X0hPne1yWNJ8y3ibapEz+Yb9p+Hk5+8HL1WK4ew1GwXD2Wq4d09VjiT+IXBhpFh295OqwAAAAASUVORK5CYII="
+    }
   }
 
   root.getDonate = function (cb) {

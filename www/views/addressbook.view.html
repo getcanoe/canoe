@@ -26,9 +26,9 @@
         <span class="address-book-field-label" translate>Account</span>
         <span>{{addressbookEntry.address}}</span>
       </div>
-      <div class="item item-text-wrap" copy-to-clipboard"addressbookEmtry.alias" ng-show="addressbookEntry.alias">
+      <div class="item item-text-wrap" copy-to-clipboard"addressbookEntry.alias" ng-show="addressbookEntry.alias">
         <span class="address-book-field-label" translate>Alias</span>
-        <span>{{addressbookEntry.alias}}</span>
+        <span>@{{addressbookEntry.alias}}</span>
       </div>
       <div class="item item-divider"></div>
       <div class="item item-icon-right has-click" ng-click="sendTo()">
@@ -43,6 +43,6 @@
       <div class="item has-click" ng-click="remove(addressbookEntry.address)">
         <span class="assertive" translate>Remove</span>
       </div>
-    </div> 
+    </div>
   </ion-content>
 </ion-view>
