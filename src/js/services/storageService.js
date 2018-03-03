@@ -220,6 +220,14 @@ angular.module('canoeApp.services')
       storage.remove('addressbook', cb)
     }
 
+    root.setTransactionTimes = function (transactionTimes, cb) {
+      storage.set('transactionTimes', transactionTimes, cb)
+    }
+
+    root.getTransactionTimes = function (cb) {
+      storage.get('transactionTimes', cb)
+    }
+
     root.setLastCurrencyUsed = function (lastCurrencyUsed, cb) {
       storage.set('lastCurrencyUsed', lastCurrencyUsed, cb)
     }

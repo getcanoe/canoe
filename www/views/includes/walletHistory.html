@@ -42,10 +42,12 @@
         {{btx.amountStr}}
       </span>
       <div>
-        <time class="wallet-details__tx-time" ng-if="btx.time && createdWithinPastDay(btx.time * 1000)">{{btx.time * 1000 | amTimeAgo}}</time>
+        <time class="wallet-details__tx-time" ng-if="btx.time">{{btx.timeStr}}</time>
+
+        <!-- This works fine, but I dont't really like it. time class="wallet-details__tx-time" ng-if="btx.time && createdWithinPastDay(btx.time * 1000)">{{btx.time * 1000 | amTimeAgo}}</time>
         <time class="wallet-details__tx-time" ng-if="btx.time && !createdWithinPastDay(btx.time * 1000)">
           {{btx.time * 1000 | amDateFormat:'MMM D, YYYY'}}
-        </time>
+        </time-->
       </div>
     </span>
   </div>

@@ -48,6 +48,11 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     }
   }
 
+  $rootScope.$on('txnList.updated', function () {
+    // Update txn list
+    $scope.updateAll()
+  })
+
   $scope.openTxModal = function (btx) {
     //$scope.btx = lodash.cloneDeep(btx) // this messes up the amount field received in confirm.js, dunno why
     $scope.accountId = $scope.account.id

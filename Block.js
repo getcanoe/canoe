@@ -52,6 +52,7 @@ module.exports = function()
 				data += previous;
 				data += destination
 				data += balance;
+				data += hash
 				
 				var context = blake2bInit(32, null);
 				blake2bUpdate(context, hex_uint8(previous));

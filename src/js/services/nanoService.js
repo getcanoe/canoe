@@ -42,6 +42,21 @@ angular.module('canoeApp.services')
     // Possibility to quiet the logs
     var doLog = true;
 
+    var txnTimes = {}
+
+    root.getTxnTimes = function(){
+      return txnTimes
+    }
+
+    // Load tranction times from localStorage
+    storageService.getTransactionTimes(function (err, times) {
+      if (err) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to import transaction times'))
+        return
+      }
+      if (times) txnTimes = JSON.parse(times)
+    })
+
     // This function calls itself every sec and scans
     // for pending blocks or precalcs in need of work.
     function generatePoW () {
@@ -91,6 +106,20 @@ angular.module('canoeApp.services')
         }, function (work) {
           if (doLog) $log.info('Client side PoW found for ' + hash + ': ' + work)
           callback(work)
+        })
+      }
+
+      // send send
+      //$log.info('txnTime send')
+      if (!txnTimes[hash]) {
+        var now = Math.floor(Date.now() / 1000) // let's forget about ms so we save space on localStorage/file backup
+        txnTimes[hash] = now
+        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) { 
+          if (err) {
+            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to save transaction times'))
+            return
+          }
+          $rootScope.$broadcast('txnList.updated')
         })
       }
     }
@@ -591,6 +620,19 @@ angular.module('canoeApp.services')
           // addRecentRecToGui(txObj)
           root.saveWallet(root.wallet, function () {})
         }
+      }
+
+      // receive receive
+      //$log.info('txnTime receive')
+      if (!txnTimes[hash]) {
+        var now = Math.floor(Date.now() / 1000) // let's forget about ms so we save space on localStorage/file backup
+        txnTimes[hash] = now
+        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) { 
+          if (err) {
+            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to save transaction times'))
+            return
+          }
+        })
       }
     }
 

@@ -280,17 +280,28 @@ angular.module('canoeApp.services')
       var acc = root.getAccount(addr)
       var blocks = root.getWallet().getLastNBlocks(addr, 100000)
       var txs = []
-      lodash.each(blocks, function (blk) {
+        lodash.each(blocks, function (blk) {
         var type = blk.getType()
         var tx = {type: type}
-        tx.time = Date.now() / 1000 // Faking timestamps
+        tx.time = nanoService.getTxnTimes()[blk.getHash(true)] // retreive txn time from tranasctionTimes
+        if (tx.time) {
+          var isToday = new Date(tx.time * 1000).toDateString() === new Date().toDateString()
+          tx.timeStr = isToday ? new Date(tx.time * 1000).toLocaleTimeString() : new Date(tx.time * 1000).toLocaleString()
+        }
         tx.amount = blk.getAmount()
         tx.amountStr = root.formatAmount(tx.amount, 2)
         tx.destination = blk.getDestination()
         tx.origin = blk.getOrigin()
+        // tx.hash = blk.getHash(true) // uncomment to bring hash to views
         txs.push(tx)
       })
-      txs.reverse()
+      txs.sort(function(a,b) {
+        if (!a.time) return 1
+        if (!b.time) return -1
+        if (a.time < b.time) return 1
+        if (a.time > b.time) return -1
+        if (a.time === b.time) return 0
+      });
       return txs
     }
 
