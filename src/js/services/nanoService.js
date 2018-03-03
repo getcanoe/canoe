@@ -413,7 +413,8 @@ angular.module('canoeApp.services')
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
       wallet.createSeed(seed)
-      var accountName = gettextCatalog.getString('Default Account')
+      var accountName = 'Default Account' // until we get https://github.com/getcanoe/canoe/issues/130 fixed
+      gettextCatalog.getString('Default Account') // To make sure it still gets translated (sorry guys...)
       var account = wallet.createAccount({label: accountName})
       resetChain(wallet, account.id) // It may be an already existing account so we want existing blocks
       root.setWallet(wallet, cb)
