@@ -30,7 +30,10 @@
         <div ng-if="!btx.note && addressbook[btx.destination]" class="wallet-details__tx-message ellipsis">
           {{addressbook[btx.destination].name || addressbook[btx.destination]}}
         </div>
-        <div ng-if="!btx.note && !addressbook[btx.destination]" translate>Sent</div>
+        <div ng-if="!btx.note && addressbook[btx.origin]" class="wallet-details__tx-message ellipsis">
+          {{addressbook[btx.origin].name || addressbook[btx.origin]}
+        </div>
+        <div ng-if="!btx.note && !addressbook[btx.destination] && !addressbook[btx.origin]" translate>Sent</div>
       </div>
 
       <span class="label tu warning radius" ng-if="btx.type == 'invalid'" translate>Invalid</span>
