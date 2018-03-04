@@ -53,11 +53,10 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     $scope.updateAll()
   })
 
-  $scope.openTxModal = function (btx) {
-    //$scope.btx = lodash.cloneDeep(btx) // this messes up the amount field received in confirm.js, dunno why
+  $scope.openTxModal = function (ntx) {
     $scope.accountId = $scope.account.id
     $state.transitionTo('tabs.account.tx-details', {
-      ntx: btx,
+      ntx: ntx,
       accountId: $scope.accountId
     })
   }  
@@ -185,7 +184,7 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     }
     prevPos = pos
     refreshAmountSection(pos)
-  };
+  }
 
   function refreshAmountSection (scrollPos) {
     $scope.showBalanceButton = false

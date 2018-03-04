@@ -288,8 +288,10 @@ angular.module('canoeApp.services')
           var isToday = new Date(tx.time * 1000).toDateString() === new Date().toDateString()
           tx.timeStr = isToday ? new Date(tx.time * 1000).toLocaleTimeString() : new Date(tx.time * 1000).toLocaleString()
         }
+        tx.account = acc
         tx.amount = blk.getAmount()
         tx.amountStr = root.formatAmount(tx.amount, 2)
+        tx.unitStr = 'NANO' // TODO
         tx.destination = blk.getDestination()
         tx.origin = blk.getOrigin()
         tx.hash = blk.getHash(true)
