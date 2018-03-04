@@ -1,7 +1,7 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, $rootScope, configService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
+  .factory('nanoService', function ($log, $rootScope, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
@@ -40,11 +40,11 @@ angular.module('canoeApp.services')
     }
 
     // Possibility to quiet the logs
-    var doLog = true;
+    var doLog = true
 
     var txnTimes = {}
 
-    root.getTxnTimes = function(){
+    root.getTxnTimes = function () {
       return txnTimes
     }
 
@@ -609,28 +609,23 @@ angular.module('canoeApp.services')
     }
 
     root.handleIncomingSendBlock = function (hash, account, from, amount) {
-      // Create a receive (or open, if this is the first block in account) block to match
-      // this incoming send block
+      // Create a receive (or open, if this is the first block in account)
+      // block to match this incoming send block
       soundService.playBling()
       if (root.wallet) {
         if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
           if (doLog) $log.info('Added pending receive block')
-          // TODO Add something visual for the txn?
-          // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
-          // addRecentRecToGui(txObj)
           root.saveWallet(root.wallet, function () {})
         }
       }
 
-      // receive receive
-      //$log.info('txnTime receive')
+      // $log.info('txnTime receive')
       if (!txnTimes[hash]) {
         var now = Math.floor(Date.now() / 1000) // let's forget about ms so we save space on localStorage/file backup
         txnTimes[hash] = now
-        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) { 
+        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) {
           if (err) {
             popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to save transaction times'))
-            return
           }
         })
       }
