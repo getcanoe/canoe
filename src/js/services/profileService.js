@@ -294,15 +294,9 @@ angular.module('canoeApp.services')
         tx.unitStr = 'NANO' // TODO
         tx.destination = blk.getDestination()
         tx.origin = blk.getOrigin()
+        console.log('TYPE: ' + type + ' ORIGIN: ' + tx.origin)
         tx.hash = blk.getHash(true)
         txs.push(tx)
-      })
-      txs.sort(function (a, b) {
-        if (!a.time) return 1
-        if (!b.time) return -1
-        if (a.time < b.time) return 1
-        if (a.time > b.time) return -1
-        if (a.time === b.time) return 0
       })
       return txs
     }
