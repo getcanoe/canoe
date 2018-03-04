@@ -8,11 +8,6 @@
   </ion-nav-bar>
 
   <ion-content class="tx-details-content">
-    Amount : <span ng-if="ntx.type == 'send'">–</span>{{ntx.amountStr}} NANO<br/>
-    <span ng-if="ntx.type != 'send'">From : {{addressbook[ntx.origin].name || ntx.origin}}<br/></span>
-    <span ng-if="ntx.type == 'send' && (addressbook[ntx.destination] || ntx.destination)">To : {{addressbook[ntx.destination].name || ntx.destination}}<br/></span>
-    
-
     <div class="list" ng-if="ntx">
       <div class="item head">
         <div class="sending-label">
@@ -44,21 +39,29 @@
             </div>
           </span>
         </div>
+        <div class="item" ng-if="ntx.type !== 'send'">
+          <span class="label" translate>From</span>
+            <div copy-to-clipboard="ntx.origin" class="ellipsis">
+              <contact ng-if="!addressbook[ntx.origin]" address="{{ntx.origin}}" class="ellipsis" style="display: block;"></contact>
+              <span class="m15l size-14" ng-if="addressbook[ntx.origin]">{{addressbook[ntx.origin].name}}</span>
+            </div>
+          </span>
+        </div>
         <div class="item">
           <span class="label" ng-if="ntx.type === 'send'" translate>From</span>
           <span class="label" ng-if="ntx.type !== 'send'" translate>To</span>
           <div class="wallet">
             <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
-            <div>{{account.name}}</div>
+            <div>{{ntx.account.name}}</div>
           </div>
         </div>
 
-        <button ng-if="ntx.origin && ntx.type != 'send'" class="button button-standard button-primary" ng-click="refund()" ng-show="!hasAccounts" translate>Refund</button>
+        <button ng-if="ntx.origin && ntx.type !== 'send'" class="button button-standard button-primary" ng-click="refund()" ng-show="hasFunds" translate>Refund</button>
 
         <div class="item single-line" ng-if="ntx.time">
           <span class="label" translate>Date</span>
           <span class="item-note">
-            <time class="wallet-details__tx-time">{{btx.timeStr}}</time>
+            <time class="wallet-details__tx-time">{{ntx.timeStr}}</time>
           </span>
         </div>
 

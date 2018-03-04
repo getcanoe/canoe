@@ -15,25 +15,20 @@
   <div class="wallet-details__tx-content" ng-class="{'no-border': !isSearching ? isLastInGroup($index) : false}">
 
     <div class="wallet-details__tx-title">
-      <div ng-show="btx.type == 'receive'" class="ellipsis">
+      <div ng-show="btx.type == 'receive'">
         <div ng-if="btx.note" class="wallet-details__tx-message ellipsis">{{btx.note}}</div>
-        <div ng-if="!btx.note && addressbook[btx.origin]" class="wallet-details__tx-message ellipsis" translate>{{addressbook[btx.origin].name || addressbook[btx.origin]}}</div>
-        <div ng-if="!btx.note && !addressbook[btx.origin]" class="wallet-details__tx-message ellipsis" translate>Received</div>
-        <div class="low-fees" ng-if="false">
-          <i class="icon"><img src="img/icon-warning.png" width="20px"></i>
-          <span class="comment" translate>Some warning</span>
+        <div ng-if="addressbook[btx.origin]" class="wallet-details__tx-message ellipsis">
+          {{addressbook[btx.origin].name}}
         </div>
+        <div ng-if="!addressbook[btx.origin]" class="wallet-details__tx-message ellipsis" translate>Received</div>
       </div>
 
-      <div ng-show="btx.type == 'send'" class="ellipsis">
+      <div ng-show="btx.type == 'send'">
         <div ng-if="btx.note" class="wallet-details__tx-message ellipsis">{{btx.note}}</div>
-        <div ng-if="!btx.note && addressbook[btx.destination]" class="wallet-details__tx-message ellipsis">
-          {{addressbook[btx.destination].name || addressbook[btx.destination]}}
+        <div ng-if="addressbook[btx.destination]" class="wallet-details__tx-message ellipsis">
+          {{addressbook[btx.destination].name}}
         </div>
-        <div ng-if="!btx.note && addressbook[btx.origin]" class="wallet-details__tx-message ellipsis">
-          {{addressbook[btx.origin].name || addressbook[btx.origin]}
-        </div>
-        <div ng-if="!btx.note && !addressbook[btx.destination] && !addressbook[btx.origin]" translate>Sent</div>
+        <div ng-if="!addressbook[btx.destination]" class="wallet-details__tx-message ellipsis" translate>Sent</div>
       </div>
 
       <span class="label tu warning radius" ng-if="btx.type == 'invalid'" translate>Invalid</span>
