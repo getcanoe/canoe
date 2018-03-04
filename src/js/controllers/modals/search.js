@@ -22,13 +22,14 @@ angular.module('canoeApp.controllers').controller('searchController', function (
 
       function computeSearchableString (tx) {
         var addrbook = ''
-        if (tx.addressTo && $scope.addressbook && $scope.addressbook[tx.addressTo]) addrbook = $scope.addressbook[tx.addressTo].name || $scope.addressbook[tx.addressTo] || ''
+        if (tx.addressTo && $scope.addressbook && $scope.addressbook[tx.addressTo]) {
+          addrbook = $scope.addressbook[tx.addressTo].name || $scope.addressbook[tx.addressTo] || ''
+        }
         var searchableDate = computeSearchableDate(new Date(tx.time * 1000))
-        var message = tx.message ? tx.message : ''
-        var comment = tx.note ? tx.note.body : ''
-        var addressTo = tx.addressTo ? tx.addressTo : ''
-        var txid = tx.txid ? tx.txid : ''
-        return ((tx.amountStr + message + addressTo + addrbook + searchableDate + comment + txid).toString()).toLowerCase()
+        var note = tx.note || ''
+        var addressTo = tx.addressTo || ''
+        var txid = tx.txid || ''
+        return ((tx.amountStr + addressTo + addrbook + searchableDate + note + txid).toString()).toLowerCase()
       }
 
       function computeSearchableDate (date) {
