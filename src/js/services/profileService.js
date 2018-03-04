@@ -410,9 +410,7 @@ angular.module('canoeApp.services')
         // Don't show unless rate is loaded, ui update will be lanched by $broadcast('rates.loaded')
         acc.alternativeBalanceStr = 'hide'
         var altBalance = root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano', true)
-        if (altBalance !== 0) {
-          acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat(altBalance).toFixed(2)) + ' ' + config.alternativeIsoCode
-        }
+        acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat(altBalance).toFixed(2)) + ' ' + config.alternativeIsoCode
 
         acc.pendingBalanceStr = root.formatAmountWithUnit(parseInt(acc.pendingBalance))
       })
