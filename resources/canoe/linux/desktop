@@ -1,11 +1,10 @@
 [Desktop Entry]
 Type=Application
-Version=VERSION
 Name=Canoe
 Comment=Nano Wallet
 Exec=canoe
-Icon=icon-256.png
+Icon=canoe
 Terminal=false
-Categories=Finance
+Categories=Finance;Office;Network;
 X-Ubuntu-Touch=true
 X-Ubuntu-StageHint=SideStage
