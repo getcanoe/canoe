@@ -202,13 +202,14 @@ angular.module('canoeApp.services')
         var frontier = ledger[account].frontier
         var hashes = rai.chain(frontier, count)
         hashes.reverse()
-        var blocks = rai.blocks_info(hashes)
+        var blocks = rai.blocks_info(hashes, 'raw', false, true) // true == include source_account
         // Unfortunately blocks is an object so to get proper order we use hashes
         lodash.each(hashes, function (hash) {
           var block = blocks[hash]
           var blk = wallet.createBlockFromJSON(block.contents)
           blk.setAmount(block.amount)
           blk.setAccount(block.block_account)
+          blk.setOrigin(block.source_account)
           blk.setImmutable(true)
           try {
             // First we check if this is a fork and thus adop it if it is
