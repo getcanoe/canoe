@@ -386,6 +386,10 @@ angular.module('canoeApp.services')
       })
     }
 
+    root.getAccountWithId = function (id) {
+      return lodash.find(root.getAccounts(), function (a) { return a.id === id })
+    }
+
     root.getAccountWithName = function (name) {
       return lodash.find(root.getAccounts(), function (a) { return a.name === name })
     }
@@ -407,15 +411,10 @@ angular.module('canoeApp.services')
         acc.alternativeBalanceStr = 'hide'
         var altBalance = root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano', true)
         acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat(altBalance).toFixed(2)) + ' ' + config.alternativeIsoCode
-
         acc.pendingBalanceStr = root.formatAmountWithUnit(parseInt(acc.pendingBalance))
       })
 
       return accounts
-      // Sorted in creation timestamp
-      // return lodash.sortBy(accounts, [
-      //   'createdOn'
-      // ])
     }
 
     root.toggleHideBalanceFlag = function (accountId, cb) {

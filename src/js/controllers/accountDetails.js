@@ -258,7 +258,9 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     var clearCache = data.stateParams.clearCache
     $scope.accountId = data.stateParams.accountId
-    $scope.account = profileService.getAccount($scope.accountId)
+    var config = configService.getSync().wallet.settings
+    $scope.alternativeIsoCode = config.alternativeIsoCode
+    $scope.account = profileService.getAccountWithId($scope.accountId)
     if (!$scope.account) return
 
     // Getting info from cache

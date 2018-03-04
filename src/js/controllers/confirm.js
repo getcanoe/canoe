@@ -225,7 +225,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     setButtonText()
 
     // Send max fix
-    if (tx.sendMax){
+    if (tx.sendMax) {
       tx.toAmount = $scope.account.balance
     }
 
