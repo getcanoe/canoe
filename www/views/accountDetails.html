@@ -133,7 +133,7 @@
 
       <div class="wallet-details__list" ng-show="txHistory[0]">
         <div ng-repeat="btx in txHistory track by $index" ng-click="openTxModal(btx)">
-          <span ng-include="'views/includes/walletHistory.html'"></span>
+          <span ng-include="'views/includes/accountHistory.html'"></span>
         </div>
       </div>
       <ion-infinite-scroll

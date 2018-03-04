@@ -20,7 +20,7 @@
     <div class="list">
       <div class="wallet-details__list" ng-show="txHistory[0]">
         <div ng-repeat="btx in txHistorySearchResults track by $index" ng-click="openTx(btx)">
-          <span ng-include="'views/includes/walletHistory.html'"></span>
+          <span ng-include="'views/includes/accountHistory.html'"></span>
         </div>
       </div>
       <div class="text-gray text-center size-12 p10t" ng-if="txHistoryShowMore">

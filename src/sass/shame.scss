@@ -465,3 +465,12 @@ input[type=file] {
   white-space: initial;
 }
 
+
+.platform-android .toggle-small .handle, 
+.platform-android .toggle .handle::before {
+  top: 6px !important;
+}
+
+.big-icon-svg > .bg {
+  box-shadow: none !important;
+}

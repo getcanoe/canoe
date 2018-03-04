@@ -1,7 +1,7 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, $rootScope, configService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
+  .factory('nanoService', function ($log, $rootScope, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
 
     // This is where communication happens. This service is mostly called from profileService.
@@ -39,6 +39,24 @@ angular.module('canoeApp.services')
       return root.wallet
     }
 
+    // Possibility to quiet the logs
+    var doLog = true
+
+    var txnTimes = {}
+
+    root.getTxnTimes = function () {
+      return txnTimes
+    }
+
+    // Load tranction times from localStorage
+    storageService.getTransactionTimes(function (err, times) {
+      if (err) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to import transaction times'))
+        return
+      }
+      if (times) txnTimes = JSON.parse(times)
+    })
+
     // This function calls itself every sec and scans
     // for pending blocks or precalcs in need of work.
     function generatePoW () {
@@ -52,7 +70,7 @@ angular.module('canoeApp.services')
         // No hash to work on, do we have one to precalculate?
         var accAndHash = root.wallet.getNextPrecalcToWork()
         if (accAndHash) {
-          $log.info('Working on precalc for ' + accAndHash.account)
+          if (doLog) $log.info('Working on precalc for ' + accAndHash.account)
           doWork(accAndHash.hash, function (work) {
             root.wallet.addWorkToPrecalc(accAndHash.account, accAndHash.hash, work)
             root.saveWallet(root.wallet, function () {})
@@ -63,7 +81,7 @@ angular.module('canoeApp.services')
         }
       } else {
         doWork(hash, function (work) {
-          $log.info('Working on pending block ' + hash)
+          if (doLog) $log.info('Working on pending block ' + hash)
           root.wallet.addWorkToPendingBlock(hash, work)
           root.saveWallet(root.wallet, function () {})
           setTimeout(generatePoW, 1000)
@@ -75,19 +93,33 @@ angular.module('canoeApp.services')
       // Do work server or client side?
       if (configService.getSync().wallet.serverSidePoW) {
         // Server side
-        $log.info('Working on server for ' + hash)
+        if (doLog) $log.info('Working on server for ' + hash)
         rai.work_generate_async(hash, function (work) {
-          $log.info('Server side PoW found for ' + hash + ': ' + work)
+          if (doLog) $log.info('Server side PoW found for ' + hash + ': ' + work)
           callback(work)
         })
       } else {
         // Client side
         powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
         pow_callback(powWorkers, hash, function () {
-          $log.info('Working on client for ' + hash)
+          if (doLog) $log.info('Working on client for ' + hash)
         }, function (work) {
-          $log.info('Client side PoW found for ' + hash + ': ' + work)
+          if (doLog) $log.info('Client side PoW found for ' + hash + ': ' + work)
           callback(work)
+        })
+      }
+
+      // send send
+      //$log.info('txnTime send')
+      if (!txnTimes[hash]) {
+        var now = Math.floor(Date.now() / 1000) // let's forget about ms so we save space on localStorage/file backup
+        txnTimes[hash] = now
+        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) { 
+          if (err) {
+            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to save transaction times'))
+            return
+          }
+          $rootScope.$broadcast('txnList.updated')
         })
       }
     }
@@ -170,13 +202,14 @@ angular.module('canoeApp.services')
         var frontier = ledger[account].frontier
         var hashes = rai.chain(frontier, count)
         hashes.reverse()
-        var blocks = rai.blocks_info(hashes)
+        var blocks = rai.blocks_info(hashes, 'raw', false, true) // true == include source_account
         // Unfortunately blocks is an object so to get proper order we use hashes
         lodash.each(hashes, function (hash) {
           var block = blocks[hash]
           var blk = wallet.createBlockFromJSON(block.contents)
           blk.setAmount(block.amount)
           blk.setAccount(block.block_account)
+          blk.setOrigin(block.source_account)
           blk.setImmutable(true)
           try {
             // First we check if this is a fork and thus adop it if it is
@@ -413,7 +446,8 @@ angular.module('canoeApp.services')
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
       wallet.createSeed(seed)
-      var accountName = gettextCatalog.getString('Default Account')
+      var accountName = 'Default Account' // until we get https://github.com/getcanoe/canoe/issues/130 fixed
+      gettextCatalog.getString('Default Account') // To make sure it still gets translated (sorry guys...)
       var account = wallet.createAccount({label: accountName})
       resetChain(wallet, account.id) // It may be an already existing account so we want existing blocks
       root.setWallet(wallet, cb)
@@ -490,7 +524,7 @@ angular.module('canoeApp.services')
     root.saveWallet = function (wallet, cb) {
       $rootScope.$emit('blocks', null)
       storageService.storeWallet(wallet.pack(), function () {
-        $log.info('Wallet saved')
+        if (doLog) $log.info('Wallet saved')
         cb(null, wallet)
       })
     }
@@ -531,10 +565,10 @@ angular.module('canoeApp.services')
         clientId: mqttClientId
       }
       // Connect to MQTT
-      $log.info('Connecting to MQTT broker ...')
+      if (doLog) $log.info('Connecting to MQTT broker ...')
       // $log.debug('Options: ' + JSON.stringify(opts))
       root.connect(opts, function () {
-        $log.info('Connected to MQTT broker.')
+        if (doLog) $log.info('Connected to MQTT broker.')
         if (cb) {
           cb(true)
         }
@@ -562,7 +596,7 @@ angular.module('canoeApp.services')
 
     root.onConnectionLost = function (responseObject) {
       if (responseObject.errorCode !== 0) {
-        $log.info('MQTT connection lost: ' + responseObject.errorMessage)
+        if (doLog) $log.info('MQTT connection lost: ' + responseObject.errorMessage)
       }
       root.connected = false
     }
@@ -572,21 +606,29 @@ angular.module('canoeApp.services')
     }
 
     root.onFailure = function () {
-      $log.info('MQTT failure')
+      if (doLog) $log.info('MQTT failure')
     }
 
     root.handleIncomingSendBlock = function (hash, account, from, amount) {
-      // Create a receive (or open, if this is the first block in account) block to match
-      // this incoming send block
+      // Create a receive (or open, if this is the first block in account)
+      // block to match this incoming send block
       soundService.playBling()
       if (root.wallet) {
         if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
-          $log.info('Added pending receive block')
-          // TODO Add something visual for the txn?
-          // var txObj = {account: account, amount: bigInt(blk.amount), date: blk.from, hash: blk.hash}
-          // addRecentRecToGui(txObj)
+          if (doLog) $log.info('Added pending receive block')
           root.saveWallet(root.wallet, function () {})
         }
+      }
+
+      // $log.info('txnTime receive')
+      if (!txnTimes[hash]) {
+        var now = Math.floor(Date.now() / 1000) // let's forget about ms so we save space on localStorage/file backup
+        txnTimes[hash] = now
+        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) {
+          if (err) {
+            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to save transaction times'))
+          }
+        })
       }
     }
 

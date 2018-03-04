@@ -231,6 +231,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
             controller: 'txDetailsController',
             templateUrl: 'views/tx-details.html'
           }
+        },
+        params: {
+          ntx: null,
+          accountId: null
         }
       })
       .state('tabs.account.backupWarning', {

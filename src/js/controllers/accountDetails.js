@@ -48,14 +48,18 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     }
   }
 
-  $scope.openTxModal = function (btx) {
-    $scope.btx = lodash.cloneDeep(btx)
+  $rootScope.$on('txnList.updated', function () {
+    // Update txn list
+    $scope.updateAll()
+  })
+
+  $scope.openTxModal = function (ntx) {
     $scope.accountId = $scope.account.id
     $state.transitionTo('tabs.account.tx-details', {
-      txid: $scope.btx.txid,
-      walletId: $scope.accountId
+      ntx: ntx,
+      accountId: $scope.accountId
     })
-  }
+  }  
 
   $scope.openBalanceModal = function () {
     $ionicModal.fromTemplateUrl('views/modals/wallet-balance.html', {
@@ -180,7 +184,7 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     }
     prevPos = pos
     refreshAmountSection(pos)
-  };
+  }
 
   function refreshAmountSection (scrollPos) {
     $scope.showBalanceButton = false

@@ -238,7 +238,8 @@ angular.module('canoeApp.services')
 
     // Create account in wallet and save wallet
     root.createAccount = function (name, cb) {
-      var accountName = name || gettextCatalog.getString('Default Account')
+      var accountName = name || 'Default Account' // until we get https://github.com/getcanoe/canoe/issues/130 fixed
+      gettextCatalog.getString('Default Account') // To make sure it still gets translated (sorry guys...)
       nanoService.createAccount(root.getWallet(), accountName)
       nanoService.saveWallet(root.getWallet(), cb)
     }
@@ -281,14 +282,24 @@ angular.module('canoeApp.services')
       var txs = []
       lodash.each(blocks, function (blk) {
         var type = blk.getType()
-        var tx = {type: type}
-        tx.time = Date.now() / 1000 // Faking timestamps
-        tx.amount = blk.getAmount()
-        tx.amountStr = root.formatAmount(tx.amount, 2)
-        tx.destination = blk.getDestination()
-        txs.push(tx)
+        // We ignore change blocks for now here
+        if (type !== 'change') {
+          var tx = {type: type}
+          tx.time = nanoService.getTxnTimes()[blk.getHash(true)] // retreive txn time from transactionTimes
+          if (tx.time) {
+            var isToday = new Date(tx.time * 1000).toDateString() === new Date().toDateString()
+            tx.timeStr = isToday ? new Date(tx.time * 1000).toLocaleTimeString() : new Date(tx.time * 1000).toLocaleString()
+          }
+          tx.account = acc
+          tx.amount = blk.getAmount()
+          tx.amountStr = root.formatAmount(tx.amount, 2)
+          tx.unitStr = 'NANO' // TODO
+          tx.destination = blk.getDestination()
+          tx.origin = blk.getOrigin()
+          tx.hash = blk.getHash(true)
+          txs.push(tx)
+        }
       })
-      txs.reverse()
       return txs
     }
 
@@ -395,9 +406,7 @@ angular.module('canoeApp.services')
         // Don't show unless rate is loaded, ui update will be lanched by $broadcast('rates.loaded')
         acc.alternativeBalanceStr = 'hide'
         var altBalance = root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano', true)
-        if (altBalance !== 0) {
-          acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat(altBalance).toFixed(2)) + ' ' + config.alternativeIsoCode
-        }
+        acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat(altBalance).toFixed(2)) + ' ' + config.alternativeIsoCode
 
         acc.pendingBalanceStr = root.formatAmountWithUnit(parseInt(acc.pendingBalance))
       })
