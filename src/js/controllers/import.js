@@ -15,6 +15,7 @@ angular.module('canoeApp.controllers').controller('importController',
       if ($stateParams.code) { $scope.processQRSeed($stateParams.code) }
 
       $scope.seedOptions = []
+      $scope.fromOnboarding = $stateParams.fromOnboarding
 
       $timeout(function () {
         $scope.$apply()
@@ -46,9 +47,27 @@ angular.module('canoeApp.controllers').controller('importController',
 
     var _importBlob = function (data, opts) {
       var err
-      importWarning(function (res) {
-        if (!res) return
-        ongoingProcess.set('importingWallet', true)
+      if (!$stateParams.fromOnboarding) {
+        importWarning(function (res) {
+          if (!res) return
+          ongoingProcess.set('importingWallet', true)
+          $timeout(function () {
+            try {
+              profileService.importWallet(data, $scope.formData.password, function (err) {
+                ongoingProcess.set('importingWallet', false)
+                if (err) {
+                  popupService.showAlert(gettextCatalog.getString('Error'), err)
+                  return
+                }
+                finish()    
+              })
+            } catch (e) {
+              err = gettextCatalog.getString('Could not decrypt wallet, check your password')
+              $log.warn(e)
+            }
+          }, 100)
+        })
+      } else {
         $timeout(function () {
           try {
             profileService.importWallet(data, $scope.formData.password, function (err) {
@@ -64,7 +83,7 @@ angular.module('canoeApp.controllers').controller('importController',
             $log.warn(e)
           }
         }, 100)
-      })
+      }
     }
 
     $scope.getFile = function () {
@@ -116,18 +135,27 @@ angular.module('canoeApp.controllers').controller('importController',
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter a password to use for the wallet'))
         return
       }
-      importWarning(function (res) {
-        if (!res) return
-        ongoingProcess.set('importingWallet', true)
+      if (!$stateParams.fromOnboarding) {
+        importWarning(function (res) {
+          if (!res) return
+          ongoingProcess.set('importingWallet', true)
+          $timeout(function () {
+            profileService.importSeed(password, seed, function () {
+              ongoingProcess.set('importingWallet', false)
+              finish()
+            })
+          }, 100)
+        })
+      } else {
         $timeout(function () {
           profileService.importSeed(password, seed, function () {
             ongoingProcess.set('importingWallet', false)
             finish()
           })
         }, 100)
-      })
+      }
     }
-
+    
     var importWarning = function (cb) {
       var title = gettextCatalog.getString('Warning!')
       var message = gettextCatalog.getString('Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from.')
