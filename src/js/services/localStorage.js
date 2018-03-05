@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.services')
   .factory('localStorageService', function (platformInfo, $timeout, $log, lodash) {
     var isNW = platformInfo.isNW

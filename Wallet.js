@@ -1288,7 +1288,7 @@ module.exports = function(password)
 	 * 
 	 * @returns {string}
 	 */
-	api.pack = function()
+	api.pack = function(debug)
 	{
 		var pack = {};
 		var tempKeys = [];
@@ -1330,9 +1330,11 @@ module.exports = function(password)
 		pack.tokenPass = tokenPass;
 
 		pack = JSON.stringify(pack);
-		pack = stringToHex(pack);
-		pack = new Buffer(pack, 'hex');
-		
+		if (debug) {
+			console.log('Wallet: ' + pack)
+		}
+		pack = Buffer.from(stringToArr(pack))
+
 		var context = blake2bInit(32);
 		blake2bUpdate(context, pack);
 		checksum = blake2bFinal(context);
@@ -1349,6 +1351,25 @@ module.exports = function(password)
 		return payload.toString('hex');
 	}
 	
+	/**
+	 * Convert an Uint8Array into a string.
+	 *
+	 * @returns {String}
+	 */
+	function arrToString(uint8array){
+		return new TextDecoder("utf-8").decode(uint8array);
+	}
+
+	/**
+	* Convert a string into a Uint8Array.
+	*
+	* @returns {Uint8Array}
+	*/
+	function stringToArr(myString){
+		return new TextEncoder("utf-8").encode(myString);
+	}
+
+
 	/**
 	 * Constructs the wallet from an encrypted base64 encoded wallet
 	 */
@@ -1371,7 +1392,7 @@ module.exports = function(password)
 		if(hash != checksum.toString('hex').toUpperCase())
 			throw "Wallet is corrupted or has been tampered.";
 		
-		var walletData = JSON.parse(decryptedBytes.toString('utf8'));
+		var walletData = JSON.parse(arrToString(decryptedBytes));
 		seed = hex_uint8(walletData.seed);
 		lastKeyFromSeed = walletData.last;
 		recentTxs = walletData.recent;
