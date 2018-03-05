@@ -447,6 +447,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         url: '/howToBuyNanos',
         views: {
           'tab-settings@tabs': {
+            controller: 'howToBuyController',
             templateUrl: 'views/tab-howToBuyNanos.html'
           }
         }

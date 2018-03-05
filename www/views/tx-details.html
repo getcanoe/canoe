@@ -56,8 +56,6 @@
           </div>
         </div>
 
-        <button ng-if="ntx.origin && ntx.type !== 'send'" class="button button-standard button-primary" ng-click="refund()" ng-show="hasFunds" translate>Refund</button>
-
         <div class="item single-line" ng-if="ntx.time">
           <span class="label" translate>Date</span>
           <span class="item-note">
@@ -103,9 +101,11 @@
 
     </div>
 
-    <button ng-if="ntx" class="view-on-blockchain-btn button button-standard button-primary" ng-click="viewOnNanode()" translate>
+    <button ng-if="ntx" class="button button-standard button-primary" ng-click="viewOnNanode()" translate>
       View on Nanode
     </button>
+
+    <button ng-if="ntx.origin && ntx.type !== 'send'" class="button button-standard button-primary" ng-click="refund()" ng-show="hasFunds" translate>Refund</button>
 
   </ion-content>
 </ion-view>
