@@ -238,8 +238,7 @@ angular.module('canoeApp.services')
 
     // Create account in wallet and save wallet
     root.createAccount = function (name, cb) {
-      var accountName = name || 'Default Account' // until we get https://github.com/getcanoe/canoe/issues/130 fixed
-      gettextCatalog.getString('Default Account') // To make sure it still gets translated (sorry guys...)
+      var accountName = name || gettextCatalog.getString('Default Account')
       nanoService.createAccount(root.getWallet(), accountName)
       nanoService.saveWallet(root.getWallet(), cb)
     }
