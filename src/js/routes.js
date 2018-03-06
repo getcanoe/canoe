@@ -329,7 +329,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
        */
 
       .state('tabs.send.amount', {
-        url: '/amount/:recipientType/:toAddress/:toName/:toEmail/:toColor/:fixedUnit',
+        url: '/amount/:recipientType/:toAddress/:toName/:toEmail/:toColor/:fixedUnit/:toAlias',
         views: {
           'tab-send@tabs': {
             controller: 'amountController',
@@ -338,7 +338,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       })
       .state('tabs.send.confirm', {
-        url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toEmail/:toColor/:description/:coin/:useSendMax',
+        url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toEmail/:toColor/:description/:coin/:useSendMax/:toAlias',
         views: {
           'tab-send@tabs': {
             controller: 'confirmController',
@@ -350,7 +350,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       })
       .state('tabs.send.addressbook', {
-        url: '/addressbook/add/:fromSendTab/:addressbookEntry',
+        url: '/addressbook/add/:fromSendTab/:addressbookEntry/:toAlias/:toName',
         views: {
           'tab-send@tabs': {
             templateUrl: 'views/addressbook.add.html',
@@ -773,6 +773,15 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           'onboarding': {
             templateUrl: 'views/backup.html',
             controller: 'backupController'
+          }
+        }
+      })
+      .state('onboarding.aliasRequest', {
+        url: '/alias/:walletId/:backedUp',
+        views: {
+          'onboarding': {
+            templateUrl: 'views/onboarding/alias.html',
+            controller: 'createAliasController'
           }
         }
       })

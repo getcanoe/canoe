@@ -114,7 +114,7 @@ angular.module('canoeApp.services')
       if (!txnTimes[hash]) {
         var now = Math.floor(Date.now() / 1000) // let's forget about ms so we save space on localStorage/file backup
         txnTimes[hash] = now
-        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) { 
+        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) {
           if (err) {
             popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to save transaction times'))
             return
@@ -323,8 +323,8 @@ angular.module('canoeApp.services')
         if (code.account) {
           // If the account is an alias, we need to perform a lookup
           if (code.account.startsWith('@')) {
-            code.alias = code.account
-            aliasService.lookupAlias(code.alias.substr(1), function (err, ans) {
+            code.alias = code.account.substr(1)
+            aliasService.lookupAlias(code.alias, function (err, ans) {
               if (err) return $log.debug(err)
               $log.debug('Answer from alias server looking up ' + code.alias + ': ' + JSON.stringify(ans))
               if (ans) {

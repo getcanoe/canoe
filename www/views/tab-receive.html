@@ -30,7 +30,10 @@
     <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0] && !singleAccount">
       <a ng-if="account" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
         <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
-        <span>
+        <span ng-if="account.meta && account.meta.alias && account.meta.alias.alias">
+          @{{account.meta.alias.alias}}
+        </span>
+        <span ng-if="!account.meta || !account.meta.alias || !account.meta.alias.alias">
           {{account.name || account.id}}
         </span>
         <p>

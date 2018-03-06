@@ -34,18 +34,24 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       return decodeURIComponent(results[2].replace(/\+/g, ' '))
     }
 
-    function goSend (addr, amount, message) {
+    function goSend (addr, amount, message, alias) {
       $state.go('tabs.send', {}, {
         'reload': true,
         'notify': $state.current.name !== 'tabs.send'
       })
+      var toName = null;
+      if (alias !== null) {
+        toName = "@"+alias;
+      }
       // Timeout is required to enable the "Back" button
       $timeout(function () {
         if (amount) {
           $state.transitionTo('tabs.send.confirm', {
             toAmount: amount,
             toAddress: addr,
-            description: message
+            toName: toName,
+            description: message,
+            toAlias: alias
           })
         } else {
           $state.transitionTo('tabs.send.amount', {
@@ -63,11 +69,20 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       }
       var protocol = code.protocol
       if (protocol === 'xrb' || protocol === 'raiblocks' || protocol === 'nano') {
-        if (code.params.amount) {
-          $log.debug('Go send ' + JSON.stringify(code))
-          goSend(code.account, code.params.amount, code.params.message)
+        if (code.alias !== null) {
+          if (code.params.amount) {
+            $log.debug('Go send ' + JSON.stringify(code))
+            goSend(code.account, code.params.amount, code.params.message, code.alias)
+          } else {
+            goToAmountPage(code.account, code.alias)
+          }
         } else {
-          goToAmountPage(code.account)
+          if (code.params.amount) {
+            $log.debug('Go send ' + JSON.stringify(code))
+            goSend(code.account, code.params.amount, code.params.message)
+          } else {
+            goToAmountPage(code.account)
+          }
         }
         return true
       } else if (protocol === 'xrbkey' || protocol === 'nanokey') {
@@ -86,7 +101,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         // We could add:
         // Contact?
         // Payment with confirmation
-  
+
       } else {
         // Offer clipboard
         if ($state.includes('tabs.scan')) {
@@ -100,14 +115,20 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     })
   }
 
-  function goToAmountPage (toAddress) {
+  function goToAmountPage (toAddress, toAlias) {
     $state.go('tabs.send', {}, {
       'reload': true,
       'notify': $state.current.name !== 'tabs.send'
     })
+    var toName = null;
+    if (toAlias !== null) {
+      toName = "@"+toAlias;
+    }
     $timeout(function () {
       $state.transitionTo('tabs.send.amount', {
-        toAddress: toAddress
+        toAddress: toAddress,
+        toName: toName,
+        toAlias: toAlias
       })
     }, 100)
   }

@@ -1,1 +1,2 @@
-  <img src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !account.meta.color}" ng-style="{'background-color': account.meta.color}" class="bg"/>
+  <img ng-cloak ng-if="account.meta.alias && account.meta.alias.avatar" ng-src="data:image/png;base64, {{account.meta.alias.avatar}}" class="bg" alt="{{account.meta.alias.alias}} avatar"/>
+  <img ng-if="!account.meta.alias"src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !account.meta.color}" ng-style="{'background-color': account.meta.color}" class="bg"/>

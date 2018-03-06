@@ -48,6 +48,18 @@
         font-size: .9rem;
       }
     }
+    .matching, .not-matching, .pending {
+      text-align: right;
+    }
+    .matching {
+      color: $v-success-color;
+    }
+    .not-matching, .too-short {
+      color: $v-error-color;
+    }
+    .pending {
+      color: $v-accent-color;
+    }
     .item-note {
       color: $v-light-gray;
     }

@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('amountController', function ($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, profileService, nodeWebkitService, storageService) {
+angular.module('canoeApp.controllers').controller('amountController', function ($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, aliasService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, profileService, nodeWebkitService, storageService) {
   var _id
   var unitToRaw
   var rawToUnit
@@ -105,6 +105,11 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     $scope.toName = data.stateParams.toName
     $scope.toEmail = data.stateParams.toEmail
     $scope.toColor = data.stateParams.toColor
+    $scope.toAlias = data.stateParams.toAlias
+    aliasService.getAvatar(data.stateParams.toAlias, function(err, avatar) {
+      $scope.toAvatar = avatar;
+      $scope.$apply();
+    });
     $scope.showSendMax = false
 
     if (!$scope.nextStep && !data.stateParams.toAddress) {
@@ -198,7 +203,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     var config = configService.getSync().wallet.settings
     unitIndex++
     if (unitIndex >= availableUnits.length) unitIndex = 0
-    
+
     if (availableUnits[unitIndex].isFiat) {
       config.amountInputDefaultCurrency = availableUnits[1].shortName
       altUnitIndex = 0
@@ -362,7 +367,6 @@ angular.module('canoeApp.controllers').controller('amountController', function (
         big = new BigNumber(amount)
         amount = (big.times(unitToRaw)).toFixed(0)
       }
-
       $state.transitionTo('tabs.send.confirm', {
         recipientType: $scope.recipientType,
         toAmount: amount,
@@ -370,6 +374,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
         toName: $scope.toName,
         toEmail: $scope.toEmail,
         toColor: $scope.toColor,
+        toAlias: $scope.toAlias,
         useSendMax: $scope.useSendMax
       })
     }

@@ -1,5 +1,8 @@
 <i class="icon big-icon-svg circle" ng-include="'views/includes/walletIcon.html'"></i>
-<span>
+<span ng-if="account.meta && account.meta.alias && account.meta.alias.alias">
+  @{{account.meta.alias.alias}}
+</span>
+<span ng-if="!account.meta || !account.meta.alias || !account.meta.alias.alias">
   {{account.name || account.id}}
 </span>
 <i class="icon bp-arrow-right"></i>

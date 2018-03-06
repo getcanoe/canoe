@@ -82,6 +82,18 @@
     .item-stacked-label {
       padding: 1rem;
     }
+    .matching, .not-matching, .pending {
+      text-align: right;
+    }
+    .matching {
+      color: $v-success-color;
+    }
+    .not-matching, .too-short {
+      color: $v-error-color;
+    }
+    .pending {
+      color: $v-accent-color;
+    }
     .input-label {
       text-transform: uppercase;
       font-size: 12px;

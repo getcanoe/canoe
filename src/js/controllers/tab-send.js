@@ -17,6 +17,8 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
           meta: acc.meta,
           color: acc.meta.color,
           name: acc.name,
+          alias: lodash.isObject(v) ? v.alias : null,
+          avatar: lodash.isObject(v) ? v.avatar : null,
           recipientType: 'account',
           address: acc.id
         })
@@ -38,6 +40,8 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
           name: lodash.isObject(v) ? v.name : v,
           address: k,
           email: lodash.isObject(v) ? v.email : null,
+          alias: lodash.isObject(v) ? v.alias : null,
+          avatar: lodash.isObject(v) ? v.avatar : null,
           recipientType: 'contact',
           getAddress: function (cb) {
             return cb(null, k)
@@ -128,7 +132,8 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
         toAddress: item.address,
         toName: item.name,
         toEmail: item.email,
-        toColor: item.color
+        toColor: item.color,
+        toAlias: item.alias
       })
     })
   }

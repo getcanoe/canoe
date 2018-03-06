@@ -1,0 +1,74 @@
+<ion-slides class="slides"  slider="data.slider" options="{pagination: false}">
+    <ion-slide-page>
+      <ion-view id="onboarding-create-alias" class="onboarding">
+        <ion-content scroll="false">
+          <div class="onboarding-topic" translate>Let People Easily Find you With Aliases</div>
+          <img src='img/onboarding/onboarding-password.svg' id="alias" />
+          <form name='createAlias' novalidate>
+            <div class="list settings-list settings-input-group">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label" translate>Alias</span>
+                <input type="text"
+                  placeholder="{{'At least 3 Characters.'|translate}}"
+                  ng-model="alias"
+                  ng-change="validateAlias(alias)"
+                  name="alias"
+                  required
+                >
+                <div class="pending" ng-show="alias && aliasValid && checkingAlias">
+                  <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+                  <span translate>Checking availablity</span>
+                </div>
+                <div class="not-matching" ng-show="alias && aliasValid && aliasRegistered">
+                  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                  <span translate>That alias is taken!</span>
+                </div>
+                <div class="not-matching" ng-show="alias && !aliasValid">
+                  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                  <span translate>Invalid Alias!</span>
+                </div>
+              </label>
+
+              <label class="item item-input item-stacked-label">
+                <span class="input-label" translate>Email</span>
+                <input type="text"
+                  placeholder="{{'Email for recovering your alias'|translate}}"
+                  ng-model="email"
+                  ng-change="validateEmail(email)"
+                  name="email"
+                  required
+                >
+                <div class="not-matching" ng-show="email && !emailValid">
+                  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                  <span translate>Invalid Email!</span>
+                </div>
+                <div class="matching" ng-show="alias && aliasValid && !aliasRegistered && email && emailValid">
+                  <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                  <span translate>Valid Alias & Email</span>
+                </div>
+              </label>
+              <ion-list>
+                <ion-checkbox ng-model="isPrivate">
+                  <span translate>Make my alias private.</span>
+                </ion-checkbox>
+                <ion-checkbox ng-model="createPhoneAlias">
+                  <span translate>Link my wallet to my phone number.</span>
+                </ion-checkbox>
+              </ion-list>
+            </div>
+            <div class="cta-buttons">
+              <button
+                class="button button-standard button-primary"
+                ng-disabled="!alias || !aliasValid || aliasRegistered === null || aliasRegistered === true || !email || !emailValid"
+                type="submit"
+                ng-click="create(alias,email,isPrivate,createPhoneAlias)"
+                translate>
+                Create Alias
+              </button>
+              <button class="button button-standard button-secondary" ng-click="skipAlias()" translate>Do it later</button>
+            </div>
+          </form>
+        </ion-content>
+      </ion-view>
+  </ion-slides>
+</ion-slide-page>

@@ -8,19 +8,49 @@
   </ion-nav-bar>
   <ion-content>
     <div class="settings-explanation">
-      <div class="settings-heading" translate>What public alias would you like to reserve?</div>
-      <div class="settings-description" translate>Type below to see if an alias is free to use.</div>
+      <div ng-if="!accountAlias" class="settings-heading" translate>What alias would you like to reserve?</div>
+      <div ng-if="!accountAlias" class="settings-description" translate>Type below to see if an alias is free to use.</div>
+      <div ng-if="accountAlias" class="settings-heading" translate>Edit your alias.</div>
+      <div ng-if="accountAlias" class="settings-description" translate>You can change your alias, email, or privacy settings.</div>
     </div>
     <form name="aliasForm" ng-submit="save(aliasForm)" novalidate>
       <div class="list settings-input-group">
         <label class="item item-input item-stacked-label">
           <span class="input-label" translate>Alias</span>
-          <input type="text" id="alias" name="alias" ng-model="alias.value" placeholder="@joedoe" required>
+          <input type="text" id="alias" ng-change="validateAlias(alias.value.alias)" name="alias" ng-model="alias.value.alias" placeholder="johnsmith" required>
         </label>
+        <label class="item item-input item-stacked-label pending" ng-show="alias.value.alias && aliasValid && checkingAlias">
+          <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+          <span translate>Checking availablity</span>
+        </label>
+        <label class="item item-input item-stacked-label not-matching" ng-show="alias.value.alias && aliasValid && aliasRegistered">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+          <span translate>That alias is taken!</span>
+        </label>
+        <label class="item item-input item-stacked-label not-matching" ng-show="alias.value.alias && aliasValid === false">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+          <span translate>Invalid Alias!</span>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label" translate>Email</span>
+          <input type="text" id="email" ng-change="validateEmail(alias.value.email)" name="email" ng-model="alias.value.email" placeholder="email@email.com" required>
+        </label>
+        <label class="item item-input item-stacked-label not-matching" ng-show="alias.value.email && emailValid === false">
+          <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+          <span translate>Invalid Email!</span>
+        </label>
+        <label class="item item-input item-stacked-label matching" ng-show="alias.value.alias && aliasValid && !aliasRegistered && alias.value.email && emailValid">
+          <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+          <span translate>Valid Alias & Email</span>
+        </label>
+        <ion-checkbox ng-model="isPrivate">
+          <span translate>Make my alias private.</span>
+        </ion-checkbox>
       </div>
       <button type="submit"
               class="button button-standard button-primary"
-              ng-disabled="aliasForm.$invalid" translate>
+              ng-disabled="aliasForm.$invalid || aliasValid === false || aliasRegistered === null || aliasRegistered === true || emailValid === false"
+              translate>
         Save
       </button>
     </form>

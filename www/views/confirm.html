@@ -26,16 +26,23 @@
         <span class="label" translate>To</span>
 
         <div class="wallet" ng-if="!recipientType">
-          <i class="icon big-icon-svg">
+          <i class="icon big-icon-svg" ng-if="toAvatar">
+            <img ng-cloak ng-if="toAlias && toAvatar" ng-src="data:image/png;base64, {{toAvatar}}" class="bg" alt="{{toAlias}} avatar"/>
+          </i>
+          <i class="icon big-icon-svg" ng-if="!toAvatar">
             <img src="img/nano-logo-no-text.svg" class="bg"/>
           </i>
           <div copy-to-clipboard="tx.toAddress">
-            <span ng-if="tx.toAddress" class="wallet-name">{{tx.toAddress}}</span>
+            <contact ng-if="tx.toAddress && !tx.toName" address="{{tx.toAddress}}"></contact>
+            <span ng-if="tx.toName" class="wallet-name">{{tx.toName}}</span>
           </div>
         </div>
 
         <div class="wallet" ng-if="recipientType == 'account'">
-          <i class="icon big-icon-svg">
+          <i class="icon big-icon-svg" ng-if="toAvatar">
+            <img ng-cloak ng-if="toAlias && toAvatar" ng-src="data:image/png;base64, {{toAvatar}}" class="bg" alt="{{toAlias}} avatar"/>
+          </i>
+          <i class="icon big-icon-svg" ng-if="!toAvatar">
             <img src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !toColor}" ng-style="{'background-color': toColor}" class="bg"/>
           </i>
           <div copy-to-clipboard="tx.toAddress">
@@ -45,7 +52,10 @@
         </div>
 
         <div ng-if="recipientType == 'contact' && !isChromeApp" class="gravatar-contact toggle" ng-click="toggleAddress()">
-          <gravatar class="send-gravatar" name="{{tx.toName}}" height="30" width="30" email="{{toEmail}}"></gravatar>
+          <i class="icon big-icon-svg" ng-if="toAvatar">
+            <img ng-cloak ng-if="toAlias && toAvatar" ng-src="data:image/png;base64, {{toAvatar}}" class="bg" alt="{{toAlias}} avatar"/>
+          </i>
+          <gravatar ng-if="!toAvatar" class="send-gravatar" name="{{tx.toName}}" height="30" width="30" email="{{toEmail}}"></gravatar>
           <span ng-if="tx.toName && !showAddress">{{tx.toName}}</span>
           <span ng-if="tx.toName && showAddress">{{tx.toAddress}}</span>
         </div>

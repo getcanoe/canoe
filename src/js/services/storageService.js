@@ -241,7 +241,7 @@ angular.module('canoeApp.services')
     }
 
     root.getAmountInputDefaultCurrency = function (cb) {
-      storage.get('amountInputDefaultCurrency', cb) 
+      storage.get('amountInputDefaultCurrency', cb)
     }
 
     root.checkQuota = function () {
