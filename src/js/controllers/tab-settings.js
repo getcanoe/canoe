@@ -40,11 +40,23 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
     applicationService.appLockModal('check')
   }
 
-  $scope.openExternalLink = function () {
-    var url = 'https://github.com/gokr/canoe/issues'
+  $scope.openExternalLinkHelp = function () {
+    // TODO var url = 'https://getcanoe.io/' + uxLanguage.getCurrentLanguage() + '/help'
+    var url = 'https://getcanoe.io/help.html'
     var optIn = true
     var title = null
     var message = gettextCatalog.getString('Help and support information is available at the website.')
+    var okText = gettextCatalog.getString('Open')
+    var cancelText = gettextCatalog.getString('Go Back')
+    externalLinkService.open(url, optIn, title, message, okText, cancelText)
+  }
+
+  $scope.openExternalLinkHowToBuy = function () {
+    // TODO var url = 'https://getcanoe.io/' + uxLanguage.getCurrentLanguage() + '/howtobuy'
+    var url = 'https://getcanoe.io/howtobuy.html'
+    var optIn = true
+    var title = null
+    var message = gettextCatalog.getString('How to buy and sell Nano is described at the website.')
     var okText = gettextCatalog.getString('Open')
     var cancelText = gettextCatalog.getString('Go Back')
     externalLinkService.open(url, optIn, title, message, okText, cancelText)

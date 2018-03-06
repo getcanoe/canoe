@@ -443,15 +443,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('tabs.howToBuyNanos', {
-        url: '/howToBuyNanos',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'howToBuyController',
-            templateUrl: 'views/tab-howToBuyNanos.html'
-          }
-        }
-      })
       .state('tabs.advanced', {
         url: '/advanced',
         views: {
