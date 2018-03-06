@@ -74,18 +74,6 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     }
   }
 
-  $scope.recreate = function () {
-    walletService.recreate($scope.account, function (err) {
-      if (err) return
-      $timeout(function () {
-        walletService.startScan($scope.account, function () {
-          $scope.updateAll()
-          $scope.$apply()
-        })
-      })
-    })
-  }
-
   var updateTxHistory = function () {
     $scope.completeTxHistory = profileService.getTxHistory($scope.account.id)
     if ($scope.completeTxHistory[0]) {
@@ -160,8 +148,9 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   }
 
   $scope.hideToggle = function () {
-    profileService.toggleHideBalanceFlag($scope.account.id, function (err) {
-      if (err) $log.error(err)
+    $scope.balanceHidden = !$scope.balanceHidden
+    $timeout(function () {
+      $scope.$apply()
     })
   }
 
@@ -189,7 +178,7 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   function refreshAmountSection (scrollPos) {
     $scope.showBalanceButton = false
     if ($scope.status) {
-      $scope.showBalanceButton = ($scope.status.totalBalanceSat != $scope.status.spendableAmount)
+      $scope.showBalanceButton = ($scope.status.totalBalanceSat !== $scope.status.spendableAmount)
     }
     if (!$scope.amountIsCollapsible) {
       var t = ($scope.showBalanceButton ? 15 : 45)
@@ -262,6 +251,8 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     $scope.alternativeIsoCode = config.alternativeIsoCode
     $scope.account = profileService.getAccountWithId($scope.accountId)
     if (!$scope.account) return
+
+    $scope.balanceHidden = $scope.account.meta.balanceHidden
 
     // Getting info from cache
     if (clearCache) {
