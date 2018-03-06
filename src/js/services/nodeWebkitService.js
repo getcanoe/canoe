@@ -1,22 +1,20 @@
-'use strict';
+'use strict'
+/* global angular */
+angular.module('canoeApp.services').service('nodeWebkitService', function () {
+  this.readFromClipboard = function () {
+    var gui = require('nw.gui')
+    var clipboard = gui.Clipboard.get()
+    return clipboard.get()
+  }
 
-angular.module('canoeApp.services').service('nodeWebkitService', function() {
+  this.writeToClipboard = function (text) {
+    var gui = require('nw.gui')
+    var clipboard = gui.Clipboard.get()
+    return clipboard.set(text)
+  }
 
-  this.readFromClipboard = function() {
-    var gui = require('nw.gui');
-    var clipboard = gui.Clipboard.get();
-    return clipboard.get();
-  };
-
-  this.writeToClipboard = function(text) {
-    var gui = require('nw.gui');
-    var clipboard = gui.Clipboard.get();
-    return clipboard.set(text);
-  };
-
-  this.openExternalLink = function(url) {
-    var gui = require('nw.gui');
-    return gui.Shell.openExternal(url);
-  };
-
-});
+  this.openExternalLink = function (url) {
+    var gui = require('nw.gui')
+    return gui.Shell.openExternal(url)
+  }
+})
