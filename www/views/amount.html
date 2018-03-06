@@ -22,13 +22,19 @@
           <img src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !toColor}" ng-style="{'background-color': toColor}" class="bg"/>
         </i>
         <span ng-if="recipientType == 'contact'">
-          <i class="icon big-icon-svg" ng-if="isChromeApp">
-            <img src="img/contact-placeholder.svg" class="bg"/>
+          <i class="icon big-icon-svg" ng-if="toAvatar">
+            <img ng-cloak ng-if="toAlias && toAvatar" ng-src="data:image/png;base64, {{toAvatar}}" class="bg" alt="{{toAlias}} avatar"/>
           </i>
-          <gravatar ng-if="!isChromeApp" class="send-gravatar" name="{{toName}}" height="30" width="30" email="{{toEmail}}"></gravatar>
+          <i class="icon big-icon-svg" ng-if="isChromeApp && !toAvatar">
+            <img src="img/contact-placeholder.svg" class="bg">
+          </i>
+          <gravatar ng-if="!isChromeApp && !toAvatar" class="send-gravatar" name="{{toName}}" height="30" width="30" email="{{toEmail}}"></gravatar>
         </span>
         <span ng-if="!recipientType">
-          <i class="icon big-icon-svg">
+          <i class="icon big-icon-svg" ng-if="toAvatar">
+            <img ng-cloak ng-if="toAlias && toAvatar" ng-src="data:image/png;base64, {{toAvatar}}" class="bg" alt="{{toAlias}} avatar"/>
+          </i>
+          <i ng-if="!toAvatar" class="icon big-icon-svg">
             <img src="img/contact-placeholder.svg" class="bg"/>
           </i>
         </span>

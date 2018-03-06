@@ -61,6 +61,35 @@ angular.module('canoeApp.services')
       xhr.send(null)
     }
 
+    root.getAvatar = function (alias, cb) {
+      $log.debug('Perform avatar lookup')
+      var params = `alias=${alias}&type=png&size=70`;
+      var xhr = new XMLHttpRequest()
+      //xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+      xhr.withCredentials = false
+      xhr.open('POST', host + '/alias/avatar', true)
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+      xhr.onerror = xhr.onabort = xhr.ontimeout = function () { cb('Lookup failed') }
+      xhr.onload = function () {
+        if (xhr.status === 422) {
+          $log.debug('No such alias')
+          cb('No such alias')
+        } else if (xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText)
+          if (response.status === 'SUCCESS') {
+            $log.debug('Success: ' + JSON.stringify(response.data.avatar))
+            cb(null, response.data.avatar)
+          } else if (response.status === 'ERROR') {
+            $log.debug('Error: ' + JSON.stringify(response.message))
+            cb(response.message)
+          }
+        } else {
+          cb(xhr.status)
+        }
+      }
+      xhr.send(params)
+    }
+
     root.createAlias = function (alias, address, email, isPrivate, signature, cb) {
       $log.debug('Perform Alias Creation')
       var params = `alias=${alias}&address=${address}&email=${email}&listed=${!isPrivate}&signature=${signature}`;

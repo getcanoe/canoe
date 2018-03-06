@@ -24,7 +24,8 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
           toAddress: ab.address,
           toName: ab.name,
           toEmail: ab.email,
-          toColor: ab.color
+          toColor: ab.color,
+          toAlias: ab.alias
         })
       }, 100)
     })

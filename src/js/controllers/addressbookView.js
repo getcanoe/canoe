@@ -33,7 +33,8 @@ angular.module('canoeApp.controllers').controller('addressbookViewController', f
         recipientType: 'contact',
         toAddress: $scope.addressbookEntry.address,
         toName: $scope.addressbookEntry.name,
-        toEmail: $scope.addressbookEntry.email
+        toEmail: $scope.addressbookEntry.email,
+        toAlias: $scope.addressbookEntry.alias
       })
     }, 100)
   }

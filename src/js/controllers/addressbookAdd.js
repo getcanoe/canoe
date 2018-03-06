@@ -5,9 +5,9 @@ angular.module('canoeApp.controllers').controller('addressbookAddController', fu
 
   $scope.addressbookEntry = {
     'address': $stateParams.addressbookEntry || '',
-    'name': '',
+    'name': $stateParams.toName || '',
     'email': '',
-    'alias': ''
+    'alias': $stateParams.toAlias || ''
   }
 
   $scope.onQrCodeScannedAddressBook = function (data, addressbookForm) {
@@ -52,8 +52,10 @@ angular.module('canoeApp.controllers').controller('addressbookAddController', fu
           $scope.aliasRegistered = true;
           $scope.addressbookEntry.address = alias.alias.address;
           $scope.addressbookEntry.name = "@"+alias.alias.alias;
+          $scope.addressbookEntry.avatar = alias.alias.avatar;
         } else {
           $scope.aliasRegistered = false;
+          $scope.addressbookEntry.avatar = null;
         }
         $scope.checkingAlias = false;
         $scope.$apply()
@@ -62,6 +64,12 @@ angular.module('canoeApp.controllers').controller('addressbookAddController', fu
       $scope.checkingAlias = false;
     }
   }
+
+  $scope.$on('$ionicView.enter', function (event, data) {
+    if ($stateParams.toAlias !== null) {
+      $scope.validateAlias($stateParams.toAlias);
+    }
+  })
 
   $scope.add = function (entry) {
     $timeout(function () {

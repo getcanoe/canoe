@@ -38,7 +38,8 @@
                 class="item-icon-right item-avatar"
                 ui-sref="tabs.addressbook.view({address:addrEntry.address, email: addrEntry.email, alias: addrEntry.alias, name: addrEntry.name})">
         <img src="img/contact-placeholder.svg" class="bg"/ ng-if="isChromeApp">
-        <gravatar name="{{addrEntry.name}}" width="50" email="{{addrEntry.email}}" ng-if="!isChromeApp"></gravatar>
+        <gravatar name="{{addrEntry.name}}" width="50" email="{{addrEntry.email}}" ng-if="!isChromeApp && !addrEntry.avatar"></gravatar>
+        <img ng-cloak ng-if="!isChromeApp && addrEntry.avatar" ng-src="data:image/png;base64, {{addrEntry.avatar}}" class="bg" alt="{{addrEntry.alias}} avatar"/>
         <h2>{{addrEntry.name}}</h2>
         <p>{{addrEntry.address}}</p>
         <i class="icon bp-arrow-right"></i>

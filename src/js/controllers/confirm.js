@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, txConfirmNotification, externalLinkService, addressbookService) {
+angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, aliasService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, txConfirmNotification, externalLinkService, addressbookService) {
   //var CONFIRM_LIMIT_USD = 20
 
   var tx = {}
@@ -110,6 +110,13 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
 
     $scope.toAddress = data.stateParams.toAddress
     $scope.toName = data.stateParams.toName
+    $scope.toAlias = data.stateParams.toAlias
+    tx.toAlias = $scope.toAlias
+    aliasService.getAvatar(data.stateParams.toAlias, function(err, avatar) {
+      $scope.toAvatar = avatar
+      $scope.$apply()
+      tx.toAvatar = avatar
+    })
     $scope.toEmail = data.stateParams.toEmail
     $scope.toColor = data.stateParams.toColor
     $scope.recipientType = data.stateParams.recipientType || null
@@ -345,7 +352,9 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
           popupService.showConfirm(title, msg, null, null, function (res) {
             if (res) {
               $state.transitionTo('tabs.send.addressbook', {
-                addressbookEntry: $scope.tx.toAddress
+                addressbookEntry: $scope.tx.toAddress,
+                toName: $scope.tx.toName,
+                toAlias: $scope.tx.toAlias
               })
             } else {
               $state.transitionTo('tabs.home')
