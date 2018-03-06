@@ -40,7 +40,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         'notify': $state.current.name !== 'tabs.send'
       })
       var toName = null;
-      if (alias !== null) {
+      if (typeof alias !== "undefined" && alias !== null) {
         toName = "@"+alias;
       }
       // Timeout is required to enable the "Back" button
@@ -121,7 +121,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       'notify': $state.current.name !== 'tabs.send'
     })
     var toName = null;
-    if (toAlias !== null) {
+    if (typeof toAlias !== "undefined" && toAlias !== null) {
       toName = "@"+toAlias;
     }
     $timeout(function () {
