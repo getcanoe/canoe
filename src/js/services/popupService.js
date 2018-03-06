@@ -1,23 +1,22 @@
-'use strict';
+'use strict'
+/* global angular */
+angular.module('canoeApp.services').service('popupService', function ($log, $ionicPopup, platformInfo, gettextCatalog) {
+  var isCordova = platformInfo.isCordova
+  var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
 
-angular.module('canoeApp.services').service('popupService', function($log, $ionicPopup, platformInfo, gettextCatalog) {
+  /** ************* Ionic ****************/
 
-  var isCordova = platformInfo.isCordova;
-  var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP;
-
-  /*************** Ionic ****************/
-
-  var _ionicAlert = function(title, message, cb, okText) {
-    if (!cb) cb = function() {};
+  var _ionicAlert = function (title, message, cb, okText) {
+    if (!cb) cb = function () {}
     $ionicPopup.alert({
       title: title,
       subTitle: message,
       okType: 'button-clear button-positive',
-      okText: okText || gettextCatalog.getString('OK'),
-    }).then(cb);
-  };
+      okText: okText || gettextCatalog.getString('OK')
+    }).then(cb)
+  }
 
-  var _ionicConfirm = function(title, message, okText, cancelText, cb) {
+  var _ionicConfirm = function (title, message, okText, cancelText, cb) {
     $ionicPopup.confirm({
       title: title,
       subTitle: message,
@@ -25,13 +24,13 @@ angular.module('canoeApp.services').service('popupService', function($log, $ioni
       cancelType: 'button-clear button-positive',
       okText: okText,
       okType: 'button-clear button-positive'
-    }).then(function(res) {
-      return cb(res);
-    });
-  };
+    }).then(function (res) {
+      return cb(res)
+    })
+  }
 
-  var _ionicPrompt = function(title, message, opts, cb) {
-    opts = opts || {};
+  var _ionicPrompt = function (title, message, opts, cb) {
+    opts = opts || {}
     $ionicPopup.prompt({
       title: title,
       subTitle: message,
@@ -39,41 +38,41 @@ angular.module('canoeApp.services').service('popupService', function($log, $ioni
       template: '<input ng-model="data.response" type="' + opts.inputType + '" value ="" autocomplete="off" autofocus>',
       inputPlaceholder: opts.inputPlaceholder,
       defaultText: opts.defaultText
-    }).then(function(res) {
-      return cb(res);
-    });
-  };
+    }).then(function (res) {
+      return cb(res)
+    })
+  }
 
-  /*************** Cordova ****************/
+  /** ************* Cordova ****************/
 
-  var _cordovaAlert = function(title, message, cb, okText) {
-    if (!cb) cb = function() {};
-    title = title ? title : '';
-    okText = okText || gettextCatalog.getString('OK');
-    navigator.notification.alert(message, cb, title, okText);
-  };
+  var _cordovaAlert = function (title, message, cb, okText) {
+    if (!cb) cb = function () {}
+    title = title || ''
+    okText = okText || gettextCatalog.getString('OK')
+    navigator.notification.alert(message, cb, title, okText)
+  }
 
-  var _cordovaConfirm = function(title, message, okText, cancelText, cb) {
-    var onConfirm = function(buttonIndex) {
-      if (buttonIndex == 2) return cb(true);
-      else return cb(false);
+  var _cordovaConfirm = function (title, message, okText, cancelText, cb) {
+    var onConfirm = function (buttonIndex) {
+      if (buttonIndex === 2) return cb(true)
+      else return cb(false)
     }
-    okText = okText || gettextCatalog.getString('OK');
-    cancelText = cancelText || gettextCatalog.getString('Cancel');
-    title = title ? title : '';
-    navigator.notification.confirm(message, onConfirm, title, [cancelText, okText]);
-  };
+    okText = okText || gettextCatalog.getString('OK')
+    cancelText = cancelText || gettextCatalog.getString('Cancel')
+    title = title || ''
+    navigator.notification.confirm(message, onConfirm, title, [cancelText, okText])
+  }
 
-  var _cordovaPrompt = function(title, message, opts, cb) {
-    var onPrompt = function(results) {
-      if (results.buttonIndex == 1) return cb(results.input1);
-      else return cb();
+  var _cordovaPrompt = function (title, message, opts, cb) {
+    var onPrompt = function (results) {
+      if (results.buttonIndex === 1) return cb(results.input1)
+      else return cb()
     }
-    var okText = gettextCatalog.getString('OK');
-    var cancelText = gettextCatalog.getString('Cancel');
-    title = title ? title : '';
-    navigator.notification.prompt(message, onPrompt, title, [okText, cancelText], opts.defaultText);
-  };
+    var okText = gettextCatalog.getString('OK')
+    var cancelText = gettextCatalog.getString('Cancel')
+    title = title || ''
+    navigator.notification.prompt(message, onPrompt, title, [okText, cancelText], opts.defaultText)
+  }
 
   /**
    * Show a simple alert popup
@@ -83,15 +82,12 @@ angular.module('canoeApp.services').service('popupService', function($log, $ioni
    * @param {Callback} Function (optional)
    */
 
-  this.showAlert = function(title, msg, cb, okText) {
-    var message = (msg && msg.message) ? msg.message : msg;
-    $log.warn(title ? (title + ': ' + message) : message);
+  this.showAlert = function (title, msg, cb, okText) {
+    var message = (msg && msg.message) ? msg.message : msg
+    $log.warn(title ? (title + ': ' + message) : message)
 
-    if (isCordova)
-      _cordovaAlert(title, message, cb, okText);
-    else
-      _ionicAlert(title, message, cb, okText);
-  };
+    if (isCordova) { _cordovaAlert(title, message, cb, okText) } else { _ionicAlert(title, message, cb, okText) }
+  }
 
   /**
    * Show a simple confirm popup
@@ -104,14 +100,14 @@ angular.module('canoeApp.services').service('popupService', function($log, $ioni
    * @returns {Callback} OK: true, Cancel: false
    */
 
-  this.showConfirm = function(title, message, okText, cancelText, cb) {
-    $log.warn(title ? (title + ': ' + message) : message);
-
-    if (isCordova)
-      _cordovaConfirm(title, message, okText, cancelText, cb);
-    else
-      _ionicConfirm(title, message, okText, cancelText, cb);
-  };
+  this.showConfirm = function (title, message, okText, cancelText, cb) {
+    $log.warn(title ? (title + ': ' + message) : message)
+    if (isCordova) {
+      _cordovaConfirm(title, message, okText, cancelText, cb)
+    } else {
+      _ionicConfirm(title, message, okText, cancelText, cb)
+    }
+  }
 
   /**
    * Show a simple prompt popup
@@ -123,16 +119,15 @@ angular.module('canoeApp.services').service('popupService', function($log, $ioni
    * @returns {Callback} Return the value of the input if user presses OK
    */
 
-  this.showPrompt = function(title, message, opts, cb) {
-    $log.warn(title ? (title + ': ' + message) : message);
+  this.showPrompt = function (title, message, opts, cb) {
+    $log.warn(title ? (title + ': ' + message) : message)
 
-    opts = opts ||  {};
+    opts = opts || {}
 
-    if (isCordova && !isWindowsPhoneApp && !opts.forceHTMLPrompt)
-      _cordovaPrompt(title, message, opts, cb);
-    else
-      _ionicPrompt(title, message, opts, cb);
-  };
-
-
-});
+    if (isCordova && !isWindowsPhoneApp && !opts.forceHTMLPrompt) {
+      _cordovaPrompt(title, message, opts, cb)
+    } else {
+      _ionicPrompt(title, message, opts, cb)
+    }
+  }
+})

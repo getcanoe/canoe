@@ -81,10 +81,7 @@ angular.module('canoeApp.services')
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
           nanoService.repair() // So we fetch truth from lattice, sync
-          nanoService.saveWallet(root.getWallet(), cb)          
-          // Refresh ui
-          root.loadWallet()
-          $rootScope.$broadcast('wallet.imported') 
+          nanoService.saveWallet(root.getWallet(), cb)
         })
       })
     }
@@ -100,15 +97,13 @@ angular.module('canoeApp.services')
       return {wallet: root.getWallet().pack()}
     }
 
-    // Import wallet from JSON and password, throws exception on failure
+    // Import wallet from JSON and password
     root.importWallet = function (json, password, cb) {
       var imported = JSON.parse(json)
       var walletData = imported.wallet
       // Then we try to load wallet
       nanoService.createWalletFromData(walletData, password, function (err, wallet) {
-        if (err) {
-          throw new Error(err)
-        }
+        if (err) { return cb(err) }
         // And we can also try merging addressBook
         if (imported.addressBook) {
           root.mergeAddressBook(imported.addressBook, function (err) {
@@ -122,10 +117,6 @@ angular.module('canoeApp.services')
         nanoService.saveWallet(wallet, function () {
           // If that succeeded we consider this entering the password
           root.enteredPassword(password)
-            
-          // Refresh ui
-          root.loadWallet()
-          $rootScope.$broadcast('wallet.imported') 
           $log.info('Successfully imported wallet')
           cb()
         })

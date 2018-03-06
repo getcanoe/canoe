@@ -46,43 +46,28 @@ angular.module('canoeApp.controllers').controller('importController',
     }
 
     var _importBlob = function (data, opts) {
-      var err
-      if (!$stateParams.fromOnboarding) {
-        importWarning(function (res) {
-          if (!res) return
-          ongoingProcess.set('importingWallet', true)
-          $timeout(function () {
-            try {
-              profileService.importWallet(data, $scope.formData.password, function (err) {
-                ongoingProcess.set('importingWallet', false)
-                if (err) {
-                  popupService.showAlert(gettextCatalog.getString('Error'), err)
-                  return
-                }
-                finish()    
-              })
-            } catch (e) {
-              err = gettextCatalog.getString('Could not decrypt wallet, check your password')
-              $log.warn(e)
-            }
-          }, 100)
-        })
-      } else {
+      function importWallet () {
+        ongoingProcess.set('importingWallet', true)
         $timeout(function () {
           try {
             profileService.importWallet(data, $scope.formData.password, function (err) {
               ongoingProcess.set('importingWallet', false)
               if (err) {
-                popupService.showAlert(gettextCatalog.getString('Error'), err)
+                popupService.showAlert(gettextCatalog.getString('Error'), 'Error importing wallet, check that the password was correct')
                 return
               }
-              finish()    
+              finish()
             })
           } catch (e) {
-            err = gettextCatalog.getString('Could not decrypt wallet, check your password')
-            $log.warn(e)
+            $log.error(gettextCatalog.getString('Error importing wallet: ' + e))
+            popupService.showAlert(gettextCatalog.getString('Error'), 'Error importing wallet: ' + e)
           }
         }, 100)
+      }
+      if (!$stateParams.fromOnboarding) {
+        importWarning(importWallet)
+      } else {
+        importWallet()
       }
     }
 
@@ -135,31 +120,35 @@ angular.module('canoeApp.controllers').controller('importController',
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter a password to use for the wallet'))
         return
       }
-      if (!$stateParams.fromOnboarding) {
-        importWarning(function (res) {
-          if (!res) return
-          ongoingProcess.set('importingWallet', true)
-          $timeout(function () {
-            profileService.importSeed(password, seed, function () {
-              ongoingProcess.set('importingWallet', false)
-              finish()
-            })
-          }, 100)
-        })
-      } else {
+
+      function importSeed () {
+        ongoingProcess.set('importingWallet', true)
         $timeout(function () {
-          profileService.importSeed(password, seed, function () {
+          profileService.importSeed(password, seed, function (err) {
             ongoingProcess.set('importingWallet', false)
+            if (err) {
+              popupService.showAlert(gettextCatalog.getString('Error'), 'Error importing seed, check session log for more details')
+              return
+            }
             finish()
           })
         }, 100)
       }
+
+      if (!$stateParams.fromOnboarding) {
+        importWarning(importSeed)
+      } else {
+        importSeed()
+      }
     }
-    
+
     var importWarning = function (cb) {
       var title = gettextCatalog.getString('Warning!')
       var message = gettextCatalog.getString('Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from.')
-      popupService.showConfirm(title, message, null, null, cb)
+      popupService.showConfirm(title, message, null, null, function (res) {
+        if (!res) return
+        return cb()
+      })
     }
 
     var finish = function () {
