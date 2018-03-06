@@ -22,7 +22,7 @@
 
       <div
         ng-click="updateAll(true)"
-        ng-show="!account.meta.balanceHidden"
+        ng-show="!balanceHidden"
         on-hold="hideToggle()"
         ng-style="{'transform': amountScale}"
         ng-class="{amount__balance: amountIsCollapsible}">
@@ -37,7 +37,7 @@
 
       <div ng-style="{'transform': amountScale}"
         class="amount__balance"
-        ng-show="account.meta.balanceHidden"
+        ng-show="balanceHidden"
         on-hold="hideToggle()">
         <strong class="size-24" translate>[Balance Hidden]</strong>
         <div ng-style="{opacity: altAmountOpacity}" class="size-14 amount-alternative" translate>
@@ -67,7 +67,7 @@
 
       <div
         ng-click='updateAll(true)'
-        ng-show="!account.meta.balanceHidden"
+        ng-show="!balanceHidden"
         on-hold="hideToggle()"
         ng-style="{'transform': amountScale}"
         ng-class="{amount__balance: amountIsCollapsible}">
