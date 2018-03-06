@@ -474,3 +474,7 @@ input[type=file] {
 .big-icon-svg > .bg {
   box-shadow: none !important;
 }
+
+.platform-android .tabs-icon-top.tabs-color-active-positive.ion-tabs-transparent.pane {
+  padding-top: 16px !important;
+}
