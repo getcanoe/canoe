@@ -16,6 +16,9 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
     $scope.validateAlias = function(alias) {
       if (alias === initialName) return;
       $scope.aliasRegistered = null;
+      if (alias && alias.length > 0 && alias.charAt(0) === "@") {
+        alias = alias.substring(1, alias.length);
+      }
       $scope.aliasValid = alias.length >= 4 && letterRegex.test(alias.charAt(0)) && lnRegex.test(alias);
       $scope.checkingAlias = true;
       if ($scope.aliasValid === true) {
@@ -47,6 +50,9 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
       // Save the alias we have selected to use for our wallet
       var wallet = profileService.getWallet();
       var curAccount = wallet.getCurrentAccount();
+      if ($scope.alias.value.alias && $scope.alias.value.alias.length > 0 && $scope.alias.value.alias.charAt(0) === "@") {
+        $scope.alias.value.alias = $scope.alias.value.alias.substring(1, $scope.alias.value.alias.length);
+      }
       var signatureParams = [
         $scope.alias.value.alias,
         curAccount
@@ -64,6 +70,7 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
           }
           $log.debug('Answer from alias server editing: ' + JSON.stringify(ans));
           if (ans) {
+            ans.alias.email = $scope.alias.value.email
             account.meta.alias = ans.alias
             profileService.saveWallet(function () {
               $log.info("Finished editing and storing your alias");
@@ -81,6 +88,7 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
           }
           $log.debug('Answer from alias server creation: ' + JSON.stringify(ans));
           if (ans) {
+            ans.alias.email = $scope.alias.value.email
             account.meta.alias = ans.alias
             profileService.saveWallet(function () {
               $log.info("Finished Creating and storing your alias");
