@@ -123,6 +123,7 @@
     "build:windows-release": "cordova prepare windows && cordova build windows --release --arch=\"ARM\"",
     "build:desktop": "grunt desktop",
     "build:osx": "grunt osx",
+    "build:desktopsign": "grunt desktopsign",
     "open:ios": "open platforms/ios/*.xcodeproj",
     "open:android": "open -a open -a /Applications/Android\\ Studio.app platforms/android",
     "final:www": "npm run build:www-release",
