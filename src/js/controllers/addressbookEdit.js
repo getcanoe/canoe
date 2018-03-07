@@ -44,6 +44,9 @@ angular.module('canoeApp.controllers').controller('addressbookEditController', f
   $scope.checkingAlias = false;
   $scope.validateAlias = function(alias) {
     $scope.aliasRegistered = null;
+    if (alias && alias.length > 0 && alias.charAt(0) === "@") {
+      alias = alias.substring(1, alias.length);
+    }
     $scope.aliasValid = alias.length >= 4 && letterRegex.test(alias.charAt(0)) && lnRegex.test(alias);
     $scope.checkingAlias = true;
     if ($scope.aliasValid === true) {
