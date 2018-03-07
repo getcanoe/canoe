@@ -23,7 +23,8 @@ module.exports = function()
 	var blockAccount;   // account owner of this block
 	var origin;			// account sending money in case of receive or open block
 	var immutable = false; // if true means block has already been confirmed and cannot be changed, some checks are ignored
-	
+	var timestamp;      // the UTC timestamp in milliseconds since 1970, 1 jan
+
 	var previous;       // send, receive and change
 	var destination;    // send
 	var balance;        // send
@@ -289,7 +290,27 @@ module.exports = function()
 		if(type == 'receive' || type == 'open')
 			origin = acc;
 	}
-	
+
+	/**
+	 * Sets the timestamp of when the block was received from the network.
+	 * This is an added feature in canoed, the server daemon for Canoe.
+	 * @param {Number} milliseconds - Since 1970, 1 jan
+	 */
+	api.setTimestamp = function(millis)
+	{
+		timestamp = millis;
+	}
+
+	/**
+	 * Gets the timestamp of when the block was received from the network.
+	 * This is an added feature in canoed, the server daemon for Canoe.
+	 * @returns {Number} milliseconds - Since 1970, 1 jan
+	 */
+	api.getTimestamp = function()
+	{
+		return timestamp;
+	}
+
 	/**
 	 *
 	 * @returns originAccount
@@ -485,6 +506,7 @@ module.exports = function()
 		else
 			extras.blockAmount = 0;
 		extras.origin = origin;
+		extras.timestamp = timestamp;
 		obj.extras = extras;
 		obj.version = version;
 		return JSON.stringify(obj);
@@ -542,6 +564,7 @@ module.exports = function()
 			api.setAccount(obj.extras.blockAccount);
 			api.setAmount(obj.extras.blockAmount ? obj.extras.blockAmount : 0);
 			api.setOrigin(obj.extras.origin);
+			api.setTimestamp(obj.extras.timestamp);
 			if(api.getAmount().greater("1000000000000000000000000000000000000000000000000")) // too big, glitch from the units change a couple of commits ago :P
 				api.setAmount(api.getAmount().over("1000000000000000000000000"));
 		}

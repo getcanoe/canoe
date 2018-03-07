@@ -275,7 +275,7 @@ angular.module('canoeApp.services')
         // We ignore change blocks for now here
         if (type !== 'change') {
           var tx = {type: type}
-          tx.time = nanoService.getTxnTimes()[blk.getHash(true)] // retreive txn time from transactionTimes
+          tx.time = blk.getTimestamp() / 1000 // Seconds
           if (tx.time) {
             var isToday = new Date(tx.time * 1000).toDateString() === new Date().toDateString()
             tx.timeStr = isToday ? new Date(tx.time * 1000).toLocaleTimeString() : new Date(tx.time * 1000).toLocaleString()

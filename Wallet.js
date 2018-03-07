@@ -835,15 +835,21 @@ module.exports = function(password)
 		}
 	}
 
-	api.getBlockFromHash = function(blockHash, acc = 0)
+	api.getBlockFromHashAndAccount = function(blockHash, acc)
 	{
-		var found = false;
-		var i = 0;
-		if(acc !== 0)
-			api.useAccount(acc);
-		else
-			api.useAccount(keys[0].account);
+		api.useAccount(acc);
+		for(let j = chain.length - 1; j >= 0; j--)
+		{
+			var blk = chain[j];
+			if(blk.getHash(true) == blockHash)
+				return blk;
+		}
+		return null;
+	}
 
+
+	api.getBlockFromHash = function(blockHash)
+	{
 		for(let i = 0; i < keys.length; i++)
 		{
 			api.useAccount(keys[i].account);
@@ -853,11 +859,8 @@ module.exports = function(password)
 				if(blk.getHash(true) == blockHash)
 					return blk;
 			}
-			if(i == keys.length - 1)
-				break;
-			api.useAccount(keys[i + 1].account);
 		}
-		return false;
+		return null;
 	}
 
 	api.addBlockToReadyBlocks = function(blk)

@@ -42,21 +42,6 @@ angular.module('canoeApp.services')
     // Possibility to quiet the logs
     var doLog = true
 
-    var txnTimes = {}
-
-    root.getTxnTimes = function () {
-      return txnTimes
-    }
-
-    // Load tranction times from localStorage
-    storageService.getTransactionTimes(function (err, times) {
-      if (err) {
-        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to import transaction times'))
-        return
-      }
-      if (times) txnTimes = JSON.parse(times)
-    })
-
     // This function calls itself every sec and scans
     // for pending blocks or precalcs in need of work.
     function generatePoW () {
@@ -106,20 +91,6 @@ angular.module('canoeApp.services')
         }, function (work) {
           if (doLog) $log.info('Client side PoW found for ' + hash + ': ' + work)
           callback(work)
-        })
-      }
-
-      // send send
-      //$log.info('txnTime send')
-      if (!txnTimes[hash]) {
-        var now = Math.floor(Date.now() / 1000) // let's forget about ms so we save space on localStorage/file backup
-        txnTimes[hash] = now
-        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) {
-          if (err) {
-            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to save transaction times'))
-            return
-          }
-          $rootScope.$broadcast('txnList.updated')
         })
       }
     }
@@ -206,10 +177,13 @@ angular.module('canoeApp.services')
         // Unfortunately blocks is an object so to get proper order we use hashes
         lodash.each(hashes, function (hash) {
           var block = blocks[hash]
+          block.contents.extras = {
+            blockAccount: block.block_account,
+            blockAmount: block.amount,
+            timestamp: block.timestamp,
+            origin: block.source_account
+          }
           var blk = wallet.createBlockFromJSON(block.contents)
-          blk.setAmount(block.amount)
-          blk.setAccount(block.block_account)
-          blk.setOrigin(block.source_account)
           blk.setImmutable(true)
           try {
             // First we check if this is a fork and thus adop it if it is
@@ -618,16 +592,17 @@ angular.module('canoeApp.services')
           root.saveWallet(root.wallet, function () {})
         }
       }
+    }
 
-      // $log.info('txnTime receive')
-      if (!txnTimes[hash]) {
-        var now = Math.floor(Date.now() / 1000) // let's forget about ms so we save space on localStorage/file backup
-        txnTimes[hash] = now
-        storageService.setTransactionTimes(JSON.stringify(txnTimes), function (err) {
-          if (err) {
-            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Failed to save transaction times'))
-          }
-        })
+    root.hasAccount = function (account) {
+      return root.wallet.findKey(account) !== null
+    }
+
+    root.confirmBlock = function (account, hash, timestamp) {
+      var blk = root.wallet.getBlockFromHashAndAccount(hash, account)
+      if (blk) {
+        $log.debug('Confirming block: ' + hash + ' time: ' + timestamp)
+        blk.setTimestamp(timestamp)
       }
     }
 
@@ -643,25 +618,34 @@ angular.module('canoeApp.services')
       // A block
       var blk = JSON.parse(payload)
       var blk2 = JSON.parse(blk.block)
-      var from = blk.account
       var hash = blk.hash
-      var account = blk2.destination
-      var amount = blk.amount
-      $log.debug('From: ' + from + 'to: ' + account + ' type: ' + blkType + ' amount: ' + amount)
+      var timestamp = blk.timestamp
+      var from = blk.account
+
       // Switch on block type
       switch (blkType) {
         case 'open':
-          // TODO We should match it right?  It can only originate from me unless multiple devices
-          $log.debug('An open block ignored')
-          return
+          // This is an echo from network, it can only originate from me unless multiple devices
+          return root.confirmBlock(from, hash, timestamp)
         case 'send':
-          return root.handleIncomingSendBlock(hash, account, from, amount)
-        case 'receive':
-          // TODO We should match it right? It can only originate from me unless multiple devices
-          $log.debug('A receive block ignored')
+          var to = blk2.destination
+          var amount = blk.amount
+          $log.debug('From: ' + from + 'to: ' + to + ' type: ' + blkType + ' amount: ' + amount)
+          // If this is from one of our accounts we confirm it
+          if (root.hasAccount(from)) {
+            root.confirmBlock(from, hash, timestamp)
+          }
+          // This is someone elses send to us
+          if (root.hasAccount(to)) {
+            root.handleIncomingSendBlock(hash, to, from, amount)
+          }
           return
+        case 'receive':
+          // This is an echo from network, it can only originate from me unless multiple devices
+          return root.confirmBlock(from, hash, timestamp)
         case 'change':
-          // TODO We should match it right? It can only originate from me unless multiple devices
+          // This is an echo from network, it can only originate from me unless multiple devices
+          // TODO not yet supported
           $log.debug('A change block ignored')
           return
       }
