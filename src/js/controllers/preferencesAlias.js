@@ -7,12 +7,15 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
     var lnRegex = XRegExp('^(\\p{Ll}|\\pN)+$');
     $scope.accountAlias = account.meta.alias || null;
     var initialName = null;
-    if ($scope.accountAlias !== null)
-      initialName = $scope.accountAlias.alias;
     $scope.emailValid = null;
     $scope.aliasValid = null;
     $scope.aliasRegistered = null;
     $scope.checkingAlias = false;
+    if ($scope.accountAlias !== null) {
+      initialName = $scope.accountAlias.alias;
+      $scope.aliasRegistered = false;
+      $scope.aliasValid = true;
+    }
     $scope.validateAlias = function(alias) {
       if (alias === initialName) return;
       $scope.aliasRegistered = null;
@@ -24,6 +27,14 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
       if ($scope.aliasValid === true) {
         aliasService.lookupAlias(alias, function(err, alias) {
           if (err === null) {
+            if (alias.alias.address === account.id) {
+              alias.alias.email = $scope.alias.value.email
+              account.meta.alias = alias.alias
+              profileService.saveWallet(function () {
+                $log.info("Finished Creating and storing your alias");
+                $ionicHistory.goBack()
+              })
+            }
             $scope.aliasRegistered = true;
           } else {
             $scope.aliasRegistered = false;
@@ -49,7 +60,7 @@ angular.module('canoeApp.controllers').controller('preferencesAliasController',
     $scope.save = function () {
       // Save the alias we have selected to use for our wallet
       var wallet = profileService.getWallet();
-      var curAccount = wallet.getCurrentAccount();
+      var curAccount = account.id;
       if ($scope.alias.value.alias && $scope.alias.value.alias.length > 0 && $scope.alias.value.alias.charAt(0) === "@") {
         $scope.alias.value.alias = $scope.alias.value.alias.substring(1, $scope.alias.value.alias.length);
       }
