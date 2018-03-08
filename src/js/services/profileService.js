@@ -276,23 +276,21 @@ angular.module('canoeApp.services')
       var txs = []
       lodash.each(blocks, function (blk) {
         var type = blk.getType()
-        // We ignore change blocks for now here
-        if (type !== 'change') {
-          var tx = {type: type}
-          tx.time = blk.getTimestamp() / 1000 // Seconds
-          if (tx.time) {
-            var isToday = new Date(tx.time * 1000).toDateString() === new Date().toDateString()
-            tx.timeStr = isToday ? new Date(tx.time * 1000).toLocaleTimeString() : new Date(tx.time * 1000).toLocaleString()
-          }
-          tx.account = acc
-          tx.amount = blk.getAmount()
-          tx.amountStr = root.formatAmount(tx.amount, 2)
-          tx.unitStr = 'NANO' // TODO
-          tx.destination = blk.getDestination()
-          tx.origin = blk.getOrigin()
-          tx.hash = blk.getHash(true)
-          txs.push(tx)
+        var tx = {type: type}
+        tx.time = blk.getTimestamp() / 1000 // Seconds
+        if (tx.time) {
+          var isToday = new Date(tx.time * 1000).toDateString() === new Date().toDateString()
+          tx.timeStr = isToday ? new Date(tx.time * 1000).toLocaleTimeString() : new Date(tx.time * 1000).toLocaleString()
         }
+        tx.account = acc
+        tx.amount = blk.getAmount()
+        tx.amountStr = root.formatAmount(tx.amount, 2)
+        tx.unitStr = 'NANO' // TODO
+        tx.destination = blk.getDestination()
+        tx.origin = blk.getOrigin()
+        tx.representative = blk.getRepresentative() || ''
+        tx.hash = blk.getHash(true)
+        txs.push(tx)
       })
       return txs
     }

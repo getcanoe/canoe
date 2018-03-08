@@ -11,6 +11,7 @@
 <a class="wallet-details__item item">
   <img class="wallet-details__tx-icon" src="img/icon-tx-received-outline.svg" width="40" ng-if="btx.type == 'receive' || btx.type == 'open'">
   <img class="wallet-details__tx-icon" src="img/icon-tx-sent-outline.svg" width="40" ng-if="btx.type == 'send'">
+  <img class="wallet-details__tx-icon" src="img/icon-tx-rep.svg" width="40" ng-if="btx.type == 'change'">
 
   <div class="wallet-details__tx-content" ng-class="{'no-border': !isSearching ? isLastInGroup($index) : false}">
 
@@ -31,11 +32,19 @@
         <div ng-if="!addressbook[btx.destination]" class="wallet-details__tx-message ellipsis" translate>Sent</div>
       </div>
 
+      <div ng-show="btx.type == 'change'">
+          <div ng-if="btx.note" class="wallet-details__tx-message ellipsis">{{btx.note}}</div>
+          <div class="wallet-details__tx-message ellipsis">
+            {{btx.representative}}
+          </div>
+          <div class="wallet-details__tx-message ellipsis" translate>Change</div>
+        </div>
+
       <span class="label tu warning radius" ng-if="btx.type == 'invalid'" translate>Invalid</span>
     </div>
 
     <span class="item-note text-right wallet-details__tx-amount">
-      <span class="wallet-details__tx-amount" ng-class="{'wallet-details__tx-amount--recent': btx.recent, 'wallet-details__tx-amount--received': (btx.type == 'receive' || btx.type == 'open'), 'wallet-details__tx-amount--sent': btx.type == 'send'}">
+      <span ng-if="!btx.type == 'change'" class="wallet-details__tx-amount" ng-class="{'wallet-details__tx-amount--recent': btx.recent, 'wallet-details__tx-amount--received': (btx.type == 'receive' || btx.type == 'open'), 'wallet-details__tx-amount--sent': btx.type == 'send'}">
         <span ng-if="btx.type == 'send'">–</span>
         {{btx.amountStr}}
       </span>
