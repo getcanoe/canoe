@@ -258,6 +258,11 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     ]*/
   })
 
+  $rootScope.$on('blocks', function (event, data) {
+    $scope.updateAll()
+    refreshAmountSection()
+  })
+
   $scope.$on('$ionicView.afterEnter', function (event, data) {
     $scope.updateAll()
     refreshAmountSection()
