@@ -210,7 +210,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'build/',
-          src: ['.desktop', '../www/img/app/favicon.ico', '../resources/canoe/linux/512x512.png'],
+          src: ['.desktop', '../www/img/app/favicon.ico', '../resources/canoe/linux/canoe.png'],
           dest: 'build/canoe/linux64/',
           flatten: true,
           filter: 'isFile'
