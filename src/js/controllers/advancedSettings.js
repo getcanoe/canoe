@@ -14,7 +14,7 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
 
   $scope.repair = function () {
     var title = gettextCatalog.getString('Warning!')
-    var message = gettextCatalog.getString('Are you sure you want to repair wallet?')
+    var message = gettextCatalog.getString('Repairing your wallet could take some time. This will reload all blockchains associated with your wallet. Are you sure you want to repair?')
     popupService.showConfirm(title, message, null, null, function (res) {
       if (!res) return
       nanoService.repair()
