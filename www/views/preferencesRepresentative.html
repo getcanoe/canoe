@@ -1,0 +1,41 @@
+<ion-view id="preferences-representative" class="settings" show-tabs>
+  <ion-nav-bar class="bar-royal">
+    <ion-nav-title>
+      {{'Account Representative' | translate}}
+    </ion-nav-title>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+    <div class="settings-explanation">
+      <div class="settings-description" translate>Enter a representative account.</div>
+    </div>
+    <form name="representativeForm" ng-submit="save(representativeForm)" novalidate>
+      <div class="list settings-input-group">
+
+        <label class="item item-input item-stacked-label">
+            <span class="input-label" translate>Representative</span>
+            <div class="input-notification">
+              <i ng-show="!representativeForm.representative.$invalid" class="icon ion-checkmark-circled valid"></i>
+              <i ng-show="representativeForm.representative.$invalid && representative.value" class="icon ion-close-circled invalid"></i>
+            </div>
+            <input type="text"
+                    id="representative"
+                    name="representative"
+                    ng-model="representative.value"
+                    valid-address required>
+        </label>
+        <div class="qr-scan-icon">
+          <qr-scanner on-scan="onQrCodeScanned(data, representativeForm)"></qr-scanner>
+        </div>
+
+      </div>
+      <button type="submit"
+              class="button button-standard button-primary"
+              ng-disabled="representativeForm.$invalid"
+              translate>
+        Save
+      </button>
+    </form>
+  </ion-content>
+</ion-view>

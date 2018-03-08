@@ -6,11 +6,6 @@ angular.module('canoeApp.controllers').controller('preferencesController',
     var accountId
 
     $scope.hiddenBalanceChange = function () {
-      var opts = {
-        balance: {
-          enabled: $scope.hiddenBalance.value
-        }
-      }
       profileService.toggleHideBalanceFlag(accountId, function (err) {
         if (err) $log.error(err)
       })
@@ -34,6 +29,7 @@ angular.module('canoeApp.controllers').controller('preferencesController',
       account = profileService.getAccount(data.stateParams.accountId)
       accountId = account.id
       $scope.account = account
+      $scope.accountRepresentative = profileService.getRepresentativeFor(account.id)
       $scope.isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
       $scope.externalSource = null
 

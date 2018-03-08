@@ -266,6 +266,10 @@ angular.module('canoeApp.services')
       return root.getWallet().getAccount(addr)
     }
 
+    root.getRepresentativeFor = function (addr) {
+      return nanoService.getRepresentativeFor(addr)
+    }
+
     root.getTxHistory = function (addr) {
       var acc = root.getAccount(addr)
       var blocks = root.getWallet().getLastNBlocks(addr, 100000)

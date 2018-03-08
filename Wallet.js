@@ -376,7 +376,7 @@ module.exports = function(password)
 				lastPendingBlock: "",
 				subscribed: false,
 				chain: [],
-				representative: "",
+				representative: canoeRepresentative,
 				meta: { label: "" }
 			}
 		);

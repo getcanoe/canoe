@@ -523,6 +523,15 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
+      .state('tabs.preferences.preferencesRepresentative', {
+        url: '/preferencesRepresentative',
+        views: {
+          'tab-settings@tabs': {
+            controller: 'preferencesRepresentativeController',
+            templateUrl: 'views/preferencesRepresentative.html'
+          }
+        }
+      })
       .state('tabs.settings.backupWarning', {
         url: '/backupWarning/:from',
         views: {

@@ -365,27 +365,31 @@ angular.module('canoeApp.services')
       return false
     }
 
-    /*
-    root.changeSeed = function (wallet, seed) {
-      $log.debug('Changing seed and clearing accounts: ' + seed)
-      wallet.seed = seed
-      wallet.accounts = {}
-      return rai.wallet_change_seed(wallet.id, seed)
-    }
-
-    */
-
     // Send amountRaw (bigInt) from account to addr, using wallet.
     root.send = function (wallet, account, addr, amountRaw) {
       $log.debug('Sending ' + amountRaw + ' from ' + account.name + ' to ' + addr)
       try {
         var blk = wallet.addPendingSendBlock(account.id, addr, amountRaw)
-        // var hash = blk.getHash(true)
-        // refreshBalances()
         $log.debug('Added send block successfully: ' + blk.getHash(true))
-        // addRecentSendToGui({date: 'Just now', amount: amountRaw, hash: hash})
       } catch (e) {
         $log.error('Send failed ' + e.message)
+        return false
+      }
+      return true
+    }
+
+    root.getRepresentativeFor = function (addr) {
+      return root.wallet.getRepresentative(addr)
+    }
+
+    // Change representative
+    root.changeRepresentative = function (addr, rep) {
+      try {
+        $log.debug('Changing representative for ' + addr + ' to ' + rep)
+        var blk = root.wallet.addPendingChangeBlock(addr, rep)
+        $log.debug('Added change block successfully: ' + blk.getHash(true))
+      } catch (e) {
+        $log.error('Change representative failed ' + e.message)
         return false
       }
       return true
