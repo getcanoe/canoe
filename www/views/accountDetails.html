@@ -21,7 +21,7 @@
       ng-class="{collapsible: amountIsCollapsible, 'wallet-background-color-default': !account.meta.color}">
 
       <div
-        ng-click="updateAll(true)"
+        ng-click="updateAll()"
         ng-show="!balanceHidden"
         on-hold="hideToggle()"
         ng-style="{'transform': amountScale}"
@@ -66,7 +66,7 @@
     >
 
       <div
-        ng-click='updateAll(true)'
+        ng-click='updateAll()'
         ng-show="!balanceHidden"
         on-hold="hideToggle()"
         ng-style="{'transform': amountScale}"

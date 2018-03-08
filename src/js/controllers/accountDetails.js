@@ -16,10 +16,6 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     externalLinkService.open(url, target)
   }
 
-  var updateStatus = function (force) {
-    $scope.updatingStatus = true
-  }
-
   $scope.openSearchModal = function () {
     $scope.color = $scope.account.meta.color
     $scope.isSearching = true
@@ -48,30 +44,12 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     }
   }
 
-  $rootScope.$on('txnList.updated', function () {
-    // Update txn list
-    $scope.updateAll()
-  })
-
   $scope.openTxModal = function (ntx) {
     $scope.accountId = $scope.account.id
     $state.transitionTo('tabs.account.tx-details', {
       ntx: ntx,
       accountId: $scope.accountId
     })
-  }  
-
-  $scope.openBalanceModal = function () {
-    $ionicModal.fromTemplateUrl('views/modals/wallet-balance.html', {
-      scope: $scope
-    }).then(function (modal) {
-      $scope.accountBalanceModal = modal
-      $scope.accountBalanceModal.show()
-    })
-
-    $scope.close = function () {
-      $scope.accountBalanceModal.hide()
-    }
   }
 
   var updateTxHistory = function () {
@@ -139,11 +117,10 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
     $timeout(function () {
       $scope.$broadcast('scroll.refreshComplete')
     }, 300)
-    $scope.updateAll(true)
+    $scope.updateAll()
   }
 
-  $scope.updateAll = function (force, cb)  {
-    updateStatus(force)
+  $scope.updateAll = function (cb) {
     updateTxHistory(cb)
   }
 
