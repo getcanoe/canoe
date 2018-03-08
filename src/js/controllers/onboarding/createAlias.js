@@ -14,14 +14,16 @@ angular.module('canoeApp.controllers').controller('createAliasController',
       if (alias && alias.length > 0 && alias.charAt(0) === "@") {
         alias = alias.substring(1, alias.length);
       }
-      $scope.aliasValid = alias.length >= 4 && letterRegex.test(alias.charAt(0)) && lnRegex.test(alias);
+      $scope.aliasValid = alias.length >= 3 && letterRegex.test(alias.charAt(0)) && lnRegex.test(alias);
       $scope.checkingAlias = true;
       if ($scope.aliasValid === true) {
         aliasService.lookupAlias(alias, function(err, alias) {
           if (err === null) {
             $scope.aliasRegistered = true;
-          } else {
+          } else if (err === "Could not find alias") {
             $scope.aliasRegistered = false;
+          } else {
+            $scope.aliasRegistered = true;
           }
           $scope.checkingAlias = false;
           $scope.$apply()
