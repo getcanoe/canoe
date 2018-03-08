@@ -135,7 +135,7 @@ module.exports = function(password)
 	var api = {};                       // wallet public methods
 	var private = {};                   // wallet private methods
 
-	var canoeRepresentative = "xrb_1qckwc5o3obkrwbet4amnkya113xq77qpaknsmiq9hwq31tmd5bpyo7sepsw"; // self explaining
+	var canoeRepresentative = "xrb_3rropjiqfxpmrrkooej4qtmm1pueu36f9ghinpho4esfdor8785a455d16nf"; // self explaining
 
 	var id = hexRandom(11);             // Unique id of this wallet, to be used as reference when handling
 	var token = hexRandom(32);          // Secret token (used as username in server account)

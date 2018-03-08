@@ -10,7 +10,7 @@ cd build
 cp ../platforms/android/build/outputs/apk/debug/android-debug.apk canoe-android-$VER-debug.apk
 
 # Make sha1sum checksums
-sha256sum canoe-*-$VER*.* >> checksums-$VER.txt
+sha256sum canoe-*-$VER*.* > checksums-$VER.txt
 
 # Upload all built files, signatures and checksums
 scp canoe-*-$VER*.* $DESTINATION
