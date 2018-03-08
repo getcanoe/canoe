@@ -423,7 +423,19 @@ angular.module('canoeApp.services')
       var accountName = gettextCatalog.getString('Default Account')
       var account = wallet.createAccount({label: accountName})
       resetChain(wallet, account.id) // It may be an already existing account so we want existing blocks
-      root.setWallet(wallet, cb)
+      aliasService.lookupAddress(account.id, function (err, ans) {
+        if (err) {
+          $log.debug(err)
+          root.setWallet(wallet, cb)
+        } else {
+          $log.debug('Answer from alias server looking up ' + account.id + ': ' + JSON.stringify(ans))
+          if (ans && ans.aliases.length > 0) {
+            account.meta.alias = ans.aliases[0];
+            wallet.setMeta(account,meta);
+          }
+          root.setWallet(wallet, cb)
+        }
+      })
     }
 
     // Loads wallet from local storage using given password
