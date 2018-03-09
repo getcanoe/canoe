@@ -33,19 +33,19 @@
       </div>
 
       <div ng-show="btx.type == 'change'">
-          <div ng-if="btx.note" class="wallet-details__tx-message ellipsis">{{btx.note}}</div>
-          <div class="wallet-details__tx-message ellipsis">
-            {{btx.representative}}
-          </div>
-          <div class="wallet-details__tx-message ellipsis" translate>Representative changed</div>
+        <div ng-if="btx.note" class="wallet-details__tx-message ellipsis">{{btx.note}}</div>
+        <div class="wallet-details__tx-message ellipsis">
+          {{btx.representative}}
         </div>
+        <div class="wallet-details__tx-message ellipsis" translate>Representative changed</div>
+      </div>
 
       <span class="label tu warning radius" ng-if="btx.type == 'invalid'" translate>Invalid</span>
     </div>
 
     <span class="item-note text-right wallet-details__tx-amount">
-      <span ng-if="!btx.type == 'change'" class="wallet-details__tx-amount" ng-class="{'wallet-details__tx-amount--recent': btx.recent, 'wallet-details__tx-amount--received': (btx.type == 'receive' || btx.type == 'open'), 'wallet-details__tx-amount--sent': btx.type == 'send'}">
-        <span ng-if="btx.type == 'send'">–</span>
+      <span ng-if="btx.type !== 'change'" class="wallet-details__tx-amount" ng-class="{'wallet-details__tx-amount--recent': btx.recent, 'wallet-details__tx-amount--received': (btx.type == 'receive' || btx.type == 'open'), 'wallet-details__tx-amount--sent': btx.type == 'send'}">
+        <span ng-if="btx.type === 'send'">–</span>
         {{btx.amountStr}}
       </span>
       <div>
