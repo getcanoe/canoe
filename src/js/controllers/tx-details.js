@@ -29,9 +29,8 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
 
   $scope.refund = function () {
     addressbookService.get($scope.ntx.origin, function (err, addr) {
-      // The 3 next lines are required to get the "Back" button of 'confirm.html' to work properly
       $ionicHistory.clearHistory()
-      $state.go('tabs.home').then(function () {
+      $state.go('tabs.send').then(function () {
         $timeout(function () {
           $state.transitionTo('tabs.send.confirm', {
             recipientType: addr ? 'contact' : null,
