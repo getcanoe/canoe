@@ -112,7 +112,7 @@
       View on Nanode
     </button>
 
-    <button ng-if="ntx.origin && ntx.type === 'receive'" class="button button-standard button-primary" ng-click="refund()" ng-show="hasFunds" translate>Refund</button>
+    <button ng-if="ntx.origin && (ntx.type === 'receive' || ntx.type === 'open')" class="button button-standard button-primary" ng-click="refund()" ng-show="hasFunds" translate>Refund</button>
 
   </ion-content>
 </ion-view>
