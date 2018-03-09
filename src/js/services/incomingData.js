@@ -39,9 +39,9 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         'reload': true,
         'notify': $state.current.name !== 'tabs.send'
       })
-      var toName = null;
-      if (typeof alias !== "undefined" && alias !== null) {
-        toName = "@"+alias;
+      var toName = null
+      if (typeof alias !== 'undefined' && alias !== null) {
+        toName = '@' + alias
       }
       // Timeout is required to enable the "Back" button
       $timeout(function () {
@@ -64,7 +64,9 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     // Some smart fixes
     data = sanitizeUri(data)
     nanoService.parseQRCode(data, function (err, code) {
-      if (code === null) {
+      // If we get error here, we can't pop up since this is incremental input etc
+      if (!code) {
+        $log.debug('Parse error: ' + err)
         return false
       }
       var protocol = code.protocol
@@ -120,9 +122,9 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       'reload': true,
       'notify': $state.current.name !== 'tabs.send'
     })
-    var toName = null;
-    if (typeof toAlias !== "undefined" && toAlias !== null) {
-      toName = "@"+toAlias;
+    var toName = null
+    if (typeof toAlias !== 'undefined' && toAlias !== null) {
+      toName = '@' + toAlias
     }
     $timeout(function () {
       $state.transitionTo('tabs.send.amount', {

@@ -30,7 +30,7 @@ angular.module('canoeApp.controllers').controller('importController',
       nanoService.parseQRCode(data, function (err, code) {
         if (err) {
           // Trying to import a malformed seed QR code
-          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Incorrect code format for a seed: ' + code))
+          popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Incorrect code format for a seed: ' + err))
           return
         }
         if (code.protocol === 'xrbseed' || code.protocol === 'nanoseed') {

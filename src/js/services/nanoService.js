@@ -268,7 +268,7 @@ angular.module('canoeApp.services')
             parts = parts[0]
           } else {
             // Nope, give up
-            return cb('Unknown format of QR code')
+            return cb('Unknown format of QR code: ' + data)
           }
         } else {
           code.protocol = parts[0]
@@ -322,7 +322,8 @@ angular.module('canoeApp.services')
           cb(null, code)
         }
       } catch (e) {
-        // Do nothing
+        // Some other error
+        cb(e)
       }
     }
 
