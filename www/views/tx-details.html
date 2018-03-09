@@ -8,7 +8,8 @@
   </ion-nav-bar>
 
   <ion-content class="tx-details-content">
-    <div class="list" ng-if="ntx">
+
+    <div class="list" ng-if="ntx && ntx.type !== 'change'">
       <div class="item head">
         <div class="sending-label">
           <img src="img/icon-tx-sent-outline.svg" ng-if="ntx.type === 'send'">
@@ -98,14 +99,26 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="list" ng-if="ntx && ntx.type === 'change'">
+      <div class="item head">
+        <div class="sending-label">
+          <img src="img/icon-tx-rep.svg">
+          <span translate>Representative changed</span>
+        </div>
+
+        <div class="amount-label">
+          <div class="alternative">{{ntx.representative}}</span></div>
+        </div>
+      </div>
     </div>
 
     <button ng-if="ntx" class="button button-standard button-primary" ng-click="viewOnNanode()" translate>
       View on Nanode
     </button>
 
-    <button ng-if="ntx.origin && ntx.type !== 'send'" class="button button-standard button-primary" ng-click="refund()" ng-show="hasFunds" translate>Refund</button>
+    <button ng-if="ntx.origin && ntx.type === 'receive'" class="button button-standard button-primary" ng-click="refund()" ng-show="hasFunds" translate>Refund</button>
 
   </ion-content>
 </ion-view>
