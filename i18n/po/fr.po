@@ -1837,146 +1837,146 @@ msgstr "Transférez des Nano instantanément, n'importe où, vers n'importe qui.
 
 #: www/views/preferencesRepresentative.html:4
 msgid "Account Representative"
-msgstr ""
+msgstr "Procurateur de compte"
 
 #: src/js/controllers/confirm.js:350
 msgid "Add to address book?"
-msgstr ""
+msgstr "Ajouter cette adresse au carnet d'adresses?"
 
 #: www/views/addressbook.add.html:70 www/views/addressbook.edit.html:70
 msgid "Alias Found!"
-msgstr ""
+msgstr "Alias trouvé!"
 
 #: www/views/onboarding/alias.html:12
 msgid "At least 3 Characters."
-msgstr ""
+msgstr "Au moins trois charactères"
 
 #: www/views/onboarding/alias.html:20 www/views/preferencesAlias.html:24
 msgid "Checking availablity"
-msgstr ""
+msgstr "Vérification de la disponibilité"
 
 #: www/views/onboarding/alias.html:60
 msgid "Create Alias"
-msgstr ""
+msgstr "Enregistrez un alias"
 
 #: src/js/services/onGoingProcess.js:15
 msgid "Creating Alias..."
-msgstr ""
+msgstr "Création d'alias..."
 
 #: src/js/controllers/confirm.js:351
 msgid "Do you want to add this new address to your address book?"
-msgstr ""
+msgstr "Voulez-vous ajouter cette adresse dans votre carnet d'adresses?"
 
 #: www/views/preferencesAlias.html:13
 msgid "Edit your alias."
-msgstr ""
+msgstr "Editer l'alias."
 
 #: src/js/services/onGoingProcess.js:16
 msgid "Editing Alias..."
-msgstr ""
+msgstr "Edition de l'alias..."
 
 #: www/views/onboarding/alias.html:35
 msgid "Email for recovering your alias"
-msgstr ""
+msgstr "Email de récupération d'alias"
 
 #: www/views/preferencesRepresentative.html:11
 msgid "Enter a representative account."
-msgstr ""
+msgstr "Compte de procuration."
 
 #: src/js/controllers/import.js:62
 msgid "Error importing wallet:"
-msgstr ""
+msgstr "Erreur d'import de portefeuille"
 
 #: www/views/tab-settings.html:134
 msgid "How to buy Nano"
-msgstr ""
+msgstr "Acheter des Nanos"
 
 #: src/js/controllers/tab-settings.js:59
 msgid "How to buy and sell Nano is described at the website."
-msgstr ""
+msgstr "La procédure pour acheter des Nanos est décrite sur le site web."
 
 #: www/views/advancedSettings.html:14
 msgid "If enabled, Proof Of Work is delegated to the Canoe server side. Currently always true."
-msgstr ""
+msgstr "Activé, la preuve de travail (POW) est déléguée au serveur. Pour l'instant, toujours à vrai."
 
 #: www/views/addressbook.add.html:74 www/views/addressbook.edit.html:74
 #: www/views/onboarding/alias.html:28 www/views/preferencesAlias.html:32
 msgid "Invalid Alias!"
-msgstr ""
+msgstr "Alias invalide!"
 
 #: www/views/onboarding/alias.html:43 www/views/preferencesAlias.html:40
 msgid "Invalid Email!"
-msgstr ""
+msgstr "Email invalide!"
 
 #: www/views/onboarding/alias.html:5
 msgid "Let People Easily Find you With Aliases"
-msgstr ""
+msgstr "Permettez aux gens de vous trouver facilement avec les Aliases!"
 
 #: www/views/onboarding/alias.html:55
 msgid "Link my wallet to my phone number."
-msgstr ""
+msgstr "Lier mon portefeuille à mon numéro de téléphone."
 
 #: www/views/addressbook.add.html:66 www/views/addressbook.edit.html:66
 msgid "Looking up @{{addressbookEntry.alias}}"
-msgstr ""
+msgstr "Recherche de @{{addressbookEntry.alias}}"
 
 #: www/views/onboarding/alias.html:52 www/views/preferencesAlias.html:47
 msgid "Make my alias private."
-msgstr ""
+msgstr "Rendre mon alias privé."
 
 #: www/views/tx-details.html:115
 msgid "Refund"
-msgstr ""
+msgstr "Rembourser"
 
 #: src/js/controllers/advancedSettings.js:17
 msgid "Repairing your wallet could take some time. This will reload all blockchains associated with your wallet. Are you sure you want to repair?"
-msgstr ""
+msgstr "Réparer votre portefeuille peut prendre du temps. Cela implique le rechargement de toutes les blockchains associées à votre portefeuille. Etes-vous sur de vouloir réparer ?"
 
 #: www/views/preferences.html:30 www/views/preferencesRepresentative.html:17
 msgid "Representative"
-msgstr ""
+msgstr "Procurateur"
 
 #: www/views/includes/accountHistory.html:40 www/views/tx-details.html:19
 msgid "Representative changed"
-msgstr ""
+msgstr "Procurateur changé"
 
 #: www/views/onboarding/alias.html:24 www/views/preferencesAlias.html:28
 msgid "That alias is taken!"
-msgstr ""
+msgstr "Cet alias est déjà pris!"
 
 #: src/js/controllers/onboarding/terms.js:21
 msgid "The official English Terms of Service are available on the Canoe website."
-msgstr ""
+msgstr "Les conditions d'utilisation (en anglais) sont disponibles sur le site getCanoe."
 
 #: www/views/onboarding/alias.html:47 www/views/preferencesAlias.html:44
 msgid "Valid Alias & Email"
-msgstr ""
+msgstr "Alias&Email valides"
 
 #: src/js/controllers/tx-details.js:93
 msgid "View Block on Nanode"
-msgstr ""
+msgstr "Voir le block sur Nanode"
 
 #: www/views/tx-details.html:111
 msgid "View on Nanode"
-msgstr ""
+msgstr "Voir sur Nanode"
 
 #: www/views/preferencesAlias.html:11
 msgid "What alias would you like to reserve?"
-msgstr ""
+msgstr "Quel alias voulez-vous réserver?"
 
 #: www/views/preferencesAlias.html:14
 msgid "You can change your alias, email, or privacy settings."
-msgstr ""
+msgstr "Vous pouvez modifier votre alias, email, ou préférences de privacité."
 
 #: src/js/controllers/changePasswordController.js:10
 msgid "Your old password was not entered correctly"
-msgstr ""
+msgstr "Votre ancien mot de passe n'a pas été saisi correctement"
 
 #: www/views/addressbook.add.html:33 www/views/addressbook.edit.html:33
 msgid "joe.doe@example.com"
-msgstr ""
+msgstr "pierre.dupont@exemple.fr"
 
 #: www/views/addressbook.add.html:59 www/views/addressbook.edit.html:59
 msgid "joedoe"
-msgstr ""
+msgstr "pierredupont"
 
