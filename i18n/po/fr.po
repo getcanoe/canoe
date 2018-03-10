@@ -1980,3 +1980,19 @@ msgstr "pierre.dupont@exemple.fr"
 msgid "joedoe"
 msgstr "pierredupont"
 
+#: www/views/modals/password.html:12
+msgid "Canoe is Locked"
+msgstr "Canoe est verrouillé"
+
+#: www/views/modals/password.html:13
+msgid "For your security, Canoe always encrypts your wallet."
+msgstr "Pour votre sécurité, Canoe encrypte toujours votre portefeuille."
+
+#: www/views/modals/password.html:26
+msgid "Forgot Password?"
+msgstr "Mot de passe oublié?"
+
+#: www/views/modals/password.html:27
+msgid "Load wallet from seed."
+msgstr "Charger le portefeuille à partir d'une graine (seed)?"
+
