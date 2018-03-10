@@ -7,7 +7,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     $rootScope.$broadcast('incomingDataMenu.showMenu', data)
   }
 
-  root.redir = function (data) {
+  root.redir = function (data, cb) {
     $log.debug('Processing incoming data: ' + data)
 
     function sanitizeUri (data) {
@@ -65,9 +65,14 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     data = sanitizeUri(data)
     nanoService.parseQRCode(data, function (err, code) {
       // If we get error here, we can't pop up since this is incremental input etc
-      if (!code) {
-        $log.debug('Parse error: ' + err)
-        return false
+      // so let cb handle it if we have it
+      if (err) {
+        if (cb) {
+          return cb(err, code)
+        } else {
+          $log.debug('Parse QR code error: ' + err)
+          return false
+        }
       }
       var protocol = code.protocol
       if (protocol === 'xrb' || protocol === 'raiblocks' || protocol === 'nano') {
@@ -86,7 +91,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
             goToAmountPage(code.account)
           }
         }
-        return true
+        return cb(null, code)
       } else if (protocol === 'xrbkey' || protocol === 'nanokey') {
         // A private key
         // xrbkey:<encoded private key>[?][label=<label>][&][message=<message>]
@@ -113,7 +118,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
           })
         }
       }
-      return false
+      return cb(null, code)
     })
   }
 

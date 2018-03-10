@@ -98,31 +98,30 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   $scope.findContact = function (search) {
     // If redir returns true it matched something and
     // will already have moved us to amount.
-    if (incomingData.redir(search)) {
-      return
-    }
-
-    if (!search || search.length < 2) {
-      $scope.list = originalList
-      $timeout(function () {
-        $scope.$apply()
-      })
-      return
-    }
-
-    var sea = search.toLowerCase()
-    var result = lodash.filter(originalList, function (item) {
-      return (
-        // If name has substring, or address startsWith, or email startsWith
-        // or alias startsWith
-        lodash.includes(item.name.toLowerCase(), sea) ||
-        (item.address && item.address.toLowerCase().startsWith(sea)) ||
-        (item.alias && item.alias.toLowerCase().startsWith(sea)) ||
-        (item.email && item.email.toLowerCase().startsWith(sea))
-      )
+    incomingData.redir(search, function (err, code) {
+      if (err) {
+        // Ok, redir did not match anything, then we search
+        if (!search || search.length < 2) {
+          $scope.list = originalList
+          $timeout(function () {
+            $scope.$apply()
+          })
+          return
+        }
+        var sea = search.toLowerCase()
+        var result = lodash.filter(originalList, function (item) {
+          return (
+            // If name has substring, or address startsWith, or email startsWith
+            // or alias startsWith
+            lodash.includes(item.name.toLowerCase(), sea) ||
+            (item.address && item.address.toLowerCase().startsWith(sea)) ||
+            (item.alias && item.alias.alias.toLowerCase().startsWith(sea)) ||
+            (item.email && item.email.toLowerCase().startsWith(sea))
+          )
+        })
+        $scope.list = result
+      }
     })
-
-    $scope.list = result
   }
 
   $scope.goToAmount = function (item) {

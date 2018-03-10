@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('tabScanController', function ($scope, $log, $timeout, scannerService, soundService, incomingData, $state, $ionicHistory, $rootScope) {
+angular.module('canoeApp.controllers').controller('tabScanController', function ($scope, $log, $timeout, scannerService, popupService, gettextCatalog, soundService, incomingData, $state, $ionicHistory, $rootScope) {
   var scannerStates = {
     unauthorized: 'unauthorized',
     denied: 'denied',
@@ -100,7 +100,17 @@ angular.module('canoeApp.controllers').controller('tabScanController', function 
   function handleSuccessfulScan (contents) {
     $log.debug('Scan returned: "' + contents + '"')
     scannerService.pausePreview()
-    incomingData.redir(contents)
+    incomingData.redir(contents, function (err, code) {
+      if (err) {
+        popupService.showAlert(
+          gettextCatalog.getString('Error'),
+          gettextCatalog.getString('Unrecognized data'), function () {
+            // Try again
+            activate()
+          }
+        )
+      }
+    })
   }
 
   $rootScope.$on('incomingDataMenu.menuHidden', function () {

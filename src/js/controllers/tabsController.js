@@ -2,9 +2,11 @@
 /* global angular */
 angular.module('canoeApp.controllers').controller('tabsController', function ($rootScope, $log, $scope, $state, $stateParams, $timeout, platformInfo, incomingData, lodash, popupService, gettextCatalog, scannerService) {
   $scope.onScan = function (data) {
-    if (!incomingData.redir(data)) {
-      popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Invalid data'))
-    }
+    incomingData.redir(data, function (err, code) {
+      if (err) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Unrecognized data'))
+      }
+    })
   }
 
   $scope.setScanFn = function (scanFn) {

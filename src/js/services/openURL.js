@@ -28,9 +28,11 @@ angular.module('canoeApp.services').factory('openURLService', function ($rootSco
 
     document.addEventListener('handleopenurl', handleOpenURL, false)
 
-    if (!incomingData.redir(url)) {
-      $log.warn('Unknown URL! : ' + url)
-    }
+    incomingData.redir(url, function (err, code) {
+      if (err) {
+        $log.warn('Unknown URL! : ' + url)
+      }
+    })
   }
 
   var handleResume = function () {
