@@ -1681,7 +1681,19 @@ msgid "Wallet Password\n"
 "\t\t\t\t\t<span translate=\"\">Timeout</span>\n"
 "\t\t\t\t</div>\n"
 "\t\t\t</div>"
-msgstr ""
+msgstr "Wallet Password\n"
+"\t\t\t<div class=\"list settings-list\">\n"
+"\t\t\t\t<p class=\"item-description\" translate=\"\">Una password  viene utilizzata per crittografare il tuo portafoglio Nano quando lo si salva sul dispositivo.</p>\n"
+"\t\t\t\t<a class=\"item item-icon-left item-icon-right\" ui-sref=\"tabs.preferencesSecurity.changePassword\">\n"
+"\t\t\t\t\t<i class=\"icon ion-ios-download-outline\"></i>\n"
+"\t\t\t\t\t<span translate=\"\">Cambia la password</span>\n"
+"\t\t\t\t\t<i class=\"icon bp-arrow-right\"></i>\n"
+"\t\t\t\t</a>\n"
+"\t\t\t\t<div class=\"item item-icon-left\">\n"
+"\t\t\t\t\t<i class=\"icon ion-ios-time-outline\"></i>\n"
+"\t\t\t\t\t<span translate=\"\">Timeout</span>\n"
+"\t\t\t\t</div>\n"
+"\t\t\t</div>"
 
 #: www/views/preferencesLanguage.html:16
 msgid "We’re always looking for translation contributions! You can make corrections or help to make this app available in your native language by joining our community on POEditor."
@@ -1980,4 +1992,20 @@ msgstr "mario.rossi@mail.it"
 #: www/views/addressbook.add.html:59 www/views/addressbook.edit.html:59
 msgid "joedoe"
 msgstr "mariorossi"
+
+#: www/views/modals/password.html:12
+msgid "Canoe is Locked"
+msgstr "Canoe è bloccato"
+
+#: www/views/modals/password.html:13
+msgid "For your security, Canoe always encrypts your wallet."
+msgstr "Per la tua sicurezza, Canoa cripta sempre il tuo portafoglio."
+
+#: www/views/modals/password.html:26
+msgid "Forgot Password?"
+msgstr "Dimenticata la password?"
+
+#: www/views/modals/password.html:27
+msgid "Load wallet from seed."
+msgstr "Ripristina il portafoglio dal seme"
 
