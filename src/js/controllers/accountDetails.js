@@ -53,7 +53,7 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   }
 
   var updateTxHistory = function () {
-    $scope.completeTxHistory = profileService.getTxHistory($scope.account.id)
+    $scope.completeTxHistory = $scope.account ? profileService.getTxHistory($scope.account.id) : []
     if ($scope.completeTxHistory[0]) {
       $scope.showNoTransactionsYetMsg = false
     } else {
