@@ -276,6 +276,10 @@ msgstr ""
 msgid "Cannot Create Wallet"
 msgstr ""
 
+#: www/views/modals/password.html:12
+msgid "Canoe is Locked"
+msgstr ""
+
 #: www/views/onboarding/tour.html:46
 msgid "Canoe stores your Nano using cutting-edge security."
 msgstr ""
@@ -715,6 +719,14 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
+#: www/views/modals/password.html:13
+msgid "For your security, Canoe always encrypts your wallet."
+msgstr ""
+
+#: www/views/modals/password.html:26
+msgid "Forgot Password?"
+msgstr ""
+
 #: www/views/confirm.html:65
 #: www/views/modals/txp-details.html:74
 #: www/views/tx-details.html:50
@@ -975,6 +987,10 @@ msgstr ""
 
 #: www/views/onboarding/alias.html:55
 msgid "Link my wallet to my phone number."
+msgstr ""
+
+#: www/views/modals/password.html:27
+msgid "Load wallet from seed."
 msgstr ""
 
 #: src/js/services/onGoingProcess.js:30
