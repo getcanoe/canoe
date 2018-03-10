@@ -17,7 +17,7 @@ angular.module('canoeApp.controllers').controller('addressbookAddController', fu
         nanoService.parseQRCode(data, function (err, code) {
           if (err) {
             // Trying to scan an incorrect QR code
-            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Incorrect code format for an account: ' + code))
+            popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Incorrect code format for an account: ' + err))
             return
           }
           form.address.$setViewValue(code.account)
