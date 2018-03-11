@@ -6,5 +6,6 @@ Exec=canoe
 Icon=canoe
 Terminal=false
 Categories=Office;Network
+MimeType=x-scheme-handler/xrb;
 X-Ubuntu-Touch=true
 X-Ubuntu-StageHint=SideStage
