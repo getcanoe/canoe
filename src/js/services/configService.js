@@ -22,6 +22,10 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
     },
     // wallet default config
     wallet: {
+      timeoutA: 60,
+      timeoutB: 1800,
+      lockTypeA: 'PIN',
+      lockTypeBackground: 'PIN',
       serverSidePoW: true,
       settings: {
         unitName: 'NANO',
