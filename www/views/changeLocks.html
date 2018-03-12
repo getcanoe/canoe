@@ -1,0 +1,74 @@
+<ion-view cache-view="false" class="settings" show-tabs>
+  <ion-nav-bar class="bar-royal">
+    <ion-nav-title>{{'Change Lock Settings' | translate}}</ion-nav-title>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content>
+
+		<form name='changeLocks' novalidate>
+			<div class="list settings-list settings-input-group">
+
+				<div class="comment" translate>
+					After the first timeout A in seconds, Canoe is locked using selected lock type. Choosing None disables locking after timeout A.
+				</div>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label" translate>Timeout A</span>
+					<input type="number"
+						placeholder="{{'Timeout in seconds'|translate}}"
+						ng-model="timeoutA"
+						name="timeoutA"
+						required>
+				</label>
+
+				<label class="item item-input item-stacked-label">
+					<span class="input-label" translate>Lock type after timeout A</span>
+					<div class="list">
+						<ion-radio name="lockTypeA" ng-value="'none'" ng-model="lockTypeA" ng-click="saveLockTypeA('none')">None</ion-radio>
+						<ion-radio name="lockTypeA" ng-value="'pin'" ng-model="lockTypeA" ng-click="saveLockTypeA('pin')">4-digit PIN</ion-radio>
+						<ion-radio name="lockTypeA" ng-value="'fingerprint'" ng-model="lockTypeA" ng-click="saveLockTypeA('fingerprint')">Fingerprint</ion-radio>		
+					</div>
+				</label>
+
+				<div class="comment" translate>
+					After the second timeout B, Canoe will lock and demand password to unlock. You can not disable this timeout, but you can set it very high.</p>
+				</div>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label" translate>Timeout B</span>
+					<input type="number"
+						placeholder="{{'Timeout in seconds'|translate}}"
+						ng-model="timeoutB"
+						name="timeoutB"
+						required>
+				</label>
+
+				<div class="comment" translate>
+					When Canoe goes to background, this is the lock type used when coming back to foreground. Disable background locking by selecting None.</p>
+				</div>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label" translate>Lock type when going to background</span>
+					<div class="list">
+						<ion-radio name="lockTypeBackground" ng-value="'none'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('none')">None</ion-radio>
+						<ion-radio name="lockTypeBackground" ng-value="'pin'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('pin')">4-digit PIN</ion-radio>
+						<ion-radio name="lockTypeBackground" ng-value="'fingerprint'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('fingerprint')">Fingerprint</ion-radio>
+						<ion-radio name="lockTypeBackground" ng-value="'password'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('password')">Password</ion-radio>
+					</div>
+				</label>
+
+			</div>
+
+			<div class="cta-buttons">
+				<button
+					class="button button-standard button-primary"
+					ng-disabled="false"
+					type="submit"
+					ng-click="save(timeoutA, timeoutB)"
+					translate>
+					Save
+				</button>
+			</div>
+		</form>
+
+	</ion-content>
+</ion-view>

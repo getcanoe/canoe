@@ -435,8 +435,8 @@ angular.module('canoeApp.services')
         } else {
           $log.debug('Answer from alias server looking up ' + account.id + ': ' + JSON.stringify(ans))
           if (ans && ans.aliases.length > 0) {
-            account.meta.alias = ans.aliases[0];
-            wallet.setMeta(account,meta);
+            account.meta.alias = ans.aliases[0]
+            wallet.setMeta(account, account.meta)
           }
           root.setWallet(wallet, cb)
         }
