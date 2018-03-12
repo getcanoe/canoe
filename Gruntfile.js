@@ -55,10 +55,6 @@ module.exports = function (grunt) {
       androidbuild: {
         command: 'cd cordova/project && cordova build android --release'
       },
-      androidsign: {
-        command: 'rm -f cordova/project/platforms/android/build/outputs/apk/release/android-release-signed-aligned.apk; jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../canoe.keystore -signedjar cordova/project/platforms/android/build/outputs/apk/release/android-release-signed.apk  cordova/project/platforms/android/build/outputs/apk/release/android-release-unsigned.apk canoe && ../android-sdk-macosx/build-tools/21.1.1/zipalign -v 4 cordova/project/platforms/android/build/outputs/apk/release/android-release-signed.apk cordova/project/platforms/android/build/outputs/apk/release/android-release-signed-aligned.apk ',
-        stdin: true
-      },
       desktopsign: {
         cmd: 'gpg -u E7ADC266 --output build/canoe-linux64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-linux64-<%= pkg.version %>.zip ; gpg -u E7ADC266 --output build/canoe-win64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-win64-<%= pkg.version %>.zip ; gpg -u E7ADC266 --output build/canoe-osx64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-osx64-<%= pkg.version %>.zip'
       },
@@ -221,7 +217,7 @@ module.exports = function (grunt) {
       options: {
         platforms: ['win64', 'osx64', 'linux64'],
         flavor: 'normal',
-        version: '0.28.2',
+        version: '0.19.5',
         macIcns: './resources/canoe/mac/app.icns',
         exeIco: './www/img/app/logo.ico',
         macPlist: {
@@ -289,6 +285,5 @@ module.exports = function (grunt) {
   grunt.registerTask('cordovaclean', ['exec:cordovaclean'])
   grunt.registerTask('android-debug', ['exec:androiddebug', 'exec:androidrun'])
   grunt.registerTask('android', ['exec:android'])
-  grunt.registerTask('android-release', ['prod', 'exec:android', 'exec:androidsign'])
   grunt.registerTask('desktopsign', ['exec:desktopsign', 'exec:desktopverify'])
 }
