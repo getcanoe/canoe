@@ -57,8 +57,11 @@ angular.module('canoeApp.services')
         if (accAndHash) {
           if (doLog) $log.info('Working on precalc for ' + accAndHash.account)
           doWork(accAndHash.hash, function (work) {
-            root.wallet.addWorkToPrecalc(accAndHash.account, accAndHash.hash, work)
-            root.saveWallet(root.wallet, function () {})
+            // Wallet may be purged from RAM, so need to check
+            if (root.wallet) {
+              root.wallet.addWorkToPrecalc(accAndHash.account, accAndHash.hash, work)
+              root.saveWallet(root.wallet, function () {})
+            }
             setTimeout(generatePoW, 1000)
           })
         } else {

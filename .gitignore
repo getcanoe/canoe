@@ -92,3 +92,5 @@ www/lib/*
 www/js/*
 www/raiwallet/braiwallet.js
 .eslint.json
+
+dist
