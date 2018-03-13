@@ -28,7 +28,7 @@
   },
   "chromium-args": "--disable-devtools",
   "build": {
-    "nwVersion": "0.28.2"
+    "nwVersion": "0.29.0"
   },
   "webkit": {
     "page-cache": false,
@@ -96,7 +96,7 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-exec": "^3.0.0",
-    "grunt-nw-builder": "git+https://github.com/Saravanan90/grunt-nw-builder.git",
+    "grunt-nw-builder": "git+https://github.com/leap-academy/grunt-nw-builder.git",
     "grunt-sass": "^2.1.0",
     "ionic-plugin-keyboard": "2.2.1",
     "load-grunt-tasks": "^3.5.2",
