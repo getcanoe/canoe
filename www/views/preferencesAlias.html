@@ -17,7 +17,7 @@
       <div class="list settings-input-group">
         <label class="item item-input item-stacked-label">
           <span class="input-label" translate>Alias</span>
-          <input type="text" id="alias" ng-change="validateAlias(alias.value.alias)" name="alias" ng-model="alias.value.alias" placeholder="johnsmith" required>
+          <input type="text" id="alias" autocorrect="off" autocapitalize="none" ng-change="validateAlias(alias.value.alias)" name="alias" ng-model="alias.value.alias" placeholder="johnsmith" required>
         </label>
         <label class="item item-input item-stacked-label pending" ng-show="alias.value.alias && aliasValid && checkingAlias">
           <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
@@ -33,7 +33,7 @@
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label" translate>Email</span>
-          <input type="text" id="email" ng-change="validateEmail(alias.value.email)" name="email" ng-model="alias.value.email" placeholder="email@email.com" required>
+          <input type="email" id="email" ng-change="validateEmail(alias.value.email)" name="email" ng-model="alias.value.email" placeholder="email@email.com" required>
         </label>
         <label class="item item-input item-stacked-label not-matching" ng-show="alias.value.email && emailValid === false">
           <i class="fa fa-times-circle-o" aria-hidden="true"></i>
