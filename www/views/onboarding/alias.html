@@ -11,6 +11,8 @@
                 <input type="text"
                   placeholder="{{'At least 3 Characters.'|translate}}"
                   ng-model="alias"
+                  autocorrect="off"
+                  autocapitalize="none"
                   ng-change="validateAlias(alias)"
                   name="alias"
                   required
@@ -31,7 +33,7 @@
 
               <label class="item item-input item-stacked-label">
                 <span class="input-label" translate>Email</span>
-                <input type="text"
+                <input type="email"
                   placeholder="{{'Email for recovering your alias'|translate}}"
                   ng-model="email"
                   ng-change="validateEmail(email)"

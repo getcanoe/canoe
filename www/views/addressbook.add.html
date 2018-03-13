@@ -28,7 +28,7 @@
         </label>
         <label class="item item-input item-stacked-label">
           <span class="input-label" translate>Email</span>
-          <input type="text"
+          <input type="email"
                  id="email"
                  placeholder="{{'joe.doe@example.com' | translate}}"
                  name="email"
@@ -58,6 +58,8 @@
                  id="alias"
                  placeholder="{{'joedoe' | translate}}"
                  name="alias"
+                 autocorrect="off"
+                 autocapitalize="none"
                  ng-change="validateAlias(addressbookEntry.alias)"
                  ng-model="addressbookEntry.alias">
         </label>
