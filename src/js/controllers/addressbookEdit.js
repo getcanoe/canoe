@@ -37,32 +37,32 @@ angular.module('canoeApp.controllers').controller('addressbookEditController', f
       $scope.$digest()
     }, 100)
   }
-  var letterRegex = XRegExp('^\\p{Ll}+$');
-  var lnRegex = XRegExp('^(\\p{Ll}|\\pN)+$');
-  $scope.aliasValid = null;
-  $scope.aliasRegistered = null;
-  $scope.checkingAlias = false;
-  $scope.validateAlias = function(alias) {
-    $scope.aliasRegistered = null;
-    if (alias && alias.length > 0 && alias.charAt(0) === "@") {
-      alias = alias.substring(1, alias.length);
+  var letterRegex = XRegExp('^\\p{Ll}+$')
+  var lnRegex = XRegExp('^(\\p{Ll}|\\pN)+$')
+  $scope.aliasValid = null
+  $scope.aliasRegistered = null
+  $scope.checkingAlias = false
+  $scope.validateAlias = function (alias) {
+    $scope.aliasRegistered = null
+    if (alias && alias.length > 0 && alias.charAt(0) === '@') {
+      alias = alias.substring(1, alias.length)
     }
-    $scope.aliasValid = alias.length >= 3 && letterRegex.test(alias.charAt(0)) && lnRegex.test(alias);
-    $scope.checkingAlias = true;
+    $scope.aliasValid = alias.length >= 3 && letterRegex.test(alias.charAt(0)) && lnRegex.test(alias)
+    $scope.checkingAlias = true
     if ($scope.aliasValid === true) {
-      aliasService.lookupAlias(alias, function(err, alias) {
+      aliasService.lookupAlias(alias, function (err, alias) {
         if (err === null) {
-          $scope.aliasRegistered = true;
-          $scope.addressbookEntry.address = alias.alias.address;
-          $scope.addressbookEntry.name = "@"+alias.alias.alias;
-        } else if (err === "Could not find alias") {
-          $scope.aliasRegistered = false;
+          $scope.aliasRegistered = true
+          $scope.addressbookEntry.address = alias.alias.address
+          $scope.addressbookEntry.name = '@' + alias.alias.alias
+        } else if (err === 'Could not find alias') {
+          $scope.aliasRegistered = false
         }
-        $scope.checkingAlias = false;
+        $scope.checkingAlias = false
         $scope.$apply()
-      });
+      })
     } else {
-      $scope.checkingAlias = false;
+      $scope.checkingAlias = false
     }
   }
 
@@ -74,9 +74,9 @@ angular.module('canoeApp.controllers').controller('addressbookEditController', f
           return
         }
         if ($scope.fromSendTab) {
-          $scope.goHome();
+          $scope.goHome()
         } else {
-          $state.go('tabs.addressbook');
+          $state.go('tabs.addressbook')
         }
       })
     }, 100)

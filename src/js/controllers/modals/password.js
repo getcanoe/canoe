@@ -65,6 +65,21 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     }
   }
 
+  $scope.gotoOnboarding = function () {
+    var title = gettextCatalog.getString('Warning!')
+    var message = gettextCatalog.getString('Going back to onboarding replaces the current wallet, are you sure?')
+    popupService.showConfirm(title, message, null, null, function (res) {
+      if (!res) return
+      $scope.hideModal()
+      // Go to import seed
+      $ionicHistory.nextViewOptions({
+        disableAnimate: true,
+        historyRoot: true
+      })
+      $state.go('onboarding.welcome')
+    })
+  }
+
   $scope.unlock = function (value) {
     if ($scope.disableButton) return // Should not happen
     $scope.error = false
