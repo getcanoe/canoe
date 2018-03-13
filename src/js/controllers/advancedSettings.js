@@ -8,7 +8,7 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
       value: config.wallet.serverSidePoW
     }
     $scope.recentTransactionsEnabled = {
-      value: config.recentTransactions.enabled
+      value: false // config.recentTransactions.enabled
     }
   }
 
