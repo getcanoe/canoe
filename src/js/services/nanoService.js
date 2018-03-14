@@ -4,6 +4,11 @@ angular.module('canoeApp.services')
   .factory('nanoService', function ($log, $rootScope, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
 
+    var POW
+    if (platformInfo.isNW) {
+      POW = require('raiblocks-pow')
+    }
+
     // This is where communication happens. This service is mostly called from profileService.
     // We use either XMLHttpRpc calls via rai (RaiblocksJS modified) or MQTT-over-WSS.
 
@@ -77,24 +82,51 @@ angular.module('canoeApp.services')
       }
     }
 
+    // Perform PoW calculation using different techniques based on platform
+    // and the server or client side setting.
     function doWork (hash, callback) {
-      // Do work server or client side?
+      var start = Date.now()
+      // Server or client side?
       if (configService.getSync().wallet.serverSidePoW) {
         // Server side
         if (doLog) $log.info('Working on server for ' + hash)
         rai.work_generate_async(hash, function (work) {
-          if (doLog) $log.info('Server side PoW found for ' + hash + ': ' + work)
+          if (doLog) $log.info('Server side PoW found for ' + hash + ': ' + work + ' took: ' + (Date.now() - start) + ' ms')
           callback(work)
         })
       } else {
         // Client side
-        powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
-        pow_callback(powWorkers, hash, function () {
-          if (doLog) $log.info('Working on client for ' + hash)
-        }, function (work) {
-          if (doLog) $log.info('Client side PoW found for ' + hash + ': ' + work)
-          callback(work)
-        })
+        if (false) { // platformInfo.isCordova) {
+          // Cordova plugin for libsodium, not working yet...
+          if (window.plugins.MiniSodium) {
+            if (doLog) $log.info('Working on client (MiniSodium) for ' + hash)
+            window.plugins.MiniSodium.crypto_generichash(8, hash, null, function (err, result) {
+              if (err) return $log.error('Failed to compute client side PoW: ' + err)
+              $log.info('Client side PoW found for ' + result + ' took: ' + (Date.now() - start) + ' ms')
+              callback(result)
+            })
+          }
+        } else {
+          // node-raiblocks-pow (native C implementation for NodeJS, works on Desktop)
+          if (platformInfo.isNW) {
+            if (doLog) $log.info('Working on client (threaded node-raiblocks-pow) for ' + hash)
+            POW.threaded(hash, (err, result) => {
+              if (err) return $log.error('Failed to compute client side PoW: ' + err)
+              $log.info('Client side PoW found for ' + result + ' took: ' + (Date.now() - start) + ' ms')
+              callback(result)
+            })
+          } else {
+            // pow.wasm solution (slower but works in Chrome and is js only)
+            if (doLog) $log.info('Working on client (pow.wasm) for ' + hash)
+            powWorkers = pow_initiate(NaN, 'raiwallet/') // NaN = let it find number of threads
+            pow_callback(powWorkers, hash, function () {
+              // Do nothing
+            }, function (result) {
+              $log.info('Client side PoW found for ' + result + ' took: ' + (Date.now() - start) + ' ms')
+              callback(result)
+            })
+          }
+        }
       }
     }
 

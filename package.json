@@ -101,6 +101,7 @@
     "ionic-plugin-keyboard": "2.2.1",
     "load-grunt-tasks": "^3.5.2",
     "pbkdf2": "^3.0.14",
+    "raiblocks-pow": "0.0.3",
     "shelljs": "^0.8.1",
     "tweetnacl": "^1.0.0",
     "xrb-prettify": "^2.0.4"
