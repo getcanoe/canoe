@@ -217,7 +217,7 @@ module.exports = function (grunt) {
       options: {
         platforms: ['win64', 'osx64', 'linux64'],
         flavor: 'normal',
-        version: '0.19.5',
+        version: '0.29.0',
         macIcns: './resources/canoe/mac/app.icns',
         exeIco: './www/img/app/logo.ico',
         macPlist: {

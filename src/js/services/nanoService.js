@@ -73,10 +73,13 @@ angular.module('canoeApp.services')
           return setTimeout(generatePoW, 1000)
         }
       } else {
+        if (doLog) $log.info('Working on pending block ' + hash)
         doWork(hash, function (work) {
-          if (doLog) $log.info('Working on pending block ' + hash)
-          root.wallet.addWorkToPendingBlock(hash, work)
-          root.saveWallet(root.wallet, function () {})
+          // Wallet may be purged from RAM, so need to check
+          if (root.wallet) {
+            root.wallet.addWorkToPendingBlock(hash, work)
+            root.saveWallet(root.wallet, function () {})
+          }
           setTimeout(generatePoW, 1000)
         })
       }
@@ -102,7 +105,7 @@ angular.module('canoeApp.services')
             if (doLog) $log.info('Working on client (MiniSodium) for ' + hash)
             window.plugins.MiniSodium.crypto_generichash(8, hash, null, function (err, result) {
               if (err) return $log.error('Failed to compute client side PoW: ' + err)
-              $log.info('Client side PoW found for ' + result + ' took: ' + (Date.now() - start) + ' ms')
+              $log.info('Client side PoW found for ' + hash + ' took: ' + (Date.now() - start) + ' ms')
               callback(result)
             })
           }
@@ -112,7 +115,7 @@ angular.module('canoeApp.services')
             if (doLog) $log.info('Working on client (threaded node-raiblocks-pow) for ' + hash)
             POW.threaded(hash, (err, result) => {
               if (err) return $log.error('Failed to compute client side PoW: ' + err)
-              $log.info('Client side PoW found for ' + result + ' took: ' + (Date.now() - start) + ' ms')
+              $log.info('Client side PoW found for ' + hash + ' took: ' + (Date.now() - start) + ' ms')
               callback(result)
             })
           } else {
@@ -122,7 +125,7 @@ angular.module('canoeApp.services')
             pow_callback(powWorkers, hash, function () {
               // Do nothing
             }, function (result) {
-              $log.info('Client side PoW found for ' + result + ' took: ' + (Date.now() - start) + ' ms')
+              $log.info('Client side PoW found for ' + hash + ' took: ' + (Date.now() - start) + ' ms')
               callback(result)
             })
           }
@@ -673,6 +676,9 @@ angular.module('canoeApp.services')
       var hash = blk.hash
       var timestamp = blk.timestamp
       var from = blk.account
+      var to = blk2.destination
+      var amount = blk.amount
+      $log.debug('From: ' + from + 'to: ' + to + ' type: ' + blkType + ' amount: ' + amount + ' time: ' + timestamp)
 
       // Switch on block type
       switch (blkType) {
@@ -680,9 +686,6 @@ angular.module('canoeApp.services')
           // This is an echo from network, it can only originate from me unless multiple devices
           return root.confirmBlock(from, hash, timestamp)
         case 'send':
-          var to = blk2.destination
-          var amount = blk.amount
-          $log.debug('From: ' + from + 'to: ' + to + ' type: ' + blkType + ' amount: ' + amount)
           // If this is from one of our accounts we confirm it
           if (root.hasAccount(from)) {
             root.confirmBlock(from, hash, timestamp)

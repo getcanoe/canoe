@@ -874,10 +874,11 @@ module.exports = function(password)
 
 	// Check if we already have a precalculated PoW and if so consume it, otherwise
 	// we will have to wait for work coming in from outside via addWorkToPendingBlock
-	private.checkPrecalculated = function(blk, acc) {
+	private.checkPrecalculated = function(blockHash, acc) {
 		var precalc = pows[acc]
 		if (precalc) {
 			delete pows[acc]
+			logger.log("Using precalculated work for block: " + blockHash + " previous: " + precalc.hash)
 			api.addWorkToPendingBlock(precalc.hash, precalc.work)
 		}
 	}
@@ -904,9 +905,9 @@ module.exports = function(password)
 		walletPendingBlocks.push(blk);
 		private.save();
 
-		logger.log("New send block ready for work: " + blk.getHash(true));
+		logger.log("New send block ready for work: " + lastPendingBlock);
 
-		private.checkPrecalculated(blk, from)
+		private.checkPrecalculated(lastPendingBlock, from)
 
 		return blk;
 
@@ -960,9 +961,9 @@ module.exports = function(password)
 		private.setPendingBalance(api.getPendingBalance().add(amount));
 		private.save();
 
-		logger.log("New receive block ready for work: " + blk.getHash(true));
+		logger.log("New receive block ready for work: " + lastPendingBlock);
 
-		private.checkPrecalculated(blk, acc);
+		private.checkPrecalculated(lastPendingBlock, acc);
 
 		return blk;
 	}
@@ -986,9 +987,9 @@ module.exports = function(password)
 		walletPendingBlocks.push(blk);
 		private.save();
 
-		logger.log("New change block ready for work: " + blk.getHash(true));
+		logger.log("New change block ready for work: " + lastPendingBlock);
 
-		private.checkPrecalculated(blk, acc);
+		private.checkPrecalculated(lastPendingBlock, acc);
 
 		return blk;
 	}
@@ -1020,10 +1021,10 @@ module.exports = function(password)
 		api.useAccount(keys[current].account);
 	}
 
-	private.setLastBlockHash = function(blockHash)
-	{
-		lastBlock = blockHash;
-		keys[current].lastBlock = blockHash;
+	private.chainPush = function(blk, hash) {
+		chain.push(blk);
+		lastBlock = hash;
+		keys[current].lastBlock = hash;
 	}
 
 	api.clearPrecalc = function()
@@ -1158,7 +1159,7 @@ module.exports = function(password)
 					// open block
 					if(blk.getType() != 'open')
 						throw "First block needs to be 'open'.";
-					chain.push(blk);
+					private.chainPush(blk, blockHash);
 					api.addBlockToReadyBlocks(blk);
 					api.removePendingBlock(blockHash);
 					private.setPendingBalance(api.getPendingBalance().minus(blk.getAmount()));
@@ -1196,7 +1197,7 @@ module.exports = function(password)
 						}
 						else
 							throw "Invalid block type";
-						chain.push(blk);
+						private.chainPush(blk, blockHash);
 						api.addBlockToReadyBlocks(blk);
 						api.removePendingBlock(blockHash);
 						api.recalculateWalletBalances();
