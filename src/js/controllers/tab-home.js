@@ -102,10 +102,8 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         }),
         $rootScope.$on('blocks', function (event, account) {
           if (account === null) {
-            $log.debug('Got action for all accounts')
             $scope.accounts = profileService.getAccounts()
           } else {
-            $log.debug('Got action for ' + account)
             //profileService.updateAccount(account)
           }
           if ($scope.recentTransactionsEnabled) {

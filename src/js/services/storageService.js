@@ -264,6 +264,7 @@ angular.module('canoeApp.services')
         return cb(e)
       }
     }
+    /*
 
     root.getTxHistory = function (walletId, cb) {
       storage.get('txsHistory-' + walletId, cb)
@@ -284,7 +285,7 @@ angular.module('canoeApp.services')
     root.removeBalanceCache = function (cardId, cb) {
       storage.remove('balanceCache-' + cardId, cb)
     }
-
+*/
     root.setAppIdentity = function (network, data, cb) {
       storage.set('appIdentity-' + network, data, cb)
     }

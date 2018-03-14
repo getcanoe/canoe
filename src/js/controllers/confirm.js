@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, aliasService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, txConfirmNotification, externalLinkService, addressbookService) {
-  //var CONFIRM_LIMIT_USD = 20
+  // var CONFIRM_LIMIT_USD = 20
 
   var tx = {}
 
@@ -112,7 +112,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     $scope.toName = data.stateParams.toName
     $scope.toAlias = data.stateParams.toAlias
     tx.toAlias = $scope.toAlias
-    aliasService.getAvatar(data.stateParams.toAlias, function(err, avatar) {
+    aliasService.getAvatar(data.stateParams.toAlias, function (err, avatar) {
       $scope.toAvatar = avatar
       $scope.$apply()
       tx.toAvatar = avatar
@@ -148,7 +148,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       var msg = gettextCatalog.getString('Amount too big')
       $log.warn(msg)
       return setSendError(msg)
-    }*/
+    } */
     var txp = {}
     txp.account = account
     txp.address = tx.toAddress
@@ -268,8 +268,8 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
 
       // confirm txs for more than 20 usd, if not spending/touchid is enabled
       function confirmTx (cb) {
-        //var amountUsd = parseFloat(txFormatService.formatToUSD(null, txp.amount))
-        //if (amountUsd <= CONFIRM_LIMIT_USD) { return cb() }
+        // var amountUsd = parseFloat(txFormatService.formatToUSD(null, txp.amount))
+        // if (amountUsd <= CONFIRM_LIMIT_USD) { return cb() }
 
         var message = gettextCatalog.getString('Sending {{amountStr}} from your {{name}} account', {
           amountStr: tx.amountStr,
@@ -291,7 +291,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
           // TODO ehum
          /* txConfirmNotification.subscribe(account, {
             txid: txp.txid
-          })*/
+          }) */
         })
 
         /*
@@ -302,7 +302,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
               txid: txp.txid
             })
           }
-        }, onSendStatusChange)*/
+        }, onSendStatusChange) */
       }
 
       confirmTx(function (nok) {
@@ -319,7 +319,6 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   }
 
   function statusChangeHandler (processName, showName, isOn) {
-    $log.debug('statusChangeHandler: ', processName, showName, isOn)
     if (
       (
         (processName === 'sendingTx')
@@ -343,10 +342,10 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     })
     $state.go('tabs.send').then(function () {
       $ionicHistory.clearHistory()
-        addressbookService.get($scope.tx.toAddress, function (err, addr) {
+      addressbookService.get($scope.tx.toAddress, function (err, addr) {
         // Popup : proposal to add new address to address book, if it's not already there
         // and if it's not the address of one of wallet accounts
-        if (!addr && !profileService.getAccount($scope.tx.toAddress)){
+        if (!addr && !profileService.getAccount($scope.tx.toAddress)) {
           var title = gettextCatalog.getString('Add to address book?')
           var msg = gettextCatalog.getString('Do you want to add this new address to your address book?')
           popupService.showConfirm(title, msg, null, null, function (res) {

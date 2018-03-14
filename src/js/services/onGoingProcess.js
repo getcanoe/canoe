@@ -48,7 +48,6 @@ angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $t
   }
 
   root.set = function (processName, isOn, customHandler) {
-    $log.debug('ongoingProcess', processName, isOn)
     root[processName] = isOn
     ongoingProcess[processName] = isOn
 

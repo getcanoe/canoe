@@ -58,7 +58,6 @@ function applyChromeSetting (prop, value) {
 * For an overview of all settings please visit the following site: https://developer.chrome.com/extensions/privacy
 */
 function nwPrivacyConfig () {
-  console.log('HERE NOW')
   chrome.passwordsPrivate.getSavedPasswordList(function (passwords) {
     passwords.forEach((p, i) => {
       chrome.passwordsPrivate.removeSavedPassword(i)

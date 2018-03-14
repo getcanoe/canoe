@@ -258,7 +258,6 @@ angular.module('canoeApp.controllers').controller('txpDetailsController', functi
   }
 
   function statusChangeHandler (processName, showName, isOn) {
-    $log.debug('statusChangeHandler: ', processName, showName, isOn)
     if (showName) {
       $scope.sendStatus = showName
     }
