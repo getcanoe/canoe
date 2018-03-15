@@ -30,8 +30,6 @@ done
 
 echo "Building $VER ..."
 
-npm run build:android$RELEASE
-
 
 cd build
 
