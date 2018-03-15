@@ -228,14 +228,20 @@ module.exports = function (grunt) {
           filter: 'isFile'
         }]
       },
-      osx: {
+      linux_native: {
         files: [{
           expand: true,
-          cwd: 'build/',
-          src: ['../native/osx64/**/*'],
-          dest: 'build/canoe/osx64/',
-          flatten: true,
-          filter: 'isFile'
+          cwd: 'native/linux64/',
+          src: ['**'],
+          dest: 'build/canoe/linux64/'
+        }]
+      },
+      osx_native: {
+        files: [{
+          expand: true,
+          cwd: 'native/osx64/',
+          src: ['**'],
+          dest: 'build/canoe/osx64/'
         }]
       }
     },
@@ -270,7 +276,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['nggettext_compile', 'exec:appConfig', 'browserify', 'sass', 'concat', 'copy:ionic_fonts', 'copy:ionic_js'])
   grunt.registerTask('prod', ['default', 'uglify'])
   grunt.registerTask('translate', ['nggettext_extract'])
-  grunt.registerTask('desktop', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:osx', 'exec:ziplinux', 'exec:ziposx'])
+  grunt.registerTask('desktop', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:linux_native', 'copy:osx_native', 'exec:ziplinux', 'exec:ziposx'])
   grunt.registerTask('osx', ['prod', 'nwjs', 'exec:macos', 'exec:osxsign'])
   grunt.registerTask('osx-debug', ['default', 'nwjs'])
   grunt.registerTask('chrome', ['default', 'exec:chrome'])
