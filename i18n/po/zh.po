@@ -150,7 +150,7 @@ msgstr "备份钱包"
 
 #: www/views/includes/confirmBackupPopup.html:7
 msgid "Be sure to store your seed in a secure place. If this app is deleted, or your device stolen, the seed is the only way to recreate the wallet."
-msgstr ""
+msgstr "请务必确保您的种子放在安全位置。如果app被删，或是设备丢失，该种子是唯一可以让你重建钱包的方法。"
 
 #: www/views/includes/incomingDataMenu.html:29
 msgid "Bitcoin Address"
@@ -174,7 +174,7 @@ msgstr "不受支持的浏览器"
 
 #: www/views/onboarding/tour.html:49
 msgid "But do not lose your seed!"
-msgstr ""
+msgstr "不要丢失你的种子！"
 
 #: www/views/includes/buyAndSellCard.html:3
 msgid "Buy &amp; Sell Bitcoin"
@@ -287,11 +287,11 @@ msgstr "无法发送支付"
 #: www/views/tab-create-account.html:3 www/views/tab-home.html:90
 #: www/views/tab-send.html:41
 msgid "Create Account"
-msgstr ""
+msgstr "创建账户"
 
 #: www/views/tab-create-account.html:25
 msgid "Create new account"
-msgstr ""
+msgstr "创建新账户"
 
 #: www/views/modals/txp-details.html:81
 msgid "Created by"
@@ -303,7 +303,7 @@ msgstr "正在创建钱包..."
 
 #: src/js/services/onGoingProcess.js:13
 msgid "Creating account..."
-msgstr ""
+msgstr "账户创建中"
 
 #: src/js/services/onGoingProcess.js:12
 msgid "Creating transaction"
@@ -319,7 +319,7 @@ msgstr "日期"
 
 #: src/js/services/nanoService.js:428 src/js/services/profileService.js:232
 msgid "Default Account"
-msgstr ""
+msgstr "账户纠错"
 
 #: www/views/preferencesDeleteWallet.html:21
 msgid "Delete"
@@ -327,7 +327,7 @@ msgstr "删除"
 
 #: www/views/preferencesAdvanced.html:34
 msgid "Delete Account"
-msgstr ""
+msgstr "删除账户"
 
 #: www/views/modals/txp-details.html:164
 msgid "Delete Payment Proposal"
@@ -359,7 +359,7 @@ msgstr "以后再做"
 
 #: www/views/tab-settings.html:142
 msgid "Donate to Canoe"
-msgstr ""
+msgstr "向Canoe捐款"
 
 #: www/views/tab-export-file.html:22 www/views/tab-home.html:36
 msgid "Download"
@@ -409,7 +409,7 @@ msgstr "输入新的消费密码"
 
 #: www/views/tab-import-phrase.html:13
 msgid "Enter wallet seed"
-msgstr ""
+msgstr "进入钱包种子"
 
 #: www/views/backup.html:36 www/views/modals/password.html:18
 msgid "Enter your password"
@@ -614,7 +614,7 @@ msgstr "如果启用，最近的交易卡-交易发生跨所有钱包名单-将�
 
 #: src/js/controllers/onboarding/backupRequest.js:16
 msgid "If this device is replaced or this app is deleted, your funds can not be recovered without a backup."
-msgstr ""
+msgstr "如果更换设备或是app被删，在没有备份的情况下无法恢复"
 
 #: www/views/feedback/complete.html:23
 msgid "If you have additional feedback, please let us know by tapping the \"Send feedback\" option in the Settings tab."
@@ -630,7 +630,7 @@ msgstr "导入钱包"
 
 #: www/views/tab-import-phrase.html:39
 msgid "Import seed"
-msgstr ""
+msgstr "注入种子"
 
 #: www/views/add.html:21 www/views/tab-import-file.html:27
 #: www/views/tab-settings.html:31
@@ -667,7 +667,7 @@ msgstr "有什么我们可以做得更好吗？"
 
 #: src/js/controllers/backup.js:34
 msgid "It's important that you write your wallet seed down correctly. If something happens to your wallet, you'll need this seed to reconstruct it. Please review your seed and try again."
-msgstr ""
+msgstr "记录下钱包种子非常重要。如果您的钱包里发生故障，您需要种子重建钱包。请重新检查您的种子再试一次。"
 
 #: www/views/preferencesLanguage.html:4 www/views/tab-settings.html:71
 msgid "Language"
@@ -732,11 +732,11 @@ msgstr "名称"
 
 #: www/views/add.html:14
 msgid "New account"
-msgstr ""
+msgstr "新账户"
 
 #: www/views/tab-receive.html:16
 msgid "No Account available"
-msgstr ""
+msgstr "没有可用账户"
 
 #: www/views/addressbook.html:19
 msgid "No contacts yet"
@@ -800,7 +800,7 @@ msgstr "现在是一个完美的时间来评估你的周围。附近的窗户吗
 
 #: www/views/tab-import-phrase.html:15
 msgid "Numbers and letters like 904A2CE76..."
-msgstr ""
+msgstr "信息编号比如904A2CE76"
 
 #: src/js/services/popupService.js:15 src/js/services/popupService.js:51
 #: src/js/services/popupService.js:60 src/js/services/popupService.js:71
@@ -822,7 +822,7 @@ msgstr "出错。"
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts."
-msgstr ""
+msgstr "在当前屏幕上您可以看到所有账户"
 
 #: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
 #: src/js/controllers/tx-details.js:94
@@ -851,7 +851,7 @@ msgstr "打开网站"
 
 #: www/views/tab-import-file.html:13
 msgid "Paste the backup plain text"
-msgstr ""
+msgstr "请复制备份文档"
 
 #: src/js/controllers/modals/txpDetails.js:49
 #: www/views/modals/tx-status.html:33
@@ -906,7 +906,7 @@ msgstr "永久删除这个钱包。"
 
 #: www/views/backup.html:21
 msgid "Please carefully write down this 64 character seed. Click to copy to clipboard."
-msgstr ""
+msgstr "请仔细写下64位的种子。并复制到剪贴板。"
 
 #: www/views/tab-scan.html:20
 msgid "Please connect a camera to get started."
@@ -914,7 +914,7 @@ msgstr "请连接相机入门。"
 
 #: src/js/controllers/import.js:111
 msgid "Please enter the seed"
-msgstr ""
+msgstr "请输入种子。"
 
 #: src/js/controllers/import.js:93
 msgid "Please, select your backup file"
@@ -1069,7 +1069,7 @@ msgstr "搜索交易"
 
 #: www/views/tab-send.html:18
 msgid "Search or enter account number"
-msgstr ""
+msgstr "搜索或输入账户"
 
 #: www/views/modals/search.html:16
 msgid "Search transactions"
@@ -1966,5 +1966,21 @@ msgstr ""
 
 #: www/views/addressbook.add.html:59 www/views/addressbook.edit.html:59
 msgid "joedoe"
+msgstr ""
+
+#: www/views/modals/password.html:12
+msgid "Canoe is Locked"
+msgstr ""
+
+#: www/views/modals/password.html:13
+msgid "For your security, Canoe always encrypts your wallet."
+msgstr ""
+
+#: www/views/modals/password.html:26
+msgid "Forgot Password?"
+msgstr ""
+
+#: www/views/modals/password.html:27
+msgid "Load wallet from seed."
 msgstr ""
 
