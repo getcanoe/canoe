@@ -1,24 +1,24 @@
 .idea
 .vscode
 
-src/js/appConfig.js
+/src/js/appConfig.js
 
 # translation
-i18n/po/*.mo
-i18n/crowdin_api_key.txt
-src/js/translations.js
+/i18n/po/*.mo
+/i18n/crowdin_api_key.txt
+/src/js/translations.js
 
 
 # cordova
-plugins
-platforms
+/plugins
+/platforms
 
 # node-webkit
-cache
-build
+/cache
+/build
 # chrome extensions
-chrome-app/build/*
-chrome-app/*zip
+/chrome-app/build/*
+/chrome-app/*zip
 
 # Logs
 logs
@@ -33,19 +33,16 @@ pids
 lib-cov
 
 # Coverage directory used by tools like istanbul
-coverage
+/coverage
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
-# Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
-
 # Dependency directory
 # Commenting this out is preferred by some people, see
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
-node_modules
-bower_components
+/node_modules
+/bower_components
 
 # Users Environment Variables
 .lock-wscript
@@ -82,9 +79,9 @@ Session.vim
 .tags1
 
 # SASS
-src/sass/*.css
+/src/sass/*.css
 .sass-cache
-src/sass/app
+/src/sass/app
 
 # www ?
 www/css/*
@@ -93,4 +90,4 @@ www/js/*
 www/raiwallet/braiwallet.js
 .eslint.json
 
-dist
+/dist

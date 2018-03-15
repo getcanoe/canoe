@@ -1,0 +1,54 @@
+{
+  "_from": "raiblocks-pow@0.0.3",
+  "_id": "raiblocks-pow@0.0.3",
+  "_inBundle": false,
+  "_integrity": "sha1-OjdONb7df/Ed6C7cReAbJ4EUSFM=",
+  "_location": "/raiblocks-pow",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "raiblocks-pow@0.0.3",
+    "name": "raiblocks-pow",
+    "escapedName": "raiblocks-pow",
+    "rawSpec": "0.0.3",
+    "saveSpec": null,
+    "fetchSpec": "0.0.3"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/raiblocks-pow/-/raiblocks-pow-0.0.3.tgz",
+  "_shasum": "3a374e35bedd7ff11de82edc45e01b2781144853",
+  "_spec": "raiblocks-pow@0.0.3",
+  "_where": "/Users/gorankrampe/rai/getcanoe/canoe",
+  "author": {
+    "name": "numtel"
+  },
+  "bugs": {
+    "url": "https://github.com/numtel/node-raiblocks-pow/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "bindings": "^1.3.0",
+    "nan": "^2.8.0"
+  },
+  "deprecated": false,
+  "description": "RaiBlocks PoW native code module",
+  "devDependencies": {
+    "blake2": "^1.4.0"
+  },
+  "gypfile": true,
+  "homepage": "https://github.com/numtel/node-raiblocks-pow#readme",
+  "main": "index.js",
+  "name": "raiblocks-pow",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/numtel/node-raiblocks-pow.git"
+  },
+  "scripts": {
+    "install": "node-gyp rebuild",
+    "test": "node test/test.js"
+  },
+  "version": "0.0.3"
+}
