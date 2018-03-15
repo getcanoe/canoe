@@ -5,7 +5,7 @@ angular.module('canoeApp.services').factory('soundService', function ($log, plat
   var isCordova = platformInfo.isCordova
   // var isNW = platformInfo.isNW
 
-  var bling = makeMedia('sounds/bling1.mp3')
+  var bling = makeMedia('sounds/bling.ogg')
 
   function makeMedia (path) {
     if (isCordova) {
