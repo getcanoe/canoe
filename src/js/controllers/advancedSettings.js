@@ -4,8 +4,18 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
   var updateConfig = function () {
     var config = configService.getSync()
 
+    var value
+    // For now we only allow choosing on NWjs
+    if (platformInfo.isNW) {
+      value = config.wallet.serverSidePoW
+      $scope.serverSidePoWDisabled = false
+    } else {
+      value = true
+      $scope.serverSidePoWDisabled = true
+    }
+
     $scope.serverSidePoW = {
-      value: config.wallet.serverSidePoW
+      value: value
     }
     $scope.recentTransactionsEnabled = {
       value: false // config.recentTransactions.enabled

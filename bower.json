@@ -18,7 +18,8 @@
     "angular-clipboard": "^1.4.2",
     "angular-md5": "^0.1.10",
     "ngtouch": "^1.0.1",
-    "string.startsWith": "*"
+    "string.startsWith": "*",
+    "ng-idle": "^1.3.2"
   },
   "resolutions": {
     "angular": "1.5.3",

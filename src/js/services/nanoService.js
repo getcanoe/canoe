@@ -101,14 +101,14 @@ angular.module('canoeApp.services')
         // Client side
         if (false) { // platformInfo.isCordova) {
           // Cordova plugin for libsodium, not working yet...
-          if (window.plugins.MiniSodium) {
-            if (doLog) $log.info('Working on client (MiniSodium) for ' + hash)
-            window.plugins.MiniSodium.crypto_generichash(8, hash, null, function (err, result) {
-              if (err) return $log.error('Failed to compute client side PoW: ' + err)
-              $log.info('Client side PoW found for ' + hash + ' took: ' + (Date.now() - start) + ' ms')
-              callback(result)
-            })
-          }
+          //if (window.plugins.MiniSodium) {
+          //  if (doLog) $log.info('Working on client (MiniSodium) for ' + hash)
+          //  window.plugins.MiniSodium.crypto_generichash(8, hash, null, function (err, result) {
+          //    if (err) return $log.error('Failed to compute client side PoW: ' + err)
+          //    $log.info('Client side PoW found for ' + hash + ' took: ' + (Date.now() - start) + ' ms')
+          //    callback(result)
+          //  })
+          //}
         } else {
           // node-raiblocks-pow (native C implementation for NodeJS, works on Desktop)
           if (platformInfo.isNW) {

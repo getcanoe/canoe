@@ -26,7 +26,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
       timeoutB: 1800,
       lockTypeA: 'PIN',
       lockTypeBackground: 'PIN',
-      serverSidePoW: true,
+      serverSidePoW: (!platformInfo.isNW), // On NW we now have good client side PoW
       settings: {
         unitName: 'NANO',
         unitToRaw: Math.pow(10, 30),

@@ -8,11 +8,11 @@
   <ion-content>
     <div class="settings-list list">
 
-      <ion-toggle class="has-comment" ng-model="serverSidePoW.value" toggle-class="toggle-balanced" ng-change="serverSidePoWChange()">
+      <ion-toggle class="has-comment" disabled="serverSidePoWDisabled" ng-disabled="serverSidePoWDisabled" ng-model="serverSidePoW.value" toggle-class="toggle-balanced" ng-change="serverSidePoWChange()">
         <span class="toggle-label" translate>Use Server Side PoW</span>
       </ion-toggle>
       <div class="comment" translate>
-        If enabled, Proof Of Work is delegated to the Canoe server side. Currently always true.
+        If enabled, Proof Of Work is delegated to the Canoe server side. This option is disabled and always true on mobile Canoe for now.
       </div>
 
       <div class="item item-divider"></div>
