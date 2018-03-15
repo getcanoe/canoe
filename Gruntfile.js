@@ -222,7 +222,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'build/',
-          src: ['.desktop', '../www/img/app/favicon.ico', '../resources/canoe/linux/canoe.png', '../native/linux64/**/*'],
+          src: ['.desktop', '../www/img/app/favicon.ico', '../resources/canoe/linux/canoe.png'],
           dest: 'build/canoe/linux64/',
           flatten: true,
           filter: 'isFile'
@@ -241,14 +241,14 @@ module.exports = function (grunt) {
           expand: true,
           cwd: 'native/osx64/',
           src: ['**'],
-          dest: 'build/canoe/osx64/'
+          dest: 'build/canoe/osx64/canoe.app/Contents/Resources/app.nw/'
         }]
       }
     },
     nwjs: {
       options: {
         platforms: ['osx64', 'linux64'], // 'win64' disabled until native modules exist
-        flavor: 'sdk', // change to normal for release
+        flavor: 'normal', // change to normal for release
         zip: false,
         version: '0.29.0', // If you modify you need to rebuild native modules!
         macIcns: './resources/canoe/mac/app.icns',
