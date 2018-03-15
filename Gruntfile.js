@@ -61,8 +61,14 @@ module.exports = function (grunt) {
       powbuild: {
         cmd: 'cd node_modules/raiblocks-pow && nw-gyp rebuild --target=<%= pkg.build.nwVersion %> --arch=x64 '
       },
-      zip: {
-        cmd: 'cd build/canoe && mv osx64 canoe-osx64-<%= pkg.version %> && mv win64 canoe-win64-<%= pkg.version %> && mv linux64 canoe-linux64-<%= pkg.version %> && rm ../canoe-linux64-<%= pkg.version %>.zip && zip -r --symlinks ../canoe-linux64-<%= pkg.version %>.zip canoe-linux64-<%= pkg.version %>/ && rm ../canoe-osx64-<%= pkg.version %>.zip && zip -r --symlinks ../canoe-osx64-<%= pkg.version %>.zip canoe-osx64-<%= pkg.version %>/ && rm ../canoe-win64-<%= pkg.version %>.zip && zip -r --symlinks ../canoe-win64-<%= pkg.version %>.zip canoe-win64-<%= pkg.version %>/'
+      ziposx: {
+        cmd: 'cd build/canoe && mv osx64 canoe-osx64-<%= pkg.version %> && rm -f ../canoe-osx64-<%= pkg.version %>.zip && zip -r --symlinks ../canoe-osx64-<%= pkg.version %>.zip canoe-osx64-<%= pkg.version %>/'
+      },
+      ziplinux: {
+        cmd: 'cd build/canoe && mv linux64 canoe-linux64-<%= pkg.version %> && rm -f ../canoe-linux64-<%= pkg.version %>.zip && zip -r --symlinks ../canoe-linux64-<%= pkg.version %>.zip canoe-linux64-<%= pkg.version %>/'
+      },
+      zipwin: {
+        cmd: 'cd build/canoe && mv win64 canoe-win64-<%= pkg.version %> && rm -f ../canoe-win64-<%= pkg.version %>.zip && zip -r --symlinks ../canoe-win64-<%= pkg.version %>.zip canoe-win64-<%= pkg.version %>/'
       },
       desktopsign: {
         cmd: 'gpg -u E7ADC266 --output build/canoe-linux64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-linux64-<%= pkg.version %>.zip ; gpg -u E7ADC266 --output build/canoe-win64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-win64-<%= pkg.version %>.zip ; gpg -u E7ADC266 --output build/canoe-osx64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-osx64-<%= pkg.version %>.zip'
@@ -216,8 +222,18 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'build/',
-          src: ['.desktop', '../www/img/app/favicon.ico', '../resources/canoe/linux/canoe.png'],
+          src: ['.desktop', '../www/img/app/favicon.ico', '../resources/canoe/linux/canoe.png', '../native/linux64/**/*'],
           dest: 'build/canoe/linux64/',
+          flatten: true,
+          filter: 'isFile'
+        }]
+      },
+      osx: {
+        files: [{
+          expand: true,
+          cwd: 'build/',
+          src: ['../native/osx64/**/*'],
+          dest: 'build/canoe/osx64/',
           flatten: true,
           filter: 'isFile'
         }]
@@ -225,10 +241,10 @@ module.exports = function (grunt) {
     },
     nwjs: {
       options: {
-        platforms: ['win64', 'osx64', 'linux64'],
-        flavor: 'sdk',
+        platforms: ['osx64', 'linux64'], // 'win64' disabled until native modules exist
+        flavor: 'sdk', // change to normal for release
         zip: false,
-        version: '0.29.0',
+        version: '0.29.0', // If you modify you need to rebuild native modules!
         macIcns: './resources/canoe/mac/app.icns',
         exeIco: './www/img/app/logo.ico',
         macPlist: {
@@ -240,7 +256,7 @@ module.exports = function (grunt) {
           ]
         }
       },
-      src: ['./package.json', './www/**/*', './node_modules/bindings/**/*', './node_modules/raiblocks-pow/**/*']
+      src: ['./package.json', './www/**/*']
     },
     browserify: {
       dist: {
@@ -254,7 +270,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['nggettext_compile', 'exec:appConfig', 'browserify', 'sass', 'concat', 'copy:ionic_fonts', 'copy:ionic_js'])
   grunt.registerTask('prod', ['default', 'uglify'])
   grunt.registerTask('translate', ['nggettext_extract'])
-  grunt.registerTask('desktop', ['prod', 'exec:powbuild', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'exec:zip'])
+  grunt.registerTask('desktop', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:osx', 'exec:ziplinux', 'exec:ziposx'])
   grunt.registerTask('osx', ['prod', 'nwjs', 'exec:macos', 'exec:osxsign'])
   grunt.registerTask('osx-debug', ['default', 'nwjs'])
   grunt.registerTask('chrome', ['default', 'exec:chrome'])
