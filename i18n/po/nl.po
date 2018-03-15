@@ -1969,3 +1969,19 @@ msgstr ""
 msgid "joedoe"
 msgstr ""
 
+#: www/views/modals/password.html:12
+msgid "Canoe is Locked"
+msgstr ""
+
+#: www/views/modals/password.html:13
+msgid "For your security, Canoe always encrypts your wallet."
+msgstr ""
+
+#: www/views/modals/password.html:26
+msgid "Forgot Password?"
+msgstr ""
+
+#: www/views/modals/password.html:27
+msgid "Load wallet from seed."
+msgstr ""
+
