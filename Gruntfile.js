@@ -270,6 +270,22 @@ module.exports = function (grunt) {
           'www/raiwallet/braiwallet.js': ['src/js/raiwallet.js']
         }
       }
+    },
+    appdmg: {
+      options: {
+        basepath: '.',
+        title: 'Canoe <%= pkg.version %>',
+        icon: 'resources/canoe/mac/volume-icon.icns',
+        background: 'resources/canoe/mac/dmg-background.tiff', // png?
+        contents: [
+          {x: 378, y: 154, type: 'link', path: '/Applications'},
+          {x: 122, y: 154, type: 'file', path: 'build/canoe/canoe-osx64-<%= pkg.version %>/canoe.app'}
+         // NOT USED: {x: 412, y: 128, type: 'file', path: 'README.txt'}
+        ]
+      },
+      target: {
+        dest: 'build/canoe-osx64-<%= pkg.version %>.dmg'
+      }
     }
   })
 
