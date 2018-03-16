@@ -981,7 +981,7 @@ msgstr "Ricevere in"
 
 #: www/views/includes/accountHistory.html:24 www/views/tx-details.html:20
 msgid "Received"
-msgstr "Ricevuti"
+msgstr "Ricevuto"
 
 #: www/views/includes/accountHistory.html:3
 msgid "Recent"

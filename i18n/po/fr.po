@@ -1994,5 +1994,5 @@ msgstr "Mot de passe oublié?"
 
 #: www/views/modals/password.html:27
 msgid "Load wallet from seed."
-msgstr "Charger le portefeuille à partir d'une graine (seed)?"
+msgstr "Charger le portefeuille à partir d'une graine (seed)"
 
