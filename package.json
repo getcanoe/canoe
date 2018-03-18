@@ -86,7 +86,6 @@
     "cordova-windows": "5.0.0",
     "coveralls": "^3.0.0",
     "express": "^4.16.2",
-    "fileicon": "^0.2.2",
     "fs": "0.0.2",
     "fs-extra": "^5.0.0",
     "grunt-angular-gettext": "^2.3.9",
@@ -192,6 +191,7 @@
     }
   },
   "optionalDependencies": {
+    "fileicon": "^0.2.2",
     "grunt-appdmg": "^1.0.0"
   }
 }
