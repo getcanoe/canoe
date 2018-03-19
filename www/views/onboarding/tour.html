@@ -47,11 +47,74 @@
         <div class="onboarding-illustration-control"></div>
         <div class="cta-buttons">
           <div class="onboarding-tldr" translate>But do not lose your seed!</div>
-          <button class="button button-standard button-primary" ui-sref="onboarding.createPassword"  translate>
-						Let's Start
+          <button class="button button-standard button-primary" ng-click="slideNext()"  translate>
+            Let's Start
           </button>
         </div>
       </ion-content>
     </ion-slide-page>
+    <ion-slide-page>
+      <ion-content id="onboarding-create-password" class="onboarding" scroll="false">
+      <div class="onboarding-topic" translate>Create your Password</div>
+
+      <img src='img/onboarding/onboarding-password.svg' id="password" />
+      <form name='createPassword' novalidate>
+        <div class="list settings-list settings-input-group">
+          <label class="item item-input item-stacked-label">
+            <span class="input-label" translate>New Password</span>
+            <input type="password"
+              placeholder="{{'At least 8 Characters. Make it good!'|translate}}"
+              ng-model="password"
+              name="password"
+              required
+            >
+          </label>
+
+          <label class="item item-input item-stacked-label">
+            <span class="input-label" translate>Confirm New Password</span>
+            <input type="password"
+              ng-model="passwordConfirm"
+              type="password"
+              name="confirmPassword"
+              required
+              data-password-verify="user.password"
+              placeholder="{{'One more time.'|translate}}"
+            >
+            <div class="valid-password" ng-show="password && passwordConfirm" >
+              <div class="matching" ng-show="password === passwordConfirm">
+                <div ng-show="password.length >= 8">
+                  <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                  <span translate>Passwords match</span>
+                </div>
+                <div ng-show="password.length < 8" class="too-short">
+                  <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+                  <span translate>Password too short</span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="not-matching" ng-show="password && passwordConfirm && password !== passwordConfirm">
+              <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              <span translate>Passwords don't match</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="cta-buttons">
+          <div class="onboarding-tldr" id="backup-tldr" translate>This password encrypts your wallet, do not forget it!</div>
+          <button
+            class="button button-standard button-primary"
+            ng-disabled="!password || !passwordConfirm || password!==passwordConfirm || password.length < 8"
+            type="submit"
+            ng-click="createDefaultWallet(password)"
+            translate>
+            Create Wallet
+          </button>
+        </div>
+
+      </form>
+      </ion-content>
+    </ion-slide-page>
   </ion-slides>
 </ion-view>
+
