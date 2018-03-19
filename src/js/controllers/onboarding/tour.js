@@ -95,12 +95,13 @@ angular
       else $state.go('onboarding.welcome')
     }
 
-    $scope.goToSlide = function () {
-      $state.go('onboarding.welcome')
-    }
-
     $scope.slideNext = function () {
       if ($scope.data.index !== 3) $scope.slider.slideNext()
       else $state.go('onboarding.welcome')
+    }
+
+    $scope.changeSlide = function (slideIndex, speed) {
+      console.log('slide to')
+      $scope.slider.slideTo(slideIndex, speed)
     }
   })
