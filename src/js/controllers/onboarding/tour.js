@@ -82,7 +82,7 @@ angular
               }, 2000)
             }
             ongoingProcess.set('creatingWallet', false)
-            $state.go('onboarding.aliasRequest', {
+            $state.go('onboarding.backupRequest', {
               walletId: $scope.accountId
             })
           }
