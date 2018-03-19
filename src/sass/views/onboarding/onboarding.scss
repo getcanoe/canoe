@@ -1,6 +1,6 @@
 .onboarding {
-  color: $v-onboarding-color;
   background-image: linear-gradient(320deg, $v-onboarding-gradient-top-color 50%, $v-onboarding-gradient-bottom-color 100%);
+  color: $v-onboarding-color;
   height: 100%;
   text-align: center;
   .bar.bar-header {
@@ -77,7 +77,6 @@
 @import "terms-of-use";
 @import "onboard-welcome";
 @import "onboard-tour";
-@import "onboard-create-password";
 @import "onboard-backup-request";
 @import "../backup-warning";
 @import "onboard-disclaimer";
@@ -127,3 +126,4 @@
       background-image: $v-onboarding-backup-warning-bg;
   }
 }
+

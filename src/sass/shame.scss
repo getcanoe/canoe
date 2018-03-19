@@ -144,6 +144,10 @@ input[type=number] {
   margin: 0px 50px;
 }
 
+.wallet-details__tx-message.ellipsis {
+  margin: 0;
+}
+
 .updating {
   div {
     text-align: center;

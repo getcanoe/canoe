@@ -1,4 +1,5 @@
 #onboard-welcome {
+  background-image: linear-gradient(320deg, $v-onboarding-gradient-top-color 50%, $v-onboarding-gradient-bottom-color 100%);
   & > ion-content {
     /*background: $v-onboarding-welcome-bg;*/
     background-position: top center;
@@ -45,3 +46,4 @@
     font-family:"Roboto-Thin"
   }
 }
+

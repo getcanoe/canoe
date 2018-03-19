@@ -31,3 +31,112 @@
     }
   }
 }
+
+#onboarding-create-password,
+#onboarding-create-alias.onboarding {
+  .settings-input-group {
+    padding-bottom: 2vw;
+  }
+  ion-list > .list {
+    width: 85%;
+  }
+  .list{
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 6px 0px;
+    @include center-block();
+    .item{
+      &:first-child{
+        padding-top: 0;
+      }
+      @media(max-height: 480px) {
+        font-size: 14px;
+      }
+    }
+  }
+  .item {
+    background: transparent;
+    border: none;
+    color: $v-light-color;
+    text-align: left;
+    .checkbox input:before,
+    .checkbox .checkbox-icon:before{
+      border-color: $v-onboarding-checkbox-off-border;
+      background: transparent;
+    }
+    .checkbox input:after,
+    .checkbox .checkbox-icon:after{
+      border-color: $v-onboarding-checkbox-on-border;
+    }
+    .checkbox input:checked:before,
+    .checkbox input:checked + .checkbox-icon:before {
+      border-color: $v-onboarding-checkbox-on-border;
+    }
+    .item-content {
+      width: 90%;
+      margin-left: 6%;
+      white-space: normal;
+    }
+  }
+  .item-checkbox .checkbox {
+    margin-left: 3%;
+    top:38%;
+    left:0;
+  }
+  .list.settings-list.settings-input-group {
+    text-align: left !important;
+  }
+  img {
+    height: 15%;
+    margin: 20px 0 0 0;
+  }
+  input {
+    height: 46px;
+    padding-left: 16px;
+    border-radius: 3px;
+  }
+
+  input:focus, input:active {
+    border: 2px solid $v-accent-color;
+  }
+
+  .matching, .not-matching, .pending {
+    margin-top: 5px;
+    text-align: right;
+  }
+  .matching {
+    color: $v-success-color;
+  }
+  .not-matching, .too-short {
+    color: $v-error-color;
+  }
+  .pending {
+    color: $v-accent-color;
+  }
+
+  .item {
+    border:none;
+  }
+
+  .item .input-label {
+    color: rgba(255,255,255,.6);
+    margin-bottom: 5px;
+    font-size: small;
+  }
+
+  .item-stacked-label {
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-buttons {
+    @extend %cta-buttons;
+    padding-bottom: 19vw;
+    position: static;
+  }
+}
+
+.keyboard-open .swiper-pagination.swiper-pagination-clickable {
+    display: none;
+}

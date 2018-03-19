@@ -739,15 +739,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
-      .state('onboarding.createPassword', {
-        url: '/createPassword',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/onboarding/createPassword.html',
-            controller: 'createPasswordController'
-          }
-        }
-      })
       .state('onboarding.backupRequest', {
         url: '/backupRequest/:walletId',
         views: {
