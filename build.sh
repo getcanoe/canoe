@@ -37,19 +37,22 @@ cd build
 rm -rf $VER
 mkdir $VER
 
-# Android
+# Android is handled slightly different for release
 if [[ "$RELEASE" == "-release" ]]
 then
+  # This builds Android and signs and everything to a proper apk.
   npm run final:android
   cp ../platforms/android/build/outputs/apk/release/android-release-signed-aligned.apk $VER/canoe-android-$VER.apk
-  npm run build:desktop
-  npm run build:desktopsign
 else
   npm run build:android
   cp ../platforms/android/build/outputs/apk/debug/android-debug.apk $VER/canoe-android-$VER-debug.apk
-  npm run build:desktop
-  npm run build:desktopsign
 fi
+
+# This builds all three desktops in zip form
+npm run build:desktop
+# This signs all three desktops with GPG
+npm run build:desktopsign
+
 
 # Move files into $VER
 mv canoe-*-$VER*.* $VER/
