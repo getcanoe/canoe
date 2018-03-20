@@ -93,12 +93,14 @@
   }
   input {
     height: 46px;
-    padding-left: 16px;
     border-radius: 3px;
+    background: none;
+    font-size: 1.0em;
+    color: white;
   }
 
   input:focus, input:active {
-    border: 2px solid $v-accent-color;
+    color: white;
   }
 
   .matching, .not-matching, .pending {
@@ -120,8 +122,7 @@
   }
 
   .item .input-label {
-    color: rgba(255,255,255,.6);
-    margin-bottom: 5px;
+    color: rgba(255,255,255,1);
     font-size: small;
   }
 
