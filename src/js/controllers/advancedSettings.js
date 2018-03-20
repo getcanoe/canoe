@@ -5,13 +5,21 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
     var config = configService.getSync()
 
     var value
-    // For now we only allow choosing on NWjs
-    if (platformInfo.isNW) {
+    // For now we only allow choosing on NWjs Linux
+    if (platformInfo.isLinux) {
       value = config.wallet.serverSidePoW
       $scope.serverSidePoWDisabled = false
     } else {
       value = true
       $scope.serverSidePoWDisabled = true
+      if (config.wallet.serverSidePoW !== true) {
+        $log.debug('Forced server side PoW to true')
+        // Old value, change to true
+        $scope.serverSidePoW = {
+          value: value
+        }
+        $scope.serverSidePoWChange()
+      }
     }
 
     $scope.serverSidePoW = {
