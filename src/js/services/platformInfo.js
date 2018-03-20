@@ -2,6 +2,8 @@
 /* global angular */
 angular.module('canoeApp.services').factory('platformInfo', function ($window) {
   var ua = navigator ? navigator.userAgent : null
+  var isNW
+  var nwOS
 
   if (!ua) {
     console.log('Could not determine navigator. Using fixed string')
@@ -15,6 +17,7 @@ angular.module('canoeApp.services').factory('platformInfo', function ($window) {
     var isNode = (typeof process !== 'undefined' && typeof require !== 'undefined')
     if (isNode) {
       try {
+        // This is NW
         return (typeof require('nw.gui') !== 'undefined')
       } catch (e) {
         return false
@@ -22,7 +25,16 @@ angular.module('canoeApp.services').factory('platformInfo', function ($window) {
     }
   }
 
-  // Detect mobile devices
+  // Detect OS of NWJs
+  var isNW = !!isNodeWebkit()
+  if (isNW) {
+    var os = require('os')
+    nwOS = os.platform()
+    console.log('Detected OS: ' + nwOS)
+  }
+  
+
+  // Detect mobile devices and platforms
   var ret = {
     isAndroid: ionic.Platform.isAndroid(),
     isIOS: ionic.Platform.isIOS(),
@@ -30,7 +42,10 @@ angular.module('canoeApp.services').factory('platformInfo', function ($window) {
     isSafari: Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0,
     ua: ua,
     isCordova: !!$window.cordova,
-    isNW: !!isNodeWebkit()
+    isNW: isNW,
+    isLinux: nwOS === 'linux',
+    isOSX: nwOS === 'darwin',
+    isWindows: nwOS === 'win64'
   }
 
   ret.isMobile = ret.isAndroid || ret.isIOS || ret.isWP

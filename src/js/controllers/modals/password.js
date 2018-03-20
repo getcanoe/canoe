@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('passwordController', function ($state, $interval, $stateParams, $ionicHistory, $timeout, $scope, $log, configService, profileService, gettextCatalog, popupService, ongoingProcess, applicationService) {
+angular.module('canoeApp.controllers').controller('passwordController', function ($state, $interval, $stateParams, $ionicHistory, $timeout, $scope, $log, configService, profileService, gettextCatalog, popupService, ongoingProcess, soundService, applicationService) {
   var ATTEMPT_LIMIT = 5
   var ATTEMPT_LOCK_OUT_TIME = 5 * 60
   var currentPassword = ''
@@ -90,6 +90,7 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     profileService.loadWallet(function (err) {
       if (profileService.getWallet()) {
         $scope.hideModal()
+        soundService.play('unlocking')
         ongoingProcess.set('decryptingWallet', false)
         if (err) {
           // Some other error though, we need to show it

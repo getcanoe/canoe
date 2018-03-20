@@ -74,7 +74,11 @@ function nwPrivacyConfig () {
 }
 
 // Setting up route
-angular.module('canoeApp').config(function (historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider) {
+angular.module('canoeApp').config(function (historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider, IdleProvider, TitleProvider) {
+
+  TitleProvider.enabled(false)
+  // IdleProvider
+
   $urlRouterProvider.otherwise('/starting')
 
     // NO CACHE
@@ -865,6 +869,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
 })
   .run(function ($rootScope, $state, $location, $log, $timeout, startupService, ionicToast, fingerprintService, $ionicHistory, $ionicPlatform, $window, appConfigService, lodash, platformInfo, profileService, uxLanguage, gettextCatalog, openURLService, storageService, scannerService, configService, emailService, /* plugins START HERE => */ applicationService) {
     uxLanguage.init()
+    applicationService.init()
 
     $ionicPlatform.ready(function () {
       if (screen.width < 768 && platformInfo.isCordova) { screen.lockOrientation('portrait') }
@@ -921,7 +926,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       }, 101)
 
       $ionicPlatform.on('pause', function () {
-        // Nothing to do
+        // We purge wallet from memory
       })
 
       $ionicPlatform.on('resume', function () {

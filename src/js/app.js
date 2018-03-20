@@ -11,6 +11,7 @@ var modules = [
   'ngLodash',
   'ngCsv',
   'angular-md5',
+  'ngIdle',
   'canoeApp.filters',
   'canoeApp.services',
   'canoeApp.controllers',

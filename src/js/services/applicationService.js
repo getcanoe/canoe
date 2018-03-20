@@ -1,13 +1,53 @@
 'use strict'
 /* global angular chrome */
 angular.module('canoeApp.services')
-  .factory('applicationService', function ($rootScope, $timeout, $ionicHistory, $ionicModal, platformInfo, fingerprintService, openURLService, configService, $state) {
+  .factory('applicationService', function ($rootScope, $state, $timeout, $ionicHistory, $ionicModal, $log, platformInfo, fingerprintService, openURLService, configService, Idle) {
     var root = {}
 
     root.isPinModalOpen = false
 
     var isChromeApp = platformInfo.isChromeApp
     var isNW = platformInfo.isNW
+
+    $rootScope.$on('IdleStart', function () {
+      $log.debug('Start idle: ' + new Date())
+    })
+
+    $rootScope.$on('IdleEnd', function () {
+      $log.debug('End idle: ' + new Date())
+    })
+
+    $rootScope.$on('IdleWarn', function (e, countdown) {
+      $log.debug('Idle warn ' + countdown + ' : ' + new Date())
+    })
+
+    $rootScope.$on('IdleTimeout', function () {
+      $log.debug('Locking A: ' + new Date())
+      // root.startWaitingForB()
+    })
+
+    root.init = function () {
+      configService.whenAvailable(function (config) {
+        root.configureLock(config.wallet)
+      })
+    }
+
+    // Called whenever lock settings are modified or on startup
+    root.configureLock = function (obj) {
+      var settings = obj || configService.getSync().wallet
+      root.timeoutA = settings.timeoutA
+      root.lockTypeA = settings.lockTypeA
+      root.timeoutB = settings.timeoutB
+      root.lockTypeBackground = settings.lockTypeBackground
+      root.startWaitingForA()
+    }
+
+    root.startWaitingForA = function () {
+      $log.debug('Waiting for timeout A: ' + root.timeoutA)
+      Idle.setIdle(root.timeoutA)
+      Idle.setTimeout(1)
+      Idle.watch()
+    }
 
     root.restart = function () {
       var hashIndex = window.location.href.indexOf('#/')
