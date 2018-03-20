@@ -1,7 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('changeLocksController', function ($scope, $state, $timeout, $log, $ionicHistory, profileService, popupService, configService, gettextCatalog) {
-
+angular.module('canoeApp.controllers').controller('changeLocksController', function ($scope, $state, $timeout, $log, $ionicHistory, profileService, popupService, configService, applicationService, gettextCatalog) {
   $scope.saveLockTypeA = function (lockType) {
     $scope.lockTypeA = lockType
   }
@@ -21,6 +20,7 @@ angular.module('canoeApp.controllers').controller('changeLocksController', funct
     }
     configService.set(opts, function (err) {
       if (err) $log.debug(err)
+      applicationService.configureLock(opts.wallet)
       popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Saved'))
       $ionicHistory.removeBackView()
       $state.go('tabs.home')
