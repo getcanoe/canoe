@@ -40,17 +40,17 @@
   ion-list > .list {
     width: 85%;
   }
-  .list{
+  .list {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     padding: 6px 0px;
     @include center-block();
-    .item{
-      &:first-child{
+    .item {
+      &:first-child {
         padding-top: 0;
       }
-      @media(max-height: 480px) {
+      @media (max-height: 480px) {
         font-size: 14px;
       }
     }
@@ -61,12 +61,12 @@
     color: $v-light-color;
     text-align: left;
     .checkbox input:before,
-    .checkbox .checkbox-icon:before{
+    .checkbox .checkbox-icon:before {
       border-color: $v-onboarding-checkbox-off-border;
       background: transparent;
     }
     .checkbox input:after,
-    .checkbox .checkbox-icon:after{
+    .checkbox .checkbox-icon:after {
       border-color: $v-onboarding-checkbox-on-border;
     }
     .checkbox input:checked:before,
@@ -81,8 +81,8 @@
   }
   .item-checkbox .checkbox {
     margin-left: 3%;
-    top:38%;
-    left:0;
+    top: 38%;
+    left: 0;
   }
   .list.settings-list.settings-input-group {
     text-align: left !important;
@@ -91,39 +91,66 @@
     height: 15%;
     margin: 20px 0 0 0;
   }
+
+  form {
+    height: 50%;
+    display: flex;
+    align-items: center;
+  }
+
   input {
     height: 46px;
-    border-radius: 3px;
     background: none;
-    font-size: 1.0em;
+    font-size: 32px;
     color: white;
   }
 
-  input:focus, input:active {
+  input:focus,
+  input:active {
     color: white;
   }
 
-  .matching, .not-matching, .pending {
-    margin-top: 5px;
-    text-align: right;
-  }
-  .matching {
-    color: $v-success-color;
-  }
-  .not-matching, .too-short {
+  .too-short {
     color: $v-error-color;
   }
-  .pending {
-    color: $v-accent-color;
+
+  .good-password {
+    color: $v-success-color;
   }
 
+  .good-password,
+  .too-short {
+    padding-left: 0px !important;
+  }
+
+  .input-password {
+    display: flex;
+    flex-direction: row;
+    margin-left: 16px !important;
+  }
+
+  .showPassword {
+    text-align: right;
+    font-size: 32px;
+    display: contents;
+  }
+
+
   .item {
-    border:none;
+    border: none;
   }
 
   .item .input-label {
-    color: rgba(255,255,255,1);
+    color: rgba(255, 255, 255, 1);
     font-size: small;
+  }
+
+  span.input-label {
+    width: 100%;
+  }
+
+  label {
+    padding-left: 0px !important;
   }
 
   .item-stacked-label {
@@ -135,9 +162,14 @@
     @extend %cta-buttons;
     padding-bottom: 19vw;
     position: static;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 12vh;
   }
 }
 
 .keyboard-open .swiper-pagination.swiper-pagination-clickable {
-    display: none;
+  display: none;
 }

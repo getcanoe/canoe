@@ -48,6 +48,13 @@ angular
       if ($scope.data.index !== 3) $scope.slider.slideTo(slideIndex, speed)
     }
 
+    $scope.togglePassword = function () {
+      $scope.typePassword = !$scope.typePassword
+    }
+
+    $scope.validate = function () {
+    }
+
     var retryCount = 0
     $scope.createDefaultWallet = function (password) {
       // Set the password we have selected to use for our wallet
