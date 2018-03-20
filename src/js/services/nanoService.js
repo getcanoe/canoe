@@ -640,7 +640,7 @@ angular.module('canoeApp.services')
     root.handleIncomingSendBlock = function (hash, account, from, amount) {
       // Create a receive (or open, if this is the first block in account)
       // block to match this incoming send block
-      soundService.playBling()
+      soundService.play('receive')
       if (root.wallet) {
         if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
           if (doLog) $log.info('Added pending receive block')
@@ -688,6 +688,7 @@ angular.module('canoeApp.services')
         case 'send':
           // If this is from one of our accounts we confirm it
           if (root.hasAccount(from)) {
+            soundService.play('send')
             root.confirmBlock(from, hash, timestamp)
           }
           // This is someone elses send to us
