@@ -123,17 +123,26 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.formatAmount = function (raw, decimals) {
+    root.formatAmount = function (raw, decimals) {      
+      //$log.info('formatAmount =================================================================')
+      var result = ''
       if (raw === 0) {
-        return raw.toFixed(decimals)
+        result = raw.toFixed(decimals)
       } else {
         var balance = raw / RAW_PER_NANO
         if (Math.round(balance * Math.pow(10, decimals)) === 0) {
-          return balance.toString()
+          result = new BigNumber(raw).dividedBy(RAW_PER_NANO).toString()
+          //$log.info('result',result) 
+          //$log.info('result.toNumber()', result.toNumber()) 
+          //$log.info('result.toNumber().toLocaleString(uxLanguage.currentLanguage)', result.toNumber().toLocaleString(uxLanguage.currentLanguage)) 
+          //result = result.toNumber().toLocaleString(uxLanguage.currentLanguage)
+          //return balance.toString()
         } else {
+          //result = new BigNumber(raw).dividedBy(RAW_PER_NANO)
           return balance.toFixed(decimals)
         }
       }
+      return result
     }
 
     root.formatAmountWithUnit = function (raw) {
