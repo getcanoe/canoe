@@ -6,6 +6,9 @@ DESTINATION=website@getcanoe.io:/var/www/files/
 # Find version
 VER=$(node -p -e "require('./package.json').version")
 
+# Put it into various places
+sed -i -E "s/(X-Canoe-BuildId=)[.0-9]*(.*)/\1$VER\2/" resources/canoe/linux/canoe.desktop
+
 # Not release build by default
 RELEASE=
 
@@ -44,15 +47,15 @@ then
   npm run final:android
   cp ../platforms/android/build/outputs/apk/release/android-release-signed-aligned.apk $VER/canoe-android-$VER.apk
 else
+  # Debug build without proper signing
   npm run build:android
   cp ../platforms/android/build/outputs/apk/debug/android-debug.apk $VER/canoe-android-$VER-debug.apk
 fi
 
-# This builds all three desktops in zip form
+# This builds all three desktops in zip form, and Linux additionally as AppImage
 npm run build:desktop
-# This signs all three desktops with GPG
+# This signs all three desktops with GPG, and Linux AppImage
 npm run build:desktopsign
-
 
 # Move files into $VER
 mv canoe-*-$VER*.* $VER/
