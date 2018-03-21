@@ -11,9 +11,10 @@ angular.module('canoeApp.services').factory('soundService', function ($log, plat
   // Register sounds, use them like:
   //   soundService.play('send')
   root.sounds = {}
-  root.sounds.receive = makeMedia('cash.ogg')
-  root.sounds.send = makeMedia('bling.ogg')
-  root.sounds.unlocking = makeMedia('houston.ogg')
+  root.sounds.send = makeMedia('locked.ogg')
+  root.sounds.receive = makeMedia('definite.ogg')
+  root.sounds.unlocking = makeMedia('confirmed.ogg')
+  root.sounds.repchanged = makeMedia('filing-your-inbox.ogg')
 
   function makeMedia (path) {
     if (isCordova) {

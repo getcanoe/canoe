@@ -701,6 +701,7 @@ angular.module('canoeApp.services')
           return root.confirmBlock(from, hash, timestamp)
         case 'change':
           // This is an echo from network, it can only originate from me unless multiple devices
+          soundService.play('repchanged')
           return root.confirmBlock(from, hash, timestamp)
       }
       $log.error('Unknown block type: ' + blkType)
