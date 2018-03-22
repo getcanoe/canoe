@@ -470,7 +470,7 @@ angular.module('canoeApp.services')
       // aliasService.lookupAddress(account.id, function (err, ans) {
       //   if (err) {
       //     $log.debug(err)
-      //     root.setWallet(wallet, cb)
+          root.setWallet(wallet, cb)
       //   } else {
       //     $log.debug('Answer from alias server looking up ' + account.id + ': ' + JSON.stringify(ans))
       //     if (ans && ans.aliases.length > 0) {
