@@ -11,7 +11,7 @@ angular.module('canoeApp.services').factory('addressbookService', function ($log
     address: DONATE_ADDRESS,
     alias: {
       "id": 1,
-      "alias": "canoe",
+      // "alias": "canoe",
       "address": "xrb_1qckwc5o3obkrwbet4amnkya113xq77qpaknsmiq9hwq31tmd5bpyo7sepsw",
       "listed": true,
       "verified": false,
