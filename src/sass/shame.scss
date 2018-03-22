@@ -133,12 +133,11 @@ input[type=number] {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: -moz-pre-wrap;
-  white-space: -hp-pre-wrap;
-  white-space: -o-pre-wrap;
-  white-space: -pre-wrap;
-  white-space: pre-wrap;
-  white-space: pre-line;
+  white-space: -moz-nowrap;
+  white-space: -hp-nowrap;
+  white-space: -o-nowrap;
+  white-space: -nowrap;
+  white-space: nowrap;
   word-wrap: break-word;
   word-break: break-all;
   margin: 0px 50px;
@@ -470,7 +469,7 @@ input[type=file] {
 }
 
 
-.platform-android .toggle-small .handle, 
+.platform-android .toggle-small .handle,
 .platform-android .toggle .handle::before {
   top: 6px !important;
 }
@@ -480,7 +479,7 @@ input[type=file] {
 }
 
 .bar-header{
-  height: 60px 
+  height: 60px
 }
 
 .bar-header h1.title{
@@ -488,7 +487,7 @@ input[type=file] {
 }
 
 .has-header{
-  top:60px 
+  top:60px
 }
 
 .bar .title {

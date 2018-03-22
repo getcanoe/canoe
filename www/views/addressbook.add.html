@@ -52,7 +52,7 @@
             <qr-scanner ng-show="!addressbookEntry.alias" on-scan="onQrCodeScannedAddressBook(data, addressbookForm)"></qr-scanner>
           </div>
         </div>
-        <label class="item item-input item-stacked-label">
+        <label ng-hide="true" class="item item-input item-stacked-label">
           <span class="input-label" translate>Alias</span>
           <input type="text"
                  id="alias"

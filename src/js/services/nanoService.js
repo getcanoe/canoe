@@ -334,28 +334,29 @@ angular.module('canoeApp.services')
         code.params = kvs
         if (code.account) {
           // If the account is an alias, we need to perform a lookup
-          if (code.account.startsWith('@')) {
-            code.alias = code.account.substr(1)
-            aliasService.lookupAlias(code.alias, function (err, ans) {
-              if (err) return $log.debug(err)
-              $log.debug('Answer from alias server looking up ' + code.alias + ': ' + JSON.stringify(ans))
-              if (ans) {
-                code.account = ans.alias.address
-                if (!root.isValidAccount(code.account)) {
-                  $log.debug('Account invalid')
-                  return
-                }
-                // Perform callback now
-                cb(null, code)
-              }
-            })
-          } else {
-            if (!root.isValidAccount(code.account)) {
-              $log.debug('Account invalid')
-              return cb('Account invalid' + code.account)
-            }
-            cb(null, code)
+          if (!root.isValidAccount(code.account)) {
+            $log.debug('Account invalid')
+            return cb('Account invalid' + code.account)
           }
+          cb(null, code)
+          // if (code.account.startsWith('@')) {
+          //   code.alias = code.account.substr(1)
+          //   aliasService.lookupAlias(code.alias, function (err, ans) {
+          //     if (err) return $log.debug(err)
+          //     $log.debug('Answer from alias server looking up ' + code.alias + ': ' + JSON.stringify(ans))
+          //     if (ans) {
+          //       code.account = ans.alias.address
+          //       if (!root.isValidAccount(code.account)) {
+          //         $log.debug('Account invalid')
+          //         return
+          //       }
+          //       // Perform callback now
+          //       cb(null, code)
+          //     }
+          //   })
+          // } else {
+          //
+          // }
         } else {
           cb(null, code)
         }
@@ -466,19 +467,19 @@ angular.module('canoeApp.services')
       var accountName = gettextCatalog.getString('Default Account')
       var account = wallet.createAccount({label: accountName})
       resetChain(wallet, account.id) // It may be an already existing account so we want existing blocks
-      aliasService.lookupAddress(account.id, function (err, ans) {
-        if (err) {
-          $log.debug(err)
-          root.setWallet(wallet, cb)
-        } else {
-          $log.debug('Answer from alias server looking up ' + account.id + ': ' + JSON.stringify(ans))
-          if (ans && ans.aliases.length > 0) {
-            account.meta.alias = ans.aliases[0]
-            wallet.setMeta(account, account.meta)
-          }
-          root.setWallet(wallet, cb)
-        }
-      })
+      // aliasService.lookupAddress(account.id, function (err, ans) {
+      //   if (err) {
+      //     $log.debug(err)
+      //     root.setWallet(wallet, cb)
+      //   } else {
+      //     $log.debug('Answer from alias server looking up ' + account.id + ': ' + JSON.stringify(ans))
+      //     if (ans && ans.aliases.length > 0) {
+      //       account.meta.alias = ans.aliases[0]
+      //       wallet.setMeta(account, account.meta)
+      //     }
+      //     root.setWallet(wallet, cb)
+      //   }
+      // })
     }
 
     // Loads wallet from local storage using given password
