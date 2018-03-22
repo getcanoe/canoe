@@ -21,7 +21,9 @@ angular
       loop: false,
       effect: 'slide',
       speed: 500,
-      spaceBetween: 100
+      spaceBetween: 100,
+      noSwiping: true,
+      noSwipingClass: 'no-swipe'
     }
 
     $scope.$on('$ionicSlides.sliderInitialized', function (event, data) {

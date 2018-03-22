@@ -37,6 +37,11 @@
   .settings-input-group {
     padding-bottom: 2vw;
   }
+
+  .create-password-form .list {
+    height: 140px;
+  }
+
   ion-list > .list {
     width: 85%;
   }
@@ -170,8 +175,4 @@
     width: 100%;
     padding-bottom: 12vh;
   }
-}
-
-.keyboard-open .swiper-pagination.swiper-pagination-clickable {
-  display: none;
 }

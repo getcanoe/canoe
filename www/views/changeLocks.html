@@ -17,17 +17,17 @@
 					<span class="input-label" translate>Timeout A</span>
 					<input type="number"
 						placeholder="{{'Timeout in seconds'|translate}}"
-						ng-model="timeoutA"
-						name="timeoutA"
+						ng-model="timeoutSoft"
+						name="timeoutSoft"
 						required>
 				</label>
 
 				<label class="item item-input item-stacked-label">
 					<span class="input-label" translate>Lock type after timeout A</span>
 					<div class="list">
-						<ion-radio name="lockTypeA" ng-value="'none'" ng-model="lockTypeA" ng-click="saveLockTypeA('none')">None</ion-radio>
-						<ion-radio name="lockTypeA" ng-value="'pin'" ng-model="lockTypeA" ng-click="saveLockTypeA('pin')">4-digit PIN</ion-radio>
-						<ion-radio name="lockTypeA" ng-value="'fingerprint'" ng-model="lockTypeA" ng-click="saveLockTypeA('fingerprint')">Fingerprint</ion-radio>		
+						<ion-radio name="lockTypeSoft" ng-value="'none'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('none')">None</ion-radio>
+						<ion-radio name="lockTypeSoft" ng-value="'pin'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('pin')">4-digit PIN</ion-radio>
+						<ion-radio name="lockTypeSoft" ng-value="'fingerprint'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('fingerprint')">Fingerprint</ion-radio>		
 					</div>
 				</label>
 
@@ -38,8 +38,8 @@
 					<span class="input-label" translate>Timeout B</span>
 					<input type="number"
 						placeholder="{{'Timeout in seconds'|translate}}"
-						ng-model="timeoutB"
-						name="timeoutB"
+						ng-model="timeoutHard"
+						name="timeoutHard"
 						required>
 				</label>
 
@@ -63,7 +63,7 @@
 					class="button button-standard button-primary"
 					ng-disabled="false"
 					type="submit"
-					ng-click="save(timeoutA, timeoutB)"
+					ng-click="save(timeoutSoft, timeoutHard)"
 					translate>
 					Save
 				</button>
