@@ -22,9 +22,9 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
     },
     // wallet default config
     wallet: {
-      timeoutA: 60,
-      timeoutB: 1800,
-      lockTypeA: 'PIN',
+      timeoutSoft: 60,
+      timeoutHard: 1800,
+      lockTypeSoft: 'PIN',
       lockTypeBackground: 'PIN',
       serverSidePoW: (!platformInfo.isNW), // On NW we now have good client side PoW
       settings: {

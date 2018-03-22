@@ -2,19 +2,19 @@
 /* global angular */
 angular.module('canoeApp.controllers').controller('changeLocksController', function ($scope, $state, $timeout, $log, $ionicHistory, profileService, popupService, configService, applicationService, gettextCatalog) {
   $scope.saveLockTypeA = function (lockType) {
-    $scope.lockTypeA = lockType
+    $scope.lockTypeSoft = lockType
   }
 
   $scope.saveLockTypeBackground = function (lockType) {
     $scope.lockTypeBackground = lockType
   }
 
-  $scope.save = function (timeoutA, timeoutB) {
+  $scope.save = function (timeoutSoft, timeoutHard) {
     var opts = {
       wallet: {
-        timeoutA: timeoutA,
-        timeoutB: timeoutB,
-        lockTypeA: $scope.lockTypeA,
+        timeoutSoft: timeoutSoft,
+        timeoutHard: timeoutHard,
+        lockTypeSoft: $scope.lockTypeSoft,
         lockTypeBackground: $scope.lockTypeBackground
       }
     }
@@ -29,9 +29,9 @@ angular.module('canoeApp.controllers').controller('changeLocksController', funct
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     var config = configService.getSync()
-    $scope.timeoutA = config.wallet.timeoutA
-    $scope.lockTypeA = config.wallet.lockTypeA
-    $scope.timeoutB = config.wallet.timeoutB
+    $scope.timeoutSoft = config.wallet.timeoutSoft
+    $scope.lockTypeSoft = config.wallet.lockTypeSoft
+    $scope.timeoutHard = config.wallet.timeoutHard
     $scope.lockTypeBackground = config.wallet.lockTypeBackground
     $timeout(function () {
       $scope.$apply()
