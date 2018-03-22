@@ -926,15 +926,13 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       }, 101)
 
       $ionicPlatform.on('pause', function () {
-        // We purge wallet from memory
+        // Canoe is going to background
+        applicationService.lockBackground()
       })
 
       $ionicPlatform.on('resume', function () {
-        // Only if we actually have it loaded
-        if (profileService.getWallet()) {
-          profileService.unloadWallet()
-          applicationService.appLockModal('check')
-        }
+        // We may need to change lock depending on time passed in background
+        applicationService.verifyLock()
       })
 
       $ionicPlatform.on('menubutton', function () {
@@ -980,7 +978,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
               // Clear history
               $ionicHistory.clearHistory()
             })
-            applicationService.appLockModal('check')
+            applicationService.lockPassword()
           })
         }
         // After everything have been loaded
