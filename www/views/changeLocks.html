@@ -11,10 +11,10 @@
 			<div class="list settings-list settings-input-group">
 
 				<div class="comment" translate>
-					After the first timeout A in seconds, Canoe is locked using selected lock type. Choosing None disables locking after timeout A.
+					After no user activity for soft timeout in seconds, Canoe is locked using selected lock type. Choosing None disables locking after soft timeout.
 				</div>
 				<label class="item item-input item-stacked-label">
-					<span class="input-label" translate>Timeout A</span>
+					<span class="input-label" translate>Soft Timeout</span>
 					<input type="number"
 						placeholder="{{'Timeout in seconds'|translate}}"
 						ng-model="timeoutSoft"
@@ -23,19 +23,19 @@
 				</label>
 
 				<label class="item item-input item-stacked-label">
-					<span class="input-label" translate>Lock type after timeout A</span>
+					<span class="input-label" translate>Soft Timeout Lock</span>
 					<div class="list">
-						<ion-radio name="lockTypeSoft" ng-value="'none'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('none')">None</ion-radio>
-						<ion-radio name="lockTypeSoft" ng-value="'pin'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('pin')">4-digit PIN</ion-radio>
-						<ion-radio name="lockTypeSoft" ng-value="'fingerprint'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('fingerprint')">Fingerprint</ion-radio>		
+						<ion-radio name="lockTypeSoft" ng-value="'none'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('none')" translate>None</ion-radio>
+						<ion-radio name="lockTypeSoft" ng-value="'pin'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('pin')" translate>4-digit PIN</ion-radio>
+						<ion-radio ng-if="enabledFingerprint" name="lockTypeSoft" ng-value="'fingerprint'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('fingerprint')" translate>Fingerprint</ion-radio>		
 					</div>
 				</label>
 
 				<div class="comment" translate>
-					After the second timeout B, Canoe will lock and demand password to unlock. You can not disable this timeout, but you can set it very high.</p>
+					After additional hard timeout in seconds, Canoe will lock and demand password to unlock. You can not disable this timeout, but you can set it very high.</p>
 				</div>
 				<label class="item item-input item-stacked-label">
-					<span class="input-label" translate>Timeout B</span>
+					<span class="input-label" translate>Hard Timeout</span>
 					<input type="number"
 						placeholder="{{'Timeout in seconds'|translate}}"
 						ng-model="timeoutHard"
@@ -44,15 +44,15 @@
 				</label>
 
 				<div class="comment" translate>
-					When Canoe goes to background, this is the lock type used when coming back to foreground. Disable background locking by selecting None.</p>
+					When Canoe goes to background, this is the lock type used. Disable background locking by selecting None.</p>
 				</div>
 				<label class="item item-input item-stacked-label">
-					<span class="input-label" translate>Lock type when going to background</span>
+					<span class="input-label" translate>Lock when going to background</span>
 					<div class="list">
-						<ion-radio name="lockTypeBackground" ng-value="'none'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('none')">None</ion-radio>
-						<ion-radio name="lockTypeBackground" ng-value="'pin'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('pin')">4-digit PIN</ion-radio>
-						<ion-radio name="lockTypeBackground" ng-value="'fingerprint'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('fingerprint')">Fingerprint</ion-radio>
-						<ion-radio name="lockTypeBackground" ng-value="'password'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('password')">Password</ion-radio>
+						<ion-radio name="lockTypeBackground" ng-value="'none'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('none')" translate>None</ion-radio>
+						<ion-radio name="lockTypeBackground" ng-value="'pin'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('pin')" translate>4-digit PIN</ion-radio>
+						<ion-radio ng-if="enabledFingerprint" name="lockTypeBackground" ng-value="'fingerprint'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('fingerprint')" translate>Fingerprint</ion-radio>
+						<ion-radio name="lockTypeBackground" ng-value="'password'" ng-model="lockTypeBackground" ng-click="saveLockTypeBackground('password')" translate>Password</ion-radio>
 					</div>
 				</label>
 
