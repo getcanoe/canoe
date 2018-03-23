@@ -122,18 +122,11 @@ angular.module('canoeApp.controllers').controller('exportController',
 
     $scope.sendWalletBackup = function () {
       window.plugins.toast.showShortCenter(gettextCatalog.getString('Preparing backup...'))
-      var name = (wallet.credentials.walletName || wallet.credentials.walletId)
-      if (wallet.alias) {
-        name = wallet.alias + ' [' + name + ']'
-      }
       $scope.getBackup(function (backup) {
         var ew = backup
         if (!ew) return
-
-        if ($scope.formData.noSignEnabled) { name = name + '(No Private Key)' }
-
-        var subject = 'Canoe Wallet Backup: ' + name
-        var body = 'Here is the encrypted backup of the wallet ' + name + ': \n\n' + ew + '\n\n To import this backup, copy all text between {...}, including the symbols {}'
+        var subject = 'Canoe Wallet Backup'
+        var body = 'Here is the encrypted backup of the wallet.\n\n' + ew + '\n\n To import this backup, copy all text between {...}, including the symbols {}'
         window.plugins.socialsharing.shareViaEmail(
           body,
           subject,
