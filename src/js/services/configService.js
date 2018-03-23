@@ -20,13 +20,13 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
         wp: ''
       }
     },
-    // wallet default config
+    // Wallet default config
     wallet: {
       timeoutSoft: 60,
-      timeoutHard: 1800,
-      lockTypeSoft: 'PIN',
-      lockTypeBackground: 'PIN',
-      serverSidePoW: (!platformInfo.isNW), // On NW we now have good client side PoW
+      timeoutHard: 180,
+      lockTypeSoft: 'password', // PIN is not yet configured and fingerprint may not be available
+      lockTypeBackground: 'none', // PIN is not yet configured and fingerprint may not be available
+      serverSidePoW: (!platformInfo.isLinux), // On NW Linux we now have good client side PoW
       settings: {
         unitName: 'NANO',
         unitToRaw: Math.pow(10, 30),
