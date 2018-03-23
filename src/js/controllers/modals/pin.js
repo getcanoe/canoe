@@ -154,7 +154,6 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
   function deletePin () {
     var opts = {
       lock: {
-        method: 'none',
         value: null,
         bannedUntil: null
       }
@@ -169,12 +168,10 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
   function savePin (value) {
     var opts = {
       lock: {
-        method: 'pin',
         value: value,
         bannedUntil: null
       }
     }
-
     configService.set(opts, function (err) {
       if (err) $log.debug(err)
       $scope.hideModal()

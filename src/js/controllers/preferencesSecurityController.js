@@ -13,19 +13,6 @@ angular.module('canoeApp.controllers').controller('preferencesSecurityController
     applicationService.pinModal('setup')
   }
 
-  function saveConfig (method) {
-    var opts = {
-      lock: {
-        method: method,
-        value: null
-      }
-    }
-    configService.set(opts, function (err) {
-      if (err) $log.debug(err)
-      initMethodSelector()
-    })
-  }
-
   $rootScope.$on('pinModalClosed', function () {
     init()
   })

@@ -39,8 +39,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
     },
 
     lock: {
-      method: 'password',
-      value: null,
+      value: '0000', // If people enable PIN and haven't set it yet
       bannedUntil: null
     },
 
