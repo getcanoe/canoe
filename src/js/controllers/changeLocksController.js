@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('changeLocksController', function ($scope, $state, $timeout, $log, $ionicHistory, fingerprintService, popupService, configService, applicationService, gettextCatalog) {
+angular.module('canoeApp.controllers').controller('changeLocksController', function ($scope, $state, $timeout, $log, $ionicHistory, fingerprintService, popupService, configService, applicationService, platformInfo, gettextCatalog) {
   $scope.saveLockTypeA = function (lockType) {
     $scope.lockTypeSoft = lockType
   }
@@ -30,6 +30,7 @@ angular.module('canoeApp.controllers').controller('changeLocksController', funct
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     var config = configService.getSync()
     $scope.enabledFingerprint = fingerprintService.isAvailable()
+    $scope.enabledBackground = platformInfo.isMobile
     $scope.timeoutSoft = config.wallet.timeoutSoft
     $scope.lockTypeSoft = config.wallet.lockTypeSoft
     $scope.timeoutHard = config.wallet.timeoutHard
