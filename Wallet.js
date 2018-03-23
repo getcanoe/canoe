@@ -802,9 +802,12 @@ module.exports = function(password)
 		return null
 	}
 
-	api.removePendingBlocks = function()
+	api.removePendingBlocks = function(account)
 	{
+		var temp = keys[current].account;
+		api.useAccount(account);
 		pendingBlocks = [];
+		api.useAccount(temp);
 	}
 
 	api.removePendingBlock = function(blockHash)
@@ -833,6 +836,10 @@ module.exports = function(password)
 				return;
 			}
 		}
+	}
+
+	api.clearWalletPendingBlocks = function () {
+		walletPendingBlocks = []
 	}
 
 	api.getBlockFromHashAndAccount = function(blockHash, acc)

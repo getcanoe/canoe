@@ -189,6 +189,8 @@ angular.module('canoeApp.services')
         lodash.each(accountIds, function (account) {
           resetChainInternal(root.wallet, account)
         })
+        // Better safe than sorry, we always remove them.
+        root.wallet.clearWalletPendingBlocks()
         root.wallet.enableBroadcast(true) // Turn back on
         root.saveWallet(root.wallet, function () {})
       }
@@ -202,6 +204,8 @@ angular.module('canoeApp.services')
     }
 
     function resetChainInternal (wallet, account) {
+      // Better safe than sorry, we always remove them.
+      wallet.removePendingBlocks(account)
       var currentBlocks = wallet.getLastNBlocks(account, 99999)
       var ledger = rai.ledger(account, 1)
       // We always get one account, but we don't get the one we asked for if
