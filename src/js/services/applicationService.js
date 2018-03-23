@@ -243,21 +243,19 @@ angular.module('canoeApp.services')
       }
       $log.debug('Applying lock: ' + type)
       if (type === 'none') return
-      if (type === 'fingerprint' && fingerprintService.isAvailable()) root.fingerprintModal()
+      if (type === 'fingerprint') {
+        if (fingerprintService.isAvailable()) {
+          root.fingerprintModal()
+        } else {
+          // Hmmm, fallback. We should not end up here normally, and PIN may not have been configured.
+          // TODO: popup?
+          root.passwordModal('check')
+        }
+      } 
       if (type === 'password') root.passwordModal('check')
+      // TODO: Verify PIN has been configured?
       if (type === 'pin') root.pinModal('check')
     }
 
-/*    root.appLockModal = function (action) {
-      if (root.isModalOpen) return
-      root.passwordModal(action)
-      var lockMethod = config.lock && config.lock.method
-        if (!lockMethod || lockMethod === 'none') return
-        if (lockMethod === 'fingerprint' && fingerprintService.isAvailable()) root.fingerprintModal()
-        if (lockMethod === 'password') root.passwordModal(action)
-        if (lockMethod === 'pin') root.pinModal(action)
-      })
-    }
-*/
     return root
   })
