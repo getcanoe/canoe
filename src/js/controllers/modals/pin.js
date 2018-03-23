@@ -22,12 +22,6 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
     }
   })
 
-  function getSavedMethod () {
-    var config = configService.getSync()
-    if (config.lock) return config.lock.method
-    return 'none'
-  }
-
   function checkAttempts () {
     $scope.currentAttempts += 1
     $log.debug('Attempts to unlock:', $scope.currentAttempts)
@@ -101,11 +95,10 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
   function isMatch (pin) {
     var config = configService.getSync()
     return config.lock.value === pin
-  };
+  }
 
   $scope.save = function () {
     if (!$scope.isComplete()) return
-    var savedMethod = getSavedMethod()
 
     switch ($scope.action) {
       case 'setup':
@@ -139,7 +132,7 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
     $timeout(function () {
       $scope.$apply()
     })
-  };
+  }
 
   function applyAndCheckPin () {
     if (!$scope.confirmPin) {
@@ -156,7 +149,7 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
     $timeout(function () {
       $scope.$apply()
     })
-  };
+  }
 
   function deletePin () {
     var opts = {
@@ -186,7 +179,7 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
       if (err) $log.debug(err)
       $scope.hideModal()
     })
-  };
+  }
 
   function saveFailedAttempt (bannedUntil) {
     var opts = {
@@ -199,5 +192,5 @@ angular.module('canoeApp.controllers').controller('pinController', function ($st
       if (err) $log.debug(err)
       lockTimeControl(bannedUntil)
     })
-  };
+  }
 })

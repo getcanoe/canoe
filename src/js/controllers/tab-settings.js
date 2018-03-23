@@ -67,10 +67,11 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
     $scope.isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     $scope.isDevel = platformInfo.isDevel
     $scope.appName = appConfigService.nameCase
-    configService.whenAvailable(function (config) {
+/*  configService.whenAvailable(function (config) {
       $scope.locked = config.lock && config.lock.method
       if (!$scope.locked || $scope.locked === 'none') { $scope.method = gettextCatalog.getString('Disabled') } else { $scope.method = $scope.locked.charAt(0).toUpperCase() + config.lock.method.slice(1) }
     })
+*/
   })
 
   $scope.$on('$ionicView.enter', function (event, data) {
