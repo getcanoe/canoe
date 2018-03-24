@@ -36,7 +36,7 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
       // Clear history
       $ionicHistory.clearHistory()
     })
-    applicationService.appLockPassword()
+    applicationService.lockPassword()
   }
 
   $scope.openExternalLinkHelp = function () {
