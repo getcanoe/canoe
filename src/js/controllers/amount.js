@@ -305,22 +305,21 @@ angular.module('canoeApp.controllers').controller('amountController', function (
           $scope.allowSend = false
         }
       } else {
-        $scope.alternativeAmount = $filter('formatFiatAmount')(toFiat(result))
+        $scope.alternativeAmount = toFiat(result)
       }
     }
   }
 
   function processResult (val) {
-    if (availableUnits[unitIndex].isFiat) return $filter('formatFiatAmount')(val)
-    else return txFormatService.formatAmount(val.toFixed(unitDecimals) * unitToRaw, true)
+    return profileService.formatAmount(new BigNumber(unitDecimals).times(unitToRaw))
   }
 
   function fromFiat (val) {
-    return parseFloat((profileService.fromFiat(val, fiatCode, availableUnits[altUnitIndex].id) * rawToUnit).toFixed(unitDecimals))
+    return profileService.fromFiat(val, fiatCode, availableUnits[altUnitIndex].id) * rawToUnit
   }
 
   function toFiat (val) {
-    return parseFloat((profileService.toFiat(val * unitToRaw, fiatCode, availableUnits[unitIndex].id)).toFixed(2))
+    return profileService.toFiat(val * unitToRaw, fiatCode, availableUnits[unitIndex].id)
   }
 
   function evaluate (val) {

@@ -18,7 +18,6 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   var isCordova = platformInfo.isCordova
   var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
   var unitToRaw
-  var rawToUnit
 
   function refresh () {
     $timeout(function () {
@@ -171,7 +170,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       tx.amountStr = profileService.formatAmountWithUnit(tx.toAmount) // txFormatService.formatAmountStr(null, tx.toAmount)
       tx.amountValueStr = tx.amountStr.split(' ')[0]
       tx.amountUnitStr = tx.amountStr.split(' ')[1]
-      tx.alternativeAmountStr = toFiat(tx.amountValueStr) + ' ' + walletConfig.settings.alternativeIsoCode
+      tx.alternativeAmountStr = toFiat(new BigNumber(tx.toAmount).dividedBy(unitToRaw))
     }
 
     updateAmount()
@@ -184,7 +183,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
   }
 
   function toFiat (val) {
-    return parseFloat((profileService.toFiat(val * unitToRaw, walletConfig.settings.alternativeIsoCode, 'nano')).toFixed(2))
+    return profileService.toFiat(new BigNumber(val).times(unitToRaw), walletConfig.settings.alternativeIsoCode)
   }
 
   function useSelectedWallet () {

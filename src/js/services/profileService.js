@@ -62,9 +62,10 @@ angular.module('canoeApp.services')
       nanoService.fetchServerStatus(cb)
     }
 
-    root.toFiat = function (raw, code, force) {
-      var rate = rateService.getRate(code)
-      return (raw * rate) / RAW_PER_NANO
+    root.toFiat = function (raw, code) {
+      BigNumber.config({ ERRORS: false });
+      var rate = new BigNumber(rateService.getRate(code))
+      return root.formatAnyAmount(new BigNumber(raw).times(rate).dividedBy(RAW_PER_NANO), uxLanguage.currentLanguage, code)
     }
 
     root.fromFiat = function (amount, code) {
@@ -124,27 +125,71 @@ angular.module('canoeApp.services')
     }
 
     root.formatAmount = function (raw, decimals) {      
-      //$log.info('formatAmount =================================================================')
-      var result = ''
-      if (raw === 0) {
-        result = raw.toFixed(decimals)
-      } else {
-        var balance = raw / RAW_PER_NANO
-        if (Math.round(balance * Math.pow(10, decimals)) === 0) {
-          result = new BigNumber(raw).dividedBy(RAW_PER_NANO).toString()
-          //$log.info('result',result) 
-          //$log.info('result.toNumber()', result.toNumber()) 
-          //$log.info('result.toNumber().toLocaleString(uxLanguage.currentLanguage)', result.toNumber().toLocaleString(uxLanguage.currentLanguage)) 
-          //result = result.toNumber().toLocaleString(uxLanguage.currentLanguage)
-          //return balance.toString()
-        } else {
-          //result = new BigNumber(raw).dividedBy(RAW_PER_NANO)
-          return balance.toFixed(decimals)
-        }
-      }
-      return result
+      return root.formatAnyAmount(new BigNumber(raw).dividedBy(RAW_PER_NANO), uxLanguage.currentLanguage)
     }
 
+    root.formatAmountWithUnit = function (raw) {
+      if (isNaN(raw)) return
+      // TODO use current unit in settings knano, Mnano etc
+      return root.formatAnyAmount(new BigNumber(raw).dividedBy(RAW_PER_NANO), uxLanguage.currentLanguage, 'NANO')
+    }
+    
+    // A quite resilient and open minded way to format amounts from any epoch and location
+    root.formatAnyAmount = function (amount, loc, cur) {
+      var result
+      var bigAmount
+      var isNan = false
+      
+      try {
+        bigAmount = new BigNumber(amount)
+      } catch (err) {
+        isNan = true
+      }
+
+      if (amount !== undefined && !isNan){
+        var decimalSeparator = '.'
+        var knownLoc = true
+        try {
+          decimalSeparator = new BigNumber(1.1).toNumber().toLocaleString(loc)[1]
+        } catch (err) {
+          knownLoc = false
+        }
+    
+        if (knownLoc){
+          var knownCur = true
+          BigNumber.config({ EXPONENTIAL_AT: -31 })
+          try {
+            1.1.toLocaleString('en', {style: 'currency', currency: cur})
+          } catch (err) {
+            knownCur = false
+          }
+          if (knownCur){
+            // Known fiat currency
+            result = bigAmount.toNumber().toLocaleString(loc, {style: 'currency', currency: cur})
+          } else {
+            // Crypto or alien currency
+            var integerPart = bigAmount.round(0, BigNumber.ROUND_DOWN)
+            var decimalPart = bigAmount.minus(integerPart)
+            var cryptoDisplay = integerPart.toString()
+            if (knownLoc){
+              cryptoDisplay = integerPart.toNumber().toLocaleString(loc)
+            }
+            if (!decimalPart.isZero()){
+              cryptoDisplay += decimalSeparator
+              cryptoDisplay += decimalPart.toString().substr(2)
+            }
+            if (cur) cryptoDisplay += ' ' + cur
+            result = cryptoDisplay
+          }
+        } else {
+          result = bigAmount.toString()
+          if (cur) result += ' ' + cur
+        }
+      } 
+      
+      return result
+    }
+    
     root.formatAmountWithUnit = function (raw) {
       if (isNaN(raw)) return
       // TODO use current unit in settings knano, Mnano etc
@@ -410,9 +455,8 @@ angular.module('canoeApp.services')
         var config = configService.getSync().wallet.settings
         // Don't show unless rate is loaded, ui update will be lanched by $broadcast('rates.loaded')
         acc.alternativeBalanceStr = 'hide'
-        var altBalance = root.toFiat(parseInt(acc.balance), config.alternativeIsoCode, 'nano', true)
-        acc.alternativeBalanceStr = $filter('formatFiatAmount')(parseFloat(altBalance).toFixed(2)) + ' ' + config.alternativeIsoCode
-        acc.pendingBalanceStr = root.formatAmountWithUnit(parseInt(acc.pendingBalance))
+        acc.alternativeBalanceStr = root.toFiat(acc.balance, config.alternativeIsoCode, 'nano')
+        acc.pendingBalanceStr = root.formatAmountWithUnit(acc.pendingBalance)
       })
 
       return accounts
