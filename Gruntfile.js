@@ -7,6 +7,9 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     exec: {
+      splashicon: {
+        command: 'cordova-splash && cordova-icon'
+      },
       desktopLinux: {
         command: 'sed s/VERSION/<%= pkg.version %>/g < resources/canoe/linux/canoe.desktop > build/canoe/canoe.desktop'
       },
@@ -296,7 +299,7 @@ module.exports = function (grunt) {
   grunt.registerTask('prod', ['default', 'uglify'])
   grunt.registerTask('translate', ['nggettext_extract'])
   grunt.registerTask('desktop', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:linux_native', 'copy:osx_native', 'exec:ziplinux', 'exec:appimage', 'exec:ziposx', 'exec:zipwin'])
-  grunt.registerTask('osx', ['prod', 'nwjs', 'exec:macos', 'exec:osxsign'])
+  grunt.registerTask('osx', ['prod', 'nwjs', 'copy:osx_native', 'appdmg', 'exec:osxsign'])
   grunt.registerTask('osx-debug', ['default', 'nwjs'])
   grunt.registerTask('chrome', ['default', 'exec:chrome'])
   grunt.registerTask('wp', ['prod', 'exec:wp'])
