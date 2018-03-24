@@ -872,7 +872,12 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     applicationService.init()
 
     $ionicPlatform.ready(function () {
-      if (screen.width < 768 && platformInfo.isCordova) { screen.lockOrientation('portrait') }
+      if (screen.width < 768 && platformInfo.isCordova) {
+	var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation || screen.orientation.lock
+        if (lockOrientation) {
+          lockOrientation('portrait')
+        }
+      }
 
       if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard && !platformInfo.isWP) {
         cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false)
