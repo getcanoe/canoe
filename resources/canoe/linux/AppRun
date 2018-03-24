@@ -139,7 +139,7 @@ if [[ $EUID -ne 0 ]]; then
   DESTINATION_DIR_DESKTOP="$HOME/.local/share/applications"
   MODE="user"
 else
-  echo "Executing AppImage as root is discouraged, exiting"
+  echo "Executing AppImage as root is not recommended."
   exit 0
 fi
 
@@ -175,7 +175,6 @@ if [ -z "$APPIMAGE_SILENT_INSTALL" ] ; then
   --set-icon="canoe" --set-key=TryExec --set-value=${APPIMAGE// /\\s} "$DESKTOP_FILE" \
   --dir "$DESTINATION_DIR_DESKTOP" \
   --mode=644
-    xdg-icon-resource install --mode $MODE --novendor --context apps --size 64 "$APPDIR/canoe.png"  "canoe"
     xdg-icon-resource install --mode $MODE --novendor --context apps --size 128 "$APPDIR/canoe.png"  "canoe"
     exit 0
 fi
