@@ -18,7 +18,6 @@ angular.module('canoeApp.services')
     // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
     // var host = 'https://getcanoe.io/rpc' // for the alpha
     var host = 'https://getcanoe.io/rpc-dev' // for dev
-    var port = 443
     var rai = null
 
     // port and ip to use for MQTT-over-WSS
@@ -372,7 +371,7 @@ angular.module('canoeApp.services')
 
     root.connect = function () {
       try {
-        rai = new Rai(host, port) // connection
+        rai = new Rai(host) // connection
         rai.initialize()
       } catch (e) {
         rai = null

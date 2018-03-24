@@ -103,30 +103,16 @@ XRB.raw_to_hex = function (raw) {
   return value
 }
 
-function Rai (url_base, port) {
+function Rai (url_base) {
   this.error = function (error) {
     XRB.error(error)
   }
 
   this.rpc = function (request, async_callback) {
     try {
-      var url = document.createElement('a')
-      if (typeof url_base === 'undefined') { url.href = 'http://localhost' } // if url is not set, use default to localhost
-      else if (!url_base.startsWith('http')) { url.href = 'http://' + url_base.split('/').reverse()[0] } // local files are not supported; default protocol = HTTP
-      else { url.href = url_base }
-
-      if (url.port === '') { url.port = port || 7076 } // default port 7076
-    } catch (e) {
-      if (e instanceof ReferenceError) {
-        if (typeof url_base === 'undefined') { var url = 'http://localhost:7076' } else { var url = url_base }
-      }	else { console.error(e) }
-    }
-
-    try {
 		// Asynchronous
       if (typeof async_callback === 'function') {
-        let xhr
-        xhr = new XMLHttpRequest()
+        let xhr = new XMLHttpRequest()
         xhr.onload = function (e) {
           if (xhr.readyState === 4 && xhr.status === 200) {
           let json = JSON.parse(xhr.responseText)
@@ -145,7 +131,7 @@ function Rai (url_base, port) {
           console.error(xhr.statusText)
         }
 
-        xhr.open('POST', url, true)
+        xhr.open('POST', url_base, true)
         xhr.send(request)
       }
 
@@ -153,7 +139,7 @@ function Rai (url_base, port) {
       else {
         let xhr
         xhr = new XMLHttpRequest()
-        xhr.open('POST', url, false)
+        xhr.open('POST', url_base, false)
         xhr.send(request)
 
         if (xhr.readyState == 4 && xhr.status == 200) {
