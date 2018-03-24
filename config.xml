@@ -56,12 +56,6 @@
         <icon height="50" src="resources/canoe/ios/icon/icon-50.png" width="50" />
         <icon height="100" src="resources/canoe/ios/icon/icon-50@2x.png" width="100" />
         <icon height="1024" src="resources/canoe/ios/icon/icon-1024.png" width="1024" />
-        <splash src="resources/canoe/ios/splash/Default@2x~universal~anyany.png" />
-        <splash src="resources/canoe/ios/splash/Default@2x~universal~comany.png" />
-        <splash src="resources/canoe/ios/splash/Default@2x~universal~comcom.png" />
-        <splash src="resources/canoe/ios/splash/Default@3x~universal~anyany.png" />
-        <splash src="resources/canoe/ios/splash/Default@3x~universal~anycom.png" />
-        <splash src="resources/canoe/ios/splash/Default@3x~universal~comany.png" />
         <allow-navigation href="*" />
     </platform>
     <platform name="android">
@@ -72,12 +66,6 @@
         <icon density="xhdpi" src="resources/canoe/android/icon/drawable-xhdpi-icon.png" />
         <icon density="xxhdpi" src="resources/canoe/android/icon/drawable-xxhdpi-icon.png" />
         <icon density="xxxhdpi" src="resources/canoe/android/icon/drawable-xxxhdpi-icon.png" />
-        <splash density="port-hdpi" src="resources/canoe/android/splash/drawable-port-hdpi-screen.png" />
-        <splash density="port-ldpi" src="resources/canoe/android/splash/drawable-port-ldpi-screen.png" />
-        <splash density="port-mdpi" src="resources/canoe/android/splash/drawable-port-mdpi-screen.png" />
-        <splash density="port-xhdpi" src="resources/canoe/android/splash/drawable-port-xhdpi-screen.png" />
-        <splash density="port-xxhdpi" src="resources/canoe/android/splash/drawable-port-xxhdpi-screen.png" />
-        <splash density="port-xxxhdpi" src="resources/canoe/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="windows">
         <icon src="resources/canoe/windows/icon/StoreLogo.png" target="StoreLogo" />
@@ -91,10 +79,9 @@
         <splash height="300" src="resources/canoe/windows/splash/SplashScreen.scale-100.png" width="620" />
         <splash height="1920" src="resources/canoe/windows/splash/SplashScreenPhone.scale-240.png" width="1152" />
     </platform>
-    <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.1.0" />
     <engine name="windows" spec="6.0.0" />
-    <plugin name="cordova-plugin-device" spec="2.0.1" />
+    <engine name="ios" spec="^4.5.4" />
     <plugin name="cordova-plugin-globalization" spec="1.0.9" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="2.4.1" />
@@ -125,4 +112,5 @@
     <plugin name="cordova-plugin-media" spec="^5.0.2">
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
+    <plugin name="cordova-plugin-device" spec="^2.0.1" />
 </widget>
