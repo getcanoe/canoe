@@ -119,6 +119,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
       }
 
       // Alternative currency guessing
+      $log.info('configCache', configCache)
       if (configCache.wallet) {
         var debug = false;
         if (debug) $log.info('configCache.wallet.settings.alternativeIsoCode = ' + configCache.wallet.settings.alternativeIsoCode)
@@ -130,6 +131,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
           configCache.wallet.settings.alternativeIsoCode = 'USD'
           // We don't have an alternative currency set in the wallet, so let's try to guess it
           // Let's get country code first, then currency
+          $log.info('getJSON')
           $.getJSON('//freegeoip.net/json/?callback=?', function(response) {
             // Test here :
             // response.country_code = 'XX'; // Any wrong or unknown currency
@@ -141,6 +143,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
             // response.country_code = 'GB'; // UK is ok too
             // response.country_code = 'CA'; // Canada's fine, as always
             // response.country_code = 'BR'; // Brazil is ok too, so let's go to carnaval !
+            $log.info('response', response)
             if (debug) $log.info('response.country_code = ' + response.country_code)
             configCache.wallet.settings.alternativeIsoCode = country_code_to_currency[response.country_code][0]
             configCache.wallet.settings.alternativeName = country_code_to_currency[response.country_code][1]
