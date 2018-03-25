@@ -121,7 +121,7 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
       // Alternative currency guessing
       $log.info('configCache', configCache)
       if (configCache.wallet) {
-        var debug = false;
+        var debug = true;
         if (debug) $log.info('configCache.wallet.settings.alternativeIsoCode = ' + configCache.wallet.settings.alternativeIsoCode)
         //if (!configCache.wallet.settings.alternativeIsoCode){ // Do like when Onbording, with not alternative currency set
         //  console.log('Pretending there is no alternativeIsoCode in wallet = ' + configCache.wallet.settings.alternativeIsoCode)
@@ -131,19 +131,19 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
           configCache.wallet.settings.alternativeIsoCode = 'USD'
           // We don't have an alternative currency set in the wallet, so let's try to guess it
           // Let's get country code first, then currency
-          $log.info('getJSON')
+          if (debug) $log.info('getJSON')
           $.getJSON('//freegeoip.net/json/?callback=?', function(response) {
             // Test here :
             // response.country_code = 'XX'; // Any wrong or unknown currency
-            // response.country_code = 'MM'; // 'MM' Myanmar does not work well
-            // response.country_code = 'VE'; // Venezuela either
-            // response.country_code = 'KP'; // North Corea...
+            // response.country_code = 'MM'; // 'MM' Myanmar
+            // response.country_code = 'VE'; // Venezuela
+            // response.country_code = 'KP'; // North Corea
 
             // response.country_code = 'FR'; // France -> EUR works fine
             // response.country_code = 'GB'; // UK is ok too
             // response.country_code = 'CA'; // Canada's fine, as always
             // response.country_code = 'BR'; // Brazil is ok too, so let's go to carnaval !
-            $log.info('response', response)
+            if (debug) $log.info('response', response)
             if (debug) $log.info('response.country_code = ' + response.country_code)
             configCache.wallet.settings.alternativeIsoCode = country_code_to_currency[response.country_code][0]
             configCache.wallet.settings.alternativeName = country_code_to_currency[response.country_code][1]
