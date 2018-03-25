@@ -22,8 +22,8 @@ angular.module('canoeApp.services').factory('configService', function (storageSe
     },
     // Wallet default config
     wallet: {
-      timeoutSoft: 60,
-      timeoutHard: 180,
+      timeoutSoft: 120,
+      timeoutHard: 300,
       lockTypeSoft: 'password', // PIN is not yet configured and fingerprint may not be available
       lockTypeBackground: 'none', // PIN is not yet configured and fingerprint may not be available
       serverSidePoW: (!platformInfo.isLinux), // On NW Linux we now have good client side PoW
