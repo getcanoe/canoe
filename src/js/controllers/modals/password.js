@@ -35,6 +35,10 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     }
   }
 
+  $scope.togglePassword = function () {
+    $scope.typePassword = !$scope.typePassword
+  }
+
   function lockTimeControl (bannedUntil) {
     setExpirationTime()
 

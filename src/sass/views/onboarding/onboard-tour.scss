@@ -108,7 +108,7 @@
   }
 
   input::selection {
-    background: red;
+    background: purple;
     color: white;
   }
 
@@ -140,6 +140,7 @@
     text-align: right;
     font-size: 32px !important;
     display: contents;
+    width: initial;
   }
 
 

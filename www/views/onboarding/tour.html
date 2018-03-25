@@ -59,6 +59,7 @@
 
       <form class="create-password-form" name='createPassword' novalidate>
         <div class="list settings-list settings-input-group">
+
           <div class="input-password item item-input item-stacked-label">
             <input autocapitalize="none" autocorrect="off" id="input-password" ng-model="password" type="{{ typePassword ? 'password' : 'text' }}" name="password" placeholder="Password">
             <button class="item item-input item-stacked-label showPassword" ng-click="togglePassword()">
@@ -74,11 +75,11 @@
             <span class="input-label" translate>Enter at least 8 characters to encrypt your wallet.</span>
           </label>
 
-                <div ng-show="password.length >= 8" class="item item-input item-stacked-label good-password">
-                  <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                  <span translate>Nice Password!</span>
-                </div>
-          </label>
+          <div ng-show="password.length >= 8" class="item item-input item-stacked-label good-password">
+            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+            <span translate>Nice Password!</span>
+          </div>
+
         </div>
 
         <div class="cta-buttons">
