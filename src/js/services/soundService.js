@@ -14,7 +14,7 @@ angular.module('canoeApp.services').factory('soundService', function ($log, plat
   root.sounds.send = makeMedia('locked.ogg')
   root.sounds.receive = makeMedia('definite.ogg')
   root.sounds.unlocking = makeMedia('confirmed.ogg')
-  root.sounds.repchanged = makeMedia('filing-your-inbox.ogg')
+  root.sounds.repchanged = makeMedia('filling-your-inbox.ogg')
 
   function makeMedia (path) {
     if (isCordova) {
