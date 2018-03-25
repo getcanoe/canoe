@@ -213,8 +213,12 @@ angular.module('canoeApp.services')
     }
     
     // When starting Canoe etc
+    root.lockStartup = function () {
+      root.lock('password', true, true)
+    }
+
     root.lockPassword = function () {
-      root.lock('password')
+      root.lock('password', true)
     }
 
     // Called on resume, need to check time passed in background
@@ -230,7 +234,17 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.lock = function (type, force) {
+    root.lock = function (type, force, startup) {
+      if (!startup && profileService.getWallet() === null) {
+        $log.debug('No wallet, not locking')
+        root.startWaitingForSoft()
+        return
+      }
+      if ($state.is('tabs.preferencesSecurity.changeLocks')) {
+        $log.debug('In lock settings, not locking')
+        root.startWaitingForSoft()
+        return
+      }
       if (root.openModalType === type) return // Already locked by that type
       if (root.openModalType) {
         if (force) {

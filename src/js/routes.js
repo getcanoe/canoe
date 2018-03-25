@@ -983,7 +983,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
               // Clear history
               $ionicHistory.clearHistory()
             })
-            applicationService.lockPassword()
+            applicationService.lockStartup()
           })
         }
         // After everything have been loaded
