@@ -7,11 +7,12 @@
 
   <ion-content>
 
-		<form name='changeLocks' novalidate>
+		<form class="change-locks" name='changeLocks' novalidate>
 			<div class="list settings-list settings-input-group">
 
 				<div class="comment" translate>
-					After no user activity for soft timeout in seconds, Canoe is locked using selected lock type. Choosing None disables locking after soft timeout.
+          <h5 class="toggle-label" translate>Soft Lock</h5>
+          With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints.
 				</div>
 				<label class="item item-input item-stacked-label">
 					<span class="input-label" translate>Soft Timeout</span>
@@ -23,7 +24,7 @@
 				</label>
 
 				<label class="item item-input item-stacked-label">
-					<span class="input-label" translate>Soft Timeout Lock</span>
+					<span class="input-label" translate>Soft Lock Type</span>
 					<div class="list">
 						<ion-radio name="lockTypeSoft" ng-value="'none'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('none')">{{'None'|translate}}</ion-radio>
 						<ion-radio name="lockTypeSoft" ng-value="'pin'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('pin')">{{'4-digit PIN'|translate}}</ion-radio>
@@ -31,8 +32,11 @@
 					</div>
 				</label>
 
+      <div class="item item-divider"></div>
+
 				<div class="comment" translate>
-					After additional hard timeout in seconds, Canoe will lock and demand password to unlock. You can not disable this timeout, but you can set it very high.</p>
+          <h5 class="toggle-label" translate>Hard Lock</h5>
+          With Hard Lock, Canoe encrypts your wallet and completely remove it from memory. You can not disable Hard Lock, but you can set a very hight timeout.
 				</div>
 				<label class="item item-input item-stacked-label">
 					<span class="input-label" translate>Hard Timeout</span>
@@ -43,9 +47,12 @@
 						required>
 				</label>
 
+        <div class="item item-divider"></div>
+
 				<div ng-if="enabledBackground">
 					<div class="comment" translate>
-						When Canoe goes to background, this is the lock type used. Disable background locking by selecting None.</p>
+            <h5 class="toggle-label" translate>Background Behaviour</h5>
+            <p>Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>
 					</div>
 					<label class="item item-input item-stacked-label">
 						<span class="input-label" translate>Lock when going to background</span>
