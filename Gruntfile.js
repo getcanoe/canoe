@@ -172,7 +172,7 @@ module.exports = function (grunt) {
           'src/js/appConfig.js',
           'src/js/init.js',
           'node_modules/bezier-easing/dist/bezier-easing.min.js',
-          'node_modules/cordova-plugin-qrscanner/dist/cordova-plugin-qrscanner-lib.min.js'
+          'node_modules/cordova-plugin-qrscanner/www/www.min.js'
         ],
         dest: 'www/js/app.js'
       }
