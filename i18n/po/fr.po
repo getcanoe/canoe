@@ -1912,124 +1912,128 @@ msgstr "Mot de passe oublié?"
 
 #: www/views/changeLocks.html:30 www/views/changeLocks.html:61
 msgid "4-digit PIN"
-msgstr ""
+msgstr "Code PIN"
 
 #: www/views/changeLocks.html:53
 msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
 "            <p>Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
-msgstr ""
+msgstr "<h5 class=\"toggle-label\" translate=\"\">Comportement en arrière-plan</h5>\n"
+"            <p>Choisissez le type de verrouillage désiré quand Canoe est mis en arrière-plan. Pour désactiver le verrouillage en arrière-plan, choisissez Aucun.</p>"
 
 #: www/views/changeLocks.html:37
 msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 "          With Hard Lock, Canoe encrypts your wallet and completely remove it from memory. You can not disable Hard Lock, but you can set a very hight timeout."
-msgstr ""
+msgstr "<h5 class=\"toggle-label\" translate=\"\">Verrouillage dur</h5>\n"
+"Avec le verrouillage dur, Canoe crypte votre portefeuille et le retire totalement de la mémoire. Vous ne pouvez pas désactiver le verrouillage dur mais vous pouvez lui donner une durée très longue."
 
 #: www/views/changeLocks.html:13
 msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
 "          With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
-msgstr ""
+msgstr "<h5 class=\"toggle-label\" translate=\"\">Verrouillage doux</h5>\n"
+"Avec le verrouillage doux, Canoe est fermé mais votre portefeuille est présent en mémoire. Le mode verrouillage doux permet d'utiliser une authentification plus simple, par emprunte digitale ou par code PIN."
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your Nano."
-msgstr ""
+msgstr "Quiconque connait votre graine peut accéder et utiliser vos Nanos."
 
 #: www/views/changeLocks.html:54
 msgid "Background Behaviour"
-msgstr ""
+msgstr "Comportement en arrière-plan"
 
 #: www/views/preferencesSecurity.html:22
 msgid "Change 4-digit PIN"
-msgstr ""
+msgstr "Changer de code PIN"
 
 #: www/views/changeLocks.html:3 www/views/preferencesSecurity.html:12
 msgid "Change Lock Settings"
-msgstr ""
+msgstr "Changer les préférences de verrouillage"
 
 #: www/views/onboarding/tour.html:58
 msgid "Encryption Time!"
-msgstr ""
+msgstr "Encryptage!"
 
 #: www/views/onboarding/tour.html:75
 msgid "Enter at least 8 characters to encrypt your wallet."
-msgstr ""
+msgstr "Saisissez au moins 8 caractères pour encrypter votre portefeuille."
 
 #: www/views/changeLocks.html:31 www/views/changeLocks.html:62
 msgid "Fingerprint"
-msgstr ""
+msgstr "Emprunte digitale"
 
 #: www/views/modals/password.html:40
 msgid "Go back to onboarding."
-msgstr ""
+msgstr "Retour à l'enregistrement"
 
 #: src/js/controllers/modals/password.js:74
 msgid "Going back to onboarding replaces the current wallet, are you sure?"
-msgstr ""
+msgstr "Le retour à la procédure d'enregistrement efface le portefeuille en cours, êtes-vous sûr?"
 
 #: www/views/changeLocks.html:38
 msgid "Hard Lock"
-msgstr ""
+msgstr "Verrouillage dur"
 
 #: www/views/changeLocks.html:42
 msgid "Hard Timeout"
-msgstr ""
+msgstr "Délai de verrouillage dur"
 
 #: www/views/advancedSettings.html:14
 msgid "If enabled, Proof Of Work is delegated to the Canoe server side. This option is disabled and always true on mobile Canoe for now."
-msgstr ""
+msgstr "Activé, la preuve de travail (POW) est déléguée au serveur Canoe.\n"
+"Cette option est désactivée et toujours vraie sur Canoe mobile pour l'instant."
 
 #: www/views/advancedSettings.html:23
 msgid "If enabled, a list of recent transactions across all wallets will appear in the Home tab. Currently false, not fully implemented."
-msgstr ""
+msgstr "Activé, la liste des transactions récentes apparaît sur la page d'accueil. L'implémentation n'est pas terminée."
 
 #: www/views/changeLocks.html:58
 msgid "Lock when going to background"
-msgstr ""
+msgstr "Verrouillage au passage en arrière-plan"
 
 #: www/views/onboarding/tour.html:80
 msgid "Nice Password!"
-msgstr ""
+msgstr "Joli mot de passe!"
 
 #: www/views/changeLocks.html:29 www/views/changeLocks.html:60
 msgid "None"
-msgstr ""
+msgstr "Aucun"
 
 #: www/views/changeLocks.html:63
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: src/js/controllers/changeLocksController.js:24
 msgid "Saved"
-msgstr ""
+msgstr "Enregistré"
 
 #: www/views/changeLocks.html:14
 msgid "Soft Lock"
-msgstr ""
+msgstr "Verrouillage doux"
 
 #: www/views/changeLocks.html:27
 msgid "Soft Lock Type"
-msgstr ""
+msgstr "Type de verrouillage doux"
 
 #: www/views/changeLocks.html:18
 msgid "Soft Timeout"
-msgstr ""
+msgstr "Délai pour le verrouillage doux"
 
 #: www/views/changeLocks.html:20 www/views/changeLocks.html:44
 msgid "Timeout in seconds"
-msgstr ""
+msgstr "Délai en secondes"
 
 #: www/views/modals/password.html:30
 msgid "Unlock"
-msgstr ""
+msgstr "Déverrouiller"
 
 #: src/js/controllers/tab-scan.js:107 src/js/controllers/tabsController.js:7
 msgid "Unrecognized data"
-msgstr ""
+msgstr "Données non reconnues"
 
 #: www/views/includes/accountHistory.html:32
 msgid "{{btx.destination}}"
-msgstr ""
+msgstr "{{btx.destination}}"
 
 #: www/views/includes/accountHistory.html:24
 msgid "{{btx.origin}}"
-msgstr ""
+msgstr "{{btx.origin}}"
 
