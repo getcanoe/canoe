@@ -5,7 +5,8 @@ angular.module('canoeApp.services')
     var root = {}
 
     var POW
-    if (platformInfo.isNW) {
+    // Only for OSX and Linux so far
+    if (platformInfo.isOSX || platformInfo.isLinux) {
       POW = require('raiblocks-pow')
     }
 
@@ -110,7 +111,7 @@ angular.module('canoeApp.services')
           //}
         } else {
           // node-raiblocks-pow (native C implementation for NodeJS, works on Desktop)
-          if (platformInfo.isNW) {
+          if (POW) {
             if (doLog) $log.info('Working on client (threaded node-raiblocks-pow) for ' + hash)
             POW.threaded(hash, (err, result) => {
               if (err) return $log.error('Failed to compute client side PoW: ' + err)
