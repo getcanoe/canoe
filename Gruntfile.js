@@ -299,6 +299,7 @@ module.exports = function (grunt) {
   grunt.registerTask('prod', ['default', 'uglify'])
   grunt.registerTask('translate', ['nggettext_extract'])
   grunt.registerTask('desktop', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:linux_native', 'copy:osx_native', 'exec:ziplinux', 'exec:appimage', 'exec:ziposx', 'exec:zipwin'])
+  grunt.registerTask('desktoposx64', ['prod', 'exec:cleanbuild', 'nwjs', 'copy:osx_native', 'exec:ziposx', 'appdmg'])
   grunt.registerTask('desktopwin64', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:zipwin'])
   grunt.registerTask('osx', ['prod', 'nwjs', 'copy:osx_native', 'appdmg', 'exec:osxsign'])
   grunt.registerTask('osx-debug', ['default', 'nwjs'])
