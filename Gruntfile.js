@@ -257,8 +257,8 @@ module.exports = function (grunt) {
         flavor: 'normal', // normal or sdk
         zip: false,
         version: '0.29.0', // If you modify you need to rebuild native modules!
-        macIcns: './resources/canoe/mac/app.icns',
-        exeIco: './www/img/app/logo.ico',
+        macIcns: './icon.icns',
+        exeIco: './icon.ico',
         macPlist: {
           'CFBundleURLTypes': [
             {
