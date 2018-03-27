@@ -44,6 +44,7 @@ angular.module('canoeApp.services')
       if (root.getWallet()) {
         $log.info('Changed password for wallet')
         root.getWallet().changePass(currentPw, pw)
+        root.enteredPassword(pw)
         nanoService.saveWallet(root.getWallet(), function () {})
       } else {
         $log.error('No wallet to change password for')
@@ -82,6 +83,7 @@ angular.module('canoeApp.services')
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
           nanoService.repair() // So we fetch truth from lattice, sync
+          root.enteredPassword(password)
           nanoService.saveWallet(root.getWallet(), cb)
         })
       })
