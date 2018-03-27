@@ -21,7 +21,7 @@
         <div ng-if="addressbook[btx.origin]" class="wallet-details__tx-message ellipsis">
           {{addressbook[btx.origin].name}}
         </div>
-        <div ng-if="!addressbook[btx.origin]" class="wallet-details__tx-message ellipsis" translate>{{btx.origin}}</div>
+        <div ng-if="!addressbook[btx.origin]" class="wallet-details__tx-message ellipsis">{{btx.origin}}</div>
       </div>
 
       <div ng-show="btx.type == 'send'">
@@ -29,7 +29,7 @@
         <div ng-if="addressbook[btx.destination]" class="wallet-details__tx-message ellipsis">
           {{addressbook[btx.destination].name}}
         </div>
-        <div ng-if="!addressbook[btx.destination]" class="wallet-details__tx-message ellipsis" translate>{{btx.destination}}</div>
+        <div ng-if="!addressbook[btx.destination]" class="wallet-details__tx-message ellipsis">{{btx.destination}}</div>
       </div>
 
       <div ng-show="btx.type == 'change'">
