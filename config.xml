@@ -38,6 +38,12 @@
         <config-file parent="ITSAppUsesNonExemptEncryption" target="*-Info.plist">
             <false />
         </config-file>
+        <splash src="resources/canoe/ios/splash/Default@2x~universal~anyany.png" />
+        <splash src="resources/canoe/ios/splash/Default@2x~universal~comany.png" />
+        <splash src="resources/canoe/ios/splash/Default@2x~universal~comcom.png" />
+        <splash src="resources/canoe/ios/splash/Default@3x~universal~anyany.png" />
+        <splash src="resources/canoe/ios/splash/Default@3x~universal~anycom.png" />
+        <splash src="resources/canoe/ios/splash/Default@3x~universal~comany.png" />
         <allow-navigation href="*" />
     </platform>
     <platform name="android">
@@ -61,9 +67,6 @@
         <splash height="300" src="resources/canoe/windows/splash/SplashScreen.scale-100.png" width="620" />
         <splash height="1920" src="resources/canoe/windows/splash/SplashScreenPhone.scale-240.png" width="1152" />
     </platform>
-    <engine name="android" spec="7.1.0" />
-    <engine name="windows" spec="6.0.0" />
-    <engine name="ios" spec="^4.5.4" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
     <plugin name="cordova-plugin-globalization" spec="^1.0.9" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
@@ -98,4 +101,7 @@
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.1" />
+    <engine name="android" spec="7.1.0" />
+    <engine name="windows" spec="6.0.0" />
+    <engine name="ios" spec="^4.5.4" />
 </widget>
