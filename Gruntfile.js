@@ -82,6 +82,12 @@ module.exports = function (grunt) {
       desktopverify: {
         cmd: 'gpg --verify build/canoe-linux64-<%= pkg.version %>.zip.sig build/canoe-linux64-<%= pkg.version %>.zip; gpg --verify build/canoe-linux64-<%= pkg.version %>.AppImage.sig build/canoe-linux64-<%= pkg.version %>.AppImage; gpg --verify build/canoe-win64-<%= pkg.version %>.zip.sig build/canoe-win64-<%= pkg.version %>.zip ; gpg --verify build/canoe-osx64-<%= pkg.version %>.zip.sig build/canoe-osx64-<%= pkg.version %>.zip'
       },
+      dmgsign: {
+        cmd: 'gpg -u E7ADC266 --output build/canoe-osx64-<%= pkg.version %>.dmg.sig --detach-sig build/canoe-osx64-<%= pkg.version %>.dmg'
+      },
+      dmgverify: {
+        cmd: 'gpg --verify build/canoe-osx64-<%= pkg.version %>.dmg.sig build/canoe-osx64-<%= pkg.version %>.dmg'
+      },
       osxsign: {
         cmd: 'gpg -u E7ADC266 --output build/canoe.dmg.sig --detach-sig build/canoe.dmg'
       }
