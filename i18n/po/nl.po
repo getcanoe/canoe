@@ -13,7 +13,7 @@ msgstr "(mogelijk dubbel besteed)"
 
 #: www/views/modals/txp-details.html:159
 msgid "* A payment proposal can be deleted if 1) you are the creator, and no other copayer has signed, or 2) 24 hours have passed since the proposal was created."
-msgstr "* Een bestedingsvoorstel kan worden verwijderd als 1) u de aanmaker bent, en geen andere copayer deze heeft ondertekend, of 2) 24 uur zijn verstreken sinds het voorstel werd aangemaakt."
+msgstr "* Een betalingsvoorstel kan worden verwijderd als 1) jij de maker bent, en geen andere mede-betaler deze heeft ondertekend, of 2) 24 uur zijn verstreken sinds het voorstel werd aangemaakt."
 
 #: www/views/modals/txp-details.html:102
 msgid "- {{tx.feeRateStr}} of the transaction"
@@ -21,7 +21,7 @@ msgstr "- {{tx.feeRateStr}} van de transactie"
 
 #: src/js/controllers/feedback/send.js:25 www/views/feedback/complete.html:21
 msgid "A member of the team will review your feedback as soon as possible."
-msgstr "Een lid van het team zal zo spoedig mogelijk uw feedback bekijken."
+msgstr "Een lid van het team zal zo spoedig mogelijk je feedback bekijken."
 
 #: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
 msgid "About"
@@ -106,7 +106,7 @@ msgstr "Bedrag"
 
 #: src/js/controllers/tab-home.js:148
 msgid "An update to this app is available. For your security, please update to the latest version."
-msgstr "Er is een update voor deze app beschikbaar. Update a.u.b. naar de nieuwste versie voor uw veiligheid."
+msgstr "Er is een update voor deze app beschikbaar. Update a.u.b. naar de nieuwste versie voor je veiligheid."
 
 #: www/views/backupWarning.html:10
 msgid "Are you being watched?"
@@ -175,7 +175,7 @@ msgstr "Browser niet ondersteund"
 
 #: www/views/onboarding/tour.html:49
 msgid "But do not lose your seed!"
-msgstr "Maar, raak je seed niet kwijt!"
+msgstr "Maar.. Raak je seed niet kwijt!"
 
 #: www/views/includes/buyAndSellCard.html:3
 msgid "Buy &amp; Sell Bitcoin"
@@ -198,7 +198,7 @@ msgstr "Kan Wallet Niet Aanmaken"
 
 #: www/views/tab-import-file.html:4
 msgid "Choose a backup file from your computer"
-msgstr "Kies een back-up bestand op uw computer"
+msgstr "Kies een back-up bestand op je computer"
 
 #: src/js/controllers/modals/txpDetails.js:47
 msgid "Click to accept"
@@ -232,11 +232,11 @@ msgstr "Bevestigen"
 
 #: www/views/modals/terms.html:26 www/views/onboarding/disclaimer.html:44
 msgid "Confirm &amp; Finish"
-msgstr "Bevestigen &amp; Voltooien"
+msgstr "Voltooien"
 
 #: src/js/services/walletService.js:31
 msgid "Confirm your new spending password"
-msgstr "Bevestig uw nieuwe bestedingswachtwoord"
+msgstr "Bevestig je nieuwe betalingswachtwoord"
 
 #: www/views/tab-send.html:50
 msgid "Contacts"
@@ -332,7 +332,7 @@ msgstr "Rekening verwijderen"
 
 #: www/views/modals/txp-details.html:164
 msgid "Delete Payment Proposal"
-msgstr "Verwijder Bestedingsvoorstel"
+msgstr "Verwijder Betalingsvoorstel"
 
 #: www/views/preferencesDeleteWallet.html:3
 msgid "Delete Wallet"
@@ -376,7 +376,7 @@ msgstr "E-mailadres"
 
 #: www/views/tab-scan.html:19
 msgid "Enable camera access in your device settings to get started."
-msgstr "Schakel camera toegang in vanuit uw apparaat instellingen om aan de slag te gaan."
+msgstr "Schakel camera toegang in vanuit je apparaat instellingen om aan de slag te gaan."
 
 #: www/views/preferencesNotifications.html:29
 msgid "Enable email notifications"
@@ -392,7 +392,7 @@ msgstr "Schakel de camera in om aan de slag te gaan."
 
 #: src/js/services/walletService.js:43 src/js/services/walletService.js:58
 msgid "Enter Spending Password"
-msgstr "Voer Bestedingswachtwoord in"
+msgstr "Voer Betalingswachtwoord in"
 
 #: www/views/amount.html:4
 msgid "Enter amount"
@@ -400,7 +400,7 @@ msgstr "Vul bedrag in"
 
 #: src/js/services/walletService.js:27
 msgid "Enter new spending password"
-msgstr "Voer nieuw bestedingswachtwoord in"
+msgstr "Voer nieuw betalingswachtwoord in"
 
 #: www/views/tab-import-phrase.html:13
 msgid "Enter wallet seed"
@@ -408,7 +408,7 @@ msgstr "Voer wallet seed in"
 
 #: www/views/backup.html:36
 msgid "Enter your password"
-msgstr "Voer uw wachtwoord in"
+msgstr "Voer je wachtwoord in"
 
 #. Trying to import a malformed wallet export QR code
 #: src/js/controllers/activity.js:45 src/js/controllers/addressbookAdd.js:20
@@ -477,7 +477,7 @@ msgstr "Exporteren mislukt"
 
 #: www/views/tab-create-account.html:14
 msgid "Family vacation funds"
-msgstr "Familie vakantie fonds"
+msgstr "Voorbeelden: Vakantiepotje, verbouwing, spaarrekening etc."
 
 #: www/views/modals/txp-details.html:99
 msgid "Fee:"
@@ -532,7 +532,7 @@ msgstr "Aan de slag"
 
 #: www/views/addressbook.html:20
 msgid "Get started by adding your first one."
-msgstr "Ga aan de slag door uw eerste toe te voegen."
+msgstr "Begin met toevoegen van je eerste adres"
 
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
@@ -572,7 +572,7 @@ msgstr "Start"
 #: src/js/controllers/feedback/send.js:64
 #: src/js/controllers/feedback/send.js:68
 msgid "How could we improve your experience?"
-msgstr "Hoe zouden wij uw ervaring kunnen verbeteren?"
+msgstr "Hoe zouden wij jouw ervaring kunnen verbeteren?"
 
 #: src/js/controllers/feedback/rateCard.js:29
 msgid "I don't like it"
@@ -597,7 +597,7 @@ msgstr "Ik begrijp het"
 
 #: www/views/onboarding/disclaimer.html:18
 msgid "I understand that my funds are held securely on this device, not by a company."
-msgstr "Ik begrijp dat mijn saldo veilig op dit apparaat bewaard wordt, en niet in handen is van een bedrijf."
+msgstr "Ik begrijp dat mijn saldo veilig op dit apparaat bewaard wordt en niet in handen is van een bedrijf."
 
 #: www/views/backup.html:28
 msgid "I've written it down"
@@ -613,7 +613,7 @@ msgstr "Als u meer feedback heeft, laat het ons dan weten via de \"Geef feedback
 
 #: www/views/includes/screenshotWarningModal.html:8
 msgid "If you take a screenshot, your backup may be viewed by other apps. You can make a safe backup with physical paper and a pen."
-msgstr "Als u een screenshot neemt kunnen andere apps mogelijk uw back-up zien. Het is veiliger een back-up te maken met pen en papier."
+msgstr "Als u een screenshot neemt kunnen andere apps mogelijk je back-up zien. Het is veiliger een back-up te maken met pen en papier."
 
 #: www/views/import.html:3
 msgid "Import Wallet"
@@ -634,7 +634,7 @@ msgstr "Wallet importeren..."
 
 #: www/views/backup.html:39
 msgid "In order to verify your wallet backup, please type your password."
-msgstr "Vul uw wachtwoord in om de back-up van uw wallet te verifiëren."
+msgstr "Vul je wachtwoord in om de back-up van je wallet te verifiëren."
 
 #: www/views/includes/walletListSettings.html:9
 msgid "Incomplete"
@@ -769,11 +769,11 @@ msgstr "Geef mij een melding wanneer transacties zijn bevestigd"
 
 #: www/views/includes/backupNeededPopup.html:8
 msgid "Now is a good time to backup your wallet. If this device is lost, it is impossible to access your funds without a backup."
-msgstr "Dit is een goed moment om een back-up van de wallet te maken. Als dit apparaat kwijt raakt is het onmogelijk om toegang tot uw saldo te krijgen zonder een back-up."
+msgstr "Dit is een goed moment om een back-up van de wallet te maken. Als dit apparaat kwijt raakt is het onmogelijk om toegang tot je saldo te krijgen zonder een back-up."
 
 #: www/views/backupWarning.html:11
 msgid "Now is a perfect time to assess your surroundings. Nearby windows? Hidden cameras? Shoulder-spies?"
-msgstr "Dit is het juiste moment om uw omgeving te bekijken. Ramen in de buurt? Verborgen camera's? Kijkt er iemand mee over uw schouder?"
+msgstr "Dit is het juiste moment om je omgeving te bekijken. Ramen in de buurt? Verborgen camera's? Kijkt er iemand mee over je schouder?"
 
 #: www/views/tab-import-phrase.html:15
 msgid "Numbers and letters like 904A2CE76..."
@@ -799,7 +799,7 @@ msgstr "O nee!"
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts."
-msgstr "In dit scherm kan u al uw rekeningen zien"
+msgstr "In dit scherm kan je al je rekeningen zien"
 
 #: src/js/controllers/tab-settings.js:48 src/js/controllers/tab-settings.js:59
 #: src/js/controllers/tx-details.js:94
@@ -879,7 +879,7 @@ msgstr "Voorstellen in behandeling"
 
 #: www/views/preferencesDeleteWallet.html:13
 msgid "Permanently delete this wallet."
-msgstr "Deze portemonnee definitief verwijderen."
+msgstr "Deze wallet definitief verwijderen."
 
 #: www/views/backup.html:21
 msgid "Please carefully write down this 64 character seed. Click to copy to clipboard."
@@ -895,7 +895,7 @@ msgstr "Voer de seed in"
 
 #: src/js/controllers/import.js:93
 msgid "Please, select your backup file"
-msgstr "Selecteer uw back-up bestand"
+msgstr "Selecteer je back-up bestand"
 
 #: www/views/tab-settings.html:57
 msgid "Preferences"
@@ -919,7 +919,7 @@ msgstr "Privé Sleutel"
 
 #: src/js/controllers/paperWallet.js:133
 msgid "Private key encrypted. Enter password"
-msgstr "Privé sleutel versleuteld. Voer wachtwoord in"
+msgstr "Privé sleutel beveiligd. Voer wachtwoord in"
 
 #: src/js/controllers/modals/txpDetails.js:59
 msgid "Proposal Created"
@@ -976,7 +976,7 @@ msgstr "Ontvangers"
 
 #: src/js/services/onGoingProcess.js:21
 msgid "Recreating Wallet..."
-msgstr "Portemonnee herstellen..."
+msgstr "Wallet herstellen..."
 
 #: src/js/controllers/modals/txpDetails.js:61
 msgid "Rejected"
@@ -996,7 +996,7 @@ msgstr "Verwijderen"
 
 #: www/views/onboarding/welcome.html:9
 msgid "Restore from backup"
-msgstr "Herstellen vanuit back-up"
+msgstr "Herstel back-up / Importeer seed"
 
 #: src/js/services/onGoingProcess.js:24
 msgid "Retrieving inputs information"
@@ -1036,7 +1036,7 @@ msgstr "Scan uw vingerafdruk"
 
 #: src/js/services/onGoingProcess.js:25
 msgid "Scanning Wallet funds..."
-msgstr "Saldo Portemonnee scannen..."
+msgstr "Saldo Wallet scannen..."
 
 #: www/views/includes/screenshotWarningModal.html:7
 msgid "Screenshots are not secure"
@@ -1178,11 +1178,11 @@ msgstr "Saldo opnemen"
 
 #: www/views/includes/incomingDataMenu.html:89 www/views/paperWallet.html:3
 msgid "Sweep paper wallet"
-msgstr "Saldo papieren portemonnee opnemen"
+msgstr "Saldo papieren wallet opnemen"
 
 #: src/js/services/onGoingProcess.js:28
 msgid "Sweeping Wallet..."
-msgstr "Saldo Portemonnee opnemen..."
+msgstr "Saldo Wallet opnemen..."
 
 #: www/views/preferencesDeleteWallet.html:16
 msgid "THIS ACTION CANNOT BE REVERSED"
@@ -1293,7 +1293,7 @@ msgstr "Update Beschikbaar"
 
 #: www/views/proposals.html:14
 msgid "Updating pending proposals. Please stand by"
-msgstr "Bestedingsvoorstellen in behandeling bijwerken. Een moment geduld"
+msgstr "Betalingsvoorstellen in behandeling bijwerken. Een moment geduld"
 
 #: www/views/activity.html:14
 msgid "Updating... Please stand by"
@@ -1387,7 +1387,7 @@ msgstr "Je kan de naam die dit apparaat gebruikt hier aanpassen."
 
 #: src/js/controllers/onboarding/backupRequest.js:22
 msgid "You can create a backup later from your wallet settings."
-msgstr "U kunt later een back-up maken vanuit uw portemonnee instellingen."
+msgstr "U kunt later een back-up maken vanuit uw wallet instellingen."
 
 #: src/js/controllers/preferencesAbout.js:13
 msgid "You can see the latest developments and contribute to this open source app by visiting our project on GitHub."
@@ -1399,24 +1399,24 @@ msgstr "U kunt deze nog steeds exporteren vanuit Geavanceerd &gt; Exporteren."
 
 #: www/views/preferencesNotifications.html:34
 msgid "You'll receive email notifications about payments sent and received from your wallets."
-msgstr "U zult email meldingen ontvangen over verzonden en ontvangen betalingen van uw portemonnee."
+msgstr "U zult email meldingen ontvangen over verzonden en ontvangen betalingen van uw wallet."
 
 #: www/views/feedback/send.html:42
 msgid "Your ideas, feedback, or comments"
-msgstr "Uw ideeën, feedback of opmerkingen"
+msgstr "Je ideeën, feedback of opmerkingen"
 
 #: www/views/tab-export-file.html:11 www/views/tab-import-file.html:20
 #: www/views/tab-import-phrase.html:30
 msgid "Your password"
-msgstr "Uw wachtwoord"
+msgstr "Je wachtwoord"
 
 #: www/views/onboarding/backupRequest.html:10
 msgid "Your wallet is never saved to cloud storage or standard device backups."
-msgstr "Uw portemonnee wordt nooit opgeslagen in de cloud of in standaard apparaat back-ups."
+msgstr "Je wallet wordt nooit opgeslagen in de cloud of in standaard apparaat back-ups."
 
 #: src/js/services/walletService.js:28
 msgid "Your wallet key will be encrypted. The Spending Password cannot be recovered. Be sure to write it down."
-msgstr "Uw privé sleutel wordt versleuteld. Het Bestedingswachtwoord kan niet worden achterhaald, schrijf deze zorgvuldig op."
+msgstr "Je privé sleutel wordt beveiligd. Het Betalingswachtwoord kan niet worden achterhaald, schrijf deze zorgvuldig op."
 
 #: www/views/accountDetails.html:42 www/views/includes/accountList.html:11
 #: www/views/paperWallet.html:33 www/views/tab-receive.html:42
@@ -1430,7 +1430,7 @@ msgstr "vergrendeld door betalingen in behandeling"
 #: www/views/onboarding/disclaimer.html:43
 msgid "I have read, understood, and agree to the <a ng-click=\"openTerms()\" href=\"javascript:void(0)\" translate=\"\">Terms of Use</a>."
 msgstr "Ik heb de <a ng-click=\"openTerms()\" href=\"javascript:void(0)\" translate=\"\">\n"
-"gebruiksvoorwaarden</a> gelezen en begrepen, en ga akkoord."
+"gebruiksvoorwaarden</a> gelezen en begrepen en ga ermee akkoord."
 
 #: www/views/feedback/rateApp.html:7
 msgid "5-star ratings help us get Canoe into more hands, and more users means more resources can be committed to the app!"
@@ -1525,11 +1525,11 @@ msgstr "Back-up seed"
 
 #: www/views/onboarding/tour.html:86
 msgid "Create Wallet"
-msgstr "Portemonnee maken"
+msgstr "Wallet maken"
 
 #: www/views/preferencesLanguage.html:21
 msgid "Don't see your language? Sign up on POEditor! We'd love to support your language."
-msgstr "Uw taal niet aanwezig? Schrijf je in via POEditor en help mee met vertalen."
+msgstr "Jouw taal niet aanwezig? Schrijf je in via POEditor en help mee met vertalen."
 
 #: www/views/addressbook.edit.html:4
 msgid "Edit Contact"
@@ -1549,7 +1549,7 @@ msgstr "John Doe"
 
 #: www/views/onboarding/welcome.html:5
 msgid "Join the future of money,<br>get started with Nano."
-msgstr "Neem deel aan de toekomst van geld,<br>ga aan de slag met Nano."
+msgstr "De toekomst van geld,<br>aan de slag met Nano."
 
 #: www/views/tab-settings.html:45
 msgid "Lock Canoe"
@@ -1557,7 +1557,7 @@ msgstr "Canoe vergrendelen"
 
 #: www/views/onboarding/disclaimer.html:15
 msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
-msgstr "Nano is anders &ndash; het kan niet veilig opgeslagen worden bij een bank of web service."
+msgstr "Nano is anders &ndash; het kan niet veilig opgeslagen worden bij een bank of web-service."
 
 #: src/js/controllers/confirm.js:75
 msgid "No accounts available"
@@ -1581,7 +1581,7 @@ msgstr "Wachtwoord om te ontcijferen"
 
 #: www/views/tab-import-phrase.html:28
 msgid "Password to encrypt"
-msgstr "Wachtwoord om te versleutelen"
+msgstr "Wachtwoord om te beveiligen"
 
 #: src/js/controllers/import.js:120
 msgid "Please enter a password to use for the wallet"
@@ -1597,11 +1597,11 @@ msgstr "Nano versturen"
 
 #: www/views/tab-send.html:33
 msgid "Start sending Nano"
-msgstr "Begin met Nano te gebruiken"
+msgstr "Begin met het versturen van Nano"
 
 #: www/views/tab-send.html:37
 msgid "To get started, you need Nano. Share your account to receive Nano."
-msgstr "Om aan de slag te gaan heb je Nano nodig. Deel je rekening om Nano te ontvangen."
+msgstr "Je hebt momenteel geen Nano op je rekeningen staan. Maak eerst Nano over voordat je het kan verzenden."
 
 #: www/views/tab-send.html:38
 msgid "To get started, you need an Account in your wallet to receive Nano."
@@ -1617,7 +1617,7 @@ msgstr "Gebruik Server Side PoW"
 
 #: www/views/preferencesLanguage.html:16
 msgid "We’re always looking for translation contributions! You can make corrections or help to make this app available in your native language by joining our community on POEditor."
-msgstr "We zijn op zoek naar vertalers! Help Canoe in uw taal beschikbaar te maken door lid te worden van de POEditor community."
+msgstr "We zijn op zoek naar vertalers! Help Canoe in je taal beschikbaar te maken door lid te worden van de POEditor community."
 
 #: src/js/controllers/preferencesLanguage.js:11
 msgid "You can make contributions by signing up on our POEditor community translation project. We’re looking forward to hearing from you!"
@@ -1629,11 +1629,11 @@ msgstr "Scan Nano adressen, betalingsverzoeken en meer."
 
 #: www/views/tab-home.html:50
 msgid "Your Nano Wallet is ready!"
-msgstr "Uw Nano Wallet is gereed!"
+msgstr "Jouw Nano Wallet is gereed!"
 
 #: www/views/includes/confirmBackupPopup.html:6
 msgid "Your Nano wallet seed is backed up!"
-msgstr "Uw Nano Wallet seed is geback-upt!"
+msgstr "Jouw Nano Wallet seed is geback-upt!"
 
 #: www/views/addressbook.add.html:39 www/views/addressbook.edit.html:39
 #: www/views/addressbook.view.html:26
@@ -1646,7 +1646,7 @@ msgstr "Er bestaat al een rekening met die naam"
 
 #: www/views/modals/pin.html:10
 msgid "Confirm your PIN"
-msgstr "Bevestig uw PIN"
+msgstr "Bevestig je PIN"
 
 #: www/views/preferencesName.html:18
 msgid "Enter a descriptive name"
@@ -1688,15 +1688,15 @@ msgstr "Beveiligingsvoorkeuren"
 
 #: www/views/changePassword.html:15
 msgid "Your current password"
-msgstr "Uw huidige wachtwoord"
+msgstr "Je huidige wachtwoord"
 
 #: src/js/controllers/changePasswordController.js:13
 msgid "Your password has been changed"
-msgstr "Uw wachtwoord is veranderd"
+msgstr "Je wachtwoord is veranderd"
 
 #: www/views/onboarding/tour.html:46
 msgid "Canoe stores your Nano using cutting-edge security."
-msgstr "Canoe slaat uw Nano op met behulp van geavanceerde beveiliging"
+msgstr "Canoe slaat jouw Nano op met behulp van eersteklas beveiliging"
 
 #. Need context. Caution as in warning or be careful?
 #: www/views/import.html:10
@@ -1717,7 +1717,7 @@ msgstr "Ik begrijp dat wanneer deze app wordt verwijderd, mijn wallet alleen her
 
 #: www/views/import.html:11
 msgid "Importing a wallet removes your current wallet and all its accounts. You may wish to first backup your current seed or make a file backup of the wallet."
-msgstr "Door een wallet te importeren, worden uw huidige wallet en al zijn rekeningen verwijderd. Mogelijk wilt u eerst een back-up maken van uw huidige seed of een bestandback-up maken van de wallet."
+msgstr "Door een wallet te importeren, worden je huidige wallet en al zijn rekeningen verwijderd. Mogelijk wil je eerst een back-up maken van je huidige seed of een bestandsback-up maken van de wallet."
 
 #: src/js/controllers/import.js:147
 msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from."
@@ -1731,7 +1731,7 @@ msgstr "Onjuiste code-indeling voor een rekening:"
 
 #: www/views/onboarding/tour.html:22
 msgid "Just scan and pay."
-msgstr "Simpelweg scan en betalen."
+msgstr "Simpelweg scannen en betalen."
 
 #: www/views/tab-settings.html:9
 msgid "Manage"
@@ -1739,11 +1739,11 @@ msgstr "Beheer"
 
 #: www/views/onboarding/tour.html:31
 msgid "Nano is Feeless"
-msgstr "Nano is zonder Transactiekosten"
+msgstr "Nano kent geen Transactiekosten"
 
 #: www/views/onboarding/tour.html:18
 msgid "Nano is Instant"
-msgstr "Nano is Direct"
+msgstr "Nano is Snel"
 
 #: www/views/onboarding/tour.html:45
 msgid "Nano is Secure"
@@ -1751,7 +1751,7 @@ msgstr "Nano is Veilig"
 
 #: www/views/onboarding/tour.html:36
 msgid "Never pay transfer fees again!"
-msgstr "Betaal nooit transactiekosten meer!"
+msgstr "Betaal nooit meer transactiekosten!"
 
 #. Need context, support as in support a club or I need support
 #: www/views/tab-settings.html:110
@@ -1760,11 +1760,11 @@ msgstr "Ondersteuning"
 
 #: www/views/onboarding/tour.html:32
 msgid "Trade Nano for other currencies like USD or Euros."
-msgstr "Verwissel Nano voor andere valuta als Euro of Dollar."
+msgstr "Verwissel Nano kosteloos voor andere valuta als Euro of Dollar."
 
 #: www/views/onboarding/tour.html:19
 msgid "Transfer Nano instantly to anyone, anywhere."
-msgstr "Maak Nano onmiddellijk over aan iedereen, overal."
+msgstr "Maak Nano over in een oogwenk, aan iedereen, overal ter wereld"
 
 #: www/views/preferencesRepresentative.html:4
 msgid "Account Representative"
@@ -1929,13 +1929,13 @@ msgstr "<h5 class=\"toggle-label\" translate=\"\">Achtergrond gedrag</h5>\n"
 msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 "          With Hard Lock, Canoe encrypts your wallet and completely remove it from memory. You can not disable Hard Lock, but you can set a very hight timeout."
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Harde Vergrendeling</h5>\n"
-"Met Harde Vergrendeling codeert Canoe uw portemonnee en verwijdert deze volledig uit het geheugen. U kunt Harde Vergrendeling niet uitschakelen, maar u kunt wel een zeer hoge time-out instellen."
+"Met Harde Vergrendeling codeert Canoe uw wallet en verwijdert deze volledig uit het geheugen. U kunt Harde Vergrendeling niet uitschakelen, maar u kunt wel een zeer hoge time-out instellen."
 
 #: www/views/changeLocks.html:13
 msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
 "          With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Zachte Vergrendeling</h5>\n"
-"Met Zachte Vergrendeling is Canoe vergrendeld maar is uw portemonnee nog steeds niet-versleuteld in het geheugen. Door Zachte Vergrendeling in te schakelen, kunt u eenvoudige vormen van ontgrendeling zoals pincodes en vingerafdrukken gebruiken."
+"Met Zachte Vergrendeling is Canoe vergrendeld maar is uw wallet nog steeds onbeveiligd in het geheugen. Door Zachte Vergrendeling in te schakelen, kunt u eenvoudige vormen van ontgrendeling zoals pincodes en vingerafdrukken gebruiken."
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your Nano."
@@ -1955,11 +1955,11 @@ msgstr "Wijzig vergrendeling instellingen"
 
 #: www/views/onboarding/tour.html:58
 msgid "Encryption Time!"
-msgstr "Versleutel Tijd!"
+msgstr "Tijd om je wallet te beveiligen"
 
 #: www/views/onboarding/tour.html:75
 msgid "Enter at least 8 characters to encrypt your wallet."
-msgstr "Voer ten minste 8 karakters in om uw wallet te versleutelen."
+msgstr "Voer ten minste 8 karakters in om je wallet te beveiligen."
 
 #: www/views/changeLocks.html:31 www/views/changeLocks.html:62
 msgid "Fingerprint"

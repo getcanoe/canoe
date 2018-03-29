@@ -61,7 +61,7 @@
         <div class="list settings-list settings-input-group">
 
           <div class="input-password item item-input item-stacked-label">
-            <input autocapitalize="none" autocorrect="off" id="input-password" ng-model="password" type="{{ typePassword ? 'password' : 'text' }}" name="password" placeholder="Password">
+            <input autocapitalize="none" autocorrect="off" id="input-password" ng-model="password" type="{{ typePassword ? 'password' : 'text' }}" name="password" placeholder="{{ 'Password' | translate }}">
             <div class="item item-input item-stacked-label showPassword" ng-click="togglePassword()">
               <i class="fa" ng-class="{ 
                 'fa-eye': typePassword,
