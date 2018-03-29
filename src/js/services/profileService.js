@@ -130,13 +130,13 @@ angular.module('canoeApp.services')
     }
 
     root.formatAmount = function (raw, decimals) {      
-      return root.formatAnyAmount(new BigNumber(raw).dividedBy(RAW_PER_NANO), uxLanguage.currentLanguage)
+      return root.formatAnyAmount(new BigNumber(raw).dividedBy(rawPerNano), uxLanguage.currentLanguage)
     }
 
     root.formatAmountWithUnit = function (raw) {
       if (isNaN(raw)) return
       // TODO use current unit in settings knano, Mnano etc
-      return root.formatAnyAmount(new BigNumber(raw).dividedBy(RAW_PER_NANO), uxLanguage.currentLanguage, 'NANO')
+      return root.formatAnyAmount(new BigNumber(raw).dividedBy(rawPerNano), uxLanguage.currentLanguage, 'NANO')
     }
     
     // A quite resilient and open minded way to format amounts from any epoch and location
@@ -303,9 +303,7 @@ angular.module('canoeApp.services')
         return cb('No password entered, can not load wallet from local storage')
       }
       nanoService.createWalletFromStorage(root.password, function (err, wallet) {
-        if (err) {
-          return cb(err)
-        }
+        if (err) return cb(err)
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
           cb(null, wallet)
