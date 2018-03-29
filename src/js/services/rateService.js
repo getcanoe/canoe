@@ -6,12 +6,8 @@ angular.module('canoeApp.services')
     // var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     // var isIOS = platformInfo.isIOS
 
-    var RAW_PER_NANO = Math.pow(10, 30) // 1 NANO = 1 Mnano = 10^30 raw
-
     var callbacks = []
-
     var root = {}
-
     root.rates = null
 
     root.updateRates = function (rates) {
