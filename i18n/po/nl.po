@@ -53,7 +53,7 @@ msgstr "Rekeningen"
 
 #: www/views/addressbook.add.html:4 www/views/addressbook.html:22
 msgid "Add Contact"
-msgstr "Contactpersoon Toevoegen"
+msgstr "Contactpersoon toevoegen"
 
 #: www/views/add.html:3
 msgid "Add account"
@@ -1545,7 +1545,7 @@ msgstr "Wachtwoord onjuist, probeer opnieuw"
 
 #: www/views/addressbook.add.html:24 www/views/addressbook.edit.html:24
 msgid "Joe Doe"
-msgstr "John Doe"
+msgstr "Jan Visser"
 
 #: www/views/onboarding/welcome.html:5
 msgid "Join the future of money,<br>get started with Nano."
