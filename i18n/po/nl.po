@@ -114,23 +114,23 @@ msgstr "Kijkt er iemand mee?"
 
 #: src/js/controllers/addressbookView.js:44
 msgid "Are you sure you want to delete this contact?"
-msgstr "Weet u zeker dat u deze contactpersoon wilt verwijderen?"
+msgstr "Weet je zeker dat je deze contactpersoon wil verwijderen?"
 
 #: src/js/controllers/preferencesDelete.js:24
 msgid "Are you sure you want to delete this wallet?"
-msgstr "Weet u zeker dat u deze wallet wilt verwijderen?"
+msgstr "Weet je zeker dat je deze wallet wil verwijderen?"
 
 #: src/js/controllers/modals/txpDetails.js:152
 msgid "Are you sure you want to reject this transaction?"
-msgstr "Weet u zeker dat u deze transactie wilt afwijzen?"
+msgstr "Weet je zeker dat je deze transactie wil afwijzen?"
 
 #: src/js/controllers/modals/txpDetails.js:168
 msgid "Are you sure you want to remove this transaction?"
-msgstr "Weet u zeker dat u deze transactie wilt verwijderen?"
+msgstr "Weet je zeker dat je deze transactie wilt verwijderen?"
 
 #: src/js/controllers/onboarding/backupRequest.js:21
 msgid "Are you sure you want to skip it?"
-msgstr "Weet u zeker dat u dit wilt overslaan?"
+msgstr "Weet je zeker dat je dit wil overslaan?"
 
 #: www/views/includes/available-balance.html:3
 msgid "Available Balance"
@@ -477,7 +477,7 @@ msgstr "Exporteren mislukt"
 
 #: www/views/tab-create-account.html:14
 msgid "Family vacation funds"
-msgstr "Voorbeelden: Vakantiepotje, verbouwing, spaarrekening etc."
+msgstr "bijv. Vakantiepotje, spaarrekening, etc."
 
 #: www/views/modals/txp-details.html:99
 msgid "Fee:"
@@ -605,7 +605,7 @@ msgstr "Ik heb het opgeschreven"
 
 #: src/js/controllers/onboarding/backupRequest.js:16
 msgid "If this device is replaced or this app is deleted, your funds can not be recovered without a backup."
-msgstr "Als de apparaat vervangen wordt, of als de app wordt verwijderd, kan je je Nano niet herstellen zonder back-up."
+msgstr "Als dit apparaat vervangen wordt, of als de app wordt verwijderd, kan je je Nano niet herstellen zonder back-up."
 
 #: www/views/feedback/complete.html:23
 msgid "If you have additional feedback, please let us know by tapping the \"Send feedback\" option in the Settings tab."
@@ -1857,7 +1857,7 @@ msgstr "Terugbetaling"
 
 #: src/js/controllers/advancedSettings.js:35
 msgid "Repairing your wallet could take some time. This will reload all blockchains associated with your wallet. Are you sure you want to repair?"
-msgstr "Het repareren van uw Wallet kan enige tijd in beslag nemen. Alle blockchains gekoppeld aan uw wallet worden opnieuw ingeladen. Weet u zeker dat u wilt repareren?"
+msgstr "Het repareren van jouw Wallet kan enige tijd in beslag nemen. Alle rekeningen gekoppeld aan je wallet worden opnieuw ingeladen. Weet je zeker dat je wil repareren?"
 
 #: www/views/preferences.html:30 www/views/preferencesRepresentative.html:17
 msgid "Representative"
@@ -1968,11 +1968,11 @@ msgstr "Vingerafdruk"
 #. Need context. What does onboarding mean?
 #: www/views/modals/password.html:40
 msgid "Go back to onboarding."
-msgstr "Ga terug naar onboarding."
+msgstr "Ga terug naar opstartwizard."
 
 #: src/js/controllers/modals/password.js:74
 msgid "Going back to onboarding replaces the current wallet, are you sure?"
-msgstr "Terug gaan naar onboarding vervangt de huidige wallet, weet u het zeker?"
+msgstr "Terug gaan naar de opstartwizard vervangt de huidige wallet, weet u het zeker?"
 
 #: www/views/changeLocks.html:38
 msgid "Hard Lock"
@@ -2042,3 +2042,6 @@ msgstr "{{btx.destination}}"
 msgid "{{btx.origin}}"
 msgstr "{{btx.origin}}"
 
+#: www/views/onboarding/tour.html:80
+msgid "Password length ok"
+msgstr "Wachtwoord correct"
