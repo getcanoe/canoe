@@ -1,7 +1,8 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, aliasService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, txConfirmNotification, externalLinkService, addressbookService) {
-  // var CONFIRM_LIMIT_USD = 20
+  // Avoid 15 signific digit error
+  BigNumber.config({ ERRORS: false })
 
   var tx = {}
 

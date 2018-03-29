@@ -16,6 +16,9 @@ angular.module('canoeApp.controllers').controller('amountController', function (
 
   var fixedUnit
 
+  // Avoid 15 signific digit error
+  BigNumber.config({ ERRORS: false })
+
   $scope.isChromeApp = platformInfo.isChromeApp
 
   $scope.$on('$ionicView.leave', function () {
@@ -141,7 +144,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     })
     $scope.specificAmount = $scope.specificAlternativeAmount = ''
     $scope.isCordova = platformInfo.isCordova
-    unitToRaw = new BigNumber(config.unitToRaw)
+    unitToRaw = BigNumber(config.unitToRaw)
     rawToUnit = 1 / unitToRaw
     unitDecimals = config.unitDecimals
 
