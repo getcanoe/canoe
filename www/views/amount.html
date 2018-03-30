@@ -12,7 +12,7 @@
     </ion-nav-buttons>
   </ion-nav-bar>
 
-  <ion-content scroll="false">
+  <ion-content scroll="false" ng-class="{'has-selector': accounts[0] && !singleAccount}">
 
     <div ng-if="!customAmount && !nextStep">
       <div class="item item-no-bottom-border recipient-label" translate>Recipient</div>
@@ -100,8 +100,32 @@
       </div>
     </div>
   </ion-content>
+  <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0] && !singleAccount">
+    <a ng-if="acc" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
+      <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
+      <span ng-if="acc.meta && acc.meta.alias && acc.meta.alias.alias">
+        @{{acc.meta.alias.alias}}
+      </span>
+      <span ng-if="!acc.meta || !acc.meta.alias || !acc.meta.alias.alias">
+        {{acc.name || acc.id}}
+      </span>
+      <p>
+        <span ng-if="!acc.meta.balanceHidden && acc.alternativeBalanceStr"> {{acc.balanceStr}} <span ng-hide="acc.alternativeBalanceStr == 'hide'">&asymp; {{acc.alternativeBalanceStr}}</span></span>
+        <span ng-if="acc.meta.balanceHidden" translate>[Balance Hidden]</span>
+        <span class="assertive" ng-if="acc.error">{{acc.error}}</span>
+        &nbsp;
+      </p>
+    </a>
+  </div>
   <item-selector
     item-selector-show="showSendMax"
     item-selector-on-select="sendMax">
   </item-selector>
+  <account-selector
+    account-selector-title="accountSelectorTitle"
+    account-selector-accounts="accounts"
+    account-selector-selected-account="acc"
+    account-selector-show="showAccounts"
+    account-selector-on-select="onAccountSelect">
+  </account-selector>
 </ion-view>

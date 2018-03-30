@@ -37,11 +37,10 @@
           {{account.name || account.id}}
         </span>
         <p>
-        <span ng-if="!account.meta.balanceHidden"> {{account.totalBalanceStr}} </span>
-
-        <span ng-if="account.meta.balanceHidden" translate>[Balance Hidden]</span>
-        <span class="assertive" ng-if="account.error">{{account.error}}</span>
-        &nbsp;
+          <span ng-if="!account.meta.balanceHidden && account.alternativeBalanceStr"> {{account.balanceStr}} <span ng-hide="account.alternativeBalanceStr == 'hide'">&asymp; {{account.alternativeBalanceStr}}</span></span>
+          <span ng-if="account.meta.balanceHidden" translate>[Balance Hidden]</span>
+          <span class="assertive" ng-if="account.error">{{account.error}}</span>
+          &nbsp;
         </p>
       </a>
     </div>

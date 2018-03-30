@@ -89,12 +89,9 @@
       }
       @media(max-width: 320px) {
         bottom: 276px;
-        top: 60px;
+        top: 76px;
         & > div {
           display: inline-block;
-        }
-        & > div:first-child {
-          display: inherit;
         }
       }
     }
@@ -267,5 +264,13 @@
       font-size: 12px;
 
     }
+  }
+  ion-content.has-selector {
+    bottom: 78px;
+  }
+  .account-selector {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
   }
 }
