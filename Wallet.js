@@ -179,7 +179,7 @@ module.exports = function(password)
 	api.debugChain = function()
 	{
 		api.useAccount(keys[1].account);
-		for(let i in chain)
+		for(var i in chain)
 		{
 			console.log(chain[i].getHash(true));
 			console.log(chain[i].getPrevious());
@@ -236,7 +236,7 @@ module.exports = function(password)
   {
     if(current != -1) {
       var context = blake2bInit(32);
-      for (let i = 0; i < fields.length; i++) {
+      for (var i = 0; i < fields.length; i++) {
         blake2bUpdate(context, hex_uint8(fields[i]));
       }
       var data = {
@@ -465,7 +465,7 @@ module.exports = function(password)
 	 * Find key for given account number
 	 */
 	api.findKey = function(account) {
-		for (let i in keys) {
+		for (var i in keys) {
 			if (keys[i].account === account) {
 				return keys[i]
 			}
@@ -518,7 +518,7 @@ module.exports = function(password)
 		api.useAccount(acc);
 		var last = chain.length > 0 ? chain[chain.length - 1].getHash(true) : uint8_hex(pk);
 		// verify chain
-		for(let i in blocks)
+		for(var i in blocks)
 		{
 			if(blocks[i].getPrevious() != last)
 				throw "Invalid chain";
@@ -536,7 +536,7 @@ module.exports = function(password)
 		if(n > chain.length)
 			n = chain.length;
 
-		for(let i = chain.length - 1 - offset; i > chain.length - 1 - n - offset; i--)
+		for(var i = chain.length - 1 - offset; i > chain.length - 1 - n - offset; i--)
 		{
 			blocks.push(chain[i]);
 		}
@@ -550,7 +550,7 @@ module.exports = function(password)
 		api.useAccount(acc);
 
 		var blocks = [];
-		for(let i = chain.length - 1; i > 0; i--)
+		for(var i = chain.length - 1; i > 0; i--)
 		{
 			blocks.push(chain[i]);
 			if(chain[i].getHash(true) == hash)
@@ -630,7 +630,7 @@ module.exports = function(password)
 	{
 		//return pendingBalance ? pendingBalance : keys[current].pendingBalance;
 		var am = bigInt(0);
-		for(let i in pendingBlocks)
+		for(var i in pendingBlocks)
 		{
 			if(pendingBlocks[i].getType() == 'open' || pendingBlocks[i].getType() == 'receive')
 					am = am.add(pendingBlocks[i].getAmount());
@@ -678,7 +678,7 @@ module.exports = function(password)
 	api.getWalletPendingBalance = function()
 	{
 		var pending = bigInt(0);
-		for(let i in walletPendingBlocks)
+		for(var i in walletPendingBlocks)
 		{
 			if(walletPendingBlocks[i].getType() == 'open' || walletPendingBlocks[i].getType() == 'receive')
 				pending = pending.add(walletPendingBlocks[i].getAmount());
@@ -690,7 +690,7 @@ module.exports = function(password)
 	{
 		var bal = bigInt(0);
 		var temp;
-		for(let i in keys)
+		for(var i in keys)
 		{
 			temp = keys[i].balance;
 			bal = bal.add(temp);
@@ -700,7 +700,7 @@ module.exports = function(password)
 
 	api.recalculateWalletBalances = function()
 	{
-		for(let i in keys)
+		for(var i in keys)
 		{
 			api.useAccount(keys[i].account);
 			private.setBalance(api.getBalanceUpToBlock(0));
@@ -717,7 +717,7 @@ module.exports = function(password)
 		var blk;
 
 		// check pending blocks first
-		for(let i = pendingBlocks.length - 1; i >= 0; i--)
+		for(var i = pendingBlocks.length - 1; i >= 0; i--)
 		{
 			blk = pendingBlocks[i];
 
@@ -738,7 +738,7 @@ module.exports = function(password)
 			}
 		}
 
-		for(let i = chain.length - 1; i >= 0; i--)
+		for(var i = chain.length - 1; i >= 0; i--)
 		{
 			blk = chain[i];
 
@@ -784,7 +784,7 @@ module.exports = function(password)
 	}
 
 	api.setMeta = function(acc, meta) {
-		for(let i in keys) {
+		for(var i in keys) {
 			if(keys[i].account == acc) {
 				keys[i].meta = meta;
 				return true
@@ -794,7 +794,7 @@ module.exports = function(password)
 	}
 
 	api.getMeta = function(acc) {
-		for(let i in keys) {
+		for(var i in keys) {
 			if(keys[i].account == acc) {
 				return keys[i].meta
 			}
@@ -813,9 +813,9 @@ module.exports = function(password)
 	api.removePendingBlock = function(blockHash)
 	{
 		var found = false;
-		for(let i in pendingBlocks)
+		for(var i in pendingBlocks)
 		{
-			let tmp = pendingBlocks[i];
+			var tmp = pendingBlocks[i];
 			if(tmp.getHash(true) == blockHash)
 			{
 				pendingBlocks.splice(i, 1);
@@ -827,9 +827,9 @@ module.exports = function(password)
 			console.log("Not found");
 			return;
 		}
-		for(let i in walletPendingBlocks)
+		for(var i in walletPendingBlocks)
 		{
-			let tmp = walletPendingBlocks[i];
+			var tmp = walletPendingBlocks[i];
 			if(tmp.getHash(true) == blockHash)
 			{
 				walletPendingBlocks.splice(i, 1);
@@ -845,7 +845,7 @@ module.exports = function(password)
 	api.getBlockFromHashAndAccount = function(blockHash, acc)
 	{
 		api.useAccount(acc);
-		for(let j = chain.length - 1; j >= 0; j--)
+		for(var j = chain.length - 1; j >= 0; j--)
 		{
 			var blk = chain[j];
 			if(blk.getHash(true) == blockHash)
@@ -857,10 +857,10 @@ module.exports = function(password)
 
 	api.getBlockFromHash = function(blockHash)
 	{
-		for(let i = 0; i < keys.length; i++)
+		for(var i = 0; i < keys.length; i++)
 		{
 			api.useAccount(keys[i].account);
-			for(let j = chain.length - 1; j >= 0; j--)
+			for(var j = chain.length - 1; j >= 0; j--)
 			{
 				var blk = chain[j];
 				if(blk.getHash(true) == blockHash)
@@ -931,19 +931,19 @@ module.exports = function(password)
 		}
 
 		// make sure this source has not been redeemed yet
-		for(let i in walletPendingBlocks)
+		for(var i in walletPendingBlocks)
 		{
 			if(walletPendingBlocks[i].getSource() == sourceBlockHash)
 				return false;
 		}
 
-		for(let i in readyBlocks)
+		for(var i in readyBlocks)
 		{
 			if(readyBlocks[i].getSource() == sourceBlockHash)
 				return false;
 		}
 
-		for(let i in chain)
+		for(var i in chain)
 		{
 			if(chain[i].getSource() == sourceBlockHash)
 				return false;
@@ -1008,7 +1008,7 @@ module.exports = function(password)
 
 	api.getPendingBlockByHash = function(blockHash)
 	{
-		for(let i in walletPendingBlocks)
+		for(var i in walletPendingBlocks)
 		{
 			if(walletPendingBlocks[i].getHash(true) == blockHash)
 				return walletPendingBlocks[i];
@@ -1086,7 +1086,7 @@ module.exports = function(password)
 			return false;
 		}
 		// Find pending block with this hash as previous
-		for (let j in walletPendingBlocks) {
+		for (var j in walletPendingBlocks) {
 			if (walletPendingBlocks[j].getPrevious() == hash) {
 				// Yes, this is the one, add work to it
 				var pendingBlk = walletPendingBlocks[j];
@@ -1121,7 +1121,7 @@ module.exports = function(password)
 
 	api.getReadyBlockByHash = function(blockHash)
 	{
-		for(let i in pendingBlocks)
+		for(var i in pendingBlocks)
 		{
 			if(readyBlocks[i].getHash(true) == blockHash)
 			{
@@ -1133,7 +1133,7 @@ module.exports = function(password)
 
 	api.removeReadyBlock = function(blockHash)
 	{
-		for(let i in readyBlocks)
+		for(var i in readyBlocks)
 		{
 			if(readyBlocks[i].getHash(true) == blockHash)
 			{
@@ -1243,7 +1243,7 @@ module.exports = function(password)
 		keys[current].lastPendingBlock = blk.getHash(true);
 
 		// check if there is a conflicting block pending
-		for(let i in pendingBlocks)
+		for(var i in pendingBlocks)
 		{
 			if(pendingBlocks[i].getPrevious() == blk.getPrevious())
 			{
@@ -1269,7 +1269,7 @@ module.exports = function(password)
 		api.useAccount(acc);
 		var prev = blk.getPrevious();
 
-		for(let i = chain.length - 1; i >= 0; i--)
+		for(var i = chain.length - 1; i >= 0; i--)
 		{
 			if(chain[i].getPrevious() == prev)
 			{
@@ -1290,7 +1290,7 @@ module.exports = function(password)
 	private.fixPreviousChange = function(oldPrevious, newPrevious, acc)
 	{
 		api.useAccount(acc);
-		for(let i in pendingBlocks)
+		for(var i in pendingBlocks)
 		{
 			if(pendingBlocks[i].getPrevious() == oldPrevious)
 			{
@@ -1352,7 +1352,7 @@ module.exports = function(password)
 			aux.representative = keys[i].representative;
 			aux.meta = keys[i].meta;
 
-			for(let j in keys[i].chain)
+			for(var j in keys[i].chain)
 			{
 				aux.chain.push(keys[i].chain[j].getEntireJSON());
 			}
@@ -1360,9 +1360,9 @@ module.exports = function(password)
 		}
 		pack.readyBlocks = []
 
-		for(let i in readyBlocks)
+		for(var rdyBlock in readyBlocks)
 		{
-			pack.readyBlocks.push(readyBlocks[i].getEntireJSON());
+			pack.readyBlocks.push(readyBlocks[rdyBlock].getEntireJSON());
 		}
 		pack.keys = tempKeys;
 		pack.seed = uint8_hex(seed);
@@ -1437,7 +1437,7 @@ module.exports = function(password)
 
 		if(hash != checksum.toString('hex').toUpperCase())
 			throw "Wallet is corrupted or has been tampered.";
-		
+
 		var walletData = JSON.parse(arrToString(decryptedBytes));
 		seed = hex_uint8(walletData.seed);
 		lastKeyFromSeed = walletData.last;
@@ -1449,21 +1449,21 @@ module.exports = function(password)
 		tokenPass = walletData.tokenPass;
 
 		readyBlocks = [];
-		for(let i in walletData.readyBlocks)
+		for(var i in walletData.readyBlocks)
 		{
 			var blk = new Block();
 			blk.buildFromJSON(walletData.readyBlocks[i]);
 			readyBlocks.push(blk);
 		}
 
-		for(let i in walletData.keys)
+		for(var i in walletData.keys)
 		{
 			var aux = {};
 
 			aux.chain = [];
-			for(let j in walletData.keys[i].chain)
+			for(var j in walletData.keys[i].chain)
 			{
-				let blk = new Block();
+				var blk = new Block();
 				blk.buildFromJSON(walletData.keys[i].chain[j]);
 				aux.chain.push(blk);
 			}
