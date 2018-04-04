@@ -553,8 +553,8 @@ function Rai (url_base) {
   this.unchecked_keys = function (key = '0000000000000000000000000000000000000000000000000000000000000000', count = '4096') {
     var unchecked_keys = this.rpc(JSON.stringify({'action': 'unchecked_keys', 'key': key, 'count': count}))
     var unchecked = unchecked_keys.unchecked
-    for (let key in unchecked) {
-      unchecked[key].contents = JSON.parse(unchecked[key].contents)
+    for (let uncheckedKey in unchecked) {
+      unchecked[uncheckedKey].contents = JSON.parse(unchecked[uncheckedKey].contents)
     }
     return unchecked
   }
