@@ -8,13 +8,14 @@ var EXTENSIONS = '0002' // 0x00 0x02
 var RAI_TO_RAW = '000000000000000000000000'
 var MAIN_NET_WORK_THRESHOLD = 'ffffffc000000000'
 var STATE_BLOCK_PREAMBLE = '0000000000000000000000000000000000000000000000000000000000000006'
-
+var STATE_BLOCK_ZERO = '0000000000000000000000000000000000000000000000000000000000000000'
 var blockID = {invalid: 0, not_a_block: 1, send: 2, receive: 3, open: 4, change: 5}
 
-module.exports = function () {
+module.exports = function (isState = false) {
   var api = {} // public methods
   var data = '' // raw block to be relayed to the network directly
   var type // block type
+  var state = isState // if this is a state block
   var hash // block hash
   var signed = false // if block has signature
   var worked = false // if block has work
@@ -405,33 +406,59 @@ module.exports = function () {
   api.getJSONBlock = function (pretty = false) {
     if (!signed) { throw new Error('Block lacks signature') }
     var obj = {}
-    obj.type = type
-
-    switch (type) {
-      case 'send':
+    // For state blocks we do things differently
+    if (state) {
+      obj.type = 'state'
+      if (type === 'open') {
+        obj.previous = STATE_BLOCK_ZERO
+      } else {
         obj.previous = previous
-        obj.destination = accountFromHexKey(destination)
-        obj.balance = balance
-        break
+      }
+      obj.account = accountFromHexKey(account)
+      obj.representative = accountFromHexKey(representative || account)
+      obj.balance = balance
 
-      case 'receive':
-        obj.previous = previous
-        obj.source = source
-        break
-
-      case 'open':
-        obj.source = source
-        obj.representative = accountFromHexKey(representative || account)
-        obj.account = accountFromHexKey(account)
-        break
-
-      case 'change':
-        obj.previous = previous
-        obj.representative = accountFromHexKey(representative)
-        break
-
-      default:
-        throw new Error('Invalid block type')
+      // Only the link field is different
+      switch (type) {
+        case 'send':
+          obj.link = accountFromHexKey(destination)
+          break
+        case 'receive':
+          obj.link = source
+          break
+        case 'open':
+          obj.link = source
+          break
+        case 'change':
+          obj.link = STATE_BLOCK_ZERO
+          break
+        default:
+          throw new Error('Invalid block type')
+      }
+    } else {
+      obj.type = type
+      switch (type) {
+        case 'send':
+          obj.previous = previous
+          obj.destination = accountFromHexKey(destination)
+          obj.balance = balance
+          break
+        case 'receive':
+          obj.previous = previous
+          obj.source = source
+          break
+        case 'open':
+          obj.source = source
+          obj.representative = accountFromHexKey(representative || account)
+          obj.account = accountFromHexKey(account)
+          break
+        case 'change':
+          obj.previous = previous
+          obj.representative = accountFromHexKey(representative)
+          break
+        default:
+          throw new Error('Invalid block type')
+      }
     }
 
     obj.work = work
@@ -441,6 +468,7 @@ module.exports = function () {
     return JSON.stringify(obj)
   }
 
+  // Used only for serializing to storage
   api.getEntireJSON = function () {
     var obj = JSON.parse(api.getJSONBlock())
     var extras = {}
