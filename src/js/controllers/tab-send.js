@@ -132,7 +132,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
         toName: item.name,
         toEmail: item.email,
         toColor: item.color,
-        toAlias: item.alias,
+        toAlias: item.meta.alias.alias,
         fromAddress: $scope.acc.id
       })
     })

@@ -18,9 +18,14 @@
       <div class="item item-no-bottom-border recipient-label" translate>Recipient</div>
 
       <div class="item item-text-wrap item-icon-left bitcoin-address">
-        <i class="icon big-icon-svg" ng-if="recipientType == 'account'">
-          <img src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !toColor}" ng-style="{'background-color': toColor}" class="bg"/>
-        </i>
+        <span ng-if="recipientType == 'account'">
+          <i class="icon big-icon-svg" ng-if="toAvatar">
+            <img ng-cloak ng-if="toAlias && toAvatar" ng-src="data:image/png;base64, {{toAvatar}}" class="bg" alt="{{toAlias}} avatar"/>
+          </i>
+          <i class="icon big-icon-svg" ng-if="!toAvatar">
+            <img src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !toColor}" ng-style="{'background-color': toColor}" class="bg"/>
+          </i>
+        </span>
         <span ng-if="recipientType == 'contact'">
           <i class="icon big-icon-svg" ng-if="toAvatar">
             <img ng-cloak ng-if="toAlias && toAvatar" ng-src="data:image/png;base64, {{toAvatar}}" class="bg" alt="{{toAlias}} avatar"/>
@@ -38,7 +43,8 @@
             <img src="img/contact-placeholder.svg" class="bg"/>
           </i>
         </span>
-        <span class="m10l">{{toName || toAddress}}</span>
+        <span ng-if="toAlias" class="m10l">@{{toAlias}}</span>
+        <span ng-if="!toAlias" class="m10l">{{toName || toAddress}}</span>
       </div>
     </div>
 
