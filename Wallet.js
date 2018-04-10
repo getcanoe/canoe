@@ -849,7 +849,7 @@ module.exports = function (password) {
 
   api.getNextWorkBlockHash = function (acc) {
     var result
-    var temp = current
+    var temp = keys[current].account
     api.useAccount(acc)
     if (lastBlock.length > 0) {
       result = lastBlock
