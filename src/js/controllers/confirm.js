@@ -61,6 +61,15 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     })
   };
 
+  var checkSelectedAccount = function (account, accounts) {
+    if (!account) return accounts[0]
+    var w = lodash.find(accounts, function (w) {
+      return w.id === account.id
+    })
+    if (!w) return accounts[0]
+    return w
+  }
+
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     function setAccountSelector (minAmount, cb) {
       // no min amount? (sendMax) => look for no empty wallets
@@ -107,8 +116,16 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       toColor: data.stateParams.toColor,
       txp: {}
     }
-
+    $scope.accounts = profileService.getAccounts()
     $scope.toAddress = data.stateParams.toAddress
+    $scope.fromAddress = data.stateParams.fromAddress
+    if ($scope.fromAddress) {
+      $scope.acc =  {
+        id: $scope.fromAddress
+      }
+    }
+    var selectedAccount = checkSelectedAccount($scope.acc, $scope.accounts)
+    $scope.onAccountSelect(selectedAccount)
     $scope.toName = data.stateParams.toName
     $scope.toAlias = data.stateParams.toAlias
     tx.toAlias = $scope.toAlias
@@ -134,10 +151,12 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       if (err) {
         return exitWithError('Could not update accounts')
       }
-      if ($scope.accounts.length > 1) {
-        $scope.showAccountSelector()
-      } else if ($scope.accounts.length) {
-        setAccount($scope.accounts[0], tx)
+      if (!$scope.account) {
+        if ($scope.accounts.length > 1) {
+          $scope.showAccountSelector()
+        } else if ($scope.accounts.length) {
+          setAccount($scope.accounts[0], tx)
+        }
       }
     })
   })

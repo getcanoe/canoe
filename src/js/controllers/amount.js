@@ -46,14 +46,30 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       return w.id === account.id
     })
     if (!w) return accounts[0]
-    return account
+    return w
   }
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     var config = configService.getSync().wallet.settings
+    $scope.recipientType = data.stateParams.recipientType || null
+    $scope.toAddress = data.stateParams.toAddress
+    $scope.toName = data.stateParams.toName
+    $scope.toEmail = data.stateParams.toEmail
+    $scope.toColor = data.stateParams.toColor
+    $scope.toAlias = data.stateParams.toAlias
+    $scope.fromAddress = data.stateParams.fromAddress
+    aliasService.getAvatar(data.stateParams.toAlias, function(err, avatar) {
+      $scope.toAvatar = avatar;
+      $scope.$apply();
+    });
     $scope.accounts = profileService.getAccounts()
     $scope.singleAccount = $scope.accounts.length === 1
     $scope.hasAccounts = !lodash.isEmpty($scope.accounts)
+    if ($scope.fromAddress) {
+      $scope.acc =  {
+        id: $scope.fromAddress
+      }
+    }
     var selectedAccount = checkSelectedAccount($scope.acc, $scope.accounts)
     $scope.onAccountSelect(selectedAccount)
     $scope.accountSelectorTitle = gettextCatalog.getString('Select an account')
@@ -133,16 +149,6 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     updateUnitUI()
 
     $scope.showMenu = $ionicHistory.backView() && ($ionicHistory.backView().stateName === 'tabs.send')
-    $scope.recipientType = data.stateParams.recipientType || null
-    $scope.toAddress = data.stateParams.toAddress
-    $scope.toName = data.stateParams.toName
-    $scope.toEmail = data.stateParams.toEmail
-    $scope.toColor = data.stateParams.toColor
-    $scope.toAlias = data.stateParams.toAlias
-    aliasService.getAvatar(data.stateParams.toAlias, function(err, avatar) {
-      $scope.toAvatar = avatar;
-      $scope.$apply();
-    });
     $scope.showSendMax = false
 
     if (!$scope.nextStep && !data.stateParams.toAddress) {
@@ -403,6 +409,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
         recipientType: $scope.recipientType,
         toAmount: amount,
         toAddress: $scope.toAddress,
+        fromAddress: $scope.acc.id,
         toName: $scope.toName,
         toEmail: $scope.toEmail,
         toColor: $scope.toColor,
