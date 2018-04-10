@@ -126,13 +126,17 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
 
   $scope.goToAmount = function (item) {
     $timeout(function () {
+      var toAlias = null;
+      if (item.meta && item.meta.alias && item.meta.alias.alias) {
+        toAlias = item.meta.alias.alias
+      }
       return $state.transitionTo('tabs.send.amount', {
         recipientType: item.recipientType,
         toAddress: item.address,
         toName: item.name,
         toEmail: item.email,
         toColor: item.color,
-        toAlias: item.meta.alias.alias,
+        toAlias: toAlias,
         fromAddress: $scope.acc.id
       })
     })
