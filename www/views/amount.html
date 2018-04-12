@@ -5,11 +5,6 @@
     </ion-nav-title>
     <ion-nav-back-button>
     </ion-nav-back-button>
-    <ion-nav-buttons side="secondary">
-      <button class="button back-button" ng-click="showSendMaxMenu()" ng-if="showMenu">
-        <i class="icon ion-ios-more"></i>
-      </button>
-    </ion-nav-buttons>
   </ion-nav-bar>
 
   <ion-content scroll="false" ng-class="{'has-selector': accounts[0] && !singleAccount}">
@@ -55,12 +50,20 @@
         <div class="title">
           <span translate>Amount</span>
         </div>
+        <div class="max">
+          <a class="amount__currency-toggle" ng-click="sendMax()" translate>
+            Max
+          </a>
+        </div>
       </div>
 
       <div class="amount">
         <div class="amount__editable" ng-class="{'amount__editable--minimize': smallFont, 'amount__editable--standard': !smallFont, 'amount__editable--placeholder': !amount}">
           <span class="amount__number">{{amount || "0.00" }}</span>
-          <a class="amount__currency-toggle" ng-click="changeUnit()">{{unit}}</a>
+          <a class="amount__currency-toggle" ng-click="changeUnit()">
+            {{unit}}
+            <span class="icon ion-loop"></span>
+          </a>
         </div>
         <div ng-class="{'amount__results--minimize': smallFont, 'amount__results--standard': !smallFont, 'amount__results--placeholder': amountResult}" ng-click="changeAlternativeUnit()">
           <div class="amount__result" ng-show="globalResult">{{globalResult}} {{unit}}</div>
@@ -123,10 +126,6 @@
       </p>
     </a>
   </div>
-  <item-selector
-    item-selector-show="showSendMax"
-    item-selector-on-select="sendMax">
-  </item-selector>
   <account-selector
     account-selector-title="accountSelectorTitle"
     account-selector-accounts="accounts"

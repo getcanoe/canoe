@@ -69,6 +69,15 @@
           padding: 0px;
         }
       }
+      .max {
+        float: right;
+        padding-top: 10px;
+        color: $v-dark-gray;
+        font-weight: bold;
+        @media(max-height: 480px) {
+          padding: 0px;
+        }
+      }
       @media(max-height: 480px) {
         padding-top: 3px;
       }
@@ -91,6 +100,7 @@
         bottom: 276px;
         top: 76px;
         & > div {
+          height: 30px;
           display: inline-block;
         }
       }
@@ -176,9 +186,9 @@
       position: relative;
       top: -3px;
       line-height: 1;
+      display: inline-block;
       @media(max-width: 320px) {
-        line-height: 30px;
-        height: 30px;
+        line-height: 25px;
       }
     }
     &__results {
@@ -205,6 +215,9 @@
     &__result-equiv {
       color: $v-mid-gray;
       font-size: 1.2em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
       @media(max-height: 480px) {
         margin-top: 0;
         font-size: 16px;
