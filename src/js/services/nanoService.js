@@ -553,6 +553,7 @@ angular.module('canoeApp.services')
       var register = {
         accounts: ids,
         wallet: wallet.getId(),
+        name: 'canoe', // Other wallets can also use our backend
         version: $window.version
       }
       root.publish('wallet/' + wallet.getId() + '/register', JSON.stringify(register), 2, false)
