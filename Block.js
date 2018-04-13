@@ -1,21 +1,15 @@
 /* globals bigInt blake2bInit blake2bUpdate hex_uint8 uint8_hex blake2bFinal keyFromAccount
    hex2dec dec2hex accountFromHexKey stringFromHex */
-var MAGIC_NUMBER = '5243' // 0x52 0x43
-var VERSION_MAX = '01' // 0x01
-var VERSION_MIN = '01' // 0x01
-var VERSION_USING = '01' // 0x01
-var EXTENSIONS = '0002' // 0x00 0x02
 var RAI_TO_RAW = '000000000000000000000000'
 var MAIN_NET_WORK_THRESHOLD = 'ffffffc000000000'
 var STATE_BLOCK_PREAMBLE = '0000000000000000000000000000000000000000000000000000000000000006'
 var STATE_BLOCK_ZERO = '0000000000000000000000000000000000000000000000000000000000000000'
-var blockID = {invalid: 0, not_a_block: 1, send: 2, receive: 3, open: 4, change: 5}
 
 module.exports = function (isState = false) {
   var api = {} // public methods
-  var data = '' // raw block to be relayed to the network directly
   var type // block type
   var state = isState // if this is a state block
+  var send // if this is a send state block
   var hash // block hash
   var signed = false // if block has signature
   var worked = false // if block has work
@@ -38,70 +32,60 @@ module.exports = function (isState = false) {
   var BLOCK_MAX_VERSION = 1
 
   /**
-   * Builds the block and calculates the hash
+   * Calculates the hash
    *
    * @throws An exception on invalid type
    * @returns {Array} The block hash
    */
   api.build = function () {
-    var context
-    switch (type) {
-      case 'send':
-        data = ''
-        data += MAGIC_NUMBER + VERSION_MAX + VERSION_USING + VERSION_MIN + uint8_hex(blockID[type]) + EXTENSIONS
-        data += previous
-        data += destination
-        data += balance
-
-        context = blake2bInit(32, null)
-        blake2bUpdate(context, hex_uint8(previous))
-        blake2bUpdate(context, hex_uint8(destination))
-        blake2bUpdate(context, hex_uint8(balance))
-        hash = uint8_hex(blake2bFinal(context))
-        break
-
-      case 'receive':
-        data = ''
-        data += MAGIC_NUMBER + VERSION_MAX + VERSION_USING + VERSION_MIN + uint8_hex(blockID[type]) + EXTENSIONS
-        data += previous
-        data += source
-
-        context = blake2bInit(32, null)
-        blake2bUpdate(context, hex_uint8(previous))
-        blake2bUpdate(context, hex_uint8(source))
-        hash = uint8_hex(blake2bFinal(context))
-        break
-
-      case 'open':
-        data = ''
-        data += MAGIC_NUMBER + VERSION_MAX + VERSION_USING + VERSION_MIN + uint8_hex(blockID[type]) + EXTENSIONS
-        data += source
-        data += representative
-        data += account
-
-        context = blake2bInit(32, null)
-        blake2bUpdate(context, hex_uint8(source))
-        blake2bUpdate(context, hex_uint8(representative))
-        blake2bUpdate(context, hex_uint8(account))
-        hash = uint8_hex(blake2bFinal(context))
-        break
-
-      case 'change':
-        data = ''
-        data += MAGIC_NUMBER + VERSION_MAX + VERSION_USING + VERSION_MIN + uint8_hex(blockID[type]) + EXTENSIONS
-        data += previous
-        data += representative
-
-        context = blake2bInit(32, null)
-        blake2bUpdate(context, hex_uint8(previous))
-        blake2bUpdate(context, hex_uint8(representative))
-        hash = uint8_hex(blake2bFinal(context))
-        break
-
-      default:
-        throw new Error('Block parameters need to be set first')
+    var context = blake2bInit(32, null)
+    if (state) {
+      blake2bUpdate(context, hex_uint8(STATE_BLOCK_PREAMBLE))
+      blake2bUpdate(context, hex_uint8(account))
+      blake2bUpdate(context, hex_uint8(previous))
+      blake2bUpdate(context, hex_uint8(representative))
+      blake2bUpdate(context, hex_uint8(balance))
+      switch (type) {
+        case 'send':
+          blake2bUpdate(context, hex_uint8(destination))
+          break
+        case 'receive':
+          blake2bUpdate(context, hex_uint8(source))
+          break
+        case 'open':
+          blake2bUpdate(context, hex_uint8(source))
+          break
+        case 'change':
+          blake2bUpdate(context, hex_uint8(STATE_BLOCK_ZERO))
+          break
+        default:
+          throw new Error('Unrecognized type of block')
+      }
+    } else {
+      switch (type) {
+        case 'send':
+          blake2bUpdate(context, hex_uint8(previous))
+          blake2bUpdate(context, hex_uint8(destination))
+          blake2bUpdate(context, hex_uint8(balance))
+          break
+        case 'receive':
+          blake2bUpdate(context, hex_uint8(previous))
+          blake2bUpdate(context, hex_uint8(source))
+          break
+        case 'open':
+          blake2bUpdate(context, hex_uint8(source))
+          blake2bUpdate(context, hex_uint8(representative))
+          blake2bUpdate(context, hex_uint8(account))
+          break
+        case 'change':
+          blake2bUpdate(context, hex_uint8(previous))
+          blake2bUpdate(context, hex_uint8(representative))
+          break
+        default:
+          throw new Error('Unrecognized type of block')
+      }
     }
-
+    hash = uint8_hex(blake2bFinal(context))
     return hash
   }
 
@@ -343,7 +327,8 @@ module.exports = function (isState = false) {
   }
 
   api.getRepresentative = function () {
-    if (type === 'change' || type === 'open') {
+    // All state blocks have representative
+    if (state || type === 'change' || type === 'open') {
       return accountFromHexKey(representative)
     } else {
       return false
@@ -388,15 +373,6 @@ module.exports = function (isState = false) {
       default:
         throw new Error('Invalid block type')
     }
-  }
-
-  /**
-   *
-   * @returns {string} The raw block hex encoded ready to be sent to the network
-   */
-  api.getRawBlock = function () {
-    if (!signed || !worked) { throw new Error('Incomplete block') }
-    return data
   }
 
   /**
@@ -479,6 +455,8 @@ module.exports = function (isState = false) {
     extras.timestamp = timestamp
     obj.extras = extras
     obj.version = version
+    obj.state = state
+    obj.send = send
     return JSON.stringify(obj)
   }
 
@@ -489,36 +467,59 @@ module.exports = function (isState = false) {
     } else {
       obj = json
     }
-
-    switch (obj.type) {
-      case 'send':
+    state = obj.state || false // Is this a state block or not?
+    type = obj.type
+    if (state) {
+      var send = obj.send // We need to know
+      // These 4 we know where to put
+      previous = obj.previous // 0 for the first block
+      balance = obj.balance
+      account = keyFromAccount(obj.account)
+      representative = keyFromAccount(obj.representative)
+      // Special handling of link field depending on send
+      if (send) {
         type = 'send'
-        previous = obj.previous
-        destination = keyFromAccount(obj.destination)
-        balance = obj.balance
-        break
-
-      case 'receive':
-        type = 'receive'
-        previous = obj.previous
-        source = obj.source
-        break
-
-      case 'open':
-        type = 'open'
-        source = obj.source
-        representative = keyFromAccount(obj.representative)
-        account = keyFromAccount(obj.account)
-        break
-
-      case 'change':
-        type = 'change'
-        previous = obj.previous
-        representative = keyFromAccount(obj.representative)
-        break
-
-      default:
-        throw new Error('Invalid block type')
+        destination = keyFromAccount(obj.link)
+      } else {
+        if (obj.link === STATE_BLOCK_ZERO) {
+          type = 'change'
+        } else {
+          if (previous === STATE_BLOCK_ZERO) {
+            type = 'open'
+            source = obj.link
+          } else {
+            type = 'receive'
+            source = obj.link
+          }
+        }
+      }
+    } else {
+      switch (type) {
+        case 'send':
+          type = 'send'
+          previous = obj.previous
+          destination = keyFromAccount(obj.destination)
+          balance = obj.balance
+          break
+        case 'receive':
+          type = 'receive'
+          previous = obj.previous
+          source = obj.source
+          break
+        case 'open':
+          type = 'open'
+          source = obj.source
+          representative = keyFromAccount(obj.representative)
+          account = keyFromAccount(obj.account)
+          break
+        case 'change':
+          type = 'change'
+          previous = obj.previous
+          representative = keyFromAccount(obj.representative)
+          break
+        default:
+          throw new Error('Invalid block type')
+      }
     }
 
     signature = obj.signature
@@ -538,15 +539,10 @@ module.exports = function (isState = false) {
       }
     }
 
-    if (!v) { version = obj.version ? obj.version : 0 } else { version = v }
-    if (version === 0) {
-      // update block data to new version and then update block version
-      if (type !== 'change') {
-        if (blockAmount) {
-          api.setAmount(blockAmount.multiply('1000000000000000000000000')) // rai to raw
-        }
-      }
-      api.setVersion(1)
+    if (!v) {
+      version = obj.version ? obj.version : 0
+    } else {
+      version = v
     }
 
     api.build()
@@ -556,13 +552,11 @@ module.exports = function (isState = false) {
     if (blockHash === false) {
       blockHash = api.getPrevious()
     }
-
     var t = hex_uint8(MAIN_NET_WORK_THRESHOLD)
     var context = blake2bInit(8, null)
     blake2bUpdate(context, hex_uint8(work).reverse())
     blake2bUpdate(context, hex_uint8(blockHash))
     var threshold = blake2bFinal(context).reverse()
-
     if (threshold[0] === t[0]) {
       if (threshold[1] === t[1]) {
         if (threshold[2] === t[2]) {

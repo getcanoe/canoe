@@ -227,7 +227,7 @@ angular.module('canoeApp.services')
           var blk = wallet.createBlockFromJSON(block.contents)
           blk.setImmutable(true)
           try {
-            // First we check if this is a fork and thus adop it if it is
+            // First we check if this is a fork and thus adopt it if it is
             if (!wallet.importForkedBlock(blk, account)) { // Replaces any existing block
               // No fork so we can just import it
               wallet.importBlock(blk, account)

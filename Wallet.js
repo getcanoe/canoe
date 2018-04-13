@@ -74,6 +74,10 @@ function hexRandom (bytes) {
   return uint8_hex(nacl.randomBytes(bytes))
 }
 
+function newBlock (isState) {
+  return new Block(isState) // State blocks!
+}
+
 module.exports = function (password) {
   var api = {} // wallet public methods
   var priv = {} // wallet priv methods
@@ -740,7 +744,7 @@ module.exports = function (password) {
 
     var bal = api.getBalanceUpToBlock(0)
     var remaining = bal.minus(amount)
-    var blk = new Block()
+    var blk = newBlock(true)
 
     blk.setSendParameters(lastPendingBlock, to, remaining)
     blk.build()
@@ -783,7 +787,7 @@ module.exports = function (password) {
       if (chain[i].getSource() === sourceBlockHash) { return false }
     }
 
-    var blk = new Block()
+    var blk = newBlock(true)
     if (lastPendingBlock.length === 64) {
       blk.setReceiveParameters(lastPendingBlock, sourceBlockHash)
     } else {
@@ -815,7 +819,7 @@ module.exports = function (password) {
 
     if (!lastPendingBlock) { throw new Error('There needs to be at least 1 block in the chain') }
 
-    var blk = new Block()
+    var blk = newBlock(true)
     blk.setChangeParameters(lastPendingBlock, repr)
     blk.build()
     api.signBlock(blk)
@@ -1052,7 +1056,7 @@ module.exports = function (password) {
   }
 
   api.createBlockFromJSON = function (jsonOrObj) {
-    var blk = new Block()
+    var blk = newBlock() // jsonOrObj will decide if state block or not
     blk.buildFromJSON(jsonOrObj, blk.getMaxVersion())
     return blk
   }
@@ -1226,7 +1230,7 @@ module.exports = function (password) {
 
     readyBlocks = []
     for (var i in walletData.readyBlocks) {
-      var blk = new Block()
+      var blk = newBlock()
       blk.buildFromJSON(walletData.readyBlocks[i])
       readyBlocks.push(blk)
     }
@@ -1236,7 +1240,7 @@ module.exports = function (password) {
 
       aux.chain = []
       for (var j in walletData.keys[i].chain) {
-        blk = new Block()
+        blk = newBlock()
         blk.buildFromJSON(walletData.keys[i].chain[j])
         aux.chain.push(blk)
       }
