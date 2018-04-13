@@ -1,7 +1,7 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, $rootScope, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
+  .factory('nanoService', function ($log, $window, $rootScope, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
 
     var POW
@@ -546,9 +546,16 @@ angular.module('canoeApp.services')
     // Tell server which accounts this wallet has. The server has a map of wallet id -> accounts
     // This needs to be called when a new account is created or one is removed.
     // We also call it whenever we load a wallet from data.
+    // Canoe up to 0.3.5 sends only wallet id.
+    // Canoe from 0.3.6 sends more information in a JSON object.
     root.updateServerMap = function (wallet) {
       var ids = wallet.getAccountIds()
-      root.publish('wallet/' + wallet.getId() + '/accounts', JSON.stringify(ids), 2, false)
+      var register = {
+        accounts: ids,
+        wallet: wallet.getId(),
+        version: $window.version
+      }
+      root.publish('wallet/' + wallet.getId() + '/register', JSON.stringify(register), 2, false)
     }
 
     // Encrypt and store the wallet in localstorage.
