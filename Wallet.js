@@ -74,10 +74,6 @@ function hexRandom (bytes) {
   return uint8_hex(nacl.randomBytes(bytes))
 }
 
-function newBlock (isState) {
-  return new Block(isState) // State blocks!
-}
-
 module.exports = function (password) {
   var api = {} // wallet public methods
   var priv = {} // wallet priv methods
@@ -87,6 +83,8 @@ module.exports = function (password) {
   var id = hexRandom(11) // Unique id of this wallet, to be used as reference when handling
   var token = hexRandom(32) // Secret token (used as username in server account)
   var tokenPass = hexRandom(32) // Secret tokenPass (used as password in server account)
+
+  var enableStateBlocks // True if we should produce state blocks
 
   // The following variables are set via useAccount()
   var pk // current account public key
@@ -122,6 +120,10 @@ module.exports = function (password) {
 
   var logger = new Logger()
 
+  function newBlock () {
+    return new Block(enableStateBlocks) // State blocks
+  }
+
   api.debug = function () {
     console.log(readyBlocks)
   }
@@ -136,6 +138,14 @@ module.exports = function (password) {
 
   api.setLogger = function (loggerObj) {
     logger = loggerObj
+  }
+
+  api.enableStateBlocks = function (bool) {
+    enableStateBlocks = bool
+  }
+
+  api.getEnableStateBlocks = function () {
+    return enableStateBlocks
   }
 
   api.enableBroadcast = function (bool) {
@@ -744,7 +754,7 @@ module.exports = function (password) {
 
     var bal = api.getBalanceUpToBlock(0)
     var remaining = bal.minus(amount)
-    var blk = newBlock(true)
+    var blk = newBlock()
 
     blk.setSendParameters(lastPendingBlock, to, remaining)
     blk.build()
@@ -787,7 +797,7 @@ module.exports = function (password) {
       if (chain[i].getSource() === sourceBlockHash) { return false }
     }
 
-    var blk = newBlock(true)
+    var blk = newBlock()
     if (lastPendingBlock.length === 64) {
       blk.setReceiveParameters(lastPendingBlock, sourceBlockHash)
     } else {
@@ -819,7 +829,7 @@ module.exports = function (password) {
 
     if (!lastPendingBlock) { throw new Error('There needs to be at least 1 block in the chain') }
 
-    var blk = newBlock(true)
+    var blk = newBlock()
     blk.setChangeParameters(lastPendingBlock, repr)
     blk.build()
     api.signBlock(blk)
@@ -1158,6 +1168,8 @@ module.exports = function (password) {
     pack.token = token
     pack.tokenPass = tokenPass
 
+    pack.enableStateBlocks = enableStateBlocks
+
     pack = JSON.stringify(pack)
     if (debug) {
       console.log('Wallet: ' + pack)
@@ -1227,6 +1239,7 @@ module.exports = function (password) {
     id = walletData.id
     token = walletData.token
     tokenPass = walletData.tokenPass
+    enableStateBlocks = walletData.enableStateBlocks
 
     readyBlocks = []
     for (var i in walletData.readyBlocks) {

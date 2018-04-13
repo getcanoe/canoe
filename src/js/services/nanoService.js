@@ -4,6 +4,14 @@ angular.module('canoeApp.services')
   .factory('nanoService', function ($log, $window, $rootScope, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
 
+    // This config is controlled over retained MQTT
+    // Perhaps we should hook it with configService
+    root.config = {
+      stateblocks: {
+        enabled: false
+      }
+    }
+
     var POW
     // Only for OSX and Linux so far
     if (platformInfo.isOSX || platformInfo.isLinux) {
@@ -158,6 +166,8 @@ angular.module('canoeApp.services')
 
     // Whenever the wallet is replaced we call this
     root.setWallet = function (wallet, cb) {
+      // Configure wallet
+      root.configureWallet(wallet)
       // Make sure we have an account for this wallet
       // Will only ever create one on the server side
       root.createServerAccount(wallet)
@@ -458,6 +468,8 @@ angular.module('canoeApp.services')
     root.subscribeForWallet = function (wallet) {
       // Subscribe to rate service
       root.subscribe('rates')
+      // Subscribe to config
+      root.subscribe('config/#')
       // Subscribe to blocks sent to our own wallet id
       root.subscribe('wallet/' + wallet.getId() + '/block/#')
     }
@@ -673,7 +685,7 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.onIncomingBlock = function (blkType, payload) {
+    root.handleIncomingBlock = function (blkType, payload) {
       /*
         {
           "account":"xrb_15d4oo67z6ruebmkcjqghawcbf5f9r4zkg8pf1af3n1s7kd9u7x3m47y8x37",
@@ -724,6 +736,32 @@ angular.module('canoeApp.services')
       rateService.updateRates(rates)
     }
 
+    root.configChanged = function () {
+      if (root.wallet) {
+        if (root.config.stateblocks.enabled) {
+          if (!root.wallet.getEnableStateBlocks) {
+            root.wallet.enableStateBlocks(true)
+          }
+        }
+      }
+    }
+
+    root.configureWallet = function (wallet) {
+      if (root.config.stateblocks.enabled) {
+        wallet.enableStateBlocks(true)
+      }
+    }
+
+    root.handleConfig = function (payload) {
+      root.config = JSON.parse(payload)
+      root.configChanged()
+    }
+
+    root.handleConfigMerge = function (payload) {
+      lodash.merge(root.config, JSON.parse(payload))
+      root.configChanged()
+    }
+
     root.onMessageArrived = function (message) {
       // $log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
       var topic = message.destinationName
@@ -731,11 +769,18 @@ angular.module('canoeApp.services')
       // Switch over topics
       var parts = topic.split('/')
       switch (parts[0]) {
+        case 'config':
+          if (parts[1] === 'merge') {
+            root.handleConfigMerge(payload)
+          } else {
+            root.handleConfig(payload)
+          }
+          return
         case 'wallet':
           // A wallet specific message
           // TODO ensure proper wallet id?
           if (parts[2] === 'block') {
-            return root.onIncomingBlock(parts[3], payload)
+            return root.handleIncomingBlock(parts[3], payload)
           }
           break
         case 'rates':
