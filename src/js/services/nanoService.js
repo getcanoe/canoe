@@ -468,8 +468,8 @@ angular.module('canoeApp.services')
     root.subscribeForWallet = function (wallet) {
       // Subscribe to rate service
       root.subscribe('rates')
-      // Subscribe to config
-      root.subscribe('config/#')
+      // Subscribe to sharedconfig
+      root.subscribe('sharedconfig/#')
       // Subscribe to blocks sent to our own wallet id
       root.subscribe('wallet/' + wallet.getId() + '/block/#')
     }
@@ -752,12 +752,12 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.handleConfig = function (payload) {
+    root.handleSharedConfig = function (payload) {
       root.config = JSON.parse(payload)
       root.configChanged()
     }
 
-    root.handleConfigMerge = function (payload) {
+    root.handleSharedConfigMerge = function (payload) {
       lodash.merge(root.config, JSON.parse(payload))
       root.configChanged()
     }
@@ -769,11 +769,11 @@ angular.module('canoeApp.services')
       // Switch over topics
       var parts = topic.split('/')
       switch (parts[0]) {
-        case 'config':
+        case 'sharedconfig':
           if (parts[1] === 'merge') {
-            root.handleConfigMerge(payload)
+            root.handleSharedConfigMerge(payload)
           } else {
-            root.handleConfig(payload)
+            root.handleSharedConfig(payload)
           }
           return
         case 'wallet':
