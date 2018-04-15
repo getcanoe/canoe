@@ -700,24 +700,42 @@ angular.module('canoeApp.services')
       var hash = blk.hash
       var timestamp = blk.timestamp
       var from = blk.account
-      var to = blk2.destination
       var amount = blk.amount
-      $log.debug('From: ' + from + 'to: ' + to + ' type: ' + blkType + ' amount: ' + amount + ' time: ' + timestamp)
 
       // Switch on block type
       switch (blkType) {
+        case 'state':
+          // If a send
+          if (blk.is_send) {
+            var to = blk2.link_as_account
+            // If this is from one of our accounts we confirm it
+            if (root.hasAccount(from)) {
+              soundService.play('send')
+              root.confirmBlock(from, hash, timestamp)
+            }
+            // This is someone elses send to us
+            if (root.hasAccount(to)) {
+              root.handleIncomingSendBlock(hash, to, from, amount)
+            }
+            return
+          } else {
+            // TODO: change and/or receive?
+            // This is an echo from network, it can only originate from me unless multiple devices
+            return root.confirmBlock(from, hash, timestamp)
+          }
         case 'open':
           // This is an echo from network, it can only originate from me unless multiple devices
           return root.confirmBlock(from, hash, timestamp)
         case 'send':
           // If this is from one of our accounts we confirm it
+          var dest = blk2.destination
           if (root.hasAccount(from)) {
             soundService.play('send')
             root.confirmBlock(from, hash, timestamp)
           }
           // This is someone elses send to us
-          if (root.hasAccount(to)) {
-            root.handleIncomingSendBlock(hash, to, from, amount)
+          if (root.hasAccount(dest)) {
+            root.handleIncomingSendBlock(hash, dest, from, amount)
           }
           return
         case 'receive':
@@ -738,8 +756,8 @@ angular.module('canoeApp.services')
 
     root.configChanged = function () {
       if (root.wallet) {
-        if (root.config.stateblocks.enabled) {
-          if (!root.wallet.getEnableStateBlocks) {
+        if (root.config.stateblocks.enable) {
+          if (!root.wallet.getEnableStateBlocks()) {
             root.wallet.enableStateBlocks(true)
           }
         }
@@ -747,13 +765,14 @@ angular.module('canoeApp.services')
     }
 
     root.configureWallet = function (wallet) {
-      if (root.config.stateblocks.enabled) {
+      if (root.config.stateblocks.enable) {
         wallet.enableStateBlocks(true)
       }
     }
 
     root.handleSharedConfig = function (payload) {
       root.config = JSON.parse(payload)
+      $log.debug('Received shared config' + JSON.stringify(root.config))
       root.configChanged()
     }
 

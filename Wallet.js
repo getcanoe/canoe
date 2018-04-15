@@ -611,6 +611,9 @@ module.exports = function (password) {
       if (blk.getHash(true) === blockHash) { found = true }
 
       if (found) {
+        if (blk.getType() === 'state') {
+          return blk.getBalance()
+        }
         if (blk.getType() === 'open' || blk.getType() === 'receive') {
           sum = sum.add(blk.getAmount())
         } else if (blk.getType() === 'send') {
@@ -626,6 +629,9 @@ module.exports = function (password) {
       if (blk.getHash(true) === blockHash) { found = true }
 
       if (found) {
+        if (blk.getType() === 'state') {
+          return blk.getBalance()
+        }
         if (blk.getType() === 'open' || blk.getType() === 'receive') {
           sum = sum.add(blk.getAmount())
         } else if (blk.getType() === 'send') {
@@ -757,6 +763,9 @@ module.exports = function (password) {
     var blk = newBlock()
 
     blk.setSendParameters(lastPendingBlock, to, remaining)
+    if (enableStateBlocks) {
+      blk.setStateParameters(from, representative)
+    }
     blk.build()
     api.signBlock(blk)
     blk.setAmount(amount)
@@ -803,7 +812,9 @@ module.exports = function (password) {
     } else {
       blk.setOpenParameters(sourceBlockHash, acc, canoeRepresentative)
     }
-
+    if (enableStateBlocks) {
+      blk.setStateParameters(acc, representative, api.getBalance().add(amount))
+    }
     blk.build()
     api.signBlock(blk)
     blk.setAmount(amount)

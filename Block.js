@@ -113,6 +113,7 @@ module.exports = function (isState = false) {
     previous = previousBlockHash
     destination = pk
     balance = dec2hex(balanceRemaining, 16)
+
     type = 'send'
   }
 
@@ -131,6 +132,22 @@ module.exports = function (isState = false) {
     previous = previousBlockHash
     source = sourceBlockHash
     type = 'receive'
+  }
+
+  api.setStateParameters = function (newAccount, representativeAccount, curBalance) {
+    try {
+      account = keyFromAccount(newAccount)
+    } catch (err) {
+      throw new Error('Invalid NANO account')
+    }
+    try {
+      representative = keyFromAccount(representativeAccount)
+    } catch (err) {
+      throw new Error('Invalid representative account')
+    }
+    if (curBalance) {
+      balance = dec2hex(curBalance, 16)
+    }
   }
 
   /**
@@ -392,7 +409,8 @@ module.exports = function (isState = false) {
       }
       obj.account = accountFromHexKey(account)
       obj.representative = accountFromHexKey(representative || account)
-      obj.balance = balance
+      // State blocks wants balance as decimal string in RPC
+      obj.balance = hex2dec(balance)
 
       // Only the link field is different
       switch (type) {
@@ -473,7 +491,7 @@ module.exports = function (isState = false) {
       var send = obj.send // We need to know
       // These 4 we know where to put
       previous = obj.previous // 0 for the first block
-      balance = obj.balance
+      balance = dec2hex(obj.balance)
       account = keyFromAccount(obj.account)
       representative = keyFromAccount(obj.representative)
       // Special handling of link field depending on send
