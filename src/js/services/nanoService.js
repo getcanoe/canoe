@@ -44,6 +44,15 @@ angular.module('canoeApp.services')
       return root.wallet
     }
 
+    root.setHost = function(url) {
+      mqttHost = url;
+      host = "https://"+url+"/rpc-dev";
+    }
+
+    root.getHost = function() {
+      return mqttHost;
+    }
+
     // Possibility to quiet the logs
     var doLog = true
 
