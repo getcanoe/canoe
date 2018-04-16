@@ -611,7 +611,7 @@ module.exports = function (password) {
       if (blk.getHash(true) === blockHash) { found = true }
 
       if (found) {
-        if (blk.getType() === 'state') {
+        if (blk.isState()) {
           return blk.getBalance()
         }
         if (blk.getType() === 'open' || blk.getType() === 'receive') {
@@ -629,7 +629,7 @@ module.exports = function (password) {
       if (blk.getHash(true) === blockHash) { found = true }
 
       if (found) {
-        if (blk.getType() === 'state') {
+        if (blk.isState()) {
           return blk.getBalance()
         }
         if (blk.getType() === 'open' || blk.getType() === 'receive') {
@@ -813,7 +813,9 @@ module.exports = function (password) {
       blk.setOpenParameters(sourceBlockHash, acc, canoeRepresentative)
     }
     if (enableStateBlocks) {
-      blk.setStateParameters(acc, representative, api.getBalance().add(amount))
+      var bal = api.getBalanceUpToBlock(0)
+      var remaining = bal.plus(amount)
+      blk.setStateParameters(acc, representative, remaining)
     }
     blk.build()
     api.signBlock(blk)
@@ -842,6 +844,10 @@ module.exports = function (password) {
 
     var blk = newBlock()
     blk.setChangeParameters(lastPendingBlock, repr)
+    if (enableStateBlocks) {
+      var bal = api.getBalanceUpToBlock(0)
+      blk.setStateParameters(acc, representative, bal)
+    }
     blk.build()
     api.signBlock(blk)
     blk.setAccount(acc)
@@ -978,6 +984,10 @@ module.exports = function (password) {
       }
     }
     return false
+  }
+
+  api.clearReadyBlocks = function () {
+    readyBlocks = []
   }
 
   api.removeReadyBlock = function (blockHash) {
@@ -1138,11 +1148,11 @@ module.exports = function (password) {
   }
 
   /**
-   * Encrypts and packs the wallet data in a hex string
+   * Serialize the wallet as JSON
    *
    * @returns {string}
    */
-  api.pack = function (debug) {
+  api.getEntireJSON = function () {
     var pack = {}
     var tempKeys = []
     for (var i in keys) {
@@ -1181,10 +1191,16 @@ module.exports = function (password) {
 
     pack.enableStateBlocks = enableStateBlocks
 
-    pack = JSON.stringify(pack)
-    if (debug) {
-      console.log('Wallet: ' + pack)
-    }
+    return JSON.stringify(pack)
+  }
+
+  /**
+   * Encrypts and packs the wallet data in a hex string
+   *
+   * @returns {string}
+   */
+  api.pack = function () {
+    var pack = api.getEntireJSON()
     pack = Buffer.from(stringToArr(pack))
 
     var context = blake2bInit(32)

@@ -216,6 +216,76 @@ angular.module('canoeApp.services')
       // Better safe than sorry, we always remove them.
       wallet.removePendingBlocks(account)
       var currentBlocks = wallet.getLastNBlocks(account, 99999)
+      var history = rai.account_history(account)
+      if (history) {
+        var blocks = history.reverse()
+        var hashes = []
+        lodash.each(blocks, function (block) {
+          hashes.push(block.hash)
+        })
+        // We have to make this call too so we get work, signature and timestamp
+        var infos = rai.blocks_info(hashes, 'raw', false, true) // true == include source_account
+        // Unfortunately blocks is an object so to get proper order we use hashes
+        lodash.each(blocks, function (block) {
+          var hash = block.hash
+          var info = infos[hash]
+          block.work = info.contents.work
+          block.signature = info.contents.signature
+          block.previous = info.contents.previous
+          block.extras = {
+            blockAccount: info.block_account,
+            blockAmount: info.amount,
+            timestamp: info.timestamp,
+            origin: info.source_account
+          }
+          // For some reason account_history is different...
+          if (block.type === 'open') {
+            block.account = info.contents.account
+          }
+          if (info.contents.balance) {
+            block.balance = info.contents.balance // hex for old blocks, decimal for new
+          }
+          // State logic
+          if (block.type === 'state') {
+            block.state = true
+            if (block.subtype === 'send') {
+              block.send = true
+            }
+          }
+          var blk = wallet.createBlockFromJSON(block)
+          if (blk.getHash(true) !== hash) {
+            console.log('WRONG HASH')
+          }
+          blk.setImmutable(true)
+          try {
+            // First we check if this is a fork and thus adopt it if it is
+            if (!wallet.importForkedBlock(blk, account)) { // Replaces any existing block
+              // No fork so we can just import it
+              wallet.importBlock(blk, account)
+            }
+            // It was added so remove it from currentBlocks
+            lodash.remove(currentBlocks, function (b) {
+              return b.getHash(true) === hash
+            })
+            wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
+          } catch (e) {
+            $log.error(e)
+          }
+        })
+        // Now we add any old blocks and rebroadcast them
+        $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
+        wallet.enableBroadcast(true) // Turn back on
+        lodash.each(currentBlocks, function (b) {
+          wallet.addBlockToReadyBlocks(b)
+        })
+        wallet.enableBroadcast(false) // Turn off
+      }
+    }
+
+    function resetChainInternalOld (wallet, account) {
+      // Better safe than sorry, we always remove them.
+      wallet.removePendingBlocks(account)
+      var currentBlocks = wallet.getLastNBlocks(account, 99999)
       var ledger = rai.ledger(account, 1)
       // We always get one account, but we don't get the one we asked for if
       // it doesn't exist. Weird API!
@@ -233,6 +303,14 @@ angular.module('canoeApp.services')
             blockAmount: block.amount,
             timestamp: block.timestamp,
             origin: block.source_account
+          }
+          // State logic
+          var json = block.contents
+          if (json.type === 'state') {
+            json.state = true
+            if (json.is_send) {
+              json.send = true
+            }
           }
           var blk = wallet.createBlockFromJSON(block.contents)
           blk.setImmutable(true)

@@ -321,6 +321,10 @@ module.exports = function (isState = false) {
     return type
   }
 
+  api.isState = function () {
+    return state
+  }
+
   api.getBalance = function (format = 'dec') {
     if (format === 'dec') {
       var dec = bigInt(hex2dec(balance))
@@ -415,7 +419,7 @@ module.exports = function (isState = false) {
       // Only the link field is different
       switch (type) {
         case 'send':
-          obj.link = accountFromHexKey(destination)
+          obj.link = destination
           break
         case 'receive':
           obj.link = source
@@ -487,17 +491,18 @@ module.exports = function (isState = false) {
     }
     state = obj.state || false // Is this a state block or not?
     type = obj.type
+
     if (state) {
-      var send = obj.send // We need to know
+      send = obj.send // We need to know
       // These 4 we know where to put
       previous = obj.previous // 0 for the first block
-      balance = dec2hex(obj.balance)
+      balance = dec2hex(obj.balance, 16)
       account = keyFromAccount(obj.account)
       representative = keyFromAccount(obj.representative)
       // Special handling of link field depending on send
       if (send) {
         type = 'send'
-        destination = keyFromAccount(obj.link)
+        destination = obj.link
       } else {
         if (obj.link === STATE_BLOCK_ZERO) {
           type = 'change'
@@ -514,24 +519,20 @@ module.exports = function (isState = false) {
     } else {
       switch (type) {
         case 'send':
-          type = 'send'
           previous = obj.previous
           destination = keyFromAccount(obj.destination)
           balance = obj.balance
           break
         case 'receive':
-          type = 'receive'
           previous = obj.previous
           source = obj.source
           break
         case 'open':
-          type = 'open'
           source = obj.source
           representative = keyFromAccount(obj.representative)
           account = keyFromAccount(obj.account)
           break
         case 'change':
-          type = 'change'
           previous = obj.previous
           representative = keyFromAccount(obj.representative)
           break
