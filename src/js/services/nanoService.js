@@ -793,6 +793,8 @@ angular.module('canoeApp.services')
             }
             // This is someone elses send to us
             if (root.hasAccount(to)) {
+              // state block sends are 2^128-1 - amount  up in the callback!
+              amount = bigInt('340282366920938463463374607431768211456').minus(bigInt(amount))
               root.handleIncomingSendBlock(hash, to, from, amount)
             }
             return
