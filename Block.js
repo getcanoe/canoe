@@ -178,6 +178,9 @@ module.exports = function (isState = false) {
     } else { representative = account }
 
     source = sourceBlockHash
+    if (api.isState()) {
+      previous = STATE_BLOCK_ZERO
+    }
     type = 'open'
   }
 
@@ -327,8 +330,7 @@ module.exports = function (isState = false) {
 
   api.getBalance = function (format = 'dec') {
     if (format === 'dec') {
-      var dec = bigInt(hex2dec(balance))
-      return dec
+      return bigInt(hex2dec(balance))
     }
     return balance
   }
