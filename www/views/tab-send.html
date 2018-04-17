@@ -2,7 +2,7 @@
   <ion-nav-bar class="bar-royal">
     <ion-nav-title>{{'Send' | translate}}</ion-nav-title>
   </ion-nav-bar>
-  <ion-content>
+  <ion-content ng-class="{'has-selector': accounts[0] && !singleAccount}">
 
     <div class="important-message" ng-if="serverMessage" ng-click="openServerMessageLink()">
       <span>{{serverMessage.title}}</span>
@@ -73,17 +73,42 @@
         <span translate>Transfer to Account</span>
       </div>
       <div class="list">
-        <a class="item item-icon-left item-icon-right" ng-repeat="account in list" ng-if="account.recipientType === 'account'" ng-click="goToAmount(account)">
+        <a class="item item-icon-left item-icon-right" ng-repeat="account in list" ng-if="account.recipientType === 'account' && account.address !== acc.id" ng-click="goToAmount(account)">
           <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
-          <i class="icon big-icon-svg">
-            <img src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !account.color}" ng-style="{'background-color': account.color}" class="bg"/>
-          </i>
           <!--<i class="icon big-icon-svg" ng-if="account.recipientType == 'account'" ng-include="'views/includes/walletIcon.html'"></i>-->
-          {{account.name}}
+          <span ng-if="account.meta && account.meta.alias && account.meta.alias.alias">
+            @{{account.meta.alias.alias}}
+          </span>
+          <span ng-if="!account.meta || !account.meta.alias || !account.meta.alias.alias">
+            {{account.name || account.id}}
+          </span>
           <i class="icon bp-arrow-right"></i>
         </a>
       </div>
     </div>
-
   </ion-content>
+  <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0]">
+    <a ng-if="acc" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
+      <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
+      <span ng-if="acc.meta && acc.meta.alias && acc.meta.alias.alias">
+        @{{acc.meta.alias.alias}}
+      </span>
+      <span ng-if="!acc.meta || !acc.meta.alias || !acc.meta.alias.alias">
+        {{acc.name || acc.id}}
+      </span>
+      <p>
+        <span ng-if="!acc.meta.balanceHidden && acc.alternativeBalanceStr"> {{acc.balanceStr}} <span ng-hide="acc.alternativeBalanceStr == 'hide'">&asymp; {{acc.alternativeBalanceStr}}</span></span>
+        <span ng-if="acc.meta.balanceHidden" translate>[Balance Hidden]</span>
+        <span class="assertive" ng-if="acc.error">{{acc.error}}</span>
+        &nbsp;
+      </p>
+    </a>
+  </div>
+  <account-selector
+    account-selector-title="accountSelectorTitle"
+    account-selector-accounts="accounts"
+    account-selector-selected-account="acc"
+    account-selector-show="showAccounts"
+    account-selector-on-select="onAccountSelect">
+  </account-selector>
 </ion-view>

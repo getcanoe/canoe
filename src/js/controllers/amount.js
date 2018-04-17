@@ -25,9 +25,55 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     angular.element($window).off('keydown')
   })
 
+  $scope.onAccountSelect = function (acc) {
+    if (!acc) {
+      $state.go('tabs.create-account')
+    } else {
+      $scope.acc = acc
+      $scope.account = acc
+    }
+  }
+
+  $scope.showAccountSelector = function () {
+    if ($scope.singleAccount) return
+    $scope.accountSelectorTitle = gettextCatalog.getString('Select an account')
+    $scope.showAccounts = true
+  }
+
+  var checkSelectedAccount = function (account, accounts) {
+    if (!account) return accounts[0]
+    var w = lodash.find(accounts, function (w) {
+      return w.id === account.id
+    })
+    if (!w) return accounts[0]
+    return w
+  }
+
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     var config = configService.getSync().wallet.settings
-
+    $scope.recipientType = data.stateParams.recipientType || null
+    $scope.toAddress = data.stateParams.toAddress
+    $scope.toName = data.stateParams.toName
+    $scope.toEmail = data.stateParams.toEmail
+    $scope.toColor = data.stateParams.toColor
+    $scope.toAlias = data.stateParams.toAlias
+    $scope.fromAddress = data.stateParams.fromAddress
+    aliasService.getAvatar(data.stateParams.toAlias, function(err, avatar) {
+      $scope.toAvatar = avatar;
+      $scope.$apply();
+    });
+    $scope.accounts = profileService.getAccounts()
+    $scope.singleAccount = $scope.accounts.length === 1
+    $scope.hasAccounts = !lodash.isEmpty($scope.accounts)
+    if ($scope.fromAddress) {
+      $scope.acc =  {
+        id: $scope.fromAddress
+      }
+    }
+    var selectedAccount = checkSelectedAccount($scope.acc, $scope.accounts)
+    $scope.onAccountSelect(selectedAccount)
+    $scope.accountSelectorTitle = gettextCatalog.getString('Select an account')
+    $scope.hasMoreAccounts = $scope.accounts.length > 1
     function setAvailableUnits () {
       availableUnits = []
 
@@ -103,16 +149,6 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     updateUnitUI()
 
     $scope.showMenu = $ionicHistory.backView() && ($ionicHistory.backView().stateName === 'tabs.send')
-    $scope.recipientType = data.stateParams.recipientType || null
-    $scope.toAddress = data.stateParams.toAddress
-    $scope.toName = data.stateParams.toName
-    $scope.toEmail = data.stateParams.toEmail
-    $scope.toColor = data.stateParams.toColor
-    $scope.toAlias = data.stateParams.toAlias
-    aliasService.getAvatar(data.stateParams.toAlias, function(err, avatar) {
-      $scope.toAvatar = avatar;
-      $scope.$apply();
-    });
     $scope.showSendMax = false
 
     if (!$scope.nextStep && !data.stateParams.toAddress) {
@@ -181,9 +217,16 @@ angular.module('canoeApp.controllers').controller('amountController', function (
   }
 
   $scope.sendMax = function () {
-    $scope.showSendMax = false
-    $scope.useSendMax = true
-    $scope.finish()
+    if (availableUnits[unitIndex].isFiat) {
+      $scope.changeUnit()
+      $scope.sendMax()
+    } else {
+      $scope.amount = $scope.acc.balanceStr.split(" ")[0]
+      processAmount()
+    }
+    // $scope.showSendMax = false
+    // $scope.useSendMax = true
+    // $scope.finish()
   }
 
   $scope.toggleAlternative = function () {
@@ -249,7 +292,6 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     if (availableUnits[unitIndex].isFiat && $scope.amount.indexOf('.') > -1 && $scope.amount[$scope.amount.indexOf('.') + 2]) return
 
     $scope.amount = ($scope.amount + digit).replace('..', '.')
-    checkFontSize()
     processAmount()
   }
 
@@ -279,7 +321,6 @@ angular.module('canoeApp.controllers').controller('amountController', function (
   $scope.removeDigit = function () {
     $scope.amount = ($scope.amount).toString().slice(0, -1)
     processAmount()
-    checkFontSize()
   }
 
   $scope.resetAmount = function () {
@@ -289,6 +330,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
   }
 
   function processAmount () {
+    checkFontSize()
     var formatedValue = format($scope.amount)
     var result = evaluate(formatedValue)
     $scope.allowSend = lodash.isNumber(result) && +result > 0
@@ -373,6 +415,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
         recipientType: $scope.recipientType,
         toAmount: amount,
         toAddress: $scope.toAddress,
+        fromAddress: $scope.acc.id,
         toName: $scope.toName,
         toEmail: $scope.toEmail,
         toColor: $scope.toColor,

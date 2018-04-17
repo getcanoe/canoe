@@ -12,6 +12,15 @@
         <div ng-if="!account.meta || !account.meta.alias || !account.meta.alias.alias" class="account-name">
           {{account.name}}
         </div>
+        <p>
+          <span ng-if="!account.meta.balanceHidden && account.alternativeBalanceStr"> {{account.balanceStr}} <span ng-hide="account.alternativeBalanceStr == 'hide'">&asymp; {{account.alternativeBalanceStr}}</span></span>
+
+          <span ng-if="account.meta.balanceHidden" translate>[Balance Hidden]</span>
+          <i ng-if="!account.meta.balanceHidden && (account.cachedPendingBalance > 0)" class="tab-home__wallet__pending-icon ion-android-arrow-back"></i>
+          <span ng-if="!account.meta.balanceHidden && (account.cachedPendingBalance > 0)"> {{account.pendingBalanceStr}} </span>
+          <span class="assertive" ng-if="account.error">{{account.error}}</span>
+          &nbsp;
+        </p>
       </div>
     </div>
   </a>

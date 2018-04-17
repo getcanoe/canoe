@@ -134,13 +134,18 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
 
   $scope.goToAmount = function (item) {
     $timeout(function () {
+      var toAlias = null;
+      if (item.meta && item.meta.alias && item.meta.alias.alias) {
+        toAlias = item.meta.alias.alias
+      }
       return $state.transitionTo('tabs.send.amount', {
         recipientType: item.recipientType,
         toAddress: item.address,
         toName: item.name,
         toEmail: item.email,
         toColor: item.color,
-        toAlias: item.alias
+        toAlias: toAlias,
+        fromAddress: $scope.acc.id
       })
     })
   }
@@ -163,11 +168,38 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
     })
   }
 
+  $scope.onAccountSelect = function (acc) {
+    if (!acc) {
+      $state.go('tabs.create-account')
+    } else {
+      $scope.acc = acc
+      $scope.account = acc
+    }
+  }
+
+  $scope.showAccountSelector = function () {
+    if ($scope.singleAccount) return
+    $scope.accountSelectorTitle = gettextCatalog.getString('Select an account')
+    $scope.showAccounts = true
+  }
+
+  var checkSelectedAccount = function (account, accounts) {
+    if (!account) return accounts[0]
+    var w = lodash.find(accounts, function (w) {
+      return w.id === account.id
+    })
+    if (!w) return accounts[0]
+    return account
+  }
+
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
     $scope.accounts = profileService.getAccounts()
+    $scope.singleAccount = $scope.accounts.length === 1
     $scope.hasAccounts = !lodash.isEmpty($scope.accounts)
+    var selectedAccount = checkSelectedAccount($scope.acc, $scope.accounts)
+    $scope.onAccountSelect(selectedAccount)
+    $scope.accountSelectorTitle = gettextCatalog.getString('Select an account')
     $scope.hasMoreAccounts = $scope.accounts.length > 1
-
     $scope.checkingBalance = true
     $scope.formData = {
       search: null
