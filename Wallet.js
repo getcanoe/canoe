@@ -846,7 +846,7 @@ module.exports = function (password) {
     blk.setChangeParameters(lastPendingBlock, repr)
     if (enableStateBlocks) {
       var bal = api.getBalanceUpToBlock(0)
-      blk.setStateParameters(acc, representative, bal)
+      blk.setStateParameters(acc, repr, bal)
     }
     blk.build()
     api.signBlock(blk)
