@@ -26,11 +26,11 @@ angular.module('canoeApp.services')
 
     // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
     // var host = 'https://getcanoe.io/rpc' // for the alpha
-    var host = 'https://test.getcanoe.io/rpc-dev' // for dev
+    var host = 'https://test.getcanoe.io/rpc' // for dev
     var mqttHost = 'test.getcanoe.io'
     configService.get(function(err, config) {
       if (config.backend) {
-        host = 'https://'+config.backend+'/rpc-dev' //TODO need to revist this setup
+        host = 'https://'+config.backend+'/rpc' //TODO need to revist this setup
         mqttHost = config.backend
       }
     });
