@@ -5,22 +5,22 @@
     </ion-nav-title>
     <ion-nav-back-button>
     </ion-nav-back-button>
-    <ion-nav-buttons side="secondary">
-      <button class="button back-button" ng-click="showSendMaxMenu()" ng-if="showMenu">
-        <i class="icon ion-ios-more"></i>
-      </button>
-    </ion-nav-buttons>
   </ion-nav-bar>
 
-  <ion-content scroll="false">
+  <ion-content scroll="false" ng-class="{'has-selector': accounts[0] && !singleAccount}">
 
     <div ng-if="!customAmount && !nextStep">
       <div class="item item-no-bottom-border recipient-label" translate>Recipient</div>
 
       <div class="item item-text-wrap item-icon-left bitcoin-address">
-        <i class="icon big-icon-svg" ng-if="recipientType == 'account'">
-          <img src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !toColor}" ng-style="{'background-color': toColor}" class="bg"/>
-        </i>
+        <span ng-if="recipientType == 'account'">
+          <i class="icon big-icon-svg" ng-if="toAvatar">
+            <img ng-cloak ng-if="toAlias && toAvatar" ng-src="data:image/png;base64, {{toAvatar}}" class="bg" alt="{{toAlias}} avatar"/>
+          </i>
+          <i class="icon big-icon-svg" ng-if="!toAvatar">
+            <img src="img/icon-wallet.svg" ng-class="{'wallet-background-color-default': !toColor}" ng-style="{'background-color': toColor}" class="bg"/>
+          </i>
+        </span>
         <span ng-if="recipientType == 'contact'">
           <i class="icon big-icon-svg" ng-if="toAvatar">
             <img ng-cloak ng-if="toAlias && toAvatar" ng-src="data:image/png;base64, {{toAvatar}}" class="bg" alt="{{toAlias}} avatar"/>
@@ -38,7 +38,8 @@
             <img src="img/contact-placeholder.svg" class="bg"/>
           </i>
         </span>
-        <span class="m10l">{{toName || toAddress}}</span>
+        <span ng-if="toAlias" class="m10l">@{{toAlias}}</span>
+        <span ng-if="!toAlias" class="m10l">{{toName || toAddress}}</span>
       </div>
     </div>
 
@@ -49,12 +50,20 @@
         <div class="title">
           <span translate>Amount</span>
         </div>
+        <div class="max">
+          <a class="amount__currency-toggle" ng-click="sendMax()" translate>
+            Max
+          </a>
+        </div>
       </div>
 
       <div class="amount">
         <div class="amount__editable" ng-class="{'amount__editable--minimize': smallFont, 'amount__editable--standard': !smallFont, 'amount__editable--placeholder': !amount}">
           <span class="amount__number">{{amount || "0.00" }}</span>
-          <a class="amount__currency-toggle" ng-click="changeUnit()">{{unit}}</a>
+          <a class="amount__currency-toggle" ng-click="changeUnit()">
+            {{unit}}
+            <span class="icon ion-loop"></span>
+          </a>
         </div>
         <div ng-class="{'amount__results--minimize': smallFont, 'amount__results--standard': !smallFont, 'amount__results--placeholder': amountResult}" ng-click="changeAlternativeUnit()">
           <div class="amount__result" ng-show="globalResult">{{globalResult}} {{unit}}</div>
@@ -100,8 +109,28 @@
       </div>
     </div>
   </ion-content>
-  <item-selector
-    item-selector-show="showSendMax"
-    item-selector-on-select="sendMax">
-  </item-selector>
+  <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0] && !singleAccount">
+    <a ng-if="acc" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
+      <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
+      <span ng-if="acc.meta && acc.meta.alias && acc.meta.alias.alias">
+        @{{acc.meta.alias.alias}}
+      </span>
+      <span ng-if="!acc.meta || !acc.meta.alias || !acc.meta.alias.alias">
+        {{acc.name || acc.id}}
+      </span>
+      <p>
+        <span ng-if="!acc.meta.balanceHidden && acc.alternativeBalanceStr"> {{acc.balanceStr}} <span ng-hide="acc.alternativeBalanceStr == 'hide'">&asymp; {{acc.alternativeBalanceStr}}</span></span>
+        <span ng-if="acc.meta.balanceHidden" translate>[Balance Hidden]</span>
+        <span class="assertive" ng-if="acc.error">{{acc.error}}</span>
+        &nbsp;
+      </p>
+    </a>
+  </div>
+  <account-selector
+    account-selector-title="accountSelectorTitle"
+    account-selector-accounts="accounts"
+    account-selector-selected-account="acc"
+    account-selector-show="showAccounts"
+    account-selector-on-select="onAccountSelect">
+  </account-selector>
 </ion-view>
