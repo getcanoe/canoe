@@ -5,10 +5,10 @@ angular.module('canoeApp.services')
     var root = {}
 
     // This config is controlled over retained MQTT
-    // Perhaps we should hook it with configService
-    root.config = {
+    root.sharedconfig = {
+      servermessage: null, // { title: 'Hey', body: 'Rock on', link: 'http://getcanoe.io' }
       stateblocks: {
-        enabled: false
+        enable: false
       }
     }
 
@@ -28,12 +28,12 @@ angular.module('canoeApp.services')
     // var host = 'https://getcanoe.io/rpc' // for the alpha
     var host = 'https://test.getcanoe.io/rpc' // for dev
     var mqttHost = 'test.getcanoe.io'
-    configService.get(function(err, config) {
+    configService.get(function (err, config) {
       if (config.backend) {
-        host = 'https://'+config.backend+'/rpc' //TODO need to revist this setup
+        host = 'https://' + config.backend + '/rpc' // TODO need to revist this setup
         mqttHost = config.backend
       }
-    });
+    })
 
     var rai = null
 
@@ -59,22 +59,22 @@ angular.module('canoeApp.services')
       return root.wallet
     }
 
-    root.setHost = function(url) {
+    root.setHost = function (url) {
       var opts = {
         backend: url
       }
       configService.set(opts, function (err) {
         if (err) $log.debug(err)
-        mqttHost = url;
-        host = "https://"+url+"/rpc-dev";
+        mqttHost = url
+        host = 'https://' + url + '/rpc-dev'
         popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
         $ionicHistory.removeBackView()
         $state.go('tabs.home')
       })
     }
 
-    root.getHost = function() {
-      return mqttHost;
+    root.getHost = function () {
+      return mqttHost
     }
 
     // Possibility to quiet the logs
@@ -134,14 +134,14 @@ angular.module('canoeApp.services')
         // Client side
         if (false) { // platformInfo.isCordova) {
           // Cordova plugin for libsodium, not working yet...
-          //if (window.plugins.MiniSodium) {
+          // if (window.plugins.MiniSodium) {
           //  if (doLog) $log.info('Working on client (MiniSodium) for ' + hash)
           //  window.plugins.MiniSodium.crypto_generichash(8, hash, null, function (err, result) {
           //    if (err) return $log.error('Failed to compute client side PoW: ' + err)
           //    $log.info('Client side PoW found for ' + hash + ' took: ' + (Date.now() - start) + ' ms')
           //    callback(result)
           //  })
-          //}
+          // }
         } else {
           // node-raiblocks-pow (native C implementation for NodeJS, works on Desktop)
           if (POW) {
@@ -503,7 +503,7 @@ angular.module('canoeApp.services')
 
     root.fetchServerStatus = function (cb) {
       var xhr = new XMLHttpRequest()
-      xhr.open('POST', host, true)
+      xhr.open('GET', host, true)
       xhr.send(JSON.stringify({'action': 'canoe_server_status'}))
       xhr.onreadystatechange = processRequest
       function processRequest (e) {
@@ -587,13 +587,27 @@ angular.module('canoeApp.services')
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
       wallet.createSeed(seed)
-      var accountName = gettextCatalog.getString('Default Account')
-      var account = wallet.createAccount({label: accountName})
-      resetChain(wallet, account.id) // It may be an already existing account so we want existing blocks
+      var emptyAccounts = 0
+      var accountNum = 1
+      do {
+        var accountName = gettextCatalog.getString('Account') + ' ' + accountNum
+        accountNum++
+        var account = wallet.createAccount({label: accountName})
+        // We load existing blocks
+        resetChain(wallet, account.id)
+        if (wallet.getAccountBlockCount(account.id) === 0) {
+          emptyAccounts++
+        }
+      } while (emptyAccounts < 5)
+      // Remove last 5 accounts because they are empty
+      while (emptyAccounts > 0) {
+        wallet.removeLastAccount()
+        emptyAccounts--
+      }
       // aliasService.lookupAddress(account.id, function (err, ans) {
       //   if (err) {
       //     $log.debug(err)
-          root.setWallet(wallet, cb)
+      root.setWallet(wallet, cb)
       //   } else {
       //     $log.debug('Answer from alias server looking up ' + account.id + ': ' + JSON.stringify(ans))
       //     if (ans && ans.aliases.length > 0) {
@@ -864,31 +878,28 @@ angular.module('canoeApp.services')
       rateService.updateRates(rates)
     }
 
-    root.configChanged = function () {
-      if (root.wallet) {
-        if (root.config.stateblocks.enable) {
-          if (!root.wallet.getEnableStateBlocks()) {
-            root.wallet.enableStateBlocks(true)
-          }
-        }
-      }
-    }
-
     root.configureWallet = function (wallet) {
-      if (root.config.stateblocks.enable) {
+      if (root.sharedconfig.stateblocks.enable) {
         wallet.enableStateBlocks(true)
       }
     }
 
     root.handleSharedConfig = function (payload) {
-      root.config = JSON.parse(payload)
-      $log.debug('Received shared config' + JSON.stringify(root.config))
-      root.configChanged()
-    }
-
-    root.handleSharedConfigMerge = function (payload) {
-      lodash.merge(root.config, JSON.parse(payload))
-      root.configChanged()
+      root.sharedconfig = JSON.parse(payload)
+      $log.debug('Received shared config' + JSON.stringify(root.sharedconfig))
+      // Check if we should turn on state block generation. Can not be turned off again.
+      if (root.wallet) {
+        if (root.sharedconfig.stateblocks.enable) {
+          if (!root.wallet.getEnableStateBlocks()) {
+            root.wallet.enableStateBlocks(true)
+            root.saveWallet(root.wallet, function () {
+              $log.debug('Enabled state blocks on this wallet')
+            })
+          }
+        }
+      }
+      // Broadcast either null or a message
+      $rootScope.$emit('servermessage', root.sharedconfig.servermessage)
     }
 
     root.onMessageArrived = function (message) {
@@ -899,11 +910,7 @@ angular.module('canoeApp.services')
       var parts = topic.split('/')
       switch (parts[0]) {
         case 'sharedconfig':
-          if (parts[1] === 'merge') {
-            root.handleSharedConfigMerge(payload)
-          } else {
-            root.handleSharedConfig(payload)
-          }
+          root.handleSharedConfig(payload)
           return
         case 'wallet':
           // A wallet specific message

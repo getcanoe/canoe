@@ -150,6 +150,13 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
     })
   }
 
+  $rootScope.$on('servermessage', function (event, message) {
+    $scope.serverMessage = message
+    $timeout(function () {
+      $scope.$apply()
+    })
+  })
+
   $scope.openServerMessageLink = function () {
     var url = $scope.serverMessage.link
     externalLinkService.open(url)

@@ -92,10 +92,15 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       })
 
       listeners = [
+        $rootScope.$on('servermessage', function (event, message) {
+          $scope.serverMessage = message
+          $timeout(function () {
+            $scope.$apply()
+          })
+        }),
         $rootScope.$on('walletloaded', function (event) {
           $log.debug('Wallet loaded')
           $scope.accounts = profileService.getAccounts()
-          // $log.debug('Accounts: ' + JSON.stringify($scope.accounts))
           if ($scope.recentTransactionsEnabled) {
             getNotifications()
           }
@@ -103,8 +108,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         $rootScope.$on('blocks', function (event, account) {
           if (account === null) {
             $scope.accounts = profileService.getAccounts()
-          } else {
-            //profileService.updateAccount(account)
           }
           if ($scope.recentTransactionsEnabled) {
             getNotifications()
@@ -142,10 +145,10 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     }
 
     $scope.goToDownload = function () {
-      var url = 'https://github.com/gokr/canoe/releases/latest'
+      var url = 'https://getcanoe.io/download'
       var optIn = true
       var title = gettextCatalog.getString('Update Available')
-      var message = gettextCatalog.getString('An update to this app is available. For your security, please update to the latest version.')
+      var message = gettextCatalog.getString('A new version of this app is available. Please update to the latest version.')
       var okText = gettextCatalog.getString('View Update')
       var cancelText = gettextCatalog.getString('Go Back')
       externalLinkService.open(url, optIn, title, message, okText, cancelText)
