@@ -84,6 +84,8 @@ module.exports = function (password) {
   var token = hexRandom(32) // Secret token (used as username in server account)
   var tokenPass = hexRandom(32) // Secret tokenPass (used as password in server account)
 
+  var enableStateBlocks // True if we should produce state blocks
+
   // The following variables are set via useAccount()
   var pk // current account public key
   var sk // current account secret key
@@ -118,6 +120,10 @@ module.exports = function (password) {
 
   var logger = new Logger()
 
+  function newBlock () {
+    return new Block(enableStateBlocks) // State blocks
+  }
+
   api.debug = function () {
     console.log(readyBlocks)
   }
@@ -132,6 +138,14 @@ module.exports = function (password) {
 
   api.setLogger = function (loggerObj) {
     logger = loggerObj
+  }
+
+  api.enableStateBlocks = function (bool) {
+    enableStateBlocks = bool
+  }
+
+  api.getEnableStateBlocks = function () {
+    return enableStateBlocks
   }
 
   api.enableBroadcast = function (bool) {
@@ -584,9 +598,9 @@ module.exports = function (password) {
   }
 
   api.getBalanceUpToBlock = function (blockHash) {
-    if (chain.length <= 0) { return 0 }
-
     var sum = bigInt(0)
+    if (chain.length <= 0) { return sum }
+    
     var found = blockHash === 0
     var blk
 
@@ -597,6 +611,9 @@ module.exports = function (password) {
       if (blk.getHash(true) === blockHash) { found = true }
 
       if (found) {
+        if (blk.isState()) {
+          return blk.getBalance()
+        }
         if (blk.getType() === 'open' || blk.getType() === 'receive') {
           sum = sum.add(blk.getAmount())
         } else if (blk.getType() === 'send') {
@@ -612,6 +629,9 @@ module.exports = function (password) {
       if (blk.getHash(true) === blockHash) { found = true }
 
       if (found) {
+        if (blk.isState()) {
+          return blk.getBalance()
+        }
         if (blk.getType() === 'open' || blk.getType() === 'receive') {
           sum = sum.add(blk.getAmount())
         } else if (blk.getType() === 'send') {
@@ -740,9 +760,12 @@ module.exports = function (password) {
 
     var bal = api.getBalanceUpToBlock(0)
     var remaining = bal.minus(amount)
-    var blk = new Block()
+    var blk = newBlock()
 
     blk.setSendParameters(lastPendingBlock, to, remaining)
+    if (enableStateBlocks) {
+      blk.setStateParameters(from, representative)
+    }
     blk.build()
     api.signBlock(blk)
     blk.setAmount(amount)
@@ -783,13 +806,17 @@ module.exports = function (password) {
       if (chain[i].getSource() === sourceBlockHash) { return false }
     }
 
-    var blk = new Block()
+    var blk = newBlock()
     if (lastPendingBlock.length === 64) {
       blk.setReceiveParameters(lastPendingBlock, sourceBlockHash)
     } else {
       blk.setOpenParameters(sourceBlockHash, acc, canoeRepresentative)
     }
-
+    if (enableStateBlocks) {
+      var bal = api.getBalanceUpToBlock(0)
+      var remaining = bal.plus(amount)
+      blk.setStateParameters(acc, representative, remaining)
+    }
     blk.build()
     api.signBlock(blk)
     blk.setAmount(amount)
@@ -815,8 +842,12 @@ module.exports = function (password) {
 
     if (!lastPendingBlock) { throw new Error('There needs to be at least 1 block in the chain') }
 
-    var blk = new Block()
+    var blk = newBlock()
     blk.setChangeParameters(lastPendingBlock, repr)
+    if (enableStateBlocks) {
+      var bal = api.getBalanceUpToBlock(0)
+      blk.setStateParameters(acc, representative, bal)
+    }
     blk.build()
     api.signBlock(blk)
     blk.setAccount(acc)
@@ -955,6 +986,10 @@ module.exports = function (password) {
     return false
   }
 
+  api.clearReadyBlocks = function () {
+    readyBlocks = []
+  }
+
   api.removeReadyBlock = function (blockHash) {
     for (var i in readyBlocks) {
       if (readyBlocks[i].getHash(true) === blockHash) {
@@ -1052,7 +1087,7 @@ module.exports = function (password) {
   }
 
   api.createBlockFromJSON = function (jsonOrObj) {
-    var blk = new Block()
+    var blk = newBlock() // jsonOrObj will decide if state block or not
     blk.buildFromJSON(jsonOrObj, blk.getMaxVersion())
     return blk
   }
@@ -1113,11 +1148,11 @@ module.exports = function (password) {
   }
 
   /**
-   * Encrypts and packs the wallet data in a hex string
+   * Serialize the wallet as JSON
    *
    * @returns {string}
    */
-  api.pack = function (debug) {
+  api.getEntireJSON = function () {
     var pack = {}
     var tempKeys = []
     for (var i in keys) {
@@ -1154,10 +1189,18 @@ module.exports = function (password) {
     pack.token = token
     pack.tokenPass = tokenPass
 
-    pack = JSON.stringify(pack)
-    if (debug) {
-      console.log('Wallet: ' + pack)
-    }
+    pack.enableStateBlocks = enableStateBlocks
+
+    return JSON.stringify(pack)
+  }
+
+  /**
+   * Encrypts and packs the wallet data in a hex string
+   *
+   * @returns {string}
+   */
+  api.pack = function () {
+    var pack = api.getEntireJSON()
     pack = Buffer.from(stringToArr(pack))
 
     var context = blake2bInit(32)
@@ -1223,10 +1266,11 @@ module.exports = function (password) {
     id = walletData.id
     token = walletData.token
     tokenPass = walletData.tokenPass
+    enableStateBlocks = walletData.enableStateBlocks
 
     readyBlocks = []
     for (var i in walletData.readyBlocks) {
-      var blk = new Block()
+      var blk = newBlock()
       blk.buildFromJSON(walletData.readyBlocks[i])
       readyBlocks.push(blk)
     }
@@ -1236,7 +1280,7 @@ module.exports = function (password) {
 
       aux.chain = []
       for (var j in walletData.keys[i].chain) {
-        blk = new Block()
+        blk = newBlock()
         blk.buildFromJSON(walletData.keys[i].chain[j])
         aux.chain.push(blk)
       }
