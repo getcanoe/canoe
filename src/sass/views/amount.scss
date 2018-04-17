@@ -185,11 +185,8 @@
       font-size: .6em;
       position: relative;
       top: -3px;
-      line-height: 1;
+      line-height: 25px;
       display: inline-block;
-      @media(max-width: 320px) {
-        line-height: 25px;
-      }
     }
     &__results {
       &--minimize {
