@@ -503,7 +503,7 @@ angular.module('canoeApp.services')
 
     root.fetchServerStatus = function (cb) {
       var xhr = new XMLHttpRequest()
-      xhr.open('POST', host, true)
+      xhr.open('GET', host, true)
       xhr.send(JSON.stringify({'action': 'canoe_server_status'}))
       xhr.onreadystatechange = processRequest
       function processRequest (e) {
@@ -587,9 +587,23 @@ angular.module('canoeApp.services')
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
       wallet.createSeed(seed)
-      var accountName = gettextCatalog.getString('Default Account')
-      var account = wallet.createAccount({label: accountName})
-      resetChain(wallet, account.id) // It may be an already existing account so we want existing blocks
+      var emptyAccounts = 0
+      var accountNum = 1
+      do {
+        var accountName = gettextCatalog.getString('Account') + ' ' + accountNum
+        accountNum++
+        var account = wallet.createAccount({label: accountName})
+        // We load existing blocks
+        resetChain(wallet, account.id)
+        if (wallet.getAccountBlockCount(account.id) === 0) {
+          emptyAccounts++
+        }
+      } while (emptyAccounts < 5)
+      // Remove last 5 accounts because they are empty
+      while (emptyAccounts > 0) {
+        wallet.removeLastAccount()
+        emptyAccounts--
+      }
       // aliasService.lookupAddress(account.id, function (err, ans) {
       //   if (err) {
       //     $log.debug(err)

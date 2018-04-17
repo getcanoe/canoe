@@ -1330,5 +1330,21 @@ module.exports = function (password) {
     return api.getAccount(account)
   }
 
+  // Use with care, we only remove the last account if the chain is empty.
+  api.removeLastAccount = function () {
+    if (keys.length === 0) {
+      // No account to remove
+      return null
+    }
+    var lastAccount = keys[keys.length - 1].account
+    api.useAccount(lastAccount)
+    if (chain.length === 0) {
+      keys.pop()
+      return lastAccount
+    } else {
+      return null
+    }
+  }
+
   return api
 }
