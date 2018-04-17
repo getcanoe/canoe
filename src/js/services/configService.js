@@ -13,6 +13,8 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
       }
     },
 
+    backend: "getcanoe.io",
+
     // TODO We need URL for rating iOS app, and Android
     rateApp: {
       canoe: {

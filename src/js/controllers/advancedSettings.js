@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.controllers').controller('advancedSettingsController', function ($scope, $log, $ionicHistory, configService, nanoService, popupService, platformInfo, gettextCatalog) {
+angular.module('canoeApp.controllers').controller('advancedSettingsController', function ($scope, $log, $ionicHistory, $timeout, $state, configService, nanoService, popupService, platformInfo, gettextCatalog) {
   var updateConfig = function () {
     var config = configService.getSync()
 
@@ -38,6 +38,13 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
       nanoService.repair()
       $ionicHistory.goBack()
     })
+  }
+
+  $scope.changeBackend = function () {
+    $ionicHistory.removeBackView()
+    $timeout(function () {
+      $state.transitionTo('tabs.advanced.changeBackend')
+    }, 100)
   }
 
   $scope.serverSidePoWChange = function () {
