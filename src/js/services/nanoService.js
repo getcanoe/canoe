@@ -277,6 +277,10 @@ angular.module('canoeApp.services')
             if (block.subtype === 'send') {
               block.send = true
             }
+            // For some reason account is not included in subtype change
+            if (block.subtype === 'change') {
+              block.account = info.contents.account
+            }
           }
           var blk = wallet.createBlockFromJSON(block)
           if (blk.getHash(true) !== hash) {
