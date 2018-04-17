@@ -92,10 +92,15 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       })
 
       listeners = [
+        $rootScope.$on('servermessage', function (event, message) {
+          $scope.serverMessage = message
+          $timeout(function () {
+            $scope.$apply()
+          })
+        }),
         $rootScope.$on('walletloaded', function (event) {
           $log.debug('Wallet loaded')
           $scope.accounts = profileService.getAccounts()
-          // $log.debug('Accounts: ' + JSON.stringify($scope.accounts))
           if ($scope.recentTransactionsEnabled) {
             getNotifications()
           }
@@ -103,8 +108,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         $rootScope.$on('blocks', function (event, account) {
           if (account === null) {
             $scope.accounts = profileService.getAccounts()
-          } else {
-            //profileService.updateAccount(account)
           }
           if ($scope.recentTransactionsEnabled) {
             getNotifications()
