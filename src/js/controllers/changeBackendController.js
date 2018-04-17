@@ -5,9 +5,6 @@ angular.module('canoeApp.controllers').controller('changeBackendController', fun
 
   $scope.changeBackend = function (url) {
     nanoService.setHost(url)
-    popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
-    $ionicHistory.removeBackView()
-    $state.go('tabs.home')
   }
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
