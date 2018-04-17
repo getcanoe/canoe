@@ -128,8 +128,8 @@ function Rai (url_base) {
     return account_info
   }
 
-  this.account_history = function (account, count = '4096') {
-    var account_history = this.rpc(JSON.stringify({'action': 'account_history', 'account': account, 'count': count}))
+  this.account_history = function (account, count = '-1', raw = 'true') {
+    var account_history = this.rpc(JSON.stringify({'action': 'account_history', 'account': account, 'count': count, 'raw': raw}))
     return account_history.history
   }
 

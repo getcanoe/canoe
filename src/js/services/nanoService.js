@@ -1,8 +1,16 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, $rootScope, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
+  .factory('nanoService', function ($log, $rootScope, $window, $state, $ionicHistory, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
+
+    // This config is controlled over retained MQTT
+    // Perhaps we should hook it with configService
+    root.config = {
+      stateblocks: {
+        enabled: false
+      }
+    }
 
     var POW
     // Only for OSX and Linux so far
@@ -18,11 +26,18 @@ angular.module('canoeApp.services')
 
     // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
     // var host = 'https://getcanoe.io/rpc' // for the alpha
-    var host = 'https://getcanoe.io/rpc-dev' // for dev
+    var host = 'https://test.getcanoe.io/rpc' // for dev
+    var mqttHost = 'test.getcanoe.io'
+    configService.get(function(err, config) {
+      if (config.backend) {
+        host = 'https://'+config.backend+'/rpc' //TODO need to revist this setup
+        mqttHost = config.backend
+      }
+    });
+
     var rai = null
 
     // port and ip to use for MQTT-over-WSS
-    var mqttHost = 'getcanoe.io'
     var mqttPort = 1884
     var mqttClient = null
     var mqttUsername = null
@@ -42,6 +57,24 @@ angular.module('canoeApp.services')
 
     root.getWallet = function () {
       return root.wallet
+    }
+
+    root.setHost = function(url) {
+      var opts = {
+        backend: url
+      }
+      configService.set(opts, function (err) {
+        if (err) $log.debug(err)
+        mqttHost = url;
+        host = "https://"+url+"/rpc-dev";
+        popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
+        $ionicHistory.removeBackView()
+        $state.go('tabs.home')
+      })
+    }
+
+    root.getHost = function() {
+      return mqttHost;
     }
 
     // Possibility to quiet the logs
@@ -159,6 +192,8 @@ angular.module('canoeApp.services')
 
     // Whenever the wallet is replaced we call this
     root.setWallet = function (wallet, cb) {
+      // Configure wallet
+      root.configureWallet(wallet)
       // Make sure we have an account for this wallet
       // Will only ever create one on the server side
       root.createServerAccount(wallet)
@@ -207,6 +242,80 @@ angular.module('canoeApp.services')
       // Better safe than sorry, we always remove them.
       wallet.removePendingBlocks(account)
       var currentBlocks = wallet.getLastNBlocks(account, 99999)
+      var history = rai.account_history(account)
+      if (history) {
+        var blocks = history.reverse()
+        var hashes = []
+        lodash.each(blocks, function (block) {
+          hashes.push(block.hash)
+        })
+        // We have to make this call too so we get work, signature and timestamp
+        var infos = rai.blocks_info(hashes, 'raw', false, true) // true == include source_account
+        // Unfortunately blocks is an object so to get proper order we use hashes
+        lodash.each(blocks, function (block) {
+          var hash = block.hash
+          var info = infos[hash]
+          block.work = info.contents.work
+          block.signature = info.contents.signature
+          block.previous = info.contents.previous
+          block.extras = {
+            blockAccount: info.block_account,
+            blockAmount: info.amount,
+            timestamp: info.timestamp,
+            origin: info.source_account
+          }
+          // For some reason account_history is different...
+          if (block.type === 'open') {
+            block.account = info.contents.account
+          }
+          if (info.contents.balance) {
+            block.balance = info.contents.balance // hex for old blocks, decimal for new
+          }
+          // State logic
+          if (block.type === 'state') {
+            block.state = true
+            if (block.subtype === 'send') {
+              block.send = true
+            }
+            // For some reason account is not included in subtype change
+            if (block.subtype === 'change') {
+              block.account = info.contents.account
+            }
+          }
+          var blk = wallet.createBlockFromJSON(block)
+          if (blk.getHash(true) !== hash) {
+            console.log('WRONG HASH')
+          }
+          blk.setImmutable(true)
+          try {
+            // First we check if this is a fork and thus adopt it if it is
+            if (!wallet.importForkedBlock(blk, account)) { // Replaces any existing block
+              // No fork so we can just import it
+              wallet.importBlock(blk, account)
+            }
+            // It was added so remove it from currentBlocks
+            lodash.remove(currentBlocks, function (b) {
+              return b.getHash(true) === hash
+            })
+            wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
+          } catch (e) {
+            $log.error(e)
+          }
+        })
+        // Now we add any old blocks and rebroadcast them
+        $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
+        wallet.enableBroadcast(true) // Turn back on
+        lodash.each(currentBlocks, function (b) {
+          wallet.addBlockToReadyBlocks(b)
+        })
+        wallet.enableBroadcast(false) // Turn off
+      }
+    }
+
+    function resetChainInternalOld (wallet, account) {
+      // Better safe than sorry, we always remove them.
+      wallet.removePendingBlocks(account)
+      var currentBlocks = wallet.getLastNBlocks(account, 99999)
       var ledger = rai.ledger(account, 1)
       // We always get one account, but we don't get the one we asked for if
       // it doesn't exist. Weird API!
@@ -225,10 +334,18 @@ angular.module('canoeApp.services')
             timestamp: block.timestamp,
             origin: block.source_account
           }
+          // State logic
+          var json = block.contents
+          if (json.type === 'state') {
+            json.state = true
+            if (json.is_send) {
+              json.send = true
+            }
+          }
           var blk = wallet.createBlockFromJSON(block.contents)
           blk.setImmutable(true)
           try {
-            // First we check if this is a fork and thus adop it if it is
+            // First we check if this is a fork and thus adopt it if it is
             if (!wallet.importForkedBlock(blk, account)) { // Replaces any existing block
               // No fork so we can just import it
               wallet.importBlock(blk, account)
@@ -459,6 +576,8 @@ angular.module('canoeApp.services')
     root.subscribeForWallet = function (wallet) {
       // Subscribe to rate service
       root.subscribe('rates')
+      // Subscribe to sharedconfig
+      root.subscribe('sharedconfig/#')
       // Subscribe to blocks sent to our own wallet id
       root.subscribe('wallet/' + wallet.getId() + '/block/#')
     }
@@ -547,9 +666,17 @@ angular.module('canoeApp.services')
     // Tell server which accounts this wallet has. The server has a map of wallet id -> accounts
     // This needs to be called when a new account is created or one is removed.
     // We also call it whenever we load a wallet from data.
+    // Canoe up to 0.3.5 sends only wallet id.
+    // Canoe from 0.3.6 sends more information in a JSON object.
     root.updateServerMap = function (wallet) {
       var ids = wallet.getAccountIds()
-      root.publish('wallet/' + wallet.getId() + '/accounts', JSON.stringify(ids), 2, false)
+      var register = {
+        accounts: ids,
+        wallet: wallet.getId(),
+        name: 'canoe', // Other wallets can also use our backend
+        version: $window.version
+      }
+      root.publish('wallet/' + wallet.getId() + '/register', JSON.stringify(register), 2, false)
     }
 
     // Encrypt and store the wallet in localstorage.
@@ -666,7 +793,7 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.onIncomingBlock = function (blkType, payload) {
+    root.handleIncomingBlock = function (blkType, payload) {
       /*
         {
           "account":"xrb_15d4oo67z6ruebmkcjqghawcbf5f9r4zkg8pf1af3n1s7kd9u7x3m47y8x37",
@@ -681,24 +808,44 @@ angular.module('canoeApp.services')
       var hash = blk.hash
       var timestamp = blk.timestamp
       var from = blk.account
-      var to = blk2.destination
       var amount = blk.amount
-      $log.debug('From: ' + from + 'to: ' + to + ' type: ' + blkType + ' amount: ' + amount + ' time: ' + timestamp)
 
       // Switch on block type
       switch (blkType) {
+        case 'state':
+          // If a send
+          if (blk.is_send) {
+            var to = blk2.link_as_account
+            // If this is from one of our accounts we confirm it
+            if (root.hasAccount(from)) {
+              soundService.play('send')
+              root.confirmBlock(from, hash, timestamp)
+            }
+            // This is someone elses send to us
+            if (root.hasAccount(to)) {
+              // state block sends are 2^128-1 - amount  up in the callback!
+              amount = bigInt('340282366920938463463374607431768211456').minus(bigInt(amount))
+              root.handleIncomingSendBlock(hash, to, from, amount)
+            }
+            return
+          } else {
+            // TODO: change and/or receive?
+            // This is an echo from network, it can only originate from me unless multiple devices
+            return root.confirmBlock(from, hash, timestamp)
+          }
         case 'open':
           // This is an echo from network, it can only originate from me unless multiple devices
           return root.confirmBlock(from, hash, timestamp)
         case 'send':
           // If this is from one of our accounts we confirm it
+          var dest = blk2.destination
           if (root.hasAccount(from)) {
             soundService.play('send')
             root.confirmBlock(from, hash, timestamp)
           }
           // This is someone elses send to us
-          if (root.hasAccount(to)) {
-            root.handleIncomingSendBlock(hash, to, from, amount)
+          if (root.hasAccount(dest)) {
+            root.handleIncomingSendBlock(hash, dest, from, amount)
           }
           return
         case 'receive':
@@ -717,6 +864,33 @@ angular.module('canoeApp.services')
       rateService.updateRates(rates)
     }
 
+    root.configChanged = function () {
+      if (root.wallet) {
+        if (root.config.stateblocks.enable) {
+          if (!root.wallet.getEnableStateBlocks()) {
+            root.wallet.enableStateBlocks(true)
+          }
+        }
+      }
+    }
+
+    root.configureWallet = function (wallet) {
+      if (root.config.stateblocks.enable) {
+        wallet.enableStateBlocks(true)
+      }
+    }
+
+    root.handleSharedConfig = function (payload) {
+      root.config = JSON.parse(payload)
+      $log.debug('Received shared config' + JSON.stringify(root.config))
+      root.configChanged()
+    }
+
+    root.handleSharedConfigMerge = function (payload) {
+      lodash.merge(root.config, JSON.parse(payload))
+      root.configChanged()
+    }
+
     root.onMessageArrived = function (message) {
       // $log.debug('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
       var topic = message.destinationName
@@ -724,11 +898,18 @@ angular.module('canoeApp.services')
       // Switch over topics
       var parts = topic.split('/')
       switch (parts[0]) {
+        case 'sharedconfig':
+          if (parts[1] === 'merge') {
+            root.handleSharedConfigMerge(payload)
+          } else {
+            root.handleSharedConfig(payload)
+          }
+          return
         case 'wallet':
           // A wallet specific message
           // TODO ensure proper wallet id?
           if (parts[2] === 'block') {
-            return root.onIncomingBlock(parts[3], payload)
+            return root.handleIncomingBlock(parts[3], payload)
           }
           break
         case 'rates':

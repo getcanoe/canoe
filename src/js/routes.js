@@ -455,6 +455,15 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
           }
         }
       })
+      .state('tabs.advanced.changeBackend', {
+        url: '/advanced/changeBackend',
+        views: {
+          'tab-settings@tabs': {
+            controller: 'changeBackendController',
+            templateUrl: 'views/changeBackend.html'
+          }
+        }
+      })
       .state('tabs.preferencesSecurity', {
         url: '/preferencesSecurity',
         views: {

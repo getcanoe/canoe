@@ -1,0 +1,35 @@
+<ion-view cache-view="false" class="settings" show-tabs>
+  <ion-nav-bar class="bar-royal">
+    <ion-nav-title>{{'Change Backend Server' | translate}}</ion-nav-title>
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content>
+
+		<form name='changeBackendForm' novalidate>
+			<div class="list settings-list settings-input-group">
+				<label class="item item-input item-stacked-label">
+					<span class="input-label" translate>Backend URL</span>
+					<input type="text"
+						placeholder="{{'getcanoe.io'|translate}}"
+						ng-model="serverURL"
+						name="serverURL"
+						required>
+				</label>
+			</div>
+
+			<div class="cta-buttons">
+				<button
+					class="button button-standard button-primary"
+					ng-disabled="!serverURL"
+					type="submit"
+					ng-click="changeBackend(serverURL)"
+					translate>
+					Change Backend
+				</button>
+			</div>
+		</form>
+
+	</ion-content>
+</ion-view>
