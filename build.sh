@@ -12,6 +12,7 @@ sed -i -E "s/(X-Canoe-BuildId=)[.0-9]*(.*)/\1$VER\2/" resources/canoe/linux/cano
 # Defaults
 RELEASE=
 ANDROID=
+DESKTOP=
 UPLOAD=
 
 # Pick out options
@@ -24,11 +25,14 @@ do
         --release)
 	RELEASE=true
 	    ;;
+        --desktop)
+	DESKTOP=true
+	    ;;
         --android)
 	ANDROID=true
 	    ;;
         --help)
-	echo "Usage: build.sh [--release] [--android] [--upload]"
+	echo "Usage: build.sh [--release] [--desktop] [--android] [--upload]"
         exit 0
             ;;
         --*) echo "Bad option $1"
@@ -40,7 +44,6 @@ do
 done
 
 echo "Building $VER ..."
-
 
 cd build
 
@@ -63,19 +66,25 @@ then
   fi
 fi
 
-# This builds all three desktops in zip form, and Linux additionally as AppImage
-npm run build:desktop
-# This signs all three desktops with GPG, and Linux AppImage
-npm run build:desktopsign
+if [[ "$DESKTOP" == "true" ]]
+then
+  # This builds all three desktops in zip form, and Linux additionally as AppImage
+  npm run build:desktop
+  # This signs all three desktops with GPG, and Linux AppImage
+  npm run build:desktopsign
+fi
 
 # Move files into $VER
 mv canoe-*-$VER*.* $VER/
 
 # Make sha256sum checksums
-sha256sum $VER/canoe-*-$VER*.* > $VER/checksums.txt
+cd $VER
+sha256sum canoe-*-$VER*.* > checksums.txt
+cd ..
 
 # Upload all built files, signatures and checksums
 if [[ "$UPLOAD" == "true" ]]
+then
   scp -r $VER $DESTINATION
 fi
 
