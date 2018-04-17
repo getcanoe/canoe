@@ -1,7 +1,7 @@
 'use strict'
 /* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, $window, $rootScope, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
+  .factory('nanoService', function ($log, $rootScope, $window, $state, $ionicHistory, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
 
     // This config is controlled over retained MQTT
@@ -24,12 +24,20 @@ angular.module('canoeApp.services')
     // Both profileService and this service holds onto it
     root.wallet = null
 
-    // var host = 'https://getcanoe.io/rpc' // for prod
+    // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
+    // var host = 'https://getcanoe.io/rpc' // for the alpha
     var host = 'https://test.getcanoe.io/rpc' // for dev
+    var mqttHost = 'test.getcanoe.io'
+    configService.get(function(err, config) {
+      if (config.backend) {
+        host = 'https://'+config.backend+'/rpc' //TODO need to revist this setup
+        mqttHost = config.backend
+      }
+    });
+
     var rai = null
 
     // port and ip to use for MQTT-over-WSS
-    var mqttHost = 'test.getcanoe.io'
     var mqttPort = 1884
     var mqttClient = null
     var mqttUsername = null
@@ -49,6 +57,24 @@ angular.module('canoeApp.services')
 
     root.getWallet = function () {
       return root.wallet
+    }
+
+    root.setHost = function(url) {
+      var opts = {
+        backend: url
+      }
+      configService.set(opts, function (err) {
+        if (err) $log.debug(err)
+        mqttHost = url;
+        host = "https://"+url+"/rpc-dev";
+        popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
+        $ionicHistory.removeBackView()
+        $state.go('tabs.home')
+      })
+    }
+
+    root.getHost = function() {
+      return mqttHost;
     }
 
     // Possibility to quiet the logs

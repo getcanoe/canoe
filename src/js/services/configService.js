@@ -13,6 +13,8 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
       }
     },
 
+    backend: "getcanoe.io",
+
     // TODO We need URL for rating iOS app, and Android
     rateApp: {
       canoe: {
@@ -68,7 +70,7 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
   }
 
   var configCache = null
-  
+
   // Contry code to curency map, hacked from https://github.com/michaelrhodes/currency-code-map
   var country_code_to_currency = {'AF': ['AFN', 'Afghan Afghani'], 'AX': ['EUR', 'Eurozone Euro'], 'AL': ['ALL', 'Albanian Lek'], 'DZ': ['DZD', 'Algerian Dinar'], 'AS': ['USD', 'US Dollar'], 'AD': ['EUR', 'Eurozone Euro'], 'AO': ['AOA', 'Angolan Kwanza'], 'AI': ['XCD', 'East Caribbean Dollar'], 'AG': ['XCD', 'East Caribbean Dollar'], 'AR': ['ARS', 'Argentine Peso'], //
   'AM': ['AMD', 'Armenian Dram'], 'AW': ['AWG', 'Aruban Florin'], 'AU': ['AUD', 'Australian Dollar'], 'AT': ['EUR', 'Eurozone Euro'], 'AZ': ['AZN', 'Azerbaijani Manat'], 'BS': ['BSD', 'Bahamian Dollar'], 'BH': ['BHD', 'Bahraini Dinar'], 'BD': ['BDT', 'Bangladeshi Taka'], 'BB': ['BBD', 'Barbadian Dollar'], 'BY': ['BYR', 'BYR'], //
