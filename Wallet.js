@@ -1022,6 +1022,10 @@ module.exports = function (password) {
           api.removePendingBlock(blockHash)
           priv.setPendingBalance(api.getPendingBalance().minus(blk.getAmount()))
           priv.setBalance(api.getBalance().add(blk.getAmount()))
+          // State blocks always carry representative
+          if (blk.isState()) {
+            priv.setRepresentative(blk.getRepresentative())
+          }
           priv.save()
         } else {
           if (blk.getPrevious() === chain[chain.length - 1].getHash(true)) {
@@ -1039,12 +1043,17 @@ module.exports = function (password) {
                 throw new Error('Incorrect send amount')
               }
             } else if (blk.getType() === 'change') {
-              // TODO
               priv.setRepresentative(blk.getRepresentative())
-            } else { throw new Error('Invalid block type') }
+            } else {
+              throw new Error('Invalid block type')
+            }
             priv.chainPush(blk, blockHash)
             api.addBlockToReadyBlocks(blk)
             api.removePendingBlock(blockHash)
+            // State blocks always carry representative
+            if (blk.isState()) {
+              priv.setRepresentative(blk.getRepresentative())
+            }
             api.recalculateWalletBalances()
             priv.save()
           } else {
