@@ -7,7 +7,7 @@
     </ion-nav-back-button>
   </ion-nav-bar>
 
-  <ion-content scroll="false" ng-class="{'has-selector': accounts[0] && !singleAccount}">
+  <ion-content scroll="false" ng-class="{'has-selector': accounts[0]}">
 
     <div ng-if="!customAmount && !nextStep">
       <div class="item item-no-bottom-border recipient-label" translate>Recipient</div>
@@ -109,7 +109,7 @@
       </div>
     </div>
   </ion-content>
-  <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0] && !singleAccount">
+  <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0]">
     <a ng-if="acc" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
       <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
       <span ng-if="acc.meta && acc.meta.alias && acc.meta.alias.alias">

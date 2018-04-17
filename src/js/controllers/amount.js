@@ -217,9 +217,16 @@ angular.module('canoeApp.controllers').controller('amountController', function (
   }
 
   $scope.sendMax = function () {
-    $scope.showSendMax = false
-    $scope.useSendMax = true
-    $scope.finish()
+    if (availableUnits[unitIndex].isFiat) {
+      $scope.changeUnit()
+      $scope.sendMax()
+    } else {
+      $scope.amount = $scope.acc.balanceStr.split(" ")[0]
+      processAmount()
+    }
+    // $scope.showSendMax = false
+    // $scope.useSendMax = true
+    // $scope.finish()
   }
 
   $scope.toggleAlternative = function () {
@@ -285,7 +292,6 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     if (availableUnits[unitIndex].isFiat && $scope.amount.indexOf('.') > -1 && $scope.amount[$scope.amount.indexOf('.') + 2]) return
 
     $scope.amount = ($scope.amount + digit).replace('..', '.')
-    checkFontSize()
     processAmount()
   }
 
@@ -315,7 +321,6 @@ angular.module('canoeApp.controllers').controller('amountController', function (
   $scope.removeDigit = function () {
     $scope.amount = ($scope.amount).toString().slice(0, -1)
     processAmount()
-    checkFontSize()
   }
 
   $scope.resetAmount = function () {
@@ -325,6 +330,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
   }
 
   function processAmount () {
+    checkFontSize()
     var formatedValue = format($scope.amount)
     var result = evaluate(formatedValue)
     $scope.allowSend = lodash.isNumber(result) && +result > 0
