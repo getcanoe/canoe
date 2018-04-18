@@ -120,8 +120,10 @@ module.exports = function (password) {
 
   var logger = new Logger()
 
-  function newBlock () {
-    return new Block(enableStateBlocks) // State blocks
+  function newBlock (state) {
+    // Explicitly or implicitly by wallet setting
+    var stateBlock = state || enableStateBlocks
+    return new Block(stateBlock) // State blocks
   }
 
   api.debug = function () {
@@ -723,6 +725,10 @@ module.exports = function (password) {
     return null
   }
 
+  api.lastBlockIsState = function () {
+    return lastBlock.isState()
+  }
+
   api.getBlockFromHash = function (blockHash) {
     for (var i = 0; i < keys.length; i++) {
       api.useAccount(keys[i].account)
@@ -759,10 +765,10 @@ module.exports = function (password) {
 
     var bal = api.getBalanceUpToBlock(0)
     var remaining = bal.minus(amount)
-    var blk = newBlock()
+    var blk = newBlock(api.lastBlockIsState())
 
     blk.setSendParameters(lastPendingBlock, to, remaining)
-    if (enableStateBlocks) {
+    if (blk.isState()) {
       blk.setStateParameters(from, representative)
     }
     blk.build()
@@ -805,13 +811,13 @@ module.exports = function (password) {
       if (chain[i].getSource() === sourceBlockHash) { return false }
     }
 
-    var blk = newBlock()
+    var blk = newBlock(api.lastBlockIsState())
     if (lastPendingBlock.length === 64) {
       blk.setReceiveParameters(lastPendingBlock, sourceBlockHash)
     } else {
       blk.setOpenParameters(sourceBlockHash, acc, canoeRepresentative)
     }
-    if (enableStateBlocks) {
+    if (blk.isState()) {
       var bal = api.getBalanceUpToBlock(0)
       var remaining = bal.plus(amount)
       blk.setStateParameters(acc, representative, remaining)
@@ -841,9 +847,9 @@ module.exports = function (password) {
 
     if (!lastPendingBlock) { throw new Error('There needs to be at least 1 block in the chain') }
 
-    var blk = newBlock()
+    var blk = newBlock(api.lastBlockIsState())
     blk.setChangeParameters(lastPendingBlock, repr)
-    if (enableStateBlocks) {
+    if (blk.isState()) {
       var bal = api.getBalanceUpToBlock(0)
       blk.setStateParameters(acc, repr, bal)
     }
