@@ -726,7 +726,10 @@ module.exports = function (password) {
   }
 
   api.lastBlockIsState = function () {
-    return lastBlock.isState()
+    if (lastBlock) {
+      return lastBlock.isState()
+    }
+    return false
   }
 
   api.getBlockFromHash = function (blockHash) {
