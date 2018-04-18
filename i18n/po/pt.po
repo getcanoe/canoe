@@ -63,7 +63,7 @@ msgstr "Adicionar conta"
 msgid "Add as a contact"
 msgstr "Adicionar como um contato"
 
-#: src/js/controllers/confirm.js:215
+#: src/js/controllers/confirm.js:234
 msgid "Add description"
 msgstr "Adicionar descrição"
 
@@ -99,14 +99,10 @@ msgstr "Quase pronto! Vamos rever."
 msgid "Alternative Currency"
 msgstr "Moeda Alternativa"
 
-#: www/views/amount.html:50 www/views/customAmount.html:34
+#: www/views/amount.html:51 www/views/customAmount.html:34
 #: www/views/includes/output.html:7
 msgid "Amount"
 msgstr "﻿Valor"
-
-#: src/js/controllers/tab-home.js:150
-msgid "An update to this app is available. For your security, please update to the latest version."
-msgstr "Está disponível uma atualização para este aplicativo. Para sua segurança, por favor atualize para a versão mais recente."
 
 #: www/views/backupWarning.html:10
 msgid "Are you being watched?"
@@ -180,7 +176,7 @@ msgstr "Mas não perca sua semente!"
 msgid "Buy &amp; Sell Bitcoin"
 msgstr "Comprar &amp; Vender Bitcoin"
 
-#: src/js/controllers/confirm.js:279 src/js/services/popupService.js:61
+#: src/js/controllers/confirm.js:298 src/js/services/popupService.js:61
 #: src/js/services/popupService.js:72 www/views/addressbook.add.html:10
 #: www/views/addressbook.edit.html:10 www/views/feedback/send.html:5
 #: www/views/includes/incomingDataMenu.html:22
@@ -191,7 +187,7 @@ msgstr "Comprar &amp; Vender Bitcoin"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/js/controllers/onboarding/createPassword.js:36
+#: src/js/controllers/onboarding/tour.js:80
 msgid "Cannot Create Wallet"
 msgstr "Não é possível criar a carteira"
 
@@ -203,7 +199,7 @@ msgstr "Escolha um arquivo de backup do seu computador"
 msgid "Click to accept"
 msgstr "Clique para aceitar"
 
-#: src/js/controllers/confirm.js:202 src/js/controllers/modals/txpDetails.js:40
+#: src/js/controllers/confirm.js:221 src/js/controllers/modals/txpDetails.js:40
 msgid "Click to send"
 msgstr "Clique para enviar"
 
@@ -224,7 +220,7 @@ msgstr "Cor"
 msgid "Commit hash"
 msgstr "Commit de hash"
 
-#: src/js/controllers/confirm.js:278 www/views/backup.html:46
+#: src/js/controllers/confirm.js:297 www/views/backup.html:46
 #: www/views/confirm.html:4
 msgid "Confirm"
 msgstr "Confirmar"
@@ -317,7 +313,7 @@ msgstr "Valor personalizado"
 msgid "Date"
 msgstr "Data"
 
-#: src/js/services/nanoService.js:428 src/js/services/profileService.js:232
+#: src/js/services/profileService.js:291
 msgid "Default Account"
 msgstr "Conta padrão"
 
@@ -345,14 +341,8 @@ msgstr "Eliminando carteira..."
 msgid "Deleting payment proposal"
 msgstr "Eliminando proposta de pagamento"
 
-#: src/js/controllers/preferencesSecurity.js:8
-#: src/js/controllers/preferencesSecurityController.js:8
-#: src/js/controllers/tab-settings.js:73
-msgid "Disabled"
-msgstr "Desativado"
-
 #: www/views/includes/backupNeededPopup.html:10
-#: www/views/onboarding/alias.html:68
+#: www/views/onboarding/alias.html:70
 #: www/views/onboarding/backupRequest.html:12
 msgid "Do it later"
 msgstr "Faça mais tarde"
@@ -370,7 +360,7 @@ msgid "Edit"
 msgstr "Editar"
 
 #: www/views/addressbook.add.html:30 www/views/addressbook.edit.html:30
-#: www/views/addressbook.view.html:22 www/views/onboarding/alias.html:33
+#: www/views/addressbook.view.html:22 www/views/onboarding/alias.html:35
 #: www/views/preferencesAlias.html:35
 msgid "Email"
 msgstr "Email"
@@ -411,7 +401,7 @@ msgstr "Insira a nova senha para pagamento"
 msgid "Enter wallet seed"
 msgstr "Insira a semente da carteira"
 
-#: www/views/backup.html:36 www/views/modals/password.html:18
+#: www/views/backup.html:36
 msgid "Enter your password"
 msgstr "Digite sua senha"
 
@@ -430,19 +420,19 @@ msgstr "Digite sua senha"
 #: src/js/controllers/import.js:33 src/js/controllers/import.js:43
 #: src/js/controllers/import.js:56 src/js/controllers/import.js:63
 #: src/js/controllers/import.js:85 src/js/controllers/import.js:93
-#: src/js/controllers/modals/password.js:81
+#: src/js/controllers/modals/password.js:101
 #: src/js/controllers/modals/txpDetails.js:138
 #: src/js/controllers/paperWallet.js:45
 #: src/js/controllers/preferencesDelete.js:35
 #: src/js/controllers/preferencesName.js:13
 #: src/js/controllers/preferencesRepresentative.js:17
-#: src/js/controllers/tab-home.js:182 src/js/controllers/tab-send.js:76
-#: src/js/controllers/tabsController.js:34
-#: src/js/controllers/tabsController.js:6
+#: src/js/controllers/tab-home.js:183 src/js/controllers/tab-scan.js:106
+#: src/js/controllers/tab-send.js:78 src/js/controllers/tabsController.js:36
+#: src/js/controllers/tabsController.js:7
 msgid "Error"
 msgstr "Erro"
 
-#: src/js/controllers/confirm.js:254
+#: src/js/controllers/confirm.js:273
 msgid "Error at confirm"
 msgstr "Erro na confirmação"
 
@@ -509,7 +499,7 @@ msgstr "Leitura de Impressão Digital falhou"
 msgid "Finish"
 msgstr "Encerrar"
 
-#: www/views/confirm.html:65 www/views/modals/txp-details.html:74
+#: www/views/confirm.html:67 www/views/modals/txp-details.html:74
 #: www/views/tx-details.html:50 www/views/tx-details.html:58
 msgid "From"
 msgstr "De"
@@ -542,8 +532,8 @@ msgstr "Comece adicionando o primeiro."
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:152 src/js/controllers/tab-settings.js:50
-#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:95
+#: src/js/controllers/tab-home.js:153 src/js/controllers/tab-settings.js:49
+#: src/js/controllers/tab-settings.js:60 src/js/controllers/tx-details.js:99
 msgid "Go Back"
 msgstr "Retroceder"
 
@@ -561,7 +551,7 @@ msgstr "Compreendi"
 msgid "Help & Support"
 msgstr "Ajuda e suporte"
 
-#: src/js/controllers/tab-settings.js:48
+#: src/js/controllers/tab-settings.js:47
 msgid "Help and support information is available at the website."
 msgstr "Informações de Ajuda e Suporte estão disponíveis no site."
 
@@ -608,10 +598,6 @@ msgstr "Eu entendi que meu saldo são mantidos em segurança neste dispositivo e
 msgid "I've written it down"
 msgstr "Já escrevi isso"
 
-#: www/views/advancedSettings.html:23
-msgid "If enabled, the Recent Transactions card - a list of transactions occuring across all wallets - will appear in the Home tab."
-msgstr "Se habilitado, o Cartão de Transações - Lista todas as transações que ocorreram em todas as Carteiras - aparecerá na aba Início."
-
 #: src/js/controllers/onboarding/backupRequest.js:16
 msgid "If this device is replaced or this app is deleted, your funds can not be recovered without a backup."
 msgstr "Se este dispositivo é substituído ou este aplicativo é excluído, seus fundos não podem ser recuperados sem um backup."
@@ -649,17 +635,13 @@ msgstr "Para verificar o seu backup de carteira, por favor, digite sua senha."
 msgid "Incomplete"
 msgstr "Incompleto"
 
-#: src/js/controllers/confirm.js:89
+#: src/js/controllers/confirm.js:98
 msgid "Insufficient funds"
 msgstr "Fundos insuficientes"
 
 #: www/views/includes/accountHistory.html:43
 msgid "Invalid"
 msgstr "Inválido"
-
-#: src/js/controllers/tabsController.js:6
-msgid "Invalid data"
-msgstr "Dados inválidos"
 
 #: src/js/controllers/feedback/send.js:78
 msgid "Is there anything we could do better?"
@@ -681,16 +663,6 @@ msgstr "Saiba mais"
 msgid "Loading transaction info..."
 msgstr "Carregando informação da transação..."
 
-#: src/js/controllers/preferencesSecurity.js:21
-#: src/js/controllers/preferencesSecurityController.js:21
-msgid "Lock by Fingerprint"
-msgstr "Bloquear por impressão digital"
-
-#: src/js/controllers/preferencesSecurity.js:13
-#: src/js/controllers/preferencesSecurityController.js:13
-msgid "Lock by PIN"
-msgstr "Bloquear por PIN"
-
 #: www/views/includes/logOptions.html:3
 msgid "Log options"
 msgstr "Opções de log"
@@ -707,7 +679,7 @@ msgstr "Correspondências:"
 msgid "Meh - it's alright"
 msgstr "Meh - está tudo bem"
 
-#: src/js/controllers/tx-details.js:69 www/views/modals/txp-details.html:93
+#: src/js/controllers/tx-details.js:73 www/views/modals/txp-details.html:93
 #: www/views/tx-details.html:76
 msgid "Memo"
 msgstr "Nota"
@@ -824,8 +796,8 @@ msgstr "Oh não!"
 msgid "On this screen you can see all your accounts."
 msgstr "Nesta tela você pode ver todas as suas contas."
 
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
-#: src/js/controllers/tx-details.js:94
+#: src/js/controllers/tab-settings.js:48 src/js/controllers/tab-settings.js:59
+#: src/js/controllers/tx-details.js:98
 msgid "Open"
 msgstr "Abrir"
 
@@ -878,7 +850,7 @@ msgstr "Pagamento Recebido"
 msgid "Payment Rejected"
 msgstr "Pagamento Rejeitado"
 
-#: src/js/controllers/modals/txpDetails.js:42 www/views/confirm.html:114
+#: src/js/controllers/modals/txpDetails.js:42 www/views/confirm.html:116
 #: www/views/includes/walletActivity.html:4
 #: www/views/modals/txp-details.html:42
 msgid "Payment Sent"
@@ -932,7 +904,7 @@ msgstr "Preparando os endereços..."
 msgid "Preparing backup..."
 msgstr "Preparando o backup..."
 
-#: src/js/routes.js:915
+#: src/js/routes.js:933
 msgid "Press again to exit"
 msgstr "Pressione novamente para sair"
 
@@ -972,7 +944,7 @@ msgstr "﻿Receber"
 msgid "Receive in"
 msgstr "﻿Receber em"
 
-#: www/views/includes/accountHistory.html:24 www/views/tx-details.html:20
+#: www/views/tx-details.html:20
 msgid "Received"
 msgstr "Recebido"
 
@@ -988,7 +960,7 @@ msgstr "Transações recentes do cartão"
 msgid "Recent Transactions"
 msgstr "Transações recentes"
 
-#: www/views/amount.html:18 www/views/tab-send.html:14
+#: www/views/amount.html:13 www/views/tab-send.html:14
 msgid "Recipient"
 msgstr "Destinatário"
 
@@ -1024,7 +996,7 @@ msgstr "Restaurar do backup"
 msgid "Retrieving inputs information"
 msgstr "Recuperando informações de entradas"
 
-#: src/js/controllers/onboarding/createPassword.js:42
+#: src/js/controllers/onboarding/tour.js:86
 msgid "Retry"
 msgstr "Repetir"
 
@@ -1032,9 +1004,10 @@ msgstr "Repetir"
 msgid "Retry Camera"
 msgstr "Tentar Camera novamente"
 
-#: www/views/addressbook.add.html:79 www/views/addressbook.edit.html:79
-#: www/views/includes/note.html:9 www/views/preferencesAlias.html:50
-#: www/views/preferencesName.html:21 www/views/preferencesNotifications.html:46
+#: www/views/addressbook.add.html:81 www/views/addressbook.edit.html:81
+#: www/views/changeLocks.html:70 www/views/includes/note.html:9
+#: www/views/preferencesAlias.html:50 www/views/preferencesName.html:21
+#: www/views/preferencesNotifications.html:46
 #: www/views/preferencesRepresentative.html:33
 msgid "Save"
 msgstr "Salvar"
@@ -1083,7 +1056,9 @@ msgstr "Procure a sua moeda"
 msgid "Select a backup file"
 msgstr "Selecione um arquivo de backup"
 
-#: src/js/controllers/tab-receive.js:90
+#: src/js/controllers/amount.js:39 src/js/controllers/amount.js:75
+#: src/js/controllers/tab-receive.js:90 src/js/controllers/tab-send.js:189
+#: src/js/controllers/tab-send.js:208
 msgid "Select an account"
 msgstr "Selecione uma conta"
 
@@ -1100,7 +1075,7 @@ msgstr "Enviar Sugestão"
 msgid "Send by email"
 msgstr "Enviar por E-mail"
 
-#: src/js/controllers/confirm.js:131
+#: src/js/controllers/confirm.js:148
 msgid "Send from"
 msgstr "Enviar De"
 
@@ -1137,12 +1112,11 @@ msgstr "Quantidade máxima de envio"
 msgid "Sending transaction"
 msgstr "Enviando transação"
 
-#: src/js/controllers/confirm.js:274
+#: src/js/controllers/confirm.js:293
 msgid "Sending {{amountStr}} from your {{name}} account"
 msgstr "Enviando {{amountStr}} da sua conta {{name}}"
 
-#: www/views/includes/accountHistory.html:32 www/views/modals/tx-status.html:9
-#: www/views/tx-details.html:18
+#: www/views/modals/tx-status.html:9 www/views/tx-details.html:18
 msgid "Sent"
 msgstr "Enviado"
 
@@ -1190,7 +1164,7 @@ msgstr "Pular"
 msgid "Slide to accept"
 msgstr "Deslize para aceitar"
 
-#: src/js/controllers/confirm.js:200 src/js/controllers/modals/txpDetails.js:38
+#: src/js/controllers/confirm.js:219 src/js/controllers/modals/txpDetails.js:38
 msgid "Slide to send"
 msgstr "Deslize para enviar"
 
@@ -1289,7 +1263,7 @@ msgstr "Falha no Touch ID"
 msgid "Transaction"
 msgstr "Transação"
 
-#: src/js/controllers/activity.js:45 src/js/controllers/tab-home.js:182
+#: src/js/controllers/activity.js:45 src/js/controllers/tab-home.js:183
 msgid "Transaction not found"
 msgstr "Transação não encontrada"
 
@@ -1301,7 +1275,7 @@ msgstr "Transferir para"
 msgid "Transfer to Account"
 msgstr "Transferir para conta"
 
-#: www/views/modals/password.html:22 www/views/modals/pin.html:13
+#: www/views/modals/password.html:24 www/views/modals/pin.html:13
 msgid "Try again in {{expires}}"
 msgstr "Tente novamente em {{expires}}"
 
@@ -1309,7 +1283,7 @@ msgstr "Tente novamente em {{expires}}"
 msgid "Uh oh..."
 msgstr "Uh oh..."
 
-#: src/js/controllers/tab-home.js:149
+#: src/js/controllers/tab-home.js:150
 msgid "Update Available"
 msgstr "Atualização Disponível"
 
@@ -1341,7 +1315,7 @@ msgstr "Ver"
 msgid "View Terms of Service"
 msgstr "Ver os Termos de Serviço"
 
-#: src/js/controllers/tab-home.js:151
+#: src/js/controllers/tab-home.js:152
 msgid "View Update"
 msgstr "Ver atualizações"
 
@@ -1362,7 +1336,8 @@ msgid "Wallet seed not available"
 msgstr "Semente da carteira não está disponível "
 
 #: src/js/controllers/addressbookView.js:43
-#: src/js/controllers/advancedSettings.js:16 src/js/controllers/import.js:146
+#: src/js/controllers/advancedSettings.js:34 src/js/controllers/import.js:146
+#: src/js/controllers/modals/password.js:73
 #: src/js/controllers/modals/txpDetails.js:151
 #: src/js/controllers/modals/txpDetails.js:167
 #: src/js/controllers/preferencesDelete.js:23
@@ -1439,8 +1414,10 @@ msgstr "Sua carteira nunca foi salva num armazenamento em nuvem ou dispositivo p
 msgid "Your wallet key will be encrypted. The Spending Password cannot be recovered. Be sure to write it down."
 msgstr "Sua chave da carteira será criptografada. A senha de gastos não poderá ser recuperada. Não se esqueça de anotá-la."
 
-#: www/views/accountDetails.html:42 www/views/includes/accountList.html:11
-#: www/views/paperWallet.html:33 www/views/tab-receive.html:42
+#: www/views/accountDetails.html:42 www/views/amount.html:123
+#: www/views/includes/accountList.html:11
+#: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
+#: www/views/tab-receive.html:41 www/views/tab-send.html:100
 msgid "[Balance Hidden]"
 msgstr "[Valores escondidos]"
 
@@ -1456,16 +1433,16 @@ msgstr "Eu li, compreendi, e aceito os <a ng-click=\"openTerms()\" href=\"javasc
 msgid "5-star ratings help us get Canoe into more hands, and more users means more resources can be committed to the app!"
 msgstr "Classificação com 5 estrelas nos ajuda a espalhar Canoe para mais pessoas, mais e mais usuários significam mais recursos que podem ser implementados."
 
-#: www/views/changePassword.html:25 www/views/onboarding/createPassword.html:13
+#: www/views/changePassword.html:25
 msgid "At least 8 Characters. Make it good!"
 msgstr "Pelo menos 8 caracteres. Você consegue mais do que isso!"
 
 #: www/views/changePassword.html:3 www/views/changePassword.html:62
-#: www/views/preferencesSecurity.html:15
+#: www/views/preferencesSecurity.html:17
 msgid "Change Password"
 msgstr "Mude sua senha"
 
-#: www/views/changePassword.html:33 www/views/onboarding/createPassword.html:21
+#: www/views/changePassword.html:33
 msgid "Confirm New Password"
 msgstr "Confirme sua nova senha"
 
@@ -1477,7 +1454,7 @@ msgstr "Você gosta da Canoe?"
 msgid "Let's Start"
 msgstr "Vamos começar"
 
-#: www/views/changePassword.html:23 www/views/onboarding/createPassword.html:11
+#: www/views/changePassword.html:23
 msgid "New Password"
 msgstr "Nova senha"
 
@@ -1485,19 +1462,19 @@ msgstr "Nova senha"
 msgid "Old Password"
 msgstr "Senha antiga"
 
-#: www/views/changePassword.html:35 www/views/onboarding/createPassword.html:28
+#: www/views/changePassword.html:35
 msgid "One more time."
 msgstr "Mais uma vez."
 
-#: www/views/changePassword.html:49 www/views/onboarding/createPassword.html:38
+#: www/views/changePassword.html:49
 msgid "Password too short"
 msgstr "Senha muito curta"
 
-#: www/views/changePassword.html:55 www/views/onboarding/createPassword.html:45
+#: www/views/changePassword.html:55
 msgid "Passwords don't match"
 msgstr "As senhas não conferem"
 
-#: www/views/changePassword.html:45 www/views/onboarding/createPassword.html:34
+#: www/views/changePassword.html:45
 msgid "Passwords match"
 msgstr "As senhas conferem"
 
@@ -1513,10 +1490,6 @@ msgstr "Compartilhe Canoe"
 msgid "There is a new version of Canoe available"
 msgstr "Existe uma nova versão do Canoe disponível"
 
-#: www/views/preferencesSecurity.html:20
-msgid "Timeout"
-msgstr "Tempo esgotado"
-
 #: src/js/controllers/feedback/send.js:76
 msgid "We're always looking for ways to improve Canoe."
 msgstr "Nós estamos sempre procurando um modo de melhorar Canoe."
@@ -1528,10 +1501,6 @@ msgstr "Nós estamos sempre procurando um modo de melhorar Canoe. Como poderiamo
 #: www/views/feedback/rateApp.html:10
 msgid "Would you be willing to rate Canoe in the app store?"
 msgstr "Você estaria disposto a classificar Canoe na App Store?"
-
-#: www/views/preferencesSecurity.html:12
-msgid "A wallet password is used to encrypt your Nano wallet when saving it on your device."
-msgstr "Uma senha para carteira é usada para encriptar sua carteira Nano quando salvada no seu dispositivo."
 
 #: www/views/preferencesAlias.html:4
 msgid "Account Alias"
@@ -1547,21 +1516,13 @@ msgstr "Cor da Conta"
 msgid "Alias"
 msgstr "Apelido"
 
-#: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your nano."
-msgstr "Qualquer um com sua seed pode acessar ou gastar seu Nano."
-
 #: www/views/backup.html:3 www/views/tab-settings.html:23
 msgid "Backup seed"
 msgstr "Sua seed para Backup"
 
-#: www/views/onboarding/createPassword.html:52
+#: www/views/onboarding/tour.html:86
 msgid "Create Wallet"
 msgstr "Criar uma carteira"
-
-#: www/views/onboarding/createPassword.html:5
-msgid "Create your Password"
-msgstr "Criar sua senha"
 
 #: www/views/preferencesLanguage.html:21
 msgid "Don't see your language? Sign up on POEditor! We'd love to support your language."
@@ -1575,7 +1536,7 @@ msgstr "Mudar contato"
 msgid "Enter password"
 msgstr "Digite a senha"
 
-#: www/views/modals/password.html:21
+#: www/views/modals/password.html:23
 msgid "Incorrect password, try again."
 msgstr "Senha incorreta, tente novamente."
 
@@ -1595,7 +1556,7 @@ msgstr "Bloquear Canoe"
 msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
 msgstr "Nano é diferente &ndash; ela não pode ser guardada em um banco ou em um serviço de internet."
 
-#: src/js/controllers/confirm.js:76
+#: src/js/controllers/confirm.js:85
 msgid "No accounts available"
 msgstr "Sem contas disponíveis"
 
@@ -1635,10 +1596,6 @@ msgstr "Enviar Nano"
 msgid "Start sending Nano"
 msgstr "Começe enviando Nano"
 
-#: www/views/onboarding/createPassword.html:51
-msgid "This password encrypts your wallet, do not forget it!"
-msgstr "Essa senha encriptografa sua carteira, não a perca!"
-
 #: www/views/tab-send.html:37
 msgid "To get started, you need Nano. Share your account to receive Nano."
 msgstr "Para começar, você precisa de Nano. Compartilhe sua conta para receber Nano."
@@ -1654,34 +1611,6 @@ msgstr "Digite abaixo para ver se o apelido está disponível."
 #: www/views/advancedSettings.html:12
 msgid "Use Server Side PoW"
 msgstr "Usar o servidor PoW"
-
-#: www/views/preferencesSecurity.html:10
-msgid "Wallet Password\n"
-"\t\t\t<div class=\"list settings-list\">\n"
-"\t\t\t\t<p class=\"item-description\" translate=\"\">A wallet password is used to encrypt your Nano wallet when saving it on your device.</p>\n"
-"\t\t\t\t<a class=\"item item-icon-left item-icon-right\" ui-sref=\"tabs.preferencesSecurity.changePassword\">\n"
-"\t\t\t\t\t<i class=\"icon ion-ios-download-outline\"></i>\n"
-"\t\t\t\t\t<span translate=\"\">Change Password</span>\n"
-"\t\t\t\t\t<i class=\"icon bp-arrow-right\"></i>\n"
-"\t\t\t\t</a>\n"
-"\t\t\t\t<div class=\"item item-icon-left\">\n"
-"\t\t\t\t\t<i class=\"icon ion-ios-time-outline\"></i>\n"
-"\t\t\t\t\t<span translate=\"\">Timeout</span>\n"
-"\t\t\t\t</div>\n"
-"\t\t\t</div>"
-msgstr "Wallet Password\n"
-"\t\t\t<div class=\"list settings-list\">\n"
-"\t\t\t\t<p class=\"item-description\" translate=\"\">Uma senha para carteira é usada para encriptar sua carteira Nano quando salvada no seu dispositivo.</p>\n"
-"\t\t\t\t<a class=\"item item-icon-left item-icon-right\" ui-sref=\"tabs.preferencesSecurity.changePassword\">\n"
-"\t\t\t\t\t<i class=\"icon ion-ios-download-outline\"></i>\n"
-"\t\t\t\t\t<span translate=\"\">Alterar senha</span>\n"
-"\t\t\t\t\t<i class=\"icon bp-arrow-right\"></i>\n"
-"\t\t\t\t</a>\n"
-"\t\t\t\t<div class=\"item item-icon-left\">\n"
-"\t\t\t\t\t<i class=\"icon ion-ios-time-outline\"></i>\n"
-"\t\t\t\t\t<span translate=\"\">Tempo esgotado</span>\n"
-"\t\t\t\t</div>\n"
-"\t\t\t</div>"
 
 #: www/views/preferencesLanguage.html:16
 msgid "We’re always looking for translation contributions! You can make corrections or help to make this app available in your native language by joining our community on POEditor."
@@ -1703,8 +1632,8 @@ msgstr "Sua carteira Nano está pronta!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Sua seed da carteira Nano foi recuperada!"
 
-#: www/views/addressbook.add.html:39 www/views/addressbook.edit.html:39
-#: www/views/addressbook.view.html:26
+#: src/js/services/nanoService.js:593 www/views/addressbook.add.html:39
+#: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Conta"
 
@@ -1732,8 +1661,10 @@ msgstr "PIN incorreto, tente novamente."
 msgid "Incorrect code format for a seed:"
 msgstr "Formato de código incorreto para uma seed."
 
+#: src/js/controllers/changeLocksController.js:24
 #: src/js/controllers/changePasswordController.js:10
 #: src/js/controllers/changePasswordController.js:13
+#: src/js/services/nanoService.js:70
 msgid "Information"
 msgstr "Informação"
 
@@ -1752,10 +1683,6 @@ msgstr "Escaneie este código QR para importar a seed dentro de outra aplicaçã
 #: www/views/preferencesSecurity.html:3 www/views/tab-settings.html:92
 msgid "Security Preferences"
 msgstr "Preferências de segurança"
-
-#: www/views/modals/password.html:24
-msgid "Unlock Canoe"
-msgstr "Desbloqueie Canoe"
 
 #: www/views/changePassword.html:15
 msgid "Your current password"
@@ -1777,7 +1704,7 @@ msgstr "Cuidado"
 msgid "Decrypting wallet..."
 msgstr "Descriptografando carteira..."
 
-#: src/js/controllers/modals/password.js:81
+#: src/js/controllers/modals/password.js:101
 msgid "Error after loading wallet:"
 msgstr "Erro após carregar a carteira"
 
@@ -1788,10 +1715,6 @@ msgstr "Eu entendo que se o aplicativo for deletado, minha carteira só pode ser
 #: www/views/import.html:11
 msgid "Importing a wallet removes your current wallet and all its accounts. You may wish to first backup your current seed or make a file backup of the wallet."
 msgstr "Importar uma carteira remove sua carteira atual e suas contas. Você pode querer fazer o backup de sua seed atual ou fazer um arquivo de backup da sua carteira."
-
-#: src/js/controllers/import.js:147
-msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from."
-msgstr "Importar uma carteira irá remover sua carteira existente e suas contas! Se você tiver fundos na sua carteira atual, tenha certeza que fez backup deles, para poder restaurar depois."
 
 #: src/js/controllers/addressbookAdd.js:20
 #: src/js/controllers/addressbookEdit.js:21
@@ -1839,11 +1762,11 @@ msgstr "Transfira Nano instantaneamente para qualquer pessoa, em qualquer lugar.
 msgid "Account Representative"
 msgstr "Conta do representante"
 
-#: src/js/controllers/confirm.js:350
+#: src/js/controllers/confirm.js:368
 msgid "Add to address book?"
 msgstr "Adicionar ao livro de endereços?"
 
-#: www/views/addressbook.add.html:70 www/views/addressbook.edit.html:70
+#: www/views/addressbook.add.html:72 www/views/addressbook.edit.html:72
 msgid "Alias Found!"
 msgstr "Alias encontrado!"
 
@@ -1851,11 +1774,11 @@ msgstr "Alias encontrado!"
 msgid "At least 3 Characters."
 msgstr "Pelo menos 3 caracteres."
 
-#: www/views/onboarding/alias.html:20 www/views/preferencesAlias.html:24
+#: www/views/onboarding/alias.html:22 www/views/preferencesAlias.html:24
 msgid "Checking availablity"
 msgstr "Verificando diponibilidade"
 
-#: www/views/onboarding/alias.html:60
+#: www/views/onboarding/alias.html:62
 msgid "Create Alias"
 msgstr "Criar Alias"
 
@@ -1863,7 +1786,7 @@ msgstr "Criar Alias"
 msgid "Creating Alias..."
 msgstr "Criando Alias"
 
-#: src/js/controllers/confirm.js:351
+#: src/js/controllers/confirm.js:369
 msgid "Do you want to add this new address to your address book?"
 msgstr "Quer adicionar este novo endereço ao seu livro de endereços?"
 
@@ -1875,7 +1798,7 @@ msgstr "Editar Alias."
 msgid "Editing Alias..."
 msgstr "Editando Alias"
 
-#: www/views/onboarding/alias.html:35
+#: www/views/onboarding/alias.html:37
 msgid "Email for recovering your alias"
 msgstr "Recuperar o Alias por Email"
 
@@ -1891,20 +1814,16 @@ msgstr "Erro ao importar carteira"
 msgid "How to buy Nano"
 msgstr "Como comprar Nano"
 
-#: src/js/controllers/tab-settings.js:59
+#: src/js/controllers/tab-settings.js:58
 msgid "How to buy and sell Nano is described at the website."
 msgstr "Como comprar e vender Nano"
 
-#: www/views/advancedSettings.html:14
-msgid "If enabled, Proof Of Work is delegated to the Canoe server side. Currently always true."
-msgstr "Se ativado, Proof Of Work é encarregado pelo lado dos servidores do Canoe. Atualmente ativado."
-
-#: www/views/addressbook.add.html:74 www/views/addressbook.edit.html:74
-#: www/views/onboarding/alias.html:28 www/views/preferencesAlias.html:32
+#: www/views/addressbook.add.html:76 www/views/addressbook.edit.html:76
+#: www/views/onboarding/alias.html:30 www/views/preferencesAlias.html:32
 msgid "Invalid Alias!"
 msgstr "Alias inválido!"
 
-#: www/views/onboarding/alias.html:43 www/views/preferencesAlias.html:40
+#: www/views/onboarding/alias.html:45 www/views/preferencesAlias.html:40
 msgid "Invalid Email!"
 msgstr "Email inválido!"
 
@@ -1912,15 +1831,15 @@ msgstr "Email inválido!"
 msgid "Let People Easily Find you With Aliases"
 msgstr "Permitir pessoas encontrarem-no com o seu Alias"
 
-#: www/views/onboarding/alias.html:55
+#: www/views/onboarding/alias.html:57
 msgid "Link my wallet to my phone number."
 msgstr "Ligar a minha carteira com o meu número de telemóvel"
 
-#: www/views/addressbook.add.html:66 www/views/addressbook.edit.html:66
+#: www/views/addressbook.add.html:68 www/views/addressbook.edit.html:68
 msgid "Looking up @{{addressbookEntry.alias}}"
 msgstr "Procurar por @{{addressbookEntry.alias}}"
 
-#: www/views/onboarding/alias.html:52 www/views/preferencesAlias.html:47
+#: www/views/onboarding/alias.html:54 www/views/preferencesAlias.html:47
 msgid "Make my alias private."
 msgstr "Tornar o meu Alias privado."
 
@@ -1928,7 +1847,7 @@ msgstr "Tornar o meu Alias privado."
 msgid "Refund"
 msgstr "Reembolso"
 
-#: src/js/controllers/advancedSettings.js:17
+#: src/js/controllers/advancedSettings.js:35
 msgid "Repairing your wallet could take some time. This will reload all blockchains associated with your wallet. Are you sure you want to repair?"
 msgstr "Reparar a sua carteira pode demorar algum tempo. Isto vai recarregar todas as blockchains associadas à sua carteira. Tem a certeza que quer reparar?"
 
@@ -1940,7 +1859,7 @@ msgstr "Representante"
 msgid "Representative changed"
 msgstr "Representante mudado"
 
-#: www/views/onboarding/alias.html:24 www/views/preferencesAlias.html:28
+#: www/views/onboarding/alias.html:26 www/views/preferencesAlias.html:28
 msgid "That alias is taken!"
 msgstr "Esse Alias já foi utilizado!"
 
@@ -1948,11 +1867,11 @@ msgstr "Esse Alias já foi utilizado!"
 msgid "The official English Terms of Service are available on the Canoe website."
 msgstr "Os Termos de Serviço oficiais em Inglês estão disponíveis no site Canoe."
 
-#: www/views/onboarding/alias.html:47 www/views/preferencesAlias.html:44
+#: www/views/onboarding/alias.html:49 www/views/preferencesAlias.html:44
 msgid "Valid Alias & Email"
 msgstr "Alias e Email válidos"
 
-#: src/js/controllers/tx-details.js:93
+#: src/js/controllers/tx-details.js:97
 msgid "View Block on Nanode"
 msgstr "Ver o bloco em Nanode"
 
@@ -1980,19 +1899,162 @@ msgstr "joe.doe@exemplo.com"
 msgid "joedoe"
 msgstr "joedoe"
 
-#: www/views/modals/password.html:12
+#: www/views/modals/password.html:6
 msgid "Canoe is Locked"
 msgstr ""
 
-#: www/views/modals/password.html:13
-msgid "For your security, Canoe always encrypts your wallet."
-msgstr ""
-
-#: www/views/modals/password.html:26
+#: www/views/modals/password.html:39
 msgid "Forgot Password?"
 msgstr ""
 
-#: www/views/modals/password.html:27
-msgid "Load wallet from seed."
+#: www/views/changeLocks.html:30 www/views/changeLocks.html:61
+msgid "4-digit PIN"
+msgstr ""
+
+#: www/views/changeLocks.html:53
+msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
+"            <p>Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
+msgstr ""
+
+#: www/views/changeLocks.html:13
+msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
+"          With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
+msgstr ""
+
+#: www/views/backupWarning.html:14
+msgid "Anyone with your seed can access or spend your Nano."
+msgstr ""
+
+#: www/views/changeLocks.html:54
+msgid "Background Behaviour"
+msgstr ""
+
+#: www/views/preferencesSecurity.html:22
+msgid "Change 4-digit PIN"
+msgstr ""
+
+#: www/views/changeLocks.html:3 www/views/preferencesSecurity.html:12
+msgid "Change Lock Settings"
+msgstr ""
+
+#: www/views/onboarding/tour.html:58
+msgid "Encryption Time!"
+msgstr ""
+
+#: www/views/onboarding/tour.html:75
+msgid "Enter at least 8 characters to encrypt your wallet."
+msgstr ""
+
+#: www/views/changeLocks.html:31 www/views/changeLocks.html:62
+msgid "Fingerprint"
+msgstr ""
+
+#: www/views/modals/password.html:40
+msgid "Go back to onboarding."
+msgstr ""
+
+#: src/js/controllers/modals/password.js:74
+msgid "Going back to onboarding replaces the current wallet, are you sure?"
+msgstr ""
+
+#: www/views/changeLocks.html:38
+msgid "Hard Lock"
+msgstr ""
+
+#: www/views/changeLocks.html:42
+msgid "Hard Timeout"
+msgstr ""
+
+#: www/views/advancedSettings.html:14
+msgid "If enabled, Proof Of Work is delegated to the Canoe server side. This option is disabled and always true on mobile Canoe for now."
+msgstr ""
+
+#: www/views/advancedSettings.html:23
+msgid "If enabled, a list of recent transactions across all wallets will appear in the Home tab. Currently false, not fully implemented."
+msgstr ""
+
+#: www/views/changeLocks.html:58
+msgid "Lock when going to background"
+msgstr ""
+
+#: www/views/changeLocks.html:29 www/views/changeLocks.html:60
+msgid "None"
+msgstr ""
+
+#: www/views/changeLocks.html:63
+msgid "Password"
+msgstr ""
+
+#: src/js/controllers/changeLocksController.js:24
+msgid "Saved"
+msgstr ""
+
+#: www/views/changeLocks.html:14
+msgid "Soft Lock"
+msgstr ""
+
+#: www/views/changeLocks.html:27
+msgid "Soft Lock Type"
+msgstr ""
+
+#: www/views/changeLocks.html:18
+msgid "Soft Timeout"
+msgstr ""
+
+#: www/views/changeLocks.html:20 www/views/changeLocks.html:44
+msgid "Timeout in seconds"
+msgstr ""
+
+#: www/views/modals/password.html:30
+msgid "Unlock"
+msgstr ""
+
+#: src/js/controllers/tab-scan.js:107 src/js/controllers/tabsController.js:7
+msgid "Unrecognized data"
+msgstr ""
+
+#: www/views/changeLocks.html:37
+msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
+"          With Hard Lock, Canoe encrypts your wallet and completely remove it from memory. You can not disable Hard Lock, but you can set a very high timeout."
+msgstr ""
+
+#: src/js/controllers/tab-home.js:151
+msgid "A new version of this app is available. Please update to the latest version."
+msgstr ""
+
+#: www/views/changeBackend.html:13
+msgid "Backend URL"
+msgstr ""
+
+#: www/views/advancedSettings.html:37 www/views/changeBackend.html:23
+msgid "Change Backend"
+msgstr ""
+
+#: www/views/changeBackend.html:3
+msgid "Change Backend Server"
+msgstr ""
+
+#: src/js/controllers/import.js:147
+msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
+msgstr ""
+
+#: www/views/amount.html:54
+msgid "Max"
+msgstr ""
+
+#: www/views/onboarding/tour.html:80
+msgid "Password length ok"
+msgstr ""
+
+#: src/js/services/nanoService.js:70
+msgid "Your backend has been changed"
+msgstr ""
+
+#: src/js/controllers/import.js:149
+msgid "delete"
+msgstr ""
+
+#: www/views/changeBackend.html:15
+msgid "getcanoe.io"
 msgstr ""
 
