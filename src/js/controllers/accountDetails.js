@@ -121,8 +121,8 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   }
 
   $scope.updateAll = function (cb) {
-    updateTxHistory(cb)
     $scope.account = profileService.getAccountWithId($scope.accountId)
+    updateTxHistory(cb)
   }
 
   $scope.hideToggle = function () {
