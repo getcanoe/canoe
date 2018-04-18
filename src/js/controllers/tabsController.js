@@ -2,7 +2,7 @@
 /* global angular */
 angular.module('canoeApp.controllers').controller('tabsController', function ($rootScope, $log, $scope, $state, $stateParams, $timeout, platformInfo, incomingData, lodash, popupService, gettextCatalog, scannerService) {
   $scope.onScan = function (data) {
-    incomingData.redir(data, function (err, code) {
+    incomingData.redir(data, null, function (err, code) {
       if (err) {
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Unrecognized data'))
       }
@@ -36,7 +36,7 @@ angular.module('canoeApp.controllers').controller('tabsController', function ($r
         popupService.showAlert(gettextCatalog.getString('Error'), err)
         return
       }
-      incomingData.redir(contents)
+      incomingData.redir(contents, null)
     })
   }
 })

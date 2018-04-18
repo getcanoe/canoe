@@ -78,7 +78,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
         popupService.showAlert(gettextCatalog.getString('Error'), err)
         return
       }
-      incomingData.redir(contents)
+      incomingData.redir(contents, $scope.acc.id)
     })
   }
 
@@ -104,7 +104,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
   $scope.findContact = function (search) {
     // If redir returns true it matched something and
     // will already have moved us to amount.
-    incomingData.redir(search, function (err, code) {
+    incomingData.redir(search, $scope.acc.id, function (err, code) {
       if (err) {
         // Ok, redir did not match anything, then we search
         if (!search || search.length < 2) {

@@ -8,8 +8,9 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
     $scope.ntx = $stateParams.ntx
     $scope.hasFunds = profileService.hasFunds()
     $scope.title = gettextCatalog.getString('Transaction')
-    $scope.account = profileService.getAccount(data.stateParams.walletId)
-
+    // console.log($stateParams);
+    $scope.walletId = $stateParams.walletId
+    $scope.account = profileService.getAccount($stateParams.walletId)
     listeners = [
 /*      $rootScope.$on('bwsEvent', function (e, walletId, type, n) {
         if (type === 'NewBlock' && n && n.data && n.data.network == 'livenet') {
@@ -32,11 +33,14 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
       $ionicHistory.clearHistory()
       $state.go('tabs.send').then(function () {
         $timeout(function () {
+          // console.log($scope.walletId);
+          // console.log($scope.account);
           $state.transitionTo('tabs.send.confirm', {
             recipientType: addr ? 'contact' : null,
             toAmount: $scope.ntx.amount,
             toName: addr ? addr.name : null,
-            toAddress: $scope.ntx.origin
+            toAddress: $scope.ntx.origin,
+            fromAddress: $stateParams.walletId
             //description: ''
           })
         }, 50)

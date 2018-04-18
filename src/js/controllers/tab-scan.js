@@ -100,7 +100,7 @@ angular.module('canoeApp.controllers').controller('tabScanController', function 
   function handleSuccessfulScan (contents) {
     $log.debug('Scan returned: "' + contents + '"')
     scannerService.pausePreview()
-    incomingData.redir(contents, function (err, code) {
+    incomingData.redir(contents, null, function (err, code) {
       if (err) {
         popupService.showAlert(
           gettextCatalog.getString('Error'),
