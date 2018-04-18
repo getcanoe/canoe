@@ -509,8 +509,7 @@ module.exports = function (password) {
     return nacl.sign.detached.verify(hex_uint8(blockHash), hex_uint8(blockSignature), pubKey)
   }
 
-  api.verifyBlock = function (block, acc = '') {
-    var account = block.getAccount() ? block.getAccount() : acc
+  api.verifyBlock = function (block) {
     return api.verifyBlockSignature(block.getHash(true), block.getSignature(), block.getAccount())
   }
 
@@ -600,7 +599,7 @@ module.exports = function (password) {
   api.getBalanceUpToBlock = function (blockHash) {
     var sum = bigInt(0)
     if (chain.length <= 0) { return sum }
-    
+
     var found = blockHash === 0
     var blk
 
@@ -1018,8 +1017,8 @@ module.exports = function (password) {
           // open block
           if (blk.getType() !== 'open') { throw new Error("First block needs to be 'open'.") }
           priv.chainPush(blk, blockHash)
-          api.addBlockToReadyBlocks(blk)
           api.removePendingBlock(blockHash)
+          api.addBlockToReadyBlocks(blk)
           priv.setPendingBalance(api.getPendingBalance().minus(blk.getAmount()))
           priv.setBalance(api.getBalance().add(blk.getAmount()))
           // State blocks always carry representative
@@ -1048,8 +1047,8 @@ module.exports = function (password) {
               throw new Error('Invalid block type')
             }
             priv.chainPush(blk, blockHash)
-            api.addBlockToReadyBlocks(blk)
             api.removePendingBlock(blockHash)
+            api.addBlockToReadyBlocks(blk)
             // State blocks always carry representative
             if (blk.isState()) {
               priv.setRepresentative(blk.getRepresentative())
