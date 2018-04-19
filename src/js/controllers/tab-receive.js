@@ -68,11 +68,11 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
 
   var checkSelectedAccount = function (account, accounts) {
     if (!account) return accounts[0]
-    var w = lodash.find(accounts, function (w) {
+    var w = lodash.findIndex(accounts, function (w) {
       return w.id === account.id
     })
     if (!w) return accounts[0]
-    return account
+    return accounts[w]
   }
 
   $scope.onAccountSelect = function (acc) {
