@@ -587,6 +587,8 @@ angular.module('canoeApp.services')
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
       wallet.createSeed(seed)
+      // Recreate existing accounts
+      wallet.enableBroadcast(false)
       var emptyAccounts = 0
       var accountNum = 1
       do {
@@ -594,20 +596,24 @@ angular.module('canoeApp.services')
         accountNum++
         var account = wallet.createAccount({label: accountName})
         // We load existing blocks
-        resetChain(wallet, account.id)
+        resetChainInternal(wallet, account.id)
         if (wallet.getAccountBlockCount(account.id) === 0) {
           emptyAccounts++
+        } else {
+          emptyAccounts = 0
         }
-      } while (emptyAccounts < 5)
-      // Remove last 5 accounts because they are empty
+      } while (emptyAccounts < 20)
+      // Remove last 20 accounts because they are empty
       while (emptyAccounts > 0) {
         wallet.removeLastAccount()
         emptyAccounts--
       }
+      wallet.enableBroadcast(true)
+      root.setWallet(wallet, cb)
+      root.saveWallet(root.wallet, function () {})
       // aliasService.lookupAddress(account.id, function (err, ans) {
       //   if (err) {
       //     $log.debug(err)
-      root.setWallet(wallet, cb)
       //   } else {
       //     $log.debug('Answer from alias server looking up ' + account.id + ': ' + JSON.stringify(ans))
       //     if (ans && ans.aliases.length > 0) {
