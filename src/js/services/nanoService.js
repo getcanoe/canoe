@@ -67,9 +67,12 @@ angular.module('canoeApp.services')
         if (err) $log.debug(err)
         mqttHost = url
         host = 'https://' + url + '/rpc-dev'
-        popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
-        $ionicHistory.removeBackView()
-        $state.go('tabs.home')
+        // Force relogin etc
+        root.setWallet(root.getWallet(), function () {
+          popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
+          $ionicHistory.removeBackView()
+          $state.go('tabs.home')
+        })
       })
     }
 
