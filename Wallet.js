@@ -1350,6 +1350,7 @@ module.exports = function (password) {
     if (chain.length === 0) {
       api.useAccount(prevAccount) // We should not have a current that we are removing
       keys.pop()
+      lastKeyFromSeed-- // Would be simpler to just use size of keys
       return lastAccount
     } else {
       return null
