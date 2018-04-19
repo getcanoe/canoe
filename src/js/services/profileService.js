@@ -85,7 +85,6 @@ angular.module('canoeApp.services')
         if (err) return cb(err)
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
-          nanoService.repair() // So we fetch truth from lattice, sync
           root.enteredPassword(password)
           nanoService.saveWallet(root.getWallet(), cb)
         })
