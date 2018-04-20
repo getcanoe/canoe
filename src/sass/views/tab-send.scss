@@ -177,7 +177,10 @@
       }
     }
   }
-  .scroll{height: 100%;}
+  .scroll{
+    height: calc(100% - 78px);
+    overflow-y: scroll;
+  }
   .important-message {
     width: 100%;
     cursor: pointer;
