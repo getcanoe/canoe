@@ -26,26 +26,24 @@
         </div>
       </div>
     </article>
-
-    <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0] && !singleAccount">
-      <a ng-if="account" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
-        <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
-        <span ng-if="account.meta && account.meta.alias && account.meta.alias.alias">
-          @{{account.meta.alias.alias}}
-        </span>
-        <span ng-if="!account.meta || !account.meta.alias || !account.meta.alias.alias">
-          {{account.name || account.id}}
-        </span>
-        <p>
-          <span ng-if="!account.meta.balanceHidden && account.alternativeBalanceStr"> {{account.balanceStr}} <span ng-hide="account.alternativeBalanceStr == 'hide'">&asymp; {{account.alternativeBalanceStr}}</span></span>
-          <span ng-if="account.meta.balanceHidden" translate>[Balance Hidden]</span>
-          <span class="assertive" ng-if="account.error">{{account.error}}</span>
-          &nbsp;
-        </p>
-      </a>
-    </div>
-
   </ion-content>
+  <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0] && !singleAccount">
+    <a ng-if="account" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
+      <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
+      <span ng-if="account.meta && account.meta.alias && account.meta.alias.alias">
+        @{{account.meta.alias.alias}}
+      </span>
+      <span ng-if="!account.meta || !account.meta.alias || !account.meta.alias.alias">
+        {{account.name || account.id}}
+      </span>
+      <p>
+        <span ng-if="!account.meta.balanceHidden && account.alternativeBalanceStr"> {{account.balanceStr}} <span ng-hide="account.alternativeBalanceStr == 'hide'">&asymp; {{account.alternativeBalanceStr}}</span></span>
+        <span ng-if="account.meta.balanceHidden" translate>[Balance Hidden]</span>
+        <span class="assertive" ng-if="account.error">{{account.error}}</span>
+        &nbsp;
+      </p>
+    </a>
+  </div>
   <account-selector
     account-selector-title="accountSelectorTitle"
     account-selector-accounts="accounts"

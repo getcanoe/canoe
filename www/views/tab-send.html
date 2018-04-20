@@ -86,24 +86,24 @@
         </a>
       </div>
     </div>
-    <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0]">
-      <a ng-if="acc" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
-        <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
-        <span ng-if="acc.meta && acc.meta.alias && acc.meta.alias.alias">
-          @{{acc.meta.alias.alias}}
-        </span>
-        <span ng-if="!acc.meta || !acc.meta.alias || !acc.meta.alias.alias">
-          {{acc.name || acc.id}}
-        </span>
-        <p>
-          <span ng-if="!acc.meta.balanceHidden && acc.alternativeBalanceStr"> {{acc.balanceStr}} <span ng-hide="acc.alternativeBalanceStr == 'hide'">&asymp; {{acc.alternativeBalanceStr}}</span></span>
-          <span ng-if="acc.meta.balanceHidden" translate>[Balance Hidden]</span>
-          <span class="assertive" ng-if="acc.error">{{acc.error}}</span>
-          &nbsp;
-        </p>
-      </a>
-    </div>
   </ion-content>
+  <div class="account-selector" ng-click="showAccountSelector()" ng-if="accounts[0]">
+    <a ng-if="acc" class="item item-sub item-icon-left item-big-icon-left item-icon-right">
+      <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
+      <span ng-if="acc.meta && acc.meta.alias && acc.meta.alias.alias">
+        @{{acc.meta.alias.alias}}
+      </span>
+      <span ng-if="!acc.meta || !acc.meta.alias || !acc.meta.alias.alias">
+        {{acc.name || acc.id}}
+      </span>
+      <p>
+        <span ng-if="!acc.meta.balanceHidden && acc.alternativeBalanceStr"> {{acc.balanceStr}} <span ng-hide="acc.alternativeBalanceStr == 'hide'">&asymp; {{acc.alternativeBalanceStr}}</span></span>
+        <span ng-if="acc.meta.balanceHidden" translate>[Balance Hidden]</span>
+        <span class="assertive" ng-if="acc.error">{{acc.error}}</span>
+        &nbsp;
+      </p>
+    </a>
+  </div>
   <account-selector
     account-selector-title="accountSelectorTitle"
     account-selector-accounts="accounts"

@@ -16,10 +16,14 @@ action-sheet {
       padding-left: 1.25rem;
       padding-right: 1.25rem;
       color: #2f2f2f;
-      padding-bottom: 3.5rem;
+      padding-bottom: 47px;
       max-width: 550px;
       max-height: 100vh;
       overflow: scroll;
+
+      @media screen and (max-device-width: 375px) and (max-device-height: 812px) {
+        padding-bottom: 81px;
+      }
 
       &.slide-up {
         -webkit-transform: translateY(0) translateX(-50%);
