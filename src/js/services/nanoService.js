@@ -38,7 +38,7 @@ angular.module('canoeApp.services')
     var rai = null
 
     // port and ip to use for MQTT-over-WSS
-    var mqttPort = 1884
+    var mqttPort = 443 // Nginx acts as proxy
     var mqttClient = null
     var mqttUsername = null
     root.connected = false
