@@ -24,18 +24,33 @@ angular.module('canoeApp.services')
     // Both profileService and this service holds onto it
     root.wallet = null
 
-    // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
-    // var host = 'https://getcanoe.io/rpc' // for the alpha
-    var host = 'https://getcanoe.io/rpc' // for dev
+    // Default server
+    var host = 'https://getcanoe.io/rpc'
     var mqttHost = 'getcanoe.io'
+
+    var rai = null
+
+    root.connectRPC = function () {
+      try {
+        $log.debug('Connecting RPC to ' + host)
+        rai = new Rai(host) // connection
+        rai.initialize()
+      } catch (e) {
+        rai = null
+        $log.warn('Failed to initialize server connection, no network?', e)
+        // Try again
+        setTimeout(function () { root.connectRPC() }, 5000)
+      }
+    }
+
     configService.get(function (err, config) {
+      if (err) return $log.debug(err)
       if (config.backend) {
         host = 'https://' + config.backend + '/rpc' // TODO need to revist this setup
         mqttHost = config.backend
+        root.connectRPC()
       }
     })
-
-    var rai = null
 
     // port and ip to use for MQTT-over-WSS
     var mqttPort = 443 // Nginx acts as proxy
@@ -66,7 +81,7 @@ angular.module('canoeApp.services')
       configService.set(opts, function (err) {
         if (err) $log.debug(err)
         mqttHost = url
-        host = 'https://' + url + '/rpc-dev'
+        host = 'https://' + url + '/rpc'
         // Force relogin etc
         root.setWallet(root.getWallet(), function () {
           popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
@@ -204,7 +219,8 @@ angular.module('canoeApp.services')
       wallet.setLogger($log)
       // Install callback for broadcasting of blocks
       wallet.setBroadcastCallback(root.broadcastCallback)
-      root.disconnect()
+      root.connectRPC() // Makes sure we have the right backend for RPC
+      root.disconnect() // Makes sure we are disconnected from MQTT
       root.startMQTT(function () {
         // Fetch all pending blocks
         root.fetchPendingBlocks()
@@ -490,20 +506,6 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.connect = function () {
-      try {
-        rai = new Rai(host) // connection
-        rai.initialize()
-      } catch (e) {
-        rai = null
-        $log.warn('Failed to initialize server connection, no network?', e)
-        // Try again
-        setTimeout(function () { root.connect() }, 5000)
-      }
-    }
-
-    root.connect()
-
     root.fetchServerStatus = function (cb) {
       var xhr = new XMLHttpRequest()
       xhr.open('GET', host, true)
@@ -748,7 +750,7 @@ angular.module('canoeApp.services')
         clientId: mqttClientId
       }
       // Connect to MQTT
-      if (doLog) $log.info('Connecting to MQTT broker ...')
+      if (doLog) $log.info('Connecting to MQTT broker ' + mqttHost + ' port ' + mqttPort)
       // $log.debug('Options: ' + JSON.stringify(opts))
       root.connect(opts, function () {
         if (doLog) $log.info('Connected to MQTT broker.')
