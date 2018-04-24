@@ -323,17 +323,17 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
           }
         }, onSendStatusChange) */
       }
-
-      confirmTx(function (nok) {
-        if (nok) {
-          $scope.sendStatus = ''
-          $timeout(function () {
-            $scope.$apply()
-          })
-          return
-        }
-        doSend()
-      })
+      doSend()
+      // confirmTx(function (nok) {
+      //   if (nok) {
+      //     $scope.sendStatus = ''
+      //     $timeout(function () {
+      //       $scope.$apply()
+      //     })
+      //     return
+      //   }
+      //   doSend()
+      // })
     })
   }
 
