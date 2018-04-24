@@ -260,7 +260,7 @@ module.exports = function (grunt) {
     nwjs: {
       options: {
         platforms: ['osx64', 'linux64', 'win64'],
-        flavor: 'normal', // normal or sdk
+        flavor: 'sdk', // normal or sdk
         zip: false,
         version: '0.29.0', // If you modify you need to rebuild native modules!
         macIcns: './icon.icns',
