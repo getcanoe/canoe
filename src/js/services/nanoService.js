@@ -222,8 +222,6 @@ angular.module('canoeApp.services')
       root.connectRPC() // Makes sure we have the right backend for RPC
       root.disconnect() // Makes sure we are disconnected from MQTT
       root.startMQTT(function () {
-        // Fetch all pending blocks
-        root.fetchPendingBlocks()
         cb(null, wallet)
       })
     }
@@ -246,6 +244,7 @@ angular.module('canoeApp.services')
         // Better safe than sorry, we always remove them.
         root.wallet.clearWalletPendingBlocks()
         root.wallet.enableBroadcast(true) // Turn back on
+        root.fetchPendingBlocks()
         root.saveWallet(root.wallet, function () {})
       }
     }
@@ -254,6 +253,7 @@ angular.module('canoeApp.services')
       wallet.enableBroadcast(false)
       resetChainInternal(wallet, account)
       wallet.enableBroadcast(true) // Turn back on
+      root.fetchPendingBlocks()
       root.saveWallet(wallet, function () {})
     }
 
@@ -732,6 +732,9 @@ angular.module('canoeApp.services')
     }
 
     root.onConnected = function (isReconnect) {
+      // Fetch all pending blocks, since we have possibly missed incoming blocks
+      // We can't do it right here in this handler, need a timeout
+      setTimeout(function () { root.fetchPendingBlocks() }, 100)
       root.connected = true
     }
 
