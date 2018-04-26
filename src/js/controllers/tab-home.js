@@ -1,12 +1,11 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('tabHomeController',
-  function ($rootScope, $timeout, $interval, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, txpModalService, appConfigService, startupService, addressbookService, feedbackService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
+  function ($rootScope, $timeout, $interval, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, appConfigService, startupService, addressbookService, feedbackService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
     var wallet
     var listeners = []
     var notifications = []
     $scope.externalServices = {}
-    $scope.openTxpModal = txpModalService.open
     $scope.version = $window.version
     $scope.name = appConfigService.nameCase
     $scope.homeTip = $stateParams.fromOnboarding
@@ -172,7 +171,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
           id: n.txpId
         })
         if (txp) {
-          txpModalService.open(txp)
+          // txpModalService.open(txp)
         } else {
           ongoingProcess.set('loadingTxInfo', true)
           walletService.getTxp(wallet, n.txpId, function (err, txp) {
@@ -182,7 +181,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
               $log.warn('No txp found')
               return popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Transaction not found'))
             }
-            txpModalService.open(_txp)
+            // txpModalService.open(_txp)
           })
         }
       }

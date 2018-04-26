@@ -75,33 +75,32 @@ function nwPrivacyConfig () {
 
 // Setting up route
 angular.module('canoeApp').config(function (historicLogProvider, $provide, $logProvider, $stateProvider, $urlRouterProvider, $compileProvider, $ionicConfigProvider, IdleProvider, TitleProvider) {
-
   TitleProvider.enabled(false)
   // IdleProvider
 
   $urlRouterProvider.otherwise('/starting')
 
-    // NO CACHE
-    // $ionicConfigProvider.views.maxCache(0);
+  // NO CACHE
+  // $ionicConfigProvider.views.maxCache(0);
 
-    // TABS BOTTOM
+  // TABS BOTTOM
   $ionicConfigProvider.tabs.position('bottom')
 
-    // NAV TITTLE CENTERED
+  // NAV TITTLE CENTERED
   $ionicConfigProvider.navBar.alignTitle('center')
 
-    // NAV BUTTONS ALIGMENT
+  // NAV BUTTONS ALIGMENT
   $ionicConfigProvider.navBar.positionPrimaryButtons('left')
   $ionicConfigProvider.navBar.positionSecondaryButtons('right')
 
-    // NAV BACK-BUTTON TEXT/ICON
+  // NAV BACK-BUTTON TEXT/ICON
   $ionicConfigProvider.backButton.icon('icon ion-ios-arrow-thin-left').text('')
   $ionicConfigProvider.backButton.previousTitleText(false)
 
-    // CHECKBOX CIRCLE
+  // CHECKBOX CIRCLE
   $ionicConfigProvider.form.checkbox('circle')
 
-    // USE NATIVE SCROLLING
+  // USE NATIVE SCROLLING
   $ionicConfigProvider.scrolling.jsScrolling(false)
 
   $logProvider.debugEnabled(true)
@@ -154,727 +153,719 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     }
   ])
 
-    // whitelist 'chrome-extension:' for chromeApp to work with image URLs processed by Angular
-    // link: http://stackoverflow.com/questions/15606751/angular-changes-urls-to-unsafe-in-extension-page?lq=1
+  // whitelist 'chrome-extension:' for chromeApp to work with image URLs processed by Angular
+  // link: http://stackoverflow.com/questions/15606751/angular-changes-urls-to-unsafe-in-extension-page?lq=1
   $compileProvider.imgSrcSanitizationWhitelist(/^\s*((https?|ftp|file|blob|chrome-extension):|data:image\/)/)
 
   $stateProvider
 
-      /*
+  /*
        *
        * Other pages
        *
        */
 
-      .state('unsupported', {
-        url: '/unsupported',
-        templateUrl: 'views/unsupported.html'
-      })
+    .state('unsupported', {
+      url: '/unsupported',
+      templateUrl: 'views/unsupported.html'
+    })
 
-      .state('starting', {
-        url: '/starting',
-        template: '<ion-view id="starting"><ion-content><div class="block-spinner row"><ion-spinner class="spinner-stable" icon="crescent"></ion-spinner></div></ion-content></ion-view>'
-      })
+    .state('starting', {
+      url: '/starting',
+      template: '<ion-view id="starting"><ion-content><div class="block-spinner row"><ion-spinner class="spinner-stable" icon="crescent"></ion-spinner></div></ion-content></ion-view>'
+    })
 
-      /*
+  /*
        *
        * URI
        *
        */
 
-      .state('uri', {
-        url: '/uri/:url',
-        controller: function ($stateParams, $log, openURLService, profileService) {
-          profileService.whenAvailable(function () {
-            $log.info('DEEP LINK from Browser:' + $stateParams.url)
-            openURLService.handleURL({
-              url: $stateParams.url
-            })
+    .state('uri', {
+      url: '/uri/:url',
+      controller: function ($stateParams, $log, openURLService, profileService) {
+        profileService.whenAvailable(function () {
+          $log.info('DEEP LINK from Browser:' + $stateParams.url)
+          openURLService.handleURL({
+            url: $stateParams.url
           })
-        }
-      })
+        })
+      }
+    })
 
-      /*
+  /*
        *
        * Wallet
        *
        */
 
-      .state('tabs.account', {
-        url: '/account/:accountId/:fromOnboarding/:clearCache',
-        views: {
-          'tab-home@tabs': {
-            controller: 'accountDetailsController',
-            templateUrl: 'views/accountDetails.html'
-          }
+    .state('tabs.account', {
+      url: '/account/:accountId/:fromOnboarding/:clearCache',
+      views: {
+        'tab-home@tabs': {
+          controller: 'accountDetailsController',
+          templateUrl: 'views/accountDetails.html'
         }
-      })
-      .state('tabs.activity', {
-        url: '/activity',
-        views: {
-          'tab-home@tabs': {
-            controller: 'activityController',
-            templateUrl: 'views/activity.html'
-          }
+      }
+    })
+/*    .state('tabs.activity', {
+      url: '/activity',
+      views: {
+        'tab-home@tabs': {
+          controller: 'activityController',
+          templateUrl: 'views/activity.html'
         }
-      })
-      .state('tabs.proposals', {
-        url: '/proposals',
-        views: {
-          'tab-home@tabs': {
-            controller: 'proposalsController',
-            templateUrl: 'views/proposals.html'
-          }
+      }
+    })
+*/
+    .state('tabs.account.tx-details', {
+      url: '/tx-details/:txid',
+      views: {
+        'tab-home@tabs': {
+          controller: 'txDetailsController',
+          templateUrl: 'views/tx-details.html'
         }
-      })
-      .state('tabs.account.tx-details', {
-        url: '/tx-details/:txid',
-        views: {
-          'tab-home@tabs': {
-            controller: 'txDetailsController',
-            templateUrl: 'views/tx-details.html'
-          }
-        },
-        params: {
-          ntx: null,
-          accountId: null
+      },
+      params: {
+        ntx: null,
+        accountId: null
+      }
+    })
+    .state('tabs.account.backupWarning', {
+      url: '/backupWarning/:from/:walletId',
+      views: {
+        'tab-home@tabs': {
+          controller: 'backupWarningController',
+          templateUrl: 'views/backupWarning.html'
         }
-      })
-      .state('tabs.account.backupWarning', {
-        url: '/backupWarning/:from/:walletId',
-        views: {
-          'tab-home@tabs': {
-            controller: 'backupWarningController',
-            templateUrl: 'views/backupWarning.html'
-          }
+      }
+    })
+    .state('tabs.account.backup', {
+      url: '/backup/:walletId',
+      views: {
+        'tab-home@tabs': {
+          templateUrl: 'views/backup.html',
+          controller: 'backupController'
         }
-      })
-      .state('tabs.account.backup', {
-        url: '/backup/:walletId',
-        views: {
-          'tab-home@tabs': {
-            templateUrl: 'views/backup.html',
-            controller: 'backupController'
-          }
-        }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Tabs
        *
        */
 
-      .state('tabs', {
-        url: '/tabs',
-        abstract: true,
-        controller: 'tabsController',
-        templateUrl: 'views/tabs.html'
-      })
-      .state('tabs.home', {
-        url: '/home/:fromOnboarding',
-        views: {
-          'tab-home': {
-            controller: 'tabHomeController',
-            templateUrl: 'views/tab-home.html'
-          }
+    .state('tabs', {
+      url: '/tabs',
+      abstract: true,
+      controller: 'tabsController',
+      templateUrl: 'views/tabs.html'
+    })
+    .state('tabs.home', {
+      url: '/home/:fromOnboarding',
+      views: {
+        'tab-home': {
+          controller: 'tabHomeController',
+          templateUrl: 'views/tab-home.html'
         }
-      })
-      .state('tabs.receive', {
-        url: '/receive',
-        views: {
-          'tab-receive': {
-            controller: 'tabReceiveController',
-            templateUrl: 'views/tab-receive.html'
-          }
+      }
+    })
+    .state('tabs.receive', {
+      url: '/receive',
+      views: {
+        'tab-receive': {
+          controller: 'tabReceiveController',
+          templateUrl: 'views/tab-receive.html'
         }
-      })
-      .state('tabs.scan', {
-        url: '/scan',
-        views: {
-          'tab-scan': {
-            controller: 'tabScanController',
-            templateUrl: 'views/tab-scan.html'
-          }
+      }
+    })
+    .state('tabs.scan', {
+      url: '/scan',
+      views: {
+        'tab-scan': {
+          controller: 'tabScanController',
+          templateUrl: 'views/tab-scan.html'
         }
-      })
-      .state('scanner', {
-        url: '/scanner',
-        params: {
-          passthroughMode: null
-        },
-        controller: 'tabScanController',
-        templateUrl: 'views/tab-scan.html'
-      })
-      .state('tabs.send', {
-        url: '/send',
-        views: {
-          'tab-send': {
-            controller: 'tabSendController',
-            templateUrl: 'views/tab-send.html'
-          }
+      }
+    })
+    .state('scanner', {
+      url: '/scanner',
+      params: {
+        passthroughMode: null
+      },
+      controller: 'tabScanController',
+      templateUrl: 'views/tab-scan.html'
+    })
+    .state('tabs.send', {
+      url: '/send',
+      views: {
+        'tab-send': {
+          controller: 'tabSendController',
+          templateUrl: 'views/tab-send.html'
         }
-      })
-      .state('tabs.settings', {
-        url: '/settings',
-        views: {
-          'tab-settings': {
-            controller: 'tabSettingsController',
-            templateUrl: 'views/tab-settings.html'
-          }
+      }
+    })
+    .state('tabs.settings', {
+      url: '/settings',
+      views: {
+        'tab-settings': {
+          controller: 'tabSettingsController',
+          templateUrl: 'views/tab-settings.html'
         }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Send
        *
        */
 
-      .state('tabs.send.amount', {
-        url: '/amount/:recipientType/:toAddress/:toName/:toEmail/:toColor/:fixedUnit/:toAlias/:fromAddress',
-        views: {
-          'tab-send@tabs': {
-            controller: 'amountController',
-            templateUrl: 'views/amount.html'
-          }
+    .state('tabs.send.amount', {
+      url: '/amount/:recipientType/:toAddress/:toName/:toEmail/:toColor/:fixedUnit/:toAlias/:fromAddress',
+      views: {
+        'tab-send@tabs': {
+          controller: 'amountController',
+          templateUrl: 'views/amount.html'
         }
-      })
-      .state('tabs.send.confirm', {
-        url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toEmail/:toColor/:description/:coin/:useSendMax/:toAlias/:fromAddress',
-        views: {
-          'tab-send@tabs': {
-            controller: 'confirmController',
-            templateUrl: 'views/confirm.html'
-          }
-        },
-        params: {
-          paypro: null
+      }
+    })
+    .state('tabs.send.confirm', {
+      url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toEmail/:toColor/:description/:coin/:useSendMax/:toAlias/:fromAddress',
+      views: {
+        'tab-send@tabs': {
+          controller: 'confirmController',
+          templateUrl: 'views/confirm.html'
         }
-      })
-      .state('tabs.send.addressbook', {
-        url: '/addressbook/add/:fromSendTab/:addressbookEntry/:toAlias/:toName',
-        views: {
-          'tab-send@tabs': {
-            templateUrl: 'views/addressbook.add.html',
-            controller: 'addressbookAddController'
-          }
+      },
+      params: {
+        paypro: null
+      }
+    })
+    .state('tabs.send.addressbook', {
+      url: '/addressbook/add/:fromSendTab/:addressbookEntry/:toAlias/:toName',
+      views: {
+        'tab-send@tabs': {
+          templateUrl: 'views/addressbook.add.html',
+          controller: 'addressbookAddController'
         }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Add
        *
        */
 
-      .state('tabs.create-account', {
-        url: '/create-account',
-        views: {
-          'tab-home@tabs': {
-            templateUrl: 'views/tab-create-account.html',
-            controller: 'createController'
-          }
+    .state('tabs.create-account', {
+      url: '/create-account',
+      views: {
+        'tab-home@tabs': {
+          templateUrl: 'views/tab-create-account.html',
+          controller: 'createController'
         }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Global Settings
        *
        */
 
-      .state('tabs.notifications', {
-        url: '/notifications',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesNotificationsController',
-            templateUrl: 'views/preferencesNotifications.html'
-          }
+    .state('tabs.notifications', {
+      url: '/notifications',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesNotificationsController',
+          templateUrl: 'views/preferencesNotifications.html'
         }
-      })
-      .state('tabs.language', {
-        url: '/language',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesLanguageController',
-            templateUrl: 'views/preferencesLanguage.html'
-          }
+      }
+    })
+    .state('tabs.language', {
+      url: '/language',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesLanguageController',
+          templateUrl: 'views/preferencesLanguage.html'
         }
-      })
-      .state('tabs.import', {
-        url: '/import',
-        views: {
-          'tab-settings@tabs': {
-            templateUrl: 'views/import.html',
-            controller: 'importController'
-          }
+      }
+    })
+    .state('tabs.import', {
+      url: '/import',
+      views: {
+        'tab-settings@tabs': {
+          templateUrl: 'views/import.html',
+          controller: 'importController'
         }
-      })
-      .state('tabs.altCurrency', {
-        url: '/altCurrency',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesAltCurrencyController',
-            templateUrl: 'views/preferencesAltCurrency.html'
-          }
+      }
+    })
+    .state('tabs.altCurrency', {
+      url: '/altCurrency',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesAltCurrencyController',
+          templateUrl: 'views/preferencesAltCurrency.html'
         }
-      })
-      .state('tabs.about', {
-        url: '/about',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesAbout',
-            templateUrl: 'views/preferencesAbout.html'
-          }
+      }
+    })
+    .state('tabs.about', {
+      url: '/about',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesAbout',
+          templateUrl: 'views/preferencesAbout.html'
         }
-      })
-      .state('tabs.about.logs', {
-        url: '/logs',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesLogs',
-            templateUrl: 'views/preferencesLogs.html'
-          }
+      }
+    })
+    .state('tabs.about.logs', {
+      url: '/logs',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesLogs',
+          templateUrl: 'views/preferencesLogs.html'
         }
-      })
-      .state('tabs.about.termsOfUse', {
-        url: '/termsOfUse',
-        views: {
-          'tab-settings@tabs': {
-            templateUrl: 'views/termsOfUse.html'
-          }
+      }
+    })
+    .state('tabs.about.termsOfUse', {
+      url: '/termsOfUse',
+      views: {
+        'tab-settings@tabs': {
+          templateUrl: 'views/termsOfUse.html'
         }
-      })
-      .state('tabs.advanced', {
-        url: '/advanced',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'advancedSettingsController',
-            templateUrl: 'views/advancedSettings.html'
-          }
+      }
+    })
+    .state('tabs.advanced', {
+      url: '/advanced',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'advancedSettingsController',
+          templateUrl: 'views/advancedSettings.html'
         }
-      })
-      .state('tabs.advanced.changeBackend', {
-        url: '/advanced/changeBackend',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'changeBackendController',
-            templateUrl: 'views/changeBackend.html'
-          }
+      }
+    })
+    .state('tabs.advanced.changeBackend', {
+      url: '/advanced/changeBackend',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'changeBackendController',
+          templateUrl: 'views/changeBackend.html'
         }
-      })
-      .state('tabs.preferencesSecurity', {
-        url: '/preferencesSecurity',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesSecurityController',
-            templateUrl: 'views/preferencesSecurity.html'
-          }
+      }
+    })
+    .state('tabs.preferencesSecurity', {
+      url: '/preferencesSecurity',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesSecurityController',
+          templateUrl: 'views/preferencesSecurity.html'
         }
-      })
-      .state('tabs.preferencesSecurity.changePassword', {
-        url: '/preferencesSecurity/changePassword',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'changePasswordController',
-            templateUrl: 'views/changePassword.html'
-          }
+      }
+    })
+    .state('tabs.preferencesSecurity.changePassword', {
+      url: '/preferencesSecurity/changePassword',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'changePasswordController',
+          templateUrl: 'views/changePassword.html'
         }
-      })
-      .state('tabs.preferencesSecurity.changeLocks', {
-        url: '/preferencesSecurity/changeLocks',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'changeLocksController',
-            templateUrl: 'views/changeLocks.html'
-          }
+      }
+    })
+    .state('tabs.preferencesSecurity.changeLocks', {
+      url: '/preferencesSecurity/changeLocks',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'changeLocksController',
+          templateUrl: 'views/changeLocks.html'
         }
-      })
-      .state('tabs.password', {
-        url: '/password',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'passwordController',
-            templateUrl: 'views/modals/password.html',
-            cache: false
-          }
+      }
+    })
+    .state('tabs.password', {
+      url: '/password',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'passwordController',
+          templateUrl: 'views/modals/password.html',
+          cache: false
         }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Wallet preferences
        *
        */
 
-      .state('tabs.preferences', {
-        url: '/preferences/:accountId',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesController',
-            templateUrl: 'views/preferences.html'
-          }
+    .state('tabs.preferences', {
+      url: '/preferences/:accountId',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesController',
+          templateUrl: 'views/preferences.html'
         }
-      })
-      .state('tabs.preferences.preferencesName', {
-        url: '/preferencesName',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesNameController',
-            templateUrl: 'views/preferencesName.html'
-          }
+      }
+    })
+    .state('tabs.preferences.preferencesName', {
+      url: '/preferencesName',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesNameController',
+          templateUrl: 'views/preferencesName.html'
         }
-      })
-      .state('tabs.preferences.preferencesAlias', {
-        url: '/preferencesAlias',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesAliasController',
-            templateUrl: 'views/preferencesAlias.html'
-          }
+      }
+    })
+    .state('tabs.preferences.preferencesAlias', {
+      url: '/preferencesAlias',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesAliasController',
+          templateUrl: 'views/preferencesAlias.html'
         }
-      })
-      .state('tabs.preferences.preferencesColor', {
-        url: '/preferencesColor',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesColorController',
-            templateUrl: 'views/preferencesColor.html'
-          }
+      }
+    })
+    .state('tabs.preferences.preferencesColor', {
+      url: '/preferencesColor',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesColorController',
+          templateUrl: 'views/preferencesColor.html'
         }
-      })
-      .state('tabs.preferences.preferencesRepresentative', {
-        url: '/preferencesRepresentative',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesRepresentativeController',
-            templateUrl: 'views/preferencesRepresentative.html'
-          }
+      }
+    })
+    .state('tabs.preferences.preferencesRepresentative', {
+      url: '/preferencesRepresentative',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesRepresentativeController',
+          templateUrl: 'views/preferencesRepresentative.html'
         }
-      })
-      .state('tabs.settings.backupWarning', {
-        url: '/backupWarning/:from',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'backupWarningController',
-            templateUrl: 'views/backupWarning.html'
-          }
+      }
+    })
+    .state('tabs.settings.backupWarning', {
+      url: '/backupWarning/:from',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'backupWarningController',
+          templateUrl: 'views/backupWarning.html'
         }
-      })
-      .state('tabs.settings.backup', {
-        url: '/backup',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'backupController',
-            templateUrl: 'views/backup.html'
-          }
+      }
+    })
+    .state('tabs.settings.backup', {
+      url: '/backup',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'backupController',
+          templateUrl: 'views/backup.html'
         }
-      })
-      .state('tabs.export', {
-        url: '/export',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'exportController',
-            templateUrl: 'views/export.html'
-          }
+      }
+    })
+    .state('tabs.export', {
+      url: '/export',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'exportController',
+          templateUrl: 'views/export.html'
         }
-      })
-      .state('tabs.preferences.delete', {
-        url: '/delete',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'preferencesDeleteWalletController',
-            templateUrl: 'views/preferencesDeleteWallet.html'
-          }
+      }
+    })
+    .state('tabs.preferences.delete', {
+      url: '/delete',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'preferencesDeleteWalletController',
+          templateUrl: 'views/preferencesDeleteWallet.html'
         }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Addressbook
        *
        */
 
-      .state('tabs.addressbook', {
-        url: '/addressbook',
-        views: {
-          'tab-settings@tabs': {
-            templateUrl: 'views/addressbook.html',
-            controller: 'addressbookListController'
-          }
+    .state('tabs.addressbook', {
+      url: '/addressbook',
+      views: {
+        'tab-settings@tabs': {
+          templateUrl: 'views/addressbook.html',
+          controller: 'addressbookListController'
         }
-      })
-      .state('tabs.addressbook.add', {
-        url: '/add',
-        views: {
-          'tab-settings@tabs': {
-            templateUrl: 'views/addressbook.add.html',
-            controller: 'addressbookAddController'
-          }
+      }
+    })
+    .state('tabs.addressbook.add', {
+      url: '/add',
+      views: {
+        'tab-settings@tabs': {
+          templateUrl: 'views/addressbook.add.html',
+          controller: 'addressbookAddController'
         }
-      })
-      .state('tabs.addressbook.edit', {
-        url: '/edit/:address/:email/:alias/:name',
-        views: {
-          'tab-settings@tabs': {
-            templateUrl: 'views/addressbook.edit.html',
-            controller: 'addressbookEditController'
-          }
+      }
+    })
+    .state('tabs.addressbook.edit', {
+      url: '/edit/:address/:email/:alias/:name',
+      views: {
+        'tab-settings@tabs': {
+          templateUrl: 'views/addressbook.edit.html',
+          controller: 'addressbookEditController'
         }
-      })
-      .state('tabs.addressbook.view', {
-        url: '/view/:address/:email/:alias/:name',
-        views: {
-          'tab-settings@tabs': {
-            templateUrl: 'views/addressbook.view.html',
-            controller: 'addressbookViewController'
-          }
+      }
+    })
+    .state('tabs.addressbook.view', {
+      url: '/view/:address/:email/:alias/:name',
+      views: {
+        'tab-settings@tabs': {
+          templateUrl: 'views/addressbook.view.html',
+          controller: 'addressbookViewController'
         }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Canoeers
        *
        */
 
-      .state('tabs.canoeers', {
-        url: '/canoeers/:walletId',
-        views: {
-          'tab-home': {
-            templateUrl: 'views/canoeers.html',
-            controller: 'canoeersController'
-          }
+    .state('tabs.canoeers', {
+      url: '/canoeers/:walletId',
+      views: {
+        'tab-home': {
+          templateUrl: 'views/canoeers.html',
+          controller: 'canoeersController'
         }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Request Specific amount
        *
        */
 
-      .state('tabs.paymentRequest', {
-        url: '/payment-request',
-        abstract: true,
-        params: {
-          id: null,
-          nextStep: 'tabs.paymentRequest.confirm'
-        }
-      })
+    .state('tabs.paymentRequest', {
+      url: '/payment-request',
+      abstract: true,
+      params: {
+        id: null,
+        nextStep: 'tabs.paymentRequest.confirm'
+      }
+    })
 
-      .state('tabs.paymentRequest.amount', {
-        url: '/amount/:coin',
-        views: {
-          'tab-receive@tabs': {
-            controller: 'amountController',
-            templateUrl: 'views/amount.html'
-          }
+    .state('tabs.paymentRequest.amount', {
+      url: '/amount/:coin',
+      views: {
+        'tab-receive@tabs': {
+          controller: 'amountController',
+          templateUrl: 'views/amount.html'
         }
-      })
-      .state('tabs.paymentRequest.confirm', {
-        url: '/confirm/:amount/:currency/:coin',
-        views: {
-          'tab-receive@tabs': {
-            controller: 'customAmountController',
-            templateUrl: 'views/customAmount.html'
-          }
+      }
+    })
+    .state('tabs.paymentRequest.confirm', {
+      url: '/confirm/:amount/:currency/:coin',
+      views: {
+        'tab-receive@tabs': {
+          controller: 'customAmountController',
+          templateUrl: 'views/customAmount.html'
         }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Init backup flow
        *
        */
 
-      .state('tabs.receive.backupWarning', {
-        url: '/backupWarning/:from/:walletId',
-        views: {
-          'tab-receive@tabs': {
-            controller: 'backupWarningController',
-            templateUrl: 'views/backupWarning.html'
-          }
+    .state('tabs.receive.backupWarning', {
+      url: '/backupWarning/:from/:walletId',
+      views: {
+        'tab-receive@tabs': {
+          controller: 'backupWarningController',
+          templateUrl: 'views/backupWarning.html'
         }
-      })
-      .state('tabs.receive.backup', {
-        url: '/backup/:walletId',
-        views: {
-          'tab-receive@tabs': {
-            controller: 'backupController',
-            templateUrl: 'views/backup.html'
-          }
+      }
+    })
+    .state('tabs.receive.backup', {
+      url: '/backup/:walletId',
+      views: {
+        'tab-receive@tabs': {
+          controller: 'backupController',
+          templateUrl: 'views/backup.html'
         }
-      })
+      }
+    })
 
-      /*
+  /*
        *
        * Paper Wallet
        *
        */
 
-      .state('tabs.home.paperWallet', {
-        url: '/paperWallet/:privateKey',
-        views: {
-          'tab-home@tabs': {
-            controller: 'paperWalletController',
-            templateUrl: 'views/paperWallet.html'
-          }
+    .state('tabs.home.paperWallet', {
+      url: '/paperWallet/:privateKey',
+      views: {
+        'tab-home@tabs': {
+          controller: 'paperWalletController',
+          templateUrl: 'views/paperWallet.html'
         }
-      })
-      /*
+      }
+    })
+  /*
        *
        * Onboarding
        *
        */
 
-      .state('onboarding', {
-        url: '/onboarding',
-        abstract: true,
-        template: '<ion-nav-view name="onboarding"></ion-nav-view>'
-      })
-      .state('onboarding.welcome', {
-        url: '/welcome',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/onboarding/welcome.html',
-            controller: 'welcomeController'
-          }
+    .state('onboarding', {
+      url: '/onboarding',
+      abstract: true,
+      template: '<ion-nav-view name="onboarding"></ion-nav-view>'
+    })
+    .state('onboarding.welcome', {
+      url: '/welcome',
+      views: {
+        'onboarding': {
+          templateUrl: 'views/onboarding/welcome.html',
+          controller: 'welcomeController'
         }
-      })
-      .state('onboarding.tour', {
-        url: '/tour',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/onboarding/tour.html',
-            controller: 'tourController'
-          }
+      }
+    })
+    .state('onboarding.tour', {
+      url: '/tour',
+      views: {
+        'onboarding': {
+          templateUrl: 'views/onboarding/tour.html',
+          controller: 'tourController'
         }
-      })
-      .state('onboarding.backupRequest', {
-        url: '/backupRequest/:walletId',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/onboarding/backupRequest.html',
-            controller: 'backupRequestController'
-          }
+      }
+    })
+    .state('onboarding.backupRequest', {
+      url: '/backupRequest/:walletId',
+      views: {
+        'onboarding': {
+          templateUrl: 'views/onboarding/backupRequest.html',
+          controller: 'backupRequestController'
         }
-      })
-      .state('onboarding.backupWarning', {
-        url: '/backupWarning/:from/:walletId',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/backupWarning.html',
-            controller: 'backupWarningController'
-          }
+      }
+    })
+    .state('onboarding.backupWarning', {
+      url: '/backupWarning/:from/:walletId',
+      views: {
+        'onboarding': {
+          templateUrl: 'views/backupWarning.html',
+          controller: 'backupWarningController'
         }
-      })
-      .state('onboarding.backup', {
-        url: '/backup/:walletId',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/backup.html',
-            controller: 'backupController'
-          }
+      }
+    })
+    .state('onboarding.backup', {
+      url: '/backup/:walletId',
+      views: {
+        'onboarding': {
+          templateUrl: 'views/backup.html',
+          controller: 'backupController'
         }
-      })
-      .state('onboarding.aliasRequest', {
-        url: '/alias/:walletId/:backedUp',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/onboarding/alias.html',
-            controller: 'createAliasController'
-          }
+      }
+    })
+    .state('onboarding.aliasRequest', {
+      url: '/alias/:walletId/:backedUp',
+      views: {
+        'onboarding': {
+          templateUrl: 'views/onboarding/alias.html',
+          controller: 'createAliasController'
         }
-      })
-      .state('onboarding.disclaimer', {
-        url: '/disclaimer/:walletId/:backedUp/:resume',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/onboarding/disclaimer.html',
-            controller: 'disclaimerController'
-          }
+      }
+    })
+    .state('onboarding.disclaimer', {
+      url: '/disclaimer/:walletId/:backedUp/:resume',
+      views: {
+        'onboarding': {
+          templateUrl: 'views/onboarding/disclaimer.html',
+          controller: 'disclaimerController'
         }
-      })
-      .state('onboarding.terms', {
-        url: '/terms',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/onboarding/terms.html',
-            controller: 'termsController'
-          }
+      }
+    })
+    .state('onboarding.terms', {
+      url: '/terms',
+      views: {
+        'onboarding': {
+          templateUrl: 'views/onboarding/terms.html',
+          controller: 'termsController'
         }
-      })
-      .state('onboarding.import', {
-        url: '/import',
-        views: {
-          'onboarding': {
-            templateUrl: 'views/import.html',
-            controller: 'importController'
-          }
-        },
-        params: {
-          code: null,
-          fromOnboarding: null
+      }
+    })
+    .state('onboarding.import', {
+      url: '/import',
+      views: {
+        'onboarding': {
+          templateUrl: 'views/import.html',
+          controller: 'importController'
         }
-      })
+      },
+      params: {
+        code: null,
+        fromOnboarding: null
+      }
+    })
 
-      /*
+  /*
        *
        * Feedback
        *
        */
 
-      .state('tabs.feedback', {
-        url: '/feedback',
-        views: {
-          'tab-settings@tabs': {
-            templateUrl: 'views/feedback/send.html',
-            controller: 'sendController'
-          }
+    .state('tabs.feedback', {
+      url: '/feedback',
+      views: {
+        'tab-settings@tabs': {
+          templateUrl: 'views/feedback/send.html',
+          controller: 'sendController'
         }
-      })
-      .state('tabs.shareApp', {
-        url: '/shareApp/:score/:skipped/:fromSettings',
-        views: {
-          'tab-settings@tabs': {
-            controller: 'completeController',
-            templateUrl: 'views/feedback/complete.html'
-          }
+      }
+    })
+    .state('tabs.shareApp', {
+      url: '/shareApp/:score/:skipped/:fromSettings',
+      views: {
+        'tab-settings@tabs': {
+          controller: 'completeController',
+          templateUrl: 'views/feedback/complete.html'
         }
-      })
-      .state('tabs.rate', {
-        url: '/rate',
-        abstract: true
-      })
-      .state('tabs.rate.send', {
-        url: '/send/:score',
-        views: {
-          'tab-home@tabs': {
-            templateUrl: 'views/feedback/send.html',
-            controller: 'sendController'
-          }
+      }
+    })
+    .state('tabs.rate', {
+      url: '/rate',
+      abstract: true
+    })
+    .state('tabs.rate.send', {
+      url: '/send/:score',
+      views: {
+        'tab-home@tabs': {
+          templateUrl: 'views/feedback/send.html',
+          controller: 'sendController'
         }
-      })
-      .state('tabs.rate.complete', {
-        url: '/complete/:score/:skipped',
-        views: {
-          'tab-home@tabs': {
-            controller: 'completeController',
-            templateUrl: 'views/feedback/complete.html'
-          }
+      }
+    })
+    .state('tabs.rate.complete', {
+      url: '/complete/:score/:skipped',
+      views: {
+        'tab-home@tabs': {
+          controller: 'completeController',
+          templateUrl: 'views/feedback/complete.html'
         }
-      })
-      .state('tabs.rate.rateApp', {
-        url: '/rateApp/:score',
-        views: {
-          'tab-home@tabs': {
-            controller: 'rateAppController',
-            templateUrl: 'views/feedback/rateApp.html'
-          }
+      }
+    })
+    .state('tabs.rate.rateApp', {
+      url: '/rateApp/:score',
+      views: {
+        'tab-home@tabs': {
+          controller: 'rateAppController',
+          templateUrl: 'views/feedback/rateApp.html'
         }
-      })
+      }
+    })
 })
   .run(function ($rootScope, $state, $location, $log, $timeout, startupService, ionicToast, fingerprintService, $ionicHistory, $ionicPlatform, $window, appConfigService, lodash, platformInfo, profileService, uxLanguage, gettextCatalog, openURLService, storageService, scannerService, configService, emailService, /* plugins START HERE => */ applicationService) {
     uxLanguage.init()
@@ -882,7 +873,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
 
     $ionicPlatform.ready(function () {
       if (screen.width < 768 && platformInfo.isCordova) {
-	var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation || screen.orientation.lock
+        var lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation || screen.orientation.lock
         if (lockOrientation) {
           lockOrientation('portrait')
         }

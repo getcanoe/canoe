@@ -55,20 +55,7 @@
       </div>
     </div>
 
-<!--
-    <div class="list card" ng-hide="!txps[0]">
-      <a class="item item-icon-right item-heading" ui-sref="tabs.proposals">
-        {{'Payment Proposals'|translate}}
-        <i class="icon bp-arrow-right"></i>
-        <span class="badge badge-assertive m5t m10r" ng-show="txpsN>3"> {{txpsN}}</span>
-      </a>
-
-      <div ng-repeat="tx in txps" ng-click="openTxpModal(tx)">
-        <a class="wallet-details__item item item-sub" ng-include="'views/includes/txp.html'"></a>
-      </div>
-    </div>
--->
-    <div class="list card" ng-if="notifications[0] && recentTransactionsEnabled">
+ <!--   <div class="list card" ng-if="notifications[0] && recentTransactionsEnabled">
       <a class="item item-icon-right item-heading" ui-sref="tabs.activity">
         <span translate>Recent Transactions</span>
         <i class="icon bp-arrow-right"></i>
@@ -78,7 +65,7 @@
         <span ng-include="'views/includes/walletActivity.html'"></span>
       </a>
     </div>
-
+  -->
     <div class="list card" ng-if="!accounts[0]">
       <div class="item item-icon-right item-heading">
         <span translate>Accounts</span>
