@@ -119,6 +119,9 @@ angular.module('canoeApp.controllers').controller('importController',
       if (!password) {
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter a password to use for the wallet'))
         return
+      } else if (password.length < 8) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter a password of at least 8 characters'))
+        return
       }
 
       function importSeed () {
