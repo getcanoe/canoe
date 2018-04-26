@@ -9,64 +9,64 @@ angular.module('canoeApp.services')
     // See https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
     root.availableLanguages = [{
       name: 'العربية',
-      isoCode: 'ar'
+      isoCode: 'ar' // Arabic
+    }, {
+      name: 'Čeština',
+      isoCode: 'cs' // Czech
     }, {
       name: 'English',
-      isoCode: 'en'
+      isoCode: 'en' // English
     }, {
       name: 'Español',
-      isoCode: 'es'
+      isoCode: 'es' // Spanish
     }, {
       name: 'Eesti keelt',
-      isoCode: 'et'
+      isoCode: 'et' // Estonian
     }, {
       name: 'Français',
-      isoCode: 'fr'
+      isoCode: 'fr' // French
     }, {
       name: 'Hrvatski jezik',
-      isoCode: 'hr'
-    },
-    {
+      isoCode: 'hr' // Croatian
+    }, {
       name: 'Italiano',
-      isoCode: 'it'
+      isoCode: 'it' // Italian
     }, {
       name: 'Magyar',
-      isoCode: 'hu'
+      isoCode: 'hu' // Hungarian
     }, {
       name: 'Nederlands',
-      isoCode: 'nl'
+      isoCode: 'nl' // Dutch
+    }, {
+      name: 'Norsk Bokmål',
+      isoCode: 'nb' // Norwegian Bokmål
     }, {
       name: 'Polski',
-      isoCode: 'pl'
+      isoCode: 'pl' // Polish
+    }, {
+      name: 'Português',
+      isoCode: 'pt' // Portuguese
     }, {
       name: 'Deutsch',
-      isoCode: 'de'
+      isoCode: 'de' // German
     }, {
       name: '日本語',
-      isoCode: 'ja',
+      isoCode: 'ja', // Japanese
       useIdeograms: true
     }, {
       name: '中文（简体）',
-      isoCode: 'zh',
+      isoCode: 'zh', // Chinese
       useIdeograms: true
     }, {
       name: 'Pусский',
-      isoCode: 'ru'
-    }, {
-      name: 'Português',
-      isoCode: 'pt'
+      isoCode: 'ru'  // Russian
     }, {
       name: 'Svenska',
-      isoCode: 'sv'
+      isoCode: 'sv' // Swedish
     }, {
       name: 'Tiếng Việt',
-      isoCode: 'vi'
+      isoCode: 'vi' // Vietnamese
     }]
-
-    // }, {
-    //   name: 'Český',
-    //   isoCode: 'cs',
-    // }
 
     root._detect = function (cb) {
       var userLang, androidLang
