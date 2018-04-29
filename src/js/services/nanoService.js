@@ -465,7 +465,7 @@ angular.module('canoeApp.services')
     }
 
     root.isValidSeed = function (seedHex) {
-      var isValidHash = /^[0123456789ABCDEF]+$/.test(seedHex)
+      var isValidHash = /^[0123456789ABCDEFabcdef]+$/.test(seedHex)
       return (isValidHash && (seedHex.length === 64))
     }
 
@@ -536,7 +536,7 @@ angular.module('canoeApp.services')
     root.createWallet = function (password, seed, cb) {
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
-      wallet.createSeed(seed)
+      wallet.createSeed(seed.toUpperCase())
       // Recreate existing accounts
       wallet.enableBroadcast(false)
       var emptyAccounts = 0
