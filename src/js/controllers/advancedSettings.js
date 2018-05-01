@@ -22,6 +22,10 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
       }
     }
 
+    $scope.playSounds = {
+      value: config.wallet.playSounds
+    }
+
     $scope.serverSidePoW = {
       value: value
     }
@@ -51,6 +55,17 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
     var opts = {
       wallet: {
         serverSidePoW: $scope.serverSidePoW.value
+      }
+    }
+    configService.set(opts, function (err) {
+      if (err) $log.debug(err)
+    })
+  }
+
+  $scope.playSoundsChange = function () {
+    var opts = {
+      wallet: {
+        playSounds: $scope.playSounds.value
       }
     }
     configService.set(opts, function (err) {
