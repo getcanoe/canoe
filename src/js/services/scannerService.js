@@ -1,6 +1,6 @@
 'use strict'
 /* global cordova angular */
-angular.module('canoeApp.services').service('scannerService', function ($log, $timeout, platformInfo, $rootScope, $window) {
+angular.module('canoeApp.services').service('scannerService', function ($log, $timeout, platformInfo, $rootScope, $window, $injector) {
   var isDesktop = !platformInfo.isCordova
   var QRScanner = $window.QRScanner
   var lightEnabled = false
@@ -140,20 +140,42 @@ angular.module('canoeApp.services').service('scannerService', function ($log, $t
    */
   this.activate = function (callback) {
     $log.debug('Activating scanner...')
-    QRScanner.show(function (status) {
-      initializeCompleted = true
-      _checkCapabilities(status)
-      if (typeof callback === 'function') {
-        callback(status)
+    var domock = false;
+    // Mock for QR Scan of alt currencies
+    if (!QRScanner) {
+      // Doesn't seam to work anymore on browsers
+      // TODO this should be a nice error popup to the user
+      if (domock){
+        console.log('Lets mock!') 
+        var incomingData = $injector.get('incomingData');
+        var contents = 'xrb:xrb_1powqhjxr843t7gtdwgkuj6o5npepwkyewuhfyrzpdpn6ya8yfw5k13mn1q8?amount=0.5&currency=USD'
+        incomingData.redir(contents, null, function (err, code) {
+          if (err) {
+            popupService.showAlert(
+              gettextCatalog.getString('Error'),
+              gettextCatalog.getString('Unrecognized data'), function (err) {
+                console.log('Unrecognized data:', err)
+              }
+            )
+          }
+        })
       }
-    })
-    if (nextHide !== null) {
-      $timeout.cancel(nextHide)
-      nextHide = null
-    }
-    if (nextDestroy !== null) {
-      $timeout.cancel(nextDestroy)
-      nextDestroy = null
+    } else {
+      QRScanner.show(function (status) {
+        initializeCompleted = true
+        _checkCapabilities(status)
+        if (typeof callback === 'function') {
+          callback(status)
+        }
+      })
+      if (nextHide !== null) {
+        $timeout.cancel(nextHide)
+        nextHide = null
+      }
+      if (nextDestroy !== null) {
+        $timeout.cancel(nextDestroy)
+        nextDestroy = null
+      }
     }
   }
 

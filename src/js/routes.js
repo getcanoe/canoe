@@ -332,7 +332,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       }
     })
     .state('tabs.send.confirm', {
-      url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toEmail/:toColor/:description/:coin/:useSendMax/:toAlias/:fromAddress',
+      url: '/confirm/:recipientType/:toAddress/:toName/:toAmount/:toEmail/:toColor/:description/:coin/:useSendMax/:toAlias/:fromAddress/:currency',
       views: {
         'tab-send@tabs': {
           controller: 'confirmController',

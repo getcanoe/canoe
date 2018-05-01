@@ -114,7 +114,8 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       toName: data.stateParams.toName,
       toEmail: data.stateParams.toEmail,
       toColor: data.stateParams.toColor,
-      txp: {}
+      txp: {},
+      currency: data.stateParams.currency
     }
     $scope.accounts = profileService.getAccounts()
     $scope.toAddress = data.stateParams.toAddress
@@ -187,7 +188,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     function updateAmount () {
       if (!tx.toAmount) return
       // Amount
-      tx.amountStr = profileService.formatAmountWithUnit(tx.toAmount) // txFormatService.formatAmountStr(null, tx.toAmount)
+      tx.amountStr = profileService.formatAmountWithUnit(tx.toAmount)
       tx.amountValueStr = tx.amountStr.split(' ')[0]
       tx.amountUnitStr = tx.amountStr.split(' ')[1]
       tx.alternativeAmountStr = toFiat(new BigNumber(tx.toAmount).dividedBy(unitToRaw))
@@ -202,8 +203,8 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     }
   }
 
-  function toFiat (val) {
-    return profileService.toFiat(new BigNumber(val).times(unitToRaw), walletConfig.settings.alternativeIsoCode)
+  function toFiat (val) {    
+    return profileService.toFiat(new BigNumber(val).times(unitToRaw), tx.currency ? tx.currency : walletConfig.settings.alternativeIsoCode)
   }
 
   function useSelectedWallet () {

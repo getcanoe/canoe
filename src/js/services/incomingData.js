@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.services').factory('incomingData', function ($log, $state, $timeout, $ionicHistory, $rootScope, lodash, nanoService, scannerService, appConfigService, popupService, gettextCatalog) {
+angular.module('canoeApp.services').factory('incomingData', function ($log, $state, $timeout, $ionicHistory, $rootScope, lodash, nanoService, scannerService, appConfigService, popupService, gettextCatalog, profileService) {
   var root = {}
 
   root.showMenu = function (data) {
@@ -34,7 +34,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       return decodeURIComponent(results[2].replace(/\+/g, ' '))
     }
 
-    function goSend (addr, amount, message, alias) {
+    function goSend (addr, amount, message, alias, currency) {
       $state.go('tabs.send', {}, {
         'reload': true,
         'notify': $state.current.name !== 'tabs.send'
@@ -46,14 +46,37 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       // Timeout is required to enable the "Back" button
       $timeout(function () {
         if (amount) {
-          $state.transitionTo('tabs.send.confirm', {
-            toAmount: amount,
-            toAddress: addr,
-            toName: toName,
-            description: message,
-            toAlias: alias,
-            fromAddress: fromAddress
-          })
+          if (!currency) { // Regular NANO amount
+            $state.transitionTo('tabs.send.confirm', {
+              toAmount: amount,
+              toAddress: addr,
+              toName: toName,
+              description: message,
+              toAlias: alias,
+              fromAddress: fromAddress
+            })
+          } else { // If we got a currency
+            if (currency === 'NANO') { // NANO to raw
+              $state.transitionTo('tabs.send.confirm', {
+                toAmount: profileService.toRaw(amount),
+                toAddress: addr,
+                toName: toName,
+                description: message,
+                toAlias: alias,
+                fromAddress: fromAddress
+              })
+            } else { // Fiat
+              $state.transitionTo('tabs.send.confirm', {
+                toAmount: profileService.fromFiat(amount, currency),
+                toAddress: addr,
+                toName: toName,
+                description: message,
+                toAlias: alias,
+                fromAddress: fromAddress,
+                currency: currency
+              })
+            }
+          }
         } else {
           $state.transitionTo('tabs.send.amount', {
             toAddress: addr,
@@ -88,7 +111,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         // } else {
           if (code.params.amount) {
             $log.debug('Go send ' + JSON.stringify(code))
-            goSend(code.account, code.params.amount, code.params.message)
+            goSend(code.account, code.params.amount, code.params.message, undefined, code.params.currency) // replace 'undefined' with the alias when this all set
           } else {
             goToAmountPage(code.account, null, fromAddress)
           }

@@ -77,6 +77,10 @@ angular.module('canoeApp.services')
       return (amount / rate) * rawPerNano
     }
 
+    root.toRaw = function (amount) {
+      return BigNumber(amount).times(rawPerNano)
+    }
+
     // Create a new wallet from a seed
     root.importSeed = function (password, seed, cb) {
       $log.debug('Importing Wallet Seed')
@@ -455,7 +459,7 @@ angular.module('canoeApp.services')
       lodash.each(accounts, function (acc) {
         acc.balanceStr = root.formatAmountWithUnit(parseInt(acc.balance))
         var config = configService.getSync().wallet.settings
-        // Don't show unless rate is loaded, ui update will be lanched by $broadcast('rates.loaded')
+        // Don't show unless rate is loaded, ui update will be launched by $broadcast('rates.loaded')
         acc.alternativeBalanceStr = 'hide'
         acc.alternativeBalanceStr = root.toFiat(acc.balance, config.alternativeIsoCode, 'nano')
         acc.pendingBalanceStr = root.formatAmountWithUnit(acc.pendingBalance)
