@@ -536,7 +536,7 @@ angular.module('canoeApp.services')
     root.createWallet = function (password, seed, cb) {
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
-      wallet.createSeed(seed.toUpperCase())
+      wallet.createSeed(seed ? seed.toUpperCase() : null)
       // Recreate existing accounts
       wallet.enableBroadcast(false)
       var emptyAccounts = 0
