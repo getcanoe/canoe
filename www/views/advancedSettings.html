@@ -17,6 +17,15 @@
 
       <div class="item item-divider"></div>
 
+      <ion-toggle class="has-comment" ng-model="playSounds.value" toggle-class="toggle-balanced" ng-change="playSoundsChange()">
+        <span class="toggle-label" translate>Play Sounds</span>
+      </ion-toggle>
+      <div class="comment" translate>
+        If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet.
+      </div>
+
+      <div class="item item-divider"></div>
+
       <ion-toggle class="has-comment" disabled="true" ng-disabled="true" ng-model="recentTransactionsEnabled.value" toggle-class="toggle-balanced" ng-change="recentTransactionsChange()">
         <span class="toggle-label" translate>Recent Transaction Card</span>
       </ion-toggle>

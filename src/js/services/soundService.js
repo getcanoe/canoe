@@ -1,6 +1,6 @@
 'use strict'
 /* global angular Media Audio */
-angular.module('canoeApp.services').factory('soundService', function ($log, platformInfo) {
+angular.module('canoeApp.services').factory('soundService', function ($log, platformInfo, configService) {
   var root = {}
   var isCordova = platformInfo.isCordova
 
@@ -34,12 +34,31 @@ angular.module('canoeApp.services').factory('soundService', function ($log, plat
   }
 
   root.play = function (soundName) {
-    var sound = root.sounds[soundName]
-    if (sound) {
-      sound.play()
-    } else {
-      $log.warn('Missing sound: ' + soundName)
-    }
+    configService.get(function (err, config) {
+      if (err) return $log.debug(err)
+      //Fallback for existing configs
+      if (typeof config.wallet.playSounds === "undefined") {
+        config.wallet.playSounds = true
+        var opts = {
+          wallet: {
+            playSounds: true
+          }
+        }
+        configService.set(opts, function (err) {
+          if (err) $log.debug(err)
+        })
+      }
+      if (config.wallet && config.wallet.playSounds === true) {
+        var sound = root.sounds[soundName]
+        if (sound) {
+          sound.play()
+        } else {
+          $log.warn('Missing sound: ' + soundName)
+        }
+      } else {
+        $log.warn('Sounds are disabled not playing: ' + soundName)
+      }
+    })
   }
 
   return root

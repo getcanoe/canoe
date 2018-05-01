@@ -30,6 +30,7 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
       lockTypeSoft: 'none', // PIN is not yet configured and fingerprint may not be available
       lockTypeBackground: 'none', // PIN is not yet configured and fingerprint may not be available
       serverSidePoW: (!platformInfo.isLinux), // On NW Linux we now have good client side PoW
+      playSounds: true,
       settings: {
         unitName: 'NANO',
         unitToRaw: Math.pow(10, 30),
