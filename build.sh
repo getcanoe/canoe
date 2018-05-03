@@ -61,7 +61,7 @@ then
     cp ../platforms/android/build/outputs/apk/release/android-release-signed-aligned.apk $VER/canoe-android-$VER.apk
   else
     # Debug build without proper signing
-    npm run build:android
+    npm run debug:android
     cp ../platforms/android/build/outputs/apk/debug/android-debug.apk $VER/canoe-android-$VER-debug.apk
   fi
 fi

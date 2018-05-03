@@ -133,6 +133,7 @@
     "final:www": "npm run build:www-release",
     "final:ios": "npm run final:www && npm run build:ios-release && npm run open:ios",
     "final:android": "npm run final:www && npm run build:android-release && npm run sign:android",
+    "debug:android": "npm run build:www && npm run build:android",
     "final:windows": "npm run final:www && npm run build:windows-release",
     "final:linux": "npm run build:desktop",
     "final:desktop": "npm run build:desktop && npm run build:osx",
