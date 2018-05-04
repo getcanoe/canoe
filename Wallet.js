@@ -78,7 +78,9 @@ module.exports = function (password) {
   var api = {} // wallet public methods
   var priv = {} // wallet priv methods
 
-  var canoeRepresentative = 'xrb_3rropjiqfxpmrrkooej4qtmm1pueu36f9ghinpho4esfdor8785a455d16nf' // self explaining
+  // Canoe rep is default (see getDefaultRepresentative()
+  // but this is normally changed immediately based on sharedConfig.
+  var defaultRepresentative = null
 
   var id = hexRandom(11) // Unique id of this wallet, to be used as reference when handling
   var token = hexRandom(32) // Secret token (used as username in server account)
@@ -136,6 +138,18 @@ module.exports = function (password) {
       console.log(chain[i].getHash(true))
       console.log(chain[i].getPrevious())
     }
+  }
+
+  api.hasDefaultRepresentative = function () {
+    return defaultRepresentative !== null
+  }
+
+  api.setDefaultRepresentative = function (rep) {
+    defaultRepresentative = rep
+  }
+
+  api.getDefaultRepresentative = function () {
+    return defaultRepresentative || 'xrb_3rropjiqfxpmrrkooej4qtmm1pueu36f9ghinpho4esfdor8785a455d16nf'
   }
 
   api.setLogger = function (loggerObj) {
@@ -312,7 +326,7 @@ module.exports = function (password) {
         lastPendingBlock: '',
         subscribed: false,
         chain: [],
-        representative: canoeRepresentative,
+        representative: api.getDefaultRepresentative(),
         meta: { label: '' }
       }
     )
@@ -818,7 +832,7 @@ module.exports = function (password) {
     if (lastPendingBlock.length === 64) {
       blk.setReceiveParameters(lastPendingBlock, sourceBlockHash)
     } else {
-      blk.setOpenParameters(sourceBlockHash, acc, canoeRepresentative)
+      blk.setOpenParameters(sourceBlockHash, acc, api.getDefaultRepresentative())
     }
     if (blk.isState()) {
       var bal = api.getBalanceUpToBlock(0)

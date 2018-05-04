@@ -6,6 +6,7 @@ angular.module('canoeApp.services')
 
     // This config is controlled over retained MQTT
     root.sharedconfig = {
+      defaultRepresentative: null,
       servermessage: null, // { title: 'Hey', body: 'Rock on', link: 'http://getcanoe.io' }
       stateblocks: {
         enable: false
@@ -536,6 +537,9 @@ angular.module('canoeApp.services')
     root.createWallet = function (password, seed, cb) {
       $log.debug('Creating new wallet')
       var wallet = root.createNewWallet(password)
+      if (root.sharedconfig.defaultRepresentative) {
+        root.wallet.setDefaultRepresentative(root.sharedconfig.defaultRepresentative)
+      }
       wallet.createSeed(seed ? seed.toUpperCase() : null)
       // Recreate existing accounts
       wallet.enableBroadcast(false)
@@ -845,17 +849,29 @@ angular.module('canoeApp.services')
     }
 
     root.handleSharedConfig = function (payload) {
+      var saveWallet = false
       root.sharedconfig = JSON.parse(payload)
       $log.debug('Received shared config' + JSON.stringify(root.sharedconfig))
-      // Check if we should turn on state block generation. Can not be turned off again.
       if (root.wallet) {
+        if (root.sharedconfig.defaultRepresentative) {
+          if (!root.wallet.hasDefaultRepresentative()) {
+            root.wallet.setDefaultRepresentative(root.sharedconfig.defaultRepresentative)
+            $log.debug('Set default representative in wallet to ' + root.sharedconfig.defaultRepresentative)
+            saveWallet = true
+          }
+        }
+        // Check if we should turn on state block generation. Can not be turned off again.
         if (root.sharedconfig.stateblocks.enable) {
           if (!root.wallet.getEnableStateBlocks()) {
             root.wallet.enableStateBlocks(true)
-            root.saveWallet(root.wallet, function () {
-              $log.debug('Enabled state blocks on this wallet')
-            })
+            $log.debug('Enabled state blocks on this wallet')
+            saveWallet = true
           }
+        }
+        if (saveWallet) {
+          root.saveWallet(root.wallet, function () {
+            $log.debug('Saved changes in wallet from sharedConfig')
+          })
         }
       }
       // Broadcast either null or a message
