@@ -112,14 +112,10 @@ angular.module('canoeApp.services')
         var accAndHash = root.wallet.getNextPrecalcToWork()
         if (accAndHash) {
           if (doLog) $log.info('Working on precalc for ' + accAndHash.account)
-          doWork(accAndHash.hash, function (work) {
-            // Wallet may be purged from RAM, so need to check
-            if (root.wallet) {
-              root.wallet.addWorkToPrecalc(accAndHash.account, accAndHash.hash, work)
-              root.saveWallet(root.wallet, function () {})
-            }
-            setTimeout(generatePoW, 1000)
-          })
+          // Wallet may be purged from RAM, so need to check
+          if (root.wallet) queueWork(root.wallet.get,accAndHash.hash)
+          setTimeout(generatePoW, 1000)
+          //TODO not do polling?
         } else {
           return setTimeout(generatePoW, 1000)
         }
@@ -530,6 +526,8 @@ angular.module('canoeApp.services')
       root.subscribe('sharedconfig/#')
       // Subscribe to blocks sent to our own wallet id
       root.subscribe('wallet/' + wallet.getId() + '/block/#')
+      // Subscribe to pow sent to our own wallet id
+      root.subscribe('wallet/' + wallet.getId() + '/pow')
     }
 
     // Create a new wallet given a good password created by the user, and optional seed.
@@ -647,6 +645,18 @@ angular.module('canoeApp.services')
         version: $window.version
       }
       root.publish('wallet/' + wallet.getId() + '/register', JSON.stringify(register), 2, false)
+    }
+
+    // Tell server to generate PoW
+    // This is called every 1000ms when there is no work stored in localstorage.
+    root.queueWork = function (wallet, hash) {
+      var message = {
+        wallet: wallet.getId(),
+        hash: hash,
+        name: 'canoe', // Other wallets can also use our backend
+        version: $window.version
+      }
+      root.publish('wallet/' + wallet.getId() + '/pow', JSON.stringify(message), 2, false)
     }
 
     // Encrypt and store the wallet in localstorage.
@@ -833,6 +843,23 @@ angular.module('canoeApp.services')
       $log.error('Unknown block type: ' + blkType)
     }
 
+    root.handleIncomingPoW = function (blkType, payload) {
+      /*
+        {
+          "account":"xrb_15d4oo67z6ruebmkcjqghawcbf5f9r4zkg8pf1af3n1s7kd9u7x3m47y8x37",
+          "hash":"718CC2121C3E641059BC1C2CFC45666C99E8AE922F7A807B7D07B62C995D79E2",
+          "work":"89c97e39a3f23834"
+        }
+      */
+      // A block
+      var message = JSON.parse(payload)
+      var hash = message.hash
+      var account = message.account
+      var work = message.work
+      root.wallet.addWorkToPrecalc(account, hash, work)
+      root.saveWallet(root.wallet, function () {})
+    }
+
     root.handleRate = function (payload) {
       var rates = JSON.parse(payload)
       rateService.updateRates(rates)
@@ -877,6 +904,8 @@ angular.module('canoeApp.services')
           // TODO ensure proper wallet id?
           if (parts[2] === 'block') {
             return root.handleIncomingBlock(parts[3], payload)
+          } else if (parts[2] === 'pow') {
+            return root.handleIncomingPoW(parts[3], payload)
           }
           break
         case 'rates':
