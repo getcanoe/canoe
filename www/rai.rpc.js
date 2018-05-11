@@ -435,16 +435,21 @@ function Rai (url_base) {
     return payment_end
   }
 
-// String input
+  // String input
   this.payment_wait = function (account, amount, timeout) {
     var payment_wait = this.rpc(JSON.stringify({'action': 'payment_wait', 'account': account, 'amount': amount, 'timeout': timeout}))
     return payment_wait.status
   }
 
-// block as Object
+  // block as Object
   this.process = function (block) {
     var process = this.rpc(JSON.stringify({'action': 'process', 'block': block}))
     return process.hash
+  }
+
+  // Added to get errors back
+  this.process_block = function (block) {
+    return this.rpc(JSON.stringify({'action': 'process', 'block': block}))
   }
 
   this.peers = function () {

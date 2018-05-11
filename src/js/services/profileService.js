@@ -77,20 +77,6 @@ angular.module('canoeApp.services')
       return (amount / rate) * rawPerNano
     }
 
-    // Create a new wallet from a seed
-    root.importSeed = function (password, seed, cb) {
-      $log.debug('Importing Wallet Seed')
-      // Synchronous now
-      nanoService.createWallet(password, seed, function (err, wallet) {
-        if (err) return cb(err)
-        root.setWallet(wallet, function (err) {
-          if (err) return cb(err)
-          root.enteredPassword(password)
-          nanoService.saveWallet(root.getWallet(), cb)
-        })
-      })
-    }
-
     // Return a URI for the seed given the password
     root.getSeedURI = function (pwd) {
       // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
@@ -273,13 +259,14 @@ angular.module('canoeApp.services')
       return root.getWallet().getWalletBalance().greater(0)
     }
 
-    // Create wallet and default account (which saves wallet), seed can be null.
+    // Create wallet and save it, seed can be null.
     root.createWallet = function (password, seed, cb) {
       // Synchronous now
       nanoService.createWallet(password, seed, function (err, wallet) {
         if (err) return cb(err)
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
+          root.enteredPassword(password) // Making sure it's there
           nanoService.saveWallet(root.getWallet(), cb)
         })
       })

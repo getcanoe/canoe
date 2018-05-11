@@ -92,16 +92,15 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     profileService.enteredPassword(currentPassword)
     // Now we try to load wallet and if it fails, ask user again
     profileService.loadWallet(function (err) {
+      ongoingProcess.set('decryptingWallet', false)
       if (profileService.getWallet()) {
         $scope.hideModal()
         soundService.play('unlocking')
-        ongoingProcess.set('decryptingWallet', false)
         if (err) {
           // Some other error though, we need to show it
           popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Error after loading wallet: ' + err))
         }
       } else {
-        ongoingProcess.set('decryptingWallet', false)
         $scope.password = ''
         showError()
         checkAttempts()

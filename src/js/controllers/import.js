@@ -127,7 +127,8 @@ angular.module('canoeApp.controllers').controller('importController',
       function importSeed () {
         ongoingProcess.set('importingWallet', true)
         $timeout(function () {
-          profileService.importSeed(password, seed, function (err) {
+          $log.debug('Importing Wallet Seed')
+          profileService.createWallet(password, seed, function (err) {
             ongoingProcess.set('importingWallet', false)
             if (err) {
               popupService.showAlert(gettextCatalog.getString('Error'), 'Error importing seed, check session log for more details')
