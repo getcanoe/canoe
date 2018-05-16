@@ -106,6 +106,8 @@
     font-size: 32px;
     color: white;
     line-height: 30px;
+    margin-left: auto !important;
+    padding: 0 !important;
   }
 
   input::selection {
@@ -135,6 +137,7 @@
     display: flex;
     flex-direction: row;
     margin-left: 16px !important;
+    border-bottom: 0.5px dotted rgba(255, 255, 255, 0.36) !important;
   }
 
   .showPassword {
@@ -144,6 +147,11 @@
     width: initial;
   }
 
+  .showPasswordButtons p {
+    color: white;
+    font-weight: 700;
+    min-width: 45px;
+  }
 
   .item {
     border: none;
