@@ -54,6 +54,7 @@
     .item {
       &:first-child {
         padding-top: 0;
+        padding-left: 0;
       }
     }
   }
@@ -136,7 +137,6 @@
   .input-password {
     display: flex;
     flex-direction: row;
-    margin-left: 16px !important;
     border-bottom: 0.5px dotted rgba(255, 255, 255, 0.36) !important;
   }
 
