@@ -61,35 +61,64 @@
         <div class="list settings-list settings-input-group">
 
           <div class="input-password item item-input item-stacked-label">
-            <input autocapitalize="none" autocorrect="off" id="input-password" ng-model="password" type="{{ typePassword ? 'password' : 'text' }}" name="password" placeholder="Password" >
+            <input 
+               autocapitalize="none" 
+               autocorrect="off" 
+               id="input-password" 
+               ng-model="password" 
+               type="{{ typePassword ? 'text' : 'password' }}" 
+               name="password" 
+               placeholder="Password" 
+               required
+            >
+
             <div class="showPassword" ng-click="togglePassword()">
-              <div class="showPasswordButtons">
-                <p ng-show="!typePassword" translate>HIDE</p>
-                <p ng-show="typePassword" translate>SHOW</p>
-              </div>
+              <i class="fa" ng-class="{ 
+                'fa-eye': !typePassword,
+                'fa-eye-slash': typePassword
+                }"
+              aria-hidden="true"></i>
             </div>
           </div>
 
-          <label class="item item-input item-stacked-label">
-            <span class="input-label" translate>Enter at least 8 characters to encrypt your wallet.</span>
+          <label class="item item-input item-stacked-label password-message">
+            <span ng-hide="password.length >= 8" class="input-label" translate>Enter at least 8 characters to encrypt your wallet.</span>
+            <div ng-show="password.length >= 8" class="item item-input item-stacked-label good-password">
+              <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+              <span translate>Password length ok</span>
+            </div>
           </label>
 
-          <div ng-show="password.length >= 8" class="item item-input item-stacked-label good-password">
-            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-            <span translate>Password length ok</span>
+					<div class="input-password item item-input item-stacked-label">
+						<input 
+							ng-model="passwordConfirm"
+              id="input-password" 
+              type="{{ typePassword ? 'text' : 'password' }}" 
+							name="confirmPassword"
+							autocapitalize="none"
+							autocorrect="off"
+							required
+							data-password-verify="user.password"
+							placeholder="{{'Confirm Password'|translate}}"
+            >
           </div>
-
+          <label class="item item-input item-stacked-label">
+            <div ng-hide="password !== passwordConfirm || !password || !passwordConfirm" class="item item-input item-stacked-label good-password">
+              <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+              <span translate>Passwords match</span>
+            </div>
+          </label>
         </div>
 
-        <div class="cta-buttons">
-          <button
-            class="button button-standard button-primary"
-            ng-disabled="!password || password.length < 8"
-            type="submit"
-            translate>
-            Create Wallet
-          </button>
-        </div>
+          <div class="cta-buttons">
+            <button
+              class="button button-standard button-primary"
+              ng-disabled="!password || !passwordConfirm || password!==passwordConfirm || password.length < 8"
+              type="submit"
+              translate>
+              Create Wallet
+            </button>
+          </div>
 
       </form>
       </ion-content>

@@ -127,6 +127,7 @@
 
   .good-password {
     color: $v-success-color;
+    margin-left: 0 !important;
   }
 
   .good-password,
@@ -138,6 +139,7 @@
     display: flex;
     flex-direction: row;
     border-bottom: 0.5px dotted rgba(255, 255, 255, 0.36) !important;
+    padding-left: 0px !important;
   }
 
   .showPassword {
@@ -147,11 +149,10 @@
     width: initial;
   }
 
-  .showPasswordButtons p {
-    color: white;
-    font-weight: 700;
-    min-width: 45px;
+  .password-message {
+    min-height: 50px;
   }
+
 
   .item {
     border: none;
