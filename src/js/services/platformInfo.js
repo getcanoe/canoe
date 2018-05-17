@@ -45,7 +45,7 @@ angular.module('canoeApp.services').factory('platformInfo', function ($window) {
     isNW: isNW,
     isLinux: nwOS === 'linux',
     isOSX: nwOS === 'darwin',
-    isWindows: nwOS === 'win64'
+    isWindows: (nwOS === 'win64' || nwOS === 'win32')
   }
 
   ret.isMobile = ret.isAndroid || ret.isIOS || ret.isWP

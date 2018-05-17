@@ -17,7 +17,7 @@ function Logger (logToConsole) {
     return errors
   }
 
-  api.log = function (data){
+  api.log = function (data) {
     logs.push(data)
     if (consoleLog) { console.log(data) }
   }

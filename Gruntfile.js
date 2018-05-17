@@ -82,6 +82,12 @@ module.exports = function (grunt) {
       desktopverify: {
         cmd: 'gpg --verify build/canoe-linux64-<%= pkg.version %>.zip.sig build/canoe-linux64-<%= pkg.version %>.zip; gpg --verify build/canoe-linux64-<%= pkg.version %>.AppImage.sig build/canoe-linux64-<%= pkg.version %>.AppImage; gpg --verify build/canoe-win64-<%= pkg.version %>.zip.sig build/canoe-win64-<%= pkg.version %>.zip ; gpg --verify build/canoe-osx64-<%= pkg.version %>.zip.sig build/canoe-osx64-<%= pkg.version %>.zip'
       },
+      dmgsign: {
+        cmd: 'gpg -u E7ADC266 --output build/canoe-osx64-<%= pkg.version %>.dmg.sig --detach-sig build/canoe-osx64-<%= pkg.version %>.dmg'
+      },
+      dmgverify: {
+        cmd: 'gpg --verify build/canoe-osx64-<%= pkg.version %>.dmg.sig build/canoe-osx64-<%= pkg.version %>.dmg'
+      },
       osxsign: {
         cmd: 'gpg -u E7ADC266 --output build/canoe.dmg.sig --detach-sig build/canoe.dmg'
       }
@@ -254,11 +260,11 @@ module.exports = function (grunt) {
     nwjs: {
       options: {
         platforms: ['osx64', 'linux64', 'win64'],
-        flavor: 'normal', // normal or sdk
+        flavor: 'sdk', // normal or sdk
         zip: false,
         version: '0.29.0', // If you modify you need to rebuild native modules!
-        macIcns: './resources/canoe/mac/app.icns',
-        exeIco: './www/img/app/logo.ico',
+        macIcns: './icon.icns',
+        exeIco: './icon.ico',
         macPlist: {
           'CFBundleURLTypes': [
             {
@@ -299,6 +305,9 @@ module.exports = function (grunt) {
   grunt.registerTask('prod', ['default', 'uglify'])
   grunt.registerTask('translate', ['nggettext_extract'])
   grunt.registerTask('desktop', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:linux_native', 'copy:osx_native', 'exec:ziplinux', 'exec:appimage', 'exec:ziposx', 'exec:zipwin'])
+  grunt.registerTask('desktoplinux64', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:linux_native', 'exec:ziplinux'])
+  grunt.registerTask('desktoposx64', ['prod', 'exec:cleanbuild', 'nwjs', 'copy:osx_native', 'exec:ziposx', 'appdmg'])
+  grunt.registerTask('desktopwin64', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:zipwin'])
   grunt.registerTask('osx', ['prod', 'nwjs', 'copy:osx_native', 'appdmg', 'exec:osxsign'])
   grunt.registerTask('osx-debug', ['default', 'nwjs'])
   grunt.registerTask('chrome', ['default', 'exec:chrome'])

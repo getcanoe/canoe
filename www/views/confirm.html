@@ -34,7 +34,8 @@
           </i>
           <div copy-to-clipboard="tx.toAddress">
             <contact ng-if="tx.toAddress && !tx.toName" address="{{tx.toAddress}}"></contact>
-            <span ng-if="tx.toName" class="wallet-name">{{tx.toName}}</span>
+            <span ng-if="toAlias" class="wallet-name">@{{toAlias}}</span>
+            <span ng-if="!toAlias && tx.toName" class="wallet-name">{{tx.toName}}</span>
           </div>
         </div>
 
@@ -47,7 +48,8 @@
           </i>
           <div copy-to-clipboard="tx.toAddress">
             <contact ng-if="tx.toAddress && !tx.toName" address="{{tx.toAddress}}"></contact>
-            <span ng-if="tx.toName" class="wallet-name">{{tx.toName}}</span>
+            <span ng-if="toAlias" class="wallet-name">@{{toAlias}}</span>
+            <span ng-if="!toAlias && tx.toName" class="wallet-name">{{tx.toName}}</span>
           </div>
         </div>
 

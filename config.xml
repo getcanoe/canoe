@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="391001" id="io.getcanoe.canoe" ios-CFBundleVersion="0.3.4" version="0.3.4">
+<widget android-versionCode="391006" id="io.getcanoe.canoe" ios-CFBundleVersion="0.9.9" version="0.9.9">
     <name>Canoe</name>
     <description>
       Canoe Nano Wallet
@@ -38,6 +38,12 @@
         <config-file parent="ITSAppUsesNonExemptEncryption" target="*-Info.plist">
             <false />
         </config-file>
+        <splash src="resources/canoe/ios/splash/Default@2x~universal~anyany.png" />
+        <splash src="resources/canoe/ios/splash/Default@2x~universal~comany.png" />
+        <splash src="resources/canoe/ios/splash/Default@2x~universal~comcom.png" />
+        <splash src="resources/canoe/ios/splash/Default@3x~universal~anyany.png" />
+        <splash src="resources/canoe/ios/splash/Default@3x~universal~anycom.png" />
+        <splash src="resources/canoe/ios/splash/Default@3x~universal~comany.png" />
         <allow-navigation href="*" />
     </platform>
     <platform name="android">
@@ -64,14 +70,16 @@
     <engine name="android" spec="7.1.0" />
     <engine name="windows" spec="6.0.0" />
     <engine name="ios" spec="^4.5.4" />
-    <plugin name="cordova-plugin-device" spec="^2.0.1" />
-    <plugin name="cordova-plugin-globalization" spec="^1.0.9" />
+
+    <plugin name="cordova-plugin-device" spec="^2.0.2" />
+    <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
+
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
-    <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
-    <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.2" />
-    <plugin name="cordova-clipboard" spec="^1.1.1" />
-    <plugin name="cordova-plugin-x-socialsharing" spec="^5.3.2" />
+    <plugin name="cordova-clipboard" spec="^1.2.1" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="^5.4.0" />
     <plugin name="cordova-plugin-spinner-dialog" spec="^1.3.1" />
     <plugin name="cordova-plugin-dialogs" spec="^2.0.1" />
     <plugin name="cordova-plugin-network-information" spec="^2.0.1" />
@@ -92,10 +100,10 @@
         <variable name="SECOND_URL_SCHEME" value="xrb" />
         <variable name="THIRD_URL_SCHEME" value="canoe" />
     </plugin>
-    <plugin name="cordova-plugin-ionic-webview" spec="^1.1.16" />
+    <plugin name="cordova-plugin-ionic-webview" spec="^1.2.1" />
     <plugin name="cordova-custom-config" spec="^5.0.2" />
     <plugin name="cordova-plugin-media" spec="^5.0.2">
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
-    <plugin name="cordova-plugin-add-swift-support" spec="^1.7.1" />
+    <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
 </widget>

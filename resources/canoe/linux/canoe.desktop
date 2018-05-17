@@ -7,6 +7,6 @@ Icon=canoe
 Terminal=false
 Categories=Office;Finance;
 MimeType=x-scheme-handler/xrb;
-X-Canoe-BuildId=0.3.4
+X-Canoe-BuildId=0.9.9
 X-Ubuntu-Touch=true
 X-Ubuntu-StageHint=SideStage

@@ -34,75 +34,6 @@ XRB.error = function (error) {
   console.error(error)
 }
 
-// Extended function, bignumber.js is required
-XRB.unit = function (input, input_unit, output_unit) {
-  var value = new BigNumber(input.toString())
-
-	// Step 1: to RAW
-  switch (input_unit) {
-    case 'raw': value = value; break
-    case 'XRB': value = value.shift(30); break
-    case 'Trai': value = value.shift(36); break // draft
-    case 'Grai': value = value.shift(33); break
-    case 'Mrai': value = value.shift(30); break
-    case 'krai': value = value.shift(27); break
-    case 'rai': value = value.shift(24); break
-    case 'mrai': value = value.shift(21); break
-    case 'urai': value = value.shift(18); break
-    case 'prai': value = value.shift(15); break // draft
-    default: value = value
-  }
-
-	// Step 2: to output
-  switch (output_unit) {
-    case 'raw': value = value; break
-    case 'XRB': value = value.shift(-30); break
-    case 'Trai': value = value.shift(-36); break // draft
-    case 'Grai': value = value.shift(-33); break
-    case 'Mrai': value = value.shift(-30); break
-    case 'krai': value = value.shift(-27); break
-    case 'rai': value = value.shift(-24); break
-    case 'mrai': value = value.shift(-21); break
-    case 'urai': value = value.shift(-18); break
-    case 'prai': value = value.shift(-15); break // draft
-    default: value = value
-  }
-
-  value = value.toFixed(0)
-  return value
-}
-
-// Use for RAW
-XRB.minus = function (base, minus) {
-  var value = new BigNumber(base.toString())
-  var big_minus = new BigNumber(minus.toString())
-  if (big_minus.greaterThan(value)) {
-    XRB.error('Incorrect amount')
-    return false
-  }	else {
-    value = value.minus(big_minus)
-    value = value.toFixed(0)
-    return value
-  }
-}
-
-// Use for RAW
-XRB.plus = function (base, plus) {
-  var value = new BigNumber(base.toString())
-  var big_plus = new BigNumber(plus.toString())
-  value = value.plus(big_plus)
-  value = value.toFixed(0)
-  return value
-}
-
-// Use for RAW
-XRB.raw_to_hex = function (raw) {
-  var value = new BigNumber(raw.toString())
-  value = value.toString(16).toUpperCase()
-  if (value.length < 32)	for (let n = value.length; n < 32; n++)	value = '0' + value
-  return value
-}
-
 function Rai (url_base) {
   this.error = function (error) {
     XRB.error(error)
@@ -161,7 +92,7 @@ function Rai (url_base) {
   }
 
   this.unit = function (input, input_unit, output_unit) {
-    return XRB.unit(input, input_unit, output_unit)
+    return input // Disabled due to pruning of BigNumber: XRB.unit(input, input_unit, output_unit)
   }
 
 // Object output
@@ -197,8 +128,8 @@ function Rai (url_base) {
     return account_info
   }
 
-  this.account_history = function (account, count = '4096') {
-    var account_history = this.rpc(JSON.stringify({'action': 'account_history', 'account': account, 'count': count}))
+  this.account_history = function (account, count = '-1', raw = 'true') {
+    var account_history = this.rpc(JSON.stringify({'action': 'account_history', 'account': account, 'count': count, 'raw': raw}))
     return account_history.history
   }
 
@@ -622,8 +553,8 @@ function Rai (url_base) {
   this.unchecked_keys = function (key = '0000000000000000000000000000000000000000000000000000000000000000', count = '4096') {
     var unchecked_keys = this.rpc(JSON.stringify({'action': 'unchecked_keys', 'key': key, 'count': count}))
     var unchecked = unchecked_keys.unchecked
-    for (let key in unchecked) {
-      unchecked[key].contents = JSON.parse(unchecked[key].contents)
+    for (let uncheckedKey in unchecked) {
+      unchecked[uncheckedKey].contents = JSON.parse(unchecked[uncheckedKey].contents)
     }
     return unchecked
   }

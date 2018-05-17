@@ -8,8 +8,7 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
     $scope.ntx = $stateParams.ntx
     $scope.hasFunds = profileService.hasFunds()
     $scope.title = gettextCatalog.getString('Transaction')
-    $scope.account = profileService.getAccount(data.stateParams.walletId)
-
+    $scope.account = profileService.getAccount($stateParams.walletId)
     listeners = [
 /*      $rootScope.$on('bwsEvent', function (e, walletId, type, n) {
         if (type === 'NewBlock' && n && n.data && n.data.network == 'livenet') {
@@ -36,7 +35,8 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
             recipientType: addr ? 'contact' : null,
             toAmount: $scope.ntx.amount,
             toName: addr ? addr.name : null,
-            toAddress: $scope.ntx.origin
+            toAddress: $scope.ntx.origin,
+            fromAddress: $stateParams.accountId
             //description: ''
           })
         }, 50)

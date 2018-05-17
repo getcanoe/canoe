@@ -5,10 +5,7 @@ Canoe is a cross platform Nano Wallet application. It's based upon the [Copay](h
 ## Main Features
 
 - Device-based security: all private keys are stored locally, not in the cloud
-- Synchronous access across all major mobile and desktop platforms
 - Support for over 150 currency pricing options and unit denomination in BTC or bits
-- Email notifications for payments and transfers
-- Push notifications (only available for ios and android versions)
 - Customizable wallet naming and background colors
 - Multiple languages supported
 
@@ -37,32 +34,6 @@ A watch task is also available to rebuild components of the app as changes are m
 ```
 npm run watch
 ```
-
-## Running the mock backend
-
-By default the code's backend is the Canoe beta server ( see `src/js/services/nanoService.js`'s `host` setting). 
-
-If you want to test things out on a local machine without running an entire Nano RPC node, you can instead run our mock backend.
-
-```
-node mock_backend/server.js
-```
-
-You will also want to change the top of `src/js/services/nanoService.js` from:
-
-```
-    // var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
-    var host = 'https://getcanoe.io/rpc' // for the beta node
-```
-
-to
-
-```
-    var host = 'http://localhost:7076' // for local testing against your own rai_wallet or node
-    // var host = 'https://getcanoe.io/rpc' // for the beta node
-```
-
-The mock backend provides placeholder responses to many requests.
 
 ## Testing on Real Devices
 
@@ -179,7 +150,9 @@ On success, the Chrome extension will be located at: `browser-extensions/chrome/
 ...details to come...
 
 ## Translations
-Canoe uses standard gettext PO files for translations. We should as soon as Canoe is fully functional start using [Crowdin](https://crowdin.com) as the front-end tool for translators, just like Copay does, more on that follows later. In the meantime, credits to the partial translations Canoe has inherited from Copay:
+Canoe uses standard gettext PO files for translations.[POEditor](https://poeditor.com/join/project/cnSZa85DRN) is the front-end tool for translators and that's the only path for contributing translation work - we do not take pull requests for translations because it gets really complicated then to keep POEditor in sync.
+
+Credits to the partial translations Canoe inherited from Copay:
 
 **Translation Credits:**
 - Japanese: @dabura667

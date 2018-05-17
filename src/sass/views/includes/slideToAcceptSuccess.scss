@@ -13,7 +13,7 @@ slide-to-accept-success {
   .slide-success {
     $duration: 400ms;
     &__windows-background {
-      background: $v-success-bg-color;
+      background-image: linear-gradient(320deg, $v-onboarding-gradient-top-color 50%, $v-onboarding-gradient-bottom-color 100%);
       height: 100%;
       width: 100%;
       position: fixed;
@@ -33,7 +33,7 @@ slide-to-accept-success {
       &.fill-screen {
         -webkit-transform: scale3d($scale-factor, $scale-factor, 1) translateY(-40%);
         transform: scale3d($scale-factor, $scale-factor, 1) translateY(-40%);
-        background: $v-success-bg-color;
+        background-image: linear-gradient(320deg, $v-onboarding-gradient-top-color 50%, $v-onboarding-gradient-bottom-color 100%);
       }
     }
 

@@ -7,7 +7,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     $rootScope.$broadcast('incomingDataMenu.showMenu', data)
   }
 
-  root.redir = function (data, cb) {
+  root.redir = function (data, fromAddress, cb) {
     $log.debug('Processing incoming data: ' + data)
 
     function sanitizeUri (data) {
@@ -51,11 +51,13 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
             toAddress: addr,
             toName: toName,
             description: message,
-            toAlias: alias
+            toAlias: alias,
+            fromAddress: fromAddress
           })
         } else {
           $state.transitionTo('tabs.send.amount', {
-            toAddress: addr
+            toAddress: addr,
+            fromAddress: fromAddress
           })
         }
       }, 100)
@@ -88,7 +90,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
             $log.debug('Go send ' + JSON.stringify(code))
             goSend(code.account, code.params.amount, code.params.message)
           } else {
-            goToAmountPage(code.account)
+            goToAmountPage(code.account, null, fromAddress)
           }
         // }
         return cb(null, code)
@@ -122,7 +124,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
     })
   }
 
-  function goToAmountPage (toAddress, toAlias) {
+  function goToAmountPage (toAddress, toAlias, fromAddress) {
     $state.go('tabs.send', {}, {
       'reload': true,
       'notify': $state.current.name !== 'tabs.send'
@@ -135,7 +137,8 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       $state.transitionTo('tabs.send.amount', {
         toAddress: toAddress,
         toName: toName,
-        toAlias: toAlias
+        toAlias: toAlias,
+        fromAddress: fromAddress
       })
     }, 100)
   }

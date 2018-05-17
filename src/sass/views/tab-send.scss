@@ -177,7 +177,10 @@
       }
     }
   }
-  .scroll{height: 100%;}
+  .scroll{
+    height: calc(100% - 78px);
+    overflow-y: scroll;
+  }
   .important-message {
     width: 100%;
     cursor: pointer;
@@ -187,6 +190,16 @@
     padding: 5px 0;
     i {
       margin: 0 10px;
+    }
+  }
+  .account-selector {
+    position: absolute;
+    bottom: 49px;
+    width: 100%;
+  }
+  @media screen and (max-device-width: 375px) and (max-device-height: 812px) {
+    .account-selector {
+      bottom: 83px;
     }
   }
 }

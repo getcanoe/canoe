@@ -28,7 +28,7 @@
 					<div class="list">
 						<ion-radio name="lockTypeSoft" ng-value="'none'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('none')">{{'None'|translate}}</ion-radio>
 						<ion-radio name="lockTypeSoft" ng-value="'pin'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('pin')">{{'4-digit PIN'|translate}}</ion-radio>
-						<ion-radio ng-if="enabledFingerprint" name="lockTypeSoft" ng-value="'fingerprint'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('fingerprint')">{{'Fingerprint'|translate}}</ion-radio>		
+						<ion-radio ng-if="enabledFingerprint" name="lockTypeSoft" ng-value="'fingerprint'" ng-model="lockTypeSoft" ng-click="saveLockTypeA('fingerprint')">{{'Fingerprint'|translate}}</ion-radio>
 					</div>
 				</label>
 
@@ -36,7 +36,7 @@
 
 				<div class="comment" translate>
           <h5 class="toggle-label" translate>Hard Lock</h5>
-          With Hard Lock, Canoe encrypts your wallet and completely remove it from memory. You can not disable Hard Lock, but you can set a very hight timeout.
+          With Hard Lock, Canoe encrypts your wallet and completely remove it from memory. You can not disable Hard Lock, but you can set a very high timeout.
 				</div>
 				<label class="item item-input item-stacked-label">
 					<span class="input-label" translate>Hard Timeout</span>

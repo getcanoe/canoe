@@ -119,6 +119,9 @@ angular.module('canoeApp.controllers').controller('importController',
       if (!password) {
         popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter a password to use for the wallet'))
         return
+      } else if (password.length < 8) {
+        popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Please enter a password of at least 8 characters'))
+        return
       }
 
       function importSeed () {
@@ -144,9 +147,9 @@ angular.module('canoeApp.controllers').controller('importController',
 
     var importWarning = function (cb) {
       var title = gettextCatalog.getString('Warning!')
-      var message = gettextCatalog.getString('Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from.')
-      popupService.showConfirm(title, message, null, null, function (res) {
-        if (!res) return
+      var message = gettextCatalog.getString('Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type "delete" to confirm you wish to delete your current wallet.')
+      popupService.showPrompt(title, message, null, function (res) {
+        if (!res || res.toLowerCase() !== gettextCatalog.getString('delete').toLowerCase()) return
         return cb()
       })
     }

@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('canoeApp.controllers').controller('advancedSettingsController', function ($scope, $log, $ionicHistory, configService, nanoService, popupService, platformInfo, gettextCatalog) {
+angular.module('canoeApp.controllers').controller('advancedSettingsController', function ($scope, $log, $ionicHistory, $timeout, $state, configService, nanoService, popupService, platformInfo, gettextCatalog) {
   var updateConfig = function () {
     var config = configService.getSync()
 
@@ -22,6 +22,10 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
       }
     }
 
+    $scope.playSounds = {
+      value: config.wallet.playSounds
+    }
+
     $scope.serverSidePoW = {
       value: value
     }
@@ -40,10 +44,28 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
     })
   }
 
+  $scope.changeBackend = function () {
+    $ionicHistory.removeBackView()
+    $timeout(function () {
+      $state.transitionTo('tabs.advanced.changeBackend')
+    }, 100)
+  }
+
   $scope.serverSidePoWChange = function () {
     var opts = {
       wallet: {
         serverSidePoW: $scope.serverSidePoW.value
+      }
+    }
+    configService.set(opts, function (err) {
+      if (err) $log.debug(err)
+    })
+  }
+
+  $scope.playSoundsChange = function () {
+    var opts = {
+      wallet: {
+        playSounds: $scope.playSounds.value
       }
     }
     configService.set(opts, function (err) {

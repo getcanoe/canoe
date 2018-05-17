@@ -6,7 +6,11 @@ angular.module('canoeApp.services')
     var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
     var isIOS = platformInfo.isIOS
 
-    var RAW_PER_NANO = Math.pow(10, 30) // 1 NANO = 1 Mnano = 10^30 raw
+    // Avoid 15 signific digit error
+    BigNumber.config({ ERRORS: false })
+
+    // 1 NANO = 1 Mnano = 10^30 raw
+    var rawPerNano = BigNumber('1000000000000000000000000000000')
 
     // This is where we hold profile, wallet and password to decrypt it
     var root = {}
@@ -44,6 +48,7 @@ angular.module('canoeApp.services')
       if (root.getWallet()) {
         $log.info('Changed password for wallet')
         root.getWallet().changePass(currentPw, pw)
+        root.enteredPassword(pw)
         nanoService.saveWallet(root.getWallet(), function () {})
       } else {
         $log.error('No wallet to change password for')
@@ -63,14 +68,13 @@ angular.module('canoeApp.services')
     }
 
     root.toFiat = function (raw, code) {
-      BigNumber.config({ ERRORS: false });
-      var rate = new BigNumber(rateService.getRate(code))
-      return root.formatAnyAmount(new BigNumber(raw).times(rate).dividedBy(RAW_PER_NANO), uxLanguage.currentLanguage, code)
+      var rate = BigNumber(rateService.getRate(code))
+      return root.formatAnyAmount(BigNumber(raw).times(rate).dividedBy(rawPerNano), uxLanguage.currentLanguage, code)
     }
 
     root.fromFiat = function (amount, code) {
       var rate = rateService.getRate(code)
-      return (amount / rate) * RAW_PER_NANO
+      return (amount / rate) * rawPerNano
     }
 
     // Create a new wallet from a seed
@@ -81,7 +85,7 @@ angular.module('canoeApp.services')
         if (err) return cb(err)
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
-          nanoService.repair() // So we fetch truth from lattice, sync
+          root.enteredPassword(password)
           nanoService.saveWallet(root.getWallet(), cb)
         })
       })
@@ -125,13 +129,13 @@ angular.module('canoeApp.services')
     }
 
     root.formatAmount = function (raw, decimals) {      
-      return root.formatAnyAmount(new BigNumber(raw).dividedBy(RAW_PER_NANO), uxLanguage.currentLanguage)
+      return root.formatAnyAmount(new BigNumber(raw).dividedBy(rawPerNano), uxLanguage.currentLanguage)
     }
 
     root.formatAmountWithUnit = function (raw) {
       if (isNaN(raw)) return
       // TODO use current unit in settings knano, Mnano etc
-      return root.formatAnyAmount(new BigNumber(raw).dividedBy(RAW_PER_NANO), uxLanguage.currentLanguage, 'NANO')
+      return root.formatAnyAmount(new BigNumber(raw).dividedBy(rawPerNano), uxLanguage.currentLanguage, 'NANO')
     }
     
     // A quite resilient and open minded way to format amounts from any epoch and location
@@ -298,9 +302,7 @@ angular.module('canoeApp.services')
         return cb('No password entered, can not load wallet from local storage')
       }
       nanoService.createWalletFromStorage(root.password, function (err, wallet) {
-        if (err) {
-          return cb(err)
-        }
+        if (err) return cb(err)
         root.setWallet(wallet, function (err) {
           if (err) return cb(err)
           cb(null, wallet)

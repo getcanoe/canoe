@@ -1,11 +1,10 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('accountDetailsController', function ($scope, $rootScope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicHistory, profileService, nanoService, lodash, configService, platformInfo, walletService, txpModalService, externalLinkService, popupService, addressbookService, $ionicScrollDelegate, $window, gettextCatalog, timeService) {
+angular.module('canoeApp.controllers').controller('accountDetailsController', function ($scope, $rootScope, $interval, $timeout, $filter, $log, $ionicModal, $ionicPopover, $state, $stateParams, $ionicHistory, profileService, nanoService, lodash, configService, platformInfo, externalLinkService, popupService, addressbookService, $ionicScrollDelegate, $window, gettextCatalog, timeService) {
   var HISTORY_SHOW_LIMIT = 10
   var currentTxHistoryPage = 0
   var listeners = []
   $scope.completeTxHistory = []
-  $scope.openTxpModal = txpModalService.open
   $scope.isCordova = platformInfo.isCordova
   $scope.isAndroid = platformInfo.isAndroid
   $scope.isIOS = platformInfo.isIOS
@@ -121,8 +120,8 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
   }
 
   $scope.updateAll = function (cb) {
-    updateTxHistory(cb)
     $scope.account = profileService.getAccountWithId($scope.accountId)
+    updateTxHistory(cb)
   }
 
   $scope.hideToggle = function () {

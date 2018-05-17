@@ -79,7 +79,12 @@
   }
   .account-selector {
     position: absolute;
-    bottom: 0;
+    bottom: 49px;
     width: 100%;
+  }
+  @media screen and (max-device-width: 375px) and (max-device-height: 812px) {
+    .account-selector {
+      bottom: 83px;
+    }
   }
 }
