@@ -185,6 +185,7 @@ angular.module('canoeApp.services')
       }
     }
 
+    // Retry broadcasts every 5 seconds, does nothing if empty.
     function regularBroadcast () {
       if (root.wallet) {
         root.broadcastCallback(root.wallet.getReadyBlocks())
@@ -197,11 +198,18 @@ angular.module('canoeApp.services')
     root.broadcastCallback = function (blocks) {
       var dirty = false
       lodash.each(blocks, function (blk) {
-        var hash = root.broadcastBlock(blk)
+        var res = root.broadcastBlock(blk)
+        var hash = res.hash
         if (hash) {
           $log.debug('Succeeded broadcast, removing readyblock: ' + hash)
           root.wallet.removeReadyBlock(hash)
           dirty = true
+        } else {
+          $log.debug('Failed broadcast, removing readyblock: ' + hash)
+          root.wallet.removeReadyBlock(hash)
+          // This will fix the tip of the chain to match network, no need to set dirty
+          // since syncChain will save wallet
+          // syncChain(root.wallet, blk.account)
         }
       })
       if (dirty) {
@@ -363,7 +371,7 @@ angular.module('canoeApp.services')
     root.broadcastBlock = function (blk) {
       var json = blk.getJSONBlock()
       $log.debug('Broadcast block: ' + json)
-      var res = rai.process(json)
+      var res = rai.process_block(json)
       $log.debug('Result ' + JSON.stringify(res))
       return res
     }
