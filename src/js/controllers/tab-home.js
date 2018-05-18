@@ -20,6 +20,17 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       startupService.ready()
     })
 
+    $scope.openExternalLinkHelp = function () {
+    // TODO var url = 'https://getcanoe.io/' + uxLanguage.getCurrentLanguage() + '/help'
+      var url = 'https://getcanoe.io/help.html'
+      var optIn = true
+      var title = null
+      var message = gettextCatalog.getString('Help and support information is available at the website.')
+      var okText = gettextCatalog.getString('Open')
+      var cancelText = gettextCatalog.getString('Go Back')
+      externalLinkService.open(url, optIn, title, message, okText, cancelText)
+    }
+
     $scope.$on('$ionicView.beforeEnter', function (event, data) {
       $scope.accounts = profileService.getAccounts()
       $scope.singleAccount = $scope.accounts.length === 1
