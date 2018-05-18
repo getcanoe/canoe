@@ -177,8 +177,8 @@ angular.module('canoeApp.services')
                 $log.error('Failed to compute client side PoW: ' + err)
                 callback(null)
               } else {
-              $log.info('Client side PoW found for ' + hash + ' took: ' + (Date.now() - start) + ' ms')
-              callback(result)
+                $log.info('Client side PoW found for ' + hash + ' took: ' + (Date.now() - start) + ' ms')
+                callback(result)
               }
             })
           } else {
@@ -269,6 +269,84 @@ angular.module('canoeApp.services')
         root.fetchPendingBlocks()
         root.saveWallet(root.wallet, function () {})
       }
+    }
+
+    function syncChain (wallet, account) {
+      root.wallet.enableBroadcast(false)
+
+      var currentBlocks = wallet.getLastNBlocks(account, 99999)
+      var history = rai.account_history(account)
+      if (history) {
+        var blocks = history.reverse()
+        // Loop until:
+        // a) History has a fork -> adopt fork from history
+        // b) History runs out -> truncate what we have
+
+        lodash.each(blocks, function (block) {
+          var our = currentBlocks.pop()
+          if (our.hash !== block.hash) {
+            // Found fork
+          }
+        })
+        // We have to make this call too so we get work, signature and timestamp
+        var infos = rai.blocks_info(hashes, 'raw', false, true) // true == include source_account
+        // Unfortunately blocks is an object so to get proper order we use hashes
+        lodash.each(blocks, function (block) {
+          var hash = block.hash
+          var info = infos[hash]
+          block.work = info.contents.work
+          block.signature = info.contents.signature
+          block.previous = info.contents.previous
+          block.extras = {
+            blockAccount: info.block_account,
+            blockAmount: info.amount,
+            timestamp: info.timestamp,
+            origin: info.source_account
+          }
+          // For some reason account_history is different...
+          if (block.type === 'open') {
+            block.account = info.contents.account
+          }
+          if (info.contents.balance) {
+            block.balance = info.contents.balance // hex for old blocks, decimal for new
+          }
+          // State logic
+          if (block.type === 'state') {
+            block.state = true
+            if (block.subtype === 'send') {
+              block.send = true
+            }
+            // For some reason account is not included in subtype change
+            // if (block.subtype === 'change') {
+            //   block.account = info.contents.account
+            // }
+            block.account = info.contents.account //
+          }
+          var blk = wallet.createBlockFromJSON(block)
+          if (blk.getHash(true) !== hash) {
+            console.log('WRONG HASH')
+          }
+          blk.setImmutable(true)
+          try {
+            // First we check if this is a fork and thus adopt it if it is
+            if (!wallet.importForkedBlock(blk, account)) { // Replaces any existing block
+              // No fork so we can just import it
+              wallet.importBlock(blk, account)
+            }
+            // It was added so remove it from currentBlocks
+            lodash.remove(currentBlocks, function (b) {
+              return b.getHash(true) === hash
+            })
+            wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
+          } catch (e) {
+            $log.error(e)
+          }
+        })
+      }
+
+      wallet.enableBroadcast(true) // Turn back on
+      root.fetchPendingBlocks()
+      root.saveWallet(wallet, function () {})
     }
 
     function resetChain (wallet, account) {
@@ -787,11 +865,29 @@ angular.module('canoeApp.services')
       return root.wallet.findKey(account) !== null
     }
 
-    root.confirmBlock = function (account, hash, timestamp) {
-      var blk = root.wallet.getBlockFromHashAndAccount(hash, account)
-      if (blk) {
-        $log.debug('Confirming block: ' + hash + ' time: ' + timestamp)
-        blk.setTimestamp(timestamp)
+    root.confirmBlock = function (blk, hash, timestamp) {
+      $log.debug('Confirming block: ' + hash + ' time: ' + timestamp)
+      blk.setTimestamp(timestamp)
+    }
+
+    root.importBlock = function (block, account) {
+      var wallet = root.wallet
+      // State logic
+      if (block.type === 'state') {
+        block.state = true
+      }
+      var blk = wallet.createBlockFromJSON(block)
+      try {
+        wallet.enableBroadcast(false)
+        // First we check if this is a fork and thus adopt it if it is
+        if (!wallet.importForkedBlock(blk, account)) { // Replaces any existing block
+          // No fork so we can just import it
+          wallet.importBlock(blk, account)
+        }
+        wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
+        wallet.enableBroadcast(true)
+      } catch (e) {
+        $log.error(e)
       }
     }
 
@@ -809,8 +905,17 @@ angular.module('canoeApp.services')
       var blk2 = JSON.parse(blk.block)
       var hash = blk.hash
       var timestamp = blk.timestamp
-      var from = blk.account
+      var account = blk.account
       var amount = blk.amount
+      blk2.extras = {
+        blockAccount: account,
+        blockAmount: amount,
+        timestamp: timestamp
+        // origin: account ??
+      }
+
+      // Check for existing block already
+      var existingBlock = root.wallet.getBlockFromHashAndAccount(hash, account)
 
       // Switch on block type
       switch (blkType) {
@@ -818,46 +923,76 @@ angular.module('canoeApp.services')
           // If a send
           if (blk.is_send) {
             var to = blk2.link_as_account
-            // If this is from one of our accounts we confirm it
-            if (root.hasAccount(from)) {
+            // If this is from one of our accounts we confirm or import
+            if (root.hasAccount(account)) {
               soundService.play('send')
-              root.confirmBlock(from, hash, timestamp)
+              if (existingBlock) {
+                root.confirmBlock(existingBlock, hash, timestamp)
+              } else {
+                // or another wallet using same seed
+                blk2.send = true
+                root.importBlock(blk2, account)
+              }
             }
-            // This is someone elses send to us
+            // And if this is to one of our accounts, we pocket it
             if (root.hasAccount(to)) {
               // state block sends were "2^128 - amount" in the callback!
               // Fixed in V12.0 of node, so removed this:
               amount = bigInt(amount) // bigInt('340282366920938463463374607431768211456').minus(bigInt(amount))
-              root.handleIncomingSendBlock(hash, to, from, amount)
+              root.handleIncomingSendBlock(hash, to, account, amount)
             }
             return
           } else {
-            // TODO: change and/or receive?
-            // This is an echo from network, it can only originate from me unless multiple devices
-            return root.confirmBlock(from, hash, timestamp)
+            // This is an echo from network
+            if (existingBlock) {
+              return root.confirmBlock(existingBlock, hash, timestamp)
+            } else {
+              // or another wallet using same seed
+              return root.importBlock(blk2, account)
+            }
           }
         case 'open':
-          // This is an echo from network, it can only originate from me unless multiple devices
-          return root.confirmBlock(from, hash, timestamp)
-        case 'send':
-          // If this is from one of our accounts we confirm it
-          var dest = blk2.destination
-          if (root.hasAccount(from)) {
-            soundService.play('send')
-            root.confirmBlock(from, hash, timestamp)
+          // This is an echo from network
+          if (existingBlock) {
+            return root.confirmBlock(existingBlock, hash, timestamp)
+          } else {
+            // or another wallet using same seed
+            return root.importBlock(blk2, account)
           }
-          // This is someone elses send to us
+        case 'send':
+          // If this is from one of our accounts we confirm or import
+          if (root.hasAccount(account)) {
+            soundService.play('send')
+            if (existingBlock) {
+              root.confirmBlock(existingBlock, hash, timestamp)
+            } else {
+              // or another wallet using same seed
+              root.importBlock(blk2, account)
+            }
+          }
+          // And if this is to one of our accounts, we pocket it
+          var dest = blk2.destination
           if (root.hasAccount(dest)) {
-            root.handleIncomingSendBlock(hash, dest, from, amount)
+            root.handleIncomingSendBlock(hash, dest, account, amount)
           }
           return
         case 'receive':
-          // This is an echo from network, it can only originate from me unless multiple devices
-          return root.confirmBlock(from, hash, timestamp)
+          // This is an echo from network
+          if (existingBlock) {
+            return root.confirmBlock(existingBlock, hash, timestamp)
+          } else {
+            // or another wallet using same seed
+            return root.importBlock(blk2, account)
+          }
         case 'change':
-          // This is an echo from network, it can only originate from me unless multiple devices
+          // This is an echo from network
           soundService.play('repchanged')
-          return root.confirmBlock(from, hash, timestamp)
+          if (existingBlock) {
+            return root.confirmBlock(existingBlock, hash, timestamp)
+          } else {
+            // or another wallet using same seed
+            return root.importBlock(blk2, account)
+          }
       }
       $log.error('Unknown block type: ' + blkType)
     }
