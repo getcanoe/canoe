@@ -31,11 +31,12 @@ angular.module('canoeApp.services')
 
     var rai = null
 
-    root.connectRPC = function () {
+    root.connectRPC = function (cb) {
       try {
         $log.debug('Connecting RPC to ' + host)
         rai = new Rai(host) // connection
         rai.initialize()
+        if (cb) cb()
       } catch (e) {
         rai = null
         $log.warn('Failed to initialize server connection, no network?', e)
@@ -68,6 +69,7 @@ angular.module('canoeApp.services')
     setTimeout(regularBroadcast, 5000)
 
     root.unloadWallet = function () {
+      root.disconnect()
       root.wallet = null
     }
 
@@ -84,7 +86,7 @@ angular.module('canoeApp.services')
         mqttHost = url
         host = 'https://' + url + '/rpc'
         // Force relogin etc
-        root.setWallet(root.getWallet(), function () {
+        root.connectNetwork(function () {
           popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
           $ionicHistory.removeBackView()
           $state.go('tabs.home')
@@ -217,22 +219,24 @@ angular.module('canoeApp.services')
       }
     }
 
+    root.connectNetwork = function (cb) {
+      // Makes sure we have the right backend for RPC
+      root.connectRPC(function () {
+        // Make sure we have an account for this wallet on the server side
+        root.createServerAccount(root.wallet)
+        root.disconnect() // Makes sure we are disconnected from MQTT
+        root.startMQTT(cb)
+      })
+    }
+
     // Whenever the wallet is replaced we call this
     root.setWallet = function (wallet, cb) {
-      // Configure wallet
-      root.configureWallet(wallet)
-      // Make sure we have an account for this wallet
-      // Will only ever create one on the server side
-      root.createServerAccount(wallet)
       root.wallet = wallet
       wallet.setLogger($log)
       // Install callback for broadcasting of blocks
       wallet.setBroadcastCallback(root.broadcastCallback)
-      root.connectRPC() // Makes sure we have the right backend for RPC
-      root.disconnect() // Makes sure we are disconnected from MQTT
-      root.startMQTT(function () {
-        cb(null, wallet)
-      })
+      cb(null, root.wallet)
+      root.connectNetwork()
     }
 
     // Perform repair tricks, can be chosen in Advanced settings
@@ -518,6 +522,9 @@ angular.module('canoeApp.services')
     // Create a new wallet
     root.createNewWallet = function (password) {
       var wallet = RAI.createNewWallet(password)
+      if (root.sharedconfig.stateblocks.enable) {
+        wallet.enableStateBlocks(true)
+      }
       return wallet
     }
 
@@ -611,7 +618,7 @@ angular.module('canoeApp.services')
           // Failsafe for reconnects causing this to run many times
           if (!doneIt) {
             doneIt = true
-            cb()
+            if (cb) cb()
           }
         }
       })
@@ -752,6 +759,7 @@ angular.module('canoeApp.services')
 
     root.onFailure = function () {
       if (doLog) $log.info('MQTT failure')
+      root.connected = false
     }
 
     root.handleIncomingSendBlock = function (hash, account, from, amount) {
@@ -848,12 +856,6 @@ angular.module('canoeApp.services')
     root.handleRate = function (payload) {
       var rates = JSON.parse(payload)
       rateService.updateRates(rates)
-    }
-
-    root.configureWallet = function (wallet) {
-      if (root.sharedconfig.stateblocks.enable) {
-        wallet.enableStateBlocks(true)
-      }
     }
 
     root.handleSharedConfig = function (payload) {
