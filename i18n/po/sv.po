@@ -12,10 +12,6 @@ msgctxt "button"
 msgid "Get started"
 msgstr "Kom igång"
 
-#: www/views/includes/txp.html:23
-msgid "(possible double spend)"
-msgstr "(möjlig dubbel spendering)"
-
 #: www/views/changeLocks.html:30 www/views/changeLocks.html:61
 msgid "4-digit PIN"
 msgstr ""
@@ -53,7 +49,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "En medlem i teamet kommer ta del av din feedback så snart som möjligt."
 
-#: src/js/controllers/tab-home.js:150
+#: src/js/controllers/tab-home.js:161
 msgid ""
 "A new version of this app is available. Please update to the latest version."
 msgstr ""
@@ -62,7 +58,7 @@ msgstr ""
 msgid "About"
 msgstr "Om"
 
-#: src/js/services/nanoService.js:545 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:651 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Konto"
@@ -286,7 +282,7 @@ msgstr ""
 msgid "Change 4-digit PIN"
 msgstr ""
 
-#: www/views/advancedSettings.html:37 www/views/changeBackend.html:23
+#: www/views/advancedSettings.html:46 www/views/changeBackend.html:23
 msgid "Change Backend"
 msgstr ""
 
@@ -437,7 +433,7 @@ msgstr "Datum"
 msgid "Decrypting wallet..."
 msgstr ""
 
-#: src/js/services/profileService.js:290
+#: src/js/services/profileService.js:277
 msgid "Default Account"
 msgstr ""
 
@@ -578,7 +574,7 @@ msgstr "Ange ditt lösenord"
 #: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:106
 #: src/js/controllers/import.js:111 src/js/controllers/import.js:115
 #: src/js/controllers/import.js:120 src/js/controllers/import.js:123
-#: src/js/controllers/import.js:133 src/js/controllers/import.js:33
+#: src/js/controllers/import.js:134 src/js/controllers/import.js:33
 #: src/js/controllers/import.js:43 src/js/controllers/import.js:56
 #: src/js/controllers/import.js:63 src/js/controllers/import.js:85
 #: src/js/controllers/import.js:93 src/js/controllers/modals/password.js:101
@@ -586,7 +582,7 @@ msgstr "Ange ditt lösenord"
 #: src/js/controllers/preferencesDelete.js:35
 #: src/js/controllers/preferencesName.js:13
 #: src/js/controllers/preferencesRepresentative.js:17
-#: src/js/controllers/tab-home.js:182 src/js/controllers/tab-scan.js:106
+#: src/js/controllers/tab-home.js:193 src/js/controllers/tab-scan.js:106
 #: src/js/controllers/tab-send.js:78 src/js/controllers/tabsController.js:36
 #: src/js/controllers/tabsController.js:7
 msgid "Error"
@@ -699,8 +695,9 @@ msgstr ""
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:152 src/js/controllers/tab-settings.js:49
-#: src/js/controllers/tab-settings.js:60 src/js/controllers/tx-details.js:95
+#: src/js/controllers/tab-home.js:163 src/js/controllers/tab-home.js:30
+#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
+#: src/js/controllers/tx-details.js:95
 msgid "Go Back"
 msgstr ""
 
@@ -738,7 +735,7 @@ msgstr ""
 msgid "Help & Support"
 msgstr "Hjälp & Support"
 
-#: src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:28 src/js/controllers/tab-settings.js:47
 msgid "Help and support information is available at the website."
 msgstr ""
 
@@ -817,10 +814,16 @@ msgid ""
 "is disabled and always true on mobile Canoe for now."
 msgstr ""
 
-#: www/views/advancedSettings.html:23
+#: www/views/advancedSettings.html:32
 msgid ""
 "If enabled, a list of recent transactions across all wallets will appear in "
 "the Home tab. Currently false, not fully implemented."
+msgstr ""
+
+#: www/views/advancedSettings.html:23
+msgid ""
+"If enabled, sounds will be played whenever you send, recieve, change "
+"representative, or unlock your wallet."
 msgstr ""
 
 #: src/js/controllers/onboarding/backupRequest.js:16
@@ -864,7 +867,7 @@ msgid ""
 "wish to first backup your current seed or make a file backup of the wallet."
 msgstr ""
 
-#: src/js/controllers/import.js:150
+#: src/js/controllers/import.js:151
 msgid ""
 "Importing a wallet will remove your existing wallet and accounts! If you "
 "have funds in your current wallet, make sure you have a backup to restore "
@@ -900,7 +903,7 @@ msgstr ""
 #: src/js/controllers/changeLocksController.js:24
 #: src/js/controllers/changePasswordController.js:10
 #: src/js/controllers/changePasswordController.js:13
-#: src/js/services/nanoService.js:87
+#: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr ""
 
@@ -1159,15 +1162,17 @@ msgid "Old Password"
 msgstr ""
 
 #: www/views/tab-home.html:53
-msgid "On this screen you can see all your accounts."
+msgid ""
+"On this screen you can see all your accounts. Check our <a ng-click="
+"\"openExternalLinkHelp()\">FAQs</a> before you start!"
 msgstr ""
 
 #: www/views/changePassword.html:35
 msgid "One more time."
 msgstr ""
 
-#: src/js/controllers/tab-settings.js:48 src/js/controllers/tab-settings.js:59
-#: src/js/controllers/tx-details.js:94
+#: src/js/controllers/tab-home.js:29 src/js/controllers/tab-settings.js:48
+#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:94
 msgid "Open"
 msgstr ""
 
@@ -1249,6 +1254,10 @@ msgstr ""
 
 #: www/views/preferencesDeleteWallet.html:13
 msgid "Permanently delete this wallet."
+msgstr ""
+
+#: www/views/advancedSettings.html:21
+msgid "Play Sounds"
 msgstr ""
 
 #: www/views/backup.html:21
@@ -1343,7 +1352,7 @@ msgstr "Mottaget"
 msgid "Recent"
 msgstr ""
 
-#: www/views/advancedSettings.html:21
+#: www/views/advancedSettings.html:30
 msgid "Recent Transaction Card"
 msgstr ""
 
@@ -1375,11 +1384,11 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: www/views/advancedSettings.html:31
+#: www/views/advancedSettings.html:40
 msgid "Repair"
 msgstr ""
 
-#: src/js/controllers/advancedSettings.js:35
+#: src/js/controllers/advancedSettings.js:39
 msgid ""
 "Repairing your wallet could take some time. This will reload all blockchains "
 "associated with your wallet. Are you sure you want to repair?"
@@ -1512,7 +1521,7 @@ msgstr ""
 msgid "Send us feedback instead"
 msgstr ""
 
-#: www/views/confirm.html:15 www/views/includes/txp.html:12
+#: www/views/confirm.html:15
 msgid "Sending"
 msgstr ""
 
@@ -1680,7 +1689,7 @@ msgstr ""
 msgid "The wallet server URL"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:43
+#: src/js/controllers/tab-home.js:54
 msgid "There is a new version of Canoe available"
 msgstr ""
 
@@ -1731,7 +1740,7 @@ msgstr ""
 msgid "Transaction"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:182
+#: src/js/controllers/tab-home.js:193
 msgid "Transaction not found"
 msgstr ""
 
@@ -1767,7 +1776,7 @@ msgstr ""
 msgid "Unrecognized data"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:149
+#: src/js/controllers/tab-home.js:160
 msgid "Update Available"
 msgstr ""
 
@@ -1807,7 +1816,7 @@ msgstr ""
 msgid "View Terms of Service"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:151
+#: src/js/controllers/tab-home.js:162
 msgid "View Update"
 msgstr ""
 
@@ -1832,7 +1841,7 @@ msgid "Wallet seed not available"
 msgstr ""
 
 #: src/js/controllers/addressbookView.js:43
-#: src/js/controllers/advancedSettings.js:34 src/js/controllers/import.js:149
+#: src/js/controllers/advancedSettings.js:38 src/js/controllers/import.js:150
 #: src/js/controllers/modals/password.js:73
 #: src/js/controllers/preferencesDelete.js:23
 #: www/views/preferencesDeleteWallet.html:11
@@ -1938,7 +1947,7 @@ msgstr ""
 msgid "Your Nano wallet seed is backed up!"
 msgstr ""
 
-#: src/js/services/nanoService.js:87
+#: src/js/services/nanoService.js:90
 msgid "Your backend has been changed"
 msgstr ""
 
@@ -1980,7 +1989,7 @@ msgstr ""
 msgid "[Balance Hidden]"
 msgstr ""
 
-#: src/js/controllers/import.js:152 src/js/controllers/modals/password.js:76
+#: src/js/controllers/import.js:153 src/js/controllers/modals/password.js:76
 msgid "delete"
 msgstr ""
 
@@ -1995,6 +2004,9 @@ msgstr ""
 #: www/views/addressbook.add.html:59 www/views/addressbook.edit.html:59
 msgid "joedoe"
 msgstr ""
+
+#~ msgid "(possible double spend)"
+#~ msgstr "(möjlig dubbel spendering)"
 
 #~ msgid "Accepted"
 #~ msgstr "Godkänt"
