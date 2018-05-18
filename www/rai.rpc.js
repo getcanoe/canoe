@@ -689,7 +689,7 @@ function Rai (url_base) {
 
   this.work_generate_async = function (hash, cb) {
     this.rpc(JSON.stringify({'action': 'work_generate', 'hash': hash}), function (result) {
-      cb(result.work)
+      cb(result)
     })
   }
 

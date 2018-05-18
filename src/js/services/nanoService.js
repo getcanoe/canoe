@@ -117,7 +117,7 @@ angular.module('canoeApp.services')
           if (doLog) $log.info('Working on precalc for ' + accAndHash.account)
           doWork(accAndHash.hash, function (work) {
             // Wallet may be purged from RAM, so need to check
-            if (root.wallet) {
+            if (work && root.wallet) {
               root.wallet.addWorkToPrecalc(accAndHash.account, accAndHash.hash, work)
               root.saveWallet(root.wallet, function () {})
             }
@@ -130,7 +130,7 @@ angular.module('canoeApp.services')
         if (doLog) $log.info('Working on pending block ' + hash)
         doWork(hash, function (work) {
           // Wallet may be purged from RAM, so need to check
-          if (root.wallet) {
+          if (work && root.wallet) {
             root.wallet.addWorkToPendingBlock(hash, work)
             root.saveWallet(root.wallet, function () {})
           }
@@ -147,9 +147,14 @@ angular.module('canoeApp.services')
       if (configService.getSync().wallet.serverSidePoW) {
         // Server side
         if (doLog) $log.info('Working on server for ' + hash)
-        rai.work_generate_async(hash, function (work) {
-          if (doLog) $log.info('Server side PoW found for ' + hash + ': ' + work + ' took: ' + (Date.now() - start) + ' ms')
-          callback(work)
+        rai.work_generate_async(hash, function (result) {
+          if (result.work) {
+            if (doLog) $log.info('Server side PoW found for ' + hash + ': ' + result.work + ' took: ' + (Date.now() - start) + ' ms')
+            callback(result.work)
+          } else {
+            if (doLog) $log.warn('Error doing PoW: ' + result)
+            callback(null)
+          }
         })
       } else {
         // Client side
@@ -168,9 +173,13 @@ angular.module('canoeApp.services')
           if (POW) {
             if (doLog) $log.info('Working on client (threaded node-raiblocks-pow) for ' + hash)
             POW.threaded(hash, (err, result) => {
-              if (err) return $log.error('Failed to compute client side PoW: ' + err)
+              if (err) {
+                $log.error('Failed to compute client side PoW: ' + err)
+                callback(null)
+              } else {
               $log.info('Client side PoW found for ' + hash + ' took: ' + (Date.now() - start) + ' ms')
               callback(result)
+              }
             })
           } else {
             // pow.wasm solution (slower but works in Chrome and is js only)
