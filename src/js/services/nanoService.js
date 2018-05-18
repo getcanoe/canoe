@@ -242,7 +242,6 @@ angular.module('canoeApp.services')
     }
 
     // Import all chains for the whole wallet from scratch throwing away local forks we have.
-    // If we have extra blocks those are rebroadcasted.
     function resetChains () {
       if (root.wallet) {
         root.wallet.enableBroadcast(false)
@@ -252,6 +251,7 @@ angular.module('canoeApp.services')
         })
         // Better safe than sorry, we always remove them.
         root.wallet.clearWalletPendingBlocks()
+        root.wallet.clearReadyBlocks()
         root.wallet.enableBroadcast(true) // Turn back on
         root.fetchPendingBlocks()
         root.saveWallet(root.wallet, function () {})
