@@ -197,7 +197,10 @@
     bottom: 49px;
     width: 100%;
   }
-  @media screen and (max-device-width: 375px) and (max-device-height: 812px) {
+  @media only screen
+    and (device-width : 375px)
+    and (device-height : 812px)
+    and (-webkit-device-pixel-ratio : 3) {
     .account-selector {
       bottom: 83px;
     }
