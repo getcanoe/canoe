@@ -55,64 +55,72 @@
     </ion-slide-page>
     <ion-slide-page class="no-swipe">
       <ion-content id="onboarding-create-password" scroll="false">
-        <div class="onboarding-topic" translate>Encryption Time</div>
-        <form name='createPassword' novalidate>
-          <div class="list settings-list settings-input-group">
-            <label class="item item-input item-stacked-label">
-              <span class="input-label" translate>Password</span>
-              <input type="password"
-                autocapitalize="none"
-                autocorrect="off"
-                placeholder="{{'At least 8 Characters'|translate}}"
-                ng-model="password"
-                name="password"
-                required
-              >
-            </label>
+      <div class="onboarding-topic" translate>Encryption Time!</div>
 
-            <label class="item item-input item-stacked-label">
-              <span class="input-label" translate>Confirm Password</span>
-              <input type="password"
-                ng-model="passwordConfirm"
-                type="password"
-                name="confirmPassword"
-                autocapitalize="none"
-                autocorrect="off"
-                required
-                data-password-verify="user.password"
-                placeholder="{{'Confirm Password.'|translate}}"
-              >
-              <div class="valid-password" ng-show="password && passwordConfirm" >
-                <div class="matching" ng-show="password === passwordConfirm">
-                  <div ng-show="password.length >= 8">
-                    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                    <span translate>Passwords match</span>
-                  </div>
-                  <div ng-show="password.length < 8" class="too-short">
-                    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-                    <span translate>Password too short</span>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="not-matching" ng-show="password && passwordConfirm && password !== passwordConfirm">
-                <i class="fa fa-times-circle-o" aria-hidden="true"></i>
-                <span translate>Passwords don't match</span>
-              </div>
-            </label>
+      <form ng-submit="createDefaultWallet(password)" class="create-password-form" name='createPassword' novalidate>
+        <div class="list settings-list settings-input-group">
+
+          <div class="input-password item item-input item-stacked-label">
+            <input 
+               autocapitalize="none" 
+               autocorrect="off" 
+               id="input-password" 
+               ng-model="password" 
+               type="{{ typePassword ? 'text' : 'password' }}" 
+               name="password" 
+               placeholder="Password" 
+               required
+            >
+
+            <div class="showPassword" ng-click="togglePassword()">
+              <i class="fa" ng-class="{ 
+                'fa-eye': !typePassword,
+                'fa-eye-slash': typePassword
+                }"
+              aria-hidden="true"></i>
+            </div>
           </div>
+
+          <label class="item item-input item-stacked-label password-message">
+            <span ng-hide="password.length >= 8" class="input-label" translate>Enter at least 8 characters to encrypt your wallet.</span>
+            <div ng-show="password.length >= 8" class="item item-input item-stacked-label good-password">
+              <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+              <span translate>Password length ok</span>
+            </div>
+          </label>
+
+					<div class="input-password item item-input item-stacked-label">
+						<input 
+							ng-model="passwordConfirm"
+              id="input-password" 
+              type="{{ typePassword ? 'text' : 'password' }}" 
+							name="confirmPassword"
+							autocapitalize="none"
+							autocorrect="off"
+							required
+							data-password-verify="user.password"
+							placeholder="{{'Confirm Password'|translate}}"
+            >
+          </div>
+          <label class="item item-input item-stacked-label">
+            <div ng-hide="password !== passwordConfirm || !password || !passwordConfirm" class="item item-input item-stacked-label good-password">
+              <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+              <span translate>Passwords match</span>
+            </div>
+          </label>
+        </div>
 
           <div class="cta-buttons">
             <button
               class="button button-standard button-primary"
               ng-disabled="!password || !passwordConfirm || password!==passwordConfirm || password.length < 8"
               type="submit"
-              ng-click="createDefaultWallet(password)"
               translate>
               Create Wallet
             </button>
           </div>
-        </form>
+
+      </form>
       </ion-content>
     </ion-slide-page>
   </ion-slides>

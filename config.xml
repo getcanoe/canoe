@@ -70,8 +70,10 @@
     <engine name="android" spec="7.1.0" />
     <engine name="windows" spec="6.0.0" />
     <engine name="ios" spec="^4.5.4" />
+
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
+
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />

@@ -37,21 +37,24 @@
   .settings-input-group {
     padding-bottom: 2vw;
   }
+
+  .create-password-form .list {
+    height: 140px;
+  }
+
   ion-list > .list {
     width: 85%;
   }
-  .list{
+  .list {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
     padding: 6px 0px;
     @include center-block();
-    .item{
-      &:first-child{
+    .item {
+      &:first-child {
         padding-top: 0;
-      }
-      @media(max-height: 480px) {
-        font-size: 14px;
+        padding-left: 0;
       }
     }
   }
@@ -61,12 +64,12 @@
     color: $v-light-color;
     text-align: left;
     .checkbox input:before,
-    .checkbox .checkbox-icon:before{
+    .checkbox .checkbox-icon:before {
       border-color: $v-onboarding-checkbox-off-border;
       background: transparent;
     }
     .checkbox input:after,
-    .checkbox .checkbox-icon:after{
+    .checkbox .checkbox-icon:after {
       border-color: $v-onboarding-checkbox-on-border;
     }
     .checkbox input:checked:before,
@@ -81,8 +84,8 @@
   }
   .item-checkbox .checkbox {
     margin-left: 3%;
-    top:38%;
-    left:0;
+    top: 38%;
+    left: 0;
   }
   .list.settings-list.settings-input-group {
     text-align: left !important;
@@ -91,44 +94,81 @@
     height: 15%;
     margin: 20px 0 0 0;
   }
+
+  form {
+    height: 50%;
+    display: flex;
+    align-items: center;
+  }
+
   input {
-    padding: 0 20px;
-    width: 100%;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.06);
-    color: rgba(0, 0, 0, 0.87);
-    height: 57px;
-    margin-bottom: 15px;
+    height: 46px;
+    background: none;
+    font-size: 32px;
+    color: white;
+    line-height: 30px;
+    margin-left: auto !important;
+    padding: 0 !important;
+  }
+
+  input::selection {
+    background: purple;
+    color: white;
   }
 
   input:focus,
   input:active {
-    background: white;
-    color: rgba(0, 0, 0, 0.56);
-    border: 1px solid rgba(0, 0, 0, 0.12);
+    color: white;
   }
 
-  .matching, .not-matching, .pending {
-    margin-top: 5px;
-    text-align: right;
-  }
-  .matching {
-    color: $v-success-color;
-  }
-  .not-matching, .too-short {
+  .too-short {
     color: $v-error-color;
   }
-  .pending {
-    color: $v-accent-color;
+
+  .good-password {
+    color: $v-success-color;
+    margin-left: 0 !important;
   }
 
+  .good-password,
+  .too-short {
+    padding-left: 0px !important;
+  }
+
+  .input-password {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 0.5px dotted rgba(255, 255, 255, 0.36) !important;
+    padding-left: 0px !important;
+  }
+
+  .showPassword {
+    text-align: right;
+    font-size: 32px !important;
+    display: contents;
+    width: initial;
+  }
+
+  .password-message {
+    min-height: 50px;
+  }
+
+
   .item {
-    border:none;
+    border: none;
   }
 
   .item .input-label {
-    color: rgba(255,255,255,1);
+    color: rgba(255, 255, 255, 1);
     font-size: small;
+  }
+
+  span.input-label {
+    width: 100%;
+  }
+
+  label {
+    padding-left: 0px !important;
   }
 
   .item-stacked-label {
@@ -140,9 +180,10 @@
     @extend %cta-buttons;
     padding-bottom: 19vw;
     position: static;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding-bottom: 12vh;
   }
-}
-
-.keyboard-open .swiper-pagination.swiper-pagination-clickable {
-    display: none;
 }
