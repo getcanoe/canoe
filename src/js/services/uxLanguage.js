@@ -14,6 +14,9 @@ angular.module('canoeApp.services')
       name: 'Čeština',
       isoCode: 'cs' // Czech
     }, {
+      name: 'Dansk',
+      isoCode: 'da' // Danish
+    }, {
       name: 'English',
       isoCode: 'en' // English
     }, {
@@ -59,7 +62,7 @@ angular.module('canoeApp.services')
       useIdeograms: true
     }, {
       name: 'Pусский',
-      isoCode: 'ru'  // Russian
+      isoCode: 'ru' // Russian
     }, {
       name: 'Svenska',
       isoCode: 'sv' // Swedish
