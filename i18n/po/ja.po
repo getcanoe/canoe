@@ -7,18 +7,6 @@ msgstr ""
 "Project-Id-Version: Canoe\n"
 "Language: ja\n"
 
-#: www/views/includes/txp.html:23
-msgid "(possible double spend)"
-msgstr "(二重払い可能性あり)"
-
-#: www/views/modals/txp-details.html:159
-msgid "* A payment proposal can be deleted if 1) you are the creator, and no other copayer has signed, or 2) 24 hours have passed since the proposal was created."
-msgstr "* 送金の提案の取下げは①他のウォレット参加者に署名されていなかった場合、提案者に提案を取り下げることができます。②提案の起案から24時間が経っても解決しなかった場合、全員に取り下げることができます。"
-
-#: www/views/modals/txp-details.html:102
-msgid "- {{tx.feeRateStr}} of the transaction"
-msgstr "- {{tx.feeRateStr}}のレート"
-
 #: src/js/controllers/feedback/send.js:25 www/views/feedback/complete.html:21
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "ただちに開発メンバーでいただいた評価を拝読し参考にさせていただきます。"
@@ -27,17 +15,13 @@ msgstr "ただちに開発メンバーでいただいた評価を拝読し参考
 msgid "About"
 msgstr "このアプリについて"
 
-#: src/js/controllers/modals/txpDetails.js:60
-msgid "Accepted"
-msgstr "承諾済"
-
 #: www/views/preferencesAdvanced.html:13
 msgid "Account Information"
 msgstr ""
 
 #: www/views/preferencesName.html:4
 msgid "Account Name"
-msgstr ""
+msgstr "アカウント名"
 
 #: www/views/preferences.html:4
 msgid "Account Settings"
@@ -45,9 +29,9 @@ msgstr ""
 
 #: www/views/tab-create-account.html:12
 msgid "Account name"
-msgstr ""
+msgstr "アカウント名"
 
-#: www/views/tab-home.html:84 www/views/tab-home.html:98
+#: www/views/tab-home.html:71 www/views/tab-home.html:85
 msgid "Accounts"
 msgstr "アカウント一覧"
 
@@ -117,21 +101,9 @@ msgid "Are you sure you want to delete this wallet?"
 msgstr "本当にこのウォレットを削除しても\n"
 "宜しいですか？"
 
-#: src/js/controllers/modals/txpDetails.js:152
-msgid "Are you sure you want to reject this transaction?"
-msgstr "この取引を却下してもよろしいですか?"
-
-#: src/js/controllers/modals/txpDetails.js:168
-msgid "Are you sure you want to remove this transaction?"
-msgstr "この取引を破棄してもよろしいですか?"
-
 #: src/js/controllers/onboarding/backupRequest.js:21
 msgid "Are you sure you want to skip it?"
 msgstr "本当にバックアップの手順を飛ばしても良いですか？"
-
-#: www/views/includes/available-balance.html:3
-msgid "Available Balance"
-msgstr "送金可能残高"
 
 #: www/views/includes/backupNeededPopup.html:7
 msgid "Backup Needed"
@@ -152,14 +124,6 @@ msgstr ""
 #: www/views/includes/incomingDataMenu.html:29
 msgid "Bitcoin Address"
 msgstr "ビットコインアドレス"
-
-#: www/views/modals/txp-details.html:36
-msgid "Broadcast Payment"
-msgstr "取引送信"
-
-#: src/js/controllers/modals/txpDetails.js:62
-msgid "Broadcasted"
-msgstr "送信済み"
 
 #: src/js/services/onGoingProcess.js:11
 msgid "Broadcasting transaction"
@@ -196,11 +160,7 @@ msgstr "ウォレットを作成できません。"
 msgid "Choose a backup file from your computer"
 msgstr "パソコンからバックアップファイルを選択して下さい。"
 
-#: src/js/controllers/modals/txpDetails.js:47
-msgid "Click to accept"
-msgstr "クリックして承諾"
-
-#: src/js/controllers/confirm.js:221 src/js/controllers/modals/txpDetails.js:40
+#: src/js/controllers/confirm.js:221
 msgid "Click to send"
 msgstr "クリックして送る"
 
@@ -265,34 +225,14 @@ msgstr "クリップボードへコピー"
 msgid "Could not access the wallet at the server. Please check:"
 msgstr "サーバーにてウォレットの確認ができませんでした。こちらをご確認下さい:"
 
-#: src/js/controllers/modals/txpDetails.js:196
-msgid "Could not broadcast payment"
-msgstr "送金を配信できませんでした。"
-
-#: src/js/controllers/modals/txpDetails.js:178
-msgid "Could not delete payment proposal"
-msgstr "送金の提案を削除できませんでした"
-
-#: src/js/controllers/modals/txpDetails.js:158
-msgid "Could not reject payment"
-msgstr "送金を却下できませんでした。"
-
-#: src/js/controllers/modals/txpDetails.js:145
-msgid "Could not send payment"
-msgstr "送金できませんでした。"
-
-#: www/views/tab-create-account.html:3 www/views/tab-home.html:90
+#: www/views/tab-create-account.html:3 www/views/tab-home.html:77
 #: www/views/tab-send.html:41
 msgid "Create Account"
-msgstr ""
+msgstr "アカウントを作成します"
 
 #: www/views/tab-create-account.html:25
 msgid "Create new account"
 msgstr ""
-
-#: www/views/modals/txp-details.html:81
-msgid "Created by"
-msgstr "作成者"
 
 #: src/js/services/onGoingProcess.js:14
 msgid "Creating Wallet..."
@@ -300,7 +240,7 @@ msgstr "ウォレット作成中…"
 
 #: src/js/services/onGoingProcess.js:13
 msgid "Creating account..."
-msgstr ""
+msgstr "アカウントを作成しています..."
 
 #: src/js/services/onGoingProcess.js:12
 msgid "Creating transaction"
@@ -310,13 +250,13 @@ msgstr "取引作成中…"
 msgid "Custom Amount"
 msgstr "金額を入力"
 
-#: www/views/modals/txp-details.html:87 www/views/tx-details.html:68
+#: www/views/tx-details.html:68
 msgid "Date"
 msgstr "日付"
 
-#: src/js/services/profileService.js:291
+#: src/js/services/profileService.js:277
 msgid "Default Account"
-msgstr ""
+msgstr "デフォルトアカウント"
 
 #: www/views/preferencesDeleteWallet.html:21
 msgid "Delete"
@@ -324,11 +264,7 @@ msgstr "削除する"
 
 #: www/views/preferencesAdvanced.html:34
 msgid "Delete Account"
-msgstr ""
-
-#: www/views/modals/txp-details.html:164
-msgid "Delete Payment Proposal"
-msgstr "送金の提案を削除"
+msgstr "アカウントを削除します"
 
 #: www/views/preferencesDeleteWallet.html:3
 msgid "Delete Wallet"
@@ -402,12 +338,12 @@ msgstr "新しい送金時パスワードを入力してください"
 msgid "Enter wallet seed"
 msgstr ""
 
-#: www/views/backup.html:36
+#: www/views/backup.html:36 www/views/modals/password.html:18
 msgid "Enter your password"
 msgstr "パスワードを入力して下さい。"
 
 #. Trying to import a malformed wallet export QR code
-#: src/js/controllers/activity.js:45 src/js/controllers/addressbookAdd.js:20
+#: src/js/controllers/addressbookAdd.js:20
 #: src/js/controllers/addressbookAdd.js:81
 #: src/js/controllers/addressbookEdit.js:21
 #: src/js/controllers/addressbookEdit.js:73
@@ -417,17 +353,16 @@ msgstr "パスワードを入力して下さい。"
 #: src/js/controllers/export.js:89 src/js/controllers/export.js:98
 #: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:106
 #: src/js/controllers/import.js:111 src/js/controllers/import.js:115
-#: src/js/controllers/import.js:120 src/js/controllers/import.js:130
-#: src/js/controllers/import.js:33 src/js/controllers/import.js:43
-#: src/js/controllers/import.js:56 src/js/controllers/import.js:63
-#: src/js/controllers/import.js:85 src/js/controllers/import.js:93
-#: src/js/controllers/modals/password.js:101
-#: src/js/controllers/modals/txpDetails.js:138
+#: src/js/controllers/import.js:120 src/js/controllers/import.js:123
+#: src/js/controllers/import.js:134 src/js/controllers/import.js:33
+#: src/js/controllers/import.js:43 src/js/controllers/import.js:56
+#: src/js/controllers/import.js:63 src/js/controllers/import.js:85
+#: src/js/controllers/import.js:93 src/js/controllers/modals/password.js:101
 #: src/js/controllers/paperWallet.js:45
 #: src/js/controllers/preferencesDelete.js:35
 #: src/js/controllers/preferencesName.js:13
 #: src/js/controllers/preferencesRepresentative.js:17
-#: src/js/controllers/tab-home.js:183 src/js/controllers/tab-scan.js:106
+#: src/js/controllers/tab-home.js:193 src/js/controllers/tab-scan.js:106
 #: src/js/controllers/tab-send.js:78 src/js/controllers/tabsController.js:36
 #: src/js/controllers/tabsController.js:7
 msgid "Error"
@@ -444,14 +379,6 @@ msgstr "残高確認に失敗しました"
 #: src/js/controllers/paperWallet.js:88
 msgid "Error sweeping wallet:"
 msgstr "ペーパーウォレット出金時にエラー"
-
-#: www/views/modals/txp-details.html:119
-msgid "Expired"
-msgstr "期限切れ"
-
-#: www/views/modals/txp-details.html:125
-msgid "Expires"
-msgstr "有効期限："
 
 #: www/views/export.html:3 www/views/tab-settings.html:39
 msgid "Export wallet"
@@ -475,10 +402,6 @@ msgstr "エクスポートに失敗しました。"
 msgid "Family vacation funds"
 msgstr "家族旅行貯金"
 
-#: www/views/modals/txp-details.html:99
-msgid "Fee:"
-msgstr "手数料:"
-
 #: src/js/controllers/feedback/send.js:21
 msgid "Feedback could not be submitted. Please try again later."
 msgstr "フォームを送信する事ができませんでした。時間をおいて再試行ください。"
@@ -500,8 +423,8 @@ msgstr "指紋認証に失敗しました"
 msgid "Finish"
 msgstr "完了"
 
-#: www/views/confirm.html:67 www/views/modals/txp-details.html:74
-#: www/views/tx-details.html:50 www/views/tx-details.html:58
+#: www/views/confirm.html:67 www/views/tx-details.html:50
+#: www/views/tx-details.html:58
 msgid "From"
 msgstr "送信者"
 
@@ -533,8 +456,9 @@ msgstr "初めての連絡先を追加しましょう。"
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:153 src/js/controllers/tab-settings.js:49
-#: src/js/controllers/tab-settings.js:60 src/js/controllers/tx-details.js:99
+#: src/js/controllers/tab-home.js:163 src/js/controllers/tab-home.js:30
+#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
+#: src/js/controllers/tx-details.js:95
 msgid "Go Back"
 msgstr "戻る"
 
@@ -552,7 +476,7 @@ msgstr "分かりました"
 msgid "Help & Support"
 msgstr "ヘルプ＆サポート"
 
-#: src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:28 src/js/controllers/tab-settings.js:47
 msgid "Help and support information is available at the website."
 msgstr "サポートに関する情報はウェブサイトに掲載しております。"
 
@@ -680,22 +604,13 @@ msgstr "結果:"
 msgid "Meh - it's alright"
 msgstr "まあまあです"
 
-#: src/js/controllers/tx-details.js:73 www/views/modals/txp-details.html:93
-#: www/views/tx-details.html:76
+#: src/js/controllers/tx-details.js:69 www/views/tx-details.html:76
 msgid "Memo"
 msgstr "メモ"
-
-#: www/views/modals/txp-details.html:131
-msgid "Merchant Message"
-msgstr "お店からのメッセージ："
 
 #: www/views/preferencesAdvanced.html:3
 msgid "More Options"
 msgstr "その他オプション"
-
-#: www/views/modals/txp-details.html:57
-msgid "Multiple recipients"
-msgstr "複数送金先"
 
 #: www/views/addressbook.add.html:21 www/views/addressbook.edit.html:21
 #: www/views/addressbook.view.html:18 www/views/preferences.html:15
@@ -705,7 +620,7 @@ msgstr "名前"
 
 #: www/views/add.html:14
 msgid "New account"
-msgstr ""
+msgstr "新しいアカウント"
 
 #: www/views/tab-receive.html:16
 msgid "No Account available"
@@ -718,10 +633,6 @@ msgstr "連絡先が無い"
 #: www/views/preferencesLogs.html:16
 msgid "No entries for this log level"
 msgstr "このレベルのログのエントリーがありません。"
-
-#: www/views/proposals.html:24
-msgid "No pending proposals"
-msgstr "保留中の提案はありません"
 
 #: www/views/activity.html:25
 msgid "No recent transactions"
@@ -793,12 +704,8 @@ msgstr "公式免責事項 (英語)"
 msgid "Oh no!"
 msgstr "おっと!"
 
-#: www/views/tab-home.html:53
-msgid "On this screen you can see all your accounts."
-msgstr ""
-
-#: src/js/controllers/tab-settings.js:48 src/js/controllers/tab-settings.js:59
-#: src/js/controllers/tx-details.js:98
+#: src/js/controllers/tab-home.js:29 src/js/controllers/tab-settings.js:48
+#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:94
 msgid "Open"
 msgstr "開く"
 
@@ -826,52 +733,25 @@ msgstr "サイトを開く"
 msgid "Paste the backup plain text"
 msgstr ""
 
-#: src/js/controllers/modals/txpDetails.js:49
 #: www/views/modals/tx-status.html:33
 msgid "Payment Accepted"
 msgstr "支払いが完了しました"
-
-#: www/views/modals/txp-details.html:6
-msgid "Payment Proposal"
-msgstr "送金の提案"
 
 #: www/views/modals/tx-status.html:21
 msgid "Payment Proposal Created"
 msgstr "送金の提案が作成されました"
 
-#: www/views/tab-home.html:61
-msgid "Payment Proposals"
-msgstr "送金の提案"
-
 #: www/views/includes/walletActivity.html:11
 msgid "Payment Received"
 msgstr "送金が受領されました"
 
-#: www/views/modals/tx-status.html:43 www/views/modals/txp-details.html:43
+#: www/views/modals/tx-status.html:43
 msgid "Payment Rejected"
 msgstr "送金が却下されました"
 
-#: src/js/controllers/modals/txpDetails.js:42 www/views/confirm.html:116
-#: www/views/includes/walletActivity.html:4
-#: www/views/modals/txp-details.html:42
+#: www/views/confirm.html:116 www/views/includes/walletActivity.html:4
 msgid "Payment Sent"
 msgstr "送金が完了しました"
-
-#: www/views/modals/txp-details.html:32
-msgid "Payment accepted, but not yet broadcasted"
-msgstr "取引が承認されましたが、まだ送信していません。"
-
-#: www/views/modals/txp-details.html:40
-msgid "Payment accepted. It will be broadcasted by Glidera. In case there is a problem, it can be deleted 6 hours after it was created."
-msgstr "取引が承認されました。Glideraより送信されます。問題があった場合、送金命令を出す６時間以内に取り消すことができます。"
-
-#: www/views/modals/txp-details.html:107
-msgid "Payment details"
-msgstr "支払いの詳細"
-
-#: www/views/proposals.html:4
-msgid "Pending Proposals"
-msgstr "保留中の提案"
 
 #: www/views/preferencesDeleteWallet.html:13
 msgid "Permanently delete this wallet."
@@ -905,7 +785,7 @@ msgstr "アドレスを処理中…"
 msgid "Preparing backup..."
 msgstr "バックアップを準備中..."
 
-#: src/js/routes.js:933
+#: src/js/routes.js:924
 msgid "Press again to exit"
 msgstr "もう一度押して終了"
 
@@ -916,10 +796,6 @@ msgstr "秘密鍵"
 #: src/js/controllers/paperWallet.js:133
 msgid "Private key encrypted. Enter password"
 msgstr "秘密鍵は暗号化されています。復号化パスワードを入力して下さい。"
-
-#: src/js/controllers/modals/txpDetails.js:59
-msgid "Proposal Created"
-msgstr "提案が作成されました"
 
 #: www/views/onboarding/notifications.html:3
 msgid "Push Notifications"
@@ -953,11 +829,11 @@ msgstr "受取済み"
 msgid "Recent"
 msgstr "履歴"
 
-#: www/views/advancedSettings.html:21
+#: www/views/advancedSettings.html:30
 msgid "Recent Transaction Card"
 msgstr "最近の取引カード"
 
-#: www/views/activity.html:4 www/views/tab-home.html:73
+#: www/views/activity.html:4
 msgid "Recent Transactions"
 msgstr "最近の取引"
 
@@ -965,17 +841,9 @@ msgstr "最近の取引"
 msgid "Recipient"
 msgstr "受取人"
 
-#: www/views/modals/txp-details.html:62
-msgid "Recipients"
-msgstr "受取人"
-
 #: src/js/services/onGoingProcess.js:21
 msgid "Recreating Wallet..."
 msgstr "ウォレットを再作成中…"
-
-#: src/js/controllers/modals/txpDetails.js:61
-msgid "Rejected"
-msgstr "却下済み"
 
 #: src/js/services/onGoingProcess.js:22
 msgid "Rejecting payment proposal"
@@ -1057,11 +925,11 @@ msgstr "通貨を検索"
 msgid "Select a backup file"
 msgstr "バックアップファイルを選択"
 
-#: src/js/controllers/amount.js:39 src/js/controllers/amount.js:75
+#: src/js/controllers/amount.js:40 src/js/controllers/amount.js:76
 #: src/js/controllers/tab-receive.js:90 src/js/controllers/tab-send.js:189
 #: src/js/controllers/tab-send.js:208
 msgid "Select an account"
-msgstr ""
+msgstr "アカウントを選択します"
 
 #: www/views/feedback/send.html:13 www/views/feedback/send.html:43
 #: www/views/tab-send.html:3 www/views/tabs.html:15
@@ -1092,8 +960,7 @@ msgstr "このアドレスへ送信して下さい"
 msgid "Send us feedback instead"
 msgstr "代わりにフィードバックを送信"
 
-#: www/views/confirm.html:15 www/views/includes/txp.html:12
-#: www/views/modals/txp-details.html:19
+#: www/views/confirm.html:15
 msgid "Sending"
 msgstr "送信中"
 
@@ -1115,7 +982,7 @@ msgstr "取引送信中"
 
 #: src/js/controllers/confirm.js:293
 msgid "Sending {{amountStr}} from your {{name}} account"
-msgstr ""
+msgstr "{{name}}アカウントから{{amountStr}}を送っています"
 
 #: www/views/modals/tx-status.html:9 www/views/tx-details.html:18
 msgid "Sent"
@@ -1161,11 +1028,7 @@ msgstr ""
 msgid "Skip"
 msgstr "スキップ"
 
-#: src/js/controllers/modals/txpDetails.js:45
-msgid "Slide to accept"
-msgstr "スライドして承諾"
-
-#: src/js/controllers/confirm.js:219 src/js/controllers/modals/txpDetails.js:38
+#: src/js/controllers/confirm.js:219
 msgid "Slide to send"
 msgstr "スライドして送る"
 
@@ -1216,10 +1079,6 @@ msgstr "ありがとうございます。"
 msgid "That's exciting to hear. We'd love to earn that fifth star from you – how could we improve your experience?"
 msgstr "嬉しい限りです！是非5つ星のアプリを目指したいため、このアプリの改善するにはどうしたら良いと思いますか？"
 
-#: www/views/modals/txp-details.html:26
-msgid "The payment was removed by creator"
-msgstr "送金の提案が作成者により削除されました"
-
 #: www/views/tab-import-phrase.html:4
 msgid "The seed"
 msgstr ""
@@ -1245,12 +1104,11 @@ msgstr "このアプリで何か間違ったことをやっているようです
 msgid "This app is fantastic!"
 msgstr "このアプリは素晴らしいです!"
 
-#: www/views/modals/txp-details.html:136 www/views/tx-details.html:86
+#: www/views/tx-details.html:86
 msgid "Timeline"
 msgstr "履歴"
 
 #: www/views/confirm.html:26 www/views/includes/output.html:2
-#: www/views/modals/txp-details.html:109 www/views/modals/txp-details.html:53
 #: www/views/tx-details.html:42 www/views/tx-details.html:59
 msgid "To"
 msgstr "宛先"
@@ -1264,7 +1122,7 @@ msgstr "Touch ID が失敗しました。"
 msgid "Transaction"
 msgstr "取引"
 
-#: src/js/controllers/activity.js:45 src/js/controllers/tab-home.js:183
+#: src/js/controllers/tab-home.js:193
 msgid "Transaction not found"
 msgstr "取引は見つかりません"
 
@@ -1276,7 +1134,7 @@ msgstr "移動先"
 msgid "Transfer to Account"
 msgstr ""
 
-#: www/views/modals/password.html:24 www/views/modals/pin.html:13
+#: www/views/modals/password.html:22 www/views/modals/pin.html:13
 msgid "Try again in {{expires}}"
 msgstr "{{expires}} 経過後にもう一度試してください。"
 
@@ -1284,13 +1142,9 @@ msgstr "{{expires}} 経過後にもう一度試してください。"
 msgid "Uh oh..."
 msgstr "あら…"
 
-#: src/js/controllers/tab-home.js:150
+#: src/js/controllers/tab-home.js:160
 msgid "Update Available"
 msgstr "利用可能なアップデートあり"
-
-#: www/views/proposals.html:14
-msgid "Updating pending proposals. Please stand by"
-msgstr "協議中の送金提案を更新します。しばらくお待ちください。"
 
 #: www/views/activity.html:14
 msgid "Updating... Please stand by"
@@ -1316,7 +1170,7 @@ msgstr "表示"
 msgid "View Terms of Service"
 msgstr "サービス利用規約を表示"
 
-#: src/js/controllers/tab-home.js:152
+#: src/js/controllers/tab-home.js:162
 msgid "View Update"
 msgstr "更新情報を表示"
 
@@ -1337,18 +1191,12 @@ msgid "Wallet seed not available"
 msgstr ""
 
 #: src/js/controllers/addressbookView.js:43
-#: src/js/controllers/advancedSettings.js:34 src/js/controllers/import.js:146
+#: src/js/controllers/advancedSettings.js:38 src/js/controllers/import.js:150
 #: src/js/controllers/modals/password.js:73
-#: src/js/controllers/modals/txpDetails.js:151
-#: src/js/controllers/modals/txpDetails.js:167
 #: src/js/controllers/preferencesDelete.js:23
 #: www/views/preferencesDeleteWallet.html:11
 msgid "Warning!"
 msgstr "注意！"
-
-#: www/views/modals/txp-details.html:47
-msgid "Warning: this transaction has unconfirmed inputs"
-msgstr "注意: この取引は未承認資金が含まれており、承認されるまで商品等をお渡しするのを待つことをお勧めします。"
 
 #: src/js/controllers/onboarding/backupRequest.js:15
 msgid "Watch out!"
@@ -1418,13 +1266,9 @@ msgstr "ウォレットの鍵が暗号化されます。Copayでは送金時の�
 #: www/views/accountDetails.html:42 www/views/amount.html:123
 #: www/views/includes/accountList.html:11
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
-#: www/views/tab-receive.html:41 www/views/tab-send.html:100
+#: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
 msgstr "[残高非表示中]"
-
-#: www/views/includes/available-balance.html:8
-msgid "locked by pending payments"
-msgstr "未対応送金の提案によりロック中"
 
 #: www/views/onboarding/disclaimer.html:43
 msgid "I have read, understood, and agree to the <a ng-click=\"openTerms()\" href=\"javascript:void(0)\" translate=\"\">Terms of Use</a>."
@@ -1453,7 +1297,7 @@ msgstr ""
 
 #: www/views/onboarding/tour.html:50
 msgid "Let's Start"
-msgstr ""
+msgstr "始めましょう"
 
 #: www/views/changePassword.html:23
 msgid "New Password"
@@ -1467,15 +1311,15 @@ msgstr ""
 msgid "One more time."
 msgstr ""
 
-#: www/views/changePassword.html:49
+#: www/views/changePassword.html:49 www/views/onboarding/tour.html:93
 msgid "Password too short"
 msgstr ""
 
-#: www/views/changePassword.html:55
+#: www/views/changePassword.html:55 www/views/onboarding/tour.html:100
 msgid "Passwords don't match"
 msgstr ""
 
-#: www/views/changePassword.html:45
+#: www/views/changePassword.html:45 www/views/onboarding/tour.html:89
 msgid "Passwords match"
 msgstr ""
 
@@ -1487,7 +1331,7 @@ msgstr ""
 msgid "Share Canoe"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:44
+#: src/js/controllers/tab-home.js:54
 msgid "There is a new version of Canoe available"
 msgstr ""
 
@@ -1521,7 +1365,7 @@ msgstr ""
 msgid "Backup seed"
 msgstr ""
 
-#: www/views/onboarding/tour.html:86
+#: www/views/onboarding/tour.html:106
 msgid "Create Wallet"
 msgstr ""
 
@@ -1537,7 +1381,7 @@ msgstr ""
 msgid "Enter password"
 msgstr ""
 
-#: www/views/modals/password.html:23
+#: www/views/modals/password.html:21
 msgid "Incorrect password, try again."
 msgstr ""
 
@@ -1585,21 +1429,21 @@ msgstr ""
 msgid "Please enter a password to use for the wallet"
 msgstr ""
 
-#: www/views/advancedSettings.html:31
+#: www/views/advancedSettings.html:40
 msgid "Repair"
 msgstr ""
 
 #: www/views/addressbook.view.html:35
 msgid "Send Nano"
-msgstr ""
+msgstr "ナノを送ります"
 
 #: www/views/tab-send.html:33
 msgid "Start sending Nano"
-msgstr ""
+msgstr "ナノを送り始める"
 
 #: www/views/tab-send.html:37
 msgid "To get started, you need Nano. Share your account to receive Nano."
-msgstr ""
+msgstr "始めるためにナノが必要です。ナノを受け取るためにアカウントを共有する。"
 
 #: www/views/tab-send.html:38
 msgid "To get started, you need an Account in your wallet to receive Nano."
@@ -1633,7 +1477,7 @@ msgstr ""
 msgid "Your Nano wallet seed is backed up!"
 msgstr ""
 
-#: src/js/services/nanoService.js:593 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:651 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr ""
@@ -1665,7 +1509,7 @@ msgstr ""
 #: src/js/controllers/changeLocksController.js:24
 #: src/js/controllers/changePasswordController.js:10
 #: src/js/controllers/changePasswordController.js:13
-#: src/js/services/nanoService.js:70
+#: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr ""
 
@@ -1733,15 +1577,15 @@ msgstr ""
 
 #: www/views/onboarding/tour.html:31
 msgid "Nano is Feeless"
-msgstr ""
+msgstr "ナノは料金を取りません"
 
 #: www/views/onboarding/tour.html:18
 msgid "Nano is Instant"
-msgstr ""
+msgstr "ナノは即時です"
 
 #: www/views/onboarding/tour.html:45
 msgid "Nano is Secure"
-msgstr ""
+msgstr "ナノは安全です"
 
 #: www/views/onboarding/tour.html:36
 msgid "Never pay transfer fees again!"
@@ -1848,7 +1692,7 @@ msgstr ""
 msgid "Refund"
 msgstr ""
 
-#: src/js/controllers/advancedSettings.js:35
+#: src/js/controllers/advancedSettings.js:39
 msgid "Repairing your wallet could take some time. This will reload all blockchains associated with your wallet. Are you sure you want to repair?"
 msgstr ""
 
@@ -1872,7 +1716,7 @@ msgstr ""
 msgid "Valid Alias & Email"
 msgstr ""
 
-#: src/js/controllers/tx-details.js:97
+#: src/js/controllers/tx-details.js:93
 msgid "View Block on Nanode"
 msgstr ""
 
@@ -1900,11 +1744,11 @@ msgstr ""
 msgid "joedoe"
 msgstr ""
 
-#: www/views/modals/password.html:6
+#: www/views/modals/password.html:12
 msgid "Canoe is Locked"
 msgstr ""
 
-#: www/views/modals/password.html:39
+#: www/views/modals/password.html:26
 msgid "Forgot Password?"
 msgstr ""
 
@@ -1938,24 +1782,12 @@ msgstr ""
 msgid "Change Lock Settings"
 msgstr ""
 
-#: www/views/onboarding/tour.html:58
-msgid "Encryption Time!"
-msgstr ""
-
-#: www/views/onboarding/tour.html:75
-msgid "Enter at least 8 characters to encrypt your wallet."
-msgstr ""
-
 #: www/views/changeLocks.html:31 www/views/changeLocks.html:62
 msgid "Fingerprint"
 msgstr ""
 
-#: www/views/modals/password.html:40
+#: www/views/modals/password.html:27
 msgid "Go back to onboarding."
-msgstr ""
-
-#: src/js/controllers/modals/password.js:74
-msgid "Going back to onboarding replaces the current wallet, are you sure?"
 msgstr ""
 
 #: www/views/changeLocks.html:38
@@ -1970,7 +1802,7 @@ msgstr ""
 msgid "If enabled, Proof Of Work is delegated to the Canoe server side. This option is disabled and always true on mobile Canoe for now."
 msgstr ""
 
-#: www/views/advancedSettings.html:23
+#: www/views/advancedSettings.html:32
 msgid "If enabled, a list of recent transactions across all wallets will appear in the Home tab. Currently false, not fully implemented."
 msgstr ""
 
@@ -1982,7 +1814,7 @@ msgstr ""
 msgid "None"
 msgstr ""
 
-#: www/views/changeLocks.html:63
+#: www/views/changeLocks.html:63 www/views/onboarding/tour.html:62
 msgid "Password"
 msgstr ""
 
@@ -2006,10 +1838,6 @@ msgstr ""
 msgid "Timeout in seconds"
 msgstr ""
 
-#: www/views/modals/password.html:30
-msgid "Unlock"
-msgstr ""
-
 #: src/js/controllers/tab-scan.js:107 src/js/controllers/tabsController.js:7
 msgid "Unrecognized data"
 msgstr ""
@@ -2019,7 +1847,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 "          With Hard Lock, Canoe encrypts your wallet and completely remove it from memory. You can not disable Hard Lock, but you can set a very high timeout."
 msgstr ""
 
-#: src/js/controllers/tab-home.js:151
+#: src/js/controllers/tab-home.js:161
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr ""
 
@@ -2027,7 +1855,7 @@ msgstr ""
 msgid "Backend URL"
 msgstr ""
 
-#: www/views/advancedSettings.html:37 www/views/changeBackend.html:23
+#: www/views/advancedSettings.html:46 www/views/changeBackend.html:23
 msgid "Change Backend"
 msgstr ""
 
@@ -2035,7 +1863,7 @@ msgstr ""
 msgid "Change Backend Server"
 msgstr ""
 
-#: src/js/controllers/import.js:147
+#: src/js/controllers/import.js:151
 msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
 msgstr ""
 
@@ -2043,19 +1871,59 @@ msgstr ""
 msgid "Max"
 msgstr ""
 
-#: www/views/onboarding/tour.html:80
-msgid "Password length ok"
-msgstr ""
-
-#: src/js/services/nanoService.js:70
+#: src/js/services/nanoService.js:90
 msgid "Your backend has been changed"
 msgstr ""
 
-#: src/js/controllers/import.js:149
+#: src/js/controllers/import.js:153 src/js/controllers/modals/password.js:76
 msgid "delete"
 msgstr ""
 
 #: www/views/changeBackend.html:15
 msgid "getcanoe.io"
+msgstr ""
+
+#: www/views/onboarding/tour.html:66
+msgid "At least 8 Characters"
+msgstr ""
+
+#: www/views/onboarding/tour.html:74
+msgid "Confirm Password"
+msgstr ""
+
+#: www/views/onboarding/tour.html:83
+msgid "Confirm Password."
+msgstr ""
+
+#: www/views/onboarding/tour.html:58
+msgid "Encryption Time"
+msgstr ""
+
+#: www/views/modals/password.html:13
+msgid "For your security, Canoe always encrypts your wallet."
+msgstr ""
+
+#: src/js/controllers/modals/password.js:74
+msgid "Going back to onboarding will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
+msgstr ""
+
+#: src/js/controllers/import.js:123
+msgid "Please enter a password of at least 8 characters"
+msgstr ""
+
+#: www/views/modals/password.html:24
+msgid "Unlock Canoe"
+msgstr ""
+
+#: www/views/advancedSettings.html:23
+msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
+msgstr ""
+
+#: www/views/tab-home.html:53
+msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
+msgstr ""
+
+#: www/views/advancedSettings.html:21
+msgid "Play Sounds"
 msgstr ""
 
