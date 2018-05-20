@@ -339,7 +339,7 @@ msgstr "Inserisci la nuova operativa"
 msgid "Enter wallet seed"
 msgstr "Inserisci seme del portafoglio"
 
-#: www/views/backup.html:36 www/views/modals/password.html:18
+#: www/views/backup.html:36
 msgid "Enter your password"
 msgstr "Inserisci la tua password"
 
@@ -1143,7 +1143,7 @@ msgstr "Trasferisci a"
 msgid "Transfer to Account"
 msgstr "Trasferimento ad un  account"
 
-#: www/views/modals/password.html:22 www/views/modals/pin.html:13
+#: www/views/modals/password.html:24 www/views/modals/pin.html:13
 msgid "Try again in {{expires}}"
 msgstr "Provare di nuovo in {{expires}}"
 
@@ -1320,15 +1320,15 @@ msgstr "Vecchia password"
 msgid "One more time."
 msgstr "Un'altra volta"
 
-#: www/views/changePassword.html:49 www/views/onboarding/tour.html:93
+#: www/views/changePassword.html:49
 msgid "Password too short"
 msgstr "Password troppo corta"
 
-#: www/views/changePassword.html:55 www/views/onboarding/tour.html:100
+#: www/views/changePassword.html:55
 msgid "Passwords don't match"
 msgstr "Password non coincidono"
 
-#: www/views/changePassword.html:45 www/views/onboarding/tour.html:89
+#: www/views/changePassword.html:45 www/views/onboarding/tour.html:106
 msgid "Passwords match"
 msgstr "Password coincidono"
 
@@ -1375,7 +1375,7 @@ msgstr "Alias"
 msgid "Backup seed"
 msgstr "Backup seme"
 
-#: www/views/onboarding/tour.html:106
+#: www/views/onboarding/tour.html:116
 msgid "Create Wallet"
 msgstr "Crea portafoglio"
 
@@ -1391,7 +1391,7 @@ msgstr "Modifica contatto"
 msgid "Enter password"
 msgstr "Inserisci password"
 
-#: www/views/modals/password.html:21
+#: www/views/modals/password.html:23
 msgid "Incorrect password, try again."
 msgstr "Password sbagliata, riprova."
 
@@ -1746,7 +1746,7 @@ msgstr "Puoi modificare il tuo alias, indirizzo mail o le impostazioni di privac
 
 #: src/js/controllers/changePasswordController.js:10
 msgid "Your old password was not entered correctly"
-msgstr "La vecchia password inserita non è valica."
+msgstr "La vecchia password inserita non è valida."
 
 #: www/views/addressbook.add.html:33 www/views/addressbook.edit.html:33
 msgid "joe.doe@example.com"
@@ -1756,29 +1756,17 @@ msgstr "mario.rossi@mail.it"
 msgid "joedoe"
 msgstr "mariorossi"
 
-#: www/views/modals/password.html:12
+#: www/views/modals/password.html:6
 msgid "Canoe is Locked"
 msgstr "Canoe è bloccato"
 
-#: www/views/modals/password.html:26
+#: www/views/modals/password.html:39
 msgid "Forgot Password?"
 msgstr "Dimenticata la password?"
 
 #: www/views/changeLocks.html:30 www/views/changeLocks.html:61
 msgid "4-digit PIN"
 msgstr "PIN a 4 cifre"
-
-#: www/views/changeLocks.html:53
-msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
-"            <p>Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
-msgstr "<5 class=\"toggle-label\" translate=\"\">Comportamento secondo piano</h5>\n"
-"            <p>Seleziona il tipo di blocco quando Canoe va in secondo piano. Per disabilitare il blocco seleziona Nessuno.</p>"
-
-#: www/views/changeLocks.html:13
-msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
-"          With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
-msgstr "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
-"         Col blocco primario, Canoe è bloccata ma il portafoglio rimane aperto e non crittografata nella memoria. Attivare il blocco primario rende possibile l'uso di  metodi più immediate di sblocco come PIN o impronta digitale."
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your Nano."
@@ -1800,7 +1788,7 @@ msgstr "Cambia impostazioni di blocco"
 msgid "Fingerprint"
 msgstr "Impronta digitale"
 
-#: www/views/modals/password.html:27
+#: www/views/modals/password.html:40
 msgid "Go back to onboarding."
 msgstr "Ritorna alla registrazione."
 
@@ -1828,7 +1816,8 @@ msgstr "Blocca quando va in secondo piano"
 msgid "None"
 msgstr "Nessuno"
 
-#: www/views/changeLocks.html:63 www/views/onboarding/tour.html:62
+#: www/views/changeLocks.html:63 www/views/modals/password.html:12
+#: www/views/onboarding/tour.html:70
 msgid "Password"
 msgstr "Password"
 
@@ -1864,7 +1853,8 @@ msgstr "<h5 class=\"toggle-label\" translate=\"\">Blocco completo</h5>\n"
 
 #: src/js/controllers/tab-home.js:161
 msgid "A new version of this app is available. Please update to the latest version."
-msgstr ""
+msgstr "È disponibile una nuova versione di questa app. Si prega di aggiornare alla versione più recente.\n"
+""
 
 #: www/views/changeBackend.html:13
 msgid "Backend URL"
@@ -1899,47 +1889,65 @@ msgstr "cancella"
 msgid "getcanoe.io"
 msgstr ""
 
-#: www/views/onboarding/tour.html:66
-msgid "At least 8 Characters"
-msgstr ""
-
-#: www/views/onboarding/tour.html:74
+#: www/views/onboarding/tour.html:100
 msgid "Confirm Password"
-msgstr ""
-
-#: www/views/onboarding/tour.html:83
-msgid "Confirm Password."
-msgstr ""
-
-#: www/views/onboarding/tour.html:58
-msgid "Encryption Time"
-msgstr ""
-
-#: www/views/modals/password.html:13
-msgid "For your security, Canoe always encrypts your wallet."
-msgstr ""
+msgstr "Conferma password"
 
 #: src/js/controllers/modals/password.js:74
 msgid "Going back to onboarding will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
-msgstr ""
+msgstr "￼Tornando all'inizio rimuoverai il tuo portafoglio e account esistenti! Se disponi di fondi nel tuo portafoglio corrente, assicurati di disporre di un backup da cui ripristinare. Digita \"cancella\" per confermare che desideri eliminare il tuo portafoglio corrente."
 
 #: src/js/controllers/import.js:123
 msgid "Please enter a password of at least 8 characters"
-msgstr ""
-
-#: www/views/modals/password.html:24
-msgid "Unlock Canoe"
-msgstr ""
+msgstr "Per favore inserire una password di almeno 8 caratteri"
 
 #: www/views/advancedSettings.html:23
 msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr ""
+msgstr "Se attivato, Canoe userà notifiche audio per inviare, ricevere, cambio rappresentativo e sblocco del portafoglio."
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
-msgstr ""
+msgstr "Qui puoi vedere tutti i tuoi account. Leggi le  <a ng-click=\"openExternalLinkHelp()\">FAQ</a> prima di cominciare!"
 
 #: www/views/advancedSettings.html:21
 msgid "Play Sounds"
+msgstr "Attiva notifiche sonore"
+
+#: www/views/changeLocks.html:53
+msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
+"            <p translate=\"\">Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
+msgstr ""
+
+#: www/views/changeLocks.html:13
+msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
+"          <p translate=\"\">With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints.</p>"
+msgstr ""
+
+#: www/views/changeLocks.html:55
+msgid "Choose the lock type to use when Canoe goes to the background. To disable background locking select None."
+msgstr ""
+
+#: www/views/onboarding/tour.html:58
+msgid "Encryption Time!"
+msgstr ""
+
+#: www/views/onboarding/tour.html:84
+msgid "Enter at least 8 characters to encrypt your wallet."
+msgstr ""
+
+#: www/views/onboarding/tour.html:87
+msgid "Password length ok"
+msgstr ""
+
+#: www/views/onboarding/tour.html:110
+msgid "Passwords do not match"
+msgstr ""
+
+#: www/views/modals/password.html:36
+msgid "Unlock"
+msgstr ""
+
+#: www/views/changeLocks.html:15
+msgid "With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
 msgstr ""
 
