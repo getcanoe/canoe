@@ -21,7 +21,7 @@ msgstr ""
 #: www/views/changeLocks.html:53
 msgid ""
 "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
-"            <p>Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
+"            <p translate=\"\">Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
 msgstr ""
 
 #: www/views/changeLocks.html:37
@@ -33,7 +33,7 @@ msgstr ""
 #: www/views/changeLocks.html:13
 msgid ""
 "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
-"          With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
+"          <p translate=\"\">With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints.</p>"
 msgstr ""
 
 #: src/js/controllers/feedback/send.js:25
@@ -194,10 +194,6 @@ msgstr ""
 msgid "At least 3 Characters."
 msgstr ""
 
-#: www/views/onboarding/tour.html:66
-msgid "At least 8 Characters"
-msgstr ""
-
 #: www/views/changePassword.html:25
 msgid "At least 8 Characters. Make it good!"
 msgstr ""
@@ -271,7 +267,7 @@ msgstr ""
 msgid "Cannot Create Wallet"
 msgstr ""
 
-#: www/views/modals/password.html:12
+#: www/views/modals/password.html:6
 msgid "Canoe is Locked"
 msgstr ""
 
@@ -316,6 +312,10 @@ msgstr ""
 msgid "Choose a backup file from your computer"
 msgstr ""
 
+#: www/views/changeLocks.html:55
+msgid "Choose the lock type to use when Canoe goes to the background. To disable background locking select None."
+msgstr ""
+
 #: src/js/controllers/confirm.js:221
 msgid "Click to send"
 msgstr ""
@@ -353,12 +353,8 @@ msgstr ""
 msgid "Confirm New Password"
 msgstr ""
 
-#: www/views/onboarding/tour.html:74
+#: www/views/onboarding/tour.html:100
 msgid "Confirm Password"
-msgstr ""
-
-#: www/views/onboarding/tour.html:83
-msgid "Confirm Password."
 msgstr ""
 
 #: www/views/modals/pin.html:10
@@ -412,7 +408,7 @@ msgstr ""
 msgid "Create Alias"
 msgstr ""
 
-#: www/views/onboarding/tour.html:106
+#: www/views/onboarding/tour.html:116
 msgid "Create Wallet"
 msgstr ""
 
@@ -544,7 +540,7 @@ msgid "Enable the camera to get started."
 msgstr ""
 
 #: www/views/onboarding/tour.html:58
-msgid "Encryption Time"
+msgid "Encryption Time!"
 msgstr ""
 
 #: src/js/services/walletService.js:43
@@ -564,6 +560,10 @@ msgstr ""
 msgid "Enter amount"
 msgstr ""
 
+#: www/views/onboarding/tour.html:84
+msgid "Enter at least 8 characters to encrypt your wallet."
+msgstr ""
+
 #: src/js/services/walletService.js:27
 msgid "Enter new spending password"
 msgstr ""
@@ -577,7 +577,6 @@ msgid "Enter wallet seed"
 msgstr ""
 
 #: www/views/backup.html:36
-#: www/views/modals/password.html:18
 msgid "Enter your password"
 msgstr ""
 
@@ -695,11 +694,7 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-#: www/views/modals/password.html:13
-msgid "For your security, Canoe always encrypts your wallet."
-msgstr ""
-
-#: www/views/modals/password.html:26
+#: www/views/modals/password.html:39
 msgid "Forgot Password?"
 msgstr ""
 
@@ -745,7 +740,7 @@ msgstr ""
 msgid "Go back"
 msgstr ""
 
-#: www/views/modals/password.html:27
+#: www/views/modals/password.html:40
 msgid "Go back to onboarding."
 msgstr ""
 
@@ -911,7 +906,7 @@ msgstr ""
 msgid "Incorrect code format for an account:"
 msgstr ""
 
-#: www/views/modals/password.html:21
+#: www/views/modals/password.html:23
 msgid "Incorrect password, try again."
 msgstr ""
 
@@ -1228,8 +1223,13 @@ msgid "Open website"
 msgstr ""
 
 #: www/views/changeLocks.html:63
-#: www/views/onboarding/tour.html:62
+#: www/views/modals/password.html:12
+#: www/views/onboarding/tour.html:70
 msgid "Password"
+msgstr ""
+
+#: www/views/onboarding/tour.html:87
+msgid "Password length ok"
 msgstr ""
 
 #: www/views/tab-import-file.html:18
@@ -1241,17 +1241,19 @@ msgid "Password to encrypt"
 msgstr ""
 
 #: www/views/changePassword.html:49
-#: www/views/onboarding/tour.html:93
 msgid "Password too short"
 msgstr ""
 
+#: www/views/onboarding/tour.html:110
+msgid "Passwords do not match"
+msgstr ""
+
 #: www/views/changePassword.html:55
-#: www/views/onboarding/tour.html:100
 msgid "Passwords don't match"
 msgstr ""
 
 #: www/views/changePassword.html:45
-#: www/views/onboarding/tour.html:89
+#: www/views/onboarding/tour.html:106
 msgid "Passwords match"
 msgstr ""
 
@@ -1801,7 +1803,7 @@ msgstr ""
 msgid "Transfer to Account"
 msgstr ""
 
-#: www/views/modals/password.html:22
+#: www/views/modals/password.html:24
 #: www/views/modals/pin.html:13
 msgid "Try again in {{expires}}"
 msgstr ""
@@ -1814,8 +1816,8 @@ msgstr ""
 msgid "Uh oh..."
 msgstr ""
 
-#: www/views/modals/password.html:24
-msgid "Unlock Canoe"
+#: www/views/modals/password.html:36
+msgid "Unlock"
 msgstr ""
 
 #: src/js/controllers/tab-scan.js:107
@@ -1927,6 +1929,10 @@ msgstr ""
 
 #: www/views/preferencesName.html:11
 msgid "What do you call this account?"
+msgstr ""
+
+#: www/views/changeLocks.html:15
+msgid "With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
 msgstr ""
 
 #: www/views/feedback/rateApp.html:10
