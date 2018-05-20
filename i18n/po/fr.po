@@ -337,7 +337,7 @@ msgstr "Saisissez un nouveau code de dépenses"
 msgid "Enter wallet seed"
 msgstr "Entrer le seed du portefeuille"
 
-#: www/views/backup.html:36 www/views/modals/password.html:18
+#: www/views/backup.html:36
 msgid "Enter your password"
 msgstr "Écrivez votre mot de passe"
 
@@ -1133,7 +1133,7 @@ msgstr "Transférer à"
 msgid "Transfer to Account"
 msgstr "Transférer vers le compte"
 
-#: www/views/modals/password.html:22 www/views/modals/pin.html:13
+#: www/views/modals/password.html:24 www/views/modals/pin.html:13
 msgid "Try again in {{expires}}"
 msgstr "Réessayez dans {{expires}}"
 
@@ -1310,15 +1310,15 @@ msgstr "Ancien mot de passe"
 msgid "One more time."
 msgstr "Encore une fois"
 
-#: www/views/changePassword.html:49 www/views/onboarding/tour.html:93
+#: www/views/changePassword.html:49
 msgid "Password too short"
 msgstr "Mot de passe trop court"
 
-#: www/views/changePassword.html:55 www/views/onboarding/tour.html:100
+#: www/views/changePassword.html:55
 msgid "Passwords don't match"
 msgstr "Les mots de passe sont différents"
 
-#: www/views/changePassword.html:45 www/views/onboarding/tour.html:89
+#: www/views/changePassword.html:45 www/views/onboarding/tour.html:106
 msgid "Passwords match"
 msgstr "Mots de passe identiques"
 
@@ -1364,7 +1364,7 @@ msgstr "Alias"
 msgid "Backup seed"
 msgstr "Sauvegarder la graine"
 
-#: www/views/onboarding/tour.html:106
+#: www/views/onboarding/tour.html:116
 msgid "Create Wallet"
 msgstr "Créer un portefeuille"
 
@@ -1380,7 +1380,7 @@ msgstr "Editer le Contact"
 msgid "Enter password"
 msgstr "Saisir le mot de passe"
 
-#: www/views/modals/password.html:21
+#: www/views/modals/password.html:23
 msgid "Incorrect password, try again."
 msgstr "Mot de passe erroné, essayez à nouveau."
 
@@ -1743,29 +1743,17 @@ msgstr "pierre.dupont@exemple.fr"
 msgid "joedoe"
 msgstr "pierredupont"
 
-#: www/views/modals/password.html:12
+#: www/views/modals/password.html:6
 msgid "Canoe is Locked"
 msgstr "Canoe est verrouillé"
 
-#: www/views/modals/password.html:26
+#: www/views/modals/password.html:39
 msgid "Forgot Password?"
 msgstr "Mot de passe oublié?"
 
 #: www/views/changeLocks.html:30 www/views/changeLocks.html:61
 msgid "4-digit PIN"
 msgstr "Code PIN"
-
-#: www/views/changeLocks.html:53
-msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
-"            <p>Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
-msgstr "<h5 class=\"toggle-label\" translate=\"\">Comportement en arrière-plan</h5>\n"
-"            <p>Choisissez le type de verrouillage désiré quand Canoe est mis en arrière-plan. Pour désactiver le verrouillage en arrière-plan, choisissez Aucun.</p>"
-
-#: www/views/changeLocks.html:13
-msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
-"          With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
-msgstr "<h5 class=\"toggle-label\" translate=\"\">Verrouillage doux</h5>\n"
-"Avec le verrouillage doux, Canoe est fermé mais votre portefeuille est présent en mémoire. Le mode verrouillage doux permet d'utiliser une authentification plus simple, par emprunte digitale ou par code PIN."
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your Nano."
@@ -1787,7 +1775,7 @@ msgstr "Changer les préférences de verrouillage"
 msgid "Fingerprint"
 msgstr "Emprunte digitale"
 
-#: www/views/modals/password.html:27
+#: www/views/modals/password.html:40
 msgid "Go back to onboarding."
 msgstr "Retour à l'enregistrement"
 
@@ -1816,7 +1804,8 @@ msgstr "Verrouillage au passage en arrière-plan"
 msgid "None"
 msgstr "Aucun"
 
-#: www/views/changeLocks.html:63 www/views/onboarding/tour.html:62
+#: www/views/changeLocks.html:63 www/views/modals/password.html:12
+#: www/views/onboarding/tour.html:70
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -1886,25 +1875,9 @@ msgstr "supprimer"
 msgid "getcanoe.io"
 msgstr "getcanoe.io"
 
-#: www/views/onboarding/tour.html:66
-msgid "At least 8 Characters"
-msgstr "8 caractères minimum"
-
-#: www/views/onboarding/tour.html:74
+#: www/views/onboarding/tour.html:100
 msgid "Confirm Password"
 msgstr "Confirmer le mot de passe"
-
-#: www/views/onboarding/tour.html:83
-msgid "Confirm Password."
-msgstr "Confirmer le mot de passe."
-
-#: www/views/onboarding/tour.html:58
-msgid "Encryption Time"
-msgstr "Temps d'encryption"
-
-#: www/views/modals/password.html:13
-msgid "For your security, Canoe always encrypts your wallet."
-msgstr "Pour votre sécurité, Canoe crypte toujours votre portefeuille."
 
 #: src/js/controllers/modals/password.js:74
 msgid "Going back to onboarding will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
@@ -1913,10 +1886,6 @@ msgstr "Retourner à l'enregistrement supprimera de cet appareil votre portefeui
 #: src/js/controllers/import.js:123
 msgid "Please enter a password of at least 8 characters"
 msgstr "Veuillez saisir un mot de passe d'au moins 8 caractères"
-
-#: www/views/modals/password.html:24
-msgid "Unlock Canoe"
-msgstr "Déverrouiller Canoe"
 
 #: www/views/advancedSettings.html:23
 msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
@@ -1928,5 +1897,43 @@ msgstr ""
 
 #: www/views/advancedSettings.html:21
 msgid "Play Sounds"
+msgstr ""
+
+#: www/views/changeLocks.html:53
+msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
+"            <p translate=\"\">Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
+msgstr ""
+
+#: www/views/changeLocks.html:13
+msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
+"          <p translate=\"\">With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints.</p>"
+msgstr ""
+
+#: www/views/changeLocks.html:55
+msgid "Choose the lock type to use when Canoe goes to the background. To disable background locking select None."
+msgstr ""
+
+#: www/views/onboarding/tour.html:58
+msgid "Encryption Time!"
+msgstr ""
+
+#: www/views/onboarding/tour.html:84
+msgid "Enter at least 8 characters to encrypt your wallet."
+msgstr ""
+
+#: www/views/onboarding/tour.html:87
+msgid "Password length ok"
+msgstr ""
+
+#: www/views/onboarding/tour.html:110
+msgid "Passwords do not match"
+msgstr ""
+
+#: www/views/modals/password.html:36
+msgid "Unlock"
+msgstr ""
+
+#: www/views/changeLocks.html:15
+msgid "With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
 msgstr ""
 
