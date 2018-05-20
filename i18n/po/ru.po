@@ -337,7 +337,7 @@ msgstr "Введите новый платёжный пароль"
 msgid "Enter wallet seed"
 msgstr "Введите Seed кошелька"
 
-#: www/views/backup.html:36 www/views/modals/password.html:18
+#: www/views/backup.html:36
 msgid "Enter your password"
 msgstr "Введите пароль"
 
@@ -499,7 +499,7 @@ msgstr "Приложение не нравится"
 
 #: www/views/modals/terms.html:22
 msgid "I have read, understood, and agree with the Terms of use."
-msgstr "Я прочитал, понял, и соглашаюсь с Условиями использования."
+msgstr "Я прочитал, понял и согласен с условиями пользования."
 
 #: src/js/controllers/feedback/rateCard.js:35
 msgid "I like the app"
@@ -545,7 +545,7 @@ msgstr "Импортировать Seed"
 #: www/views/add.html:21 www/views/tab-import-file.html:27
 #: www/views/tab-settings.html:31
 msgid "Import wallet"
-msgstr "Импортировать кошелёк"
+msgstr "Импорт кошелька"
 
 #: src/js/services/onGoingProcess.js:20
 msgid "Importing Wallet..."
@@ -679,7 +679,7 @@ msgstr "Если это устройство окажется утеряно, б
 
 #: www/views/backupWarning.html:11
 msgid "Now is a perfect time to assess your surroundings. Nearby windows? Hidden cameras? Shoulder-spies?"
-msgstr "Самое время оценить окружение. Окна поблизости? Скрытые камеры? Плечешпионы?"
+msgstr "Самое время оценить окружение. Окна поблизости? Скрытые камеры? Подсматривающие через плечо?"
 
 #: www/views/tab-import-phrase.html:15
 msgid "Numbers and letters like 904A2CE76..."
@@ -688,7 +688,7 @@ msgstr "Цифры и буквы такие как 904A2CE76..."
 #: src/js/services/popupService.js:15 src/js/services/popupService.js:51
 #: src/js/services/popupService.js:60 src/js/services/popupService.js:71
 msgid "OK"
-msgstr "ХОРОШО"
+msgstr "ПРОДОЛЖИТЬ"
 
 #: www/views/modals/tx-status.html:12 www/views/modals/tx-status.html:24
 #: www/views/modals/tx-status.html:36 www/views/modals/tx-status.html:46
@@ -850,7 +850,7 @@ msgstr "Отклонение платежа"
 
 #: www/views/preferencesAbout.html:9
 msgid "Release information"
-msgstr "Информация о выпуске"
+msgstr "Информация о версии Canoe"
 
 #: www/views/addressbook.view.html:44
 msgid "Remove"
@@ -993,11 +993,11 @@ msgstr "Службы"
 
 #: www/views/preferencesLogs.html:3
 msgid "Session Log"
-msgstr "Журнал сеанса"
+msgstr "Журнал сессии"
 
 #: www/views/preferencesAbout.html:35
 msgid "Session log"
-msgstr "Журнал сеанса"
+msgstr "Журнал сессии"
 
 #: www/views/tab-settings.html:3 www/views/tabs.html:19
 msgid "Settings"
@@ -1021,7 +1021,7 @@ msgstr "Подписание транзакции"
 
 #: www/views/onboarding/backupRequest.html:6
 msgid "Since only you control your money, you’ll need to save your wallet seed in case this app is deleted."
-msgstr "Так как только вы контролируете свои деньги, вам надо сохранить Seed вашего кошелька в случае, если это приложение будет удалено."
+msgstr "Только вы контролируете свои деньги, поэтому вам надо сохранить Seed вашего кошелька на случай, если это приложение будет удалено."
 
 #: www/views/onboarding/tour.html:11
 msgid "Skip"
@@ -1053,12 +1053,12 @@ msgstr "Коснитесь и удерживайте, чтобы показат�
 
 #: www/views/termsOfUse.html:3
 msgid "Terms Of Use"
-msgstr "Условия использования"
+msgstr "Условия пользования"
 
 #: www/views/modals/terms.html:3 www/views/onboarding/disclaimer.html:29
 #: www/views/onboarding/disclaimer.html:43 www/views/preferencesAbout.html:30
 msgid "Terms of Use"
-msgstr "Условия использования"
+msgstr "Условия пользования"
 
 #: www/views/includes/incomingDataMenu.html:61
 msgid "Text"
@@ -1133,7 +1133,7 @@ msgstr "Перевести в"
 msgid "Transfer to Account"
 msgstr "Перевод на аккаунт"
 
-#: www/views/modals/password.html:22 www/views/modals/pin.html:13
+#: www/views/modals/password.html:24 www/views/modals/pin.html:13
 msgid "Try again in {{expires}}"
 msgstr "Попробуйте снова через {{expires}}"
 
@@ -1167,7 +1167,7 @@ msgstr "Просмотреть"
 
 #: src/js/controllers/onboarding/terms.js:20
 msgid "View Terms of Service"
-msgstr "Посмотреть Условия обслуживания"
+msgstr "Посмотреть условия пользования"
 
 #: src/js/controllers/tab-home.js:162
 msgid "View Update"
@@ -1211,7 +1211,7 @@ msgstr "Сайт"
 
 #: www/views/preferencesName.html:11
 msgid "What do you call this account?"
-msgstr "Как вы называете этот аккаунт?"
+msgstr "Как вы хотите назвать этот аккаунт?"
 
 #: www/views/onboarding/notifications.html:4
 msgid "Would you like to receive push notifications about payments?"
@@ -1271,7 +1271,7 @@ msgstr "[Баланс скрыт]"
 
 #: www/views/onboarding/disclaimer.html:43
 msgid "I have read, understood, and agree to the <a ng-click=\"openTerms()\" href=\"javascript:void(0)\" translate=\"\">Terms of Use</a>."
-msgstr "Я прочитал, понял, и согласен с <a ng-click=\"openTerms()\" href=\"javascript:void(0)\" translate=\"\">условиями пользования</a>."
+msgstr "Я прочитал, понял и согласен с <a ng-click=\"openTerms()\" href=\"javascript:void(0)\" translate=\"\">условиями пользования</a>."
 
 #: www/views/feedback/rateApp.html:7
 msgid "5-star ratings help us get Canoe into more hands, and more users means more resources can be committed to the app!"
@@ -1310,15 +1310,15 @@ msgstr "Старый пароль"
 msgid "One more time."
 msgstr "Ещё раз."
 
-#: www/views/changePassword.html:49 www/views/onboarding/tour.html:93
+#: www/views/changePassword.html:49
 msgid "Password too short"
 msgstr "Пароль слишком короткий"
 
-#: www/views/changePassword.html:55 www/views/onboarding/tour.html:100
+#: www/views/changePassword.html:55
 msgid "Passwords don't match"
 msgstr "Пароли не совпадают"
 
-#: www/views/changePassword.html:45 www/views/onboarding/tour.html:89
+#: www/views/changePassword.html:45 www/views/onboarding/tour.html:106
 msgid "Passwords match"
 msgstr "Пароли совпадают"
 
@@ -1364,7 +1364,7 @@ msgstr "Псевдоним"
 msgid "Backup seed"
 msgstr "Резервная копия Seed"
 
-#: www/views/onboarding/tour.html:106
+#: www/views/onboarding/tour.html:116
 msgid "Create Wallet"
 msgstr "Создать кошелёк"
 
@@ -1380,7 +1380,7 @@ msgstr "Редактировать контакт"
 msgid "Enter password"
 msgstr "Введите пароль"
 
-#: www/views/modals/password.html:21
+#: www/views/modals/password.html:23
 msgid "Incorrect password, try again."
 msgstr "Неправильный пароль, попробуйте снова."
 
@@ -1458,7 +1458,7 @@ msgstr "Использовать PoW на стороне сервера"
 
 #: www/views/preferencesLanguage.html:16
 msgid "We’re always looking for translation contributions! You can make corrections or help to make this app available in your native language by joining our community on POEditor."
-msgstr "Мы всегда в поиске авторов для переводов! Вы можете внести исправления или помочь сделать это приложение доступным на вашем родном языке, присоединившись к нашему сообществу на POEditor."
+msgstr "Мы всегда находимся в поиске авторов для переводов! Вы можете внести исправления или помочь сделать это приложение доступным на вашем родном языке, присоединившись к нашему сообществу на POEditor."
 
 #: src/js/controllers/preferencesLanguage.js:11
 msgid "You can make contributions by signing up on our POEditor community translation project. We’re looking forward to hearing from you!"
@@ -1576,15 +1576,15 @@ msgstr "Управлять"
 
 #: www/views/onboarding/tour.html:31
 msgid "Nano is Feeless"
-msgstr "Nano - это без комиссий"
+msgstr "Nano без комиссий"
 
 #: www/views/onboarding/tour.html:18
 msgid "Nano is Instant"
-msgstr "Nano - это мгновенный"
+msgstr "Nano мгновенный"
 
 #: www/views/onboarding/tour.html:45
 msgid "Nano is Secure"
-msgstr "Nano - это безопасный"
+msgstr "Nano безопасный"
 
 #: www/views/onboarding/tour.html:36
 msgid "Never pay transfer fees again!"
@@ -1743,29 +1743,17 @@ msgstr "ivan.ivanov@example.com"
 msgid "joedoe"
 msgstr "ivanivanov"
 
-#: www/views/modals/password.html:12
+#: www/views/modals/password.html:6
 msgid "Canoe is Locked"
 msgstr "Canoe заблокирован"
 
-#: www/views/modals/password.html:26
+#: www/views/modals/password.html:39
 msgid "Forgot Password?"
 msgstr "Забыли пароль?"
 
 #: www/views/changeLocks.html:30 www/views/changeLocks.html:61
 msgid "4-digit PIN"
 msgstr "4-значный PIN-код"
-
-#: www/views/changeLocks.html:53
-msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
-"            <p>Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
-msgstr "<h5 class=\"toggle-label\" translate=\"\">Поведение в фоновом режиме</h5>\n"
-"            <p>Выберите тип блокировки, когда Canoe запущен в фоновом режиме. Чтобы отключить блокировку в фоновом режиме, выберите Отключить.</p>"
-
-#: www/views/changeLocks.html:13
-msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
-"          With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
-msgstr "<h5 class=\"toggle-label\" translate=\"\">Мягкая блокировка</h5>\n"
-"          При мягкой блокировке, Canoe заблокирован, но ваш кошелек по-прежнему находится в незашифрованной области памяти. Режим мягкой блокировки позволяет использовать более простые формы идентификации, такие как PIN-код и цифровой отпечаток пальца."
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your Nano."
@@ -1787,7 +1775,7 @@ msgstr "Изменить настройки блокировки"
 msgid "Fingerprint"
 msgstr "Отпечаток пальца"
 
-#: www/views/modals/password.html:27
+#: www/views/modals/password.html:40
 msgid "Go back to onboarding."
 msgstr "Вернуться к регистрации."
 
@@ -1815,7 +1803,8 @@ msgstr "Заблокировать при переходе в фоновый р�
 msgid "None"
 msgstr "Нет"
 
-#: www/views/changeLocks.html:63 www/views/onboarding/tour.html:62
+#: www/views/changeLocks.html:63 www/views/modals/password.html:12
+#: www/views/onboarding/tour.html:70
 msgid "Password"
 msgstr "Пароль"
 
@@ -1871,7 +1860,7 @@ msgstr "Импортирование кошелька приведет к уда
 
 #: www/views/amount.html:54
 msgid "Max"
-msgstr "Макс."
+msgstr "Max"
 
 #: src/js/services/nanoService.js:90
 msgid "Your backend has been changed"
@@ -1885,25 +1874,9 @@ msgstr "удалить"
 msgid "getcanoe.io"
 msgstr "getcanoe.io"
 
-#: www/views/onboarding/tour.html:66
-msgid "At least 8 Characters"
-msgstr "Не менее 8 символов"
-
-#: www/views/onboarding/tour.html:74
+#: www/views/onboarding/tour.html:100
 msgid "Confirm Password"
 msgstr "Подтвердите пароль"
-
-#: www/views/onboarding/tour.html:83
-msgid "Confirm Password."
-msgstr "Подтвердите пароль."
-
-#: www/views/onboarding/tour.html:58
-msgid "Encryption Time"
-msgstr "Время шифрования"
-
-#: www/views/modals/password.html:13
-msgid "For your security, Canoe always encrypts your wallet."
-msgstr "Для вашей безопасности, Canoe всегда шифрует ваш кошелек."
 
 #: src/js/controllers/modals/password.js:74
 msgid "Going back to onboarding will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
@@ -1913,19 +1886,53 @@ msgstr "Возврат к регистрации удалит ваш сущес�
 msgid "Please enter a password of at least 8 characters"
 msgstr "Пожалуйста введите пароль(не менее 8 символов)"
 
-#: www/views/modals/password.html:24
-msgid "Unlock Canoe"
-msgstr "Разблокировать Canoe"
-
 #: www/views/advancedSettings.html:23
 msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr ""
+msgstr "Если активировано, то вы услышите звуковые сигналы при отправке и приеме Nano, изменении представителя или при разблокировке кошелька."
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
-msgstr ""
+msgstr "На этом экране вы можете видеть все ваши аккаунты. Прочтите <a ng-click=\"openExternalLinkHelp()\">FAQs</a> прежде чем начать!"
 
 #: www/views/advancedSettings.html:21
 msgid "Play Sounds"
+msgstr "Включить звук"
+
+#: www/views/changeLocks.html:53
+msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
+"            <p translate=\"\">Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
+msgstr ""
+
+#: www/views/changeLocks.html:13
+msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
+"          <p translate=\"\">With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints.</p>"
+msgstr ""
+
+#: www/views/changeLocks.html:55
+msgid "Choose the lock type to use when Canoe goes to the background. To disable background locking select None."
+msgstr ""
+
+#: www/views/onboarding/tour.html:58
+msgid "Encryption Time!"
+msgstr ""
+
+#: www/views/onboarding/tour.html:84
+msgid "Enter at least 8 characters to encrypt your wallet."
+msgstr ""
+
+#: www/views/onboarding/tour.html:87
+msgid "Password length ok"
+msgstr ""
+
+#: www/views/onboarding/tour.html:110
+msgid "Passwords do not match"
+msgstr ""
+
+#: www/views/modals/password.html:36
+msgid "Unlock"
+msgstr ""
+
+#: www/views/changeLocks.html:15
+msgid "With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
 msgstr ""
 
