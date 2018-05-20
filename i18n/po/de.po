@@ -338,7 +338,7 @@ msgstr "Neuen Berechtigungscode eingeben"
 msgid "Enter wallet seed"
 msgstr "Seed"
 
-#: www/views/backup.html:36 www/views/modals/password.html:18
+#: www/views/backup.html:36
 msgid "Enter your password"
 msgstr "Passwort eingeben"
 
@@ -1134,7 +1134,7 @@ msgstr "Senden an"
 msgid "Transfer to Account"
 msgstr "Senden an Konto"
 
-#: www/views/modals/password.html:22 www/views/modals/pin.html:13
+#: www/views/modals/password.html:24 www/views/modals/pin.html:13
 msgid "Try again in {{expires}}"
 msgstr "Versuche es erneut in {{expires}}"
 
@@ -1311,15 +1311,15 @@ msgstr "Bisheriges Passwort"
 msgid "One more time."
 msgstr "Noch einmal."
 
-#: www/views/changePassword.html:49 www/views/onboarding/tour.html:93
+#: www/views/changePassword.html:49
 msgid "Password too short"
 msgstr "Passwort zu kurz"
 
-#: www/views/changePassword.html:55 www/views/onboarding/tour.html:100
+#: www/views/changePassword.html:55
 msgid "Passwords don't match"
 msgstr "Passwörter stimmen nicht überein"
 
-#: www/views/changePassword.html:45 www/views/onboarding/tour.html:89
+#: www/views/changePassword.html:45 www/views/onboarding/tour.html:106
 msgid "Passwords match"
 msgstr "Passwörter stimmen überein"
 
@@ -1365,7 +1365,7 @@ msgstr "Alias"
 msgid "Backup seed"
 msgstr "Seed sichern"
 
-#: www/views/onboarding/tour.html:106
+#: www/views/onboarding/tour.html:116
 msgid "Create Wallet"
 msgstr "Wallet erstellen"
 
@@ -1381,7 +1381,7 @@ msgstr "Kontakt bearbeiten"
 msgid "Enter password"
 msgstr "Gib dein Passwort ein"
 
-#: www/views/modals/password.html:21
+#: www/views/modals/password.html:23
 msgid "Incorrect password, try again."
 msgstr "Falsches Passwort, versuche es bitte erneut."
 
@@ -1744,29 +1744,17 @@ msgstr "max.mustermann@beispiel.de"
 msgid "joedoe"
 msgstr "maxmustermann"
 
-#: www/views/modals/password.html:12
+#: www/views/modals/password.html:6
 msgid "Canoe is Locked"
 msgstr "Canoe ist gesperrt"
 
-#: www/views/modals/password.html:26
+#: www/views/modals/password.html:39
 msgid "Forgot Password?"
 msgstr "Passwort vergessen?"
 
 #: www/views/changeLocks.html:30 www/views/changeLocks.html:61
 msgid "4-digit PIN"
 msgstr "4-stellige PIN"
-
-#: www/views/changeLocks.html:53
-msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
-"            <p>Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
-msgstr "<h5 class=\"toggle-label\" translate=\"\">Verhalten bei Inaktivität</h5>\n"
-"            <p>Wähle aus, wie Canoe bei Inaktivität gesperrt werden soll.</p>"
-
-#: www/views/changeLocks.html:13
-msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
-"          With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
-msgstr "<h5 class=\"toggle-label\" translate=\"\">Standby</h5>\n"
-"          Im Standby ist dein Wallet gesperrt, aber läuft unverschlüsselt im Speicher weiter. Verwende eine PIN oder deinen Fingerabdruck."
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your Nano."
@@ -1788,7 +1776,7 @@ msgstr "Sicherheitseinstellungen ändern"
 msgid "Fingerprint"
 msgstr "Fingerabdruck"
 
-#: www/views/modals/password.html:27
+#: www/views/modals/password.html:40
 msgid "Go back to onboarding."
 msgstr "Gehe zurück zum Onboarding."
 
@@ -1816,7 +1804,8 @@ msgstr "Sperren bei Inaktivität"
 msgid "None"
 msgstr "Keines"
 
-#: www/views/changeLocks.html:63 www/views/onboarding/tour.html:62
+#: www/views/changeLocks.html:63 www/views/modals/password.html:12
+#: www/views/onboarding/tour.html:70
 msgid "Password"
 msgstr "Passwort"
 
@@ -1886,24 +1875,8 @@ msgstr "löschen"
 msgid "getcanoe.io"
 msgstr "getcanoe.io"
 
-#: www/views/onboarding/tour.html:66
-msgid "At least 8 Characters"
-msgstr ""
-
-#: www/views/onboarding/tour.html:74
+#: www/views/onboarding/tour.html:100
 msgid "Confirm Password"
-msgstr ""
-
-#: www/views/onboarding/tour.html:83
-msgid "Confirm Password."
-msgstr ""
-
-#: www/views/onboarding/tour.html:58
-msgid "Encryption Time"
-msgstr ""
-
-#: www/views/modals/password.html:13
-msgid "For your security, Canoe always encrypts your wallet."
 msgstr ""
 
 #: src/js/controllers/modals/password.js:74
@@ -1912,10 +1885,6 @@ msgstr ""
 
 #: src/js/controllers/import.js:123
 msgid "Please enter a password of at least 8 characters"
-msgstr ""
-
-#: www/views/modals/password.html:24
-msgid "Unlock Canoe"
 msgstr ""
 
 #: www/views/advancedSettings.html:23
@@ -1928,5 +1897,43 @@ msgstr ""
 
 #: www/views/advancedSettings.html:21
 msgid "Play Sounds"
+msgstr ""
+
+#: www/views/changeLocks.html:53
+msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
+"            <p translate=\"\">Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
+msgstr ""
+
+#: www/views/changeLocks.html:13
+msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
+"          <p translate=\"\">With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints.</p>"
+msgstr ""
+
+#: www/views/changeLocks.html:55
+msgid "Choose the lock type to use when Canoe goes to the background. To disable background locking select None."
+msgstr ""
+
+#: www/views/onboarding/tour.html:58
+msgid "Encryption Time!"
+msgstr ""
+
+#: www/views/onboarding/tour.html:84
+msgid "Enter at least 8 characters to encrypt your wallet."
+msgstr ""
+
+#: www/views/onboarding/tour.html:87
+msgid "Password length ok"
+msgstr ""
+
+#: www/views/onboarding/tour.html:110
+msgid "Passwords do not match"
+msgstr ""
+
+#: www/views/modals/password.html:36
+msgid "Unlock"
+msgstr ""
+
+#: www/views/changeLocks.html:15
+msgid "With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
 msgstr ""
 
