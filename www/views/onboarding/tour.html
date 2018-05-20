@@ -64,7 +64,6 @@
             <input 
                autocapitalize="none" 
                autocorrect="off" 
-               id="input-password" 
                ng-model="password" 
                type="{{ typePassword ? 'text' : 'password' }}" 
                name="password" 
@@ -92,7 +91,6 @@
 					<div class="input-password item item-input item-stacked-label">
 						<input 
 							ng-model="passwordConfirm"
-              id="input-password" 
               type="{{ typePassword ? 'text' : 'password' }}" 
 							name="confirmPassword"
 							autocapitalize="none"
@@ -106,6 +104,10 @@
             <div ng-hide="password !== passwordConfirm || !password || !passwordConfirm" class="item item-input item-stacked-label good-password">
               <i class="fa fa-check-circle-o" aria-hidden="true"></i>
               <span translate>Passwords match</span>
+            </div>
+            <div ng-hide="password === passwordConfirm || !password || !passwordConfirm" class="item item-input item-stacked-label bad-password">
+              <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+              <span translate>Passwords do not match</span>
             </div>
           </label>
         </div>

@@ -121,18 +121,19 @@
     color: white;
   }
 
-  .too-short {
+  .bad-password {
     color: $v-error-color;
+    margin-top: -7px;
   }
 
   .good-password {
     color: $v-success-color;
-    margin-left: 0 !important;
   }
 
   .good-password,
-  .too-short {
+  .bad-password {
     padding-left: 0px !important;
+    margin-left: 0 !important;
   }
 
   .input-password {
