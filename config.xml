@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="391008" id="io.getcanoe.canoe" ios-CFBundleVersion="0.9.10" version="0.9.10">
+<widget android-versionCode="391009" id="io.getcanoe.canoe" ios-CFBundleVersion="0.9.10" version="0.9.10">
     <name>Canoe</name>
     <description>
       Canoe Nano Wallet
