@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="391007" id="io.getcanoe.canoe" ios-CFBundleVersion="0.9.9" version="0.9.9">
+<widget android-versionCode="391008" id="io.getcanoe.canoe" ios-CFBundleVersion="0.9.10" version="0.9.10">
     <name>Canoe</name>
     <description>
       Canoe Nano Wallet
@@ -81,13 +81,8 @@
         <splash height="300" src="resources/canoe/windows/splash/SplashScreen.scale-100.png" width="620" />
         <splash height="1920" src="resources/canoe/windows/splash/SplashScreenPhone.scale-240.png" width="1152" />
     </platform>
-    <engine name="android" spec="7.1.0" />
-    <engine name="windows" spec="6.0.0" />
-    <engine name="ios" spec="^4.5.4" />
-
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-globalization" spec="^1.11.0" />
-
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
@@ -120,4 +115,7 @@
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
+    <engine name="windows" spec="6.0.0" />
+    <engine name="ios" spec="^4.5.4" />
+    <engine name="android" spec="^7.1.0" />
 </widget>
