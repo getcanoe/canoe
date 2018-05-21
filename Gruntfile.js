@@ -8,7 +8,7 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     exec: {
       splashicon: {
-        command: 'cordova-splash && cordova-icon'
+        command: 'cordova-splash && cordova-icon && rm -rf resources/canoe/android/splash && mv platforms/android/res resources/canoe/android/splash'
       },
       desktopLinux: {
         command: 'sed s/VERSION/<%= pkg.version %>/g < resources/canoe/linux/canoe.desktop > build/canoe/canoe.desktop'
