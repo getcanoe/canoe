@@ -57,7 +57,7 @@
     "bezier-easing": "^2.0.3",
     "bhttp": "1.2.4",
     "bower": "^1.8.4",
-    "cordova-android": "7.1.0",
+    "cordova-android": "^7.1.0",
     "cordova-clipboard": "^1.2.1",
     "cordova-custom-config": "^5.0.2",
     "cordova-ios": "^4.5.4",
@@ -141,15 +141,15 @@
     "run:android": "cordova run android --device",
     "run:android-release": "cordova run android --device --release",
     "log:android": "adb logcat | grep chromium",
-    "sign:android": "rm -f platforms/android/build/outputs/apk/release/android-release-signed-aligned.apk; jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../canoe.keystore -signedjar platforms/android/build/outputs/apk/release/android-release-signed.apk  platforms/android/build/outputs/apk/release/android-release-unsigned.apk canoe && $ANDROID_HOME/build-tools/26.0.2/zipalign -v 4 platforms/android/build/outputs/apk/release/android-release-signed.apk platforms/android/build/outputs/apk/release/android-release-signed-aligned.apk",
+    "sign:android": "rm -f platforms/android/app/build/outputs/apk/release/app-release-signed-aligned.apk; jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../canoe.keystore -signedjar platforms/android/app/build/outputs/apk/release/app-release-signed.apk  platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk canoe && $ANDROID_HOME/build-tools/26.0.2/zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-signed.apk platforms/android/app/build/outputs/apk/release/app-release-signed-aligned.apk",
     "test": "echo \"no package tests configured\"",
     "clean": "trash platforms && trash plugins && cordova prepare",
     "unstage-package": "git reset package.json",
     "clean-all": "git clean -dfx"
   },
   "devDependencies": {
-    "browserify": "^16.2.0",
     "cordova": "^8.0.0",
+    "browserify": "^16.2.0",
     "grunt": "^1.0.2",
     "grunt-contrib-uglify-es": "^3.3.0",
     "ionic": "3.20.0",
@@ -160,9 +160,9 @@
   "pre-commit": "unstage-package",
   "cordova": {
     "platforms": [
-      "android",
       "windows",
-      "ios"
+      "ios",
+      "android"
     ],
     "plugins": {
       "cordova-plugin-device": {},
