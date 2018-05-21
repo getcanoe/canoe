@@ -54,6 +54,9 @@
     .amount-bar {
       padding: 24px 0;
       font-size: 18px;
+      @media(max-height: 620px) {
+        padding: 6px 0;
+      }
       @media(max-height: 480px) {
         padding: 0px;
       }
@@ -195,6 +198,9 @@
       &--standard {
         font-size: 18px;
         padding: 10px 0;
+        @media(max-height: 620px){
+          display: none;
+        }
       }
       &--placeholder {
         color: $v-light-gray;
