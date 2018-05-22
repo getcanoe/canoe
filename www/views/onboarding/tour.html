@@ -105,7 +105,7 @@
               <i class="fa fa-check-circle-o" aria-hidden="true"></i>
               <span translate>Passwords match</span>
             </div>
-            <div ng-hide="password === passwordConfirm || !password || !passwordConfirm" class="item item-input item-stacked-label bad-password">
+            <div ng-hide="password.length !== passwordConfirm.length || password === passwordConfirm || !password || !passwordConfirm" class="item item-input item-stacked-label bad-password">
               <i class="fa fa-times-circle-o" aria-hidden="true"></i>
               <span translate>Passwords do not match</span>
             </div>
