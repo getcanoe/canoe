@@ -271,10 +271,39 @@ angular.module('canoeApp.services')
       }
     }
 
+    // This function is meant to quickly, from the last block in the chain
+    // make sure we are in sync. The function resetChainInternal does a full reconstruct
+    // of the chain and takes a lot of time. We have the following situations:
+    // 1. We are already in perfect sync, all is well.
+    // 2. Our chain is good, but there are more blocks on the network. We need to process them.
+    // 3. We have extra blocks not on the network, we throw them away.
+    // 4. A combination of 2 and 3, a fork. We throw ours away and process those on the network.
     function syncChain (wallet, account) {
       root.wallet.enableBroadcast(false)
-
+      // Get our full chain, this is a fast operation.
       var currentBlocks = wallet.getLastNBlocks(account, 99999)
+      // Get last block from network
+      var frontiers = rai.accounts_frontiers([account])
+      var lastHash = frontiers[account]
+      // Is our chain empty?
+      if (currentBlocks.length === 0) {
+        // Are they both empty?
+        if (!lastHash) {
+          return true
+        }
+        // Network has blocks that we do not, process them
+
+
+      } else {
+        var lastBlock = currentBlocks[currentBlocks.length - 1]
+        // Are the last hashes the same
+        if (lastHash && lastBlock) 
+        var ourLastHash = currentBlocks.pop().hash
+        if (lastHash === ourLastHash) {
+          return
+        }
+
+      }
       var history = rai.account_history(account)
       if (history) {
         var blocks = history.reverse()
@@ -360,7 +389,7 @@ angular.module('canoeApp.services')
     function resetChainInternal (wallet, account) {
       // Better safe than sorry, we always remove them.
       wallet.removePendingBlocks(account)
-      var currentBlocks = wallet.getLastNBlocks(account, 99999)
+      // var currentBlocks = wallet.getLastNBlocks(account, 99999)
       var history = rai.account_history(account)
       if (history) {
         var blocks = history.reverse()
@@ -370,7 +399,7 @@ angular.module('canoeApp.services')
         })
         // We have to make this call too so we get work, signature and timestamp
         var infos = rai.blocks_info(hashes, 'raw', false, true) // true == include source_account
-        // Unfortunately blocks is an object so to get proper order we use hashes
+        // Unfortunately infos is an object so to get proper order we use hashes
         lodash.each(blocks, function (block) {
           var hash = block.hash
           var info = infos[hash]
@@ -414,21 +443,21 @@ angular.module('canoeApp.services')
               wallet.importBlock(blk, account)
             }
             // It was added so remove it from currentBlocks
-            lodash.remove(currentBlocks, function (b) {
-              return b.getHash(true) === hash
-            })
+            // lodash.remove(currentBlocks, function (b) {
+            //   return b.getHash(true) === hash
+            // })
             wallet.removeReadyBlock(blk.getHash(true)) // so it is not broadcasted, not necessary
           } catch (e) {
             $log.error(e)
           }
         })
         // Now we add any old blocks and rebroadcast them
-        $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
-        wallet.enableBroadcast(true) // Turn back on
-        lodash.each(currentBlocks, function (b) {
-          wallet.addBlockToReadyBlocks(b)
-        })
-        wallet.enableBroadcast(false) // Turn off
+        // $log.debug('Current blocks not found from server: ' + JSON.stringify(currentBlocks))
+        // wallet.enableBroadcast(true) // Turn back on
+        // lodash.each(currentBlocks, function (b) {
+        //   wallet.addBlockToReadyBlocks(b)
+        // })
+        // wallet.enableBroadcast(false) // Turn off
       }
     }
 
@@ -512,50 +541,50 @@ angular.module('canoeApp.services')
           cb(null, code)
         } else {
           // URL style params, time to check for params
-        parts = parts.split('?')
-        if (code.protocol === 'xrbseed' || code.protocol === 'nanoseed') {
-          code.seed = parts[0]
-        } else {
-          code.account = parts[0]
-        }
-        var kvs = {}
-        if (parts.length === 2) {
-          // We also have key value pairs
-          var pairs = parts[1].split('&')
-          lodash.each(pairs, function (pair) {
-            var kv = pair.split('=')
-            kvs[kv[0]] = kv[1]
-          })
-        }
-        code.params = kvs
-        if (code.account) {
-          // If the account is an alias, we need to perform a lookup
-          if (!root.isValidAccount(code.account)) {
-            $log.debug('Account invalid')
-            return cb('Account invalid' + code.account)
+          parts = parts.split('?')
+          if (code.protocol === 'xrbseed' || code.protocol === 'nanoseed') {
+            code.seed = parts[0]
+          } else {
+            code.account = parts[0]
           }
-          cb(null, code)
-          // if (code.account.startsWith('@')) {
-          //   code.alias = code.account.substr(1)
-          //   aliasService.lookupAlias(code.alias, function (err, ans) {
-          //     if (err) return $log.debug(err)
-          //     $log.debug('Answer from alias server looking up ' + code.alias + ': ' + JSON.stringify(ans))
-          //     if (ans) {
-          //       code.account = ans.alias.address
-          //       if (!root.isValidAccount(code.account)) {
-          //         $log.debug('Account invalid')
-          //         return
-          //       }
-          //       // Perform callback now
-          //       cb(null, code)
-          //     }
-          //   })
-          // } else {
-          //
-          // }
-        } else {
-          cb(null, code)
-        }
+          var kvs = {}
+          if (parts.length === 2) {
+            // We also have key value pairs
+            var pairs = parts[1].split('&')
+            lodash.each(pairs, function (pair) {
+              var kv = pair.split('=')
+              kvs[kv[0]] = kv[1]
+            })
+          }
+          code.params = kvs
+          if (code.account) {
+            // If the account is an alias, we need to perform a lookup
+            if (!root.isValidAccount(code.account)) {
+              $log.debug('Account invalid')
+              return cb('Account invalid' + code.account)
+            }
+            cb(null, code)
+            // if (code.account.startsWith('@')) {
+            //   code.alias = code.account.substr(1)
+            //   aliasService.lookupAlias(code.alias, function (err, ans) {
+            //     if (err) return $log.debug(err)
+            //     $log.debug('Answer from alias server looking up ' + code.alias + ': ' + JSON.stringify(ans))
+            //     if (ans) {
+            //       code.account = ans.alias.address
+            //       if (!root.isValidAccount(code.account)) {
+            //         $log.debug('Account invalid')
+            //         return
+            //       }
+            //       // Perform callback now
+            //       cb(null, code)
+            //     }
+            //   })
+            // } else {
+            //
+            // }
+          } else {
+            cb(null, code)
+          }
         }
       } catch (e) {
         // Some other error
@@ -864,10 +893,10 @@ angular.module('canoeApp.services')
     root.handleIncomingSendBlock = function (hash, account, from, amount) {
       // Create a receive (or open, if this is the first block in account)
       // block to match this incoming send block
-      soundService.play('receive')
       if (root.wallet) {
         if (root.wallet.addPendingReceiveBlock(hash, account, from, amount)) {
           if (doLog) $log.info('Added pending receive block')
+          soundService.play('receive')
           root.saveWallet(root.wallet, function () {})
         }
       }
