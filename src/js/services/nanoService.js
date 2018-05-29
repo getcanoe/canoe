@@ -460,7 +460,10 @@ angular.module('canoeApp.services')
     // Synchronous call that currently returns hash if it succeeded, null otherwise
     // TODO make async
     root.broadcastBlock = function (blk) {
-      var json = blk.getJSONBlock()
+      return root.processBlockJSON(blk.getJSONBlock())      
+    }
+
+    root.processBlockJSON = function (json) {
       $log.debug('Broadcast block: ' + json)
       var res = rai.process_block(json)
       $log.debug('Result ' + JSON.stringify(res))
@@ -472,35 +475,43 @@ angular.module('canoeApp.services')
     root.parseQRCode = function (data, cb) {
       // <protocol>:<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
       var code = {}
-      var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'xrbkey', 'nanoseed', 'nanokey']
+      var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'nanoseed', 'xrbkey', 'nanokey', 'xrbblock', 'nanoblock']
       try {
-        var parts = data.split(':')
-        if (parts.length === 1) {
-          // No ':',  perhaps a bare account, alias, seed? TODO bare key
+        //var parts = data.split(':')
+        var parts = data.match(/^([a-z]+):(.*)/) // Match protocol:whatever
+        if (!parts) {
+          // No match,  perhaps a bare account, alias, seed? TODO bare key
           if (root.isValidAccount(data)) {
             // A bare account
             code.protocol = 'nano'
-            parts = parts[0]
+            parts = data
           } else if (data.startsWith('@')) {
             // A bare alias
             code.protocol = 'nano'
-            parts = parts[0]
+            parts = data
           } else if (root.isValidSeed(data)) {
             // A bare seed
             code.protocol = 'nanoseed'
-            parts = parts[0]
+            parts = data
           } else {
             // Nope, give up
             return cb('Unknown format of QR code: ' + data)
           }
         } else {
-          code.protocol = parts[0]
-          parts = parts[1]
+          code.protocol = parts[1]
+          parts = parts[2]
         }
         if (!protocols.includes(code.protocol)) {
           return cb('Unknown protocol: ' + code.protocol)
         }
-        // Time to check for params
+        // Special handling for JSON protocols
+        $log.debug('Protocol: ' + code.protocol)
+        $log.debug('Parts: ' + parts)
+        if (code.protocol === 'xrbblock' || code.protocol === 'nanoblock') {
+          code.block = JSON.parse(parts)
+          cb(null, code)
+        } else {
+          // URL style params, time to check for params
         parts = parts.split('?')
         if (code.protocol === 'xrbseed' || code.protocol === 'nanoseed') {
           code.seed = parts[0]
@@ -544,6 +555,7 @@ angular.module('canoeApp.services')
           // }
         } else {
           cb(null, code)
+        }
         }
       } catch (e) {
         // Some other error

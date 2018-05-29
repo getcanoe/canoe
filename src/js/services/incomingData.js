@@ -110,7 +110,15 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         // We could add:
         // Contact?
         // Payment with confirmation
-
+      } else if (protocol === 'xrbblock' || protocol === 'nanoblock') {
+        // Used to scan blocks as QR codes and send them off to process
+        // Currently we process it blindly without any verifications
+        var result = nanoService.processBlockJSON(JSON.stringify(code.block))
+        if (result) {
+          popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Block was scanned and sent successfully'))
+        } else {
+          popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Block was scanned but failed to process: ' + JSON.stringify(result)))
+        }
       } else {
         // Offer clipboard
         if ($state.includes('tabs.scan')) {
