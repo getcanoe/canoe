@@ -51,7 +51,11 @@ angular.module('canoeApp.services').factory('soundService', function ($log, plat
       if (config.wallet && config.wallet.playSounds === true) {
         var sound = root.sounds[soundName]
         if (sound) {
-          sound.play()
+          try {
+            sound.play()
+          } catch (e) {
+            $log.warn('Audo play failed:' + JSON.stringify(e))
+          }
         } else {
           $log.warn('Missing sound: ' + soundName)
         }
