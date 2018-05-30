@@ -144,7 +144,11 @@ grunt
 make
 ```
 
-On success, the Chrome extension will be located at: `browser-extensions/chrome/canoe-chrome-extension`.  To install it go to `chrome://extensions/` in your browser and ensure you have the 'developer mode' option enabled in the settings.  Then click on "Load unpacked chrome extension" and choose the directory mentioned above.
+On success, the Chrome extension will be in `build` (or `canoe-chrome-extension.zip`). To install it go to `chrome://extensions/` in your browser and ensure you have the 'developer mode' option enabled in the settings.  Then click on "Load unpacked chrome extension" and drag and drop the build directory.
+
+Launch the app from `chrome://apps`.
+
+You may also want to enable debugging by enabling `chrome://flags/#debug-packed-apps`. Then right click in Canoe window for debugging.
 
 ## About Canoe
 ...details to come...
