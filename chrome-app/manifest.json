@@ -1,11 +1,8 @@
- { 
-  "//":"Changes to this file will be overwritten",
-  "//":"        Modify it in the app-template directory", 
-
+{
   "manifest_version": 2,
-  "name": "copay",
+  "name": "canoe",
   "description": "A Secure Nano Wallet",
-  "version": "3.9.1",
+  "version": "0.9.11",
   "permissions": [
     "storage",
     "unlimitedStorage",
@@ -19,6 +16,6 @@
     }
   },
   "icons": {
-    "128": "img/icon-chrome-128.png"
+    "128": "img/app/icon-128.png"
   }
 }

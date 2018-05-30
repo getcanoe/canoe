@@ -1,3 +1,7 @@
+./*.js
+./sounds/*
+./roboto-font/*
+./raiwallet/*
 ./index.html
 ./cordova.js
 ./css/*.css
