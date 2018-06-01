@@ -72,7 +72,7 @@ angular.module('canoeApp.services')
     }]
 
     root._detect = function (cb) {
-      var userLang, androidLang
+      var userLang
       if (navigator && navigator.globalization) {
         navigator.globalization.getPreferredLanguage(function (preferedLanguage) {
           // works for iOS and Android 4.x
@@ -128,7 +128,6 @@ angular.module('canoeApp.services')
     root.init = function (cb) {
       configService.whenAvailable(function (config) {
         var userLang = config.wallet.settings.defaultLanguage
-
         if (userLang && userLang !== root.currentLanguage) {
           root._set(userLang)
         } else {

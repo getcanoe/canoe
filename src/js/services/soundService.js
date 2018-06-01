@@ -36,7 +36,7 @@ angular.module('canoeApp.services').factory('soundService', function ($log, plat
   root.play = function (soundName) {
     configService.get(function (err, config) {
       if (err) return $log.debug(err)
-      //Fallback for existing configs
+      // Fallback for existing configs
       if (typeof config.wallet.playSounds === "undefined") {
         config.wallet.playSounds = true
         var opts = {
