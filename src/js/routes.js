@@ -437,6 +437,14 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       }
     })
+    .state('tabs.about.attributions', {
+      url: '/attributions',
+      views: {
+        'tab-settings@tabs': {
+          templateUrl: 'views/attributions.html'
+        }
+      }
+    })
     .state('tabs.advanced', {
       url: '/advanced',
       views: {
