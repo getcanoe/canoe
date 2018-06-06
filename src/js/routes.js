@@ -441,6 +441,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       url: '/attributions',
       views: {
         'tab-settings@tabs': {
+          controller: 'preferencesAttributions',
           templateUrl: 'views/attributions.html'
         }
       }
