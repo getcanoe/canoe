@@ -614,7 +614,7 @@ module.exports = function (password) {
 
   api.getBalanceUpToBlock = function (blockHash) {
     var sum = bigInt(0)
-    if (chain.length <= 0) { return sum }
+    if (chain.length + pendingBlocks.length === 0) { return sum }
 
     var found = blockHash === 0
     var blk
