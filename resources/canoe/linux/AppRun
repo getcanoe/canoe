@@ -143,8 +143,9 @@ else
   exit 0
 fi
 
-APP_VERSION=$(grep "^X-Canoe-BuildId=" "$DESKTOP_FILE" | cut -c 17-21)
+APP_VERSION=$(grep "^X-Canoe-BuildId=" "$DESKTOP_FILE" | cut -c 17-22)
 # Check if the desktop file is already there and if so check version
+# cut -c 17-22 handles 0.9.12 issue now but maybe should be reset to 17-21 after 1.0
 # If minor we  ask for upgrading
 if [ -e "$DESTINATION_DIR_DESKTOP/$VENDORPREFIX-canoe.desktop" ] ; then
   INSTALLED_APP_VERSION=$(grep "^X-Canoe-BuildId=" "$DESTINATION_DIR_DESKTOP/$VENDORPREFIX-canoe.desktop" |cut -c 17-21)
