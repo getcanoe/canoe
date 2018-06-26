@@ -1,6 +1,10 @@
 #export {
   .list {
     background-color: #fff;
+	  div.item {
+       margin: 6px 6px 5px 16px;
+       border: none;
+    }
   }
   .top-tabs.row {
     padding: 0;
@@ -12,7 +16,8 @@
     border-bottom-width: 2px;
     border-bottom-color: $v-top-tabs-color;
   }
-  input[type="password"] {
+  //input[type="password"]
+  .password-container {
     border: none;
     margin-left: -5px;
     padding-left: 4px;
