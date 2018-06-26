@@ -22,6 +22,10 @@ angular.module('canoeApp.controllers').controller('importController',
       })
     }
 
+    $scope.togglePassword = function (typePasswordStr) {
+        $scope[typePasswordStr] = !$scope[typePasswordStr]
+    }
+
     $scope.processQRSeed = function (data) {
       // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
       // xrbseed:97123971239712937123987129387129873?label=bah&message=hubba&lastindex=9
