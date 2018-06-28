@@ -24,12 +24,15 @@
       </div>
     </div>
 
-    <label class="item item-input item-stacked-label">
+    <div class="item item-input item-stacked-label">
       <span class="input-label" translate>Password to encrypt</span>
-      <input type="password"
-        placeholder="{{'Your password'|translate}}"
-        ng-model="formData.password">
-    </label>
+      <span class="password-container" ng-class="{'correct': result == 'correct', 'incorrect': result == 'incorrect'}">
+        <input type="{{ typePassword ? 'text' : 'password' }}" placeholder="{{'Your password'|translate}}" ng-model="formData.password">
+        <span class="item item-input item-stacked-label showPassword" ng-click="togglePassword('typePassword')">
+          <i class="fa" ng-class="{ 'fa-eye-slash': typePassword, 'fa-eye': !typePassword}" aria-hidden="true"></i>
+        </span>
+      </span>
+    </div>
 
     <div class="item item-divider"></div>
 

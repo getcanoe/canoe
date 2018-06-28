@@ -6,11 +6,17 @@
 
   <form name="exportForm" novalidate>
     <div class="list">
-      <label class="item item-input item-stacked-label">
+      <div class="item item-input item-stacked-label">
         <span class="input-label" translate>Enter password</span>
-        <input type="password" placeholder="{{'Your password'|translate}}" ng-model="formData.password" ng-change="checkPassword(formData.password)"
-          ng-class="{'correct': result == 'correct', 'incorrect': result == 'incorrect'}">
-      </label>
+		  <span class="password-container" ng-class="{'correct': result == 'correct', 'incorrect': result == 'incorrect'}">
+			<input type="{{ typePassword ? 'text' : 'password' }}" placeholder="{{'Your password'|translate}}" ng-model="formData.password" ng-change="checkPassword(formData.password)">
+			<span class="item item-input item-stacked-label showPassword" ng-click="togglePassword('typePassword')">
+				<i class="fa" ng-class="{ 'fa-eye-slash': typePassword, 'fa-eye': !typePassword}" aria-hidden="true"></i>
+			</span>
+		  </span>
+		</span>
+      </div>
+	</div>
 
     <button
       ng-click="downloadWalletBackup()"

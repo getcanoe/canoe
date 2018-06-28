@@ -4,6 +4,9 @@ angular.module('canoeApp.controllers').controller('changePasswordController', fu
   $scope.oldPassword = ''
   $scope.password = ''
   $scope.confirmPassword = ''
+  $scope.typePassword1 = false
+  $scope.typePassword2 = false
+  $scope.typePassword3 = false
 
   $scope.changePass = function (pw, oldPw) {
     if (!profileService.checkPassword(oldPw)) {
@@ -14,6 +17,10 @@ angular.module('canoeApp.controllers').controller('changePasswordController', fu
       $ionicHistory.removeBackView()
       $state.go('tabs.home')
     }
+  }
+
+  $scope.togglePassword = function (typePasswordStr) {
+   $scope[typePasswordStr] = !$scope[typePasswordStr]
   }
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {

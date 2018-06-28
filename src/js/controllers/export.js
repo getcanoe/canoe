@@ -4,6 +4,7 @@ angular.module('canoeApp.controllers').controller('exportController',
   function ($scope, $timeout, $log, $ionicHistory, $ionicScrollDelegate, backupService, walletService, storageService, profileService, platformInfo, gettextCatalog, $state, $stateParams, popupService) {
     var wallet = profileService.getAccount($stateParams.walletId)
     $scope.wallet = wallet
+    $scope.typePassword = false
 
     $scope.resizeView = function () {
       $timeout(function () {
@@ -19,6 +20,10 @@ angular.module('canoeApp.controllers').controller('exportController',
         $scope.result = 'incorrect'
         $scope.passwordCorrect = false
       }
+    }
+
+    $scope.togglePassword = function (typePasswordStr) {
+      $scope[typePasswordStr] = !$scope[typePasswordStr]
     }
 
     $scope.generateQrCode = function () {
