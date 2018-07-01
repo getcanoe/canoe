@@ -1,5 +1,5 @@
 'use strict'
-/* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
+/* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai ionic */
 angular.module('canoeApp.services')
   .factory('nanoService', function ($log, $rootScope, $window, $state, $ionicHistory, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
@@ -662,7 +662,11 @@ angular.module('canoeApp.services')
     // Create a corresponding account in the server for this wallet
     root.createServerAccount = function (wallet) {
       $log.debug('Creating server account for wallet ' + wallet.getId())
-      var json = rai.create_server_account(wallet.getId(), wallet.getToken(), wallet.getTokenPass())
+      var meta = {
+        platform: ionic.Platform.platform(),
+        platformVersion: ionic.Platform.version()
+      }
+      var json = rai.create_server_account(wallet.getId(), wallet.getToken(), wallet.getTokenPass(), 'canoe', $window.version, meta)
       if (json.error) {
         $log.debug('Error from creating server account: ' + json.error)
         throw new Error(json.error)

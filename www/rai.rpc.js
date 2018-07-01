@@ -105,12 +105,15 @@ function Rai (url_base) {
     return this.rpc(JSON.stringify({'action': 'account_block_count', 'account': account}))
   }
 
-  this.create_server_account = function (id, token, tokenPass) {
+  this.create_server_account = function (id, token, tokenPass, name, version, meta) {
     return this.rpc(JSON.stringify(
       {'action': 'create_server_account',
         'wallet': id,
         'token': token,
-        'tokenPass': tokenPass
+        'tokenPass': tokenPass,
+        'name': name,
+        'version': version,
+        'meta': JSON.stringify(meta)
       }))
   }
 
