@@ -460,6 +460,17 @@ module.exports = function (password) {
     }
   }
 
+  api.resetChain = function (acc) {
+    api.useAccount(acc)
+    balance = bigInt(0)
+    pendingBalance = bigInt(0)
+    pendingBlocks = []
+    lastBlock = ''
+    lastPendingBlock = ''
+    chain = []
+    priv.save()
+  }
+
   api.getLastNBlocks = function (acc, n, offset = 0) {
     var temp = keys[current].account
     api.useAccount(acc)

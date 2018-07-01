@@ -458,6 +458,9 @@ angular.module('canoeApp.services')
         //   wallet.addBlockToReadyBlocks(b)
         // })
         // wallet.enableBroadcast(false) // Turn off
+      } else {
+        // Empty it from blocks
+        wallet.resetChain(account)
       }
     }
 
