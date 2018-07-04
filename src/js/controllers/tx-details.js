@@ -10,14 +10,7 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
     $scope.title = gettextCatalog.getString('Transaction')
     $scope.account = profileService.getAccount($stateParams.walletId)
     listeners = [
-/*      $rootScope.$on('bwsEvent', function (e, walletId, type, n) {
-        if (type === 'NewBlock' && n && n.data && n.data.network == 'livenet') {
-          updateTxDebounced({
-            hideLoading: true
-          })
-        }
-      })
-*/
+      
     ]
   })
 
@@ -94,22 +87,5 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
     var okText = gettextCatalog.getString('Open')
     var cancelText = gettextCatalog.getString('Go Back')
     externalLinkService.open(url, optIn, title, message, okText, cancelText)
-  }
-
-  var getFiatRate = function () {
-    $scope.alternativeIsoCode = $scope.account.status.alternativeIsoCode
-    $scope.account.getFiatRate({
-      code: $scope.alternativeIsoCode,
-      ts: $scope.btx.time * 1000
-    }, function (err, res) {
-      if (err) {
-        $log.debug('Could not get historic rate')
-        return
-      }
-      if (res && res.rate) {
-        $scope.rateDate = res.fetchedOn
-        $scope.rate = res.rate
-      }
-    })
   }
 })
