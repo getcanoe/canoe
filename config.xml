@@ -115,6 +115,7 @@
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
+    <plugin name="phonegap-nfc" spec="^1.0.3" />
     <engine name="windows" spec="6.0.0" />
     <engine name="ios" spec="^4.5.4" />
     <engine name="android" spec="^7.1.0" />

@@ -104,6 +104,7 @@
     "load-grunt-tasks": "^3.5.2",
     "npm-check-updates": "^2.14.2",
     "pbkdf2": "^3.0.16",
+    "phonegap-nfc": "^1.0.3",
     "raiblocks-pow": "0.0.3",
     "shelljs": "^0.8.1",
     "tweetnacl": "^1.0.0",
@@ -198,7 +199,8 @@
       "cordova-plugin-media": {
         "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
       },
-      "cordova-plugin-add-swift-support": {}
+      "cordova-plugin-add-swift-support": {},
+      "phonegap-nfc": {}
     }
   },
   "optionalDependencies": {
