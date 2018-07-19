@@ -484,18 +484,32 @@ module.exports = function (isState = false) {
     return JSON.stringify(obj)
   }
 
-  api.buildFromJSON = function (json, v = false) {
+  api.buildFromJSON = function (json,prev) {
     var obj
+    var prevObj
     if (typeof (json) !== 'object') {
       obj = JSON.parse(json)
     } else {
       obj = json
     }
+    if (typeof (prev) !== 'object') {
+      prevObj = JSON.parse(prev)
+    } else {
+      prevObj = prev
+    }
     state = obj.state || false // Is this a state block or not?
     type = obj.type
 
     if (state) {
-      send = obj.send // We need to know
+      send = false
+      if (prevObj) {
+        if (prevObj.type !== "state" && typeof prevObj.balance !== "undefined") {
+          prevObj.balance = hex2dec(prevObj.balance)
+        }
+        if (typeof prevObj.balance !== "undefined") {
+          send = bigInt(prevObj.balance).compare(bigInt(obj.balance)) > 0
+        }
+      }
       // These 4 we know where to put
       previous = obj.previous // 0 for the first block
       balance = dec2hex(obj.balance, 16)
