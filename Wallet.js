@@ -1323,7 +1323,11 @@ module.exports = function (password) {
       aux.chain = []
       for (var j in walletData.keys[i].chain) {
         blk = newBlock()
-        blk.buildFromJSON(walletData.keys[i].chain[j])
+        var prev = null
+        if (j > 0) {
+          prev = walletData.keys[i].chain[j-1]
+        }
+        blk.buildFromJSON(walletData.keys[i].chain[j],prev)
         aux.chain.push(blk)
       }
 
