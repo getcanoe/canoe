@@ -487,12 +487,12 @@ module.exports = function (isState = false) {
   api.buildFromJSON = function (json,prev) {
     var obj
     var prevObj
-    if (typeof (json) !== 'object') {
+    if (typeof json !== 'object') {
       obj = JSON.parse(json)
     } else {
       obj = json
     }
-    if (typeof (prev) !== 'object') {
+    if (typeof prev !== 'object' && typeof prev !== 'undefined') {
       prevObj = JSON.parse(prev)
     } else {
       prevObj = prev
@@ -503,10 +503,10 @@ module.exports = function (isState = false) {
     if (state) {
       send = false
       if (prevObj) {
-        if (prevObj.type !== "state" && typeof prevObj.balance !== "undefined") {
+        if (prevObj.type !== "state" && typeof prevObj.balance !== 'undefined') {
           prevObj.balance = hex2dec(prevObj.balance)
         }
-        if (typeof prevObj.balance !== "undefined") {
+        if (typeof prevObj.balance !== 'undefined') {
           send = bigInt(prevObj.balance).compare(bigInt(obj.balance)) > 0
         }
       }
