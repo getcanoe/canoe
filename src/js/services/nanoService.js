@@ -342,15 +342,8 @@ angular.module('canoeApp.services')
           // State logic
           if (block.type === 'state') {
             block.state = true
-            if (block.subtype === 'send') {
-              block.send = true
+            block.account = info.contents.account
             }
-            // For some reason account is not included in subtype change
-            // if (block.subtype === 'change') {
-            //   block.account = info.contents.account
-            // }
-            block.account = info.contents.account //
-          }
           var blk = wallet.createBlockFromJSON(block)
           if (blk.getHash(true) !== hash) {
             console.log('WRONG HASH')
@@ -422,14 +415,7 @@ angular.module('canoeApp.services')
           // State logic
           if (block.type === 'state') {
             block.state = true
-            if (block.subtype === 'send') {
-              block.send = true
-            }
-            // For some reason account is not included in subtype change
-            // if (block.subtype === 'change') {
-            //   block.account = info.contents.account
-            // }
-            block.account = info.contents.account //
+            block.account = info.contents.account
           }
           var blk = wallet.createBlockFromJSON(block)
           if (blk.getHash(true) !== hash) {
@@ -978,7 +964,6 @@ angular.module('canoeApp.services')
                 root.confirmBlock(existingBlock, hash, timestamp)
               } else {
                 // or another wallet using same seed
-                blk2.send = true
                 root.importBlock(blk2, account)
               }
             }
