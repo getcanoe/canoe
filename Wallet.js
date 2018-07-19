@@ -1130,7 +1130,7 @@ module.exports = function (password) {
 
   api.createBlockFromJSON = function (jsonOrObj) {
     var blk = newBlock() // jsonOrObj will decide if state block or not
-    blk.buildFromJSON(jsonOrObj, blk.getMaxVersion())
+    blk.buildFromJSON(jsonOrObj)
     return blk
   }
 
