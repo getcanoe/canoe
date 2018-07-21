@@ -1,5 +1,5 @@
 'use strict'
-/* global XMLHttpRequest angular Profile */
+/* global XMLHttpRequest BigNumber angular Profile */
 angular.module('canoeApp.services')
   .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, nanoService, configService, gettextCatalog, uxLanguage, platformInfo, txFormatService, addressbookService, rateService) {
     var isChromeApp = platformInfo.isChromeApp
