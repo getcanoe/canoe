@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('preferencesAltCurrencyController',
-  function ($rootScope, $scope, $log, $timeout, $ionicHistory, configService, rateService, lodash, profileService, walletService, storageService) {
+  function ($scope, $log, $timeout, $ionicHistory, configService, rateService, lodash, storageService) {
     var next = 10
     var completeAlternativeList = []
 
@@ -89,8 +89,8 @@ angular.module('canoeApp.controllers').controller('preferencesAltCurrencyControl
         // Refresh ui
         $timeout(function () {
           configService.getSync().wallet.settings.alternativeIsoCode = newAltCurrency.isoCode
-          //profileService.updateRate(newAltCurrency.isoCode, true)
-          //$rootScope.$broadcast('rates.loaded')
+          // profileService.updateRate(newAltCurrency.isoCode, true)
+          // $rootScope.$broadcast('rates.loaded')
         }, 30)
       })
     }

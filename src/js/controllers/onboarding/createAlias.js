@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('createAliasController',
-  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, lodash, profileService, nanoService, aliasService, walletService, ongoingProcess, popupService, gettextCatalog, $ionicModal) {
+  function ($scope, $timeout, $log, $state, $stateParams, profileService, nanoService, aliasService, ongoingProcess) {
     var letterRegex = XRegExp('^\\p{Ll}+$')
     var lnRegex = XRegExp('^(\\p{Ll}|\\pN)+$')
     $scope.accountId = $stateParams.walletId

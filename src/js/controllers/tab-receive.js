@@ -1,16 +1,10 @@
 'use strict'
-
-angular.module('canoeApp.controllers').controller('tabReceiveController', function ($rootScope, $scope, $timeout, $log, $ionicModal, $state, $ionicHistory, $ionicPopover, storageService, platformInfo, walletService, profileService, configService, lodash, gettextCatalog, popupService) {
+/* global angular */
+angular.module('canoeApp.controllers').controller('tabReceiveController', function ($rootScope, $scope, $ionicModal, $state, platformInfo, profileService, lodash, gettextCatalog) {
   var listeners = []
   $scope.wallet = profileService.getWallet()
   $scope.isCordova = platformInfo.isCordova
   $scope.isNW = platformInfo.isNW
-
-  $scope.requestSpecificAmount = function () {
-    $state.go('tabs.paymentRequest.amount', {
-      id: $scope.account
-    })
-  }
 
   $scope.openBackupNeededModal = function () {
     $ionicModal.fromTemplateUrl('views/includes/backupNeededPopup.html', {

@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('preferencesLanguageController',
-  function ($scope, $log, $ionicHistory, configService, profileService, uxLanguage, externalLinkService, gettextCatalog) {
+  function ($scope, $log, $ionicHistory, configService, uxLanguage, externalLinkService, gettextCatalog) {
     $scope.availableLanguages = uxLanguage.getLanguages()
 
     $scope.openExternalLink = function () {
@@ -26,7 +26,6 @@ angular.module('canoeApp.controllers').controller('preferencesLanguageController
       uxLanguage._set(newLang)
       configService.set(opts, function (err) {
         if (err) $log.warn(err)
-        // walletService.updateRemotePreferences(profileService.getAccounts());
       })
 
       $ionicHistory.goBack()

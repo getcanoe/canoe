@@ -1,13 +1,11 @@
 'use strict'
-
-angular.module('canoeApp.services').factory('emailService', function ($log, configService, lodash, walletService, profileService) {
+/* global angular */
+angular.module('canoeApp.services').factory('emailService', function ($log, configService, lodash) {
   var root = {}
 
   root.updateEmail = function (opts) {
     opts = opts || {}
     if (!opts.email) return
-
-    var wallets = profileService.getAccounts()
 
     configService.set({
       emailFor: null, // Backward compatibility
@@ -17,7 +15,6 @@ angular.module('canoeApp.services').factory('emailService', function ($log, conf
       }
     }, function (err) {
       if (err) $log.warn(err)
-      // walletService.updateRemotePreferences(wallets)
     })
   }
 

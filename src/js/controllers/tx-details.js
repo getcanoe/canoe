@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('txDetailsController', function ($rootScope, $log, $ionicHistory, $scope, $state, $timeout, $stateParams, walletService, lodash, gettextCatalog, profileService, externalLinkService, popupService, ongoingProcess, txFormatService, txConfirmNotification, configService, addressbookService) {
+angular.module('canoeApp.controllers').controller('txDetailsController', function ($rootScope, $log, $ionicHistory, $scope, $state, $timeout, $stateParams, lodash, gettextCatalog, profileService, externalLinkService, popupService, addressbookService) {
   var listeners = []
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
@@ -9,9 +9,7 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
     $scope.hasFunds = profileService.hasFunds()
     $scope.title = gettextCatalog.getString('Transaction')
     $scope.account = profileService.getAccount($stateParams.walletId)
-    listeners = [
-      
-    ]
+    listeners = []
   })
 
   addressbookService.list(function (err, ab) {
@@ -43,21 +41,8 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
     })
   })
 
-  function updateMemo () {
-    // TODO this getTxNote is not yet implemented
-    walletService.getTxNote($scope.account, $scope.ntx.hash, function (err, note) {
-      if (err) {
-        $log.warn('Could not fetch transaction note: ' + err)
-        return
-      }
-      if (!note) return
-      $scope.ntx.note = note
-      $scope.$apply()
-    })
-  }
-
   $scope.showCommentPopup = function () {
-    var opts = {}
+    /* var opts = {}
     if ($scope.ntx.note) opts.defaultText = $scope.ntx.note
     popupService.showPrompt($scope.account.name, gettextCatalog.getString('Memo'), opts, function (text) {
       if (typeof text === 'undefined') return
@@ -75,7 +60,7 @@ angular.module('canoeApp.controllers').controller('txDetailsController', functio
           $log.debug('Could not save transaction note ' + err)
         }
       })
-    })
+    }) */
   }
 
   $scope.viewOnNanode = function () {

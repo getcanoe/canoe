@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('preferencesNameController',
-  function ($scope, $timeout, $stateParams, $ionicHistory, configService, profileService, walletService, popupService, gettextCatalog) {
+  function ($scope, $stateParams, $ionicHistory, profileService, popupService, gettextCatalog) {
     var account = profileService.getAccount($stateParams.accountId)
     $scope.accountName = account.meta.label
     $scope.name = {

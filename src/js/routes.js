@@ -160,10 +160,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
   $stateProvider
 
   /*
-       *
-       * Other pages
-       *
-       */
+  *
+  * Other pages
+  *
+  */
 
     .state('unsupported', {
       url: '/unsupported',
@@ -176,10 +176,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * URI
-       *
-       */
+  *
+  * URI
+  *
+  */
 
     .state('uri', {
       url: '/uri/:url',
@@ -194,11 +194,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Wallet
-       *
-       */
-
+   *
+   * Wallet
+   *
+   */
     .state('tabs.account', {
       url: '/account/:accountId/:fromOnboarding/:clearCache',
       views: {
@@ -208,16 +207,6 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       }
     })
-/*    .state('tabs.activity', {
-      url: '/activity',
-      views: {
-        'tab-home@tabs': {
-          controller: 'activityController',
-          templateUrl: 'views/activity.html'
-        }
-      }
-    })
-*/
     .state('tabs.account.tx-details', {
       url: '/tx-details/:txid',
       views: {
@@ -251,11 +240,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Tabs
-       *
-       */
-
+   *
+   * Tabs
+   *
+   */
     .state('tabs', {
       url: '/tabs',
       abstract: true,
@@ -317,10 +305,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Send
-       *
-       */
+  *
+  * Send
+  *
+  */
 
     .state('tabs.send.amount', {
       url: '/amount/:recipientType/:toAddress/:toName/:toEmail/:toColor/:fixedUnit/:toAlias/:fromAddress',
@@ -354,10 +342,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Add
-       *
-       */
+  *
+  * Add
+  *
+  */
 
     .state('tabs.create-account', {
       url: '/create-account',
@@ -370,10 +358,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Global Settings
-       *
-       */
+  *
+  * Global Settings
+  *
+  */
 
     .state('tabs.notifications', {
       url: '/notifications',
@@ -503,10 +491,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Wallet preferences
-       *
-       */
+  *
+  * Wallet preferences
+  *
+  */
 
     .state('tabs.preferences', {
       url: '/preferences/:accountId',
@@ -591,10 +579,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Addressbook
-       *
-       */
+  *
+  * Addressbook
+  *
+  */
 
     .state('tabs.addressbook', {
       url: '/addressbook',
@@ -634,26 +622,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Canoeers
-       *
-       */
-
-    .state('tabs.canoeers', {
-      url: '/canoeers/:walletId',
-      views: {
-        'tab-home': {
-          templateUrl: 'views/canoeers.html',
-          controller: 'canoeersController'
-        }
-      }
-    })
-
-  /*
-       *
-       * Request Specific amount
-       *
-       */
+  *
+  * Request Specific amount
+  *
+  */
 
     .state('tabs.paymentRequest', {
       url: '/payment-request',
@@ -673,21 +645,12 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
         }
       }
     })
-    .state('tabs.paymentRequest.confirm', {
-      url: '/confirm/:amount/:currency/:coin',
-      views: {
-        'tab-receive@tabs': {
-          controller: 'customAmountController',
-          templateUrl: 'views/customAmount.html'
-        }
-      }
-    })
 
   /*
-       *
-       * Init backup flow
-       *
-       */
+    *
+    * Init backup flow
+    *
+    */
 
     .state('tabs.receive.backupWarning', {
       url: '/backupWarning/:from/:walletId',
@@ -709,10 +672,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Paper Wallet
-       *
-       */
+  *
+  * Paper Wallet
+  *
+  */
 
     .state('tabs.home.paperWallet', {
       url: '/paperWallet/:privateKey',
@@ -724,10 +687,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       }
     })
   /*
-       *
-       * Onboarding
-       *
-       */
+  *
+  * Onboarding
+  *
+  */
 
     .state('onboarding', {
       url: '/onboarding',
@@ -821,10 +784,10 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
     })
 
   /*
-       *
-       * Feedback
-       *
-       */
+  *
+  * Feedback
+  *
+  */
 
     .state('tabs.feedback', {
       url: '/feedback',

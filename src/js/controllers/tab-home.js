@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('tabHomeController',
-  function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, appConfigService, startupService, addressbookService, feedbackService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
+  function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, appConfigService, startupService, addressbookService, feedbackService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
     var wallet
     var listeners = []
     var notifications = []
@@ -209,33 +209,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       $scope.accounts = profileService.getAccounts()
       $scope.$apply()
     })
-/*
-    var updateTxps = function () {
-      profileService.getTxps({
-        limit: 3
-      }, function (err, txps, n) {
-        if (err) $log.error(err)
-        $scope.txps = txps
-        $scope.txpsN = n
-        $timeout(function () {
-          $ionicScrollDelegate.resize()
-          $scope.$apply()
-        }, 10)
-      })
-    }
-
-    var updateAccount = function (account) {
-      $log.debug('Updating account:' + account.name)
-      walletService.getStatus(account, {}, function (err, status) {
-        if (err) {
-          $log.error(err)
-          return
-        }
-        account.status = status
-        updateTxps()
-      })
-    }
-*/
 
     var getNotifications = function () {
       profileService.getNotifications({
@@ -256,7 +229,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
 
     var performUpdate = function (cb) {
       $scope.accounts = profileService.getAccounts()
-      // TODO Call and check server message regularly some other way
       $scope.serverMessage = null
     }
 

@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('exportController',
-  function ($scope, $timeout, $log, $ionicHistory, $ionicScrollDelegate, backupService, walletService, storageService, profileService, platformInfo, gettextCatalog, $state, $stateParams, popupService) {
+  function ($scope, $timeout, $log, $ionicHistory, $ionicScrollDelegate, backupService, storageService, profileService, platformInfo, gettextCatalog, $state, $stateParams, popupService) {
     var wallet = profileService.getAccount($stateParams.walletId)
     $scope.wallet = wallet
     $scope.typePassword = false

@@ -1,10 +1,8 @@
 'use strict'
 /* global angular FileReader */
 angular.module('canoeApp.controllers').controller('importController',
-  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, lodash, profileService, configService, nanoService, platformInfo, ongoingProcess, walletService, popupService, gettextCatalog, appConfigService) {
+  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, $ionicScrollDelegate, profileService, configService, nanoService, platformInfo, ongoingProcess, popupService, gettextCatalog) {
     var reader = new FileReader()
-    var defaults = configService.getDefaults()
-    var config = configService.getSync()
 
     $scope.init = function () {
       $scope.isCordova = platformInfo.isCordova
@@ -23,7 +21,7 @@ angular.module('canoeApp.controllers').controller('importController',
     }
 
     $scope.togglePassword = function (typePasswordStr) {
-        $scope[typePasswordStr] = !$scope[typePasswordStr]
+      $scope[typePasswordStr] = !$scope[typePasswordStr]
     }
 
     $scope.processQRSeed = function (data) {
