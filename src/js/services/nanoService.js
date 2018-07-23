@@ -1,5 +1,5 @@
 'use strict'
-/* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai ionic */
+/* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai ionic bigInt */
 angular.module('canoeApp.services')
   .factory('nanoService', function ($log, $rootScope, $window, $state, $ionicHistory, $timeout, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
@@ -33,15 +33,15 @@ angular.module('canoeApp.services')
 
     root.connectRPC = function (cb) {
       try {
-        $log.debug('Connecting RPC to ' + host)
+        $log.debug('Connecting to ' + host)
         rai = new Rai(host) // connection
         rai.initialize()
-        if (cb) cb()
+        cb()
       } catch (e) {
         rai = null
-        $log.warn('Failed to initialize server connection, no network?', e)
-        // Try again
-        setTimeout(function () { root.connectRPC() }, 5000)
+        var msg = gettextCatalog.getString('Failed connecting to backend, no network?')
+        $log.warn(msg, e)
+        cb(msg)
       }
     }
 
@@ -50,7 +50,6 @@ angular.module('canoeApp.services')
       if (config.backend) {
         host = 'https://' + config.backend + '/rpc' // TODO need to revist this setup
         mqttHost = config.backend
-        root.connectRPC()
       }
     })
 
@@ -87,7 +86,7 @@ angular.module('canoeApp.services')
         host = 'https://' + url + '/rpc'
         // Force relogin etc
         root.connectNetwork(function () {
-          popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
+          popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Successfully connected to backend'))
           $ionicHistory.removeBackView()
           $state.go('tabs.home')
         })
@@ -230,11 +229,28 @@ angular.module('canoeApp.services')
 
     root.connectNetwork = function (cb) {
       // Makes sure we have the right backend for RPC
-      root.connectRPC(function () {
-        // Make sure we have an account for this wallet on the server side
-        root.createServerAccount(root.wallet)
-        root.disconnect() // Makes sure we are disconnected from MQTT
-        root.startMQTT(cb)
+      root.connectRPC(function (err) {
+        if (err) {
+          $timeout(function () {
+            popupService.showAlert(gettextCatalog.getString('Failed connecting to backend'), err)
+            $ionicHistory.removeBackView()
+            $state.go('tabs.home')
+          }, 1000)
+        } else {
+          // Make sure we have an account for this wallet on the server side
+          root.createServerAccount(root.wallet, function (err) {
+            if (err) {
+              $timeout(function () {
+                popupService.showAlert(gettextCatalog.getString('Failed connecting to backend'), err)
+                $ionicHistory.removeBackView()
+                $state.go('tabs.home')
+              }, 1000)
+            } else {
+              root.disconnect() // Makes sure we are disconnected from MQTT
+              root.startMQTT(cb)
+            }
+          })
+        }
       })
     }
 
@@ -495,7 +511,6 @@ angular.module('canoeApp.services')
       var code = {}
       var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'nanoseed', 'xrbkey', 'nanokey', 'xrbblock', 'nanoblock']
       try {
-        //var parts = data.split(':')
         var parts = data.match(/^([a-z]+):(.*)/) // Match protocol:whatever
         if (!parts) {
           // No match,  perhaps a bare account, alias, seed? TODO bare key
@@ -646,7 +661,7 @@ angular.module('canoeApp.services')
     }
 
     // Create a corresponding account in the server for this wallet
-    root.createServerAccount = function (wallet) {
+    root.createServerAccount = function (wallet, cb) {
       $log.debug('Creating server account for wallet ' + wallet.getId())
       var meta = {
         platform: ionic.Platform.platform(),
@@ -654,8 +669,10 @@ angular.module('canoeApp.services')
       }
       var json = rai.create_server_account(wallet.getId(), wallet.getToken(), wallet.getTokenPass(), 'canoe', $window.version, meta)
       if (json.error) {
-        $log.debug('Error from creating server account: ' + json.error)
-        throw new Error(json.error)
+        $log.debug('Error creating server account: ' + json.error + ' ' + json.message)
+        cb(json.message)
+      } else {
+        cb(null)
       }
     }
 
