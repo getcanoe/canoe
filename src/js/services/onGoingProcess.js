@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $timeout, $filter, lodash, $ionicLoading, gettext, platformInfo) {
+angular.module('canoeApp.services').factory('ongoingProcess', function ($filter, lodash, $ionicLoading, gettext, platformInfo) {
   var root = {}
   var isCordova = platformInfo.isCordova
   var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
@@ -8,7 +8,7 @@ angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $t
   var ongoingProcess = {}
 
   var processNames = {
-    'broadcastingTx': gettext('Broadcasting transaction'),
+    // 'broadcastingTx': gettext('Broadcasting transaction'),
     'creatingTx': gettext('Creating transaction'),
     'creatingAccount': gettext('Creating account...'),
     'creatingWallet': gettext('Creating Wallet...'),
@@ -16,21 +16,21 @@ angular.module('canoeApp.services').factory('ongoingProcess', function ($log, $t
     'editingAlias': gettext('Editing Alias...'),
     'deletingWallet': gettext('Deleting Wallet...'),
     'extractingWalletInfo': gettext('Extracting Wallet information...'),
-    'generatingCSV': gettext('Generating .csv file...'),
+    // 'generatingCSV': gettext('Generating .csv file...'),
     'importingWallet': gettext('Importing Wallet...'),
-    'recreating': gettext('Recreating Wallet...'),
-    'rejectTx': gettext('Rejecting payment proposal'),
-    'removeTx': gettext('Deleting payment proposal'),
-    'retrievingInputs': gettext('Retrieving inputs information'),
+    // 'recreating': gettext('Recreating Wallet...'),
+    // 'rejectTx': gettext('Rejecting payment proposal'),
+    // 'removeTx': gettext('Deleting payment proposal'),
+    // 'retrievingInputs': gettext('Retrieving inputs information'),
     'scanning': gettext('Scanning Wallet funds...'),
     'sendingTx': gettext('Sending transaction'),
     'signingTx': gettext('Signing transaction'),
     'sweepingWallet': gettext('Sweeping Wallet...'),
-    'validatingWords': gettext('Validating recovery phrase...'),
+    // 'validatingWords': gettext('Validating recovery phrase...'),
     'loadingTxInfo': gettext('Loading transaction info...'),
     'sendingFeedback': gettext('Sending feedback...'),
     'sendingByEmail': gettext('Preparing addresses...'),
-    'sending2faCode': gettext('Sending 2FA code...'),
+    // 'sending2faCode': gettext('Sending 2FA code...'),
     'decryptingWallet': gettext('Decrypting wallet...')
   }
 
