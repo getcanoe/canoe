@@ -9,7 +9,7 @@
 
   <ion-content scroll="false" ng-class="{'has-selector': accounts[0]}">
 
-    <div ng-if="!customAmount && !nextStep">
+    <div ng-if="!nextStep">
       <div class="item item-no-bottom-border recipient-label" translate>Recipient</div>
 
       <div class="item item-text-wrap item-icon-left bitcoin-address">
@@ -42,8 +42,8 @@
       </div>
     </div>
 
-    <div ng-class="{'amount-pane-recipient': !customAmount && !nextStep,
-      'amount-pane-no-recipient': customAmount || nextStep}">
+    <div ng-class="{'amount-pane-recipient': !nextStep,
+      'amount-pane-no-recipient': nextStep}">
 
       <div class="amount-bar oh">
         <div class="title">
