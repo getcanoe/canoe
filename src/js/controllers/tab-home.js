@@ -1,10 +1,8 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('tabHomeController',
-  function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, appConfigService, startupService, addressbookService, feedbackService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
-    var wallet
+  function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, configService, $log, platformInfo, storageService, appConfigService, startupService, addressbookService, feedbackService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
     var listeners = []
-    var notifications = []
     $scope.externalServices = {}
     $scope.version = $window.version
     $scope.name = appConfigService.nameCase
@@ -169,6 +167,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       externalLinkService.open(url)
     }
 
+    /*
     $scope.openNotificationModal = function (n) {
       wallet = profileService.getAccount(n.walletId)
 
@@ -196,7 +195,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
           })
         }
       }
-    }
+    } */
 
     $scope.openAccount = function (account) {
       $state.go('tabs.account', {

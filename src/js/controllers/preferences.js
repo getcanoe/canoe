@@ -1,27 +1,13 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('preferencesController',
-  function ($scope, $rootScope, $timeout, $log, $ionicHistory, configService, profileService, fingerprintService, walletService, platformInfo, externalLinkService, gettextCatalog) {
+  function ($scope, $log, $ionicHistory, configService, profileService, fingerprintService, platformInfo) {
     var account
     var accountId
 
     $scope.hiddenBalanceChange = function () {
       profileService.toggleHideBalanceFlag(accountId, function (err) {
         if (err) $log.error(err)
-      })
-    }
-
-    $scope.touchIdChange = function () {
-      var newStatus = $scope.touchIdEnabled.value
-      walletService.setTouchId(account, !!newStatus, function (err) {
-        if (err) {
-          $scope.touchIdEnabled.value = !newStatus
-          $timeout(function () {
-            $scope.$apply()
-          }, 1)
-          return
-        }
-        $log.debug('Touch Id status changed: ' + newStatus)
       })
     }
 

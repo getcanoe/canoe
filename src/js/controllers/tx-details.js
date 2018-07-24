@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('txDetailsController', function ($rootScope, $log, $ionicHistory, $scope, $state, $timeout, $stateParams, lodash, gettextCatalog, profileService, externalLinkService, popupService, addressbookService) {
+angular.module('canoeApp.controllers').controller('txDetailsController', function ($log, $ionicHistory, $scope, $state, $timeout, $stateParams, lodash, gettextCatalog, profileService, externalLinkService, addressbookService) {
   var listeners = []
 
   $scope.$on('$ionicView.beforeEnter', function (event, data) {
