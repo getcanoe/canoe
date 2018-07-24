@@ -35,6 +35,12 @@ A watch task is also available to rebuild components of the app as changes are m
 npm run watch
 ```
 
+## Tools
+We need grunt to run tasks etc:
+```sh
+sudo npm install -g grunt-cli
+```
+
 ## Testing on Real Devices
 
 It's recommended that all final testing be done on a real device – both to assess performance and to enable features that are unavailable to the emulator (e.g. a device camera).
@@ -149,9 +155,6 @@ On success, the Chrome extension will be in `build` (or `canoe-chrome-extension.
 Launch the app from `chrome://apps`.
 
 You may also want to enable debugging by enabling `chrome://flags/#debug-packed-apps`. Then right click in Canoe window for debugging.
-
-## About Canoe
-...details to come...
 
 ## Translations
 Canoe uses standard gettext PO files for translations.[POEditor](https://poeditor.com/join/project/cnSZa85DRN) is the front-end tool for translators and that's the only path for contributing translation work - we do not take pull requests for translations because it gets really complicated then to keep POEditor in sync.
