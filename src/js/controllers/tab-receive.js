@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('tabReceiveController', function ($rootScope, $scope, $ionicModal, $state, platformInfo, profileService, lodash, gettextCatalog) {
+angular.module('canoeApp.controllers').controller('tabReceiveController', function ($scope, $ionicModal, $state, platformInfo, profileService, lodash, gettextCatalog) {
   var listeners = []
   $scope.wallet = profileService.getWallet()
   $scope.isCordova = platformInfo.isCordova
@@ -46,12 +46,7 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
 
     $scope.showShareButton = platformInfo.isCordova ? (platformInfo.isIOS ? 'iOS' : 'Android') : null
 
-    listeners = [
-      $rootScope.$on('bwsEvent', function (e, walletId, type, n) {
-        // Update current address
-        if ($scope.account && walletId === $scope.account.id && type === 'NewIncomingTx') $scope.setAddress(true)
-      })
-    ]
+    listeners = []
   })
 
   $scope.$on('$ionicView.leave', function (event, data) {
@@ -65,7 +60,7 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
     var w = lodash.findIndex(accounts, function (w) {
       return w.id === account.id
     })
-    if (!w) return accounts[0]
+    if (w < 0) return accounts[0]
     return accounts[w]
   }
 
