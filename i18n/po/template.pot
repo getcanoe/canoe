@@ -41,7 +41,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr ""
 
-#: src/js/controllers/tab-home.js:161
+#: src/js/controllers/tab-home.js:159
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr ""
 
@@ -111,10 +111,6 @@ msgstr ""
 msgid "Add to address book?"
 msgstr ""
 
-#: www/views/customAmount.html:28
-msgid "Address"
-msgstr ""
-
 #: www/views/addressbook.html:6
 #: www/views/tab-settings.html:15
 msgid "Address Book"
@@ -160,7 +156,6 @@ msgid "Alternative Currency"
 msgstr ""
 
 #: www/views/amount.html:50
-#: www/views/customAmount.html:34
 #: www/views/includes/output.html:7
 msgid "Amount"
 msgstr ""
@@ -233,20 +228,12 @@ msgstr ""
 msgid "Be sure to store your seed in a secure place. If this app is deleted, or your device stolen, the seed is the only way to recreate the wallet."
 msgstr ""
 
-#: www/views/includes/incomingDataMenu.html:29
-msgid "Bitcoin Address"
-msgstr ""
-
 #: src/js/services/incomingData.js:118
 msgid "Block was scanned and sent successfully"
 msgstr ""
 
 #: src/js/services/incomingData.js:120
 msgid "Block was scanned but failed to process:"
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:11
-msgid "Broadcasting transaction"
 msgstr ""
 
 #: www/views/unsupported.html:6
@@ -333,7 +320,6 @@ msgstr ""
 msgid "Click to send"
 msgstr ""
 
-#: www/views/customAmount.html:4
 #: www/views/modals/pin.html:3
 #: www/views/modals/search.html:3
 msgid "Close"
@@ -372,10 +358,6 @@ msgstr ""
 
 #: www/views/modals/pin.html:10
 msgid "Confirm your PIN"
-msgstr ""
-
-#: src/js/services/walletService.js:31
-msgid "Confirm your new spending password"
 msgstr ""
 
 #: www/views/tab-send.html:50
@@ -445,10 +427,6 @@ msgstr ""
 msgid "Creating transaction"
 msgstr ""
 
-#: www/views/customAmount.html:9
-msgid "Custom Amount"
-msgstr ""
-
 #: www/views/tx-details.html:68
 msgid "Date"
 msgstr ""
@@ -475,10 +453,6 @@ msgstr ""
 
 #: src/js/services/onGoingProcess.js:17
 msgid "Deleting Wallet..."
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:23
-msgid "Deleting payment proposal"
 msgstr ""
 
 #: www/views/includes/backupNeededPopup.html:10
@@ -556,11 +530,6 @@ msgstr ""
 msgid "Encryption Time!"
 msgstr ""
 
-#: src/js/services/walletService.js:43
-#: src/js/services/walletService.js:58
-msgid "Enter Spending Password"
-msgstr ""
-
 #: www/views/preferencesName.html:18
 msgid "Enter a descriptive name"
 msgstr ""
@@ -575,10 +544,6 @@ msgstr ""
 
 #: www/views/onboarding/tour.html:84
 msgid "Enter at least 8 characters to encrypt your wallet."
-msgstr ""
-
-#: src/js/services/walletService.js:27
-msgid "Enter new spending password"
 msgstr ""
 
 #: www/views/tab-export-file.html:10
@@ -619,11 +584,10 @@ msgstr ""
 #: src/js/controllers/import.js:87
 #: src/js/controllers/import.js:95
 #: src/js/controllers/modals/password.js:101
-#: src/js/controllers/paperWallet.js:45
+#: src/js/controllers/paperWallet.js:21
 #: src/js/controllers/preferencesDelete.js:35
 #: src/js/controllers/preferencesName.js:13
 #: src/js/controllers/preferencesRepresentative.js:17
-#: src/js/controllers/tab-home.js:193
 #: src/js/controllers/tab-scan.js:106
 #: src/js/controllers/tab-send.js:78
 #: src/js/controllers/tabsController.js:36
@@ -643,21 +607,17 @@ msgstr ""
 msgid "Error importing wallet:"
 msgstr ""
 
-#: src/js/controllers/paperWallet.js:40
+#: src/js/controllers/paperWallet.js:15
 msgid "Error scanning funds:"
 msgstr ""
 
-#: src/js/controllers/paperWallet.js:88
+#: src/js/controllers/paperWallet.js:44
 msgid "Error sweeping wallet:"
 msgstr ""
 
 #: www/views/export.html:3
 #: www/views/tab-settings.html:39
 msgid "Export wallet"
-msgstr ""
-
-#: src/js/services/walletService.js:88
-msgid "Exporting via QR not supported for this wallet"
 msgstr ""
 
 #: src/js/services/onGoingProcess.js:18
@@ -738,10 +698,6 @@ msgstr ""
 msgid "Funds will be transferred to"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:19
-msgid "Generating .csv file..."
-msgstr ""
-
 #: www/views/addressbook.html:20
 msgid "Get started by adding your first one."
 msgstr ""
@@ -749,8 +705,8 @@ msgstr ""
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:163
-#: src/js/controllers/tab-home.js:30
+#: src/js/controllers/tab-home.js:161
+#: src/js/controllers/tab-home.js:28
 #: src/js/controllers/tab-settings.js:49
 #: src/js/controllers/tab-settings.js:60
 #: src/js/controllers/tx-details.js:73
@@ -788,7 +744,7 @@ msgstr ""
 msgid "Help & Support"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-home.js:26
 #: src/js/controllers/tab-settings.js:47
 msgid "Help and support information is available at the website."
 msgstr ""
@@ -1065,6 +1021,10 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
+#: www/views/includes/incomingDataMenu.html:29
+msgid "Nano Account"
+msgstr ""
+
 #: www/views/onboarding/tour.html:31
 msgid "Nano is Feeless"
 msgstr ""
@@ -1142,7 +1102,7 @@ msgstr ""
 msgid "Not a seed QR code:"
 msgstr ""
 
-#: src/js/controllers/paperWallet.js:45
+#: src/js/controllers/paperWallet.js:21
 msgid "Not funds found"
 msgstr ""
 
@@ -1210,7 +1170,7 @@ msgstr ""
 msgid "One more time."
 msgstr ""
 
-#: src/js/controllers/tab-home.js:29
+#: src/js/controllers/tab-home.js:27
 #: src/js/controllers/tab-settings.js:48
 #: src/js/controllers/tab-settings.js:59
 #: src/js/controllers/tx-details.js:72
@@ -1361,7 +1321,7 @@ msgstr ""
 msgid "Private Key"
 msgstr ""
 
-#: src/js/controllers/paperWallet.js:133
+#: src/js/controllers/paperWallet.js:86
 msgid "Private key encrypted. Enter password"
 msgstr ""
 
@@ -1390,10 +1350,6 @@ msgstr ""
 msgid "Receive"
 msgstr ""
 
-#: www/views/customAmount.html:44
-msgid "Receive in"
-msgstr ""
-
 #: www/views/tx-details.html:20
 msgid "Received"
 msgstr ""
@@ -1415,16 +1371,8 @@ msgstr ""
 msgid "Recipient"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:21
-msgid "Recreating Wallet..."
-msgstr ""
-
 #: www/views/tx-details.html:115
 msgid "Refund"
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:22
-msgid "Rejecting payment proposal"
 msgstr ""
 
 #: www/views/preferencesAbout.html:9
@@ -1455,10 +1403,6 @@ msgstr ""
 
 #: www/views/onboarding/welcome.html:9
 msgid "Restore from backup"
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:24
-msgid "Retrieving inputs information"
 msgstr ""
 
 #: src/js/controllers/onboarding/tour.js:86
@@ -1562,6 +1506,10 @@ msgstr ""
 msgid "Send Nano"
 msgstr ""
 
+#: www/views/includes/incomingDataMenu.html:46
+msgid "Send Nano to this address"
+msgstr ""
+
 #: www/views/includes/logOptions.html:17
 #: www/views/tab-export-file.html:51
 msgid "Send by email"
@@ -1575,20 +1523,12 @@ msgstr ""
 msgid "Send max amount"
 msgstr ""
 
-#: www/views/includes/incomingDataMenu.html:46
-msgid "Send payment to this address"
-msgstr ""
-
 #: www/views/feedback/rateApp.html:17
 msgid "Send us feedback instead"
 msgstr ""
 
 #: www/views/confirm.html:15
 msgid "Sending"
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:33
-msgid "Sending 2FA code..."
 msgstr ""
 
 #: src/js/services/onGoingProcess.js:31
@@ -1759,7 +1699,7 @@ msgstr ""
 msgid "The wallet server URL"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:54
+#: src/js/controllers/tab-home.js:52
 msgid "There is a new version of Canoe available"
 msgstr ""
 
@@ -1814,15 +1754,11 @@ msgstr ""
 msgid "Transaction"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:193
-msgid "Transaction not found"
-msgstr ""
-
 #: www/views/onboarding/tour.html:19
 msgid "Transfer Nano instantly to anyone, anywhere."
 msgstr ""
 
-#: src/js/controllers/paperWallet.js:107
+#: src/js/controllers/paperWallet.js:63
 msgid "Transfer to"
 msgstr ""
 
@@ -1852,7 +1788,7 @@ msgstr ""
 msgid "Unrecognized data"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:158
 msgid "Update Available"
 msgstr ""
 
@@ -1867,10 +1803,6 @@ msgstr ""
 #: www/views/onboarding/alias.html:49
 #: www/views/preferencesAlias.html:44
 msgid "Valid Alias & Email"
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:29
-msgid "Validating recovery phrase..."
 msgstr ""
 
 #: www/views/modals/fingerprintCheck.html:4
@@ -1893,7 +1825,7 @@ msgstr ""
 msgid "View Terms of Service"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:162
+#: src/js/controllers/tab-home.js:160
 msgid "View Update"
 msgstr ""
 
@@ -2042,10 +1974,6 @@ msgstr ""
 
 #: www/views/onboarding/backupRequest.html:10
 msgid "Your wallet is never saved to cloud storage or standard device backups."
-msgstr ""
-
-#: src/js/services/walletService.js:28
-msgid "Your wallet key will be encrypted. The Spending Password cannot be recovered. Be sure to write it down."
 msgstr ""
 
 #: www/views/accountDetails.html:42
