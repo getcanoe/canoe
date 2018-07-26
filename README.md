@@ -183,7 +183,7 @@ We are using `sketchtool` which is a tool that comes bundled with Sketch. Unfort
 Canoe uses the `MAJOR.MINOR.PATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
 
 ## Contributing to this project
-Anyone and everyone is welcome to contribute, here is our [discord link](https://discord.gg/S2cU8x).
+Anyone and everyone is welcome to contribute, here is our [discord link](https://discord.gg/ecVcJM3).
 
 ## License
 Canoe is released under the MIT License.  Please refer to the [LICENSE](https://github.com/gokr/canoe/blob/master/LICENSE) file that accompanies this project for more information including complete terms and conditions.
