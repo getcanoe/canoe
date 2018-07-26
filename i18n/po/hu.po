@@ -18,47 +18,43 @@ msgstr "Rólunk"
 
 #: www/views/preferencesAdvanced.html:13
 msgid "Account Information"
-msgstr ""
+msgstr "Számla információ"
 
 #: www/views/preferencesName.html:4
 msgid "Account Name"
-msgstr ""
+msgstr "Számla név"
 
 #: www/views/preferences.html:4
 msgid "Account Settings"
-msgstr ""
+msgstr "Számla beállítások"
 
 #: www/views/tab-create-account.html:12
 msgid "Account name"
-msgstr ""
+msgstr "Számla név"
 
 #: www/views/tab-home.html:71 www/views/tab-home.html:85
 msgid "Accounts"
-msgstr ""
+msgstr "Számlák"
 
 #: www/views/addressbook.add.html:4 www/views/addressbook.html:22
 msgid "Add Contact"
-msgstr ""
+msgstr "Kapcsolat hozzáadása"
 
 #: www/views/add.html:3
 msgid "Add account"
-msgstr ""
+msgstr "Számla hozzáadása"
 
 #: www/views/includes/incomingDataMenu.html:41
 msgid "Add as a contact"
-msgstr ""
+msgstr "Hozzáadás kapcsolatként"
 
 #: src/js/controllers/confirm.js:234
 msgid "Add description"
-msgstr ""
-
-#: www/views/customAmount.html:28
-msgid "Address"
-msgstr ""
+msgstr "Leírás hozzáadása"
 
 #: www/views/addressbook.html:6 www/views/tab-settings.html:15
 msgid "Address Book"
-msgstr ""
+msgstr "Címjegyzék"
 
 #: www/views/tab-settings.html:100
 msgid "Advanced"
@@ -84,10 +80,9 @@ msgstr ""
 msgid "Alternative Currency"
 msgstr ""
 
-#: www/views/amount.html:51 www/views/customAmount.html:34
-#: www/views/includes/output.html:7
+#: www/views/amount.html:50 www/views/includes/output.html:7
 msgid "Amount"
-msgstr ""
+msgstr "Összeg"
 
 #: www/views/backupWarning.html:10
 msgid "Are you being watched?"
@@ -113,21 +108,13 @@ msgstr ""
 msgid "Backup now"
 msgstr ""
 
-#: www/views/onboarding/backupRequest.html:11 www/views/tab-export-file.html:52
+#: www/views/onboarding/backupRequest.html:11 www/views/tab-export-file.html:58
 msgid "Backup wallet"
 msgstr "Tárca biztonsági mentése"
 
 #: www/views/includes/confirmBackupPopup.html:7
 msgid "Be sure to store your seed in a secure place. If this app is deleted, or your device stolen, the seed is the only way to recreate the wallet."
 msgstr "Ügyelj arra, hogy a privát kulcsot biztonságos helyen tárold. Ha ez az alkalmazás törlődik vagy ezt az eszközöd ellopják, a privát kulcs az egyetlen módja annak, hogy újra létrehozd a tárcát."
-
-#: www/views/includes/incomingDataMenu.html:29
-msgid "Bitcoin Address"
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:11
-msgid "Broadcasting transaction"
-msgstr ""
 
 #: www/views/unsupported.html:6
 msgid "Browser unsupported"
@@ -164,8 +151,7 @@ msgstr ""
 msgid "Click to send"
 msgstr ""
 
-#: www/views/customAmount.html:4 www/views/modals/pin.html:3
-#: www/views/modals/search.html:3
+#: www/views/modals/pin.html:3 www/views/modals/search.html:3
 msgid "Close"
 msgstr ""
 
@@ -190,10 +176,6 @@ msgstr ""
 msgid "Confirm &amp; Finish"
 msgstr ""
 
-#: src/js/services/walletService.js:31
-msgid "Confirm your new spending password"
-msgstr ""
-
 #: www/views/tab-send.html:50
 msgid "Contacts"
 msgstr ""
@@ -206,18 +188,18 @@ msgstr ""
 msgid "Contribute Translations"
 msgstr ""
 
-#: src/js/controllers/export.js:119 www/views/includes/copyToClipboard.html:4
+#: src/js/controllers/export.js:124 www/views/includes/copyToClipboard.html:4
 msgid "Copied to clipboard"
 msgstr ""
 
-#: www/views/tab-export-file.html:57
+#: www/views/tab-export-file.html:63
 msgid "Copy this text as it is to a safe place (notepad or email)"
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:51
 #: www/views/includes/incomingDataMenu.html:70
 #: www/views/includes/incomingDataMenu.html:94
-#: www/views/includes/logOptions.html:9 www/views/tab-export-file.html:41
+#: www/views/includes/logOptions.html:9 www/views/tab-export-file.html:47
 msgid "Copy to clipboard"
 msgstr ""
 
@@ -228,11 +210,11 @@ msgstr "A tárca nem elérhető a szerveren. Ellenőrizd a következőt:"
 #: www/views/tab-create-account.html:3 www/views/tab-home.html:77
 #: www/views/tab-send.html:41
 msgid "Create Account"
-msgstr ""
+msgstr "Számla létrehozása"
 
 #: www/views/tab-create-account.html:25
 msgid "Create new account"
-msgstr ""
+msgstr "Új számla létrehozása"
 
 #: src/js/services/onGoingProcess.js:14
 msgid "Creating Wallet..."
@@ -240,14 +222,10 @@ msgstr "Tárca létrehozása..."
 
 #: src/js/services/onGoingProcess.js:13
 msgid "Creating account..."
-msgstr ""
+msgstr "Számla létrehozása..."
 
 #: src/js/services/onGoingProcess.js:12
 msgid "Creating transaction"
-msgstr ""
-
-#: www/views/customAmount.html:9
-msgid "Custom Amount"
 msgstr ""
 
 #: www/views/tx-details.html:68
@@ -256,7 +234,7 @@ msgstr ""
 
 #: src/js/services/profileService.js:277
 msgid "Default Account"
-msgstr ""
+msgstr "Alapértelmezett számla"
 
 #: www/views/preferencesDeleteWallet.html:21
 msgid "Delete"
@@ -264,7 +242,7 @@ msgstr "Törlés"
 
 #: www/views/preferencesAdvanced.html:34
 msgid "Delete Account"
-msgstr ""
+msgstr "Számla törlése"
 
 #: www/views/preferencesDeleteWallet.html:3
 msgid "Delete Wallet"
@@ -273,10 +251,6 @@ msgstr "Tárca törlése"
 #: src/js/services/onGoingProcess.js:17
 msgid "Deleting Wallet..."
 msgstr "Tárca törlése..."
-
-#: src/js/services/onGoingProcess.js:23
-msgid "Deleting payment proposal"
-msgstr ""
 
 #: www/views/includes/backupNeededPopup.html:10
 #: www/views/onboarding/alias.html:70
@@ -288,7 +262,7 @@ msgstr ""
 msgid "Donate to Canoe"
 msgstr ""
 
-#: www/views/tab-export-file.html:22 www/views/tab-home.html:36
+#: www/views/tab-export-file.html:28 www/views/tab-home.html:36
 msgid "Download"
 msgstr ""
 
@@ -322,16 +296,8 @@ msgstr ""
 msgid "Enable the camera to get started."
 msgstr ""
 
-#: src/js/services/walletService.js:43 src/js/services/walletService.js:58
-msgid "Enter Spending Password"
-msgstr ""
-
 #: www/views/amount.html:4
 msgid "Enter amount"
-msgstr ""
-
-#: src/js/services/walletService.js:27
-msgid "Enter new spending password"
 msgstr ""
 
 #: www/views/tab-import-phrase.html:13
@@ -348,36 +314,36 @@ msgstr ""
 #: src/js/controllers/addressbookEdit.js:21
 #: src/js/controllers/addressbookEdit.js:73
 #: src/js/controllers/addressbookView.js:49 src/js/controllers/create.js:19
-#: src/js/controllers/create.js:28 src/js/controllers/export.js:30
-#: src/js/controllers/export.js:52 src/js/controllers/export.js:62
-#: src/js/controllers/export.js:89 src/js/controllers/export.js:98
-#: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:106
-#: src/js/controllers/import.js:111 src/js/controllers/import.js:115
-#: src/js/controllers/import.js:120 src/js/controllers/import.js:123
-#: src/js/controllers/import.js:134 src/js/controllers/import.js:33
-#: src/js/controllers/import.js:43 src/js/controllers/import.js:56
-#: src/js/controllers/import.js:63 src/js/controllers/import.js:85
-#: src/js/controllers/import.js:93 src/js/controllers/modals/password.js:101
-#: src/js/controllers/paperWallet.js:45
+#: src/js/controllers/create.js:28 src/js/controllers/export.js:103
+#: src/js/controllers/export.js:35 src/js/controllers/export.js:57
+#: src/js/controllers/export.js:67 src/js/controllers/export.js:94
+#: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:108
+#: src/js/controllers/import.js:113 src/js/controllers/import.js:117
+#: src/js/controllers/import.js:122 src/js/controllers/import.js:125
+#: src/js/controllers/import.js:136 src/js/controllers/import.js:35
+#: src/js/controllers/import.js:45 src/js/controllers/import.js:58
+#: src/js/controllers/import.js:65 src/js/controllers/import.js:87
+#: src/js/controllers/import.js:95 src/js/controllers/modals/password.js:101
+#: src/js/controllers/paperWallet.js:21
 #: src/js/controllers/preferencesDelete.js:35
 #: src/js/controllers/preferencesName.js:13
 #: src/js/controllers/preferencesRepresentative.js:17
-#: src/js/controllers/tab-home.js:193 src/js/controllers/tab-scan.js:106
-#: src/js/controllers/tab-send.js:78 src/js/controllers/tabsController.js:36
+#: src/js/controllers/tab-scan.js:106 src/js/controllers/tab-send.js:78
+#: src/js/controllers/tabsController.js:36
 #: src/js/controllers/tabsController.js:7
 msgid "Error"
-msgstr ""
+msgstr "Hiba"
 
 #: src/js/controllers/confirm.js:273
 msgid "Error at confirm"
 msgstr ""
 
-#: src/js/controllers/paperWallet.js:40
+#: src/js/controllers/paperWallet.js:15
 msgid "Error scanning funds:"
 msgstr ""
 
 #. Hard to say what sweeping means here.
-#: src/js/controllers/paperWallet.js:88
+#: src/js/controllers/paperWallet.js:44
 #, fuzzy
 msgid "Error sweeping wallet:"
 msgstr "Hiba a tárca olvasása közben:"
@@ -386,23 +352,19 @@ msgstr "Hiba a tárca olvasása közben:"
 msgid "Export wallet"
 msgstr "Tárca exportálása"
 
-#: src/js/services/walletService.js:88
-msgid "Exporting via QR not supported for this wallet"
-msgstr "Ez a tárca nem támogatja a QR kód általi exportálást"
-
 #: src/js/services/onGoingProcess.js:18
 msgid "Extracting Wallet information..."
 msgstr "Tárca információ kicsomagolása..."
 
-#: src/js/controllers/export.js:52 src/js/controllers/export.js:62
-#: src/js/controllers/export.js:89 src/js/controllers/export.js:98
+#: src/js/controllers/export.js:103 src/js/controllers/export.js:57
+#: src/js/controllers/export.js:67 src/js/controllers/export.js:94
 #: www/views/tab-export-file.html:4
 msgid "Failed to export"
 msgstr ""
 
 #: www/views/tab-create-account.html:14
 msgid "Family vacation funds"
-msgstr ""
+msgstr "Családi vakáció keret"
 
 #: src/js/controllers/feedback/send.js:21
 msgid "Feedback could not be submitted. Please try again later."
@@ -442,10 +404,6 @@ msgstr ""
 msgid "Funds will be transferred to"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:19
-msgid "Generating .csv file..."
-msgstr ""
-
 #: www/views/onboarding/welcome.html:8
 msgctxt "button"
 msgid "Get started"
@@ -458,9 +416,9 @@ msgstr ""
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:163 src/js/controllers/tab-home.js:30
+#: src/js/controllers/tab-home.js:161 src/js/controllers/tab-home.js:28
 #: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
-#: src/js/controllers/tx-details.js:95
+#: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr ""
 
@@ -478,7 +436,7 @@ msgstr ""
 msgid "Help & Support"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:28 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:47
 msgid "Help and support information is available at the website."
 msgstr ""
 
@@ -541,11 +499,11 @@ msgstr ""
 msgid "Import Wallet"
 msgstr "Tárca importálása"
 
-#: www/views/tab-import-phrase.html:39
+#: www/views/tab-import-phrase.html:42
 msgid "Import seed"
 msgstr ""
 
-#: www/views/add.html:21 www/views/tab-import-file.html:27
+#: www/views/add.html:21 www/views/tab-import-file.html:30
 #: www/views/tab-settings.html:31
 msgid "Import wallet"
 msgstr "Tárca importálása"
@@ -568,7 +526,7 @@ msgstr ""
 
 #: www/views/includes/accountHistory.html:43
 msgid "Invalid"
-msgstr ""
+msgstr "Helytelen"
 
 #: src/js/controllers/feedback/send.js:78
 msgid "Is there anything we could do better?"
@@ -606,7 +564,7 @@ msgstr ""
 msgid "Meh - it's alright"
 msgstr ""
 
-#: src/js/controllers/tx-details.js:69 www/views/tx-details.html:76
+#: www/views/tx-details.html:76
 msgid "Memo"
 msgstr ""
 
@@ -622,11 +580,11 @@ msgstr ""
 
 #: www/views/add.html:14
 msgid "New account"
-msgstr ""
+msgstr "Új számla"
 
 #: www/views/tab-receive.html:16
 msgid "No Account available"
-msgstr ""
+msgstr "Nincs elérhető számla"
 
 #: www/views/addressbook.html:19
 msgid "No contacts yet"
@@ -642,7 +600,7 @@ msgstr ""
 
 #: www/views/accountDetails.html:103
 msgid "No transactions yet"
-msgstr ""
+msgstr "Még nincs tranzakció"
 
 #: src/js/controllers/preferencesDelete.js:14
 msgid "No wallet found"
@@ -656,7 +614,7 @@ msgstr "Nincs tárca kiválasztva"
 msgid "No wallets available to receive funds"
 msgstr "Nincs elérhető tárca összeg fogadására"
 
-#: src/js/controllers/paperWallet.js:45
+#: src/js/controllers/paperWallet.js:21
 msgid "Not funds found"
 msgstr ""
 
@@ -706,8 +664,8 @@ msgstr ""
 msgid "Oh no!"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:29 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:94
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:48
+#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr ""
 
@@ -767,11 +725,11 @@ msgstr ""
 msgid "Please connect a camera to get started."
 msgstr ""
 
-#: src/js/controllers/import.js:111
+#: src/js/controllers/import.js:113
 msgid "Please enter the seed"
 msgstr ""
 
-#: src/js/controllers/import.js:93
+#: src/js/controllers/import.js:95
 msgid "Please, select your backup file"
 msgstr ""
 
@@ -783,11 +741,11 @@ msgstr ""
 msgid "Preparing addresses..."
 msgstr ""
 
-#: src/js/controllers/export.js:124
+#: src/js/controllers/export.js:129
 msgid "Preparing backup..."
 msgstr ""
 
-#: src/js/routes.js:924
+#: src/js/routes.js:896
 msgid "Press again to exit"
 msgstr ""
 
@@ -795,7 +753,7 @@ msgstr ""
 msgid "Private Key"
 msgstr ""
 
-#: src/js/controllers/paperWallet.js:133
+#: src/js/controllers/paperWallet.js:86
 msgid "Private key encrypted. Enter password"
 msgstr ""
 
@@ -819,17 +777,13 @@ msgstr ""
 msgid "Receive"
 msgstr ""
 
-#: www/views/customAmount.html:44
-msgid "Receive in"
-msgstr ""
-
 #: www/views/tx-details.html:20
 msgid "Received"
 msgstr ""
 
 #: www/views/includes/accountHistory.html:3
 msgid "Recent"
-msgstr ""
+msgstr "Friss"
 
 #: www/views/advancedSettings.html:30
 msgid "Recent Transaction Card"
@@ -843,15 +797,6 @@ msgstr ""
 msgid "Recipient"
 msgstr ""
 
-#: src/js/services/onGoingProcess.js:21
-#, fuzzy
-msgid "Recreating Wallet..."
-msgstr "Tárca létrehozása..."
-
-#: src/js/services/onGoingProcess.js:22
-msgid "Rejecting payment proposal"
-msgstr ""
-
 #: www/views/preferencesAbout.html:9
 msgid "Release information"
 msgstr ""
@@ -862,10 +807,6 @@ msgstr ""
 
 #: www/views/onboarding/welcome.html:9
 msgid "Restore from backup"
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:24
-msgid "Retrieving inputs information"
 msgstr ""
 
 #: src/js/controllers/onboarding/tour.js:86
@@ -882,7 +823,7 @@ msgstr ""
 #: www/views/preferencesNotifications.html:46
 #: www/views/preferencesRepresentative.html:33
 msgid "Save"
-msgstr ""
+msgstr "Mentés"
 
 #: www/views/tab-scan.html:3 www/views/tabs.html:11
 msgid "Scan"
@@ -915,7 +856,7 @@ msgstr ""
 
 #: www/views/tab-send.html:18
 msgid "Search or enter account number"
-msgstr ""
+msgstr "Számla címének keresése vagy bevitele"
 
 #: www/views/modals/search.html:16
 msgid "Search transactions"
@@ -930,10 +871,10 @@ msgid "Select a backup file"
 msgstr ""
 
 #: src/js/controllers/amount.js:40 src/js/controllers/amount.js:76
-#: src/js/controllers/tab-receive.js:90 src/js/controllers/tab-send.js:189
+#: src/js/controllers/tab-receive.js:79 src/js/controllers/tab-send.js:189
 #: src/js/controllers/tab-send.js:208
 msgid "Select an account"
-msgstr ""
+msgstr "Válassz számlát"
 
 #: www/views/feedback/send.html:13 www/views/feedback/send.html:43
 #: www/views/tab-send.html:3 www/views/tabs.html:15
@@ -944,7 +885,7 @@ msgstr ""
 msgid "Send Feedback"
 msgstr ""
 
-#: www/views/includes/logOptions.html:17 www/views/tab-export-file.html:45
+#: www/views/includes/logOptions.html:17 www/views/tab-export-file.html:51
 msgid "Send by email"
 msgstr ""
 
@@ -956,20 +897,12 @@ msgstr ""
 msgid "Send max amount"
 msgstr ""
 
-#: www/views/includes/incomingDataMenu.html:46
-msgid "Send payment to this address"
-msgstr ""
-
 #: www/views/feedback/rateApp.html:17
 msgid "Send us feedback instead"
 msgstr ""
 
 #: www/views/confirm.html:15
 msgid "Sending"
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:33
-msgid "Sending 2FA code..."
 msgstr ""
 
 #: src/js/services/onGoingProcess.js:31
@@ -986,7 +919,7 @@ msgstr ""
 
 #: src/js/controllers/confirm.js:293
 msgid "Sending {{amountStr}} from your {{name}} account"
-msgstr ""
+msgstr "{{amountStr}} küldése {{name}} számládról folyamatban"
 
 #: www/views/modals/tx-status.html:9 www/views/tx-details.html:18
 msgid "Sent"
@@ -1000,7 +933,7 @@ msgstr ""
 msgid "Session Log"
 msgstr ""
 
-#: www/views/preferencesAbout.html:35
+#: www/views/preferencesAbout.html:40
 msgid "Session log"
 msgstr ""
 
@@ -1014,7 +947,7 @@ msgstr ""
 
 #: www/views/tab-send.html:42
 msgid "Show Account"
-msgstr ""
+msgstr "Számla mutatása"
 
 #: www/views/tab-send.html:65
 msgid "Show more"
@@ -1054,7 +987,7 @@ msgstr "EZ A MŰVELET NEM VISSZAFORDÍTHATÓ"
 
 #: www/views/accountDetails.html:43
 msgid "Tap and hold to show"
-msgstr ""
+msgstr "Érints és tartsd lenyomva a mutatáshoz"
 
 #: www/views/termsOfUse.html:3
 msgid "Terms Of Use"
@@ -1087,7 +1020,7 @@ msgstr ""
 msgid "The seed"
 msgstr ""
 
-#: src/js/controllers/import.js:115
+#: src/js/controllers/import.js:117
 msgid "The seed is invalid, it should be 64 characters of: 0-9, A-F"
 msgstr ""
 
@@ -1095,7 +1028,7 @@ msgstr ""
 msgid "The wallet server URL"
 msgstr "A tárca szerver URL-je"
 
-#: src/js/controllers/import.js:106 src/js/controllers/import.js:85
+#: src/js/controllers/import.js:108 src/js/controllers/import.js:87
 msgid "There is an error in the form"
 msgstr ""
 
@@ -1126,17 +1059,13 @@ msgstr ""
 msgid "Transaction"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:193
-msgid "Transaction not found"
-msgstr ""
-
-#: src/js/controllers/paperWallet.js:107
+#: src/js/controllers/paperWallet.js:63
 msgid "Transfer to"
 msgstr ""
 
 #: www/views/tab-send.html:73
 msgid "Transfer to Account"
-msgstr ""
+msgstr "Számlára utalás"
 
 #: www/views/modals/password.html:24 www/views/modals/pin.html:13
 msgid "Try again in {{expires}}"
@@ -1146,16 +1075,12 @@ msgstr ""
 msgid "Uh oh..."
 msgstr ""
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:158
 msgid "Update Available"
 msgstr ""
 
 #: www/views/activity.html:14
 msgid "Updating... Please stand by"
-msgstr ""
-
-#: src/js/services/onGoingProcess.js:29
-msgid "Validating recovery phrase..."
 msgstr ""
 
 #: www/views/modals/fingerprintCheck.html:4
@@ -1166,7 +1091,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: www/views/tab-export-file.html:32
+#: www/views/tab-export-file.html:38
 msgid "View"
 msgstr ""
 
@@ -1174,7 +1099,7 @@ msgstr ""
 msgid "View Terms of Service"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:162
+#: src/js/controllers/tab-home.js:160
 msgid "View Update"
 msgstr ""
 
@@ -1195,7 +1120,7 @@ msgid "Wallet seed not available"
 msgstr "A tárca privát kulcsa nem elérhető"
 
 #: src/js/controllers/addressbookView.js:43
-#: src/js/controllers/advancedSettings.js:38 src/js/controllers/import.js:150
+#: src/js/controllers/advancedSettings.js:38 src/js/controllers/import.js:152
 #: src/js/controllers/modals/password.js:73
 #: src/js/controllers/preferencesDelete.js:23
 #: www/views/preferencesDeleteWallet.html:11
@@ -1216,7 +1141,7 @@ msgstr ""
 
 #: www/views/preferencesName.html:11
 msgid "What do you call this account?"
-msgstr ""
+msgstr "Hogyan nevezed ezt a számlát?"
 
 #: www/views/onboarding/notifications.html:4
 msgid "Would you like to receive push notifications about payments?"
@@ -1254,7 +1179,7 @@ msgstr "Email értesítéseket fogsz kapni a tárcához kapcsolódó ki- és bef
 msgid "Your ideas, feedback, or comments"
 msgstr ""
 
-#: www/views/tab-export-file.html:11 www/views/tab-import-file.html:20
+#: www/views/tab-export-file.html:12 www/views/tab-import-file.html:20
 #: www/views/tab-import-phrase.html:30
 msgid "Your password"
 msgstr ""
@@ -1263,16 +1188,12 @@ msgstr ""
 msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "A tárcád soha nem kerül mentésre a felhőben vagy az eszköz biztonsági mentésekor."
 
-#: src/js/services/walletService.js:28
-msgid "Your wallet key will be encrypted. The Spending Password cannot be recovered. Be sure to write it down."
-msgstr "A tárca kulcsa titkosítva lesz. A küldő jelszót nem lehet visszaszerezni. Mindenképpen írd azt le!"
-
-#: www/views/accountDetails.html:42 www/views/amount.html:123
+#: www/views/accountDetails.html:42 www/views/amount.html:122
 #: www/views/includes/accountList.html:11
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
-msgstr ""
+msgstr "[Egyenleg rejtve]"
 
 #: www/views/onboarding/disclaimer.html:43
 msgid "I have read, understood, and agree to the <a ng-click=\"openTerms()\" href=\"javascript:void(0)\" translate=\"\">Terms of Use</a>."
@@ -1282,16 +1203,16 @@ msgstr ""
 msgid "5-star ratings help us get Canoe into more hands, and more users means more resources can be committed to the app!"
 msgstr ""
 
-#: www/views/changePassword.html:25
+#: www/views/changePassword.html:31
 msgid "At least 8 Characters. Make it good!"
 msgstr ""
 
-#: www/views/changePassword.html:3 www/views/changePassword.html:62
+#: www/views/changePassword.html:3 www/views/changePassword.html:77
 #: www/views/preferencesSecurity.html:17
 msgid "Change Password"
 msgstr ""
 
-#: www/views/changePassword.html:33
+#: www/views/changePassword.html:43
 msgid "Confirm New Password"
 msgstr ""
 
@@ -1303,7 +1224,7 @@ msgstr ""
 msgid "Let's Start"
 msgstr ""
 
-#: www/views/changePassword.html:23
+#: www/views/changePassword.html:28
 msgid "New Password"
 msgstr ""
 
@@ -1311,19 +1232,19 @@ msgstr ""
 msgid "Old Password"
 msgstr ""
 
-#: www/views/changePassword.html:35
+#: www/views/changePassword.html:46
 msgid "One more time."
 msgstr ""
 
-#: www/views/changePassword.html:49
+#: www/views/changePassword.html:64
 msgid "Password too short"
 msgstr ""
 
-#: www/views/changePassword.html:55
+#: www/views/changePassword.html:70
 msgid "Passwords don't match"
 msgstr ""
 
-#: www/views/changePassword.html:45 www/views/onboarding/tour.html:106
+#: www/views/changePassword.html:60 www/views/onboarding/tour.html:106
 msgid "Passwords match"
 msgstr ""
 
@@ -1335,7 +1256,7 @@ msgstr ""
 msgid "Share Canoe"
 msgstr ""
 
-#: src/js/controllers/tab-home.js:54
+#: src/js/controllers/tab-home.js:52
 msgid "There is a new version of Canoe available"
 msgstr ""
 
@@ -1353,11 +1274,11 @@ msgstr ""
 
 #: www/views/preferencesAlias.html:4
 msgid "Account Alias"
-msgstr ""
+msgstr "Számla másik megnevezése"
 
 #: www/views/preferencesColor.html:4
 msgid "Account Color"
-msgstr ""
+msgstr "Számla színe"
 
 #: www/views/addressbook.add.html:56 www/views/addressbook.edit.html:56
 #: www/views/addressbook.view.html:30 www/views/onboarding/alias.html:10
@@ -1407,7 +1328,7 @@ msgstr ""
 
 #: src/js/controllers/confirm.js:85
 msgid "No accounts available"
-msgstr ""
+msgstr "Nincs elérhető számla"
 
 #: www/views/onboarding/backupRequest.html:5
 msgid "No backup, no Nano."
@@ -1429,7 +1350,7 @@ msgstr ""
 msgid "Password to encrypt"
 msgstr ""
 
-#: src/js/controllers/import.js:120
+#: src/js/controllers/import.js:122
 msgid "Please enter a password to use for the wallet"
 msgstr "Add meg a jelszót a tárca használatához"
 
@@ -1447,7 +1368,7 @@ msgstr ""
 
 #: www/views/tab-send.html:37
 msgid "To get started, you need Nano. Share your account to receive Nano."
-msgstr ""
+msgstr "Kezdésnek Nanora lesz szükséged. Oszd meg a számlád, hogy Nanot fogadhass."
 
 #: www/views/tab-send.html:38
 msgid "To get started, you need an Account in your wallet to receive Nano."
@@ -1481,14 +1402,14 @@ msgstr "A Nano tárcád készen áll!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "A Nano tárcád titkos kulcsa mentésre került!"
 
-#: src/js/services/nanoService.js:651 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:702 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
-msgstr ""
+msgstr "Számla"
 
 #: src/js/controllers/create.js:19 src/js/controllers/preferencesName.js:13
 msgid "An account already exists with that name"
-msgstr ""
+msgstr "Egy számla már létezik ezzel a névvel"
 
 #: www/views/modals/pin.html:10
 msgid "Confirm your PIN"
@@ -1498,7 +1419,7 @@ msgstr ""
 msgid "Enter a descriptive name"
 msgstr ""
 
-#: src/js/controllers/export.js:30
+#: src/js/controllers/export.js:35
 msgid "Failed to generate seed QR code"
 msgstr ""
 
@@ -1506,18 +1427,19 @@ msgstr ""
 msgid "Incorrect PIN, try again."
 msgstr ""
 
-#: src/js/controllers/import.js:33
+#: src/js/controllers/import.js:35
 msgid "Incorrect code format for a seed:"
 msgstr ""
 
 #: src/js/controllers/changeLocksController.js:24
-#: src/js/controllers/changePasswordController.js:10
 #: src/js/controllers/changePasswordController.js:13
-#: src/js/services/nanoService.js:90
+#: src/js/controllers/changePasswordController.js:16
+#: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
+#: src/js/services/nanoService.js:89
 msgid "Information"
 msgstr ""
 
-#: src/js/controllers/import.js:43
+#: src/js/controllers/import.js:45
 msgid "Not a seed QR code:"
 msgstr ""
 
@@ -1533,11 +1455,11 @@ msgstr ""
 msgid "Security Preferences"
 msgstr ""
 
-#: www/views/changePassword.html:15
+#: www/views/changePassword.html:16
 msgid "Your current password"
 msgstr ""
 
-#: src/js/controllers/changePasswordController.js:13
+#: src/js/controllers/changePasswordController.js:16
 msgid "Your password has been changed"
 msgstr ""
 
@@ -1569,7 +1491,7 @@ msgstr "Egy tárca importálása törli a jelenlegi tárcát és annak számlái
 #: src/js/controllers/addressbookEdit.js:21
 #: src/js/controllers/preferencesRepresentative.js:17
 msgid "Incorrect code format for an account:"
-msgstr ""
+msgstr "Helytelen kód formátum egy számlához"
 
 #: www/views/onboarding/tour.html:22
 msgid "Just scan and pay."
@@ -1609,9 +1531,9 @@ msgstr ""
 
 #: www/views/preferencesRepresentative.html:4
 msgid "Account Representative"
-msgstr ""
+msgstr "Számla megbízott"
 
-#: src/js/controllers/confirm.js:368
+#: src/js/controllers/confirm.js:343
 msgid "Add to address book?"
 msgstr ""
 
@@ -1635,7 +1557,7 @@ msgstr ""
 msgid "Creating Alias..."
 msgstr ""
 
-#: src/js/controllers/confirm.js:369
+#: src/js/controllers/confirm.js:344
 msgid "Do you want to add this new address to your address book?"
 msgstr ""
 
@@ -1653,9 +1575,9 @@ msgstr ""
 
 #: www/views/preferencesRepresentative.html:11
 msgid "Enter a representative account."
-msgstr ""
+msgstr "Add meg a megbízott számlát"
 
-#: src/js/controllers/import.js:62
+#: src/js/controllers/import.js:64
 msgid "Error importing wallet:"
 msgstr "Hiba tárca importálásakor:"
 
@@ -1702,11 +1624,11 @@ msgstr "A tárcád helyreállítása eltarthat egy ideig. Ez újratölt minden a
 
 #: www/views/preferences.html:30 www/views/preferencesRepresentative.html:17
 msgid "Representative"
-msgstr ""
+msgstr "Megbízott"
 
 #: www/views/includes/accountHistory.html:40 www/views/tx-details.html:19
 msgid "Representative changed"
-msgstr ""
+msgstr "Megbízott megváltoztatva"
 
 #: www/views/onboarding/alias.html:26 www/views/preferencesAlias.html:28
 msgid "That alias is taken!"
@@ -1720,7 +1642,7 @@ msgstr ""
 msgid "Valid Alias & Email"
 msgstr ""
 
-#: src/js/controllers/tx-details.js:93
+#: src/js/controllers/tx-details.js:71
 msgid "View Block on Nanode"
 msgstr ""
 
@@ -1736,7 +1658,7 @@ msgstr ""
 msgid "You can change your alias, email, or privacy settings."
 msgstr ""
 
-#: src/js/controllers/changePasswordController.js:10
+#: src/js/controllers/changePasswordController.js:13
 msgid "Your old password was not entered correctly"
 msgstr ""
 
@@ -1842,7 +1764,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 "          With Hard Lock, Canoe encrypts your wallet and completely remove it from memory. You can not disable Hard Lock, but you can set a very high timeout."
 msgstr ""
 
-#: src/js/controllers/tab-home.js:161
+#: src/js/controllers/tab-home.js:159
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr ""
 
@@ -1858,19 +1780,15 @@ msgstr ""
 msgid "Change Backend Server"
 msgstr ""
 
-#: src/js/controllers/import.js:151
+#: src/js/controllers/import.js:153
 msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
-msgstr ""
+msgstr "Tárca importálása eltávolítja a meglévő tárcádat és számláid! Ha van pénzed a jelenlegi tárcádban, bizonyosodj meg arról, hogy van biztonsági mentésed. Írd be a \"törlés\" szót, hogy megerősítsd a jelenlegi tárcád törlését."
 
-#: www/views/amount.html:54
+#: www/views/amount.html:53
 msgid "Max"
 msgstr ""
 
-#: src/js/services/nanoService.js:90
-msgid "Your backend has been changed"
-msgstr ""
-
-#: src/js/controllers/import.js:153 src/js/controllers/modals/password.js:76
+#: src/js/controllers/import.js:155 src/js/controllers/modals/password.js:76
 msgid "delete"
 msgstr ""
 
@@ -1886,17 +1804,17 @@ msgstr ""
 msgid "Going back to onboarding will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
 msgstr "Ha visszatérsz a bevezetéshez, elveszíted a létező tárcádat és számláidat! Ha van pénzed a jelenlegi tárcádban, győződj meg róla, hogy van róla biztonsági mentésed. Írd be a \"törlés\" szót, hogy megerősítsd a a jelenlegi tárca törlését."
 
-#: src/js/controllers/import.js:123
+#: src/js/controllers/import.js:125
 msgid "Please enter a password of at least 8 characters"
 msgstr ""
 
 #: www/views/advancedSettings.html:23
 msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr ""
+msgstr "Ha engedélyezve, a küldés, fogadás, megbízott váltás, vagy a tálca feloldása hangjelzéssel jár."
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
-msgstr ""
+msgstr "Ezen a képernyőn láthatod az összes számládat. Nézd meg a <a ng-click=\"openExternalLinkHelp()\">GYIK-et</a>  mielőtt belekezdesz!"
 
 #: www/views/advancedSettings.html:21
 msgid "Play Sounds"
@@ -1938,5 +1856,37 @@ msgstr ""
 
 #: www/views/changeLocks.html:15
 msgid "With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
+msgstr ""
+
+#: www/views/attributions.html:3 www/views/preferencesAbout.html:35
+msgid "Attributions"
+msgstr ""
+
+#: src/js/services/incomingData.js:118
+msgid "Block was scanned and sent successfully"
+msgstr ""
+
+#: src/js/services/incomingData.js:120
+msgid "Block was scanned but failed to process:"
+msgstr ""
+
+#: src/js/services/nanoService.js:235 src/js/services/nanoService.js:244
+msgid "Failed connecting to backend"
+msgstr ""
+
+#: src/js/services/nanoService.js:42
+msgid "Failed connecting to backend, no network?"
+msgstr ""
+
+#: src/js/services/nanoService.js:89
+msgid "Successfully connected to backend"
+msgstr ""
+
+#: www/views/includes/incomingDataMenu.html:29
+msgid "Nano Account"
+msgstr ""
+
+#: www/views/includes/incomingDataMenu.html:46
+msgid "Send Nano to this address"
 msgstr ""
 
