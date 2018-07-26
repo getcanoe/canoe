@@ -50,6 +50,9 @@ angular.module('canoeApp.services')
       name: 'Português',
       isoCode: 'pt' // Portuguese
     }, {
+      name: 'Português (Brazil)',
+      isoCode: 'pt-br' // Portuguese Brazil
+    }, {
       name: 'Deutsch',
       isoCode: 'de' // German
     }, {
