@@ -616,6 +616,14 @@ module.exports = function (password) {
     return bal
   }
 
+  api.getPoW = function (acc) {
+    if (acc) {
+      return pows[acc]
+    } else {
+      return pows
+    }
+  }
+
   api.recalculateWalletBalances = function () {
     for (var i in keys) {
       api.useAccount(keys[i].account)

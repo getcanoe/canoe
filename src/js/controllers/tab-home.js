@@ -113,6 +113,22 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
             getNotifications()
           }
         }),
+        $rootScope.$on('work', function (event) {
+          $log.debug('Work Recieved')
+          $scope.work = profileService.getPoW()
+          if ($scope.work) {
+            for (var i = 0; i < $scope.accounts.length; i++) {
+              if ($scope.work[$scope.accounts[i].id] && ($scope.accounts[i].work === null || typeof $scope.accounts[i].work === "undefined")) {
+                console.log("Work found for wallet " + i)
+                $scope.accounts[i].work = $scope.work[$scope.accounts[i].id]
+              } else if (!$scope.work[$scope.accounts[i].id]) {
+                console.log("Work is null for " + i)
+                $scope.accounts[i].work = null
+                $scope.$apply()
+              }
+            }
+          }
+        }),
         $rootScope.$on('blocks', function (event, account) {
           if (account === null) {
             $scope.accounts = profileService.getAccounts()
