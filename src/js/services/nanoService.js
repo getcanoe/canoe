@@ -103,6 +103,7 @@ angular.module('canoeApp.services')
     // This function calls itself every sec and scans
     // for pending blocks or precalcs in need of work.
     function generatePoW () {
+      $rootScope.$emit('work', null)
       // No wallet, no dice
       if (root.wallet === null) {
         return setTimeout(generatePoW, 1000)
@@ -118,6 +119,7 @@ angular.module('canoeApp.services')
             // Wallet may be purged from RAM, so need to check
             if (work && root.wallet) {
               root.wallet.addWorkToPrecalc(accAndHash.account, accAndHash.hash, work)
+              $rootScope.$emit('work', root.wallet.getPoW())
               root.saveWallet(root.wallet, function () {})
             }
             setTimeout(generatePoW, 1000)
@@ -131,6 +133,7 @@ angular.module('canoeApp.services')
           // Wallet may be purged from RAM, so need to check
           if (work && root.wallet) {
             root.wallet.addWorkToPendingBlock(hash, work)
+            $rootScope.$emit('work', root.wallet.getPoW())
             root.saveWallet(root.wallet, function () {})
           }
           setTimeout(generatePoW, 1000)
@@ -313,7 +316,7 @@ angular.module('canoeApp.services')
       } else {
         var lastBlock = currentBlocks[currentBlocks.length - 1]
         // Are the last hashes the same
-        if (lastHash && lastBlock) 
+        if (lastHash && lastBlock)
         var ourLastHash = currentBlocks.pop().hash
         if (lastHash === ourLastHash) {
           return
@@ -494,7 +497,7 @@ angular.module('canoeApp.services')
     // Synchronous call that currently returns hash if it succeeded, null otherwise
     // TODO make async
     root.broadcastBlock = function (blk) {
-      return root.processBlockJSON(blk.getJSONBlock())      
+      return root.processBlockJSON(blk.getJSONBlock())
     }
 
     root.processBlockJSON = function (json) {
