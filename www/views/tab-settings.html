@@ -135,11 +135,12 @@
         <i class="icon bp-arrow-right"></i>
       </a>
 
-      <a class="item item-icon-left item-icon-right" ng-click="openDonate()">
+      <a class="item item-icon-left item-icon-right" ng-class="{disabled: !hasFunds}" ng-click="openDonate()">
         <i class="icon big-icon-svg">
           <img src="img/icon-gift.svg" class="bg"/>
         </i>
-        <span>{{'Donate to Canoe' | translate}}</span>
+        <span class="setting-title">{{'Donate to Canoe' | translate}}</span>
+        <span class="setting-value" ng-show="{disabled: !hasFunds}">{{'Please load Nano to donate' | translate}}</span>
         <i class="icon bp-arrow-right"></i>
       </a>
 

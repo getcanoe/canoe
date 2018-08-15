@@ -4,7 +4,7 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
   var updateConfig = function () {
     $scope.currentLanguageName = uxLanguage.getCurrentLanguageName()
     // $scope.buyAndSellServices = buyAndSellService.getLinked()
-
+    $scope.hasFunds = profileService.hasFunds()
     configService.whenAvailable(function (config) {
       $scope.selectedAlternative = {
         name: config.wallet.settings.alternativeName,
@@ -14,21 +14,23 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
   }
 
   $scope.openDonate = function () {
-    addressbookService.getDonate(function (err, ab) {
-      if (err) $log.error(err)
-      $ionicHistory.removeBackView()
-      $state.go('tabs.send')
-      $timeout(function () {
-        return $state.transitionTo('tabs.send.amount', {
-          recipientType: 'contact',
-          toAddress: ab.address,
-          toName: ab.name,
-          toEmail: ab.email,
-          toColor: ab.color,
-          toAlias: ab.alias
+      if($scope.hasFunds){
+        addressbookService.getDonate(function (err, ab) {
+          if (err) $log.error(err)
+          $ionicHistory.removeBackView()
+          $state.go('tabs.send')
+          $timeout(function () {
+            return $state.transitionTo('tabs.send.amount', {
+              recipientType: 'contact',
+              toAddress: ab.address,
+              toName: ab.name,
+              toEmail: ab.email,
+              toColor: ab.color,
+              toAlias: ab.alias
+            })
+          }, 100)
         })
-      }, 100)
-    })
+      }
   }
 
   $scope.lockCanoe = function () {
