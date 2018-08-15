@@ -117,6 +117,10 @@
       .icon {
         color: $v-light-gray;
       }
+      &.disabled{
+        color: $v-light-gray;
+        background-color: rgba(221, 221, 221, 0.3);
+      }
     }
     .item-note {
       color: $v-light-gray;
