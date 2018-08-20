@@ -36,12 +36,12 @@ angular.module('canoeApp.services')
         $log.debug('Connecting to ' + host)
         rai = new Rai(host) // connection
         rai.initialize()
-        cb()
+        if (cb) cb()
       } catch (e) {
         rai = null
         var msg = gettextCatalog.getString('Failed connecting to backend, no network?')
         $log.warn(msg, e)
-        cb(msg)
+        if (cb) cb(msg)
       }
     }
 
@@ -50,6 +50,7 @@ angular.module('canoeApp.services')
       if (config.backend) {
         host = 'https://' + config.backend + '/rpc' // TODO need to revist this setup
         mqttHost = config.backend
+        root.connectRPC()
       }
     })
 
