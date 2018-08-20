@@ -114,7 +114,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
           }
         }),
         $rootScope.$on('work', function (event) {
-          $log.debug('Work Recieved')
           $scope.work = profileService.getPoW()
           if ($scope.work) {
             for (var i = 0; i < $scope.accounts.length; i++) {
