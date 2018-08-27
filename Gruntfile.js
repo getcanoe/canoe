@@ -73,14 +73,17 @@ module.exports = function (grunt) {
       zipwin: {
         cmd: 'cd build/canoe && mv win64 canoe-win64-<%= pkg.version %> && rm -f ../canoe-win64-<%= pkg.version %>.zip && zip -r --symlinks ../canoe-win64-<%= pkg.version %>.zip canoe-win64-<%= pkg.version %>/'
       },
+      zipwin32: {
+        cmd: 'cd build/canoe && mv win32 canoe-win32-<%= pkg.version %> && rm -f ../canoe-win32-<%= pkg.version %>.zip && zip -r --symlinks ../canoe-win32-<%= pkg.version %>.zip canoe-win32-<%= pkg.version %>/'
+      },
       appimage: {
         cmd: 'cd build/canoe && cp -a ../../resources/canoe/linux/AppRun canoe-linux64-<%= pkg.version %>/ && ARCH=x86_64 appimagetool canoe-linux64-<%= pkg.version %> && mv Canoe-x86_64.AppImage ../canoe-linux64-<%= pkg.version %>.AppImage'
       },
       desktopsign: {
-        cmd: 'gpg -u E7ADC266 --output build/canoe-linux64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-linux64-<%= pkg.version %>.zip ; gpg -u E7ADC266 --output build/canoe-linux64-<%= pkg.version %>.AppImage.sig --detach-sig build/canoe-linux64-<%= pkg.version %>.AppImage ;gpg -u E7ADC266 --output build/canoe-win64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-win64-<%= pkg.version %>.zip ; gpg -u E7ADC266 --output build/canoe-osx64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-osx64-<%= pkg.version %>.zip'
+        cmd: 'gpg -u E7ADC266 --output build/canoe-linux64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-linux64-<%= pkg.version %>.zip ; gpg -u E7ADC266 --output build/canoe-linux64-<%= pkg.version %>.AppImage.sig --detach-sig build/canoe-linux64-<%= pkg.version %>.AppImage ;gpg -u E7ADC266 --output build/canoe-win64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-win64-<%= pkg.version %>.zip ; gpg -u E7ADC266 --output build/canoe-win32-<%= pkg.version %>.zip.sig --detach-sig build/canoe-win32-<%= pkg.version %>.zip ; gpg -u E7ADC266 --output build/canoe-osx64-<%= pkg.version %>.zip.sig --detach-sig build/canoe-osx64-<%= pkg.version %>.zip'
       },
       desktopverify: {
-        cmd: 'gpg --verify build/canoe-linux64-<%= pkg.version %>.zip.sig build/canoe-linux64-<%= pkg.version %>.zip; gpg --verify build/canoe-linux64-<%= pkg.version %>.AppImage.sig build/canoe-linux64-<%= pkg.version %>.AppImage; gpg --verify build/canoe-win64-<%= pkg.version %>.zip.sig build/canoe-win64-<%= pkg.version %>.zip ; gpg --verify build/canoe-osx64-<%= pkg.version %>.zip.sig build/canoe-osx64-<%= pkg.version %>.zip'
+        cmd: 'gpg --verify build/canoe-linux64-<%= pkg.version %>.zip.sig build/canoe-linux64-<%= pkg.version %>.zip; gpg --verify build/canoe-linux64-<%= pkg.version %>.AppImage.sig build/canoe-linux64-<%= pkg.version %>.AppImage; gpg --verify build/canoe-win64-<%= pkg.version %>.zip.sig build/canoe-win64-<%= pkg.version %>.zip ; gpg --verify build/canoe-win32-<%= pkg.version %>.zip.sig build/canoe-win32-<%= pkg.version %>.zip ;gpg --verify build/canoe-osx64-<%= pkg.version %>.zip.sig build/canoe-osx64-<%= pkg.version %>.zip'
       },
       dmgsign: {
         cmd: 'gpg -u E7ADC266 --output build/canoe-osx64-<%= pkg.version %>.dmg.sig --detach-sig build/canoe-osx64-<%= pkg.version %>.dmg'
@@ -259,7 +262,7 @@ module.exports = function (grunt) {
     },
     nwjs: {
       options: {
-        platforms: ['osx64', 'linux64', 'win64'],
+        platforms: ['osx64', 'linux64', 'win64', 'win32'],
         flavor: 'sdk', // normal or sdk
         zip: false,
         version: '0.29.0', // If you modify you need to rebuild native modules!
@@ -304,10 +307,11 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['nggettext_compile', 'exec:appConfig', 'browserify', 'sass', 'concat', 'copy:ionic_fonts', 'copy:ionic_js'])
   grunt.registerTask('prod', ['default', 'uglify'])
   grunt.registerTask('translate', ['nggettext_extract'])
-  grunt.registerTask('desktop', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:linux_native', 'copy:osx_native', 'exec:ziplinux', 'exec:appimage', 'exec:ziposx', 'exec:zipwin'])
+  grunt.registerTask('desktop', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:linux_native', 'copy:osx_native', 'exec:ziplinux', 'exec:appimage', 'exec:ziposx', 'exec:zipwin', 'exec:zipwin32'])
   grunt.registerTask('desktoplinux64', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:desktopLinux', 'copy:linux', 'copy:linux_native', 'exec:ziplinux'])
   grunt.registerTask('desktoposx64', ['prod', 'exec:cleanbuild', 'nwjs', 'copy:osx_native', 'exec:ziposx', 'appdmg'])
   grunt.registerTask('desktopwin64', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:zipwin'])
+  grunt.registerTask('desktopwin32', ['prod', 'exec:cleanbuild', 'nwjs', 'exec:zipwin32'])
   grunt.registerTask('osx', ['prod', 'nwjs', 'copy:osx_native', 'appdmg', 'exec:osxsign'])
   grunt.registerTask('osx-debug', ['default', 'nwjs'])
   grunt.registerTask('chrome', ['default', 'exec:chrome'])
