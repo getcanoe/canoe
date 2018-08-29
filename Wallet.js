@@ -149,7 +149,7 @@ module.exports = function (password) {
   }
 
   api.getDefaultRepresentative = function () {
-    return defaultRepresentative || 'xrb_3rropjiqfxpmrrkooej4qtmm1pueu36f9ghinpho4esfdor8785a455d16nf'
+    return defaultRepresentative || 'eur_39nqgscm7yz7q1demb3zf96ru8bboqcwet14cefhmgbrxbhhozhjwxci1k9m'
   }
 
   api.setLogger = function (loggerObj) {
