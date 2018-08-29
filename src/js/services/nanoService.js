@@ -513,22 +513,22 @@ angular.module('canoeApp.services')
     root.parseQRCode = function (data, cb) {
       // <protocol>:<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
       var code = {}
-      var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'nanoseed', 'xrbkey', 'nanokey', 'xrbblock', 'nanoblock']
+      var protocols = ['eur', 'eurseed', 'eurblock']
       try {
         var parts = data.match(/^([a-z]+):(.*)/) // Match protocol:whatever
         if (!parts) {
           // No match,  perhaps a bare account, alias, seed? TODO bare key
           if (root.isValidAccount(data)) {
             // A bare account
-            code.protocol = 'nano'
+            code.protocol = 'eur'
             parts = data
           } else if (data.startsWith('@')) {
             // A bare alias
-            code.protocol = 'nano'
+            code.protocol = 'eur'
             parts = data
           } else if (root.isValidSeed(data)) {
             // A bare seed
-            code.protocol = 'nanoseed'
+            code.protocol = 'eurseed'
             parts = data
           } else {
             // Nope, give up
@@ -544,13 +544,13 @@ angular.module('canoeApp.services')
         // Special handling for JSON protocols
         $log.debug('Protocol: ' + code.protocol)
         $log.debug('Parts: ' + parts)
-        if (code.protocol === 'xrbblock' || code.protocol === 'nanoblock') {
+        if (code.protocol === 'eurblock') {
           code.block = JSON.parse(parts)
           cb(null, code)
         } else {
           // URL style params, time to check for params
           parts = parts.split('?')
-          if (code.protocol === 'xrbseed' || code.protocol === 'nanoseed') {
+          if (code.protocol === 'eurseed') {
             code.seed = parts[0]
           } else {
             code.account = parts[0]
@@ -619,7 +619,7 @@ angular.module('canoeApp.services')
     }
 
     root.isValidAccount = function (addr) {
-      if (addr.startsWith('xrb_') || addr.startsWith('nano_')) {
+      if (addr.startsWith('eur_')) {
         return rai.account_validate(addr)
       }
       return false

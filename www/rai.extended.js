@@ -271,8 +271,7 @@ Rai.prototype.ext_account_get = function (key) {
 
 // String output
 XRB.account_key = function (account) {
-  if (((account.startsWith('xrb_1') || account.startsWith('xrb_3')) && (account.length === 64)) ||
-			((account.startsWith('nano_1') || account.startsWith('nano_3')) && (account.length === 65))) {
+  if (((account.startsWith('eur_1') || account.startsWith('eur_3')) && (account.length === 64))) {
     var account_crop = account.substring(account.length - 60)
     var isValid = /^[13456789abcdefghijkmnopqrstuwxyz]+$/.test(account_crop)
     if (isValid) {
