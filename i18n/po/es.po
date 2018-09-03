@@ -11,7 +11,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "Un miembro del equipo revisará tus comentarios tan pronto como sea posible."
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "Acerca de"
 
@@ -414,8 +414,8 @@ msgstr "Comienza agregando el primero."
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:161 src/js/controllers/tab-home.js:28
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
+#: src/js/controllers/tab-home.js:176 src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-settings.js:51 src/js/controllers/tab-settings.js:62
 #: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr "Volver"
@@ -434,7 +434,7 @@ msgstr "Entiendo"
 msgid "Help & Support"
 msgstr "Ayuda y Soporte"
 
-#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:49
 msgid "Help and support information is available at the website."
 msgstr "La ayuda está disponible en el sitio web."
 
@@ -662,8 +662,8 @@ msgstr "Declaración de responsabilidad oficial en inglés"
 msgid "Oh no!"
 msgstr "¡Oh no!"
 
-#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:72
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:50
+#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr "Abrir"
 
@@ -1072,7 +1072,7 @@ msgstr "Intenta de nuevo en {{expires}}"
 msgid "Uh oh..."
 msgstr "Oh, oh..."
 
-#: src/js/controllers/tab-home.js:158
+#: src/js/controllers/tab-home.js:173
 msgid "Update Available"
 msgstr "Actualización Disponible"
 
@@ -1096,7 +1096,7 @@ msgstr "Ver"
 msgid "View Terms of Service"
 msgstr "Ver Términos de Uso"
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:175
 msgid "View Update"
 msgstr "Ver Actualización"
 
@@ -1186,7 +1186,7 @@ msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "Tu billetera nunca se sube a la nube ni se resguarda automáticamente en el dispositivo."
 
 #: www/views/accountDetails.html:42 www/views/amount.html:122
-#: www/views/includes/accountList.html:11
+#: www/views/includes/accountList.html:19
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
@@ -1399,7 +1399,7 @@ msgstr "¡Tu billetera Nano esta lista!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "¡La semilla de tu billetara Nano ha sido respaldada!"
 
-#: src/js/services/nanoService.js:702 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Cuenta"
@@ -1432,7 +1432,7 @@ msgstr "El formato de la semilla es incorrecto:"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr "Información"
 
@@ -1582,7 +1582,7 @@ msgstr "Error importando la billetera:"
 msgid "How to buy Nano"
 msgstr "Como comprar"
 
-#: src/js/controllers/tab-settings.js:58
+#: src/js/controllers/tab-settings.js:60
 msgid "How to buy and sell Nano is described at the website."
 msgstr "Como comprar y vender Nano está explicado en el sitio."
 
@@ -1764,7 +1764,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Bloqueo Profundo</h5>\n"
 "          Al usar Bloqueo Profundo, Canoe cifra tu billetera y la borra sus rastros de la memoria. No puedes deshabilitar el Bloqueo Profundo, pero puedes configurar un tiempo de espera muy alto."
 
-#: src/js/controllers/tab-home.js:159
+#: src/js/controllers/tab-home.js:174
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr "Una nueva versión de esta app está disponible. Por favor, actualiza a la ultima versión."
 
@@ -1871,7 +1871,7 @@ msgstr ""
 msgid "Block was scanned but failed to process:"
 msgstr ""
 
-#: src/js/services/nanoService.js:235 src/js/services/nanoService.js:244
+#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
 msgid "Failed connecting to backend"
 msgstr ""
 
@@ -1879,7 +1879,7 @@ msgstr ""
 msgid "Failed connecting to backend, no network?"
 msgstr ""
 
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Successfully connected to backend"
 msgstr ""
 
@@ -1889,5 +1889,9 @@ msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:46
 msgid "Send Nano to this address"
+msgstr ""
+
+#: www/views/tab-settings.html:143
+msgid "Please load Nano to donate"
 msgstr ""
 
