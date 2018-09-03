@@ -11,7 +11,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "团队的成员将尽快查阅您的反馈意见。"
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "关于"
 
@@ -414,8 +414,8 @@ msgstr "通过添加您的第一个开始。"
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:161 src/js/controllers/tab-home.js:28
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
+#: src/js/controllers/tab-home.js:176 src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-settings.js:51 src/js/controllers/tab-settings.js:62
 #: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr "返回\t#"
@@ -434,7 +434,7 @@ msgstr "收到！"
 msgid "Help & Support"
 msgstr "帮助与支持"
 
-#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:49
 msgid "Help and support information is available at the website."
 msgstr "已在网站上提供帮助和支持"
 
@@ -662,8 +662,8 @@ msgstr "官方英文免责声明"
 msgid "Oh no!"
 msgstr "出错。"
 
-#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:72
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:50
+#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr "打开"
 
@@ -1073,7 +1073,7 @@ msgstr "在 {{expires}} 中再试一次"
 msgid "Uh oh..."
 msgstr "哦哦......"
 
-#: src/js/controllers/tab-home.js:158
+#: src/js/controllers/tab-home.js:173
 msgid "Update Available"
 msgstr "可用的更新"
 
@@ -1097,7 +1097,7 @@ msgstr "查看"
 msgid "View Terms of Service"
 msgstr "查看服务条款"
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:175
 msgid "View Update"
 msgstr "查看更新"
 
@@ -1187,7 +1187,7 @@ msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "你的钱包是永远不会保存到云存储或标准设备备份。"
 
 #: www/views/accountDetails.html:42 www/views/amount.html:122
-#: www/views/includes/accountList.html:11
+#: www/views/includes/accountList.html:19
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
@@ -1401,7 +1401,7 @@ msgstr "您的Nano钱包已经就绪！"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "您的Nano钱包种子已经备份！"
 
-#: src/js/services/nanoService.js:702 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "账号"
@@ -1434,7 +1434,7 @@ msgstr "不正确的钱包种子格式："
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr "信息"
 
@@ -1584,7 +1584,7 @@ msgstr "倒入钱包出错："
 msgid "How to buy Nano"
 msgstr "如何购买Nano"
 
-#: src/js/controllers/tab-settings.js:58
+#: src/js/controllers/tab-settings.js:60
 msgid "How to buy and sell Nano is described at the website."
 msgstr "网站中会注明如何购买和卖出Nano。"
 
@@ -1764,7 +1764,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 msgstr "<h5 class=\"toggle-label\" translate=\"\">硬锁定</h5>\n"
 "          硬锁定，Canoe会加密你的钱包并从内存里面删除。硬锁定不能被禁用，不过你可以设置一个比较长的等待锁定的时间。"
 
-#: src/js/controllers/tab-home.js:159
+#: src/js/controllers/tab-home.js:174
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr "有新版本发布。请更新到最新版本。"
 
@@ -1872,7 +1872,7 @@ msgstr "区块已被扫描且发送成功"
 msgid "Block was scanned but failed to process:"
 msgstr "区块已被扫描，但处理区块失败："
 
-#: src/js/services/nanoService.js:235 src/js/services/nanoService.js:244
+#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
 msgid "Failed connecting to backend"
 msgstr "连接到服务器失败"
 
@@ -1880,7 +1880,7 @@ msgstr "连接到服务器失败"
 msgid "Failed connecting to backend, no network?"
 msgstr "连接到服务器失败，没有网络？"
 
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Successfully connected to backend"
 msgstr "成功联机到服务器"
 
@@ -1891,4 +1891,8 @@ msgstr "Nano账号"
 #: www/views/includes/incomingDataMenu.html:46
 msgid "Send Nano to this address"
 msgstr "发送Nano到这个地址"
+
+#: www/views/tab-settings.html:143
+msgid "Please load Nano to donate"
+msgstr ""
 
