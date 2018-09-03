@@ -35,6 +35,9 @@ angular.module('canoeApp.services')
       name: 'Français',
       isoCode: 'fr' // French
     }, {
+      name: 'עברית',
+      isoCode: 'he' // Hebrew
+    }, {
       name: 'Hrvatski jezik',
       isoCode: 'hr' // Croatian
     }, {
