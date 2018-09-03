@@ -1,7 +1,7 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('backupController',
-  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, lodash, profileService, walletService, ongoingProcess, popupService, gettextCatalog, $ionicModal) {
+  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, profileService, popupService, gettextCatalog, $ionicModal) {
     $scope.wallet = profileService.getWallet()
 
     $scope.setFlow = function (step) {
@@ -26,7 +26,7 @@ angular.module('canoeApp.controllers').controller('backupController',
         $scope.confirmBackupModal = modal
         $scope.confirmBackupModal.show()
       })
-    };
+    }
 
     var showBackupResult = function () {
       if ($scope.backupError) {

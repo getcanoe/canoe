@@ -1,5 +1,5 @@
 'use strict'
-/* global XMLHttpRequest angular Profile */
+/* global XMLHttpRequest BigNumber angular Profile */
 angular.module('canoeApp.services')
   .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, nanoService, configService, gettextCatalog, uxLanguage, platformInfo, txFormatService, addressbookService, rateService) {
     var isChromeApp = platformInfo.isChromeApp
@@ -114,7 +114,7 @@ angular.module('canoeApp.services')
       })
     }
 
-    root.formatAmount = function (raw, decimals) {      
+    root.formatAmount = function (raw, decimals) {
       return root.formatAnyAmount(new BigNumber(raw).dividedBy(rawPerNano), uxLanguage.currentLanguage)
     }
 
@@ -123,13 +123,13 @@ angular.module('canoeApp.services')
       // TODO use current unit in settings knano, Mnano etc
       return root.formatAnyAmount(new BigNumber(raw).dividedBy(rawPerNano), uxLanguage.currentLanguage, 'NANO')
     }
-    
+
     // A quite resilient and open minded way to format amounts from any epoch and location
     root.formatAnyAmount = function (amount, loc, cur) {
       var result
       var bigAmount
       var isNan = false
-      
+
       try {
         bigAmount = new BigNumber(amount)
       } catch (err) {
@@ -144,7 +144,7 @@ angular.module('canoeApp.services')
         } catch (err) {
           knownLoc = false
         }
-    
+
         if (knownLoc){
           var knownCur = true
           BigNumber.config({ EXPONENTIAL_AT: -31 })
@@ -175,11 +175,11 @@ angular.module('canoeApp.services')
           result = bigAmount.toString()
           if (cur) result += ' ' + cur
         }
-      } 
-      
+      }
+
       return result
     }
-    
+
     root.formatAmountWithUnit = function (raw) {
       if (isNaN(raw)) return
       // TODO use current unit in settings knano, Mnano etc
@@ -307,6 +307,14 @@ angular.module('canoeApp.services')
 
     root.getAccount = function (addr) {
       return root.getWallet().getAccount(addr)
+    }
+
+    root.getPoW = function (addr) {
+      if (!root.getWallet()) {
+        return null
+      } else {
+        return root.getWallet().getPoW(addr)
+      }
     }
 
     root.getRepresentativeFor = function (addr) {
@@ -437,11 +445,16 @@ angular.module('canoeApp.services')
         return []
       }
       var accounts = root.getWallet().getAccounts()
-
+      var work = root.getPoW()
       // Add formatted balances and timestamps
       lodash.each(accounts, function (acc) {
         acc.balanceStr = root.formatAmountWithUnit(parseInt(acc.balance))
         var config = configService.getSync().wallet.settings
+        if (work[acc.id]) {
+          acc.work = work[acc.id]
+        } else {
+          acc.work = null
+        }
         // Don't show unless rate is loaded, ui update will be lanched by $broadcast('rates.loaded')
         acc.alternativeBalanceStr = 'hide'
         acc.alternativeBalanceStr = root.toFiat(acc.balance, config.alternativeIsoCode, 'nano')

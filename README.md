@@ -35,6 +35,12 @@ A watch task is also available to rebuild components of the app as changes are m
 npm run watch
 ```
 
+## Tools
+We need grunt to run tasks etc:
+```sh
+sudo npm install -g grunt-cli
+```
+
 ## Testing on Real Devices
 
 It's recommended that all final testing be done on a real device – both to assess performance and to enable features that are unavailable to the emulator (e.g. a device camera).
@@ -150,9 +156,6 @@ Launch the app from `chrome://apps`.
 
 You may also want to enable debugging by enabling `chrome://flags/#debug-packed-apps`. Then right click in Canoe window for debugging.
 
-## About Canoe
-...details to come...
-
 ## Translations
 Canoe uses standard gettext PO files for translations.[POEditor](https://poeditor.com/join/project/cnSZa85DRN) is the front-end tool for translators and that's the only path for contributing translation work - we do not take pull requests for translations because it gets really complicated then to keep POEditor in sync.
 
@@ -180,7 +183,7 @@ We are using `sketchtool` which is a tool that comes bundled with Sketch. Unfort
 Canoe uses the `MAJOR.MINOR.PATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
 
 ## Contributing to this project
-Anyone and everyone is welcome to contribute.
+Anyone and everyone is welcome to contribute, here is our [discord link](https://discord.gg/ecVcJM3).
 
 ## License
 Canoe is released under the MIT License.  Please refer to the [LICENSE](https://github.com/gokr/canoe/blob/master/LICENSE) file that accompanies this project for more information including complete terms and conditions.

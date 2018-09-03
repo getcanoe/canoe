@@ -1,6 +1,6 @@
 'use strict'
-/* global angular */
-angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, walletService, platformInfo, lodash, configService, aliasService, $stateParams, $window, $state, $log, profileService, txFormatService, ongoingProcess, $ionicModal, popupService, $ionicHistory, $ionicConfig, txConfirmNotification, externalLinkService, addressbookService) {
+/* global angular BigNumber */
+angular.module('canoeApp.controllers').controller('confirmController', function ($rootScope, $scope, $interval, $filter, $timeout, $ionicScrollDelegate, gettextCatalog, platformInfo, lodash, configService, aliasService, $stateParams, $window, $state, $log, profileService, ongoingProcess, popupService, $ionicHistory, $ionicConfig, externalLinkService, addressbookService) {
   // Avoid 15 signific digit error
   BigNumber.config({ ERRORS: false })
 
@@ -78,7 +78,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       // Make sure we have latest accounts and balances
       $scope.accounts = profileService.getAccounts()
 
-      // Needed to show back button when comming from tx-details (refund)
+      // Needed to show back button when coming from tx-details (refund)
       data.enableBack = true
 
       if (!$scope.accounts || !$scope.accounts.length) {
@@ -306,34 +306,9 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
         profileService.send(txp, function (err) {
           if (err) return setSendError(err)
           ongoingProcess.set('sendingTx', false, onSendStatusChange)
-
-          // TODO ehum
-         /* txConfirmNotification.subscribe(account, {
-            txid: txp.txid
-          }) */
         })
-
-        /*
-        walletService.publishAndSign(wallet, txp, function (err, txp) {
-          if (err) return setSendError(err)
-          if (config.confirmedTxsNotifications && config.confirmedTxsNotifications.enabled) {
-            txConfirmNotification.subscribe(account, {
-              txid: txp.txid
-            })
-          }
-        }, onSendStatusChange) */
       }
       doSend()
-      // confirmTx(function (nok) {
-      //   if (nok) {
-      //     $scope.sendStatus = ''
-      //     $timeout(function () {
-      //       $scope.$apply()
-      //     })
-      //     return
-      //   }
-      //   doSend()
-      // })
     })
   }
 

@@ -199,7 +199,7 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
       amountTop = top
     }
 
-    var t = amountTop
+    t = amountTop
 
     $scope.altAmountOpacity = (amountHeight - 100) / 80
     $window.requestAnimationFrame(function () {
@@ -247,15 +247,6 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
       if (err) $log.error(err)
       $scope.addressbook = ab || {}
     })
-/*
-    listeners = [
-      $rootScope.$on('bwsEvent', function (e, walletId) {
-        if (walletId == $scope.account.id && e.type != 'NewAddress') { $scope.updateAll() }
-      }),
-      $rootScope.$on('Local/TxAction', function (e, walletId) {
-        if (walletId == $scope.account.id) { $scope.updateAll() }
-      })
-    ]*/
   })
 
   $rootScope.$on('blocks', function (event, data) {
@@ -316,7 +307,7 @@ angular.module('canoeApp.controllers').controller('accountDetailsController', fu
 
   function componentToHex (c) {
     var hex = c.toString(16)
-    return hex.length == 1 ? '0' + hex : hex
+    return hex.length === 1 ? '0' + hex : hex
   }
 
   function rgbToHex (r, g, b) {

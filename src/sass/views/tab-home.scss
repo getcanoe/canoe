@@ -1,4 +1,34 @@
 #tab-home {
+  .hourglass-spin {
+    height: 17px;
+    vertical-align: top;
+    width: 17px;
+    line-height: 22px;
+    > [class*="fa-hourglass"] {
+      animation: showhide 4s steps(1) infinite;
+      opacity: 0;
+    }
+
+    > .fa-hourglass-end { animation-delay: 2s; }
+    > .fa-hourglass-half { animation-delay: 1s; }
+    > .fa-hourglass-start { animation-delay: 0s; }
+
+    > .fa-hourglass-end.spin {
+      animation: showhidespin 4s linear infinite;
+    }
+  }
+
+  @keyframes showhide {
+    0% { opacity: 1 }
+    25% { opacity: 0 }
+  }
+  @keyframes showhidespin {
+    0% { opacity: 0 }
+    74.9999999% { opacity: 0 }
+    75% { opacity: 1; transform: rotate(0deg); }
+    100% { opacity: 1; transform: rotate(180deg); }
+  }
+
   .icon-create-wallet {
     background-color: #4A90E2; // default wallet color
   }

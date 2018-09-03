@@ -14,10 +14,10 @@
         <div class="sending-label">
           <img src="img/icon-tx-rep.svg" ng-if="ntx.type === 'change'">
           <img src="img/icon-tx-sent-outline.svg" ng-if="ntx.type === 'send'">
-          <img src="img/icon-tx-received-outline.svg" ng-if="ntx.type === 'receive' || btx.type === 'open'">
+          <img src="img/icon-tx-received-outline.svg" ng-if="ntx.type === 'receive' || ntx.type === 'open'">
           <span ng-if="ntx.type === 'send'">{{'Sent' | translate}}</span>
           <span ng-if="ntx.type === 'change'">{{'Representative changed' | translate}}</span>
-          <span ng-if="ntx.type === 'receive' || btx.type === 'open'">{{'Received' | translate}}</span>
+          <span ng-if="ntx.type === 'receive' || ntx.type === 'open'">{{'Received' | translate}}</span>
         </div>
 
         <div class="amount-label" ng-if="ntx.type === 'change'">

@@ -28,34 +28,19 @@
 
 var XRB = XRB || {}
 
-XRB.error = function (error) {
-	// try { alert(error); }
-	// catch (e) { }
-  console.error(error)
-}
-
 function Rai (url_base) {
-  this.error = function (error) {
-    XRB.error(error)
-  }
-
   this.rpc = function (request, async_callback) {
     try {
-		// Asynchronous
+      // Asynchronous
       if (typeof async_callback === 'function') {
         let xhr = new XMLHttpRequest()
         xhr.onload = function (e) {
           if (xhr.readyState === 4 && xhr.status === 200) {
-          let json = JSON.parse(xhr.responseText)
-					// Errors as JSON
-          let error = json.error
-          if (typeof error !== 'undefined') {
-          XRB.error(error)
-        }
-          async_callback(json)
-        }				else {
-          console.error('XHR Failure')
-        }
+            let json = JSON.parse(xhr.responseText)
+            async_callback(json)
+          }	else {
+            console.error('XHR Failure')
+          }
         }
 
         xhr.onerror = function (e) {
@@ -66,28 +51,22 @@ function Rai (url_base) {
         xhr.send(request)
       }
 
-		// Synchronous
+      // Synchronous
       else {
         let xhr
         xhr = new XMLHttpRequest()
         xhr.open('POST', url_base, false)
         xhr.send(request)
 
-        if (xhr.readyState == 4 && xhr.status == 200) {
+        if (xhr.readyState === 4 && xhr.status === 200) {
           let json = JSON.parse(xhr.responseText)
-				// Errors as JSON
-          let error = json.error
-          if (typeof error !== 'undefined') {
-          XRB.error(error)
-          return false
-        }
           return json
-        }			else {
+        } else {
           console.error('XHR Failure')
         }
       }
-    }	catch (ex) {
-      XRB.error(ex.message)
+    } catch (ex) {
+      console.error(ex.message)
     }
   }
 
@@ -95,22 +74,25 @@ function Rai (url_base) {
     return input // Disabled due to pruning of BigNumber: XRB.unit(input, input_unit, output_unit)
   }
 
-// Object output
+  // Object output
   this.account_balance = function (account) {
     return this.rpc(JSON.stringify({'action': 'account_balance', 'account': account}))
   }
 
-// String output
-  this.account_block_count = function () {
+  // String output
+  this.account_block_count = function (account) {
     return this.rpc(JSON.stringify({'action': 'account_block_count', 'account': account}))
   }
 
-  this.create_server_account = function (id, token, tokenPass) {
+  this.create_server_account = function (id, token, tokenPass, name, version, meta) {
     return this.rpc(JSON.stringify(
       {'action': 'create_server_account',
         'wallet': id,
         'token': token,
-        'tokenPass': tokenPass
+        'tokenPass': tokenPass,
+        'name': name,
+        'version': version,
+        'meta': JSON.stringify(meta)
       }))
   }
 
@@ -151,7 +133,7 @@ function Rai (url_base) {
     })
   }
 
-// accounts is array
+  // accounts is array
   this.account_move = function (wallet, source, accounts) {
     var account_move = this.rpc(JSON.stringify({'action': 'account_move', 'wallet': wallet, 'source': source, 'accounts': accounts}))
     return account_move.moved
@@ -172,14 +154,14 @@ function Rai (url_base) {
     return account_representative_set.block
   }
 
-// String output
+  // String output
   this.account_weight = function (account, unit = 'raw') {
     var rpc_account_weight = this.rpc(JSON.stringify({'action': 'account_weight', 'account': account}))
     var account_weight = this.unit(rpc_account_weight.weight, 'raw', unit)
     return account_weight
   }
 
-// Array input
+  // Array input
   this.accounts_balances = function (accounts) {
     return this.rpc(JSON.stringify({'action': 'accounts_balances', 'accounts': accounts}))
   }
@@ -194,13 +176,13 @@ function Rai (url_base) {
     return accounts_create.accounts
   }
 
-// Array input
+  // Array input
   this.accounts_frontiers = function (accounts) {
     var accounts_frontiers = this.rpc(JSON.stringify({'action': 'accounts_frontiers', 'accounts': accounts}))
     return accounts_frontiers.frontiers
   }
 
-// Array input
+  // Array input
   this.accounts_pending = function (accounts, count = '4096', threshold = 0, unit = 'raw', source = false) {
     if (threshold != 0)	threshold = this.unit(threshold, unit, 'raw')
     var accounts_pending = this.rpc(JSON.stringify({'action': 'accounts_pending', 'accounts': accounts, 'count': count, 'threshold': threshold, 'source': source}))
@@ -213,14 +195,14 @@ function Rai (url_base) {
     }	else if (threshold != 0) {
       for (let account in accounts_pending.blocks) {
         for (let hash in accounts_pending.blocks[account]) {
-      accounts_pending.blocks[account][hash] = this.unit(accounts_pending.blocks[account][hash], 'raw', unit)
-    }
+          accounts_pending.blocks[account][hash] = this.unit(accounts_pending.blocks[account][hash], 'raw', unit)
+        }
       }
     }
     return accounts_pending.blocks
   }
 
-// String output
+  // String output
   this.available_supply = function (unit = 'raw') {
     var rpc_available_supply = this.rpc(JSON.stringify({'action': 'available_supply'}))
     var available_supply = this.unit(rpc_available_supply.available, 'raw', unit)
@@ -233,7 +215,7 @@ function Rai (url_base) {
     return block
   }
 
-// Array input
+  // Array input
   this.blocks = function (hashes) {
     var rpc_blocks = this.rpc(JSON.stringify({'action': 'blocks', 'hashes': hashes}))
     var blocks = rpc_blocks.blocks
@@ -243,7 +225,7 @@ function Rai (url_base) {
     return blocks
   }
 
-// Array input
+  // Array input
   this.blocks_info = function (hashes, unit = 'raw', pending = false, source = false) {
     var rpc_blocks_info = this.rpc(JSON.stringify({'action': 'blocks_info', 'hashes': hashes, 'pending': pending, 'source': source}))
     var blocks = rpc_blocks_info.blocks
@@ -259,20 +241,20 @@ function Rai (url_base) {
     return block_account.account
   }
 
-// Object output
+  // Object output
   this.block_count = function () {
     var block_count = this.rpc(JSON.stringify({'action': 'block_count'}))
     return block_count
   }
 
-// Object output
+  // Object output
   this.block_count_type = function () {
     var block_count_type = this.rpc(JSON.stringify({'action': 'block_count_type'}))
     return block_count_type
   }
 
-// Object input, object output
-/*	Sample block creation:
+  // Object input, object output
+  /*	Sample block creation:
 	var block_data = {};
 	block_data.type = "open";
 	block_data.key = "0000000000000000000000000000000000000000000000000000000000000001",
@@ -287,13 +269,13 @@ function Rai (url_base) {
     return block
   }
 
-// Empty output
+  // Empty output
   this.bootstrap = function (address = '::ffff:138.201.94.249', port = '7075') {
     var bootstrap = this.rpc(JSON.stringify({'action': 'bootstrap', 'address': address, 'port': port}))
     return bootstrap.success
   }
 
-// Empty output
+  // Empty output
   this.bootstrap_any = function () {
     var bootstrap_any = this.rpc(JSON.stringify({'action': 'bootstrap_any'}))
     return bootstrap_any.success
@@ -311,13 +293,13 @@ function Rai (url_base) {
     return delegators
   }
 
-// String output
+  // String output
   this.delegators_count = function (account) {
     var delegators_count = this.rpc(JSON.stringify({'action': 'delegators_count', 'account': account}))
     return delegators_count.count
   }
 
-// Object output
+  // Object output
   this.deterministic_key = function (seed, index = 0) {
     var deterministic_key = this.rpc(JSON.stringify({'action': 'deterministic_key', 'seed': seed, 'index': index}))
     return deterministic_key
@@ -328,7 +310,7 @@ function Rai (url_base) {
     return rpc_frontiers.frontiers
   }
 
-// String output
+  // String output
   this.frontier_count = function () {
     var frontier_count = this.rpc(JSON.stringify({'action': 'frontier_count'}))
     return frontier_count.count
@@ -339,43 +321,43 @@ function Rai (url_base) {
     return rpc_history.history
   }
 
-// Use this.unit instead of this function
-// String input and output
+  // Use this.unit instead of this function
+  // String input and output
   this.mrai_from_raw = function (amount) {
     var mrai_from_raw = this.rpc(JSON.stringify({'action': 'mrai_from_raw', 'amount': amount}))
     return mrai_from_raw.amount
   }
 
-// Use this.unit instead of this function
-// String input and output
+  // Use this.unit instead of this function
+  // String input and output
   this.mrai_to_raw = function (amount) {
     var mrai_to_raw = this.rpc(JSON.stringify({'action': 'mrai_to_raw', 'amount': amount}))
     return mrai_to_raw.amount
   }
 
-// Use this.unit instead of this function
-// String input and output
+  // Use this.unit instead of this function
+  // String input and output
   this.krai_from_raw = function (amount) {
     var krai_from_raw = this.rpc(JSON.stringify({'action': 'krai_from_raw', 'amount': amount}))
     return krai_from_raw.amount
   }
 
-// Use this.unit instead of this function
-// String input and output
+  // Use this.unit instead of this function
+  // String input and output
   this.krai_to_raw = function (amount) {
     var krai_to_raw = this.rpc(JSON.stringify({'action': 'krai_to_raw', 'amount': amount}))
     return krai_to_raw.amount
   }
 
-// Use this.unit instead of this function
-// String input and output
+  // Use this.unit instead of this function
+  // String input and output
   this.rai_from_raw = function (amount) {
     var rai_from_raw = this.rpc(JSON.stringify({'action': 'rai_from_raw', 'amount': amount}))
     return rai_from_raw.amount
   }
 
-// Use this.unit instead of this function
-// String input and output
+  // Use this.unit instead of this function
+  // String input and output
   this.rai_to_raw = function (amount) {
     var rai_to_raw = this.rpc(JSON.stringify({'action': 'rai_to_raw', 'amount': amount}))
     return rai_to_raw.amount
@@ -386,13 +368,13 @@ function Rai (url_base) {
     return keepalive
   }
 
-// Object output
+  // Object output
   this.key_create = function () {
     var key_create = this.rpc(JSON.stringify({'action': 'key_create'}))
     return key_create
   }
 
-// Object output
+  // Object output
   this.key_expand = function (key) {
     var key_expand = this.rpc(JSON.stringify({'action': 'key_expand', 'key': key}))
     return key_expand
@@ -543,7 +525,7 @@ function Rai (url_base) {
     return blocks
   }
 
-// Empty output
+  // Empty output
   this.unchecked_clear = function () {
     var unchecked_clear = this.rpc(JSON.stringify({'action': 'unchecked_clear'}))
     return unchecked_clear.success
@@ -579,7 +561,7 @@ function Rai (url_base) {
     return wallet_add.account
   }
 
-// Object output
+  // Object output
   this.wallet_balance_total = function (wallet, unit = 'raw') {
     var rpc_wallet_balance = this.rpc(JSON.stringify({'action': 'wallet_balance_total', 'wallet': wallet}))
     var wallet_balance_total = { balance: this.unit(rpc_wallet_balance.balance, 'raw', unit), pending: this.unit(rpc_wallet_balance.pending, 'raw', unit) }
@@ -596,7 +578,7 @@ function Rai (url_base) {
     return wallet_balances.balances
   }
 
-// Empty output
+  // Empty output
   this.wallet_change_seed = function (wallet, seed) {
     var wallet_change_seed = this.rpc(JSON.stringify({'action': 'wallet_change_seed', 'wallet': wallet, 'seed': seed}))
     return wallet_change_seed.success
@@ -617,7 +599,7 @@ function Rai (url_base) {
     return wallet_destroy
   }
 
-// Return as array or as JSON/Object?
+  // Return as array or as JSON/Object?
   this.wallet_export = function (wallet) {
     var wallet_export = this.rpc(JSON.stringify({'action': 'wallet_export', 'wallet': wallet}))
     return wallet_export.json
@@ -645,8 +627,8 @@ function Rai (url_base) {
     }	else if (threshold != 0) {
       for (let account in wallet_pending.blocks) {
         for (let hash in wallet_pending.blocks[account]) {
-      wallet_pending.blocks[account][hash] = this.unit(wallet_pending.blocks[account][hash], 'raw', unit)
-    }
+          wallet_pending.blocks[account][hash] = this.unit(wallet_pending.blocks[account][hash], 'raw', unit)
+        }
       }
     }
     return wallet_pending.blocks
@@ -708,7 +690,7 @@ function Rai (url_base) {
     return work_validate.valid
   }
 
-// Empty output
+  // Empty output
   this.work_peer_add = function (address = '::1', port = '7076') {
     var work_peer_add = this.rpc(JSON.stringify({'action': 'work_peer_add', 'address': address, 'port': port}))
     return work_peer_add.success
@@ -719,7 +701,7 @@ function Rai (url_base) {
     return rpc_work_peers.work_peers
   }
 
-// Empty output
+  // Empty output
   this.work_peers_clear = function () {
     var work_peers_clear = this.rpc(JSON.stringify({'action': 'work_peers_clear'}))
     return work_peers_clear.success

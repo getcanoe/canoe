@@ -1,4 +1,12 @@
 <i class="icon big-icon-svg" ng-include="'views/includes/walletIcon.html'"></i>
+<span ng-if="account.work === null">
+  <div class="fa-stack fa hourglass-spin">
+    <i class="fa fa-stack-1x fa-hourglass-start"></i>
+    <i class="fa fa-stack-1x fa-hourglass-half"></i>
+    <i class="fa fa-stack-1x fa-hourglass-end"></i>
+    <i class="fa fa-stack-1x fa-hourglass-end spin"></i>
+  </div>
+</span>
 <span ng-if="account.meta && account.meta.alias && account.meta.alias.alias">
   @{{account.meta.alias.alias}}
 </span>

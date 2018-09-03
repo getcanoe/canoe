@@ -11,7 +11,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "Một thành viên của đội ngũ phát triển sẽ xem xét hồi đáp của bạn sớm nhất có thể."
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "Về"
 
@@ -51,10 +51,6 @@ msgstr "Thêm vào liên lạc"
 msgid "Add description"
 msgstr "Thêm mô tả"
 
-#: www/views/customAmount.html:28
-msgid "Address"
-msgstr "Địa chỉ"
-
 #: www/views/addressbook.html:6 www/views/tab-settings.html:15
 msgid "Address Book"
 msgstr "Sổ địa chỉ"
@@ -83,8 +79,7 @@ msgstr "Hầu như đã xong! Hãy kiểm tra lại."
 msgid "Alternative Currency"
 msgstr "Tiền tệ khác"
 
-#: www/views/amount.html:51 www/views/customAmount.html:34
-#: www/views/includes/output.html:7
+#: www/views/amount.html:50 www/views/includes/output.html:7
 msgid "Amount"
 msgstr "Số lượng"
 
@@ -112,21 +107,13 @@ msgstr "Cần thiết phải Sao lưu"
 msgid "Backup now"
 msgstr "Sao lưu ngay"
 
-#: www/views/onboarding/backupRequest.html:11 www/views/tab-export-file.html:52
+#: www/views/onboarding/backupRequest.html:11 www/views/tab-export-file.html:58
 msgid "Backup wallet"
 msgstr "Sao lưu ví"
 
 #: www/views/includes/confirmBackupPopup.html:7
 msgid "Be sure to store your seed in a secure place. If this app is deleted, or your device stolen, the seed is the only way to recreate the wallet."
 msgstr "Hãy chắc rằng bạn lưu trữ seed ở nơi bí mật. Nếu ứng dụng này bị xóa hoặc thiết bị bị ăn trộm, seed là cách duy nhất để tái tạo ví."
-
-#: www/views/includes/incomingDataMenu.html:29
-msgid "Bitcoin Address"
-msgstr "Địa chỉ Bitcoin"
-
-#: src/js/services/onGoingProcess.js:11
-msgid "Broadcasting transaction"
-msgstr "Đang gởi thanh toán"
 
 #: www/views/unsupported.html:6
 msgid "Browser unsupported"
@@ -163,8 +150,7 @@ msgstr "Chọn tập tin sao lưu từ máy tính"
 msgid "Click to send"
 msgstr "Bấm để gởi"
 
-#: www/views/customAmount.html:4 www/views/modals/pin.html:3
-#: www/views/modals/search.html:3
+#: www/views/modals/pin.html:3 www/views/modals/search.html:3
 msgid "Close"
 msgstr "Đóng"
 
@@ -189,10 +175,6 @@ msgstr "Xác nhận"
 msgid "Confirm &amp; Finish"
 msgstr "Xác nhận &amp; Hoàn tất"
 
-#: src/js/services/walletService.js:31
-msgid "Confirm your new spending password"
-msgstr "Xác nhận mật khẩu sử dụng mới của bạn"
-
 #: www/views/tab-send.html:50
 msgid "Contacts"
 msgstr "Liên lạc"
@@ -205,18 +187,18 @@ msgstr "Tiếp tục"
 msgid "Contribute Translations"
 msgstr "Đóng góp vào bản dịch"
 
-#: src/js/controllers/export.js:119 www/views/includes/copyToClipboard.html:4
+#: src/js/controllers/export.js:124 www/views/includes/copyToClipboard.html:4
 msgid "Copied to clipboard"
 msgstr "Đã sao chép vào clipboard"
 
-#: www/views/tab-export-file.html:57
+#: www/views/tab-export-file.html:63
 msgid "Copy this text as it is to a safe place (notepad or email)"
 msgstr "Sao chép nội dung này vào mội nơi an toàn (sổ sách hoặc email)"
 
 #: www/views/includes/incomingDataMenu.html:51
 #: www/views/includes/incomingDataMenu.html:70
 #: www/views/includes/incomingDataMenu.html:94
-#: www/views/includes/logOptions.html:9 www/views/tab-export-file.html:41
+#: www/views/includes/logOptions.html:9 www/views/tab-export-file.html:47
 msgid "Copy to clipboard"
 msgstr "Sao chép vào clipboard"
 
@@ -245,10 +227,6 @@ msgstr "Đang tạo tài khoản..."
 msgid "Creating transaction"
 msgstr "Đang tạo giao dịch"
 
-#: www/views/customAmount.html:9
-msgid "Custom Amount"
-msgstr "Tùy biến số lượng"
-
 #: www/views/tx-details.html:68
 msgid "Date"
 msgstr "Ngày tháng"
@@ -273,10 +251,6 @@ msgstr "Xóa bỏ Ví"
 msgid "Deleting Wallet..."
 msgstr "Đang xóa bỏ Ví..."
 
-#: src/js/services/onGoingProcess.js:23
-msgid "Deleting payment proposal"
-msgstr "Đang xóa bỏ kế hoạch chi tiêu"
-
 #: www/views/includes/backupNeededPopup.html:10
 #: www/views/onboarding/alias.html:70
 #: www/views/onboarding/backupRequest.html:12
@@ -287,7 +261,7 @@ msgstr "Làm điều đó sau"
 msgid "Donate to Canoe"
 msgstr "Đóng góp cho Canoe"
 
-#: www/views/tab-export-file.html:22 www/views/tab-home.html:36
+#: www/views/tab-export-file.html:28 www/views/tab-home.html:36
 msgid "Download"
 msgstr "Download"
 
@@ -321,17 +295,9 @@ msgstr "Cho phép thông báo"
 msgid "Enable the camera to get started."
 msgstr "Cho phép camera để bắt đầu"
 
-#: src/js/services/walletService.js:43 src/js/services/walletService.js:58
-msgid "Enter Spending Password"
-msgstr "Nhập vào Mật khẩu Sử dụng"
-
 #: www/views/amount.html:4
 msgid "Enter amount"
 msgstr "Nhập vào số lượng"
-
-#: src/js/services/walletService.js:27
-msgid "Enter new spending password"
-msgstr "Nhập vào mật khẩu sử dụng mới"
 
 #: www/views/tab-import-phrase.html:13
 msgid "Enter wallet seed"
@@ -347,22 +313,22 @@ msgstr "Nhập vào mật khẩu"
 #: src/js/controllers/addressbookEdit.js:21
 #: src/js/controllers/addressbookEdit.js:73
 #: src/js/controllers/addressbookView.js:49 src/js/controllers/create.js:19
-#: src/js/controllers/create.js:28 src/js/controllers/export.js:30
-#: src/js/controllers/export.js:52 src/js/controllers/export.js:62
-#: src/js/controllers/export.js:89 src/js/controllers/export.js:98
-#: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:106
-#: src/js/controllers/import.js:111 src/js/controllers/import.js:115
-#: src/js/controllers/import.js:120 src/js/controllers/import.js:123
-#: src/js/controllers/import.js:134 src/js/controllers/import.js:33
-#: src/js/controllers/import.js:43 src/js/controllers/import.js:56
-#: src/js/controllers/import.js:63 src/js/controllers/import.js:85
-#: src/js/controllers/import.js:93 src/js/controllers/modals/password.js:101
-#: src/js/controllers/paperWallet.js:45
+#: src/js/controllers/create.js:28 src/js/controllers/export.js:103
+#: src/js/controllers/export.js:35 src/js/controllers/export.js:57
+#: src/js/controllers/export.js:67 src/js/controllers/export.js:94
+#: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:108
+#: src/js/controllers/import.js:113 src/js/controllers/import.js:117
+#: src/js/controllers/import.js:122 src/js/controllers/import.js:125
+#: src/js/controllers/import.js:136 src/js/controllers/import.js:35
+#: src/js/controllers/import.js:45 src/js/controllers/import.js:58
+#: src/js/controllers/import.js:65 src/js/controllers/import.js:87
+#: src/js/controllers/import.js:95 src/js/controllers/modals/password.js:101
+#: src/js/controllers/paperWallet.js:21
 #: src/js/controllers/preferencesDelete.js:35
 #: src/js/controllers/preferencesName.js:13
 #: src/js/controllers/preferencesRepresentative.js:17
-#: src/js/controllers/tab-home.js:193 src/js/controllers/tab-scan.js:106
-#: src/js/controllers/tab-send.js:78 src/js/controllers/tabsController.js:36
+#: src/js/controllers/tab-scan.js:106 src/js/controllers/tab-send.js:78
+#: src/js/controllers/tabsController.js:36
 #: src/js/controllers/tabsController.js:7
 msgid "Error"
 msgstr "Lỗi"
@@ -371,11 +337,11 @@ msgstr "Lỗi"
 msgid "Error at confirm"
 msgstr "Lỗi khi xác nhận"
 
-#: src/js/controllers/paperWallet.js:40
+#: src/js/controllers/paperWallet.js:15
 msgid "Error scanning funds:"
 msgstr "Lỗi khi quét số dư:"
 
-#: src/js/controllers/paperWallet.js:88
+#: src/js/controllers/paperWallet.js:44
 msgid "Error sweeping wallet:"
 msgstr "Lỗi khi đọc ví:"
 
@@ -383,16 +349,12 @@ msgstr "Lỗi khi đọc ví:"
 msgid "Export wallet"
 msgstr "Xuất ví"
 
-#: src/js/services/walletService.js:88
-msgid "Exporting via QR not supported for this wallet"
-msgstr "Xuất thông qua mã QR chưa được hỗ trợ cho ví này"
-
 #: src/js/services/onGoingProcess.js:18
 msgid "Extracting Wallet information..."
 msgstr "Trích xuất Nội dung Ví"
 
-#: src/js/controllers/export.js:52 src/js/controllers/export.js:62
-#: src/js/controllers/export.js:89 src/js/controllers/export.js:98
+#: src/js/controllers/export.js:103 src/js/controllers/export.js:57
+#: src/js/controllers/export.js:67 src/js/controllers/export.js:94
 #: www/views/tab-export-file.html:4
 msgid "Failed to export"
 msgstr "Thất bại khi xuất"
@@ -439,10 +401,6 @@ msgstr "Tiền đã chuyển"
 msgid "Funds will be transferred to"
 msgstr "Tiền sẽ được chuyển đến"
 
-#: src/js/services/onGoingProcess.js:19
-msgid "Generating .csv file..."
-msgstr "Tạo tệp .csv"
-
 #: www/views/onboarding/welcome.html:8
 msgctxt "button"
 msgid "Get started"
@@ -455,9 +413,9 @@ msgstr "Bắt đầu bằng việc thêm vào cái đầu tiên của bạn."
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:163 src/js/controllers/tab-home.js:30
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
-#: src/js/controllers/tx-details.js:95
+#: src/js/controllers/tab-home.js:176 src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-settings.js:51 src/js/controllers/tab-settings.js:62
+#: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr "Quay Lại"
 
@@ -475,7 +433,7 @@ msgstr "Đã nhận được"
 msgid "Help & Support"
 msgstr "Giúp đỡ & Hỗ trợ"
 
-#: src/js/controllers/tab-home.js:28 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:49
 msgid "Help and support information is available at the website."
 msgstr "Nội dung giúp đỡ và hỗ trợ hiện có trên website."
 
@@ -538,11 +496,11 @@ msgstr "Nếu bạn chụp hình, bản sao lưu có thể bị nhìn trộm b�
 msgid "Import Wallet"
 msgstr "Nhập Ví"
 
-#: www/views/tab-import-phrase.html:39
+#: www/views/tab-import-phrase.html:42
 msgid "Import seed"
 msgstr "Nhập seed"
 
-#: www/views/add.html:21 www/views/tab-import-file.html:27
+#: www/views/add.html:21 www/views/tab-import-file.html:30
 #: www/views/tab-settings.html:31
 msgid "Import wallet"
 msgstr "Nhập ví"
@@ -603,7 +561,7 @@ msgstr "Trùng:"
 msgid "Meh - it's alright"
 msgstr "Ê - được đó"
 
-#: src/js/controllers/tx-details.js:69 www/views/tx-details.html:76
+#: www/views/tx-details.html:76
 msgid "Memo"
 msgstr "Ghi nhớ"
 
@@ -653,7 +611,7 @@ msgstr "Không có ví nào được lựa chọn"
 msgid "No wallets available to receive funds"
 msgstr "Không có ví nào để nhận tiền"
 
-#: src/js/controllers/paperWallet.js:45
+#: src/js/controllers/paperWallet.js:21
 msgid "Not funds found"
 msgstr "Tiền không thấy"
 
@@ -703,8 +661,8 @@ msgstr "Từ chối Trách nhiệm"
 msgid "Oh no!"
 msgstr "Ồ không!"
 
-#: src/js/controllers/tab-home.js:29 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:94
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:50
+#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr "Mở"
 
@@ -764,11 +722,11 @@ msgstr "Vui lòng viết cận thận 64 ký tự seed. Bấm để sao chép v�
 msgid "Please connect a camera to get started."
 msgstr "Vui lòng kết nối camera để bắt đầu."
 
-#: src/js/controllers/import.js:111
+#: src/js/controllers/import.js:113
 msgid "Please enter the seed"
 msgstr "Vui lòng nhập vào seed"
 
-#: src/js/controllers/import.js:93
+#: src/js/controllers/import.js:95
 msgid "Please, select your backup file"
 msgstr "Vui lòng chọn tập tin sao lưu"
 
@@ -780,11 +738,11 @@ msgstr "Ưu tiên"
 msgid "Preparing addresses..."
 msgstr "Chuẩn bị địa chỉ..."
 
-#: src/js/controllers/export.js:124
+#: src/js/controllers/export.js:129
 msgid "Preparing backup..."
 msgstr "Chuẩn bị sao lưu..."
 
-#: src/js/routes.js:924
+#: src/js/routes.js:896
 msgid "Press again to exit"
 msgstr "Bấm lại để thoát"
 
@@ -792,7 +750,7 @@ msgstr "Bấm lại để thoát"
 msgid "Private Key"
 msgstr "Chìa khóa Bí mật"
 
-#: src/js/controllers/paperWallet.js:133
+#: src/js/controllers/paperWallet.js:86
 msgid "Private key encrypted. Enter password"
 msgstr "Chìa khóa bí mật bị mã hóa. Nhập vào mật khẩu"
 
@@ -816,10 +774,6 @@ msgstr "Đánh giá trên app store"
 msgid "Receive"
 msgstr "Nhận"
 
-#: www/views/customAmount.html:44
-msgid "Receive in"
-msgstr "Nhận vào"
-
 #: www/views/tx-details.html:20
 msgid "Received"
 msgstr "Đã nhận"
@@ -840,14 +794,6 @@ msgstr "Giao dịch gần đây"
 msgid "Recipient"
 msgstr "Người nhận"
 
-#: src/js/services/onGoingProcess.js:21
-msgid "Recreating Wallet..."
-msgstr "Đang tại lại ví...."
-
-#: src/js/services/onGoingProcess.js:22
-msgid "Rejecting payment proposal"
-msgstr "Từ chối đề xuất thanh toán"
-
 #: www/views/preferencesAbout.html:9
 msgid "Release information"
 msgstr "Để lại thông tin"
@@ -859,10 +805,6 @@ msgstr "Xoá"
 #: www/views/onboarding/welcome.html:9
 msgid "Restore from backup"
 msgstr "Khôi phục từ sao lưu"
-
-#: src/js/services/onGoingProcess.js:24
-msgid "Retrieving inputs information"
-msgstr "Truy xuất thông tin đầu vào"
 
 #: src/js/controllers/onboarding/tour.js:86
 msgid "Retry"
@@ -925,7 +867,7 @@ msgid "Select a backup file"
 msgstr "Chọn file sao lưu"
 
 #: src/js/controllers/amount.js:40 src/js/controllers/amount.js:76
-#: src/js/controllers/tab-receive.js:90 src/js/controllers/tab-send.js:189
+#: src/js/controllers/tab-receive.js:79 src/js/controllers/tab-send.js:189
 #: src/js/controllers/tab-send.js:208
 msgid "Select an account"
 msgstr "Chọn tài khoản"
@@ -939,7 +881,7 @@ msgstr "Gửi"
 msgid "Send Feedback"
 msgstr "Gửi phản hồi"
 
-#: www/views/includes/logOptions.html:17 www/views/tab-export-file.html:45
+#: www/views/includes/logOptions.html:17 www/views/tab-export-file.html:51
 msgid "Send by email"
 msgstr "Gửi bằng email"
 
@@ -951,10 +893,6 @@ msgstr "Gửi từ"
 msgid "Send max amount"
 msgstr "Gửi số tiền tối đa"
 
-#: www/views/includes/incomingDataMenu.html:46
-msgid "Send payment to this address"
-msgstr "Gửi khoản tiền tới địa chỉ này"
-
 #: www/views/feedback/rateApp.html:17
 msgid "Send us feedback instead"
 msgstr "Hãy gửi cho chúng tôi phản hồi"
@@ -962,10 +900,6 @@ msgstr "Hãy gửi cho chúng tôi phản hồi"
 #: www/views/confirm.html:15
 msgid "Sending"
 msgstr "Đang gửi"
-
-#: src/js/services/onGoingProcess.js:33
-msgid "Sending 2FA code..."
-msgstr "Đang gửi mã xác thực 2FA..."
 
 #: src/js/services/onGoingProcess.js:31
 msgid "Sending feedback..."
@@ -995,7 +929,7 @@ msgstr "Dịch vụ"
 msgid "Session Log"
 msgstr "Nhật ký phiên"
 
-#: www/views/preferencesAbout.html:35
+#: www/views/preferencesAbout.html:40
 msgid "Session log"
 msgstr "Nhật ký phiên"
 
@@ -1082,7 +1016,7 @@ msgstr "Thật vui khi biết. Chúng tôi mong rằng có thể nhận được
 msgid "The seed"
 msgstr "Chìa khóa"
 
-#: src/js/controllers/import.js:115
+#: src/js/controllers/import.js:117
 msgid "The seed is invalid, it should be 64 characters of: 0-9, A-F"
 msgstr "Chìa khóa ví đã sai, nó phải bao gồm 64 ký tự bao gồm: 0-9, A-F"
 
@@ -1090,7 +1024,7 @@ msgstr "Chìa khóa ví đã sai, nó phải bao gồm 64 ký tự bao gồm: 0-
 msgid "The wallet server URL"
 msgstr "Địa chỉ máy chủ của ví"
 
-#: src/js/controllers/import.js:106 src/js/controllers/import.js:85
+#: src/js/controllers/import.js:108 src/js/controllers/import.js:87
 msgid "There is an error in the form"
 msgstr "Có lỗi trong form này"
 
@@ -1121,11 +1055,7 @@ msgstr "Xác thực vân tay thất bại"
 msgid "Transaction"
 msgstr "Giao dịch"
 
-#: src/js/controllers/tab-home.js:193
-msgid "Transaction not found"
-msgstr "Không tìm thấy giao dịch"
-
-#: src/js/controllers/paperWallet.js:107
+#: src/js/controllers/paperWallet.js:63
 msgid "Transfer to"
 msgstr "Chuyển tới"
 
@@ -1141,17 +1071,13 @@ msgstr "Thử lại trong {{expires}}"
 msgid "Uh oh..."
 msgstr "Ôi trời..."
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:173
 msgid "Update Available"
 msgstr "Có cập nhật mới"
 
 #: www/views/activity.html:14
 msgid "Updating... Please stand by"
 msgstr "Đang cập nhật... Vui lòng chờ"
-
-#: src/js/services/onGoingProcess.js:29
-msgid "Validating recovery phrase..."
-msgstr "Đang xác thực cụm từ khôi phục..."
 
 #: www/views/modals/fingerprintCheck.html:4
 msgid "Verify your identity"
@@ -1161,7 +1087,7 @@ msgstr "Xác nhận danh tính của bạn"
 msgid "Version"
 msgstr "Phiên bản"
 
-#: www/views/tab-export-file.html:32
+#: www/views/tab-export-file.html:38
 msgid "View"
 msgstr "Xem"
 
@@ -1169,7 +1095,7 @@ msgstr "Xem"
 msgid "View Terms of Service"
 msgstr "Xem điều khoản Dịch vụ"
 
-#: src/js/controllers/tab-home.js:162
+#: src/js/controllers/tab-home.js:175
 msgid "View Update"
 msgstr "Xem cập nhật"
 
@@ -1190,7 +1116,7 @@ msgid "Wallet seed not available"
 msgstr "Chìa khóa Ví không sẵn có"
 
 #: src/js/controllers/addressbookView.js:43
-#: src/js/controllers/advancedSettings.js:38 src/js/controllers/import.js:150
+#: src/js/controllers/advancedSettings.js:38 src/js/controllers/import.js:152
 #: src/js/controllers/modals/password.js:73
 #: src/js/controllers/preferencesDelete.js:23
 #: www/views/preferencesDeleteWallet.html:11
@@ -1249,7 +1175,7 @@ msgstr "Bạn sẽ được nhận các email thông báo về các khoản giao
 msgid "Your ideas, feedback, or comments"
 msgstr "Ý tưởng, phản hồi và bình luận của bạn."
 
-#: www/views/tab-export-file.html:11 www/views/tab-import-file.html:20
+#: www/views/tab-export-file.html:12 www/views/tab-import-file.html:20
 #: www/views/tab-import-phrase.html:30
 msgid "Your password"
 msgstr "Mật khẩu của bạn"
@@ -1258,12 +1184,8 @@ msgstr "Mật khẩu của bạn"
 msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "Ví của bạn sẽ không bao giờ được lưu trên mạng hay các thiết bị lưu trữ,"
 
-#: src/js/services/walletService.js:28
-msgid "Your wallet key will be encrypted. The Spending Password cannot be recovered. Be sure to write it down."
-msgstr "Chìa khóa Ví của bạn sẽ được mã hóa. Mật khẩu tiêu tiền sẽ không thể khôi phục được nữa. Hãy nhớ viết chúng ra"
-
-#: www/views/accountDetails.html:42 www/views/amount.html:123
-#: www/views/includes/accountList.html:11
+#: www/views/accountDetails.html:42 www/views/amount.html:122
+#: www/views/includes/accountList.html:19
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
@@ -1277,16 +1199,16 @@ msgstr "Tôi đã đọc, hiểu và đồng ý với <a ng-click=\"openTerms()\
 msgid "5-star ratings help us get Canoe into more hands, and more users means more resources can be committed to the app!"
 msgstr "Xếp hạng 5 sao giúp mọi người biết đến Canoe nhiều hơn và nhiều người dùng hơn có nghĩa là nhiều tài nguyên hơn có thể được cam kết với ứng dụng!"
 
-#: www/views/changePassword.html:25
+#: www/views/changePassword.html:31
 msgid "At least 8 Characters. Make it good!"
 msgstr "Ít nhất 8 ký tự. Hãy chọn!"
 
-#: www/views/changePassword.html:3 www/views/changePassword.html:62
+#: www/views/changePassword.html:3 www/views/changePassword.html:77
 #: www/views/preferencesSecurity.html:17
 msgid "Change Password"
 msgstr "Đổi mật khẩu"
 
-#: www/views/changePassword.html:33
+#: www/views/changePassword.html:43
 msgid "Confirm New Password"
 msgstr "Xác nhận mật khẩu mới"
 
@@ -1298,7 +1220,7 @@ msgstr "Bạn có thích Canoe không?"
 msgid "Let's Start"
 msgstr "Hãy bắt đầu nào"
 
-#: www/views/changePassword.html:23
+#: www/views/changePassword.html:28
 msgid "New Password"
 msgstr "Mật khẩu mới"
 
@@ -1306,19 +1228,19 @@ msgstr "Mật khẩu mới"
 msgid "Old Password"
 msgstr "Mật khẩu cũ"
 
-#: www/views/changePassword.html:35
+#: www/views/changePassword.html:46
 msgid "One more time."
 msgstr "Một lần nữa."
 
-#: www/views/changePassword.html:49
+#: www/views/changePassword.html:64
 msgid "Password too short"
 msgstr "Mật khẩu quá ngắn"
 
-#: www/views/changePassword.html:55
+#: www/views/changePassword.html:70
 msgid "Passwords don't match"
 msgstr "Hai mật khẩu không giống nhau."
 
-#: www/views/changePassword.html:45 www/views/onboarding/tour.html:106
+#: www/views/changePassword.html:60 www/views/onboarding/tour.html:106
 msgid "Passwords match"
 msgstr "Mật khẩu giống nhau."
 
@@ -1330,7 +1252,7 @@ msgstr "Thông báo đẩy từ Canoe hiện đang bị tắt. Hãy bật chúng
 msgid "Share Canoe"
 msgstr "Chia sẻ Canoe"
 
-#: src/js/controllers/tab-home.js:54
+#: src/js/controllers/tab-home.js:52
 msgid "There is a new version of Canoe available"
 msgstr "Có một bản cập nhật mới của Canoe"
 
@@ -1424,7 +1346,7 @@ msgstr "Mật khẩu để giải mã"
 msgid "Password to encrypt"
 msgstr "Mật khẩu để mã hóa"
 
-#: src/js/controllers/import.js:120
+#: src/js/controllers/import.js:122
 msgid "Please enter a password to use for the wallet"
 msgstr "Vui lòng nhập mật khẩu để sử dụng Ví"
 
@@ -1476,7 +1398,7 @@ msgstr "Ví Nano của bạn đã sẵn sàng!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Chìa khóa Ví Nano của bạn đã được lưu!"
 
-#: src/js/services/nanoService.js:651 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Tài khoản"
@@ -1493,7 +1415,7 @@ msgstr "Hãy xác thực mã PIN"
 msgid "Enter a descriptive name"
 msgstr "Hãy điền một tên mô tả"
 
-#: src/js/controllers/export.js:30
+#: src/js/controllers/export.js:35
 msgid "Failed to generate seed QR code"
 msgstr "Thất bại khi tạo ra chìa khóa bằng mã QR"
 
@@ -1501,18 +1423,19 @@ msgstr "Thất bại khi tạo ra chìa khóa bằng mã QR"
 msgid "Incorrect PIN, try again."
 msgstr "Mã PIN sai, hãy thử lại."
 
-#: src/js/controllers/import.js:33
+#: src/js/controllers/import.js:35
 msgid "Incorrect code format for a seed:"
 msgstr "ĐỊnh dạng chìa khóa sai."
 
 #: src/js/controllers/changeLocksController.js:24
-#: src/js/controllers/changePasswordController.js:10
 #: src/js/controllers/changePasswordController.js:13
+#: src/js/controllers/changePasswordController.js:16
+#: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
 #: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr "Thông tin"
 
-#: src/js/controllers/import.js:43
+#: src/js/controllers/import.js:45
 msgid "Not a seed QR code:"
 msgstr "Không phải là chìa khóa mã QR"
 
@@ -1528,11 +1451,11 @@ msgstr "Quét mã QR này để nhập chìa khóa vào một ứng dụng khác
 msgid "Security Preferences"
 msgstr "Tùy chọn cài đặt"
 
-#: www/views/changePassword.html:15
+#: www/views/changePassword.html:16
 msgid "Your current password"
 msgstr "Mật khẩu hiện thời của bạn"
 
-#: src/js/controllers/changePasswordController.js:13
+#: src/js/controllers/changePasswordController.js:16
 msgid "Your password has been changed"
 msgstr "Mật khẩu của bạn đã được đổi"
 
@@ -1606,7 +1529,7 @@ msgstr "Chuyển Nano ngay lập tức cho bất kỳ ai, bất kỳ đâu."
 msgid "Account Representative"
 msgstr "Đại diện tài khoản"
 
-#: src/js/controllers/confirm.js:368
+#: src/js/controllers/confirm.js:343
 msgid "Add to address book?"
 msgstr "Thêm vào liên hệ?"
 
@@ -1630,7 +1553,7 @@ msgstr "Tạo Tên"
 msgid "Creating Alias..."
 msgstr "Tạo Tên..."
 
-#: src/js/controllers/confirm.js:369
+#: src/js/controllers/confirm.js:344
 msgid "Do you want to add this new address to your address book?"
 msgstr "Bạn có muốn thêm địa chỉ mới này vào danh bạ?"
 
@@ -1650,7 +1573,7 @@ msgstr "Email để khôi phục bí danh của bạn"
 msgid "Enter a representative account."
 msgstr "Hãy điền một đại diện cho tài khoản."
 
-#: src/js/controllers/import.js:62
+#: src/js/controllers/import.js:64
 msgid "Error importing wallet:"
 msgstr "Lỗi khi nhập Ví:"
 
@@ -1658,7 +1581,7 @@ msgstr "Lỗi khi nhập Ví:"
 msgid "How to buy Nano"
 msgstr "Mua Nano bằng cách nào"
 
-#: src/js/controllers/tab-settings.js:58
+#: src/js/controllers/tab-settings.js:60
 msgid "How to buy and sell Nano is described at the website."
 msgstr "Làm sao để mua và bán Nano được hướng dẫn tại website."
 
@@ -1715,7 +1638,7 @@ msgstr "Điều khoản sử dụng bằng tiếng Anh đã có trên website Ca
 msgid "Valid Alias & Email"
 msgstr "Tên hợp lệ & Email"
 
-#: src/js/controllers/tx-details.js:93
+#: src/js/controllers/tx-details.js:71
 msgid "View Block on Nanode"
 msgstr "Xem Khối trên Nanode"
 
@@ -1731,7 +1654,7 @@ msgstr "Tên mà bạn muốn dữ trữ?"
 msgid "You can change your alias, email, or privacy settings."
 msgstr "Bạn có thể đổi tên, email, hoặc xác lập riêng tư."
 
-#: src/js/controllers/changePasswordController.js:10
+#: src/js/controllers/changePasswordController.js:13
 msgid "Your old password was not entered correctly"
 msgstr "Mật khẩu cũ bạn nhập chưa đúng"
 
@@ -1838,7 +1761,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 "          Với khóa cứng, Canoe mã hóa ví của bạn và xóa hoàn toàn khỏi bộ nhớ Ram. Bạn không thể tắt khóa cứng, nhưng bạn có thể đặt thời gian chờ khóa."
 
-#: src/js/controllers/tab-home.js:161
+#: src/js/controllers/tab-home.js:174
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr "Một bản cập nhật mới của ứng dụng này đã có. Vui lòng cập nhật lên bản mới nhât."
 
@@ -1854,19 +1777,15 @@ msgstr "Đã đổi phụ trợ"
 msgid "Change Backend Server"
 msgstr "Đổi máy chủ phụ trợ"
 
-#: src/js/controllers/import.js:151
+#: src/js/controllers/import.js:153
 msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
 msgstr "Nhập một Ví mới sẽ xóa Ví hiện tại và các tài khoản! Nếu bạn có tiền trong ví hiện tại, hãy nhớ đã sao lưu để có thể khôi phục lại."
 
-#: www/views/amount.html:54
+#: www/views/amount.html:53
 msgid "Max"
 msgstr "Tối đa"
 
-#: src/js/services/nanoService.js:90
-msgid "Your backend has been changed"
-msgstr "Phụ trợ của bạn đã được thay đổi"
-
-#: src/js/controllers/import.js:153 src/js/controllers/modals/password.js:76
+#: src/js/controllers/import.js:155 src/js/controllers/modals/password.js:76
 msgid "delete"
 msgstr "Xóa"
 
@@ -1882,7 +1801,7 @@ msgstr ""
 msgid "Going back to onboarding will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
 msgstr ""
 
-#: src/js/controllers/import.js:123
+#: src/js/controllers/import.js:125
 msgid "Please enter a password of at least 8 characters"
 msgstr ""
 
@@ -1934,5 +1853,41 @@ msgstr ""
 
 #: www/views/changeLocks.html:15
 msgid "With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
+msgstr ""
+
+#: www/views/attributions.html:3 www/views/preferencesAbout.html:35
+msgid "Attributions"
+msgstr ""
+
+#: src/js/services/incomingData.js:118
+msgid "Block was scanned and sent successfully"
+msgstr ""
+
+#: src/js/services/incomingData.js:120
+msgid "Block was scanned but failed to process:"
+msgstr ""
+
+#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
+msgid "Failed connecting to backend"
+msgstr ""
+
+#: src/js/services/nanoService.js:42
+msgid "Failed connecting to backend, no network?"
+msgstr ""
+
+#: src/js/services/nanoService.js:90
+msgid "Successfully connected to backend"
+msgstr ""
+
+#: www/views/includes/incomingDataMenu.html:29
+msgid "Nano Account"
+msgstr ""
+
+#: www/views/includes/incomingDataMenu.html:46
+msgid "Send Nano to this address"
+msgstr ""
+
+#: www/views/tab-settings.html:143
+msgid "Please load Nano to donate"
 msgstr ""
 

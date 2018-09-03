@@ -1,16 +1,10 @@
 'use strict'
-
-angular.module('canoeApp.controllers').controller('tabReceiveController', function ($rootScope, $scope, $timeout, $log, $ionicModal, $state, $ionicHistory, $ionicPopover, storageService, platformInfo, walletService, profileService, configService, lodash, gettextCatalog, popupService) {
+/* global angular */
+angular.module('canoeApp.controllers').controller('tabReceiveController', function ($scope, $ionicModal, $state, platformInfo, profileService, lodash, gettextCatalog) {
   var listeners = []
   $scope.wallet = profileService.getWallet()
   $scope.isCordova = platformInfo.isCordova
   $scope.isNW = platformInfo.isNW
-
-  $scope.requestSpecificAmount = function () {
-    $state.go('tabs.paymentRequest.amount', {
-      id: $scope.account
-    })
-  }
 
   $scope.openBackupNeededModal = function () {
     $ionicModal.fromTemplateUrl('views/includes/backupNeededPopup.html', {
@@ -52,12 +46,7 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
 
     $scope.showShareButton = platformInfo.isCordova ? (platformInfo.isIOS ? 'iOS' : 'Android') : null
 
-    listeners = [
-      $rootScope.$on('bwsEvent', function (e, walletId, type, n) {
-        // Update current address
-        if ($scope.account && walletId === $scope.account.id && type === 'NewIncomingTx') $scope.setAddress(true)
-      })
-    ]
+    listeners = []
   })
 
   $scope.$on('$ionicView.leave', function (event, data) {
@@ -71,7 +60,7 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
     var w = lodash.findIndex(accounts, function (w) {
       return w.id === account.id
     })
-    if (!w) return accounts[0]
+    if (w < 0) return accounts[0]
     return accounts[w]
   }
 

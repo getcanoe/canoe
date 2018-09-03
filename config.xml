@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="391010" id="io.getcanoe.canoe" ios-CFBundleVersion="0.9.12" version="0.9.12">
+<widget android-versionCode="391011" id="io.getcanoe.canoe" ios-CFBundleVersion="1.0.0" version="1.0.0">
     <name>Canoe</name>
     <description>
       Canoe Nano Wallet
@@ -115,6 +115,7 @@
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
     <plugin name="cordova-plugin-add-swift-support" spec="^1.7.2" />
+    <plugin name="phonegap-nfc" spec="^1.0.3" />
     <engine name="windows" spec="6.0.0" />
     <engine name="ios" spec="^4.5.4" />
     <engine name="android" spec="^7.1.0" />

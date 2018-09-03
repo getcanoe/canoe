@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('tabSendController', function ($scope, $rootScope, $log, $timeout, $ionicScrollDelegate, addressbookService, profileService, lodash, $state, walletService, incomingData, popupService, platformInfo, gettextCatalog, scannerService, externalLinkService) {
+angular.module('canoeApp.controllers').controller('tabSendController', function ($scope, $rootScope, $log, $timeout, $ionicScrollDelegate, addressbookService, profileService, lodash, $state, incomingData, popupService, platformInfo, gettextCatalog, scannerService, externalLinkService) {
   var originalList
   var completeContacts
   var CONTACTS_SHOW_LIMIT
@@ -134,7 +134,7 @@ angular.module('canoeApp.controllers').controller('tabSendController', function 
 
   $scope.goToAmount = function (item) {
     $timeout(function () {
-      var toAlias = null;
+      var toAlias = null
       if (item.meta && item.meta.alias && item.meta.alias.alias) {
         toAlias = item.meta.alias.alias
       }

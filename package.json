@@ -2,7 +2,7 @@
   "name": "canoe",
   "description": "A Secure Cross Platform Nano Wallet",
   "author": "Göran Krampe",
-  "version": "0.9.12",
+  "version": "1.0.1",
   "keywords": [
     "nano",
     "raiblocks",
@@ -105,6 +105,7 @@
     "load-grunt-tasks": "^4.0.0",
     "npm-check-updates": "^2.14.2",
     "pbkdf2": "^3.0.16",
+    "phonegap-nfc": "^1.0.3",
     "raiblocks-pow": "0.0.3",
     "shelljs": "^0.8.2",
     "tweetnacl": "^1.0.0",

@@ -24,9 +24,9 @@
     </a>
   </div>
 
-  <div ng-if="type === 'bitcoinAddress'">
+  <div ng-if="type === 'nanoAccount'">
     <div class="incoming-data-menu__item head">
-      <div class="incoming-data-menu__header" translate>Bitcoin Address</div>
+      <div class="incoming-data-menu__header" translate>Nano Account</div>
       <div class="incoming-data-menu__url">
         <div class="incoming-data-menu__url__icon">
           <img src="img/icon-bitcoin-small.svg">
@@ -43,7 +43,7 @@
     </a>
     <a class="incoming-data-menu__item item item-icon-right" ng-click="sendPaymentToAddress(data)">
       <img src="img/icon-send-alt.svg">
-      <div class="incoming-data-menu__item__text" translate>Send payment to this address</div>
+      <div class="incoming-data-menu__item__text" translate>Send Nano to this address</div>
       <i class="icon bp-arrow-right"></i>
     </a>
     <a class="incoming-data-menu__item item item-icon-right" copy-to-clipboard="data">

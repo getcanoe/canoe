@@ -1,34 +1,9 @@
+/* global angular */
 angular.module('canoeApp.controllers').controller('paperWalletController',
-  function ($scope, $timeout, $log, $ionicModal, $ionicHistory, popupService, gettextCatalog, platformInfo, configService, profileService, $state, bitcore, ongoingProcess, txFormatService, $stateParams, walletService) {
+  function ($scope, $timeout, $log, popupService, gettextCatalog, profileService, $state, ongoingProcess, txFormatService, $stateParams) {
     function _scanFunds (cb) {
-      function getPrivateKey (scannedKey, isPkEncrypted, passphrase, cb) {
-        if (!isPkEncrypted) return cb(null, scannedKey)
-        $scope.account.decryptBIP38PrivateKey(scannedKey, passphrase, null, cb)
-      };
-
-      function getBalance (privateKey, cb) {
-        $scope.account.getBalanceFromPrivateKey(privateKey, cb)
-      };
-
-      function checkPrivateKey (privateKey) {
-        try {
-          //new bitcore.PrivateKey(privateKey, 'livenet')
-        } catch (err) {
-          return false
-        }
-        return true
-      };
-
-      getPrivateKey($scope.scannedKey, $scope.isPkEncrypted, $scope.passphrase, function (err, privateKey) {
-        if (err) return cb(err)
-        if (!checkPrivateKey(privateKey)) return cb(new Error('Invalid private key'))
-
-        getBalance(privateKey, function (err, balance) {
-          if (err) return cb(err)
-          return cb(null, privateKey, balance)
-        })
-      })
-    };
+      // Do it here
+    }
 
     $scope.scanFunds = function () {
       ongoingProcess.set('scanning', true)
@@ -42,7 +17,9 @@ angular.module('canoeApp.controllers').controller('paperWalletController',
           } else {
             $scope.privateKey = privateKey
             $scope.balanceSat = balance
-            if ($scope.balanceSat <= 0)              { popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Not funds found'))}
+            if ($scope.balanceSat <= 0) {
+              popupService.showAlert(gettextCatalog.getString('Error'), gettextCatalog.getString('Not funds found'))
+            }
             $scope.balance = txFormatService.formatAmountStr($scope.account.coin, balance)
           }
           $scope.$apply()
@@ -51,29 +28,8 @@ angular.module('canoeApp.controllers').controller('paperWalletController',
     }
 
     function _sweepWallet (cb) {
-      walletService.getAddress($scope.account, true, function (err, destinationAddress) {
-        if (err) return cb(err)
-
-        $scope.account.buildTxFromPrivateKey($scope.privateKey, destinationAddress, null, function (err, testTx) {
-          if (err) return cb(err)
-          var rawTxLength = testTx.serialize().length
-          /*feeService.getCurrentFeeRate('btc', 'livenet', function (err, feePerKb) {
-            var opts = {}
-            opts.fee = Math.round((feePerKb * rawTxLength) / 2000)
-            $scope.account.buildTxFromPrivateKey($scope.privateKey, destinationAddress, opts, function (err, tx) {
-              if (err) return cb(err)
-              $scope.account.broadcastRawTx({
-                rawTx: tx.serialize(),
-                network: 'livenet'
-              }, function (err, txid) {
-                if (err) return cb(err)
-                return cb(null, destinationAddress, txid)
-              })
-            })
-          })*/
-        })
-      })
-    };
+       
+    }
 
     $scope.sweepWallet = function () {
       ongoingProcess.set('sweepingWallet', true)
@@ -114,11 +70,8 @@ angular.module('canoeApp.controllers').controller('paperWalletController',
       $scope.sendStatus = null
       $scope.error = false
 
-      $scope.accounts = profileService.getAccounts({
-        onlyComplete: true,
-        network: 'livenet'
-      })
-      $scope.singleAccount = $scope.accounts.length == 1
+      $scope.accounts = profileService.getAccounts()
+      $scope.singleAccount = $scope.accounts.length === 1
 
       if (!$scope.accounts || !$scope.accounts.length) {
         $scope.noMatchingWallet = true       

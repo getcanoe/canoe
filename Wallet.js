@@ -460,6 +460,17 @@ module.exports = function (password) {
     }
   }
 
+  api.resetChain = function (acc) {
+    api.useAccount(acc)
+    balance = bigInt(0)
+    pendingBalance = bigInt(0)
+    pendingBlocks = []
+    lastBlock = ''
+    lastPendingBlock = ''
+    chain = []
+    priv.save()
+  }
+
   api.getLastNBlocks = function (acc, n, offset = 0) {
     var temp = keys[current].account
     api.useAccount(acc)
@@ -603,6 +614,14 @@ module.exports = function (password) {
       bal = bal.add(temp)
     }
     return bal
+  }
+
+  api.getPoW = function (acc) {
+    if (acc) {
+      return pows[acc]
+    } else {
+      return pows
+    }
   }
 
   api.recalculateWalletBalances = function () {
@@ -1119,7 +1138,7 @@ module.exports = function (password) {
 
   api.createBlockFromJSON = function (jsonOrObj) {
     var blk = newBlock() // jsonOrObj will decide if state block or not
-    blk.buildFromJSON(jsonOrObj, blk.getMaxVersion())
+    blk.buildFromJSON(jsonOrObj)
     return blk
   }
 
@@ -1312,7 +1331,11 @@ module.exports = function (password) {
       aux.chain = []
       for (var j in walletData.keys[i].chain) {
         blk = newBlock()
-        blk.buildFromJSON(walletData.keys[i].chain[j])
+        var prev = null
+        if (j > 0) {
+          prev = walletData.keys[i].chain[j-1]
+        }
+        blk.buildFromJSON(walletData.keys[i].chain[j],prev)
         aux.chain.push(blk)
       }
 

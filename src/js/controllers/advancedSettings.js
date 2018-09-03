@@ -1,5 +1,5 @@
 'use strict'
-
+/* global angular */
 angular.module('canoeApp.controllers').controller('advancedSettingsController', function ($scope, $log, $ionicHistory, $timeout, $state, configService, nanoService, popupService, platformInfo, gettextCatalog) {
   var updateConfig = function () {
     var config = configService.getSync()

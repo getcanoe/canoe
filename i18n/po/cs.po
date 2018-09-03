@@ -11,7 +11,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "Člen týmu posoudí tvůj feed back co nejdříve."
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "O aplikaci"
 
@@ -51,10 +51,6 @@ msgstr "Přidat kontakt"
 msgid "Add description"
 msgstr "Přidat popis"
 
-#: www/views/customAmount.html:28
-msgid "Address"
-msgstr "Adresa"
-
 #: www/views/addressbook.html:6 www/views/tab-settings.html:15
 msgid "Address Book"
 msgstr "Seznam adres"
@@ -83,8 +79,7 @@ msgstr "Téměř vše! Přehled."
 msgid "Alternative Currency"
 msgstr "Alternativní měny"
 
-#: www/views/amount.html:51 www/views/customAmount.html:34
-#: www/views/includes/output.html:7
+#: www/views/amount.html:50 www/views/includes/output.html:7
 msgid "Amount"
 msgstr "Suma"
 
@@ -112,21 +107,13 @@ msgstr "Nutnost zálohy"
 msgid "Backup now"
 msgstr "Zálohovat nyní"
 
-#: www/views/onboarding/backupRequest.html:11 www/views/tab-export-file.html:52
+#: www/views/onboarding/backupRequest.html:11 www/views/tab-export-file.html:58
 msgid "Backup wallet"
 msgstr "Záloha peněženky"
 
 #: www/views/includes/confirmBackupPopup.html:7
 msgid "Be sure to store your seed in a secure place. If this app is deleted, or your device stolen, the seed is the only way to recreate the wallet."
 msgstr "Uchovejte vaše seed na bezpečném místě. Pokud je aplikace smazána/ukradena seed je jediná možnost k obnově peněženky."
-
-#: www/views/includes/incomingDataMenu.html:29
-msgid "Bitcoin Address"
-msgstr "Bitcoin adresa"
-
-#: src/js/services/onGoingProcess.js:11
-msgid "Broadcasting transaction"
-msgstr "Rozesílání platby"
 
 #: www/views/unsupported.html:6
 msgid "Browser unsupported"
@@ -163,8 +150,7 @@ msgstr "Najdi soubor zálohy"
 msgid "Click to send"
 msgstr "Klikni a odešli"
 
-#: www/views/customAmount.html:4 www/views/modals/pin.html:3
-#: www/views/modals/search.html:3
+#: www/views/modals/pin.html:3 www/views/modals/search.html:3
 msgid "Close"
 msgstr "Zavřít"
 
@@ -189,10 +175,6 @@ msgstr "Potvrdit"
 msgid "Confirm &amp; Finish"
 msgstr "Potvrď &amp; Dokončit"
 
-#: src/js/services/walletService.js:31
-msgid "Confirm your new spending password"
-msgstr "Potvrďte nové heslo plateb"
-
 #: www/views/tab-send.html:50
 msgid "Contacts"
 msgstr "Kontakty"
@@ -205,18 +187,18 @@ msgstr "Pokračovat"
 msgid "Contribute Translations"
 msgstr "Pomoc s překladem"
 
-#: src/js/controllers/export.js:119 www/views/includes/copyToClipboard.html:4
+#: src/js/controllers/export.js:124 www/views/includes/copyToClipboard.html:4
 msgid "Copied to clipboard"
 msgstr "Zkopírováno do clipboardu"
 
-#: www/views/tab-export-file.html:57
+#: www/views/tab-export-file.html:63
 msgid "Copy this text as it is to a safe place (notepad or email)"
 msgstr "Zkopírujte tento text na bezpečné místo (poznámkový blok, email)"
 
 #: www/views/includes/incomingDataMenu.html:51
 #: www/views/includes/incomingDataMenu.html:70
 #: www/views/includes/incomingDataMenu.html:94
-#: www/views/includes/logOptions.html:9 www/views/tab-export-file.html:41
+#: www/views/includes/logOptions.html:9 www/views/tab-export-file.html:47
 msgid "Copy to clipboard"
 msgstr "Kopie do clipboard"
 
@@ -245,10 +227,6 @@ msgstr "Vytváření účtu..."
 msgid "Creating transaction"
 msgstr "Vytváření transakce..."
 
-#: www/views/customAmount.html:9
-msgid "Custom Amount"
-msgstr "Běžný účet"
-
 #: www/views/tx-details.html:68
 msgid "Date"
 msgstr "Datum"
@@ -273,10 +251,6 @@ msgstr "Smazat peněženku"
 msgid "Deleting Wallet..."
 msgstr "Smazání peněženky..."
 
-#: src/js/services/onGoingProcess.js:23
-msgid "Deleting payment proposal"
-msgstr "Mazání návrhu platby"
-
 #: www/views/includes/backupNeededPopup.html:10
 #: www/views/onboarding/alias.html:70
 #: www/views/onboarding/backupRequest.html:12
@@ -287,7 +261,7 @@ msgstr "Později"
 msgid "Donate to Canoe"
 msgstr "Podpořit Canoe"
 
-#: www/views/tab-export-file.html:22 www/views/tab-home.html:36
+#: www/views/tab-export-file.html:28 www/views/tab-home.html:36
 msgid "Download"
 msgstr "Ke stažení"
 
@@ -321,21 +295,13 @@ msgstr "Zapnout upozornění"
 msgid "Enable the camera to get started."
 msgstr "Zapnout kameru ať můžete začít"
 
-#: src/js/services/walletService.js:43 src/js/services/walletService.js:58
-msgid "Enter Spending Password"
-msgstr "Vložit heslo útrat"
-
 #: www/views/amount.html:4
 msgid "Enter amount"
 msgstr "Vyplňte sumu"
 
-#: src/js/services/walletService.js:27
-msgid "Enter new spending password"
-msgstr "Vložit nové heslo útrat"
-
 #: www/views/tab-import-phrase.html:13
 msgid "Enter wallet seed"
-msgstr "Vložte seed peněženky"
+msgstr "Zadejte seed peněženky"
 
 #: www/views/backup.html:36
 msgid "Enter your password"
@@ -347,22 +313,22 @@ msgstr "Vyplňte Vaše heslo"
 #: src/js/controllers/addressbookEdit.js:21
 #: src/js/controllers/addressbookEdit.js:73
 #: src/js/controllers/addressbookView.js:49 src/js/controllers/create.js:19
-#: src/js/controllers/create.js:28 src/js/controllers/export.js:30
-#: src/js/controllers/export.js:52 src/js/controllers/export.js:62
-#: src/js/controllers/export.js:89 src/js/controllers/export.js:98
-#: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:106
-#: src/js/controllers/import.js:111 src/js/controllers/import.js:115
-#: src/js/controllers/import.js:120 src/js/controllers/import.js:123
-#: src/js/controllers/import.js:134 src/js/controllers/import.js:33
-#: src/js/controllers/import.js:43 src/js/controllers/import.js:56
-#: src/js/controllers/import.js:63 src/js/controllers/import.js:85
-#: src/js/controllers/import.js:93 src/js/controllers/modals/password.js:101
-#: src/js/controllers/paperWallet.js:45
+#: src/js/controllers/create.js:28 src/js/controllers/export.js:103
+#: src/js/controllers/export.js:35 src/js/controllers/export.js:57
+#: src/js/controllers/export.js:67 src/js/controllers/export.js:94
+#: src/js/controllers/feedback/send.js:21 src/js/controllers/import.js:108
+#: src/js/controllers/import.js:113 src/js/controllers/import.js:117
+#: src/js/controllers/import.js:122 src/js/controllers/import.js:125
+#: src/js/controllers/import.js:136 src/js/controllers/import.js:35
+#: src/js/controllers/import.js:45 src/js/controllers/import.js:58
+#: src/js/controllers/import.js:65 src/js/controllers/import.js:87
+#: src/js/controllers/import.js:95 src/js/controllers/modals/password.js:101
+#: src/js/controllers/paperWallet.js:21
 #: src/js/controllers/preferencesDelete.js:35
 #: src/js/controllers/preferencesName.js:13
 #: src/js/controllers/preferencesRepresentative.js:17
-#: src/js/controllers/tab-home.js:193 src/js/controllers/tab-scan.js:106
-#: src/js/controllers/tab-send.js:78 src/js/controllers/tabsController.js:36
+#: src/js/controllers/tab-scan.js:106 src/js/controllers/tab-send.js:78
+#: src/js/controllers/tabsController.js:36
 #: src/js/controllers/tabsController.js:7
 msgid "Error"
 msgstr "Error"
@@ -371,11 +337,11 @@ msgstr "Error"
 msgid "Error at confirm"
 msgstr "Error při potvrzení"
 
-#: src/js/controllers/paperWallet.js:40
+#: src/js/controllers/paperWallet.js:15
 msgid "Error scanning funds:"
 msgstr "Error skenování zůstatků"
 
-#: src/js/controllers/paperWallet.js:88
+#: src/js/controllers/paperWallet.js:44
 msgid "Error sweeping wallet:"
 msgstr "Error přepnutí peněženky"
 
@@ -383,16 +349,12 @@ msgstr "Error přepnutí peněženky"
 msgid "Export wallet"
 msgstr "Export peněženky"
 
-#: src/js/services/walletService.js:88
-msgid "Exporting via QR not supported for this wallet"
-msgstr "Export přes QR nepodporuje tato peněženka"
-
 #: src/js/services/onGoingProcess.js:18
 msgid "Extracting Wallet information..."
 msgstr "Získávání informací z peněženky..."
 
-#: src/js/controllers/export.js:52 src/js/controllers/export.js:62
-#: src/js/controllers/export.js:89 src/js/controllers/export.js:98
+#: src/js/controllers/export.js:103 src/js/controllers/export.js:57
+#: src/js/controllers/export.js:67 src/js/controllers/export.js:94
 #: www/views/tab-export-file.html:4
 msgid "Failed to export"
 msgstr "Chyba při exportu"
@@ -439,10 +401,6 @@ msgstr "Prostředky převedeny"
 msgid "Funds will be transferred to"
 msgstr "Prostředky převedeny na"
 
-#: src/js/services/onGoingProcess.js:19
-msgid "Generating .csv file..."
-msgstr "Vytvářím .csv soubor..."
-
 #: www/views/onboarding/welcome.html:8
 msgctxt "button"
 msgid "Get started"
@@ -455,9 +413,9 @@ msgstr "Pojďme začít přidáním prvního."
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:163 src/js/controllers/tab-home.js:30
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
-#: src/js/controllers/tx-details.js:95
+#: src/js/controllers/tab-home.js:176 src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-settings.js:51 src/js/controllers/tab-settings.js:62
+#: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr "Zpět"
 
@@ -475,7 +433,7 @@ msgstr "Rozumím"
 msgid "Help & Support"
 msgstr "Pomoc & Podpora"
 
-#: src/js/controllers/tab-home.js:28 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:49
 msgid "Help and support information is available at the website."
 msgstr "Podpora a pomoc je dostupná na webových stránkách"
 
@@ -538,11 +496,11 @@ msgstr "Pokud uděláte screenshot, Vaši zálohu mohou vidět další aplikace.
 msgid "Import Wallet"
 msgstr "Importovat peněženku"
 
-#: www/views/tab-import-phrase.html:39
+#: www/views/tab-import-phrase.html:42
 msgid "Import seed"
 msgstr "Importovat seed"
 
-#: www/views/add.html:21 www/views/tab-import-file.html:27
+#: www/views/add.html:21 www/views/tab-import-file.html:30
 #: www/views/tab-settings.html:31
 msgid "Import wallet"
 msgstr "Importovat peněženku"
@@ -603,7 +561,7 @@ msgstr "Shoda:"
 msgid "Meh - it's alright"
 msgstr "Hmm - to je v pořádku"
 
-#: src/js/controllers/tx-details.js:69 www/views/tx-details.html:76
+#: www/views/tx-details.html:76
 msgid "Memo"
 msgstr "Poznámky"
 
@@ -653,7 +611,7 @@ msgstr "Nevybrána peněženka"
 msgid "No wallets available to receive funds"
 msgstr "Žádná dostupná peněženka k přijetí platby"
 
-#: src/js/controllers/paperWallet.js:45
+#: src/js/controllers/paperWallet.js:21
 msgid "Not funds found"
 msgstr "Nenalezeny žádné prostředky"
 
@@ -703,8 +661,8 @@ msgstr "Oficiální vyloučení zodpovědnosti"
 msgid "Oh no!"
 msgstr "Ah ne!"
 
-#: src/js/controllers/tab-home.js:29 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:94
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:50
+#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr "Otevřít"
 
@@ -764,11 +722,11 @@ msgstr "Prosím opatrně opiště 64 seed. Klikni ke kopii do schránky."
 msgid "Please connect a camera to get started."
 msgstr "Ke startu prosím zapojte kameru."
 
-#: src/js/controllers/import.js:111
+#: src/js/controllers/import.js:113
 msgid "Please enter the seed"
-msgstr "Prosím vložte Váš seed"
+msgstr "Prosím zadejte Váš seed"
 
-#: src/js/controllers/import.js:93
+#: src/js/controllers/import.js:95
 msgid "Please, select your backup file"
 msgstr "Prosím označte Váš soubor se zálohou"
 
@@ -780,11 +738,11 @@ msgstr "Volby"
 msgid "Preparing addresses..."
 msgstr "Připravuji adresy..."
 
-#: src/js/controllers/export.js:124
+#: src/js/controllers/export.js:129
 msgid "Preparing backup..."
 msgstr "Připravuji zálohu..."
 
-#: src/js/routes.js:924
+#: src/js/routes.js:896
 msgid "Press again to exit"
 msgstr "Zmáčkněte znovu pro exit"
 
@@ -792,9 +750,9 @@ msgstr "Zmáčkněte znovu pro exit"
 msgid "Private Key"
 msgstr "Privátní klíč"
 
-#: src/js/controllers/paperWallet.js:133
+#: src/js/controllers/paperWallet.js:86
 msgid "Private key encrypted. Enter password"
-msgstr "Privátní klíč zašifrován. Vložte heslo"
+msgstr "Privátní klíč zašifrován. Zadejte heslo"
 
 #: www/views/onboarding/notifications.html:3
 msgid "Push Notifications"
@@ -816,10 +774,6 @@ msgstr "Hodnocení v App Store"
 msgid "Receive"
 msgstr "Přijmout"
 
-#: www/views/customAmount.html:44
-msgid "Receive in"
-msgstr "Přijato"
-
 #: www/views/tx-details.html:20
 msgid "Received"
 msgstr "Přijato"
@@ -840,14 +794,6 @@ msgstr "Poslední transakce"
 msgid "Recipient"
 msgstr "Příjemce"
 
-#: src/js/services/onGoingProcess.js:21
-msgid "Recreating Wallet..."
-msgstr "Vytvářím znovu peněženku..."
-
-#: src/js/services/onGoingProcess.js:22
-msgid "Rejecting payment proposal"
-msgstr "Zamítání návrhu platby"
-
 #: www/views/preferencesAbout.html:9
 msgid "Release information"
 msgstr "Uvolnit informace"
@@ -859,10 +805,6 @@ msgstr "Odstranit"
 #: www/views/onboarding/welcome.html:9
 msgid "Restore from backup"
 msgstr "Obnovit ze zálohy"
-
-#: src/js/services/onGoingProcess.js:24
-msgid "Retrieving inputs information"
-msgstr "Získávání zdrojových informací"
 
 #: src/js/controllers/onboarding/tour.js:86
 msgid "Retry"
@@ -925,7 +867,7 @@ msgid "Select a backup file"
 msgstr "Označte soubor zálohy"
 
 #: src/js/controllers/amount.js:40 src/js/controllers/amount.js:76
-#: src/js/controllers/tab-receive.js:90 src/js/controllers/tab-send.js:189
+#: src/js/controllers/tab-receive.js:79 src/js/controllers/tab-send.js:189
 #: src/js/controllers/tab-send.js:208
 msgid "Select an account"
 msgstr "Vybrat účet"
@@ -939,7 +881,7 @@ msgstr "Poslat"
 msgid "Send Feedback"
 msgstr "Poslat názor"
 
-#: www/views/includes/logOptions.html:17 www/views/tab-export-file.html:45
+#: www/views/includes/logOptions.html:17 www/views/tab-export-file.html:51
 msgid "Send by email"
 msgstr "Poslat přes email"
 
@@ -951,10 +893,6 @@ msgstr "Pošli z"
 msgid "Send max amount"
 msgstr "Poslat max. částku"
 
-#: www/views/includes/incomingDataMenu.html:46
-msgid "Send payment to this address"
-msgstr "Poslat platbu na tuto adresu"
-
 #: www/views/feedback/rateApp.html:17
 msgid "Send us feedback instead"
 msgstr "Pošlete nám raději Váš názor"
@@ -962,10 +900,6 @@ msgstr "Pošlete nám raději Váš názor"
 #: www/views/confirm.html:15
 msgid "Sending"
 msgstr "Posílání"
-
-#: src/js/services/onGoingProcess.js:33
-msgid "Sending 2FA code..."
-msgstr "Posílání 2FA kódu"
 
 #: src/js/services/onGoingProcess.js:31
 msgid "Sending feedback..."
@@ -993,11 +927,11 @@ msgstr "Servis"
 
 #: www/views/preferencesLogs.html:3
 msgid "Session Log"
-msgstr "Historie log"
+msgstr "Log historie"
 
-#: www/views/preferencesAbout.html:35
+#: www/views/preferencesAbout.html:40
 msgid "Session log"
-msgstr "Historie log"
+msgstr "Log historie"
 
 #: www/views/tab-settings.html:3 www/views/tabs.html:19
 msgid "Settings"
@@ -1082,7 +1016,7 @@ msgstr "To je zajímavé slyšet. Rádi bychom od Vás získali 5 hvězdičkové
 msgid "The seed"
 msgstr "Rychlost"
 
-#: src/js/controllers/import.js:115
+#: src/js/controllers/import.js:117
 msgid "The seed is invalid, it should be 64 characters of: 0-9, A-F"
 msgstr "Seed není správný. Správný obsahuje 64 znaků 0-9, A-F"
 
@@ -1090,7 +1024,7 @@ msgstr "Seed není správný. Správný obsahuje 64 znaků 0-9, A-F"
 msgid "The wallet server URL"
 msgstr "Server URL peněženky"
 
-#: src/js/controllers/import.js:106 src/js/controllers/import.js:85
+#: src/js/controllers/import.js:108 src/js/controllers/import.js:87
 msgid "There is an error in the form"
 msgstr "Chyba ve formuláři"
 
@@ -1121,11 +1055,7 @@ msgstr "Otisk prstu selhal"
 msgid "Transaction"
 msgstr "Transakce"
 
-#: src/js/controllers/tab-home.js:193
-msgid "Transaction not found"
-msgstr "Transakce nenalezena"
-
-#: src/js/controllers/paperWallet.js:107
+#: src/js/controllers/paperWallet.js:63
 msgid "Transfer to"
 msgstr "Přesun do"
 
@@ -1141,17 +1071,13 @@ msgstr "Zkuste znovu {{expires}}"
 msgid "Uh oh..."
 msgstr "Uh oh..."
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:173
 msgid "Update Available"
 msgstr "Dostupná aktualizace"
 
 #: www/views/activity.html:14
 msgid "Updating... Please stand by"
 msgstr "Aktualizuji...prosím čekejte"
-
-#: src/js/services/onGoingProcess.js:29
-msgid "Validating recovery phrase..."
-msgstr "Kontrola záložní fráze..."
 
 #: www/views/modals/fingerprintCheck.html:4
 msgid "Verify your identity"
@@ -1161,7 +1087,7 @@ msgstr "Potvrďte svou identitu"
 msgid "Version"
 msgstr "Verze"
 
-#: www/views/tab-export-file.html:32
+#: www/views/tab-export-file.html:38
 msgid "View"
 msgstr "Ukázat"
 
@@ -1169,7 +1095,7 @@ msgstr "Ukázat"
 msgid "View Terms of Service"
 msgstr "Ukázat podmínky o použití"
 
-#: src/js/controllers/tab-home.js:162
+#: src/js/controllers/tab-home.js:175
 msgid "View Update"
 msgstr "Ukázat aktualizace"
 
@@ -1190,7 +1116,7 @@ msgid "Wallet seed not available"
 msgstr "Seed peněženky není dostupný"
 
 #: src/js/controllers/addressbookView.js:43
-#: src/js/controllers/advancedSettings.js:38 src/js/controllers/import.js:150
+#: src/js/controllers/advancedSettings.js:38 src/js/controllers/import.js:152
 #: src/js/controllers/modals/password.js:73
 #: src/js/controllers/preferencesDelete.js:23
 #: www/views/preferencesDeleteWallet.html:11
@@ -1249,7 +1175,7 @@ msgstr "Obdržíte email s upozornění o odesláné, nebo přijaté platbě pen
 msgid "Your ideas, feedback, or comments"
 msgstr "Vaše nápady, myšlenky a komentáře"
 
-#: www/views/tab-export-file.html:11 www/views/tab-import-file.html:20
+#: www/views/tab-export-file.html:12 www/views/tab-import-file.html:20
 #: www/views/tab-import-phrase.html:30
 msgid "Your password"
 msgstr "Vaše heslo"
@@ -1258,12 +1184,8 @@ msgstr "Vaše heslo"
 msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "Vaše peněženka není nikdy uložena v Cloudu, nebo v běžné záloze zařízení."
 
-#: src/js/services/walletService.js:28
-msgid "Your wallet key will be encrypted. The Spending Password cannot be recovered. Be sure to write it down."
-msgstr "Váš klíč k peněžence bude zašifrován. Heslo k utrácení nemůže být obnoveno. Pamatujte, aby bylo zapsáno."
-
-#: www/views/accountDetails.html:42 www/views/amount.html:123
-#: www/views/includes/accountList.html:11
+#: www/views/accountDetails.html:42 www/views/amount.html:122
+#: www/views/includes/accountList.html:19
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
@@ -1277,16 +1199,16 @@ msgstr "Četl jsem, rozumím a souhlasím s <a ng-click=\"openTerms()\" href=\"j
 msgid "5-star ratings help us get Canoe into more hands, and more users means more resources can be committed to the app!"
 msgstr "5 hvězdičkové hodnocení pomůže dostat Canoe mezi více lidí a pomůže dalšímu rozvoji aplikace."
 
-#: www/views/changePassword.html:25
+#: www/views/changePassword.html:31
 msgid "At least 8 Characters. Make it good!"
 msgstr "Alespoň 8 znaků."
 
-#: www/views/changePassword.html:3 www/views/changePassword.html:62
+#: www/views/changePassword.html:3 www/views/changePassword.html:77
 #: www/views/preferencesSecurity.html:17
 msgid "Change Password"
 msgstr "Změna hesla"
 
-#: www/views/changePassword.html:33
+#: www/views/changePassword.html:43
 msgid "Confirm New Password"
 msgstr "Potvrďte heslo"
 
@@ -1298,7 +1220,7 @@ msgstr "Jak se Vám líbí Canoe?"
 msgid "Let's Start"
 msgstr "Začít"
 
-#: www/views/changePassword.html:23
+#: www/views/changePassword.html:28
 msgid "New Password"
 msgstr "Nové heslo"
 
@@ -1306,19 +1228,19 @@ msgstr "Nové heslo"
 msgid "Old Password"
 msgstr "Staré heslo"
 
-#: www/views/changePassword.html:35
+#: www/views/changePassword.html:46
 msgid "One more time."
 msgstr "Zopakovat"
 
-#: www/views/changePassword.html:49
+#: www/views/changePassword.html:64
 msgid "Password too short"
 msgstr "Heslo příliš krátké"
 
-#: www/views/changePassword.html:55
+#: www/views/changePassword.html:70
 msgid "Passwords don't match"
 msgstr "Hesla nesouhlasí"
 
-#: www/views/changePassword.html:45 www/views/onboarding/tour.html:106
+#: www/views/changePassword.html:60 www/views/onboarding/tour.html:106
 msgid "Passwords match"
 msgstr "Hesla souhlasí"
 
@@ -1330,17 +1252,17 @@ msgstr "Upozornění z Canoe jsou momentálně vypnuté, Zapnout v nastavení ap
 msgid "Share Canoe"
 msgstr "Sdílet Canoe"
 
-#: src/js/controllers/tab-home.js:54
+#: src/js/controllers/tab-home.js:52
 msgid "There is a new version of Canoe available"
 msgstr "Nové verze Canoe je dostupná"
 
 #: src/js/controllers/feedback/send.js:76
 msgid "We're always looking for ways to improve Canoe."
-msgstr "Vždy hledáme cesty jak vylepšit Canoe."
+msgstr "Vždy hledáme způsob jak vylepšit Canoe."
 
 #: src/js/controllers/feedback/send.js:82
 msgid "We're always looking for ways to improve Canoe. How could we improve your experience?"
-msgstr "Vždy hledáme cesty jak vylepšit Canoe. Jak můžeme vylepšit Vaše zkušenosti?"
+msgstr "Vždy hledáme způsob jak vylepšit Canoe. Jak můžeme využít Vaše zkušenosti?"
 
 #: www/views/feedback/rateApp.html:10
 msgid "Would you be willing to rate Canoe in the app store?"
@@ -1378,7 +1300,7 @@ msgstr "Upravit kontakt"
 
 #: www/views/tab-export-file.html:10
 msgid "Enter password"
-msgstr "Vložte heslo"
+msgstr "Zadejte heslo"
 
 #: www/views/modals/password.html:23
 msgid "Incorrect password, try again."
@@ -1424,7 +1346,7 @@ msgstr "Heslo k dešifrování"
 msgid "Password to encrypt"
 msgstr "Heslo k zašifrování"
 
-#: src/js/controllers/import.js:120
+#: src/js/controllers/import.js:122
 msgid "Please enter a password to use for the wallet"
 msgstr "Prosím zadejte heslo pro start peněženky"
 
@@ -1450,7 +1372,7 @@ msgstr "Abyste začali, potřebujete účet, na který příjmete Nano."
 
 #: www/views/preferencesAlias.html:12
 msgid "Type below to see if an alias is free to use."
-msgstr "Vyzkoušejte níže zda váš alia je neobsazený."
+msgstr "Vyzkoušejte níže zda váš alias je neobsazený."
 
 #: www/views/advancedSettings.html:12
 msgid "Use Server Side PoW"
@@ -1476,7 +1398,7 @@ msgstr "Vaše Nano peněženka je připravena!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Váš seed Nano peněženky je zálohován!"
 
-#: src/js/services/nanoService.js:651 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Účet"
@@ -1491,9 +1413,9 @@ msgstr "Potvrdit PIN"
 
 #: www/views/preferencesName.html:18
 msgid "Enter a descriptive name"
-msgstr "Vložte popisný název"
+msgstr "Zadejte popis"
 
-#: src/js/controllers/export.js:30
+#: src/js/controllers/export.js:35
 msgid "Failed to generate seed QR code"
 msgstr "Selhalo vytvoření SEED QR kódu"
 
@@ -1501,24 +1423,25 @@ msgstr "Selhalo vytvoření SEED QR kódu"
 msgid "Incorrect PIN, try again."
 msgstr "Špatný PIN, zkuste znovu"
 
-#: src/js/controllers/import.js:33
+#: src/js/controllers/import.js:35
 msgid "Incorrect code format for a seed:"
 msgstr "Špatný formát SEED kódu"
 
 #: src/js/controllers/changeLocksController.js:24
-#: src/js/controllers/changePasswordController.js:10
 #: src/js/controllers/changePasswordController.js:13
+#: src/js/controllers/changePasswordController.js:16
+#: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
 #: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr "Informace"
 
-#: src/js/controllers/import.js:43
+#: src/js/controllers/import.js:45
 msgid "Not a seed QR code:"
 msgstr "Ne QR seed kód"
 
 #: www/views/modals/pin.html:9
 msgid "Please enter your PIN"
-msgstr "Prosím vložte Váš PIN"
+msgstr "Prosím zadejte Váš PIN"
 
 #: www/views/tab-export-qrCode.html:7
 msgid "Scan this QR code to import seed into another application"
@@ -1528,11 +1451,11 @@ msgstr "Oskenujte QR kód k importu seed do další aplikace."
 msgid "Security Preferences"
 msgstr "Bezpečnostní preference"
 
-#: www/views/changePassword.html:15
+#: www/views/changePassword.html:16
 msgid "Your current password"
 msgstr "Vaše aktuální heslo"
 
-#: src/js/controllers/changePasswordController.js:13
+#: src/js/controllers/changePasswordController.js:16
 msgid "Your password has been changed"
 msgstr "Vaše bylo změněno"
 
@@ -1606,7 +1529,7 @@ msgstr "Pošli Nano okamžitě komukoli a kdykoli."
 msgid "Account Representative"
 msgstr "Účet representanta"
 
-#: src/js/controllers/confirm.js:368
+#: src/js/controllers/confirm.js:343
 msgid "Add to address book?"
 msgstr "Přidat do adresáře?"
 
@@ -1630,7 +1553,7 @@ msgstr "Vytvořit alias"
 msgid "Creating Alias..."
 msgstr "Vytvářím alias..."
 
-#: src/js/controllers/confirm.js:369
+#: src/js/controllers/confirm.js:344
 msgid "Do you want to add this new address to your address book?"
 msgstr "Chcete přidat tuto adresu do adresáře?"
 
@@ -1650,7 +1573,7 @@ msgstr "Email pro obnovu vašeho alias"
 msgid "Enter a representative account."
 msgstr "Vložte adresu representanta."
 
-#: src/js/controllers/import.js:62
+#: src/js/controllers/import.js:64
 msgid "Error importing wallet:"
 msgstr "Error import peněženky:"
 
@@ -1658,7 +1581,7 @@ msgstr "Error import peněženky:"
 msgid "How to buy Nano"
 msgstr "Jak koupit Nano"
 
-#: src/js/controllers/tab-settings.js:58
+#: src/js/controllers/tab-settings.js:60
 msgid "How to buy and sell Nano is described at the website."
 msgstr "Jak nakoupit a prodat Nano je popsáno na stránkách."
 
@@ -1715,7 +1638,7 @@ msgstr "Oficiální aknglické podmínky o servisu jsou dostupné na stránkách
 msgid "Valid Alias & Email"
 msgstr "Platný alias & email"
 
-#: src/js/controllers/tx-details.js:93
+#: src/js/controllers/tx-details.js:71
 msgid "View Block on Nanode"
 msgstr "Prohlídnout blok na Nanode"
 
@@ -1731,7 +1654,7 @@ msgstr "Jaký alias byste si chtěli rezervovat?"
 msgid "You can change your alias, email, or privacy settings."
 msgstr "Můžete změnit váš alias, email nebo osobní nastavení."
 
-#: src/js/controllers/changePasswordController.js:10
+#: src/js/controllers/changePasswordController.js:13
 msgid "Your old password was not entered correctly"
 msgstr "Vaše staré heslo nebylo zadáno správně"
 
@@ -1745,7 +1668,7 @@ msgstr "honzanovak"
 
 #: www/views/modals/password.html:6
 msgid "Canoe is Locked"
-msgstr "Canoe je zamčeno"
+msgstr "Canoe je uzamčeno"
 
 #: www/views/modals/password.html:39
 msgid "Forgot Password?"
@@ -1757,11 +1680,11 @@ msgstr "4-číselný PIN"
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your Nano."
-msgstr "Kdokoli s Vašim seed má přístup, nebo může utratit Nano."
+msgstr "Kdokoli s Vašim seed má přístup, nebo může utratit Vaše Nano."
 
 #: www/views/changeLocks.html:54
 msgid "Background Behaviour"
-msgstr "Chování na pozadí"
+msgstr "Přechod do pozadí"
 
 #: www/views/preferencesSecurity.html:22
 msgid "Change 4-digit PIN"
@@ -1789,7 +1712,7 @@ msgstr "Pevný časový limit"
 
 #: www/views/advancedSettings.html:14
 msgid "If enabled, Proof Of Work is delegated to the Canoe server side. This option is disabled and always true on mobile Canoe for now."
-msgstr "Pokud povoleno, důkaz prací je delegován na server Canoe. Tato možnost je vypnuta a prozatím vždy platí na mobilní verzi Canoe."
+msgstr "Pokud povoleno, důkaz prací (PoW) je delegován na server Canoe. Tato možnost prozatím nelze změnit na mobilní verzi Canoe."
 
 #: www/views/advancedSettings.html:32
 msgid "If enabled, a list of recent transactions across all wallets will appear in the Home tab. Currently false, not fully implemented."
@@ -1801,7 +1724,7 @@ msgstr "Zamknout při přechodu na pozadí"
 
 #: www/views/changeLocks.html:29 www/views/changeLocks.html:60
 msgid "None"
-msgstr "Žádný"
+msgstr "Ne"
 
 #: www/views/changeLocks.html:63 www/views/modals/password.html:12
 #: www/views/onboarding/tour.html:70
@@ -1818,7 +1741,7 @@ msgstr "Standby režim"
 
 #: www/views/changeLocks.html:27
 msgid "Soft Lock Type"
-msgstr "Standby type"
+msgstr "Standby typ"
 
 #: www/views/changeLocks.html:18
 msgid "Soft Timeout"
@@ -1838,7 +1761,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 "          S Hard Lock, Canoe zašifruje Vaši peněženku a kompletně ji odstraní z paměti. Režim Hard Lock nemůžete vypnout, ale můžete si nastavit libovolný čas k automatickému uzamčení."
 
-#: src/js/controllers/tab-home.js:161
+#: src/js/controllers/tab-home.js:174
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr "Je dostupná nová verze Canoe. Prosím proveďte update."
 
@@ -1854,19 +1777,15 @@ msgstr "Změnit backend"
 msgid "Change Backend Server"
 msgstr "Změna backend serveru"
 
-#: src/js/controllers/import.js:151
+#: src/js/controllers/import.js:153
 msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
-msgstr "Import peněženky odstraní Vaši aktuální peněženku a účty! Pokud máte nějaké prostředky ve své nynější peněžence, ujistěte se, že máte provedenu zálohu pro obnovu. Type \"Smazat\" k potvrzení rozhodnutí smazání Vaši peněženky."
+msgstr "Import peněženky odstraní Vaši aktuální peněženku a účty! Pokud máte nějaké prostředky ve své nynější peněžence, ujistěte se, že máte provedenu zálohu pro obnovu. Napiště \"delete\" k potvrzení rozhodnutí smazání Vaši peněženky."
 
-#: www/views/amount.html:54
+#: www/views/amount.html:53
 msgid "Max"
 msgstr "Max"
 
-#: src/js/services/nanoService.js:90
-msgid "Your backend has been changed"
-msgstr "Váš backend byl změněn"
-
-#: src/js/controllers/import.js:153 src/js/controllers/modals/password.js:76
+#: src/js/controllers/import.js:155 src/js/controllers/modals/password.js:76
 msgid "delete"
 msgstr "Smazat"
 
@@ -1880,59 +1799,97 @@ msgstr "Podvrďte heslo"
 
 #: src/js/controllers/modals/password.js:74
 msgid "Going back to onboarding will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
-msgstr "Přechod zpět na onboarding odstraní Vaši nynější peněženku i s účty! Pokud zde máte nějaké prostředky, tak se ujistěte, že máte zálohu k jejímu obnovení. Type \"delete\" pro potvrzení jejího smazání."
+msgstr "Přechod zpět na onboarding odstraní Vaši nynější peněženku i s účty! Pokud zde máte nějaké prostředky, tak se ujistěte, že máte zálohu k jejímu obnovení. Napište \"delete\" pro potvrzení jejího smazání."
 
-#: src/js/controllers/import.js:123
+#: src/js/controllers/import.js:125
 msgid "Please enter a password of at least 8 characters"
 msgstr "Prosím zadejte heslo s nejméně 8 znaky."
 
 #: www/views/advancedSettings.html:23
 msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr ""
+msgstr "Pokud zapnuto, bude přehrán zvuk když odešlete, přijmete, změníte representanta, nebo odemknete peněženku."
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
-msgstr ""
+msgstr "Přehled všech Vašich účtů. Podívejte se na <a ng-click=\"openExternalLinkHelp()\">FAQs</a> než začnete!"
 
 #: www/views/advancedSettings.html:21
 msgid "Play Sounds"
-msgstr ""
+msgstr "Přehrát zvuk"
 
 #: www/views/changeLocks.html:53
 msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
 "            <p translate=\"\">Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
-msgstr ""
+msgstr "<h5 class=\"toggle-label\" translate=\"\">Chování na pozadí</h5>\n"
+"            <p translate=\"\">Vyberte způsob uzamčení při kterém jde Canoe do pozadí. Pro vypnutí přechodu do pozadí zvolte Ne.</p>"
 
 #: www/views/changeLocks.html:13
 msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
 "          <p translate=\"\">With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints.</p>"
-msgstr ""
+msgstr "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
+"          <p translate=\"\">Se standby zámkem je Canoe uzamčeno, ale data nejsou v paměti zašifrována. Povolením Standby je možné použít jednodušší formy uzamčení jako PIN nebo otisk prstu</p>"
 
 #: www/views/changeLocks.html:55
 msgid "Choose the lock type to use when Canoe goes to the background. To disable background locking select None."
-msgstr ""
+msgstr "Vyberte způsob uzamčení při kterém jde Canoe do pozadí. Pro vypnutí přechodu do pozadí zvolte Nikdy."
 
 #: www/views/onboarding/tour.html:58
 msgid "Encryption Time!"
-msgstr ""
+msgstr "Probíhá šifrování!"
 
 #: www/views/onboarding/tour.html:84
 msgid "Enter at least 8 characters to encrypt your wallet."
-msgstr ""
+msgstr "Alespoň 8 znaků k zašifrování peněženky"
 
 #: www/views/onboarding/tour.html:87
 msgid "Password length ok"
-msgstr ""
+msgstr "Délka hesla ok"
 
 #: www/views/onboarding/tour.html:110
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Heslo nesouhlasí"
 
 #: www/views/modals/password.html:36
 msgid "Unlock"
-msgstr ""
+msgstr "Odemknout"
 
 #: www/views/changeLocks.html:15
 msgid "With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
+msgstr "Se standby zámkem je Canoe uzamčeno, ale data nejsou v paměti zašifrována. Povolením Standby zámku je možné použít jednodušší formy uzamčení jako PIN nebo otisk prstu"
+
+#: www/views/attributions.html:3 www/views/preferencesAbout.html:35
+msgid "Attributions"
+msgstr "Attributions"
+
+#: src/js/services/incomingData.js:118
+msgid "Block was scanned and sent successfully"
+msgstr "Blok naskenován a úspěšně odeslán"
+
+#: src/js/services/incomingData.js:120
+msgid "Block was scanned but failed to process:"
+msgstr "Blok naskenován ale chyba:"
+
+#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
+msgid "Failed connecting to backend"
+msgstr "Chyba v připojení na backend"
+
+#: src/js/services/nanoService.js:42
+msgid "Failed connecting to backend, no network?"
+msgstr "Chyba v připojení na backend, žádné připojení?"
+
+#: src/js/services/nanoService.js:90
+msgid "Successfully connected to backend"
+msgstr "Úspěšně připojeno k backend"
+
+#: www/views/includes/incomingDataMenu.html:29
+msgid "Nano Account"
+msgstr "Nano účet"
+
+#: www/views/includes/incomingDataMenu.html:46
+msgid "Send Nano to this address"
+msgstr "Poslat Nano na tuto adresu"
+
+#: www/views/tab-settings.html:143
+msgid "Please load Nano to donate"
 msgstr ""
 

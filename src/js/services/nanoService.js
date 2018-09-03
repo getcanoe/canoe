@@ -1,7 +1,7 @@
 'use strict'
-/* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai */
+/* global angular XMLHttpRequest pow_initiate pow_callback Paho RAI Rai ionic bigInt */
 angular.module('canoeApp.services')
-  .factory('nanoService', function ($log, $rootScope, $window, $state, $ionicHistory, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
+  .factory('nanoService', function ($log, $rootScope, $window, $state, $ionicHistory, $timeout, configService, popupService, soundService, platformInfo, storageService, gettextCatalog, aliasService, rateService, lodash) {
     var root = {}
 
     // This config is controlled over retained MQTT
@@ -33,15 +33,15 @@ angular.module('canoeApp.services')
 
     root.connectRPC = function (cb) {
       try {
-        $log.debug('Connecting RPC to ' + host)
+        $log.debug('Connecting to ' + host)
         rai = new Rai(host) // connection
         rai.initialize()
         if (cb) cb()
       } catch (e) {
         rai = null
-        $log.warn('Failed to initialize server connection, no network?', e)
-        // Try again
-        setTimeout(function () { root.connectRPC() }, 5000)
+        var msg = gettextCatalog.getString('Failed connecting to backend, no network?')
+        $log.warn(msg, e)
+        if (cb) cb(msg)
       }
     }
 
@@ -87,7 +87,7 @@ angular.module('canoeApp.services')
         host = 'https://' + url + '/rpc'
         // Force relogin etc
         root.connectNetwork(function () {
-          popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Your backend has been changed'))
+          popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Successfully connected to backend'))
           $ionicHistory.removeBackView()
           $state.go('tabs.home')
         })
@@ -104,6 +104,7 @@ angular.module('canoeApp.services')
     // This function calls itself every sec and scans
     // for pending blocks or precalcs in need of work.
     function generatePoW () {
+      $rootScope.$emit('work', null)
       // No wallet, no dice
       if (root.wallet === null) {
         return setTimeout(generatePoW, 1000)
@@ -119,6 +120,7 @@ angular.module('canoeApp.services')
             // Wallet may be purged from RAM, so need to check
             if (work && root.wallet) {
               root.wallet.addWorkToPrecalc(accAndHash.account, accAndHash.hash, work)
+              $rootScope.$emit('work', root.wallet.getPoW())
               root.saveWallet(root.wallet, function () {})
             }
             setTimeout(generatePoW, 1000)
@@ -132,6 +134,7 @@ angular.module('canoeApp.services')
           // Wallet may be purged from RAM, so need to check
           if (work && root.wallet) {
             root.wallet.addWorkToPendingBlock(hash, work)
+            $rootScope.$emit('work', root.wallet.getPoW())
             root.saveWallet(root.wallet, function () {})
           }
           setTimeout(generatePoW, 1000)
@@ -230,11 +233,28 @@ angular.module('canoeApp.services')
 
     root.connectNetwork = function (cb) {
       // Makes sure we have the right backend for RPC
-      root.connectRPC(function () {
-        // Make sure we have an account for this wallet on the server side
-        root.createServerAccount(root.wallet)
-        root.disconnect() // Makes sure we are disconnected from MQTT
-        root.startMQTT(cb)
+      root.connectRPC(function (err) {
+        if (err) {
+          $timeout(function () {
+            popupService.showAlert(gettextCatalog.getString('Failed connecting to backend'), err)
+            $ionicHistory.removeBackView()
+            $state.go('tabs.home')
+          }, 1000)
+        } else {
+          // Make sure we have an account for this wallet on the server side
+          root.createServerAccount(root.wallet, function (err) {
+            if (err) {
+              $timeout(function () {
+                popupService.showAlert(gettextCatalog.getString('Failed connecting to backend'), err)
+                $ionicHistory.removeBackView()
+                $state.go('tabs.home')
+              }, 1000)
+            } else {
+              root.disconnect() // Makes sure we are disconnected from MQTT
+              root.startMQTT(cb)
+            }
+          })
+        }
       })
     }
 
@@ -297,7 +317,7 @@ angular.module('canoeApp.services')
       } else {
         var lastBlock = currentBlocks[currentBlocks.length - 1]
         // Are the last hashes the same
-        if (lastHash && lastBlock) 
+        if (lastHash && lastBlock)
         var ourLastHash = currentBlocks.pop().hash
         if (lastHash === ourLastHash) {
           return
@@ -342,15 +362,8 @@ angular.module('canoeApp.services')
           // State logic
           if (block.type === 'state') {
             block.state = true
-            if (block.subtype === 'send') {
-              block.send = true
+            block.account = info.contents.account
             }
-            // For some reason account is not included in subtype change
-            // if (block.subtype === 'change') {
-            //   block.account = info.contents.account
-            // }
-            block.account = info.contents.account //
-          }
           var blk = wallet.createBlockFromJSON(block)
           if (blk.getHash(true) !== hash) {
             console.log('WRONG HASH')
@@ -422,14 +435,7 @@ angular.module('canoeApp.services')
           // State logic
           if (block.type === 'state') {
             block.state = true
-            if (block.subtype === 'send') {
-              block.send = true
-            }
-            // For some reason account is not included in subtype change
-            // if (block.subtype === 'change') {
-            //   block.account = info.contents.account
-            // }
-            block.account = info.contents.account //
+            block.account = info.contents.account
           }
           var blk = wallet.createBlockFromJSON(block)
           if (blk.getHash(true) !== hash) {
@@ -458,6 +464,9 @@ angular.module('canoeApp.services')
         //   wallet.addBlockToReadyBlocks(b)
         // })
         // wallet.enableBroadcast(false) // Turn off
+      } else {
+        // Empty it from blocks
+        wallet.resetChain(account)
       }
     }
 
@@ -489,7 +498,7 @@ angular.module('canoeApp.services')
     // Synchronous call that currently returns hash if it succeeded, null otherwise
     // TODO make async
     root.broadcastBlock = function (blk) {
-      return root.processBlockJSON(blk.getJSONBlock())      
+      return root.processBlockJSON(blk.getJSONBlock())
     }
 
     root.processBlockJSON = function (json) {
@@ -506,7 +515,6 @@ angular.module('canoeApp.services')
       var code = {}
       var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'nanoseed', 'xrbkey', 'nanokey', 'xrbblock', 'nanoblock']
       try {
-        //var parts = data.split(':')
         var parts = data.match(/^([a-z]+):(.*)/) // Match protocol:whatever
         if (!parts) {
           // No match,  perhaps a bare account, alias, seed? TODO bare key
@@ -657,12 +665,18 @@ angular.module('canoeApp.services')
     }
 
     // Create a corresponding account in the server for this wallet
-    root.createServerAccount = function (wallet) {
+    root.createServerAccount = function (wallet, cb) {
       $log.debug('Creating server account for wallet ' + wallet.getId())
-      var json = rai.create_server_account(wallet.getId(), wallet.getToken(), wallet.getTokenPass())
+      var meta = {
+        platform: ionic.Platform.platform(),
+        platformVersion: ionic.Platform.version()
+      }
+      var json = rai.create_server_account(wallet.getId(), wallet.getToken(), wallet.getTokenPass(), 'canoe', $window.version, meta)
       if (json.error) {
-        $log.debug('Error from creating server account: ' + json.error)
-        throw new Error(json.error)
+        $log.debug('Error creating server account: ' + json.error + ' ' + json.message)
+        cb(json.message)
+      } else {
+        cb(null)
       }
     }
 
@@ -956,7 +970,10 @@ angular.module('canoeApp.services')
       }
 
       // Check for existing block already
-      var existingBlock = root.wallet.getBlockFromHashAndAccount(hash, account)
+      var existingBlock = null
+      if (root.hasAccount(account)) {
+        existingBlock = root.wallet.getBlockFromHashAndAccount(hash, account)
+      }
 
       // Switch on block type
       switch (blkType) {
@@ -971,7 +988,6 @@ angular.module('canoeApp.services')
                 root.confirmBlock(existingBlock, hash, timestamp)
               } else {
                 // or another wallet using same seed
-                blk2.send = true
                 root.importBlock(blk2, account)
               }
             }

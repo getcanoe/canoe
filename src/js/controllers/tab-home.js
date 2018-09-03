@@ -1,10 +1,8 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('tabHomeController',
-  function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicModal, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, walletService, configService, $log, platformInfo, storageService, appConfigService, startupService, addressbookService, feedbackService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
-    var wallet
+  function ($rootScope, $timeout, $scope, $state, $stateParams, $ionicScrollDelegate, $window, gettextCatalog, lodash, popupService, ongoingProcess, externalLinkService, latestReleaseService, profileService, configService, $log, platformInfo, storageService, appConfigService, startupService, addressbookService, feedbackService, buyAndSellService, homeIntegrationsService, pushNotificationsService, timeService) {
     var listeners = []
-    var notifications = []
     $scope.externalServices = {}
     $scope.version = $window.version
     $scope.name = appConfigService.nameCase
@@ -115,6 +113,21 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
             getNotifications()
           }
         }),
+        $rootScope.$on('work', function (event) {
+          $scope.work = profileService.getPoW()
+          if ($scope.work) {
+            for (var i = 0; i < $scope.accounts.length; i++) {
+              if ($scope.work[$scope.accounts[i].id] && ($scope.accounts[i].work === null || typeof $scope.accounts[i].work === "undefined")) {
+                console.log("Work found for wallet " + i)
+                $scope.accounts[i].work = $scope.work[$scope.accounts[i].id]
+              } else if (!$scope.work[$scope.accounts[i].id]) {
+                console.log("Work is null for " + i)
+                $scope.accounts[i].work = null
+                $scope.$apply()
+              }
+            }
+          }
+        }),
         $rootScope.$on('blocks', function (event, account) {
           if (account === null) {
             $scope.accounts = profileService.getAccounts()
@@ -169,6 +182,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       externalLinkService.open(url)
     }
 
+    /*
     $scope.openNotificationModal = function (n) {
       wallet = profileService.getAccount(n.walletId)
 
@@ -196,7 +210,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
           })
         }
       }
-    }
+    } */
 
     $scope.openAccount = function (account) {
       $state.go('tabs.account', {
@@ -209,33 +223,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       $scope.accounts = profileService.getAccounts()
       $scope.$apply()
     })
-/*
-    var updateTxps = function () {
-      profileService.getTxps({
-        limit: 3
-      }, function (err, txps, n) {
-        if (err) $log.error(err)
-        $scope.txps = txps
-        $scope.txpsN = n
-        $timeout(function () {
-          $ionicScrollDelegate.resize()
-          $scope.$apply()
-        }, 10)
-      })
-    }
-
-    var updateAccount = function (account) {
-      $log.debug('Updating account:' + account.name)
-      walletService.getStatus(account, {}, function (err, status) {
-        if (err) {
-          $log.error(err)
-          return
-        }
-        account.status = status
-        updateTxps()
-      })
-    }
-*/
 
     var getNotifications = function () {
       profileService.getNotifications({
@@ -256,7 +243,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
 
     var performUpdate = function (cb) {
       $scope.accounts = profileService.getAccounts()
-      // TODO Call and check server message regularly some other way
       $scope.serverMessage = null
     }
 

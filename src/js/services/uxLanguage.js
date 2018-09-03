@@ -11,11 +11,17 @@ angular.module('canoeApp.services')
       name: 'العربية',
       isoCode: 'ar' // Arabic
     }, {
+      name: 'български език',
+      isoCode: 'bg' // Bulgarian
+    }, {
       name: 'Čeština',
       isoCode: 'cs' // Czech
     }, {
       name: 'Dansk',
       isoCode: 'da' // Danish
+    }, {
+      name: 'Deutsch',
+      isoCode: 'de' // German
     }, {
       name: 'English',
       isoCode: 'en' // English
@@ -28,6 +34,9 @@ angular.module('canoeApp.services')
     }, {
       name: 'Français',
       isoCode: 'fr' // French
+    }, {
+      name: 'עברית',
+      isoCode: 'he' // Hebrew
     }, {
       name: 'Hrvatski jezik',
       isoCode: 'hr' // Croatian
@@ -50,19 +59,25 @@ angular.module('canoeApp.services')
       name: 'Português',
       isoCode: 'pt' // Portuguese
     }, {
-      name: 'Deutsch',
-      isoCode: 'de' // German
+      name: 'Português (Brazil)',
+      isoCode: 'pt-br' // Portuguese Brazil
+    }, {
+      name: 'Română',
+      isoCode: 'ro' // Romanian
     }, {
       name: '日本語',
       isoCode: 'ja', // Japanese
       useIdeograms: true
     }, {
       name: '中文（简体）',
-      isoCode: 'zh', // Chinese
+      isoCode: 'zh', // Chinese Simplified
       useIdeograms: true
     }, {
       name: 'Pусский',
       isoCode: 'ru' // Russian
+    }, {
+      name: 'Slovenčina',
+      isoCode: 'sk' // Slovak
     }, {
       name: 'Svenska',
       isoCode: 'sv' // Swedish

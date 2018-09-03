@@ -1,6 +1,6 @@
 'use strict'
-/* global angular */
-angular.module('canoeApp.controllers').controller('amountController', function ($scope, $filter, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, aliasService, $stateParams, $window, $state, $log, txFormatService, ongoingProcess, popupService, profileService, nodeWebkitService, storageService) {
+/* global angular BigNumber */
+angular.module('canoeApp.controllers').controller('amountController', function ($scope, $timeout, $ionicScrollDelegate, $ionicHistory, gettextCatalog, platformInfo, lodash, configService, aliasService, $stateParams, $window, $state, $log, profileService, nodeWebkitService, storageService) {
   var _id
   var unitToRaw
   var rawToUnit
@@ -60,9 +60,9 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     $scope.toAlias = data.stateParams.toAlias
     $scope.fromAddress = data.stateParams.fromAddress
     aliasService.getAvatar(data.stateParams.toAlias, function(err, avatar) {
-      $scope.toAvatar = avatar;
-      $scope.$apply();
-    });
+      $scope.toAvatar = avatar
+      $scope.$apply()
+    })
     $scope.accounts = profileService.getAccounts()
     $scope.singleAccount = $scope.accounts.length === 1
     $scope.hasAccounts = !lodash.isEmpty($scope.accounts)
@@ -129,7 +129,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       storageService.getAmountInputDefaultCurrency(function (err, amountInputDefaultCurrency) {
         config.amountInputDefaultCurrency = amountInputDefaultCurrency ? amountInputDefaultCurrency : 'NANO'
       })
-      if (!config.amountInputDefaultCurrency || config.amountInputDefaultCurrency == 'NANO'){
+      if (!config.amountInputDefaultCurrency || config.amountInputDefaultCurrency === 'NANO') {
         unitIndex = 0
         altUnitIndex = 1
       } else {
