@@ -92,6 +92,7 @@ angular.module('canoeApp.controllers').controller('passwordController', function
     profileService.enteredPassword(currentPassword)
     // Now we try to load wallet and if it fails, ask user again
     profileService.loadWallet(function (err) {
+      window.rfid_wallet_locked=false;
       ongoingProcess.set('decryptingWallet', false)
       if (profileService.getWallet()) {
         $scope.hideModal()

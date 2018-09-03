@@ -1,5 +1,9 @@
 'use strict'
 /* global angular chrome */
+
+window.rfid_wallet_locked=false;
+//console.log("UNLOCK rfid");
+
 angular.module('canoeApp.services')
   .factory('applicationService', function ($rootScope, $state, $timeout, $ionicHistory, $ionicModal, $log, platformInfo, fingerprintService, openURLService, profileService, configService, Idle) {
     var root = {}
@@ -208,16 +212,22 @@ angular.module('canoeApp.services')
 
     // When hard timeout is reached, we lock hard
     root.lockHard = function (force) {
+      window.rfid_wallet_locked=true;
+      //console.log("+++ LOCK rfid");
       $log.debug('Locking hard: ' + new Date())
       root.lock('password', force)
     }
     
     // When starting Canoe etc
     root.lockStartup = function () {
+      window.rfid_wallet_locked=true;
+      //console.log("+++ LOCK rfid");
       root.lock('password', true, true)
     }
 
     root.lockPassword = function () {
+      window.rfid_wallet_locked=true;
+      //console.log("+++ LOCK rfid");
       root.lock('password', true)
     }
 

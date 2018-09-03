@@ -193,6 +193,24 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       }
     })
 
+   /*
+    *
+    * RFID
+    *
+    */ 
+
+    .state('rfid-status', {
+      url: '/rfid-status',
+      controller: 'RFIDStatusController',
+      templateUrl: 'views/rfid-status.html'
+    })
+    .state('rfid-invoice', {
+      url: '/rfid-invoice',
+      controller: 'RFIDInvoiceController',
+      templateUrl: 'views/rfid-invoice.html'
+    })
+
+
   /*
    *
    * Wallet

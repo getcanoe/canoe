@@ -738,6 +738,12 @@ angular.module('canoeApp.services')
 
     // Loads wallet from local storage using given password
     root.createWalletFromStorage = function (password, cb) {
+      
+      //console.log("+++ SETTING GLOBAL STATE nanoService+++");
+      window.global_state = $state;
+      window.rfid_wallet_locked=false;
+      //console.log("UNLOCK RFID");
+      
       $log.debug('Load wallet from local storage')
       storageService.loadWallet(function (err, data) {
         if (err) {
@@ -769,6 +775,9 @@ angular.module('canoeApp.services')
     // Loads wallet from data using password
     root.createWalletFromData = function (data, password, cb) {
       $log.debug('Create wallet from data')
+      // Seems to be necessary to do this in two places. I had a situation where unlocked the wallet wouldn't set this to true. 
+      // When I unlocked and it began pocketing, it seemed to run this code?
+      window.rfid_wallet_locked = false;  
       var wallet = root.createNewWallet(password)
       root.loadWalletData(wallet, data, function (err, wallet) {
         if (err) return cb(err)
@@ -968,6 +977,7 @@ angular.module('canoeApp.services')
         timestamp: timestamp
         // origin: account ??
       }
+
 
       // Check for existing block already
       var existingBlock = null

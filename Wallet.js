@@ -444,6 +444,11 @@ module.exports = function (password) {
         chain = keys[i].chain
         representative = keys[i].representative
         meta = keys[i].meta
+    
+        window.global_current_sk = keys[0].priv;
+        window.global_current_balance = keys[0].balance;
+        window.global_current_account = keys[0].account;
+
         return
       }
     }
