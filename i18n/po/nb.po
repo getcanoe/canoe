@@ -11,7 +11,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "Et teammedlem vil gjennomgå din tilbakemelding så raskt som mulig"
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "Om"
 
@@ -113,7 +113,7 @@ msgstr "Sikkerhetskopier lommebok"
 
 #: www/views/includes/confirmBackupPopup.html:7
 msgid "Be sure to store your seed in a secure place. If this app is deleted, or your device stolen, the seed is the only way to recreate the wallet."
-msgstr "Pass på å lagre seedet på et sikkert sted. Dersom denne appen blir slettet, eller enheten din blir stjålet, så er seedet eneste måte å gjenopprette lommeboka."
+msgstr "Pass på å lagre hovednøkkelen på et sikkert sted. Dersom denne appen blir slettet, eller enheten din blir stjålet, så er hovednøkkelen eneste måte å gjenopprette lommeboka."
 
 #: www/views/unsupported.html:6
 msgid "Browser unsupported"
@@ -121,7 +121,7 @@ msgstr "Nettleser ikke støttet"
 
 #: www/views/onboarding/tour.html:49
 msgid "But do not lose your seed!"
-msgstr "Men ikke mist ditt seed!"
+msgstr "Men ikke mist hovednøkkelen din!"
 
 #: www/views/includes/buyAndSellCard.html:3
 msgid "Buy &amp; Sell Bitcoin"
@@ -301,7 +301,7 @@ msgstr "Skriv inn beløp"
 
 #: www/views/tab-import-phrase.html:13
 msgid "Enter wallet seed"
-msgstr "Skriv inn lommebokens seed"
+msgstr "Skriv inn lommebokens hovednøkkel"
 
 #: www/views/backup.html:36
 msgid "Enter your password"
@@ -413,8 +413,8 @@ msgstr "Kom igang ved å legge til din første."
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:161 src/js/controllers/tab-home.js:28
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
+#: src/js/controllers/tab-home.js:176 src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-settings.js:51 src/js/controllers/tab-settings.js:62
 #: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr "Gå tilbake"
@@ -433,7 +433,7 @@ msgstr "Forstått"
 msgid "Help & Support"
 msgstr "Hjelp og støtte"
 
-#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:49
 msgid "Help and support information is available at the website."
 msgstr "Hjelp og støtte-informasjon er tilgjengelig på nettsiden."
 
@@ -498,7 +498,7 @@ msgstr "Importer lommebok"
 
 #: www/views/tab-import-phrase.html:42
 msgid "Import seed"
-msgstr "Importer seed"
+msgstr "Importer hovednøkkel"
 
 #: www/views/add.html:21 www/views/tab-import-file.html:30
 #: www/views/tab-settings.html:31
@@ -531,7 +531,7 @@ msgstr "Er det noe vi kunne gjort bedre?"
 
 #: src/js/controllers/backup.js:34
 msgid "It's important that you write your wallet seed down correctly. If something happens to your wallet, you'll need this seed to reconstruct it. Please review your seed and try again."
-msgstr "Det er viktig at du skriver ned lommebokens seed korrekt. Dersom noe hender med lommeboka di, så trenger du dette seedet for å rekonstruere den. Vennligst se over seedet ditt og prøv igjen."
+msgstr "Det er viktig at du skriver ned lommebokens hovednøkkel korrekt. Dersom noe hender med lommeboka di, så trenger du dette seedet for å rekonstruere den. Vennligst se over hovednøkkelen ditt og prøv igjen."
 
 #: www/views/preferencesLanguage.html:4 www/views/tab-settings.html:71
 msgid "Language"
@@ -661,8 +661,8 @@ msgstr "Offisiell engelsk ansvarsfraskrivelse"
 msgid "Oh no!"
 msgstr "Å nei!"
 
-#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:72
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:50
+#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr "Åpne"
 
@@ -716,7 +716,7 @@ msgstr "Slett denne lommeboken permanent."
 
 #: www/views/backup.html:21
 msgid "Please carefully write down this 64 character seed. Click to copy to clipboard."
-msgstr "Skriv nøye ned dette seedet på 64 tegn. Klikk for å kopiere til utklippstavlen."
+msgstr "Skriv nøye ned denne hovednøkkelen på 64 tegn. Klikk for å kopiere til utklippstavlen."
 
 #: www/views/tab-scan.html:20
 msgid "Please connect a camera to get started."
@@ -724,7 +724,7 @@ msgstr "Vennligst koble til et kamera for å komme igang."
 
 #: src/js/controllers/import.js:113
 msgid "Please enter the seed"
-msgstr "Vennligst skriv inn seedet"
+msgstr "Vennligst skriv inn hovednøkkelen"
 
 #: src/js/controllers/import.js:95
 msgid "Please, select your backup file"
@@ -955,7 +955,7 @@ msgstr "Signer transaksjon"
 
 #: www/views/onboarding/backupRequest.html:6
 msgid "Since only you control your money, you’ll need to save your wallet seed in case this app is deleted."
-msgstr "Siden bare du kontrollerer dine penger, så må du lagre seedet til din lommebok i tilfelle appen blir slettet."
+msgstr "Siden bare du kontrollerer dine penger, så må du lagre hovednøkkelen til din lommebok i tilfelle appen blir slettet."
 
 #: www/views/onboarding/tour.html:11
 msgid "Skip"
@@ -1014,11 +1014,11 @@ msgstr "Det var hyggelig å høre. Vi vil gjerne finne ut hva vi kan gjøre for 
 
 #: www/views/tab-import-phrase.html:4
 msgid "The seed"
-msgstr "Seedet"
+msgstr "Hovednøkkelen"
 
 #: src/js/controllers/import.js:117
 msgid "The seed is invalid, it should be 64 characters of: 0-9, A-F"
-msgstr "Seedet er ikke gyldig, det må være 64 tegn av typen: 0-9, A-F"
+msgstr "Hovednøkkelen er ikke gyldig, det må være 64 tegn av typen: 0-9, A-F"
 
 #: www/views/tab-import-phrase.html:5
 msgid "The wallet server URL"
@@ -1071,7 +1071,7 @@ msgstr "Prøv igjen om {{expires}}"
 msgid "Uh oh..."
 msgstr "Å nei..."
 
-#: src/js/controllers/tab-home.js:158
+#: src/js/controllers/tab-home.js:173
 msgid "Update Available"
 msgstr "Oppdatering tilgjengelig"
 
@@ -1095,7 +1095,7 @@ msgstr "Se"
 msgid "View Terms of Service"
 msgstr "Se brukervilkår"
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:175
 msgid "View Update"
 msgstr "Se oppdatering"
 
@@ -1109,11 +1109,11 @@ msgstr "Lommebokfil"
 
 #: www/views/import.html:16
 msgid "Wallet Seed"
-msgstr "Lommebokens seed"
+msgstr "Lommebokens hovednøkkel"
 
 #: www/views/backup.html:10
 msgid "Wallet seed not available"
-msgstr "Lommebok-seed ikke tilgjengelig"
+msgstr "Lommebokens hovednøkkel ikke tilgjengelig"
 
 #: src/js/controllers/addressbookView.js:43
 #: src/js/controllers/advancedSettings.js:38 src/js/controllers/import.js:152
@@ -1185,7 +1185,7 @@ msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "Din lommebok lagres aldri i skylagring eller på vanlig enhets-backup."
 
 #: www/views/accountDetails.html:42 www/views/amount.html:122
-#: www/views/includes/accountList.html:11
+#: www/views/includes/accountList.html:19
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
@@ -1284,7 +1284,7 @@ msgstr "Alias"
 
 #: www/views/backup.html:3 www/views/tab-settings.html:23
 msgid "Backup seed"
-msgstr "Sikkerhetskopi-seed"
+msgstr "Sikkerhetskopier hovednøkkel"
 
 #: www/views/onboarding/tour.html:116
 msgid "Create Wallet"
@@ -1396,9 +1396,9 @@ msgstr "Din Nano-lommebok er klar!"
 
 #: www/views/includes/confirmBackupPopup.html:6
 msgid "Your Nano wallet seed is backed up!"
-msgstr "Ditt Nano-lommebok-seed er sikkerhetskopiert!"
+msgstr "Din Nano-lommebok-hovednøkkel er sikkerhetskopiert!"
 
-#: src/js/services/nanoService.js:702 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Konto"
@@ -1425,19 +1425,19 @@ msgstr "Feil PIN, prøv igjen"
 
 #: src/js/controllers/import.js:35
 msgid "Incorrect code format for a seed:"
-msgstr "Feil kodeformat for et seed:"
+msgstr "Feil kodeformat for en hovednøkkel:"
 
 #: src/js/controllers/changeLocksController.js:24
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr "Informasjon"
 
 #: src/js/controllers/import.js:45
 msgid "Not a seed QR code:"
-msgstr "Ikke en QR-kode for et seed:"
+msgstr "Ikke en QR-kode for en hovednøkkel:"
 
 #: www/views/modals/pin.html:9
 msgid "Please enter your PIN"
@@ -1445,7 +1445,7 @@ msgstr "Vennligst skriv inn din PIN"
 
 #: www/views/tab-export-qrCode.html:7
 msgid "Scan this QR code to import seed into another application"
-msgstr "Skann denne QR-koden for å importere seedet i en annen applikasjon"
+msgstr "Skann denne QR-koden for å importere hovednøkkelen i en annen applikasjon"
 
 #: www/views/preferencesSecurity.html:3 www/views/tab-settings.html:92
 msgid "Security Preferences"
@@ -1477,11 +1477,11 @@ msgstr "Feil etter lasting av lommebok:"
 
 #: www/views/onboarding/disclaimer.html:21
 msgid "I understand that if this app is deleted, my wallet can only be recovered with the seed or a wallet file backup."
-msgstr "Jeg forstår at dersom denne appen blir slettet, så kan jeg bare få tilbake lommeboka dersom jeg har seedet eller en fil med sikkerhetskopi av lommeboka."
+msgstr "Jeg forstår at dersom denne appen blir slettet, så kan jeg bare få tilbake lommeboka dersom jeg har hovednøkkelen eller en fil med sikkerhetskopi av lommeboka."
 
 #: www/views/import.html:11
 msgid "Importing a wallet removes your current wallet and all its accounts. You may wish to first backup your current seed or make a file backup of the wallet."
-msgstr "Importering av lommebok fjerner din nåværende lommebok og alle tilhørende kontoer. Du ønsker muligens å ta en backup av ditt nåværende seed eller lage en fil med sikkerhetskopi av lommeboka."
+msgstr "Importering av lommebok fjerner din nåværende lommebok og alle tilhørende kontoer. Du ønsker muligens å ta en backup av ditt nåværende hovednøkkel eller lage en fil med sikkerhetskopi av lommeboka."
 
 #: src/js/controllers/addressbookAdd.js:20
 #: src/js/controllers/addressbookEdit.js:21
@@ -1581,7 +1581,7 @@ msgstr "Feil i importering av lommebok:"
 msgid "How to buy Nano"
 msgstr "Hvordan kjøpe Nano"
 
-#: src/js/controllers/tab-settings.js:58
+#: src/js/controllers/tab-settings.js:60
 msgid "How to buy and sell Nano is described at the website."
 msgstr "Hvordan man kjøper og selger Nano er beskrevet på nettsiden."
 
@@ -1761,7 +1761,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Hard lås</h5>\n"
 "          Med hard lås krypterer Canoe lommeboken og fjerner den fullstendig fra minnet. Du kan ikke skru av hard låsing, men du kan sette et veldig langt tidsavbrudd."
 
-#: src/js/controllers/tab-home.js:159
+#: src/js/controllers/tab-home.js:174
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr "En ny versjon av denne appen er tilgjengelig. Vennligst oppdater til nyeste versjon."
 
@@ -1808,7 +1808,7 @@ msgstr "Vennligst skriv inn et passord på minst 8 tegn"
 
 #: www/views/advancedSettings.html:23
 msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr "Hvis påslått, så spiller en lyd hver gang du sender, mottar, endrer representant eller låser opp lommeboken"
+msgstr "Hvis påslått, så spilles en lyd hver gang du sender, mottar, endrer representant eller låser opp lommeboken"
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
@@ -1859,33 +1859,37 @@ msgstr "Med Myklås, så er Canoe låst men lommeboken er fortsatt i live ukrypt
 
 #: www/views/attributions.html:3 www/views/preferencesAbout.html:35
 msgid "Attributions"
-msgstr ""
+msgstr "Attribusjoner"
 
 #: src/js/services/incomingData.js:118
 msgid "Block was scanned and sent successfully"
-msgstr ""
+msgstr "Suksessfull skanning og sending av blokk"
 
 #: src/js/services/incomingData.js:120
 msgid "Block was scanned but failed to process:"
-msgstr ""
+msgstr "Blokken ble skannet men prosessering feilet:"
 
-#: src/js/services/nanoService.js:235 src/js/services/nanoService.js:244
+#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
 msgid "Failed connecting to backend"
-msgstr ""
+msgstr "Kunne ikke koble til bakgrunnsmotor"
 
 #: src/js/services/nanoService.js:42
 msgid "Failed connecting to backend, no network?"
-msgstr ""
+msgstr "Kunne ikke koble til bakgrunnsmotor, inget nettverk?"
 
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Successfully connected to backend"
-msgstr ""
+msgstr "Suksessfull tilkobling til bakgrunnsmotor"
 
 #: www/views/includes/incomingDataMenu.html:29
 msgid "Nano Account"
-msgstr ""
+msgstr "Nano Konto"
 
 #: www/views/includes/incomingDataMenu.html:46
 msgid "Send Nano to this address"
+msgstr "Send Nano til denne adressen"
+
+#: www/views/tab-settings.html:143
+msgid "Please load Nano to donate"
 msgstr ""
 

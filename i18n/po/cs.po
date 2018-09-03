@@ -11,7 +11,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "Člen týmu posoudí tvůj feed back co nejdříve."
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "O aplikaci"
 
@@ -301,7 +301,7 @@ msgstr "Vyplňte sumu"
 
 #: www/views/tab-import-phrase.html:13
 msgid "Enter wallet seed"
-msgstr "Vložte seed peněženky"
+msgstr "Zadejte seed peněženky"
 
 #: www/views/backup.html:36
 msgid "Enter your password"
@@ -413,8 +413,8 @@ msgstr "Pojďme začít přidáním prvního."
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:161 src/js/controllers/tab-home.js:28
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
+#: src/js/controllers/tab-home.js:176 src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-settings.js:51 src/js/controllers/tab-settings.js:62
 #: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr "Zpět"
@@ -433,7 +433,7 @@ msgstr "Rozumím"
 msgid "Help & Support"
 msgstr "Pomoc & Podpora"
 
-#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:49
 msgid "Help and support information is available at the website."
 msgstr "Podpora a pomoc je dostupná na webových stránkách"
 
@@ -661,8 +661,8 @@ msgstr "Oficiální vyloučení zodpovědnosti"
 msgid "Oh no!"
 msgstr "Ah ne!"
 
-#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:72
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:50
+#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr "Otevřít"
 
@@ -724,7 +724,7 @@ msgstr "Ke startu prosím zapojte kameru."
 
 #: src/js/controllers/import.js:113
 msgid "Please enter the seed"
-msgstr "Prosím vložte Váš seed"
+msgstr "Prosím zadejte Váš seed"
 
 #: src/js/controllers/import.js:95
 msgid "Please, select your backup file"
@@ -752,7 +752,7 @@ msgstr "Privátní klíč"
 
 #: src/js/controllers/paperWallet.js:86
 msgid "Private key encrypted. Enter password"
-msgstr "Privátní klíč zašifrován. Vložte heslo"
+msgstr "Privátní klíč zašifrován. Zadejte heslo"
 
 #: www/views/onboarding/notifications.html:3
 msgid "Push Notifications"
@@ -927,11 +927,11 @@ msgstr "Servis"
 
 #: www/views/preferencesLogs.html:3
 msgid "Session Log"
-msgstr "Historie log"
+msgstr "Log historie"
 
 #: www/views/preferencesAbout.html:40
 msgid "Session log"
-msgstr "Historie log"
+msgstr "Log historie"
 
 #: www/views/tab-settings.html:3 www/views/tabs.html:19
 msgid "Settings"
@@ -1071,7 +1071,7 @@ msgstr "Zkuste znovu {{expires}}"
 msgid "Uh oh..."
 msgstr "Uh oh..."
 
-#: src/js/controllers/tab-home.js:158
+#: src/js/controllers/tab-home.js:173
 msgid "Update Available"
 msgstr "Dostupná aktualizace"
 
@@ -1095,7 +1095,7 @@ msgstr "Ukázat"
 msgid "View Terms of Service"
 msgstr "Ukázat podmínky o použití"
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:175
 msgid "View Update"
 msgstr "Ukázat aktualizace"
 
@@ -1185,7 +1185,7 @@ msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "Vaše peněženka není nikdy uložena v Cloudu, nebo v běžné záloze zařízení."
 
 #: www/views/accountDetails.html:42 www/views/amount.html:122
-#: www/views/includes/accountList.html:11
+#: www/views/includes/accountList.html:19
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
@@ -1258,11 +1258,11 @@ msgstr "Nové verze Canoe je dostupná"
 
 #: src/js/controllers/feedback/send.js:76
 msgid "We're always looking for ways to improve Canoe."
-msgstr "Vždy hledáme cesty jak vylepšit Canoe."
+msgstr "Vždy hledáme způsob jak vylepšit Canoe."
 
 #: src/js/controllers/feedback/send.js:82
 msgid "We're always looking for ways to improve Canoe. How could we improve your experience?"
-msgstr "Vždy hledáme cesty jak vylepšit Canoe. Jak můžeme vylepšit Vaše zkušenosti?"
+msgstr "Vždy hledáme způsob jak vylepšit Canoe. Jak můžeme využít Vaše zkušenosti?"
 
 #: www/views/feedback/rateApp.html:10
 msgid "Would you be willing to rate Canoe in the app store?"
@@ -1300,7 +1300,7 @@ msgstr "Upravit kontakt"
 
 #: www/views/tab-export-file.html:10
 msgid "Enter password"
-msgstr "Vložte heslo"
+msgstr "Zadejte heslo"
 
 #: www/views/modals/password.html:23
 msgid "Incorrect password, try again."
@@ -1372,7 +1372,7 @@ msgstr "Abyste začali, potřebujete účet, na který příjmete Nano."
 
 #: www/views/preferencesAlias.html:12
 msgid "Type below to see if an alias is free to use."
-msgstr "Vyzkoušejte níže zda váš alia je neobsazený."
+msgstr "Vyzkoušejte níže zda váš alias je neobsazený."
 
 #: www/views/advancedSettings.html:12
 msgid "Use Server Side PoW"
@@ -1398,7 +1398,7 @@ msgstr "Vaše Nano peněženka je připravena!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Váš seed Nano peněženky je zálohován!"
 
-#: src/js/services/nanoService.js:702 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Účet"
@@ -1413,7 +1413,7 @@ msgstr "Potvrdit PIN"
 
 #: www/views/preferencesName.html:18
 msgid "Enter a descriptive name"
-msgstr "Vložte popisný název"
+msgstr "Zadejte popis"
 
 #: src/js/controllers/export.js:35
 msgid "Failed to generate seed QR code"
@@ -1431,7 +1431,7 @@ msgstr "Špatný formát SEED kódu"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr "Informace"
 
@@ -1441,7 +1441,7 @@ msgstr "Ne QR seed kód"
 
 #: www/views/modals/pin.html:9
 msgid "Please enter your PIN"
-msgstr "Prosím vložte Váš PIN"
+msgstr "Prosím zadejte Váš PIN"
 
 #: www/views/tab-export-qrCode.html:7
 msgid "Scan this QR code to import seed into another application"
@@ -1581,7 +1581,7 @@ msgstr "Error import peněženky:"
 msgid "How to buy Nano"
 msgstr "Jak koupit Nano"
 
-#: src/js/controllers/tab-settings.js:58
+#: src/js/controllers/tab-settings.js:60
 msgid "How to buy and sell Nano is described at the website."
 msgstr "Jak nakoupit a prodat Nano je popsáno na stránkách."
 
@@ -1668,7 +1668,7 @@ msgstr "honzanovak"
 
 #: www/views/modals/password.html:6
 msgid "Canoe is Locked"
-msgstr "Canoe je zamčeno"
+msgstr "Canoe je uzamčeno"
 
 #: www/views/modals/password.html:39
 msgid "Forgot Password?"
@@ -1680,11 +1680,11 @@ msgstr "4-číselný PIN"
 
 #: www/views/backupWarning.html:14
 msgid "Anyone with your seed can access or spend your Nano."
-msgstr "Kdokoli s Vašim seed má přístup, nebo může utratit Nano."
+msgstr "Kdokoli s Vašim seed má přístup, nebo může utratit Vaše Nano."
 
 #: www/views/changeLocks.html:54
 msgid "Background Behaviour"
-msgstr "Chování na pozadí"
+msgstr "Přechod do pozadí"
 
 #: www/views/preferencesSecurity.html:22
 msgid "Change 4-digit PIN"
@@ -1712,7 +1712,7 @@ msgstr "Pevný časový limit"
 
 #: www/views/advancedSettings.html:14
 msgid "If enabled, Proof Of Work is delegated to the Canoe server side. This option is disabled and always true on mobile Canoe for now."
-msgstr "Pokud povoleno, důkaz prací je delegován na server Canoe. Tato možnost je vypnuta a prozatím vždy platí na mobilní verzi Canoe."
+msgstr "Pokud povoleno, důkaz prací (PoW) je delegován na server Canoe. Tato možnost prozatím nelze změnit na mobilní verzi Canoe."
 
 #: www/views/advancedSettings.html:32
 msgid "If enabled, a list of recent transactions across all wallets will appear in the Home tab. Currently false, not fully implemented."
@@ -1724,7 +1724,7 @@ msgstr "Zamknout při přechodu na pozadí"
 
 #: www/views/changeLocks.html:29 www/views/changeLocks.html:60
 msgid "None"
-msgstr "Žádný"
+msgstr "Ne"
 
 #: www/views/changeLocks.html:63 www/views/modals/password.html:12
 #: www/views/onboarding/tour.html:70
@@ -1741,7 +1741,7 @@ msgstr "Standby režim"
 
 #: www/views/changeLocks.html:27
 msgid "Soft Lock Type"
-msgstr "Standby type"
+msgstr "Standby typ"
 
 #: www/views/changeLocks.html:18
 msgid "Soft Timeout"
@@ -1761,7 +1761,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 "          S Hard Lock, Canoe zašifruje Vaši peněženku a kompletně ji odstraní z paměti. Režim Hard Lock nemůžete vypnout, ale můžete si nastavit libovolný čas k automatickému uzamčení."
 
-#: src/js/controllers/tab-home.js:159
+#: src/js/controllers/tab-home.js:174
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr "Je dostupná nová verze Canoe. Prosím proveďte update."
 
@@ -1779,7 +1779,7 @@ msgstr "Změna backend serveru"
 
 #: src/js/controllers/import.js:153
 msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
-msgstr "Import peněženky odstraní Vaši aktuální peněženku a účty! Pokud máte nějaké prostředky ve své nynější peněžence, ujistěte se, že máte provedenu zálohu pro obnovu. Type \"Smazat\" k potvrzení rozhodnutí smazání Vaši peněženky."
+msgstr "Import peněženky odstraní Vaši aktuální peněženku a účty! Pokud máte nějaké prostředky ve své nynější peněžence, ujistěte se, že máte provedenu zálohu pro obnovu. Napiště \"delete\" k potvrzení rozhodnutí smazání Vaši peněženky."
 
 #: www/views/amount.html:53
 msgid "Max"
@@ -1799,7 +1799,7 @@ msgstr "Podvrďte heslo"
 
 #: src/js/controllers/modals/password.js:74
 msgid "Going back to onboarding will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
-msgstr "Přechod zpět na onboarding odstraní Vaši nynější peněženku i s účty! Pokud zde máte nějaké prostředky, tak se ujistěte, že máte zálohu k jejímu obnovení. Type \"delete\" pro potvrzení jejího smazání."
+msgstr "Přechod zpět na onboarding odstraní Vaši nynější peněženku i s účty! Pokud zde máte nějaké prostředky, tak se ujistěte, že máte zálohu k jejímu obnovení. Napište \"delete\" pro potvrzení jejího smazání."
 
 #: src/js/controllers/import.js:125
 msgid "Please enter a password of at least 8 characters"
@@ -1807,83 +1807,89 @@ msgstr "Prosím zadejte heslo s nejméně 8 znaky."
 
 #: www/views/advancedSettings.html:23
 msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr ""
+msgstr "Pokud zapnuto, bude přehrán zvuk když odešlete, přijmete, změníte representanta, nebo odemknete peněženku."
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
-msgstr ""
+msgstr "Přehled všech Vašich účtů. Podívejte se na <a ng-click=\"openExternalLinkHelp()\">FAQs</a> než začnete!"
 
 #: www/views/advancedSettings.html:21
 msgid "Play Sounds"
-msgstr ""
+msgstr "Přehrát zvuk"
 
 #: www/views/changeLocks.html:53
 msgid "<h5 class=\"toggle-label\" translate=\"\">Background Behaviour</h5>\n"
 "            <p translate=\"\">Choose the lock type to use when Canoe goes to the background. To disable background locking select None.</p>"
-msgstr ""
+msgstr "<h5 class=\"toggle-label\" translate=\"\">Chování na pozadí</h5>\n"
+"            <p translate=\"\">Vyberte způsob uzamčení při kterém jde Canoe do pozadí. Pro vypnutí přechodu do pozadí zvolte Ne.</p>"
 
 #: www/views/changeLocks.html:13
 msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
 "          <p translate=\"\">With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints.</p>"
-msgstr ""
+msgstr "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
+"          <p translate=\"\">Se standby zámkem je Canoe uzamčeno, ale data nejsou v paměti zašifrována. Povolením Standby je možné použít jednodušší formy uzamčení jako PIN nebo otisk prstu</p>"
 
 #: www/views/changeLocks.html:55
 msgid "Choose the lock type to use when Canoe goes to the background. To disable background locking select None."
-msgstr ""
+msgstr "Vyberte způsob uzamčení při kterém jde Canoe do pozadí. Pro vypnutí přechodu do pozadí zvolte Nikdy."
 
 #: www/views/onboarding/tour.html:58
 msgid "Encryption Time!"
-msgstr ""
+msgstr "Probíhá šifrování!"
 
 #: www/views/onboarding/tour.html:84
 msgid "Enter at least 8 characters to encrypt your wallet."
-msgstr ""
+msgstr "Alespoň 8 znaků k zašifrování peněženky"
 
 #: www/views/onboarding/tour.html:87
 msgid "Password length ok"
-msgstr ""
+msgstr "Délka hesla ok"
 
 #: www/views/onboarding/tour.html:110
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Heslo nesouhlasí"
 
 #: www/views/modals/password.html:36
 msgid "Unlock"
-msgstr ""
+msgstr "Odemknout"
 
 #: www/views/changeLocks.html:15
 msgid "With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints."
-msgstr ""
+msgstr "Se standby zámkem je Canoe uzamčeno, ale data nejsou v paměti zašifrována. Povolením Standby zámku je možné použít jednodušší formy uzamčení jako PIN nebo otisk prstu"
 
 #: www/views/attributions.html:3 www/views/preferencesAbout.html:35
 msgid "Attributions"
-msgstr ""
+msgstr "Attributions"
 
 #: src/js/services/incomingData.js:118
 msgid "Block was scanned and sent successfully"
-msgstr ""
+msgstr "Blok naskenován a úspěšně odeslán"
 
 #: src/js/services/incomingData.js:120
 msgid "Block was scanned but failed to process:"
-msgstr ""
+msgstr "Blok naskenován ale chyba:"
 
-#: src/js/services/nanoService.js:235 src/js/services/nanoService.js:244
+#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
 msgid "Failed connecting to backend"
-msgstr ""
+msgstr "Chyba v připojení na backend"
 
 #: src/js/services/nanoService.js:42
 msgid "Failed connecting to backend, no network?"
-msgstr ""
+msgstr "Chyba v připojení na backend, žádné připojení?"
 
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Successfully connected to backend"
-msgstr ""
+msgstr "Úspěšně připojeno k backend"
 
 #: www/views/includes/incomingDataMenu.html:29
 msgid "Nano Account"
-msgstr ""
+msgstr "Nano účet"
 
 #: www/views/includes/incomingDataMenu.html:46
 msgid "Send Nano to this address"
+msgstr "Poslat Nano na tuto adresu"
+
+#: www/views/tab-settings.html:143
+msgid "Please load Nano to donate"
 msgstr ""
 

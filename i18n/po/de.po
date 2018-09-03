@@ -11,7 +11,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "Ein Teammitglied wird dein Feedback so bald wie möglich überprüfen."
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "Über"
 
@@ -414,8 +414,8 @@ msgstr "Starte, indem du dein erstes hinzufügst."
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:161 src/js/controllers/tab-home.js:28
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
+#: src/js/controllers/tab-home.js:176 src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-settings.js:51 src/js/controllers/tab-settings.js:62
 #: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr "Zurück"
@@ -434,7 +434,7 @@ msgstr "Habe verstanden"
 msgid "Help & Support"
 msgstr "Hilfe & Support"
 
-#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:49
 msgid "Help and support information is available at the website."
 msgstr "Hilfe und Support-Informationen gibt es auf der Website."
 
@@ -662,8 +662,8 @@ msgstr "Offizieller englischer Haftungsausschluss"
 msgid "Oh no!"
 msgstr "Oh nein!"
 
-#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:72
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:50
+#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr "Öffnen"
 
@@ -1072,7 +1072,7 @@ msgstr "Versuche es erneut in {{expires}}"
 msgid "Uh oh..."
 msgstr "Oh oh..."
 
-#: src/js/controllers/tab-home.js:158
+#: src/js/controllers/tab-home.js:173
 msgid "Update Available"
 msgstr "Aktualisierung verfügbar"
 
@@ -1096,7 +1096,7 @@ msgstr "Ansicht"
 msgid "View Terms of Service"
 msgstr "Nutzungsbedingungen anzeigen"
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:175
 msgid "View Update"
 msgstr "Aktualisierungen anzeigen"
 
@@ -1186,7 +1186,7 @@ msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "Dein Wallet wird nie auf einem Cloud-Speicher oder einem Standard-Geräte-Backup gespeichert."
 
 #: www/views/accountDetails.html:42 www/views/amount.html:122
-#: www/views/includes/accountList.html:11
+#: www/views/includes/accountList.html:19
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
@@ -1399,7 +1399,7 @@ msgstr "Dein Nano-Wallet ist bereit!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Dein Wallet Seed ist gesichert!"
 
-#: src/js/services/nanoService.js:702 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Adresse"
@@ -1432,7 +1432,7 @@ msgstr "Falsches Format für eine Seed:"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr "Information"
 
@@ -1582,7 +1582,7 @@ msgstr "Fehler beim Importieren des Wallets:"
 msgid "How to buy Nano"
 msgstr "Nanos kaufen"
 
-#: src/js/controllers/tab-settings.js:58
+#: src/js/controllers/tab-settings.js:60
 msgid "How to buy and sell Nano is described at the website."
 msgstr "Wie man Nanos kaufen und verkaufen kann, wird auf der Webseite erklärt."
 
@@ -1762,7 +1762,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Ruhezustand</h5>\n"
 "    Im Ruhezustand wird dein Wallet verschlüsselt und komplett aus dem Speicher entfernt."
 
-#: src/js/controllers/tab-home.js:159
+#: src/js/controllers/tab-home.js:174
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr "Eine neue Version der App ist verfügbar. Bitte aktualisiere auf die neueste Version."
 
@@ -1874,7 +1874,7 @@ msgstr "Block wurde gescannt und erfolgreich versendet"
 msgid "Block was scanned but failed to process:"
 msgstr "Block wurde gescannt, konnte aber nicht verarbeitet werden"
 
-#: src/js/services/nanoService.js:235 src/js/services/nanoService.js:244
+#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
 msgid "Failed connecting to backend"
 msgstr "Verbindung zum Server fehlgeschlagen"
 
@@ -1882,7 +1882,7 @@ msgstr "Verbindung zum Server fehlgeschlagen"
 msgid "Failed connecting to backend, no network?"
 msgstr "Verbindung zum Server fehlgeschlagen, keine Netzwerkverbindung?"
 
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Successfully connected to backend"
 msgstr "Erfolgreich mit dem Server verbunden"
 
@@ -1893,4 +1893,8 @@ msgstr "Nano Konto"
 #: www/views/includes/incomingDataMenu.html:46
 msgid "Send Nano to this address"
 msgstr "Sende Nano zu dieser Addresse"
+
+#: www/views/tab-settings.html:143
+msgid "Please load Nano to donate"
+msgstr ""
 

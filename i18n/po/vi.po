@@ -11,7 +11,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "Một thành viên của đội ngũ phát triển sẽ xem xét hồi đáp của bạn sớm nhất có thể."
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "Về"
 
@@ -413,8 +413,8 @@ msgstr "Bắt đầu bằng việc thêm vào cái đầu tiên của bạn."
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:161 src/js/controllers/tab-home.js:28
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
+#: src/js/controllers/tab-home.js:176 src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-settings.js:51 src/js/controllers/tab-settings.js:62
 #: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr "Quay Lại"
@@ -433,7 +433,7 @@ msgstr "Đã nhận được"
 msgid "Help & Support"
 msgstr "Giúp đỡ & Hỗ trợ"
 
-#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:49
 msgid "Help and support information is available at the website."
 msgstr "Nội dung giúp đỡ và hỗ trợ hiện có trên website."
 
@@ -661,8 +661,8 @@ msgstr "Từ chối Trách nhiệm"
 msgid "Oh no!"
 msgstr "Ồ không!"
 
-#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:72
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:50
+#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr "Mở"
 
@@ -1071,7 +1071,7 @@ msgstr "Thử lại trong {{expires}}"
 msgid "Uh oh..."
 msgstr "Ôi trời..."
 
-#: src/js/controllers/tab-home.js:158
+#: src/js/controllers/tab-home.js:173
 msgid "Update Available"
 msgstr "Có cập nhật mới"
 
@@ -1095,7 +1095,7 @@ msgstr "Xem"
 msgid "View Terms of Service"
 msgstr "Xem điều khoản Dịch vụ"
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:175
 msgid "View Update"
 msgstr "Xem cập nhật"
 
@@ -1185,7 +1185,7 @@ msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "Ví của bạn sẽ không bao giờ được lưu trên mạng hay các thiết bị lưu trữ,"
 
 #: www/views/accountDetails.html:42 www/views/amount.html:122
-#: www/views/includes/accountList.html:11
+#: www/views/includes/accountList.html:19
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
@@ -1398,7 +1398,7 @@ msgstr "Ví Nano của bạn đã sẵn sàng!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Chìa khóa Ví Nano của bạn đã được lưu!"
 
-#: src/js/services/nanoService.js:702 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Tài khoản"
@@ -1431,7 +1431,7 @@ msgstr "ĐỊnh dạng chìa khóa sai."
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr "Thông tin"
 
@@ -1581,7 +1581,7 @@ msgstr "Lỗi khi nhập Ví:"
 msgid "How to buy Nano"
 msgstr "Mua Nano bằng cách nào"
 
-#: src/js/controllers/tab-settings.js:58
+#: src/js/controllers/tab-settings.js:60
 msgid "How to buy and sell Nano is described at the website."
 msgstr "Làm sao để mua và bán Nano được hướng dẫn tại website."
 
@@ -1761,7 +1761,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 "          Với khóa cứng, Canoe mã hóa ví của bạn và xóa hoàn toàn khỏi bộ nhớ Ram. Bạn không thể tắt khóa cứng, nhưng bạn có thể đặt thời gian chờ khóa."
 
-#: src/js/controllers/tab-home.js:159
+#: src/js/controllers/tab-home.js:174
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr "Một bản cập nhật mới của ứng dụng này đã có. Vui lòng cập nhật lên bản mới nhât."
 
@@ -1867,7 +1867,7 @@ msgstr ""
 msgid "Block was scanned but failed to process:"
 msgstr ""
 
-#: src/js/services/nanoService.js:235 src/js/services/nanoService.js:244
+#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
 msgid "Failed connecting to backend"
 msgstr ""
 
@@ -1875,7 +1875,7 @@ msgstr ""
 msgid "Failed connecting to backend, no network?"
 msgstr ""
 
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Successfully connected to backend"
 msgstr ""
 
@@ -1885,5 +1885,9 @@ msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:46
 msgid "Send Nano to this address"
+msgstr ""
+
+#: www/views/tab-settings.html:143
+msgid "Please load Nano to donate"
 msgstr ""
 
