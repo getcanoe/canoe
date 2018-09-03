@@ -1,0 +1,18 @@
+<ion-view id="tab-rfid-status" class="rfid-status" show-tabs>
+  <ion-nav-bar class="bar-royal">
+    <ion-nav-title>{{'RFID Status' | translate}}</ion-nav-title>
+  </ion-nav-bar>
+
+  <ion-content ng-controller="RFIDStatusController">
+    <h2 ng-value="rfid_status_headline='Default headline'" ng-bind="rfid_status_headline_text">
+      {{rfid_status_headline}}
+    </h2>
+    <p ng-value="rfid_status_message='Default message'" ng-bind="rfid_status_message_text">
+      {{rfid_status_message}}
+    </p>
+    <br/>
+    <br/>
+    <br/>
+	  <button style="width:60%; margin: auto;" ng-click='statusReturn()' type="button">{{rfid_status_button_text}}</button> 
+  </ion-content>
+</ion-view>

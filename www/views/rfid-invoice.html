@@ -1,0 +1,40 @@
+<ion-view id="tab-rfid-invoice" class="rfid-invoice" show-tabs>
+  	<ion-nav-bar class="bar-royal">
+    	<ion-nav-title>{{'RFID Invoice' | translate}}</ion-nav-title>
+  	</ion-nav-bar>
+
+  	<ion-content ng-controller="RFIDInvoiceController">
+    	<h2>{{'New RFID Invoice' | translate}}</h2>
+    	<p>
+    		<table style="width:90%; margin: auto;">
+    			<tr>
+    				<td><span>{{'Store name' | translate}}</span></td>
+			    	<td><span ng-bind="rfid_invoice_storename_value"></span></td>			    	
+			    </tr>
+
+    			<tr>
+    				<td><span>{{'Amount Nano' | translate}}</span></td>
+			    	<td><span ng-bind="rfid_invoice_amount_nano_value"></span></td>
+			    </tr>
+
+			    <tr>
+	    			<td><span>{{'Amount' | translate}}</span>&nbsp;<span ng-bind="rfid_invoice_local_currency"></span></td>
+    				<td><span ng-bind="rfid_invoice_local_currency_value"></span></td>
+    			</tr>
+
+    			<tr>
+    				<td><span>{{'Exchange rate' | translate}}</span></td>
+    				<td><span ng-bind="rfid_invoice_exchange_rate_value"></span></td>
+    			</tr>
+    		</table>
+    	</p>
+        <br/>
+        <br/>
+        <br/>
+		<button style="width:60%; margin: auto;" ng-click='invoiceCancel()' type="button">CANCEL</button>
+        <br/>
+        <br/>
+        <br/>
+		<button style="width:60%; margin: auto;" ng-click='invoicePay()' type="button">PAY</button> 
+	</ion-content>
+</ion-view>
