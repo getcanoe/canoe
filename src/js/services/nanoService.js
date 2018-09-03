@@ -970,7 +970,10 @@ angular.module('canoeApp.services')
       }
 
       // Check for existing block already
-      var existingBlock = root.wallet.getBlockFromHashAndAccount(hash, account)
+      var existingBlock = null
+      if (root.hasAccount(account)) {
+        existingBlock = root.wallet.getBlockFromHashAndAccount(hash, account)
+      }
 
       // Switch on block type
       switch (blkType) {
