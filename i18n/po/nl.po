@@ -11,7 +11,7 @@ msgstr ""
 msgid "A member of the team will review your feedback as soon as possible."
 msgstr "Een lid van het team zal zo spoedig mogelijk je feedback bekijken."
 
-#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:150
+#: src/js/controllers/preferencesAbout.js:5 www/views/tab-settings.html:151
 msgid "About"
 msgstr "Over"
 
@@ -414,8 +414,8 @@ msgstr "Begin met toevoegen van je eerste adres"
 #: src/js/controllers/onboarding/terms.js:23
 #: src/js/controllers/preferencesAbout.js:15
 #: src/js/controllers/preferencesLanguage.js:13
-#: src/js/controllers/tab-home.js:161 src/js/controllers/tab-home.js:28
-#: src/js/controllers/tab-settings.js:49 src/js/controllers/tab-settings.js:60
+#: src/js/controllers/tab-home.js:176 src/js/controllers/tab-home.js:28
+#: src/js/controllers/tab-settings.js:51 src/js/controllers/tab-settings.js:62
 #: src/js/controllers/tx-details.js:73
 msgid "Go Back"
 msgstr "Terug"
@@ -434,7 +434,7 @@ msgstr "Duidelijk"
 msgid "Help & Support"
 msgstr "Hulp & Ondersteuning"
 
-#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:47
+#: src/js/controllers/tab-home.js:26 src/js/controllers/tab-settings.js:49
 msgid "Help and support information is available at the website."
 msgstr "Hulp en ondersteuning is beschikbaar op de website."
 
@@ -662,8 +662,8 @@ msgstr "Officiële Engelse Disclaimer"
 msgid "Oh no!"
 msgstr "O nee!"
 
-#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:48
-#: src/js/controllers/tab-settings.js:59 src/js/controllers/tx-details.js:72
+#: src/js/controllers/tab-home.js:27 src/js/controllers/tab-settings.js:50
+#: src/js/controllers/tab-settings.js:61 src/js/controllers/tx-details.js:72
 msgid "Open"
 msgstr "Openen"
 
@@ -1073,7 +1073,7 @@ msgstr "Probeer het nogmaals over {{expires}}"
 msgid "Uh oh..."
 msgstr "Oh oh..."
 
-#: src/js/controllers/tab-home.js:158
+#: src/js/controllers/tab-home.js:173
 msgid "Update Available"
 msgstr "Update Beschikbaar"
 
@@ -1097,7 +1097,7 @@ msgstr "Weergeven"
 msgid "View Terms of Service"
 msgstr "Toon Algemene Voorwaarden"
 
-#: src/js/controllers/tab-home.js:160
+#: src/js/controllers/tab-home.js:175
 msgid "View Update"
 msgstr "Update Bekijken"
 
@@ -1187,7 +1187,7 @@ msgid "Your wallet is never saved to cloud storage or standard device backups."
 msgstr "Je wallet wordt nooit opgeslagen in de cloud of in standaard apparaat back-ups."
 
 #: www/views/accountDetails.html:42 www/views/amount.html:122
-#: www/views/includes/accountList.html:11
+#: www/views/includes/accountList.html:19
 #: www/views/includes/accountSelector.html:18 www/views/paperWallet.html:33
 #: www/views/tab-receive.html:41 www/views/tab-send.html:101
 msgid "[Balance Hidden]"
@@ -1401,7 +1401,7 @@ msgstr "Jouw Nano Wallet is gereed!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Jouw Nano Wallet seed is geback-upt!"
 
-#: src/js/services/nanoService.js:702 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Rekening"
@@ -1434,7 +1434,7 @@ msgstr "Onjuiste seed:"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Information"
 msgstr "Informatie"
 
@@ -1586,7 +1586,7 @@ msgstr "Error bij het importeren van wallet:"
 msgid "How to buy Nano"
 msgstr "Hoe Nano te kopen"
 
-#: src/js/controllers/tab-settings.js:58
+#: src/js/controllers/tab-settings.js:60
 msgid "How to buy and sell Nano is described at the website."
 msgstr "Hoe Nano te kopen en verkopen is beschreven op de website."
 
@@ -1767,7 +1767,7 @@ msgid "<h5 class=\"toggle-label\" translate=\"\">Hard Lock</h5>\n"
 msgstr "<h5 class=\"toggle-label\" translate=\"\">Harde vergrendeling</h5>\n"
 "Met een harde vergrendeling wordt je wallet versleuteld en uit het geheugen gehaald. Harde vergrendeling kan nooit worden uitgeschakeld, maar wel op een hoge time-out gezet worden."
 
-#: src/js/controllers/tab-home.js:159
+#: src/js/controllers/tab-home.js:174
 msgid "A new version of this app is available. Please update to the latest version."
 msgstr "Een nieuwe versie van Canoe is beschikbaar. Update naar de laatste versie."
 
@@ -1873,7 +1873,7 @@ msgstr ""
 msgid "Block was scanned but failed to process:"
 msgstr ""
 
-#: src/js/services/nanoService.js:235 src/js/services/nanoService.js:244
+#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
 msgid "Failed connecting to backend"
 msgstr ""
 
@@ -1881,7 +1881,7 @@ msgstr ""
 msgid "Failed connecting to backend, no network?"
 msgstr ""
 
-#: src/js/services/nanoService.js:89
+#: src/js/services/nanoService.js:90
 msgid "Successfully connected to backend"
 msgstr ""
 
@@ -1891,5 +1891,9 @@ msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:46
 msgid "Send Nano to this address"
+msgstr ""
+
+#: www/views/tab-settings.html:143
+msgid "Please load Nano to donate"
 msgstr ""
 
