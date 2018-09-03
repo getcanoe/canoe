@@ -118,4 +118,7 @@
     <engine name="windows" spec="6.0.0" />
     <engine name="ios" spec="^4.5.4" />
     <engine name="android" spec="^7.1.0" />
+    <plugin name="cordova-plugin-hce" spec="git+https://github.com/getcanoe/cordova-plugin-hce.git">
+        <variable name="AID_FILTER" value="F2A731D87C" />
+    </plugin>
 </widget>
