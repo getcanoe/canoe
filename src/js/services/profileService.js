@@ -80,7 +80,7 @@ angular.module('canoeApp.services')
     // Return a URI for the seed given the password
     root.getSeedURI = function (pwd) {
       // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
-      return 'xrbseed:' + root.getWallet().getSeed(pwd) + '?lastindex=' + (root.getWallet().getAccountIds().length - 1)
+      return 'eurseed:' + root.getWallet().getSeed(pwd) + '?lastindex=' + (root.getWallet().getAccountIds().length - 1)
     }
 
     // Return an object with wallet member holding the encrypted hex of wallet

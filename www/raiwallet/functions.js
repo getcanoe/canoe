@@ -20,11 +20,11 @@ function accountFromHexKey (hex) {
   var key_bytes = uint4_uint8(hex_uint4(hex))
   var checksum = uint5_string(uint4_uint5(uint8_uint4(blake2b(key_bytes, null, 5).reverse())))
   var c_account = uint5_string(uint4_uint5(hex_uint4('0' + hex)))
-  return 'xrb_' + c_account + checksum
+  return 'eur_' + c_account + checksum
 }
 
 function parseXRBAccount (str) {
-  var i = str.indexOf('xrb_')
+  var i = str.indexOf('eur_')
   if (i !== -1) {
     var acc = str.slice(i, i + 64)
     try {
@@ -231,7 +231,7 @@ function array_crop (array) {
 }
 
 function keyFromAccount (account) {
-  if ((account.startsWith('xrb_1') || account.startsWith('xrb_3')) && (account.length == 64)) {
+  if ((account.startsWith('eur_1') || account.startsWith('eur_3')) && (account.length == 64)) {
     var account_crop = account.substring(4, 64)
     var isValid = /^[13456789abcdefghijkmnopqrstuwxyz]+$/.test(account_crop)
     if (isValid) {
@@ -243,7 +243,7 @@ function keyFromAccount (account) {
         var key = uint4_hex(key_uint4)
         return key
       }			else				{ throw 'Checksum incorrect.' }
-    }		else			{ throw 'Invalid XRB account.' }
+    }		else			{ throw 'Invalid NEURO account.' }
   }
-  throw 'Invalid XRB account.'
+  throw 'Invalid NEURO account.'
 }
