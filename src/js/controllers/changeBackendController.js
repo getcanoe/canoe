@@ -1,6 +1,6 @@
 'use strict'
 /* global angular */
-angular.module('canoeApp.controllers').controller('changeBackendController', function ($scope, $state, $timeout, $log, $ionicHistory, nanoService, popupService, gettextCatalog) {
+angular.module('canoeApp.controllers').controller('changeBackendController', function ($scope, $timeout, nanoService) {
   $scope.serverURL = ''
 
   $scope.changeBackend = function (url) {

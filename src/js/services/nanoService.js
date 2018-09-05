@@ -78,19 +78,23 @@ angular.module('canoeApp.services')
     }
 
     root.setHost = function (url) {
-      var opts = {
-        backend: url
-      }
-      configService.set(opts, function (err) {
-        if (err) $log.debug(err)
-        mqttHost = url
-        host = 'https://' + url + '/rpc'
-        // Force relogin etc
-        root.connectNetwork(function () {
-          popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Successfully connected to backend'))
-          $ionicHistory.removeBackView()
-          $state.go('tabs.home')
+      var oldMqttHost = mqttHost
+      var oldHost = host
+      mqttHost = url
+      host = 'https://' + url + '/rpc'
+      // Force relogin etc
+      root.connectNetwork(function () {
+        popupService.showAlert(gettextCatalog.getString('Information'), gettextCatalog.getString('Successfully connected to backend'))
+        // Now we save it also in config
+        configService.set({backend: url}, function (err) {
+          if (err) $log.debug(err)
         })
+        $ionicHistory.removeBackView()
+        $state.go('tabs.home')
+      }, function () {
+        // Failed connecting, revert
+        mqttHost = oldMqttHost
+        host = oldHost
       })
     }
 
@@ -231,7 +235,7 @@ angular.module('canoeApp.services')
       }
     }
 
-    root.connectNetwork = function (cb) {
+    root.connectNetwork = function (cb, cberr) {
       // Makes sure we have the right backend for RPC
       root.connectRPC(function (err) {
         if (err) {
@@ -240,6 +244,7 @@ angular.module('canoeApp.services')
             $ionicHistory.removeBackView()
             $state.go('tabs.home')
           }, 1000)
+          if (cberr) cberr(err)
         } else {
           // Make sure we have an account for this wallet on the server side
           root.createServerAccount(root.wallet, function (err) {
@@ -249,6 +254,7 @@ angular.module('canoeApp.services')
                 $ionicHistory.removeBackView()
                 $state.go('tabs.home')
               }, 1000)
+              if (cberr) cberr(err)
             } else {
               root.disconnect() // Makes sure we are disconnected from MQTT
               root.startMQTT(cb)
