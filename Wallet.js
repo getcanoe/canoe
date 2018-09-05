@@ -6,7 +6,7 @@ var assert = require('assert')
 var Block = require('./Block')
 var Buffer = require('buffer').Buffer
 
-var MAIN_NET_WORK_THRESHOLD = 'ffffffc000000000'
+var MAIN_NET_WORK_THRESHOLD = 'ff00000000000000' // 'ffffffc000000000'
 var BLOCK_BIT_LEN = 128
 
 var Iso10126 = {
@@ -948,16 +948,8 @@ module.exports = function (password) {
     blake2bUpdate(context, hex_uint8(work).reverse())
     blake2bUpdate(context, hex_uint8(blockHash))
     var threshold = blake2bFinal(context).reverse()
-    if (threshold[0] === t[0]) {
-      if (threshold[1] === t[1]) {
-        if (threshold[2] === t[2]) {
-          if (threshold[3] >= t[3]) {
-            return true
-          }
-        }
-      }
-    }
-    return false
+    // This logic depends on the MAIN_NET_WORK_THRESHOLD, so if you change it - change here too!
+    return threshold[0] === t[0]
   }
 
   api.getNextPrecalcToWork = function () {

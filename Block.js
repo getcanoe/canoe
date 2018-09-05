@@ -1,7 +1,7 @@
 /* globals bigInt blake2bInit blake2bUpdate hex_uint8 uint8_hex blake2bFinal keyFromAccount
    hex2dec dec2hex accountFromHexKey stringFromHex */
 var RAI_TO_RAW = '000000000000000000000000'
-var MAIN_NET_WORK_THRESHOLD = 'ffffffc000000000'
+var MAIN_NET_WORK_THRESHOLD = 'ff00000000000000' // 'ffffffc000000000'
 var STATE_BLOCK_PREAMBLE = '0000000000000000000000000000000000000000000000000000000000000006'
 var STATE_BLOCK_ZERO = '0000000000000000000000000000000000000000000000000000000000000000'
 
@@ -135,7 +135,7 @@ module.exports = function (isState = false) {
     try {
       account = keyFromAccount(newAccount)
     } catch (err) {
-      throw new Error('Invalid NANO account')
+      throw new Error('Invalid NEURO account')
     }
     try {
       representative = keyFromAccount(representativeAccount)
@@ -151,7 +151,7 @@ module.exports = function (isState = false) {
    * Sets the open parameters and builds the block
    *
    * @param {string} sourceBlockHash - The hash of the send block which is going to be received, 32 byte hex encoded
-   * @param {string} newAccount - The NANO account which is being created
+   * @param {string} newAccount - The account which is being created
    * @param {string} representativeAccount - The account to be set as representative, if none, its self assigned
    * @throws An exception on invalid sourceBlockHash
    * @throws An exception on invalid account
@@ -582,14 +582,8 @@ module.exports = function (isState = false) {
     blake2bUpdate(context, hex_uint8(work).reverse())
     blake2bUpdate(context, hex_uint8(blockHash))
     var threshold = blake2bFinal(context).reverse()
-    if (threshold[0] === t[0]) {
-      if (threshold[1] === t[1]) {
-        if (threshold[2] === t[2]) {
-          if (threshold[3] >= t[3]) { return true }
-        }
-      }
-    }
-    return false
+    // This logic depends on the MAIN_NET_WORK_THRESHOLD, so if you change it - change here too!
+    return threshold[0] === t[0]
   }
 
   return api
