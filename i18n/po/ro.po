@@ -1398,7 +1398,7 @@ msgstr "Portofelul dumneavoastră de Nano este pregătit!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Seed-ul portofelului dumneavoastră este în siguranță! (backup realizat)"
 
-#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Cont"
@@ -1431,7 +1431,7 @@ msgstr "Format incorect pentru un seed"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Information"
 msgstr "Informații"
 
@@ -1805,10 +1805,6 @@ msgstr "Revenind \"la bord\" vom elimita portofelul și conturile dumneavoastră
 msgid "Please enter a password of at least 8 characters"
 msgstr "Introduceți o parolă cu cel puțin 8 caractere"
 
-#: www/views/advancedSettings.html:23
-msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr "Dacă opțiunea este activată, vor fi redate sunete atunci când trimiteți/primiți fonduri, schimbați reprezentantul sau deblocați contul."
-
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
 msgstr "Pe acesta pagină puteți vedea toate conturile dumneavoastră. Aruncați o privire<a ng-click=\"openExternalLinkHelp()\">FAQs</a> înainte să începeți!"
@@ -1870,7 +1866,7 @@ msgstr "Block-ul a fost scanat și trimis cu succes."
 msgid "Block was scanned but failed to process:"
 msgstr "Block-ul a fost scanat, dar procesarea nu a reușit:"
 
-#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
+#: src/js/services/nanoService.js:243 src/js/services/nanoService.js:253
 msgid "Failed connecting to backend"
 msgstr "Conectare nereușită la backend"
 
@@ -1878,7 +1874,7 @@ msgstr "Conectare nereușită la backend"
 msgid "Failed connecting to backend, no network?"
 msgstr "Conectare nereușită la backend, rețea indisponibilă?"
 
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Successfully connected to backend"
 msgstr "Conectare cu succes la backend"
 
@@ -1892,5 +1888,9 @@ msgstr "Trimiteți Nano la această adresă"
 
 #: www/views/tab-settings.html:143
 msgid "Please load Nano to donate"
+msgstr "Nu există Nano pentru a face o donație"
+
+#: www/views/advancedSettings.html:23
+msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."
 msgstr ""
 
