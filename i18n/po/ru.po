@@ -1398,7 +1398,7 @@ msgstr "Ваш Nano кошелек готов!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Резервная копия Seed вашего Nano кошелька создана!"
 
-#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Аккаунт"
@@ -1431,7 +1431,7 @@ msgstr "Неправильный формат кода Seed"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Information"
 msgstr "Информация"
 
@@ -1805,10 +1805,6 @@ msgstr "Возврат к регистрации удалит ваш сущес�
 msgid "Please enter a password of at least 8 characters"
 msgstr "Пожалуйста введите пароль(не менее 8 символов)"
 
-#: www/views/advancedSettings.html:23
-msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr "Если активировано, то вы услышите звуковые сигналы при отправке и приеме Nano, изменении представителя или при разблокировке кошелька."
-
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
 msgstr "На этом экране вы можете видеть все ваши аккаунты. Прочтите <a ng-click=\"openExternalLinkHelp()\">FAQs</a> прежде чем начать!"
@@ -1869,7 +1865,7 @@ msgstr "Блок проверен и успешно отправлен"
 msgid "Block was scanned but failed to process:"
 msgstr "Блок проверен, но его не удалось обработать:"
 
-#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
+#: src/js/services/nanoService.js:243 src/js/services/nanoService.js:253
 msgid "Failed connecting to backend"
 msgstr "Не удалось соединиться с сервером"
 
@@ -1877,7 +1873,7 @@ msgstr "Не удалось соединиться с сервером"
 msgid "Failed connecting to backend, no network?"
 msgstr "Не удалось соединиться с сервером, нет связи?"
 
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Successfully connected to backend"
 msgstr "Соединение с сервером успешно установлено"
 
@@ -1891,5 +1887,9 @@ msgstr "Отправить Нано на этот адрес"
 
 #: www/views/tab-settings.html:143
 msgid "Please load Nano to donate"
+msgstr ""
+
+#: www/views/advancedSettings.html:23
+msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."
 msgstr ""
 
