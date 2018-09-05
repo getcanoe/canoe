@@ -1,0 +1,26 @@
+diff --git a/Gruntfile.js b/Gruntfile.js
+index 01c31d2..99c506e 100644
+--- a/Gruntfile.js
++++ b/Gruntfile.js
+@@ -265,7 +265,7 @@ module.exports = function (grunt) {
+         platforms: ['osx64', 'linux64', 'win64', 'win32'],
+         flavor: 'sdk', // normal or sdk
+         zip: false,
+-        version: '0.29.0', // If you modify you need to rebuild native modules!
++        version: '0.14.7', // If you modify you need to rebuild native modules!
+         macIcns: './icon.icns',
+         exeIco: './icon.ico',
+         macPlist: {
+diff --git a/package.json b/package.json
+index bc2d1a0..e109420 100644
+--- a/package.json
++++ b/package.json
+@@ -28,7 +28,7 @@
+   },
+   "chromium-args": "--disable-devtools",
+   "build": {
+-    "nwVersion": "0.29.0"
++    "nwVersion": "0.14.7"
+   },
+   "webkit": {
+     "page-cache": false,
