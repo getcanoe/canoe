@@ -341,7 +341,6 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
     storageService.getConfig(function (err, localConfig) {
       if (localConfig) {
         configCache = JSON.parse(localConfig)
-        configCache.wallet.settings.unitToRaw = 100
       } else {
         configCache = lodash.clone(defaultConfig)
       }
