@@ -32,13 +32,13 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
       serverSidePoW: (!platformInfo.isLinux), // On NW Linux we now have good client side PoW
       playSounds: true,
       settings: {
-        unitName: 'NANO',
-        unitToRaw: Math.pow(10, 30),
+        unitName: 'NEURO',
+        unitToRaw: 100, // Math.pow(10, 30),
         unitDecimals: 2,
-        unitCode: 'NANO',
+        unitCode: 'NEURO',
         alternativeName: 'US Dollar',
         alternativeIsoCode: undefined,
-        amountInputDefaultCurrency: 'NANO'
+        amountInputDefaultCurrency: 'NEURO'
       }
     },
 

@@ -10,7 +10,7 @@ angular.module('canoeApp.services')
     BigNumber.config({ ERRORS: false })
 
     // 1 NANO = 1 Mnano = 10^30 raw
-    var rawPerNano = BigNumber('1000000000000000000000000000000')
+    var rawPerNano = BigNumber('100') // 1 NEURO = 100 raw
 
     // This is where we hold profile, wallet and password to decrypt it
     var root = {}
