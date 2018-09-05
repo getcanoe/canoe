@@ -1410,7 +1410,7 @@ msgstr "A Nano tárcád készen áll!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "A Nano tárcád titkos kulcsa mentésre került!"
 
-#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Számla"
@@ -1443,7 +1443,7 @@ msgstr "Helytelen kód formátum egy privát kulcshoz:"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Information"
 msgstr "Információ"
 
@@ -1820,10 +1820,6 @@ msgstr "Ha visszatérsz a bevezetéshez, elveszíted a létező tárcádat és s
 msgid "Please enter a password of at least 8 characters"
 msgstr "Adj meg egy legalább 8 karakterből álló jelszót"
 
-#: www/views/advancedSettings.html:23
-msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr "Ha engedélyezve, a küldés, fogadás, megbízott váltás, vagy a tálca feloldása hangjelzéssel jár."
-
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
 msgstr "Ezen a képernyőn láthatod az összes számládat. Nézd meg a <a ng-click=\"openExternalLinkHelp()\">GYIK-et</a>  mielőtt belekezdesz!"
@@ -1884,7 +1880,7 @@ msgstr "A blokk sikeresen beolvasva és elküldve"
 msgid "Block was scanned but failed to process:"
 msgstr "A blokk beolvasása sikerült de a feldolgozás közben hiba történt:"
 
-#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
+#: src/js/services/nanoService.js:243 src/js/services/nanoService.js:253
 #, fuzzy
 msgid "Failed connecting to backend"
 msgstr "Nem sikerült csatlakozni a backendhez"
@@ -1894,7 +1890,7 @@ msgstr "Nem sikerült csatlakozni a backendhez"
 msgid "Failed connecting to backend, no network?"
 msgstr "Nem sikerült csatlakozni a backendhez, nincs hálózat?"
 
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 #, fuzzy
 msgid "Successfully connected to backend"
 msgstr "Sikeres csatlakozás a backendhez"
@@ -1909,5 +1905,9 @@ msgstr "Nano küldése erre a számlára"
 
 #: www/views/tab-settings.html:143
 msgid "Please load Nano to donate"
+msgstr ""
+
+#: www/views/advancedSettings.html:23
+msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."
 msgstr ""
 
