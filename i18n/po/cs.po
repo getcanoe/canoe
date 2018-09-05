@@ -1398,7 +1398,7 @@ msgstr "Vaše Nano peněženka je připravena!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Váš seed Nano peněženky je zálohován!"
 
-#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Účet"
@@ -1431,7 +1431,7 @@ msgstr "Špatný formát SEED kódu"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Information"
 msgstr "Informace"
 
@@ -1700,7 +1700,7 @@ msgstr "Otisk prstu"
 
 #: www/views/modals/password.html:40
 msgid "Go back to onboarding."
-msgstr "Jít zpět na onboarding."
+msgstr "Obnovit ze zálohy"
 
 #: www/views/changeLocks.html:38
 msgid "Hard Lock"
@@ -1799,15 +1799,11 @@ msgstr "Podvrďte heslo"
 
 #: src/js/controllers/modals/password.js:74
 msgid "Going back to onboarding will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
-msgstr "Přechod zpět na onboarding odstraní Vaši nynější peněženku i s účty! Pokud zde máte nějaké prostředky, tak se ujistěte, že máte zálohu k jejímu obnovení. Napište \"delete\" pro potvrzení jejího smazání."
+msgstr "Přechod zpět na prvotní nastavení odstraní Vaši nynější peněženku i s účty! Pokud zde máte nějaké prostředky, tak se ujistěte, že máte zálohu k jejímu obnovení. Napište \"delete\" pro potvrzení jejího smazání."
 
 #: src/js/controllers/import.js:125
 msgid "Please enter a password of at least 8 characters"
 msgstr "Prosím zadejte heslo s nejméně 8 znaky."
-
-#: www/views/advancedSettings.html:23
-msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr "Pokud zapnuto, bude přehrán zvuk když odešlete, přijmete, změníte representanta, nebo odemknete peněženku."
 
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
@@ -1869,7 +1865,7 @@ msgstr "Blok naskenován a úspěšně odeslán"
 msgid "Block was scanned but failed to process:"
 msgstr "Blok naskenován ale chyba:"
 
-#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
+#: src/js/services/nanoService.js:243 src/js/services/nanoService.js:253
 msgid "Failed connecting to backend"
 msgstr "Chyba v připojení na backend"
 
@@ -1877,7 +1873,7 @@ msgstr "Chyba v připojení na backend"
 msgid "Failed connecting to backend, no network?"
 msgstr "Chyba v připojení na backend, žádné připojení?"
 
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Successfully connected to backend"
 msgstr "Úspěšně připojeno k backend"
 
@@ -1891,5 +1887,9 @@ msgstr "Poslat Nano na tuto adresu"
 
 #: www/views/tab-settings.html:143
 msgid "Please load Nano to donate"
+msgstr "Prosím proveďte vklad Nano pro dotaci Canoe"
+
+#: www/views/advancedSettings.html:23
+msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."
 msgstr ""
 

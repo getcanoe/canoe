@@ -50,7 +50,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/js/services/nanoService.js:706
+#: src/js/services/nanoService.js:712
 #: www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39
 #: www/views/addressbook.view.html:26
@@ -624,8 +624,8 @@ msgstr ""
 msgid "Extracting Wallet information..."
 msgstr ""
 
-#: src/js/services/nanoService.js:239
-#: src/js/services/nanoService.js:248
+#: src/js/services/nanoService.js:243
+#: src/js/services/nanoService.js:253
 msgid "Failed connecting to backend"
 msgstr ""
 
@@ -821,7 +821,7 @@ msgid "If enabled, a list of recent transactions across all wallets will appear 
 msgstr ""
 
 #: www/views/advancedSettings.html:23
-msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
+msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."
 msgstr ""
 
 #: src/js/controllers/onboarding/backupRequest.js:16
@@ -893,7 +893,7 @@ msgstr ""
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118
 #: src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Information"
 msgstr ""
 
@@ -1623,7 +1623,7 @@ msgstr ""
 msgid "Start sending Nano"
 msgstr ""
 
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Successfully connected to backend"
 msgstr ""
 

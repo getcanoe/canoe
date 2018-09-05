@@ -1401,7 +1401,7 @@ msgstr "您的Nano钱包已经就绪！"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "您的Nano钱包种子已经备份！"
 
-#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "账号"
@@ -1434,7 +1434,7 @@ msgstr "不正确的钱包种子格式："
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Information"
 msgstr "信息"
 
@@ -1808,10 +1808,6 @@ msgstr "回到入口会删除你现有的钱包和所用账号！如果你有资
 msgid "Please enter a password of at least 8 characters"
 msgstr "请输入8位或以上的密码"
 
-#: www/views/advancedSettings.html:23
-msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr "如果有效，在你发送，接收，改变代表，或者解锁钱包的时候会发出提示音。"
-
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
 msgstr "在这个页面上面你可以看到你所有的账号。在使用之前请先阅读我们的<a ng-click=\"openExternalLinkHelp()\">FAQs</a> ！"
@@ -1872,7 +1868,7 @@ msgstr "区块已被扫描且发送成功"
 msgid "Block was scanned but failed to process:"
 msgstr "区块已被扫描，但处理区块失败："
 
-#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
+#: src/js/services/nanoService.js:243 src/js/services/nanoService.js:253
 msgid "Failed connecting to backend"
 msgstr "连接到服务器失败"
 
@@ -1880,7 +1876,7 @@ msgstr "连接到服务器失败"
 msgid "Failed connecting to backend, no network?"
 msgstr "连接到服务器失败，没有网络？"
 
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Successfully connected to backend"
 msgstr "成功联机到服务器"
 
@@ -1894,5 +1890,9 @@ msgstr "发送Nano到这个地址"
 
 #: www/views/tab-settings.html:143
 msgid "Please load Nano to donate"
+msgstr ""
+
+#: www/views/advancedSettings.html:23
+msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."
 msgstr ""
 

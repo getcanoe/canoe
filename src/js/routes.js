@@ -58,11 +58,13 @@ function applyChromeSetting (prop, value) {
 * For an overview of all settings please visit the following site: https://developer.chrome.com/extensions/privacy
 */
 function nwPrivacyConfig () {
-  chrome.passwordsPrivate.getSavedPasswordList(function (passwords) {
-    passwords.forEach((p, i) => {
-      chrome.passwordsPrivate.removeSavedPassword(i)
+  if (chrome.passwordsPrivate.getSavedPasswordList) {
+    chrome.passwordsPrivate.getSavedPasswordList(function (passwords) {
+      passwords.forEach((p, i) => {
+        chrome.passwordsPrivate.removeSavedPassword(i)
+      })
     })
-  })
+  }
   applyChromeSetting('privacy.services.alternateErrorPagesEnabled', false)
   applyChromeSetting('privacy.services.autofillEnabled', false)
   applyChromeSetting('privacy.services.hotwordSearchEnabled', false)

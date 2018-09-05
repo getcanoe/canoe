@@ -1410,7 +1410,7 @@ msgstr "Il portafoglio Nano è pronto!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Hai fatto il backup del seme del tuo portafoglio!"
 
-#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Account"
@@ -1443,7 +1443,7 @@ msgstr "Codice del seme errato"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Information"
 msgstr "Informazione"
 
@@ -1820,10 +1820,6 @@ msgstr "￼Tornando all'inizio rimuoverai il tuo portafoglio e account esistenti
 msgid "Please enter a password of at least 8 characters"
 msgstr "Per favore inserire una password di almeno 8 caratteri"
 
-#: www/views/advancedSettings.html:23
-msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr "Se attivato, Canoe userà notifiche audio per inviare, ricevere, cambio rappresentativo e sblocco del portafoglio."
-
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
 msgstr "Qui puoi vedere tutti i tuoi account. Leggi le  <a ng-click=\"openExternalLinkHelp()\">FAQ</a> prima di cominciare!"
@@ -1841,7 +1837,8 @@ msgstr "<h5 class=\"toggle-label\" translate=\"\">Comportamento se in secondo pi
 #: www/views/changeLocks.html:13
 msgid "<h5 class=\"toggle-label\" translate=\"\">Soft Lock</h5>\n"
 "          <p translate=\"\">With Soft Lock, Canoe is locked but your wallet is still live unencrypted in memory. Enabling Soft Locks, makes it possible to use simpler forms of credentials like PINs and fingerprints.</p>"
-msgstr ""
+msgstr " <h5 class=\"toggle-label\" translate=\"\">Blocco primario</h5>\n"
+"          <p translate=\"\">Con il blocco primario Canoe è bloccato ma il portafoglio è aperto nella memoria. Abilitare il blocco primario rende possibile l'uso di forme di autenticazione semplici come PIN o impronte digitali.</p>"
 
 #: www/views/changeLocks.html:55
 msgid "Choose the lock type to use when Canoe goes to the background. To disable background locking select None."
@@ -1877,13 +1874,13 @@ msgstr "Crediti"
 
 #: src/js/services/incomingData.js:118
 msgid "Block was scanned and sent successfully"
-msgstr ""
+msgstr "Il blocco è stato scansionato e inviato con successo."
 
 #: src/js/services/incomingData.js:120
 msgid "Block was scanned but failed to process:"
-msgstr ""
+msgstr "Il blocco è stato scansionato ma l'elaborazione è fallita:"
 
-#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
+#: src/js/services/nanoService.js:243 src/js/services/nanoService.js:253
 msgid "Failed connecting to backend"
 msgstr "Connessione al backend non riuscita"
 
@@ -1891,7 +1888,7 @@ msgstr "Connessione al backend non riuscita"
 msgid "Failed connecting to backend, no network?"
 msgstr "Connessione al backend non riuscita, nessuna connessione di rete?"
 
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Successfully connected to backend"
 msgstr "Connesso al backend"
 
@@ -1905,5 +1902,9 @@ msgstr "Invia Nano a questo indirizzo"
 
 #: www/views/tab-settings.html:143
 msgid "Please load Nano to donate"
+msgstr "Per favore caricare prima Nano per donare."
+
+#: www/views/advancedSettings.html:23
+msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."
 msgstr ""
 

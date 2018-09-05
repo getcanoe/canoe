@@ -1398,7 +1398,7 @@ msgstr "Din Nano-lommebok er klar!"
 msgid "Your Nano wallet seed is backed up!"
 msgstr "Din Nano-lommebok-hovednøkkel er sikkerhetskopiert!"
 
-#: src/js/services/nanoService.js:706 www/views/addressbook.add.html:39
+#: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
 msgid "Account"
 msgstr "Konto"
@@ -1431,7 +1431,7 @@ msgstr "Feil kodeformat for en hovednøkkel:"
 #: src/js/controllers/changePasswordController.js:13
 #: src/js/controllers/changePasswordController.js:16
 #: src/js/services/incomingData.js:118 src/js/services/incomingData.js:120
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Information"
 msgstr "Informasjon"
 
@@ -1806,10 +1806,6 @@ msgstr "Går du tilbake til innføringsprogrammet mister du dine eksisterende lo
 msgid "Please enter a password of at least 8 characters"
 msgstr "Vennligst skriv inn et passord på minst 8 tegn"
 
-#: www/views/advancedSettings.html:23
-msgid "If enabled, sounds will be played whenever you send, recieve, change representative, or unlock your wallet."
-msgstr "Hvis påslått, så spilles en lyd hver gang du sender, mottar, endrer representant eller låser opp lommeboken"
-
 #: www/views/tab-home.html:53
 msgid "On this screen you can see all your accounts. Check our <a ng-click=\"openExternalLinkHelp()\">FAQs</a> before you start!"
 msgstr "På denne skjermen kan du se alle dine kontoer. Sjekk våre <a ng-click=\"openExternalLinkHelp()\">FAQs</a> før du starter!"
@@ -1869,7 +1865,7 @@ msgstr "Suksessfull skanning og sending av blokk"
 msgid "Block was scanned but failed to process:"
 msgstr "Blokken ble skannet men prosessering feilet:"
 
-#: src/js/services/nanoService.js:239 src/js/services/nanoService.js:248
+#: src/js/services/nanoService.js:243 src/js/services/nanoService.js:253
 msgid "Failed connecting to backend"
 msgstr "Kunne ikke koble til bakgrunnsmotor"
 
@@ -1877,7 +1873,7 @@ msgstr "Kunne ikke koble til bakgrunnsmotor"
 msgid "Failed connecting to backend, no network?"
 msgstr "Kunne ikke koble til bakgrunnsmotor, inget nettverk?"
 
-#: src/js/services/nanoService.js:90
+#: src/js/services/nanoService.js:87
 msgid "Successfully connected to backend"
 msgstr "Suksessfull tilkobling til bakgrunnsmotor"
 
@@ -1891,5 +1887,9 @@ msgstr "Send Nano til denne adressen"
 
 #: www/views/tab-settings.html:143
 msgid "Please load Nano to donate"
+msgstr ""
+
+#: www/views/advancedSettings.html:23
+msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."
 msgstr ""
 
