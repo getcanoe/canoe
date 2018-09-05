@@ -121,7 +121,7 @@ angular.module('canoeApp.services')
     root.formatAmountWithUnit = function (raw) {
       if (isNaN(raw)) return
       // TODO use current unit in settings knano, Mnano etc
-      return root.formatAnyAmount(new BigNumber(raw).dividedBy(rawPerNano), uxLanguage.currentLanguage, 'NANO')
+      return root.formatAnyAmount(new BigNumber(raw).dividedBy(rawPerNano), uxLanguage.currentLanguage, 'NEURO')
     }
 
     // A quite resilient and open minded way to format amounts from any epoch and location
@@ -183,7 +183,7 @@ angular.module('canoeApp.services')
     root.formatAmountWithUnit = function (raw) {
       if (isNaN(raw)) return
       // TODO use current unit in settings knano, Mnano etc
-      return root.formatAmount(raw, 2) + ' NANO'
+      return root.formatAmount(raw, 2) + ' NEURO'
     }
 
     root.updateAccountSettings = function (account) {
@@ -336,7 +336,7 @@ angular.module('canoeApp.services')
         tx.account = acc
         tx.amount = blk.getAmount()
         tx.amountStr = root.formatAmount(tx.amount, 2)
-        tx.unitStr = 'NANO' // TODO
+        tx.unitStr = 'NEURO' // TODO
         tx.destination = blk.getDestination()
         tx.origin = blk.getOrigin()
         tx.representative = blk.getRepresentative() || ''

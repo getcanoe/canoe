@@ -3,8 +3,6 @@
 angular.module('canoeApp.services').factory('txFormatService', function ($filter, rateService, configService, lodash) {
   var root = {}
 
-  //root.Utils = bwcService.getUtils()
-
   root.formatAmount = function (raw, fullPrecision) {
     var config = configService.getDefaults().wallet.settings
     if (config.unitCode === 'raw') return raw
@@ -18,7 +16,7 @@ angular.module('canoeApp.services').factory('txFormatService', function ($filter
 
   root.formatAmountStr = function (coin, raw) {
     if (isNaN(raw)) return
-    return root.formatAmount(raw) + (coin ? coin.toUpperCase() : 'NANO')
+    return root.formatAmount(raw) + (coin ? coin.toUpperCase() : 'NEURO')
   }
 
   root.toFiat = function (coin, raw, code, cb) {
@@ -204,7 +202,7 @@ angular.module('canoeApp.services').factory('txFormatService', function ($filter
       currency: currency,
       alternativeIsoCode: alternativeIsoCode,
       amountSat: amountSat,
-      amountUnitStr: 'NANO' // amountUnitStr
+      amountUnitStr: 'NEURO' // amountUnitStr
     }
   }
 
