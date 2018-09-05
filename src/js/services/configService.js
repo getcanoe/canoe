@@ -13,7 +13,7 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
       }
     },
 
-    backend: 'getcanoe.io',
+    backend: 'cbnos.cryptware.de',
 
     // TODO We need URL for rating iOS app, and Android
     rateApp: {
@@ -341,6 +341,7 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
     storageService.getConfig(function (err, localConfig) {
       if (localConfig) {
         configCache = JSON.parse(localConfig)
+        configCache.wallet.settings.unitToRaw = 100
       } else {
         configCache = lodash.clone(defaultConfig)
       }
