@@ -150,9 +150,11 @@ angular.module('canoeApp.controllers').controller('importController',
 
     var importWarning = function (cb) {
       var title = gettextCatalog.getString('Warning!')
-      var message = gettextCatalog.getString('Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type "delete" to confirm you wish to delete your current wallet.')
+      var deleteWord = gettextCatalog.getString('delete')
+      var message = gettextCatalog.getString('Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. To confirm you wish to delete your current wallet type:') + deleteWord
+
       popupService.showPrompt(title, message, null, function (res) {
-        if (!res || res.toLowerCase() !== gettextCatalog.getString('delete').toLowerCase()) return
+        if (!res || res.toLowerCase() !== deleteWord.toLowerCase()) return
         return cb()
       })
     }
