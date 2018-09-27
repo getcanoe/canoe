@@ -15,10 +15,9 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
 
     backend: 'getcanoe.io',
 
-    // TODO We need URL for rating iOS app, and Android
     rateApp: {
       canoe: {
-        ios: '<URLNEEDED>',
+        ios: 'https://itunes.apple.com/us/app/canoe-nano-wallet/id1365127213?mt=8',
         android: 'https://play.google.com/store/apps/details?id=io.getcanoe.canoe',
         wp: ''
       }
