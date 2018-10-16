@@ -102,6 +102,7 @@ angular.module('canoeApp.controllers').controller('tabScanController', function 
     scannerService.pausePreview()
     incomingData.redir(contents, null, function (err, code) {
       if (err) {
+        console.log(err)
         popupService.showAlert(
           gettextCatalog.getString('Error'),
           gettextCatalog.getString('Unrecognized data'), function () {

@@ -519,7 +519,7 @@ angular.module('canoeApp.services')
     root.parseQRCode = function (data, cb) {
       // <protocol>:<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
       var code = {}
-      var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'nanoseed', 'xrbkey', 'nanokey', 'xrbblock', 'nanoblock']
+      var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'nanoseed', 'xrbkey', 'nanokey', 'xrbblock', 'nanoblock', 'manta']
       try {
         var parts = data.match(/^([a-z]+):(.*)/) // Match protocol:whatever
         if (!parts) {
@@ -553,6 +553,9 @@ angular.module('canoeApp.services')
         if (code.protocol === 'xrbblock' || code.protocol === 'nanoblock') {
           code.block = JSON.parse(parts)
           cb(null, code)
+        } else if (code.protocol === 'manta') {
+          MantaWallet.init(data)
+          cb('TODO')
         } else {
           // URL style params, time to check for params
           parts = parts.split('?')

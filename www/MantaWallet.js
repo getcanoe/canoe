@@ -6,18 +6,11 @@
 //  Modified by Tyler Storm.
 //  Copyright © 2018 Alessandro Viganò. All rights reserved.
 //
-(function (root, factory) {
-	"use strict";
-
-	/*global define*/
-	if (typeof module === 'object' && module.exports) {
-		module.exports = factory(require('paho-mqtt'))         // Node
-	} else if (typeof define === 'function' && define.amd) {
-		define(['paho-mqtt'], factory)                         // AMD
-	} else {
-		factory(root.Paho.MQTT.Client)                         // Browser
-	}
-}(this, function (MantaWallet) {
+;(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    global.MantaWallet = factory()
+}(this, (function () { 'use strict';
   var mqtt,
     sessionID,
     paymentRequest,
@@ -25,46 +18,49 @@
     host,
     connected
 
-  isConnected = function () {
-    return connected
+  function isConnected() {
+		return connected
   }
 
-  disconnect = function () {
+  function disconnect() {
     if (mqtt) {
       mqtt.disconnect()
     }
     mqtt = null
   }
 
-  onConnected = function (isReconnect) {
+  function onConnected(isReconnect) {
+		console.log("connected")
     connected = true
+		mqtt.subscribe("/payment_requests/" + sessionID)
+		publish('/PAYMENT_REQUEST/' + sessionID + '/all', null, 2, false)
   }
 
-  onFailure = function () {
+  function onFailure() {
     console.log('MQTT failure')
     connected = false
   }
 
-  onConnectionLost = function (responseObject) {
+  function onConnectionLost(responseObject) {
     if (responseObject.errorCode !== 0) {
       console.log('MQTT connection lost: ' + responseObject.errorMessage)
     }
     connected = false
   }
-  connectFailure = function (c, code, msg) {
+  function connectFailure(c, code, msg) {
     console.log('Failed connecting to MQTT: ' + JSON.stringify({context: c, code: code, msg: msg}))
     disconnect()
   }
-  connectSuccess = function () {
+  function connectSuccess() {
     console.log('Connected to MQTT broker.')
   }
 
-  parseURL = function (url) {
-    let pattern = /(^manta:\/\/((?:\w|\.)+)(?:(\d+))?\/(\d+)$)/
+  function parseURL(url) {
+    let pattern = /manta:\/\/((?:\w|\.)+)(?::(\d+))?\/(.+)/
     return url.match(pattern)
   }
 
-  onMessageArrived = function (message) {
+  function onMessageArrived(message) {
     console.log('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
     var topic = message.destinationName
     var payload = message.payloadString
@@ -81,10 +77,11 @@
     }
   }
 
-  init = function (url) {
+  function init(url) {
     var results = parseURL(url)
+		console.log(results)
     if (results.length < 2) return null;
-    host = results[0]
+    host = results[1]
     sessionID = parseInt(results[results.length-1])
     port = results.length === 3 ? parseInt(results[1]) : 1883
     console.log("NEW MANTA WALLET")
@@ -100,22 +97,10 @@
       onSuccess: connectSuccess,
       onFailure: connectFailure
     }
+		mqtt.connect(opts)
   }
 
-  getPaymentRequest = function() {
-    mqtt.subscribe("/payment_requests/" + sessionID)
-  }
-
-  sendPayment = function(cryptoCurrency, hashes) {
-    var paymentMessage = {
-      "crypto_currency": cryptoCurrency,
-      "transaction_hash": hashes
-    }
-    var jsonData = JSON.stringify(paymentMessage)
-    publish('/payments/' + sessionID, jsonData, 2, false)
-  }
-
-  publish = function (topic, json, qos, retained) {
+   function publish(topic, json, qos, retained) {
     if (mqtt) {
       var message = new Paho.MQTT.Message(json)
       message.destinationName = topic
@@ -131,6 +116,10 @@
       console.log('Not connected to MQTT, should send ' + topic + ' ' + json)
     }
   }
-  MantaWallet.init = MantaWallet.init
+	var MantaWallet = {}
+  MantaWallet.init = init
+	MantaWallet.isConnected = isConnected
+	MantaWallet.disconnect = disconnect
+	MantaWallet.publish = publish
   return MantaWallet
-}));
+})));
