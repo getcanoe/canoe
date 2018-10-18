@@ -555,7 +555,11 @@ angular.module('canoeApp.services')
           cb(null, code)
         } else if (code.protocol === 'manta') {
           MantaWallet.init(data)
-          cb('TODO')
+          code.account = 'xrb_1qckwc5o3obkrwbet4amnkya113xq77qpaknsmiq9hwq31tmd5bpyo7sepsw'
+          code.params = {
+            amount: "100000000000000000000"
+          }
+          cb(null, code)
         } else {
           // URL style params, time to check for params
           parts = parts.split('?')

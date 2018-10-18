@@ -32,7 +32,7 @@
   function onConnected(isReconnect) {
 		console.log("connected")
     connected = true
-		mqtt.subscribe("/payment_requests/" + sessionID)
+		mqtt.subscribe("/PAYMENT_REQUESTS/" + sessionID)
 		publish('/PAYMENT_REQUEST/' + sessionID + '/all', null, 2, false)
   }
 
@@ -43,7 +43,7 @@
 
   function onConnectionLost(responseObject) {
     if (responseObject.errorCode !== 0) {
-      console.log('MQTT connection lost: ' + responseObject.errorMessage)
+      console.log(responseObject)
     }
     connected = false
   }
@@ -82,18 +82,17 @@
 		console.log(results)
     if (results.length < 2) return null;
     host = results[1]
-    sessionID = parseInt(results[results.length-1])
-    port = results.length === 3 ? parseInt(results[1]) : 1883
-    console.log("NEW MANTA WALLET")
-    mqtt = new Paho.MQTT.Client(host,port,"testClient")
+    sessionID = results[results.length-1]
+    port = results.length === 3 ? parseInt(results[1]) : 9000
+    console.log("Initalizing a new MQTT Connection")
+    mqtt = new Paho.MQTT.Client(host,port,"canoeNanoWallet")
     mqtt.onConnectionLost = onConnectionLost
     mqtt.onConnected = onConnected
     mqtt.onFailure = onFailure
     mqtt.onMessageArrived = onMessageArrived
     var opts = {
       reconnect: true,
-      keepAliveInterval: 3600,
-      useSSL: true,
+			keepAliveInterval: 3600,
       onSuccess: connectSuccess,
       onFailure: connectFailure
     }
@@ -101,9 +100,14 @@
   }
 
    function publish(topic, json, qos, retained) {
+		console.log("publishing")
     if (mqtt) {
+			console.log(json)
+			console.log(topic)
       var message = new Paho.MQTT.Message(json)
+			console.log(message)
       message.destinationName = topic
+			console.log(2)
       if (qos !== undefined) {
         message.qos = qos
       }

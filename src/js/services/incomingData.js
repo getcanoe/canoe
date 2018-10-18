@@ -77,7 +77,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         }
       }
       var protocol = code.protocol
-      if (protocol === 'xrb' || protocol === 'raiblocks' || protocol === 'nano') {
+      if (protocol === 'xrb' || protocol === 'raiblocks' || protocol === 'nano' || protocol === 'manta') {
         // if (code.alias !== null) {
         //   if (code.params.amount) {
         //     $log.debug('Go send ' + JSON.stringify(code))
