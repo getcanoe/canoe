@@ -108,6 +108,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
       sendMax: data.stateParams.useSendMax === 'true',
       toAddress: data.stateParams.toAddress,
       description: data.stateParams.description,
+      isManta: data.stateParams.isManta,
 
       // Vanity tx info (not in the real tx)
       recipientType: data.stateParams.recipientType || null,
@@ -173,6 +174,7 @@ angular.module('canoeApp.controllers').controller('confirmController', function 
     txp.address = tx.toAddress
     txp.amount = tx.toAmount
     txp.message = tx.description
+    txp.isManta = tx.isManta
     txp.dryRun = dryRun
     return cb(null, txp)
   }

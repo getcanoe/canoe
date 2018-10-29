@@ -795,7 +795,7 @@ module.exports = function (password) {
     }
   }
 
-  api.addPendingSendBlock = function (from, to, amount = 0) {
+  api.addPendingSendBlock = function (from, to, amount = 0, message) {
     api.useAccount(from)
     amount = bigInt(amount)
 
@@ -811,6 +811,7 @@ module.exports = function (password) {
     api.signBlock(blk)
     blk.setAmount(amount)
     blk.setAccount(from)
+    blk.setMessage(message)
 
     lastPendingBlock = blk.getHash(true)
     keys[current].lastPendingBlock = lastPendingBlock

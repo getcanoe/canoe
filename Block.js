@@ -17,6 +17,7 @@ module.exports = function (isState = false) {
   var work = '' // work
   var blockAmount = bigInt(0)// amount transferred
   var blockAccount // account owner of this block
+  var blockMessage // Additional information about this block
   var origin // account sending money in case of receive or open block
   var immutable = false // if true means block has already been confirmed and cannot be changed, some checks are ignored
   var timestamp // the UTC timestamp in milliseconds since 1970, 1 jan
@@ -260,6 +261,24 @@ module.exports = function (isState = false) {
   }
 
   /**
+   * Sets the message of the block
+   *
+   * @param {string} message - The message with the block
+   */
+  api.setMessage = function (message) {
+    blockMessage = message
+  }
+
+  /**
+   *
+   * @returns blockMessage
+   */
+  api.getMessage = function () {
+    return blockMessage
+  }
+
+
+  /**
    * Sets the account which sent the block
    * @param {string} acc - The NANO account
    */
@@ -474,6 +493,7 @@ module.exports = function (isState = false) {
     if (blockAmount) { extras.blockAmount = blockAmount.toString() } else { extras.blockAmount = 0 }
     extras.origin = origin
     extras.timestamp = timestamp
+    extras.blockMessage = blockMessage
     obj.extras = extras
     obj.state = state
     obj.send = send
@@ -564,6 +584,7 @@ module.exports = function (isState = false) {
       api.setAmount(obj.extras.blockAmount ? obj.extras.blockAmount : 0)
       api.setOrigin(obj.extras.origin)
       api.setTimestamp(obj.extras.timestamp)
+      api.setMessage(obj.extras.message)
       // too big, glitch from the units change a couple of commits ago :P
       if (api.getAmount().greater('1000000000000000000000000000000000000000000000000')) {
         api.setAmount(api.getAmount().over('1000000000000000000000000'))

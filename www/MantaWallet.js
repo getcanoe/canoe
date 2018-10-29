@@ -16,10 +16,35 @@
     paymentRequest,
     port,
     host,
-    connected
+    connected,
+    cb
+
+  var APPIA_PEM = `
+  -----BEGIN CERTIFICATE-----
+  MIIDaDCCAlCgAwIBAgIINZv0BbLXm9AwDQYJKoZIhvcNAQELBQAwOjELMAkGA1UE
+  BhMCVUsxDjAMBgNVBAoTBUFwcGlhMRswGQYDVQQDExJBcHBpYSBEZXZlbG9wZXIg
+  Q0EwHhcNMTgxMDE3MDc0MjAwWhcNMjgxMDE3MDc0MjAwWjA6MQswCQYDVQQGEwJV
+  SzEOMAwGA1UEChMFQXBwaWExGzAZBgNVBAMTEkFwcGlhIERldmVsb3BlciBDQTCC
+  ASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALLV0rgr0TYjTKMLOPQlHNp9
+  V2NyfyTY6rZd3uLs6UWH4BZSAu2jlB40pWeIoFZb7+sBuJbGe4l1VKPgospynB/+
+  +qxDnMNjY2M41a4Gv2Mr261xfNKJ0Vwd1D7WK9XN+3p4BS2dEmv685dSk3AhbnhU
+  RVcIFy6aUYCVjLZeg3M0CGPaGy6Zb0g8kt5mQdAQtFTE0wZ0cSUPea9QT+5kDs38
+  Lc0jVo1QqB4DFpJ6ceg3sLSB2fGS6c4YEU8SKvu2rLk/VVJJstjFrAwvKQfx+oSx
+  NPotU37C4zPG3wBfWb2o/DjFUPWyq6sjtXUb6kmzfcsdP50vN0K8LTpBF84CsqUC
+  AwEAAaNyMHAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUOJcBmAyRITBHOIqC
+  s+sZ5eM0xlQwCwYDVR0PBAQDAgEGMBEGCWCGSAGG+EIBAQQEAwIABzAeBglghkgB
+  hvhCAQ0EERYPeGNhIGNlcnRpZmljYXRlMA0GCSqGSIb3DQEBCwUAA4IBAQCpudBY
+  QX4bm6La9cx7h4fruuBmC2NIF2GhobZzd1lEx5bEPtq5S6kx3Qr7pY0yoQtN+lpn
+  XWJJQcks3a4WhF0YeqesBcLdlXqMCDsFU6A4yJ6x25FaoelMpv+Keoj+sYuNtcyb
+  sfWjDvDaOU1jj76nLX+llMHAau0gALQrH39KCYkORwltOQgc98X/aX/UiBMBxSz8
+  dCU0MPLl8dU8KnprtG2Ibik86J649o4EJr0lA01liQicr/viKrVOqzS6cq18hJaX
+  zvYu2RVV+AtDHXXE462p3sT8Bk2iB979aDV3GsD0/WrRVwyPhi7YG6zM4otv59xF
+  O+dbxo9YqCeAzbna
+  -----END CERTIFICATE-----
+  `;
 
   function isConnected() {
-		return connected
+  	return connected
   }
 
   function disconnect() {
@@ -30,10 +55,9 @@
   }
 
   function onConnected(isReconnect) {
-		console.log("connected")
+  	console.log("connected")
     connected = true
-		mqtt.subscribe("/PAYMENT_REQUESTS/" + sessionID)
-		publish('/PAYMENT_REQUEST/' + sessionID + '/all', null, 2, false)
+    mqtt.subscribe("certificate")
   }
 
   function onFailure() {
@@ -56,7 +80,7 @@
   }
 
   function parseURL(url) {
-    let pattern = /manta:\/\/((?:\w|\.)+)(?::(\d+))?\/(.+)/
+    var pattern = /manta:\/\/((?:\w|\.)+)(?::(\d+))?\/(.+)/
     return url.match(pattern)
   }
 
@@ -64,22 +88,98 @@
     console.log('Topic: ' + message.destinationName + ' Payload: ' + message.payloadString)
     var topic = message.destinationName
     var payload = message.payloadString
-    var tokens = topic.split('/')
-
-    switch (tokens[0]) {
-      case 'payment_requests':
-        console.log("Got Payment Request");
-        var paymentRequestMessage = JSON.parse(payload)
-        console.log(paymentRequestMessage);
-        return
-      default:
-        console.log("Unknown Case");
+    if (topic === 'certificate') {
+      console.log("cert received")
+      console.log(payload)
+      if (verifyChain(payload, APPIA_PEM)) {
+        mqtt.subscribe("payment_requests/" + sessionID)
+        publish('payment_requests/' + sessionID + '/all', {}, 1, false)
+      } else {
+        console.log("Invalid Signature Chain");
+        cb(
+          {
+            error:"Invalid Signature Chain"
+          }
+        );
+      }
+    } else {
+      var tokens = topic.split('/')
+      switch (tokens[0]) {
+        case 'payment_requests':
+          console.log("Got Payment Request");
+          var paymentRequest = JSON.parse(payload)
+          var paymentRequestMessage = JSON.parse(paymentRequest.message)
+          for (var i = 0; i < paymentRequestMessage.destinations.length; i++) {
+            if (paymentRequestMessage.destinations[i].crypto_currency === "NANO") {
+              if (verifySignature(APPIA_PEM,paymentRequest.message,paymentRequest.signature)) {
+                console.log("Valid Signature");
+                var big = new BigNumber(paymentRequestMessage.destinations[i].amount);
+                var amount = (big.times(Math.pow(10, 30))).toFixed(0)
+                var paymentDetails = {
+                  error: null,
+                  account: paymentRequestMessage.destinations[i].destination_address,
+                  amount: amount,
+                  message: paymentRequestMessage
+                }
+                console.log("Returning from MantaWallet");
+                console.log(paymentDetails)
+                cb(paymentDetails);
+                break;
+              } else {
+                console.log("Invalid Signature");
+                cb(
+                  {
+                    error:"Invalid Signature"
+                  }
+                );
+              }
+            }
+          }
+        default:
+          console.log("Unknown Case");
+      }
     }
   }
 
-  function init(url) {
+  function publishPayment(hash) {
+    var payment = {
+      crypto_currency: "nano",
+      transaction_hash: hash,
+    };
+    mqtt.subscribe('acks/'+sessionID);
+    publish('payments/'+sessionID, JSON.stringify(payment), 1, false);
+  }
+
+  function verifyChain(testCer, caCer) {
+    var caStore = forge.pki.createCaStore([caCer]);
+    var result = false;
+    try {
+      result = forge.pki.verifyCertificateChain(caStore, [testCer]);
+    } catch (e) {
+      console.log(e);
+    }
+    return result;
+  }
+
+  function verifySignature(key, message, signature) {
+    var cert = forge.pki.certificateFromPem(key);
+    var publicKey = cert.publicKey;
+    var messageDigest = forge.md.sha256.create();
+    messageDigest.update(message, "utf-8");
+    var dsig = forge.util.decode64(signature);
+    var result: boolean = false;
+    try {
+      result = publicKey.verify(messageDigest.digest().bytes(), dsig);
+    } catch (e) {
+      console.log(e);
+    }
+    return result;
+  }
+
+  function init(url, callback) {
+    cb = callback
     var results = parseURL(url)
-		console.log(results)
+  	console.log(results)
     if (results.length < 2) return null;
     host = results[1]
     sessionID = results[results.length-1]
@@ -92,22 +192,18 @@
     mqtt.onMessageArrived = onMessageArrived
     var opts = {
       reconnect: true,
-			keepAliveInterval: 3600,
+  		keepAliveInterval: 3600,
       onSuccess: connectSuccess,
       onFailure: connectFailure
     }
-		mqtt.connect(opts)
+  	mqtt.connect(opts)
   }
 
    function publish(topic, json, qos, retained) {
-		console.log("publishing")
+  	console.log("publishing")
     if (mqtt) {
-			console.log(json)
-			console.log(topic)
       var message = new Paho.MQTT.Message(json)
-			console.log(message)
       message.destinationName = topic
-			console.log(2)
       if (qos !== undefined) {
         message.qos = qos
       }
@@ -120,10 +216,9 @@
       console.log('Not connected to MQTT, should send ' + topic + ' ' + json)
     }
   }
-	var MantaWallet = {}
+  var MantaWallet = {}
   MantaWallet.init = init
-	MantaWallet.isConnected = isConnected
-	MantaWallet.disconnect = disconnect
-	MantaWallet.publish = publish
-  return MantaWallet
+  MantaWallet.isConnected = isConnected
+  MantaWallet.disconnect = disconnect
+  MantaWallet.publishPayment = publishPayment
 })));

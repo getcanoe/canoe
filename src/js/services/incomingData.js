@@ -34,7 +34,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
       return decodeURIComponent(results[2].replace(/\+/g, ' '))
     }
 
-    function goSend (addr, amount, message, alias) {
+    function goSend (addr, amount, message, alias, manta) {
       $state.go('tabs.send', {}, {
         'reload': true,
         'notify': $state.current.name !== 'tabs.send'
@@ -51,6 +51,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
             toAddress: addr,
             toName: toName,
             description: message,
+            isManta: manta,
             toAlias: alias,
             fromAddress: fromAddress
           })
@@ -88,7 +89,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         // } else {
           if (code.params.amount) {
             $log.debug('Go send ' + JSON.stringify(code))
-            goSend(code.account, code.params.amount, code.params.message)
+            goSend(code.account, code.params.amount, code.params.message, null, code.params.manta)
           } else {
             goToAmountPage(code.account, null, fromAddress)
           }

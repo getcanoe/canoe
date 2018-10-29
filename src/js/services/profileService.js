@@ -347,7 +347,7 @@ angular.module('canoeApp.services')
     }
 
     root.send = function (tx, cb) {
-      nanoService.send(root.getWallet(), tx.account, tx.address, tx.amount)
+      nanoService.send(root.getWallet(), tx.account, tx.address, tx.amount, tx.message, tx.isManta)
       cb()
     }
 
