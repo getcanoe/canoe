@@ -554,19 +554,19 @@ angular.module('canoeApp.services')
           code.block = JSON.parse(parts)
           cb(null, code)
         } else if (code.protocol === 'manta') {
-          MantaWallet.init(data, function(response) {
-            if (response.error) {
-              cb("Invalid Manta QR Code")
-            } else {
-              code.account = response.account
-              code.params = {
-                amount: response.amount,
-                message: response.message,
-                manta: true
-              }
-              cb(null,code)
-            }
-          })
+          // MantaWallet.init(data, function(response) {
+          //   if (response.error) {
+          //     cb("Invalid Manta QR Code")
+          //   } else {
+          //     code.account = response.account
+          //     code.params = {
+          //       amount: response.amount,
+          //       message: response.message,
+          //       manta: true
+          //     }
+          //     cb(null,code)
+          //   }
+          // })
         } else {
           // URL style params, time to check for params
           parts = parts.split('?')
@@ -945,9 +945,9 @@ angular.module('canoeApp.services')
 
     root.confirmBlock = function (blk, hash, timestamp) {
       $log.debug('Confirming block: ' + hash + ' time: ' + timestamp)
-      if (mantaHash && hash == mantaHash) {
-        MantaWallet.publishPayment(hash)
-      }
+      // if (mantaHash && hash == mantaHash) {
+      //   MantaWallet.publishPayment(hash)
+      // }
       blk.setTimestamp(timestamp)
     }
 

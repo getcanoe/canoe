@@ -167,7 +167,7 @@
     var messageDigest = forge.md.sha256.create();
     messageDigest.update(message, "utf-8");
     var dsig = forge.util.decode64(signature);
-    var result: boolean = false;
+    var result = false;
     try {
       result = publicKey.verify(messageDigest.digest().bytes(), dsig);
     } catch (e) {
