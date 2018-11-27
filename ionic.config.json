@@ -1,6 +1,5 @@
 {
   "name": "Canoe",
-  "app_id": "se.krampe.canoe",
   "integrations": {
     "cordova": {}
   },
@@ -10,5 +9,7 @@
     "www/**/*",
     "!www/lib/**/*",
     "!www/**/*.map"
-  ]
+  ],
+  "pro_id": "se.krampe.canoe",
+  "app_id": ""
 }
