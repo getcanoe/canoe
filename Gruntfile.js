@@ -1,5 +1,7 @@
 'use strict'
 
+const sass = require('node-sass');
+
 module.exports = function (grunt) {
   require('load-grunt-tasks')(grunt)
 
@@ -131,6 +133,7 @@ module.exports = function (grunt) {
     sass: {
       dist: {
         options: {
+          implementation: sass,
           style: 'compact',
           sourcemap: 'none'
         },
