@@ -16,7 +16,7 @@
         .then(function(response) {
           deferred.resolve(
             parseSRV(response.data)
-              .then(data => getAddressFromServer(alias, data.host, data.dnssec))
+              .then(data => getAddressReqeust(alias, data.host, data.dnssec))
               .catch(function(error) {
                 return $q((resolve, reject) => {
                   reject(error);
@@ -54,7 +54,7 @@
       });
     };
 
-    var getAddressFromServer = function(alias, host, dnssec) {
+    var getAddressReqeust = function(alias, host, dnssec) {
       let deferred = $q.defer();
       $http
         .get(`https://${host}/v1/addresses?alias=${alias}&address_type=300`)
@@ -76,6 +76,85 @@
           return reject('Error contacting opencap server, no response');
         }
         return resolve({ address: respData.address, dnssec });
+      });
+    };
+
+    function updateAddress(alias, password, address) {
+      let aliasData = validateAlias(alias);
+      if (aliasData.username === '' || aliasData.domain === '') {
+        return $q((resolve, reject) => {
+          return reject('Invalid OpenCAP alias');
+        });
+      }
+
+      let deferred = $q.defer();
+      $http
+        .get(`https://dns.google.com/resolve?name=_opencap._tcp.${aliasData.domain}&type=SRV`)
+        .then(function(response) {
+          deferred.resolve(
+            parseSRV(response.data)
+              .then(data =>
+                loginRequest(alias, password, data.host)
+                  .then(jwt => updateAddressRequest(alias, address, data.host, jwt))
+                  .catch(function(error) {
+                    return $q((resolve, reject) => {
+                      reject(error);
+                    });
+                  })
+              )
+              .catch(function(error) {
+                return $q((resolve, reject) => {
+                  reject(error);
+                });
+              })
+          );
+        })
+        .catch(function(response) {
+          deferred.reject("Couldn't find srv record for the provided domain");
+        });
+      return deferred.promise;
+    }
+
+    function updateAddressRequest(alias, address, host, jwt) {
+      let deferred = $q.defer();
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwt}`,
+      });
+      let options = new RequestOptions({ headers: headers });
+      const nano_address_type = 300;
+      $http
+        .put(`https://${host}/v1/addresses`, { address_type: nano_address_type, address }, options)
+        .then(function(response) {
+          deferred.resolve('Alias was updated succesfully');
+        })
+        .catch(function(response) {
+          deferred.reject('Failed to update alias');
+        });
+      return deferred.promise;
+    }
+
+    function loginRequest(alias, password, host) {
+      let deferred = $q.defer();
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      $http
+        .post(`https://${host}/v1/auth`, { alias, password }, options)
+        .then(function(response) {
+          deferred.resolve(parseJWT(response.data).then());
+        })
+        .catch(function(response) {
+          deferred.reject('Invalid login credentials');
+        });
+      return deferred.promise;
+    }
+
+    var parseJWT = function(respData) {
+      return $q((resolve, reject) => {
+        if (respData.jwt === 'undefined') {
+          return reject('Error contacting opencap server, no response');
+        }
+        return resolve(respData.jwt);
       });
     };
 
@@ -106,6 +185,7 @@
     }
 
     var service = {
+      updateAddress,
       getAddress,
     };
 
