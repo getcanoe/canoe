@@ -638,6 +638,17 @@ angular.module('canoeApp.services')
       return (isValidHash && (seedHex.length === 64))
     }
 
+    root.splitSeed = function (seedHex) {
+      // 64 letters is 16 groups of 4
+      var g = []
+      for (var count = 0; count < 16; count++) {
+        g.push(seedHex.slice(count * 4, (count * 4) + 4))
+      }
+      var sep = '  '
+      return [g.slice(0, 4).join(sep), g.slice(4, 8).join(sep),
+        g.slice(8, 12).join(sep), g.slice(12, 16).join(sep)]
+    }
+
     root.isValidAccount = function (addr) {
       if (addr.startsWith('xrb_') || addr.startsWith('nano_')) {
         return rai.account_validate(addr)

@@ -1,12 +1,12 @@
 'use strict'
 /* global angular */
 angular.module('canoeApp.controllers').controller('backupController',
-  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, profileService, popupService, gettextCatalog, $ionicModal) {
+  function ($scope, $timeout, $log, $state, $stateParams, $ionicHistory, profileService, nanoService, popupService, gettextCatalog, $ionicModal) {
     $scope.wallet = profileService.getWallet()
 
     $scope.setFlow = function (step) {
       $scope.data = {}
-      $scope.seed = profileService.getSeed()
+      $scope.seedLines = nanoService.splitSeed(profileService.getSeed())
       $scope.data.passphrase = null
       $scope.step = step || 1
       $scope.selectComplete = false
@@ -56,10 +56,6 @@ angular.module('canoeApp.controllers').controller('backupController',
           })
         }
       })
-    }
-
-    $scope.copyWalletSeed = function () {
-      return $scope.seed
     }
 
     var finalStep = function () {

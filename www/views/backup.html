@@ -18,12 +18,13 @@
       ## STEP 1
     -->
     <div id="wallet-backup-seed-step-1" class="ng-hide" ng-show="step == 1 && (!deleted)">
-      <div class="initial-prompt" translate>Please carefully write down this 64 character seed. Click to copy to clipboard.</div>
-      <div class="backup-seed" copy-to-clipboard="copyWalletSeed()">
+      <div class="initial-prompt" translate>Please carefully write down this 64 character seed.</div>
         <div class="backup-seed-content">
-          <span class="backup-seed-content-word-readonly"><span class="ellipsis">{{seed}}</span></span>
+          <pre><span class="backup-seed-content-word-readonly">{{seedLines[0]}}</span></pre>
+          <pre><span class="backup-seed-content-word-readonly">{{seedLines[1]}}</span></pre>
+          <pre><span class="backup-seed-content-word-readonly">{{seedLines[2]}}</span></pre>
+          <pre><span class="backup-seed-content-word-readonly">{{seedLines[3]}}</span></pre>
         </div>
-      </div>
       <div class="cta-buttons">
         <button ng-show="!deleted" ng-disabled="error" class="button button-standard button-primary" ng-click="goToStep(4);" translate>I've written it down</button>
       </div>
