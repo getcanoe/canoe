@@ -149,13 +149,13 @@
   "devDependencies": {
     "cordova": "^8.1.2",
     "grunt": "^1.0.3",
-    "shelljs": "^0.8.3",
     "grunt-contrib-uglify-es": "^3.3.0",
-    "node-sass": "^4.10.0",
-    "nw-builder": "^3.5.4",
+    "node-sass": "^4.11.0",
+    "npm-check-updates": "^2.15.0",
+    "nw-builder": "^3.5.6",
     "pre-commit": "^1.2.2",
-    "trash-cli": "^1.4.0",
-    "npm-check-updates": "^2.15.0"
+    "shelljs": "^0.8.3",
+    "trash-cli": "^1.4.0"
   },
   "pre-commit": "unstage-package",
   "cordova": {
