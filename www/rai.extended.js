@@ -236,29 +236,16 @@ array_extend = function (array) {
   for (let i = 0; i < (length - 1); i++)	extended_array[i + 1] = array[i]
   return extended_array
 }
-// Arrays manipulations
-
-// String output
-random_hex = function () {
-  var array = new Uint8Array(32)
-  crypto.getRandomValues(array)
-  var hex = uint8_hex(array)
-  return hex
-}
-
-XRB.createSeedHex = function () {
-  return random_hex()
-}
 
 // String output
 XRB.account_get = function (key) {
   var isValid = /^[0123456789ABCDEF]+$/.test(key)
-  if (isValid && (key.length == 64)) {
+  if (isValid && (key.length === 64)) {
     var key_array = hex_uint8(key)
     var bytes = uint4_uint5(array_extend(uint8_uint4(key_array)))
     var blake_hash = blake2b(key_array, null, 5).reverse()
     var hash_bytes = uint4_uint5(uint8_uint4(blake_hash))
-    var account = 'xrb_' + uint5_string(bytes) + uint5_string(hash_bytes)
+    var account = 'nano_' + uint5_string(bytes) + uint5_string(hash_bytes)
     return account
   }	else {
     XRB.error('Invalid public key')
@@ -272,7 +259,7 @@ Rai.prototype.ext_account_get = function (key) {
 // String output
 XRB.account_key = function (account) {
   if (((account.startsWith('xrb_1') || account.startsWith('xrb_3')) && (account.length === 64)) ||
-			((account.startsWith('nano_1') || account.startsWith('nano_3')) && (account.length === 65))) {
+  ((account.startsWith('nano_1') || account.startsWith('nano_3')) && (account.length === 65))) {
     var account_crop = account.substring(account.length - 60)
     var isValid = /^[13456789abcdefghijkmnopqrstuwxyz]+$/.test(account_crop)
     if (isValid) {

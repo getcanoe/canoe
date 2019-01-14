@@ -1,7 +1,7 @@
 // general functions
 
 function stringFromHex (hex) {
-  var hex = hex.toString()// force conversion
+  hex = hex.toString() // force conversion
   var str = ''
   for (var i = 0; i < hex.length; i += 2) { str += String.fromCharCode(parseInt(hex.substr(i, 2), 16)) }
   return str
@@ -20,28 +20,17 @@ function accountFromHexKey (hex) {
   var key_bytes = uint4_uint8(hex_uint4(hex))
   var checksum = uint5_string(uint4_uint5(uint8_uint4(blake2b(key_bytes, null, 5).reverse())))
   var c_account = uint5_string(uint4_uint5(hex_uint4('0' + hex)))
-  return 'xrb_' + c_account + checksum
-}
-
-function parseXRBAccount (str) {
-  var i = str.indexOf('xrb_')
-  if (i !== -1) {
-    var acc = str.slice(i, i + 64)
-    try {
-      keyFromAccount(acc)
-      return acc
-    } catch (e) {
-      return false
-    }
-  }
-  return false
+  return 'nano_' + c_account + checksum
 }
 
 function dec2hex (str, bytes = null) {
-  var dec = str.toString().split(''), sum = [], hex = [], i, s
-  while (dec.length)	{
+  var dec = str.toString().split('')
+  var sum = []
+  var hex = []
+  var s, i
+  while (dec.length) {
     s = 1 * dec.shift()
-    for (i = 0; s || i < sum.length; i++)		{
+    for (i = 0; s || i < sum.length; i++)	{
       s += (sum[i] || 0) * 10
       sum[i] = s % 16
       s = (s - sum[i]) / 16
@@ -53,11 +42,11 @@ function dec2hex (str, bytes = null) {
 
   hex = hex.join('')
 
-  if (hex.length % 2 != 0) { hex = '0' + hex }
+  if (hex.length % 2 !== 0) { hex = '0' + hex }
 
   if (bytes > hex.length / 2)	{
     var diff = bytes - hex.length / 2
-    for (var i = 0; i < diff; i++) { hex = '00' + hex }
+    for (i = 0; i < diff; i++) { hex = '00' + hex }
   }
 
   return hex
@@ -65,9 +54,10 @@ function dec2hex (str, bytes = null) {
 
 function hex2dec (s) {
   function add (x, y) {
-    var c = 0, r = []
-    var x = x.split('').map(Number)
-    var y = y.split('').map(Number)
+    var c = 0
+    var r = []
+    x = x.split('').map(Number)
+    y = y.split('').map(Number)
     while (x.length || y.length) {
       var s = (x.pop() || 0) + (y.pop() || 0) + c
       r.unshift(s < 10 ? s : s - 10)
@@ -218,7 +208,7 @@ function uint4_hex (uint4) {
 
 function equal_arrays (array1, array2) {
   for (let i = 0; i < array1.length; i++) {
-    if (array1[i] != array2[i])	return false
+    if (array1[i] !== array2[i]) return false
   }
   return true
 }
@@ -231,8 +221,9 @@ function array_crop (array) {
 }
 
 function keyFromAccount (account) {
-  if ((account.startsWith('xrb_1') || account.startsWith('xrb_3')) && (account.length == 64)) {
-    var account_crop = account.substring(4, 64)
+  if (((account.startsWith('xrb_1') || account.startsWith('xrb_3')) && (account.length === 64)) ||
+  ((account.startsWith('nano_1') || account.startsWith('nano_3')) && (account.length === 65))) {
+    var account_crop = account.substring(account.length - 60)
     var isValid = /^[13456789abcdefghijkmnopqrstuwxyz]+$/.test(account_crop)
     if (isValid) {
       var key_uint4 = array_crop(uint5_uint4(string_uint5(account_crop.substring(0, 52))))
@@ -242,8 +233,12 @@ function keyFromAccount (account) {
       if (equal_arrays(hash_uint4, uint8_uint4(blake_hash))) {
         var key = uint4_hex(key_uint4)
         return key
-      }			else				{ throw 'Checksum incorrect.' }
-    }		else			{ throw 'Invalid XRB account.' }
+      } else {
+        throw 'Account checksum incorrect.'
+      }
+    } else {
+      throw 'Invalid symbols in account.'
+    }
   }
-  throw 'Invalid XRB account.'
+  throw 'Invalid account.'
 }
