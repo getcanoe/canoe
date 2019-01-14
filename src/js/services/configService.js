@@ -46,10 +46,6 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
       bannedUntil: null
     },
 
-    recentTransactions: {
-      enabled: true
-    },
-
     release: {
       url: 'https://api.github.com/repos/getcanoe/canoe/releases/latest'
     },

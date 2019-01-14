@@ -109,9 +109,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
         $rootScope.$on('walletloaded', function (event) {
           $log.debug('Wallet loaded')
           $scope.accounts = profileService.getAccounts()
-          if ($scope.recentTransactionsEnabled) {
-            getNotifications()
-          }
         }),
         $rootScope.$on('work', function (event) {
           $scope.work = profileService.getPoW()
@@ -132,9 +129,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
           if (account === null) {
             $scope.accounts = profileService.getAccounts()
           }
-          if ($scope.recentTransactionsEnabled) {
-            getNotifications()
-          }
           $timeout(function () {
             $scope.$apply()
           })
@@ -145,9 +139,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       $scope.homeIntegrations = homeIntegrationsService.get()
 
       configService.whenAvailable(function (config) {
-        $scope.recentTransactionsEnabled = config.recentTransactions.enabled
-        if ($scope.recentTransactionsEnabled) getNotifications()
-
         pushNotificationsService.init()
 
         $timeout(function () {
@@ -223,23 +214,6 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
       $scope.accounts = profileService.getAccounts()
       $scope.$apply()
     })
-
-    var getNotifications = function () {
-      profileService.getNotifications({
-        limit: 3
-      }, function (err, notifications, total) {
-        if (err) {
-          $log.error(err)
-          return
-        }
-        $scope.notifications = notifications
-        $scope.notificationsN = total
-        $timeout(function () {
-          $ionicScrollDelegate.resize()
-          $scope.$apply()
-        }, 10)
-      })
-    }
 
     var performUpdate = function (cb) {
       $scope.accounts = profileService.getAccounts()

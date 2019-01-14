@@ -29,9 +29,6 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
     $scope.serverSidePoW = {
       value: value
     }
-    $scope.recentTransactionsEnabled = {
-      value: false // config.recentTransactions.enabled
-    }
   }
 
   $scope.repair = function () {
@@ -66,17 +63,6 @@ angular.module('canoeApp.controllers').controller('advancedSettingsController', 
     var opts = {
       wallet: {
         playSounds: $scope.playSounds.value
-      }
-    }
-    configService.set(opts, function (err) {
-      if (err) $log.debug(err)
-    })
-  }
-
-  $scope.recentTransactionsChange = function () {
-    var opts = {
-      recentTransactions: {
-        enabled: $scope.recentTransactionsEnabled.value
       }
     }
     configService.set(opts, function (err) {
