@@ -70,7 +70,7 @@ angular.module('canoeApp.controllers').controller('tabReceiveController', functi
     } else {
       $scope.account = acc
       $scope.addr = acc.id
-      $scope.addrUrl = 'xrb:' + acc.id
+      $scope.addrUrl = 'nano:' + acc.id
     }
   }
 
