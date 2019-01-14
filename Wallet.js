@@ -1,5 +1,5 @@
 /* globals uint8_hex nacl blake2bInit blake2bUpdate blake2bFinal hex_uint8 bigInt
-   accountFromHexKey dec2hex keyFromAccount TextDecoder TextEncoder */
+   accountFromHexKey dec2hex keyFromAccount TextDecoder TextEncoder Logger */
 var pbkdf2 = require('pbkdf2')
 var crypto = require('crypto')
 var assert = require('assert')
@@ -18,7 +18,7 @@ var Iso10126 = {
   pad: function (dataBytes, nBytesPerBlock) {
     var nPaddingBytes = nBytesPerBlock - dataBytes.length % nBytesPerBlock
     var paddingBytes = crypto.randomBytes(nPaddingBytes - 1)
-    var endByte = new Buffer([ nPaddingBytes ])
+    var endByte = Buffer.from([ nPaddingBytes ])
     return Buffer.concat([ dataBytes, paddingBytes, endByte ])
   },
 
@@ -1258,13 +1258,13 @@ module.exports = function (password) {
     blake2bUpdate(context, pack)
     checksum = blake2bFinal(context)
 
-    var salt = new Buffer(nacl.randomBytes(16))
+    var salt = Buffer.from(nacl.randomBytes(16)) // new Buffer(nacl.randomBytes(16))
     var key = pbkdf2.pbkdf2Sync(passPhrase, salt, iterations, 32, 'sha1')
 
     var options = { mode: AES.CBC, padding: Iso10126 }
     var encryptedBytes = AES.encrypt(pack, key, salt, options)
 
-    var payload = Buffer.concat([new Buffer(checksum), salt, encryptedBytes])
+    var payload = Buffer.concat([Buffer.from(checksum), salt, encryptedBytes])
     return payload.toString('hex')
   }
 
@@ -1290,7 +1290,7 @@ module.exports = function (password) {
    * Constructs the wallet from an encrypted base64 encoded wallet
    */
   api.load = function (data) {
-    var bytes = new Buffer(data, 'hex')
+    var bytes = Buffer.from(data, 'hex') // new Buffer(data, 'hex')
     checksum = bytes.slice(0, 32)
     var salt = bytes.slice(32, 48)
     var payload = bytes.slice(48)
@@ -1334,9 +1334,9 @@ module.exports = function (password) {
         blk = newBlock()
         var prev = null
         if (j > 0) {
-          prev = walletData.keys[i].chain[j-1]
+          prev = walletData.keys[i].chain[j - 1]
         }
-        blk.buildFromJSON(walletData.keys[i].chain[j],prev)
+        blk.buildFromJSON(walletData.keys[i].chain[j], prev)
         aux.chain.push(blk)
       }
 
