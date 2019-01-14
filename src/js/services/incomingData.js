@@ -87,12 +87,12 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
         //     goToAmountPage(code.account, code.alias)
         //   }
         // } else {
-          if (code.params.amount) {
-            $log.debug('Go send ' + JSON.stringify(code))
-            goSend(code.account, code.params.amount, code.params.message, null, code.params.manta)
-          } else {
-            goToAmountPage(code.account, null, fromAddress)
-          }
+        if (code.params.amount) {
+          $log.debug('Go send ' + JSON.stringify(code))
+          goSend(code.account, code.params.amount, code.params.message, null, code.params.manta)
+        } else {
+          goToAmountPage(code.account, null, fromAddress)
+        }
         // }
         return cb(null, code)
       } else if (protocol === 'xrbkey' || protocol === 'nanokey') {
@@ -103,11 +103,14 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
 
         // Example QR urls, see https://github.com/clemahieu/raiblocks/wiki/URI-and-QR-Code-Standard
         // Payment:
+        // nano:nano_<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
         // xrb:xrb_<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
         // Key import:
         // xrbkey:<encoded private key>[?][label=<label>][&][message=<message>]
+        // nanokey:<encoded private key>[?][label=<label>][&][message=<message>]
         // Seed import:
         // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
+        // nanoseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
         // We could add:
         // Contact?
         // Payment with confirmation

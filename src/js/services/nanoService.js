@@ -318,8 +318,6 @@ angular.module('canoeApp.services')
           return true
         }
         // Network has blocks that we do not, process them
-
-
       } else {
         var lastBlock = currentBlocks[currentBlocks.length - 1]
         // Are the last hashes the same
@@ -328,7 +326,6 @@ angular.module('canoeApp.services')
         if (lastHash === ourLastHash) {
           return
         }
-
       }
       var history = rai.account_history(account)
       if (history) {
@@ -369,7 +366,7 @@ angular.module('canoeApp.services')
           if (block.type === 'state') {
             block.state = true
             block.account = info.contents.account
-            }
+          }
           var blk = wallet.createBlockFromJSON(block)
           if (blk.getHash(true) !== hash) {
             console.log('WRONG HASH')

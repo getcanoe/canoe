@@ -1,10 +1,10 @@
 'use strict'
-/* global XMLHttpRequest BigNumber angular Profile */
+/* global BigNumber angular Profile */
 angular.module('canoeApp.services')
   .factory('profileService', function profileServiceFactory ($rootScope, $timeout, $filter, $log, $state, lodash, storageService, nanoService, configService, gettextCatalog, uxLanguage, platformInfo, txFormatService, addressbookService, rateService) {
-    var isChromeApp = platformInfo.isChromeApp
-    var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
-    var isIOS = platformInfo.isIOS
+    // var isChromeApp = platformInfo.isChromeApp
+    // var isWindowsPhoneApp = platformInfo.isCordova && platformInfo.isWP
+    // var isIOS = platformInfo.isIOS
 
     // Avoid 15 signific digit error
     BigNumber.config({ ERRORS: false })
@@ -80,7 +80,7 @@ angular.module('canoeApp.services')
     // Return a URI for the seed given the password
     root.getSeedURI = function (pwd) {
       // xrbseed:<encoded seed>[?][label=<label>][&][message=<message>][&][lastindex=<index>]
-      return 'xrbseed:' + root.getWallet().getSeed(pwd) + '?lastindex=' + (root.getWallet().getAccountIds().length - 1)
+      return 'nanoseed:' + root.getWallet().getSeed(pwd) + '?lastindex=' + (root.getWallet().getAccountIds().length - 1)
     }
 
     // Return an object with wallet member holding the encrypted hex of wallet
@@ -136,7 +136,7 @@ angular.module('canoeApp.services')
         isNan = true
       }
 
-      if (amount !== undefined && !isNan){
+      if (amount !== undefined && !isNan) {
         var decimalSeparator = '.'
         var knownLoc = true
         try {
@@ -145,7 +145,7 @@ angular.module('canoeApp.services')
           knownLoc = false
         }
 
-        if (knownLoc){
+        if (knownLoc) {
           var knownCur = true
           BigNumber.config({ EXPONENTIAL_AT: -31 })
           try {
@@ -153,7 +153,7 @@ angular.module('canoeApp.services')
           } catch (err) {
             knownCur = false
           }
-          if (knownCur){
+          if (knownCur) {
             // Known fiat currency
             result = bigAmount.toNumber().toLocaleString(loc, {style: 'currency', currency: cur})
           } else {
@@ -161,10 +161,10 @@ angular.module('canoeApp.services')
             var integerPart = bigAmount.round(0, BigNumber.ROUND_DOWN)
             var decimalPart = bigAmount.minus(integerPart)
             var cryptoDisplay = integerPart.toString()
-            if (knownLoc){
+            if (knownLoc) {
               cryptoDisplay = integerPart.toNumber().toLocaleString(loc)
             }
-            if (!decimalPart.isZero()){
+            if (!decimalPart.isZero()) {
               cryptoDisplay += decimalSeparator
               cryptoDisplay += decimalPart.toString().substr(2)
             }
@@ -187,7 +187,6 @@ angular.module('canoeApp.services')
     }
 
     root.updateAccountSettings = function (account) {
-      var defaults = configService.getDefaults()
       configService.whenAvailable(function (config) {
         account.name = (config.aliasFor && config.aliasFor[account.id])
         account.meta.color = (config.colorFor && config.colorFor[account.id])
@@ -378,7 +377,6 @@ angular.module('canoeApp.services')
 
     root.createProfile = function (cb) {
       $log.info('Creating profile')
-      var defaults = configService.getDefaults()
 
       configService.get(function (err) {
         if (err) $log.debug(err)
@@ -468,158 +466,6 @@ angular.module('canoeApp.services')
       var acc = root.getAccount(accountId)
       acc.meta.balanceHidden = !acc.meta.balanceHidden
       nanoService.saveWallet(root.getWallet(), cb)
-    }
-
-    root.getNotifications = function (opts, cb) {
-      opts = opts || {}
-
-      var TIME_STAMP = 60 * 60 * 6
-      var MAX = 30
-
-      var typeFilter = {
-        'NewOutgoingTx': 1,
-        'NewIncomingTx': 1
-      }
-
-      var w = root.getAccounts()
-      if (lodash.isEmpty(w)) return cb()
-
-      var l = w.length,
-        j = 0,
-        notifications = []
-
-      function isActivityCached (wallet) {
-        return wallet.cachedActivity && wallet.cachedActivity.isValid
-      };
-
-      function updateNotifications (wallet, cb2) {
-        if (isActivityCached(wallet) && !opts.force) return cb2()
-        // TODO
-/*        wallet.getNotifications({
-          timeSpan: TIME_STAMP,
-          includeOwn: true
-        }, function (err, n) {
-          if (err) return cb2(err)
-
-          wallet.cachedActivity = {
-            n: n.slice(-MAX),
-            isValid: true
-          }
-
-          return cb2()
-        }) */
-      };
-
-      function process (notifications) {
-        if (!notifications) return []
-
-        var shown = lodash.sortBy(notifications, 'createdOn').reverse()
-
-        shown = shown.splice(0, opts.limit || MAX)
-
-        lodash.each(shown, function (x) {
-          x.txpId = x.data ? x.data.txProposalId : null
-          x.txid = x.data ? x.data.txid : null
-          x.types = [x.type]
-
-          if (x.data && x.data.amount) { x.amountStr = txFormatService.formatAmountStr(x.wallet.coin, x.data.amount) }
-
-          x.action = function () {
-            // TODO?
-            // $state.go('tabs.account', {
-            //   walletId: x.walletId,
-            //   txpId: x.txpId,
-            //   txid: x.txid,
-            // });
-          }
-        })
-
-        var finale = shown // GROUPING DISABLED!
-
-        var finale = [],
-          prev
-
-        // Item grouping... DISABLED.
-
-        // REMOVE (if we want 1-to-1 notification) ????
-        lodash.each(shown, function (x) {
-          if (prev && prev.walletId === x.walletId && prev.txpId && prev.txpId === x.txpId && prev.creatorId && prev.creatorId === x.creatorId) {
-            prev.types.push(x.type)
-            prev.data = lodash.assign(prev.data, x.data)
-            prev.txid = prev.txid || x.txid
-            prev.amountStr = prev.amountStr || x.amountStr
-            prev.creatorName = prev.creatorName || x.creatorName
-          } else {
-            finale.push(x)
-            prev = x
-          }
-        })
-
-        // var u = bwcService.getUtils()
-        lodash.each(finale, function (x) {
-          if (x.data && x.data.message && x.wallet && x.wallet.credentials.sharedEncryptingKey) {
-            // TODO TODO TODO => BWC
-            x.message = u.decryptMessage(x.data.message, x.wallet.credentials.sharedEncryptingKey)
-          }
-        })
-
-        return finale
-      };
-
-      lodash.each(w, function (wallet) {
-        updateNotifications(wallet, function (err) {
-          j++
-          if (err) {
-            $log.warn('Error updating notifications:' + err)
-          } else {
-            var n
-
-            n = lodash.filter(wallet.cachedActivity.n, function (x) {
-              return typeFilter[x.type]
-            })
-
-            var idToName = {}
-            if (wallet.cachedStatus) {
-              lodash.each(wallet.cachedStatus.wallet.canoeers, function (c) {
-                idToName[c.id] = c.name
-              })
-            }
-
-            lodash.each(n, function (x) {
-              x.wallet = wallet
-              if (x.creatorId && wallet.cachedStatus) {
-                x.creatorName = idToName[x.creatorId]
-              };
-            })
-
-            notifications.push(n)
-          }
-          if (j === l) {
-            notifications = lodash.sortBy(notifications, 'createdOn')
-            notifications = lodash.compact(lodash.flatten(notifications)).slice(0, MAX)
-            var total = notifications.length
-            return cb(null, process(notifications), total)
-          };
-        })
-      })
-    }
-
-    root.getTxps = function (opts, cb) {
-      var MAX = 100
-      opts = opts || {}
-
-      var w = root.getAccounts()
-      if (lodash.isEmpty(w)) return cb()
-
-      var txps = []
-
-      lodash.each(w, function (x) {
-        if (x.pendingTxps) { txps = txps.concat(x.pendingTxps) }
-      })
-      var n = txps.length
-      txps = lodash.sortBy(txps, 'pendingForUs', 'createdOn')
-      txps = lodash.compact(lodash.flatten(txps)).slice(0, opts.limit || MAX)
-      return cb(null, txps, n)
     }
 
     return root
