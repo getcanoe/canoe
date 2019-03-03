@@ -9,7 +9,7 @@ angular.module('canoeApp.services')
       defaultRepresentative: null,
       servermessage: null, // { title: 'Hey', body: 'Rock on', link: 'http://getcanoe.io' }
       stateblocks: {
-        enable: false
+        enable: true
       }
     }
 
