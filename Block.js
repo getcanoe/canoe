@@ -5,7 +5,7 @@ var MAIN_NET_WORK_THRESHOLD = 'ffffffc000000000'
 var STATE_BLOCK_PREAMBLE = '0000000000000000000000000000000000000000000000000000000000000006'
 var STATE_BLOCK_ZERO = '0000000000000000000000000000000000000000000000000000000000000000'
 
-module.exports = function (isState = false) {
+module.exports = function (isState = true) {
   var api = {} // public methods
   var type // block type
   var state = isState // if this is a state block

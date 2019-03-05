@@ -761,8 +761,9 @@ module.exports = function (password) {
   api.lastBlockIsState = function () {
     if (lastBlock) {
       return api.getBlockFromHash(lastBlock).isState()
+    } else {
+      throw new Error('There is no previous block synced!')
     }
-    return false
   }
 
   api.getBlockFromHash = function (blockHash) {
@@ -1123,14 +1124,7 @@ module.exports = function (password) {
     lastPendingBlock = blk.getHash(true)
     keys[current].lastPendingBlock = blk.getHash(true)
 
-    // check if there is a conflicting block pending
-    for (var i in pendingBlocks) {
-      if (pendingBlocks[i].getPrevious() === blk.getPrevious()) {
-        // conflict
-        priv.fixPreviousChange(blk.getPrevious(), blk.getHash(true), acc)
-      }
-    }
-
+    pendingBlocks = []
     pendingBlocks.push(blk)
     walletPendingBlocks.push(blk)
     priv.save()
