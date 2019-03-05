@@ -223,8 +223,9 @@ angular.module('canoeApp.services')
           root.wallet.removeReadyBlock(hash)
           dirty = true
         } else {
-          $log.debug('Failed broadcast, removing readyblock: ' + hash)
-          root.wallet.removeReadyBlock(hash)
+          var h = blk.getHash(true)
+          $log.debug('Failed broadcast, removing readyblock: ' + h)
+          root.wallet.removeReadyBlock(h)
           // This will fix the tip of the chain to match network, no need to set dirty
           // since syncChain will save wallet
           // syncChain(root.wallet, blk.account)
