@@ -268,7 +268,7 @@ module.exports = function (grunt) {
         platforms: ['osx64', 'linux64', 'win64', 'win32'],
         flavor: 'sdk', // normal or sdk
         zip: false,
-        version: '0.29.0', // If you modify you need to rebuild native modules!
+        version: '0.36.4', // If you modify you need to rebuild native modules! "grunt exec:powbuild" and copy raiblocks-pow into native dir
         macIcns: './icon.icns',
         exeIco: './icon.ico',
         macPlist: {
