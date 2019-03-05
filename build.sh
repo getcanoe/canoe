@@ -45,6 +45,7 @@ done
 
 echo "Building $VER ..."
 
+mkdir -p build
 cd build
 
 # Remove previous build
@@ -62,7 +63,7 @@ then
   else
     # Debug build without proper signing
     npm run debug:android
-    cp ../platforms/android/app/build/outputs/apk/debug/android-debug.apk $VER/canoe-android-$VER-debug.apk
+    cp ../platforms/android/app/build/outputs/apk/debug/app-debug.apk $VER/canoe-android-$VER-debug.apk
   fi
 fi
 
@@ -75,7 +76,7 @@ then
 fi
 
 # Move files into $VER
-mv canoe-*-$VER*.* $VER/
+mv -f canoe-*-$VER*.* $VER/
 
 # Make sha256sum checksums
 cd $VER
