@@ -26,9 +26,8 @@
     "position": "center",
     "fullscreen": false
   },
-  "chromium-args": "--disable-devtools",
   "build": {
-    "nwVersion": "0.29.0"
+    "nwVersion": "0.36.4"
   },
   "webkit": {
     "page-cache": false,
@@ -56,10 +55,10 @@
     "bezier-easing": "^2.1.0",
     "bower": "^1.8.8",
     "browserify": "^16.2.3",
-    "cordova-android": "^7.1.4",
+    "cordova-android": "^8.0.0",
     "cordova-clipboard": "^1.2.1",
     "cordova-custom-config": "^5.0.3",
-    "cordova-ios": "^4.5.5",
+    "cordova-ios": "^5.0.0",
     "cordova-ios-requires-fullscreen": "0.0.2",
     "cordova-plugin-add-swift-support": "^1.7.2",
     "cordova-plugin-android-fingerprint-auth": "^1.5.0",
@@ -69,7 +68,7 @@
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-globalization": "^1.11.0",
     "cordova-plugin-inappbrowser": "^3.0.0",
-    "cordova-plugin-ionic-webview": "^2.4.0",
+    "cordova-plugin-ionic-webview": "^4.0.0",
     "cordova-plugin-media": "^5.0.2",
     "cordova-plugin-network-information": "^2.0.1",
     "cordova-plugin-qrscanner": "git+https://github.com/gokr/cordova-plugin-qrscanner.git",
@@ -98,7 +97,7 @@
     "grunt-exec": "^3.0.0",
     "grunt-nw-builder": "git+https://github.com/rmp/grunt-nw-builder.git",
     "grunt-sass": "^3.0.2",
-    "ionic": "3.20.0",
+    "ionic": "4.10.3",
     "ionic-plugin-keyboard": "^2.2.1",
     "load-grunt-tasks": "^4.0.0",
     "lodash": "^4.17.11",
@@ -152,6 +151,7 @@
     "grunt-contrib-uglify-es": "^3.3.0",
     "node-sass": "^4.11.0",
     "nw-builder": "^3.5.7",
+    "nw-gyp": "^3.6.3",
     "pre-commit": "^1.2.2",
     "shelljs": "^0.8.3",
     "trash-cli": "^1.4.0"
