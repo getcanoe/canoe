@@ -305,7 +305,7 @@ function Rai (url_base) {
     return deterministic_key
   }
 
-  this.frontiers = function (account = 'xrb_1111111111111111111111111111111111111111111111111117353trpda', count = '1048576') {
+  this.frontiers = function (account = 'nano_1111111111111111111111111111111111111111111111111117353trpda', count = '1048576') {
     var rpc_frontiers = this.rpc(JSON.stringify({'action': 'frontiers', 'account': account, 'count': count}))
     return rpc_frontiers.frontiers
   }
@@ -380,7 +380,7 @@ function Rai (url_base) {
     return key_expand
   }
 
-  this.ledger = function (account = 'xrb_1111111111111111111111111111111111111111111111111117353trpda', count = '1048576', representative = false, weight = false, pending = false, sorting = false) {
+  this.ledger = function (account = 'nano_1111111111111111111111111111111111111111111111111117353trpda', count = '1048576', representative = false, weight = false, pending = false, sorting = false) {
     var ledger = this.rpc(JSON.stringify({'action': 'ledger', 'account': account, 'count': count, 'representative': representative, 'weight': weight, 'pending': pending, 'sorting': sorting}))
     return ledger.accounts
   }

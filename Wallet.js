@@ -762,7 +762,9 @@ module.exports = function (password) {
     if (lastBlock) {
       return api.getBlockFromHash(lastBlock).isState()
     } else {
-      throw new Error('There is no previous block synced!')
+      return true
+      // new account
+      //throw new Error('There is no previous block synced!')
     }
   }
 

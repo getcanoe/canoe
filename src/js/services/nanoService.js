@@ -491,6 +491,10 @@ angular.module('canoeApp.services')
         var accountsAndHashes = rai.accounts_pending(accountIds)
         $log.debug('Pending hashes: ' + JSON.stringify(accountsAndHashes))
         lodash.each(accountsAndHashes, function (hashes, account) {
+          if (account.startsWith('xrb')) {
+            account = account.substring(3)
+            account = 'nano'.concat(account)
+          }
           var blocks = rai.blocks_info(hashes)
           lodash.each(blocks, function (blk, hash) {
             root.handleIncomingSendBlock(hash, account, blk.block_account, blk.amount)
