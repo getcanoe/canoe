@@ -1283,6 +1283,16 @@ module.exports = function (password) {
   }
 
   /**
+   * Convert an xrb_account to a nano_account, replacing prefix.
+   */
+  function xrb2nano (acc) {
+    if (acc.startsWith('xrb_')) {
+      return 'nano' + acc.slice(3)
+    }
+    return acc
+  }
+
+  /**
    * Constructs the wallet from an encrypted base64 encoded wallet
    */
   api.load = function (data) {
@@ -1338,7 +1348,7 @@ module.exports = function (password) {
 
       aux.priv = hex_uint8(walletData.keys[i].priv)
       aux.pub = hex_uint8(walletData.keys[i].pub)
-      aux.account = walletData.keys[i].account
+      aux.account = xrb2nano(walletData.keys[i].account)
       aux.balance = bigInt(walletData.keys[i].balance ? walletData.keys[i].balance : 0)
       aux.lastBlock = aux.chain.length > 0 ? aux.chain[aux.chain.length - 1].getHash(true) : ''
       aux.lastPendingBlock = aux.lastBlock
