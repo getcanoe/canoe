@@ -55,7 +55,8 @@
     "bezier-easing": "^2.1.0",
     "bower": "^1.8.8",
     "browserify": "^16.2.3",
-    "cordova-android": "^8.0.0",
+    "cordova-android": "^7.1.4",
+    "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-clipboard": "^1.2.1",
     "cordova-custom-config": "^5.0.3",
     "cordova-ios": "^5.0.0",
@@ -198,7 +199,10 @@
         "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
       },
       "cordova-plugin-add-swift-support": {},
-      "phonegap-nfc": {}
+      "phonegap-nfc": {},
+      "cordova-android-support-gradle-release": {
+        "ANDROID_SUPPORT_VERSION": "27.+"
+      }
     }
   },
   "optionalDependencies": {
