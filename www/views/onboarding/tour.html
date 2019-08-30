@@ -1,59 +1,4 @@
-<ion-view class="onboarding" id="onboarding-tour">
-  <ion-nav-bar>
-    <ion-nav-title></ion-nav-title>
-    <ion-nav-buttons side="primary">
-      <button class="button back-button button-clear" ng-click="goBack()">
-        <i class="icon ion-ios-arrow-thin-left"></i>
-      </button>
-    </ion-nav-buttons>
-    <ion-nav-buttons side="secondary">
-      <button class="button back-button button-clear" ng-hide="data.index > 2" ng-click="changeSlide(3,150)">
-        {{'Skip' | translate}}
-      </button>
-    </ion-nav-buttons>
-  </ion-nav-bar>
-  <ion-slides class="slides" options="options" slider="data.slider">
-    <ion-slide-page>
-      <ion-content id="onboard-tour-secure" scroll="false">
-        <div class="onboarding-topic" translate>Nano is Instant</div>
-        <div class="onboarding-description" translate>Transfer Nano instantly to anyone, anywhere.</div>
-        <div class="onboarding-illustration-secure"></div>
-        <div class="cta-buttons">
-          <div class="onboarding-tldr" translate>Just scan and pay.</div>
-          <button class="button button-standard button-primary" ng-click="slideNext()" translate>
-            Got it
-          </button>
-        </div>
-      </ion-content>
-    </ion-slide-page>
-    <ion-slide-page>
-      <ion-content id="onboard-tour-currency" scroll="false">
-        <div class="onboarding-topic" translate>Nano is Feeless</div>
-        <div class="onboarding-description" translate>Trade Nano for other currencies like USD or Euros. </div>
-        <div class="onboarding-illustration-currency">
-        </div>
-        <div class="cta-buttons">
-          <div class="onboarding-tldr" translate>Never pay transfer fees again!</div>
-          <button class="button button-standard button-primary" ng-click="slideNext()" translate>
-            Makes sense
-          </button>
-        </div>
-      </ion-content>
-    </ion-slide-page>
-    <ion-slide-page>
-      <ion-content id="onboard-tour-control" scroll="false">
-        <div class="onboarding-topic" translate>Nano is Secure</div>
-        <div class="onboarding-description" translate>Canoe stores your Nano using cutting-edge security.</div>
-        <div class="onboarding-illustration-control"></div>
-        <div class="cta-buttons">
-          <div class="onboarding-tldr" translate>But do not lose your seed!</div>
-          <button class="button button-standard button-primary" ng-click="slideNext()"  translate>
-            Let's Start
-          </button>
-        </div>
-      </ion-content>
-    </ion-slide-page>
-    <ion-slide-page class="no-swipe">
+<ion-view class="onboarding" id="onboarding-tour">  
       <ion-content id="onboarding-create-password" scroll="false">
       <div class="onboarding-topic" translate>Encryption Time!</div>
 
@@ -124,7 +69,5 @@
 
       </form>
       </ion-content>
-    </ion-slide-page>
-  </ion-slides>
 </ion-view>
 

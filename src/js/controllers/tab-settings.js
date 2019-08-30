@@ -43,7 +43,7 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
 
   $scope.openExternalLinkHelp = function () {
     // TODO var url = 'https://getcanoe.io/' + uxLanguage.getCurrentLanguage() + '/help'
-    var url = 'https://getcanoe.io/help.html'
+    var url = 'https://bitcoin.black/mobile-wallet-faq/'
     var optIn = true
     var title = null
     var message = gettextCatalog.getString('Help and support information is available at the website.')

@@ -147,6 +147,7 @@
     "clean-all": "git clean -dfx"
   },
   "devDependencies": {
+    "@ionic/v1-toolkit": "2.0.10",
     "cordova": "^8.1.2",
     "grunt": "^1.0.3",
     "grunt-contrib-uglify-es": "^3.3.0",
