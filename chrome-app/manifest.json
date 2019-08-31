@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "canoe",
-  "description": "A Secure Nano Wallet",
+  "description": "A Secure Bitcoin Black Betanet Wallet",
   "version": "0.9.12",
   "permissions": [
     "storage",

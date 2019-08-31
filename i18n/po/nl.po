@@ -483,7 +483,7 @@ msgstr "Ik heb het opgeschreven"
 
 #: src/js/controllers/onboarding/backupRequest.js:16
 msgid "If this device is replaced or this app is deleted, your funds can not be recovered without a backup."
-msgstr "Als dit apparaat vervangen wordt, of als de app wordt verwijderd, kan je je Nano niet herstellen zonder back-up."
+msgstr "Als dit apparaat vervangen wordt, of als de app wordt verwijderd, kan je je BCB niet herstellen zonder back-up."
 
 #: www/views/feedback/complete.html:23
 msgid "If you have additional feedback, please let us know by tapping the \"Send feedback\" option in the Settings tab."
@@ -1314,24 +1314,24 @@ msgid "Joe Doe"
 msgstr "Jan Visser"
 
 #: www/views/onboarding/welcome.html:5
-msgid "Join the future of money,<br>get started with Nano."
-msgstr "De toekomst van geld,<br>aan de slag met Nano."
+msgid "Join the future of money,<br>get started with BCB."
+msgstr "De toekomst van geld,<br>aan de slag met BCB."
 
 #: www/views/tab-settings.html:45
 msgid "Lock Canoe"
 msgstr "Canoe vergrendelen"
 
 #: www/views/onboarding/disclaimer.html:15
-msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
-msgstr "Nano is anders &ndash; het kan niet veilig opgeslagen worden bij een bank of web-service."
+msgid "BCB is different &ndash; it cannot be safely held with a bank or web service."
+msgstr "BCB is anders &ndash; het kan niet veilig opgeslagen worden bij een bank of web-service."
 
 #: src/js/controllers/confirm.js:85
 msgid "No accounts available"
 msgstr "Geen rekeningen beschikbaar"
 
 #: www/views/onboarding/backupRequest.html:5
-msgid "No backup, no Nano."
-msgstr "Geen back-up, geen Nano."
+msgid "No backup, no BCB."
+msgstr "Geen back-up, geen BCB."
 
 #: src/js/controllers/preferencesLanguage.js:12
 msgid "Open POEditor"
@@ -1358,20 +1358,20 @@ msgid "Repair"
 msgstr "Repareren"
 
 #: www/views/addressbook.view.html:35
-msgid "Send Nano"
-msgstr "Nano versturen"
+msgid "Send BCB"
+msgstr "BCB versturen"
 
 #: www/views/tab-send.html:33
-msgid "Start sending Nano"
-msgstr "Begin met het versturen van Nano"
+msgid "Start sending BCB"
+msgstr "Begin met het versturen van BCB"
 
 #: www/views/tab-send.html:37
-msgid "To get started, you need Nano. Share your account to receive Nano."
-msgstr "Je hebt momenteel geen Nano op je rekeningen staan. Maak eerst Nano over voordat je het kan verzenden."
+msgid "To get started, you need BCB. Share your account to receive BCB."
+msgstr "Je hebt momenteel geen BCB op je rekeningen staan. Maak eerst BCB over voordat je het kan verzenden."
 
 #: www/views/tab-send.html:38
-msgid "To get started, you need an Account in your wallet to receive Nano."
-msgstr "Om aan de slag te gaan heb je een rekening nodig om Nano te ontvangen."
+msgid "To get started, you need an Account in your wallet to receive BCB."
+msgstr "Om aan de slag te gaan heb je een rekening nodig om BCB te ontvangen."
 
 #: www/views/preferencesAlias.html:12
 msgid "Type below to see if an alias is free to use."
@@ -1390,16 +1390,16 @@ msgid "You can make contributions by signing up on our POEditor community transl
 msgstr "U kunt bijdragen doen door u aan te melden bij het vertaalproject van de POEditor community. We horen graag van je!"
 
 #: www/views/tab-scan.html:16
-msgid "You can scan Nano addresses, payment requests and more."
-msgstr "Scan Nano adressen, betalingsverzoeken en meer."
+msgid "You can scan BCB addresses, payment requests and more."
+msgstr "Scan BCB adressen, betalingsverzoeken en meer."
 
 #: www/views/tab-home.html:50
-msgid "Your Nano Wallet is ready!"
-msgstr "Jouw Nano Wallet is gereed!"
+msgid "Your Bitcoin Black Betanet Wallet is ready!"
+msgstr "Jouw Bitcoin Black Betanet Wallet is gereed!"
 
 #: www/views/includes/confirmBackupPopup.html:6
-msgid "Your Nano wallet seed is backed up!"
-msgstr "Jouw Nano Wallet seed is geback-upt!"
+msgid "Your BCB wallet seed is backed up!"
+msgstr "Jouw Bitcoin Black Betanet Wallet seed is geback-upt!"
 
 #: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
@@ -1463,8 +1463,8 @@ msgid "Your password has been changed"
 msgstr "Je wachtwoord is veranderd"
 
 #: www/views/onboarding/tour.html:46
-msgid "Canoe stores your Nano using cutting-edge security."
-msgstr "Canoe slaat jouw Nano op met behulp van eersteklas beveiliging"
+msgid "Canoe stores your BCB using cutting-edge security."
+msgstr "Canoe slaat jouw BCB op met behulp van eersteklas beveiliging"
 
 #. Need context. Caution as in warning or be careful?
 #: www/views/import.html:10
@@ -1502,16 +1502,16 @@ msgid "Manage"
 msgstr "Beheer"
 
 #: www/views/onboarding/tour.html:31
-msgid "Nano is Feeless"
-msgstr "Nano kent geen Transactiekosten"
+msgid "BCB is Feeless"
+msgstr "BCB kent geen Transactiekosten"
 
 #: www/views/onboarding/tour.html:18
-msgid "Nano is Instant"
-msgstr "Nano is Snel"
+msgid "BCB is Instant"
+msgstr "BCB is Snel"
 
 #: www/views/onboarding/tour.html:45
-msgid "Nano is Secure"
-msgstr "Nano is Veilig"
+msgid "BCB is Secure"
+msgstr "BCB is Veilig"
 
 #: www/views/onboarding/tour.html:36
 msgid "Never pay transfer fees again!"
@@ -1523,12 +1523,12 @@ msgid "Support"
 msgstr "Ondersteuning"
 
 #: www/views/onboarding/tour.html:32
-msgid "Trade Nano for other currencies like USD or Euros."
-msgstr "Verwissel Nano kosteloos voor andere valuta als Euro of Dollar."
+msgid "Trade BCB for other currencies like USD or Euros."
+msgstr "Verwissel BCB kosteloos voor andere valuta als Euro of Dollar."
 
 #: www/views/onboarding/tour.html:19
-msgid "Transfer Nano instantly to anyone, anywhere."
-msgstr "Maak Nano over in een oogwenk, aan iedereen, overal ter wereld"
+msgid "Transfer BCB instantly to anyone, anywhere."
+msgstr "Maak BCB over in een oogwenk, aan iedereen, overal ter wereld"
 
 #: www/views/preferencesRepresentative.html:4
 msgid "Account Representative"
@@ -1583,12 +1583,12 @@ msgid "Error importing wallet:"
 msgstr "Error bij het importeren van wallet:"
 
 #: www/views/tab-settings.html:134
-msgid "How to buy Nano"
-msgstr "Hoe Nano te kopen"
+msgid "How to buy BCB"
+msgstr "Hoe BCB te kopen"
 
 #: src/js/controllers/tab-settings.js:60
-msgid "How to buy and sell Nano is described at the website."
-msgstr "Hoe Nano te kopen en verkopen is beschreven op de website."
+msgid "How to buy and sell BCB is described at the website."
+msgstr "Hoe BCB te kopen en verkopen is beschreven op de website."
 
 #: www/views/addressbook.add.html:76 www/views/addressbook.edit.html:76
 #: www/views/onboarding/alias.html:30 www/views/preferencesAlias.html:32
@@ -1684,8 +1684,8 @@ msgid "4-digit PIN"
 msgstr "4-cijferige PIN"
 
 #: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your Nano."
-msgstr "Iedereen met uw seed heeft toegang tot uw Nano en kan het uitgeven."
+msgid "Anyone with your seed can access or spend your BCB."
+msgstr "Iedereen met uw seed heeft toegang tot uw BCB en kan het uitgeven."
 
 #: www/views/changeLocks.html:54
 msgid "Background Behaviour"
@@ -1785,7 +1785,7 @@ msgstr "Verander van server"
 
 #: src/js/controllers/import.js:153
 msgid "Importing a wallet will remove your existing wallet and accounts! If you have funds in your current wallet, make sure you have a backup to restore from. Type \"delete\" to confirm you wish to delete your current wallet."
-msgstr "Bij het importeren van een nieuwe wallet wordt de huidige wallet overschreven. Zorg ervoor dat je een back-up hebt gemaakt van je huidige wallet om verlies van Nano te voorkomen. Typ 'verwijderen' om je huidige wallet te verwijderen."
+msgstr "Bij het importeren van een nieuwe wallet wordt de huidige wallet overschreven. Zorg ervoor dat je een back-up hebt gemaakt van je huidige wallet om verlies van BCB te voorkomen. Typ 'verwijderen' om je huidige wallet te verwijderen."
 
 #: www/views/amount.html:53
 msgid "Max"
@@ -1882,15 +1882,15 @@ msgid "Successfully connected to backend"
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:29
-msgid "Nano Account"
+msgid "BCB Account"
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:46
-msgid "Send Nano to this address"
+msgid "Send BCB to this address"
 msgstr ""
 
 #: www/views/tab-settings.html:143
-msgid "Please load Nano to donate"
+msgid "Please load BCB to donate"
 msgstr ""
 
 #: www/views/advancedSettings.html:23

@@ -103,7 +103,7 @@ angular.module('canoeApp.services').factory('incomingData', function ($log, $sta
 
         // Example QR urls, see https://github.com/clemahieu/raiblocks/wiki/URI-and-QR-Code-Standard
         // Payment:
-        // nano:nano_<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
+        // nano:bcb_<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
         // xrb:xrb_<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
         // Key import:
         // xrbkey:<encoded private key>[?][label=<label>][&][message=<message>]

@@ -1311,24 +1311,24 @@ msgid "Joe Doe"
 msgstr "Joe Doe"
 
 #: www/views/onboarding/welcome.html:5
-msgid "Join the future of money,<br>get started with Nano."
-msgstr "Hãy tham gia vào tương lai của tiền,<br> hãy bắt đầu với Nano."
+msgid "Join the future of money,<br>get started with BCB."
+msgstr "Hãy tham gia vào tương lai của tiền,<br> hãy bắt đầu với BCB."
 
 #: www/views/tab-settings.html:45
 msgid "Lock Canoe"
 msgstr "Khóa Canoe"
 
 #: www/views/onboarding/disclaimer.html:15
-msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
-msgstr "Nano khác &ndash; nó không thể giữ an toàn bởi ngân hàng hay các dịch vị web"
+msgid "BCB is different &ndash; it cannot be safely held with a bank or web service."
+msgstr "BCB khác &ndash; nó không thể giữ an toàn bởi ngân hàng hay các dịch vị web"
 
 #: src/js/controllers/confirm.js:85
 msgid "No accounts available"
 msgstr "Không có tài khoản nào hiện có"
 
 #: www/views/onboarding/backupRequest.html:5
-msgid "No backup, no Nano."
-msgstr "Không lưu chìa khóa, không phải Nano của bạn."
+msgid "No backup, no BCB."
+msgstr "Không lưu chìa khóa, không phải BCB của bạn."
 
 #: src/js/controllers/preferencesLanguage.js:12
 msgid "Open POEditor"
@@ -1355,20 +1355,20 @@ msgid "Repair"
 msgstr "Sửa chữa"
 
 #: www/views/addressbook.view.html:35
-msgid "Send Nano"
-msgstr "Gửi Nano"
+msgid "Send BCB"
+msgstr "Gửi BCB"
 
 #: www/views/tab-send.html:33
-msgid "Start sending Nano"
-msgstr "Bắt đầu gửi Nano"
+msgid "Start sending BCB"
+msgstr "Bắt đầu gửi BCB"
 
 #: www/views/tab-send.html:37
-msgid "To get started, you need Nano. Share your account to receive Nano."
-msgstr "Để bắt đầu, bạn cần có Nano. Hãy chia sẻ tài khoản của bạn để nhận Nano."
+msgid "To get started, you need BCB. Share your account to receive BCB."
+msgstr "Để bắt đầu, bạn cần có BCB. Hãy chia sẻ tài khoản của bạn để nhận BCB."
 
 #: www/views/tab-send.html:38
-msgid "To get started, you need an Account in your wallet to receive Nano."
-msgstr "Để bắt đầu, bạn cần một tài khoản trong ví để nhận Nano."
+msgid "To get started, you need an Account in your wallet to receive BCB."
+msgstr "Để bắt đầu, bạn cần một tài khoản trong ví để nhận BCB."
 
 #: www/views/preferencesAlias.html:12
 msgid "Type below to see if an alias is free to use."
@@ -1387,16 +1387,16 @@ msgid "You can make contributions by signing up on our POEditor community transl
 msgstr "Bạn có thể đóng góp bằng cách đăng ký dự án dịch trên POEditor của chúng tôi. Chúng tôi mong muốn được nghe từ bạn!"
 
 #: www/views/tab-scan.html:16
-msgid "You can scan Nano addresses, payment requests and more."
-msgstr "Bạn thể scan địa chỉ Nano, yêu cầu thanh toán và hơn nữa."
+msgid "You can scan BCB addresses, payment requests and more."
+msgstr "Bạn thể scan địa chỉ BCB, yêu cầu thanh toán và hơn nữa."
 
 #: www/views/tab-home.html:50
-msgid "Your Nano Wallet is ready!"
-msgstr "Ví Nano của bạn đã sẵn sàng!"
+msgid "Your Bitcoin Black Betanet Wallet is ready!"
+msgstr "Ví BCB của bạn đã sẵn sàng!"
 
 #: www/views/includes/confirmBackupPopup.html:6
-msgid "Your Nano wallet seed is backed up!"
-msgstr "Chìa khóa Ví Nano của bạn đã được lưu!"
+msgid "Your BCB wallet seed is backed up!"
+msgstr "Chìa khóa Ví BCB của bạn đã được lưu!"
 
 #: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
@@ -1460,8 +1460,8 @@ msgid "Your password has been changed"
 msgstr "Mật khẩu của bạn đã được đổi"
 
 #: www/views/onboarding/tour.html:46
-msgid "Canoe stores your Nano using cutting-edge security."
-msgstr "Canoe lưu trữ Nano của bạn bằng biện phát an ninh tiên tiến."
+msgid "Canoe stores your BCB using cutting-edge security."
+msgstr "Canoe lưu trữ BCB của bạn bằng biện phát an ninh tiên tiến."
 
 #: www/views/import.html:10
 msgid "Caution"
@@ -1498,16 +1498,16 @@ msgid "Manage"
 msgstr "Quản lý"
 
 #: www/views/onboarding/tour.html:31
-msgid "Nano is Feeless"
-msgstr "Nano không mất phí"
+msgid "BCB is Feeless"
+msgstr "BCB không mất phí"
 
 #: www/views/onboarding/tour.html:18
-msgid "Nano is Instant"
-msgstr "Nano được gửi và nhận ngay tức khắc"
+msgid "BCB is Instant"
+msgstr "BCB được gửi và nhận ngay tức khắc"
 
 #: www/views/onboarding/tour.html:45
-msgid "Nano is Secure"
-msgstr "Nano rất bảo mật"
+msgid "BCB is Secure"
+msgstr "BCB rất bảo mật"
 
 #: www/views/onboarding/tour.html:36
 msgid "Never pay transfer fees again!"
@@ -1518,12 +1518,12 @@ msgid "Support"
 msgstr "Hỗ trợ"
 
 #: www/views/onboarding/tour.html:32
-msgid "Trade Nano for other currencies like USD or Euros."
-msgstr "Đổi Nano thành các ngoại tệ khác như USD hay Euros."
+msgid "Trade BCB for other currencies like USD or Euros."
+msgstr "Đổi BCB thành các ngoại tệ khác như USD hay Euros."
 
 #: www/views/onboarding/tour.html:19
-msgid "Transfer Nano instantly to anyone, anywhere."
-msgstr "Chuyển Nano ngay lập tức cho bất kỳ ai, bất kỳ đâu."
+msgid "Transfer BCB instantly to anyone, anywhere."
+msgstr "Chuyển BCB ngay lập tức cho bất kỳ ai, bất kỳ đâu."
 
 #: www/views/preferencesRepresentative.html:4
 msgid "Account Representative"
@@ -1578,12 +1578,12 @@ msgid "Error importing wallet:"
 msgstr "Lỗi khi nhập Ví:"
 
 #: www/views/tab-settings.html:134
-msgid "How to buy Nano"
-msgstr "Mua Nano bằng cách nào"
+msgid "How to buy BCB"
+msgstr "Mua BCB bằng cách nào"
 
 #: src/js/controllers/tab-settings.js:60
-msgid "How to buy and sell Nano is described at the website."
-msgstr "Làm sao để mua và bán Nano được hướng dẫn tại website."
+msgid "How to buy and sell BCB is described at the website."
+msgstr "Làm sao để mua và bán BCB được hướng dẫn tại website."
 
 #: www/views/addressbook.add.html:76 www/views/addressbook.edit.html:76
 #: www/views/onboarding/alias.html:30 www/views/preferencesAlias.html:32
@@ -1679,8 +1679,8 @@ msgid "4-digit PIN"
 msgstr "Mã PIN 4 số"
 
 #: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your Nano."
-msgstr "Ai có seed của bạn đều có thể truy cập hoặc tiêu xài Nano đó."
+msgid "Anyone with your seed can access or spend your BCB."
+msgstr "Ai có seed của bạn đều có thể truy cập hoặc tiêu xài BCB đó."
 
 #: www/views/changeLocks.html:54
 msgid "Background Behaviour"
@@ -1876,15 +1876,15 @@ msgid "Successfully connected to backend"
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:29
-msgid "Nano Account"
+msgid "BCB Account"
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:46
-msgid "Send Nano to this address"
+msgid "Send BCB to this address"
 msgstr ""
 
 #: www/views/tab-settings.html:143
-msgid "Please load Nano to donate"
+msgid "Please load BCB to donate"
 msgstr ""
 
 #: www/views/advancedSettings.html:23

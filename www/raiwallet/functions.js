@@ -20,7 +20,7 @@ function accountFromHexKey (hex) {
   var key_bytes = uint4_uint8(hex_uint4(hex))
   var checksum = uint5_string(uint4_uint5(uint8_uint4(blake2b(key_bytes, null, 5).reverse())))
   var c_account = uint5_string(uint4_uint5(hex_uint4('0' + hex)))
-  return 'nano_' + c_account + checksum
+  return 'bcb_' + c_account + checksum
 }
 
 function dec2hex (str, bytes = null) {

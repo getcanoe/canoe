@@ -1314,7 +1314,7 @@ msgid "Joe Doe"
 msgstr "乔欧"
 
 #: www/views/onboarding/welcome.html:5
-msgid "Join the future of money,<br>get started with Nano."
+msgid "Join the future of money,<br>get started with BCB."
 msgstr "货币的未来，<br>从Nano开始。"
 
 #: www/views/tab-settings.html:45
@@ -1322,7 +1322,7 @@ msgid "Lock Canoe"
 msgstr "锁定Canoe"
 
 #: www/views/onboarding/disclaimer.html:15
-msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
+msgid "BCB is different &ndash; it cannot be safely held with a bank or web service."
 msgstr "Nano是不同的 &ndash; 它不可以被银行或者网站保存。"
 
 #: src/js/controllers/confirm.js:85
@@ -1330,7 +1330,7 @@ msgid "No accounts available"
 msgstr "没有可用的账号"
 
 #: www/views/onboarding/backupRequest.html:5
-msgid "No backup, no Nano."
+msgid "No backup, no BCB."
 msgstr "无备份不Nano。"
 
 #: src/js/controllers/preferencesLanguage.js:12
@@ -1358,19 +1358,19 @@ msgid "Repair"
 msgstr "修复"
 
 #: www/views/addressbook.view.html:35
-msgid "Send Nano"
+msgid "Send BCB"
 msgstr "发送Nano"
 
 #: www/views/tab-send.html:33
-msgid "Start sending Nano"
+msgid "Start sending BCB"
 msgstr "开始发送Nano"
 
 #: www/views/tab-send.html:37
-msgid "To get started, you need Nano. Share your account to receive Nano."
+msgid "To get started, you need BCB. Share your account to receive BCB."
 msgstr "首先，你首先需要Nano。出示你的账号来接受Nano。"
 
 #: www/views/tab-send.html:38
-msgid "To get started, you need an Account in your wallet to receive Nano."
+msgid "To get started, you need an Account in your wallet to receive BCB."
 msgstr "你需要先用一个钱包的账号来接受Nano。"
 
 #: www/views/preferencesAlias.html:12
@@ -1390,15 +1390,15 @@ msgid "You can make contributions by signing up on our POEditor community transl
 msgstr "你可以通过注册poeditor来参与翻译本项目。我们希望听到你们支持的声音！"
 
 #: www/views/tab-scan.html:16
-msgid "You can scan Nano addresses, payment requests and more."
+msgid "You can scan BCB addresses, payment requests and more."
 msgstr "您可以扫描Nano地址、申请支付还有其他。"
 
 #: www/views/tab-home.html:50
-msgid "Your Nano Wallet is ready!"
+msgid "Your Bitcoin Black Betanet Wallet is ready!"
 msgstr "您的Nano钱包已经就绪！"
 
 #: www/views/includes/confirmBackupPopup.html:6
-msgid "Your Nano wallet seed is backed up!"
+msgid "Your BCB wallet seed is backed up!"
 msgstr "您的Nano钱包种子已经备份！"
 
 #: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
@@ -1463,7 +1463,7 @@ msgid "Your password has been changed"
 msgstr "您的密码已经修改成功"
 
 #: www/views/onboarding/tour.html:46
-msgid "Canoe stores your Nano using cutting-edge security."
+msgid "Canoe stores your BCB using cutting-edge security."
 msgstr "Canoe钱包通过前沿的安全技术保存你的Nano。"
 
 #: www/views/import.html:10
@@ -1501,15 +1501,15 @@ msgid "Manage"
 msgstr "管理"
 
 #: www/views/onboarding/tour.html:31
-msgid "Nano is Feeless"
+msgid "BCB is Feeless"
 msgstr "Nano是无手续费的"
 
 #: www/views/onboarding/tour.html:18
-msgid "Nano is Instant"
+msgid "BCB is Instant"
 msgstr "Nano是即时到账的"
 
 #: www/views/onboarding/tour.html:45
-msgid "Nano is Secure"
+msgid "BCB is Secure"
 msgstr "Nano是安全的"
 
 #: www/views/onboarding/tour.html:36
@@ -1521,11 +1521,11 @@ msgid "Support"
 msgstr "技术支持"
 
 #: www/views/onboarding/tour.html:32
-msgid "Trade Nano for other currencies like USD or Euros."
+msgid "Trade BCB for other currencies like USD or Euros."
 msgstr "通过Nano和其他货币如美元或者欧元兑换。"
 
 #: www/views/onboarding/tour.html:19
-msgid "Transfer Nano instantly to anyone, anywhere."
+msgid "Transfer BCB instantly to anyone, anywhere."
 msgstr "将Nano转账给任何人，任何地方。"
 
 #: www/views/preferencesRepresentative.html:4
@@ -1581,11 +1581,11 @@ msgid "Error importing wallet:"
 msgstr "倒入钱包出错："
 
 #: www/views/tab-settings.html:134
-msgid "How to buy Nano"
+msgid "How to buy BCB"
 msgstr "如何购买Nano"
 
 #: src/js/controllers/tab-settings.js:60
-msgid "How to buy and sell Nano is described at the website."
+msgid "How to buy and sell BCB is described at the website."
 msgstr "网站中会注明如何购买和卖出Nano。"
 
 #: www/views/addressbook.add.html:76 www/views/addressbook.edit.html:76
@@ -1682,7 +1682,7 @@ msgid "4-digit PIN"
 msgstr "4位密码"
 
 #: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your Nano."
+msgid "Anyone with your seed can access or spend your BCB."
 msgstr "任何人都可以通过种子密码访问和花费你的nano."
 
 #: www/views/changeLocks.html:54
@@ -1881,15 +1881,15 @@ msgid "Successfully connected to backend"
 msgstr "成功联机到服务器"
 
 #: www/views/includes/incomingDataMenu.html:29
-msgid "Nano Account"
+msgid "BCB Account"
 msgstr "Nano账号"
 
 #: www/views/includes/incomingDataMenu.html:46
-msgid "Send Nano to this address"
+msgid "Send BCB to this address"
 msgstr "发送Nano到这个地址"
 
 #: www/views/tab-settings.html:143
-msgid "Please load Nano to donate"
+msgid "Please load BCB to donate"
 msgstr ""
 
 #: www/views/advancedSettings.html:23

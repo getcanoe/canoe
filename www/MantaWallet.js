@@ -110,7 +110,7 @@
           var paymentRequest = JSON.parse(payload)
           var paymentRequestMessage = JSON.parse(paymentRequest.message)
           for (var i = 0; i < paymentRequestMessage.destinations.length; i++) {
-            if (paymentRequestMessage.destinations[i].crypto_currency === "NANO") {
+            if (paymentRequestMessage.destinations[i].crypto_currency === "BCB") {
               if (verifySignature(APPIA_PEM,paymentRequest.message,paymentRequest.signature)) {
                 console.log("Valid Signature");
                 var big = new BigNumber(paymentRequestMessage.destinations[i].amount);

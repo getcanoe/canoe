@@ -1311,24 +1311,24 @@ msgid "Joe Doe"
 msgstr "Ola Nordmann"
 
 #: www/views/onboarding/welcome.html:5
-msgid "Join the future of money,<br>get started with Nano."
-msgstr "Bli med i pengenes framtid,<br>kom igang med Nano."
+msgid "Join the future of money,<br>get started with BCB."
+msgstr "Bli med i pengenes framtid,<br>kom igang med BCB."
 
 #: www/views/tab-settings.html:45
 msgid "Lock Canoe"
 msgstr "Lås Canoe"
 
 #: www/views/onboarding/disclaimer.html:15
-msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
-msgstr "Nano er annerledes &ndash; det kan ikke lagres trygt hos en bank eller nettjeneste"
+msgid "BCB is different &ndash; it cannot be safely held with a bank or web service."
+msgstr "BCB er annerledes &ndash; det kan ikke lagres trygt hos en bank eller nettjeneste"
 
 #: src/js/controllers/confirm.js:85
 msgid "No accounts available"
 msgstr "Ingen konto tilgjengelig"
 
 #: www/views/onboarding/backupRequest.html:5
-msgid "No backup, no Nano."
-msgstr "Ingen sikkerhetskopi, ingen Nano."
+msgid "No backup, no BCB."
+msgstr "Ingen sikkerhetskopi, ingen BCB."
 
 #: src/js/controllers/preferencesLanguage.js:12
 msgid "Open POEditor"
@@ -1355,20 +1355,20 @@ msgid "Repair"
 msgstr "Reparer"
 
 #: www/views/addressbook.view.html:35
-msgid "Send Nano"
-msgstr "Send Nano"
+msgid "Send BCB"
+msgstr "Send BCB"
 
 #: www/views/tab-send.html:33
-msgid "Start sending Nano"
-msgstr "Start å bruke Nano"
+msgid "Start sending BCB"
+msgstr "Start å bruke BCB"
 
 #: www/views/tab-send.html:37
-msgid "To get started, you need Nano. Share your account to receive Nano."
-msgstr "For å komme igang, trenger du Nano. Del din konto for å motta Nano."
+msgid "To get started, you need BCB. Share your account to receive BCB."
+msgstr "For å komme igang, trenger du BCB. Del din konto for å motta BCB."
 
 #: www/views/tab-send.html:38
-msgid "To get started, you need an Account in your wallet to receive Nano."
-msgstr "For å starte, trenger du en Konto i din lommebok for å motta Nano."
+msgid "To get started, you need an Account in your wallet to receive BCB."
+msgstr "For å starte, trenger du en Konto i din lommebok for å motta BCB."
 
 #: www/views/preferencesAlias.html:12
 msgid "Type below to see if an alias is free to use."
@@ -1387,16 +1387,16 @@ msgid "You can make contributions by signing up on our POEditor community transl
 msgstr "Du kan bidra med oversettelser ved å melde deg inn på vårt oversettelsesprosjekt hos POEditor. Vi ser frem til å høre fra deg!"
 
 #: www/views/tab-scan.html:16
-msgid "You can scan Nano addresses, payment requests and more."
-msgstr "Du kan skanne Nano adresser, betalingsforespørsler og annet."
+msgid "You can scan BCB addresses, payment requests and more."
+msgstr "Du kan skanne BCB adresser, betalingsforespørsler og annet."
 
 #: www/views/tab-home.html:50
-msgid "Your Nano Wallet is ready!"
-msgstr "Din Nano-lommebok er klar!"
+msgid "Your Bitcoin Black Betanet Wallet is ready!"
+msgstr "Din BCB-lommebok er klar!"
 
 #: www/views/includes/confirmBackupPopup.html:6
-msgid "Your Nano wallet seed is backed up!"
-msgstr "Din Nano-lommebok-hovednøkkel er sikkerhetskopiert!"
+msgid "Your BCB wallet seed is backed up!"
+msgstr "Din BCB-lommebok-hovednøkkel er sikkerhetskopiert!"
 
 #: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
@@ -1460,8 +1460,8 @@ msgid "Your password has been changed"
 msgstr "Ditt passord er endret"
 
 #: www/views/onboarding/tour.html:46
-msgid "Canoe stores your Nano using cutting-edge security."
-msgstr "Canoe lagrer dine Nano ved hjelp av banebrytende sikkerhet"
+msgid "Canoe stores your BCB using cutting-edge security."
+msgstr "Canoe lagrer dine BCB ved hjelp av banebrytende sikkerhet"
 
 #: www/views/import.html:10
 msgid "Caution"
@@ -1498,16 +1498,16 @@ msgid "Manage"
 msgstr "Administrer"
 
 #: www/views/onboarding/tour.html:31
-msgid "Nano is Feeless"
-msgstr "Nano har ingen avgifter"
+msgid "BCB is Feeless"
+msgstr "BCB har ingen avgifter"
 
 #: www/views/onboarding/tour.html:18
-msgid "Nano is Instant"
-msgstr "Nano er øyeblikkelig"
+msgid "BCB is Instant"
+msgstr "BCB er øyeblikkelig"
 
 #: www/views/onboarding/tour.html:45
-msgid "Nano is Secure"
-msgstr "Nano er sikkert"
+msgid "BCB is Secure"
+msgstr "BCB er sikkert"
 
 #: www/views/onboarding/tour.html:36
 msgid "Never pay transfer fees again!"
@@ -1518,12 +1518,12 @@ msgid "Support"
 msgstr "Brukerstøtte"
 
 #: www/views/onboarding/tour.html:32
-msgid "Trade Nano for other currencies like USD or Euros."
-msgstr "Veksle Nano til andre valutaer som USD eller euro."
+msgid "Trade BCB for other currencies like USD or Euros."
+msgstr "Veksle BCB til andre valutaer som USD eller euro."
 
 #: www/views/onboarding/tour.html:19
-msgid "Transfer Nano instantly to anyone, anywhere."
-msgstr "Overfør Nano øyeblikkelig til hvem som helst, hvor som helst."
+msgid "Transfer BCB instantly to anyone, anywhere."
+msgstr "Overfør BCB øyeblikkelig til hvem som helst, hvor som helst."
 
 #: www/views/preferencesRepresentative.html:4
 msgid "Account Representative"
@@ -1578,12 +1578,12 @@ msgid "Error importing wallet:"
 msgstr "Feil i importering av lommebok:"
 
 #: www/views/tab-settings.html:134
-msgid "How to buy Nano"
-msgstr "Hvordan kjøpe Nano"
+msgid "How to buy BCB"
+msgstr "Hvordan kjøpe BCB"
 
 #: src/js/controllers/tab-settings.js:60
-msgid "How to buy and sell Nano is described at the website."
-msgstr "Hvordan man kjøper og selger Nano er beskrevet på nettsiden."
+msgid "How to buy and sell BCB is described at the website."
+msgstr "Hvordan man kjøper og selger BCB er beskrevet på nettsiden."
 
 #: www/views/addressbook.add.html:76 www/views/addressbook.edit.html:76
 #: www/views/onboarding/alias.html:30 www/views/preferencesAlias.html:32
@@ -1679,8 +1679,8 @@ msgid "4-digit PIN"
 msgstr "Firesifret PIN-kode"
 
 #: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your Nano."
-msgstr "Hvem som helst som har ditt seed kan få tilgang til og bruke dine Nano."
+msgid "Anyone with your seed can access or spend your BCB."
+msgstr "Hvem som helst som har ditt seed kan få tilgang til og bruke dine BCB."
 
 #: www/views/changeLocks.html:54
 msgid "Background Behaviour"
@@ -1878,15 +1878,15 @@ msgid "Successfully connected to backend"
 msgstr "Suksessfull tilkobling til bakgrunnsmotor"
 
 #: www/views/includes/incomingDataMenu.html:29
-msgid "Nano Account"
-msgstr "Nano Konto"
+msgid "BCB Account"
+msgstr "BCB Konto"
 
 #: www/views/includes/incomingDataMenu.html:46
-msgid "Send Nano to this address"
-msgstr "Send Nano til denne adressen"
+msgid "Send BCB to this address"
+msgstr "Send BCB til denne adressen"
 
 #: www/views/tab-settings.html:143
-msgid "Please load Nano to donate"
+msgid "Please load BCB to donate"
 msgstr ""
 
 #: www/views/advancedSettings.html:23

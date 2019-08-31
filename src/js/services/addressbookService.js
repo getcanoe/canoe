@@ -62,14 +62,14 @@ angular.module('canoeApp.services').factory('addressbookService', function ($log
   }
 
   root.save = function (entry, oldAddress, cb) {
-    if (!nanoService.isValidAccount(entry.address)) return cb('Not valid Nano account')
+    if (!nanoService.isValidAccount(entry.address)) return cb('Not valid BCB account')
     storageService.getAddressbook(function (err, ab) {
       if (err) return cb(err)
       if (ab) ab = JSON.parse(ab)
       ab = ab || {}
       if (lodash.isArray(ab)) ab = {} // No array
       if (!ab[oldAddress]) return cb('Old entry does not exist')
-      if ((entry.address !== oldAddress) && ab[entry.address]) return cb('Other entry with that Nano account already exists')
+      if ((entry.address !== oldAddress) && ab[entry.address]) return cb('Other entry with that BCB account already exists')
       delete ab[oldAddress]
       ab[entry.address] = entry
       storageService.setAddressbook(JSON.stringify(ab), function (err, ab) {
@@ -82,13 +82,13 @@ angular.module('canoeApp.services').factory('addressbookService', function ($log
   }
 
   root.add = function (entry, cb) {
-    if (!nanoService.isValidAccount(entry.address)) return cb('Not valid Nano account')
+    if (!nanoService.isValidAccount(entry.address)) return cb('Not valid BCB account')
     storageService.getAddressbook(function (err, ab) {
       if (err) return cb(err)
       if (ab) ab = JSON.parse(ab)
       ab = ab || {}
       if (lodash.isArray(ab)) ab = {} // No array
-      if (ab[entry.address]) return cb('Other entry with that Nano account already exists')
+      if (ab[entry.address]) return cb('Other entry with that BCB account already exists')
       ab[entry.address] = entry
       storageService.setAddressbook(JSON.stringify(ab), function (err, ab) {
         if (err) return cb('Error adding new entry')
@@ -100,7 +100,7 @@ angular.module('canoeApp.services').factory('addressbookService', function ($log
   }
 
   root.remove = function (addr, cb) {
-    if (!nanoService.isValidAccount(addr)) return cb('Not valid Nano account')
+    if (!nanoService.isValidAccount(addr)) return cb('Not valid BCB account')
     storageService.getAddressbook(function (err, ab) {
       if (err) return cb(err)
       if (ab) ab = JSON.parse(ab)

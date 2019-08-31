@@ -59,7 +59,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     $scope.toColor = data.stateParams.toColor
     $scope.toAlias = data.stateParams.toAlias
     $scope.fromAddress = data.stateParams.fromAddress
-    aliasService.getAvatar(data.stateParams.toAlias, function(err, avatar) {
+    aliasService.getAvatar(data.stateParams.toAlias, function (err, avatar) {
       $scope.toAvatar = avatar
       $scope.$apply()
     })
@@ -67,7 +67,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     $scope.singleAccount = $scope.accounts.length === 1
     $scope.hasAccounts = !lodash.isEmpty($scope.accounts)
     if ($scope.fromAddress) {
-      $scope.acc =  {
+      $scope.acc = {
         id: $scope.fromAddress
       }
     }
@@ -75,13 +75,13 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     $scope.onAccountSelect(selectedAccount)
     $scope.accountSelectorTitle = gettextCatalog.getString('Select an account')
     $scope.hasMoreAccounts = $scope.accounts.length > 1
-    function setAvailableUnits () {
+    function setAvailableUnits() {
       availableUnits = []
 
       availableUnits.push({
-        name: 'Nano',
-        id: 'nano',
-        shortName: 'NANO'
+        name: 'BCB',
+        id: 'bcb',
+        shortName: 'BCB'
       })
 
       unitIndex = 0
@@ -127,9 +127,9 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       })
 
       storageService.getAmountInputDefaultCurrency(function (err, amountInputDefaultCurrency) {
-        config.amountInputDefaultCurrency = amountInputDefaultCurrency ? amountInputDefaultCurrency : 'NANO'
+        config.amountInputDefaultCurrency = amountInputDefaultCurrency ? amountInputDefaultCurrency : 'BCB'
       })
-      if (!config.amountInputDefaultCurrency || config.amountInputDefaultCurrency === 'NANO') {
+      if (!config.amountInputDefaultCurrency || config.amountInputDefaultCurrency === 'BCB') {
         unitIndex = 0
         altUnitIndex = 1
       } else {
@@ -199,7 +199,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     }, 10)
   })
 
-  function paste (value) {
+  function paste(value) {
     $scope.amount = value
     processAmount()
     $timeout(function () {
@@ -207,7 +207,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     })
   };
 
-  function processClipboard () {
+  function processClipboard() {
     if (!isNW) return
     var value = nodeWebkitService.readFromClipboard()
     if (value && evaluate(value) > 0) paste(evaluate(value))
@@ -237,7 +237,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     }
   }
 
-  function updateUnitUI () {
+  function updateUnitUI() {
     $scope.unit = availableUnits[unitIndex].shortName
     $scope.alternativeUnit = availableUnits[altUnitIndex].shortName
     processAmount()
@@ -255,13 +255,13 @@ angular.module('canoeApp.controllers').controller('amountController', function (
       config.amountInputDefaultCurrency = availableUnits[1].shortName
       altUnitIndex = 0
     } else {
-      config.amountInputDefaultCurrency = 'NANO'
+      config.amountInputDefaultCurrency = 'BCB'
       altUnitIndex = lodash.findIndex(availableUnits, {
         isFiat: true
       })
     }
 
-    storageService.setAmountInputDefaultCurrency(config.amountInputDefaultCurrency, function () {})
+    storageService.setAmountInputDefaultCurrency(config.amountInputDefaultCurrency, function () { })
 
     updateUnitUI()
   }
@@ -282,7 +282,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     }
   }
 
-  function checkFontSize () {
+  function checkFontSize() {
     if ($scope.amount && $scope.amount.length >= SMALL_FONT_SIZE_LIMIT) $scope.smallFont = true
     else $scope.smallFont = false
   };
@@ -300,7 +300,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     if (!$scope.amount || $scope.amount.length == 0) return
     $scope.amount = _pushOperator($scope.amount)
 
-    function _pushOperator (val) {
+    function _pushOperator(val) {
       if (!isOperator(lodash.last(val))) {
         return val + operator
       } else {
@@ -309,12 +309,12 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     };
   }
 
-  function isOperator (val) {
+  function isOperator(val) {
     var regex = /[\/\-\+\x\*]/
     return regex.test(val)
   };
 
-  function isExpression (val) {
+  function isExpression(val) {
     var regex = /^\.?\d+(\.?\d+)?([\/\-\+\*x]\d?\.?\d+)+$/
     return regex.test(val)
   };
@@ -330,7 +330,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     checkFontSize()
   }
 
-  function processAmount () {
+  function processAmount() {
     checkFontSize()
     var formatedValue = format($scope.amount)
     var result = evaluate(formatedValue)
@@ -356,19 +356,19 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     }
   }
 
-  function processResult (val) {
+  function processResult(val) {
     return profileService.formatAmount(new BigNumber(unitDecimals).times(unitToRaw))
   }
 
-  function fromFiat (val) {
+  function fromFiat(val) {
     return profileService.fromFiat(val, fiatCode, availableUnits[altUnitIndex].id) * rawToUnit
   }
 
-  function toFiat (val) {
+  function toFiat(val) {
     return profileService.toFiat(val * unitToRaw, fiatCode, availableUnits[unitIndex].id)
   }
 
-  function evaluate (val) {
+  function evaluate(val) {
     var result
     try {
       result = $scope.$eval(val)
@@ -379,7 +379,7 @@ angular.module('canoeApp.controllers').controller('amountController', function (
     return result
   }
 
-  function format (val) {
+  function format(val) {
     if (!val) return
     var result = val.toString()
     if (isOperator(lodash.last(val))) result = result.slice(0, -1)

@@ -1313,7 +1313,7 @@ msgid "Joe Doe"
 msgstr "Joe Doe"
 
 #: www/views/onboarding/welcome.html:5
-msgid "Join the future of money,<br>get started with Nano."
+msgid "Join the future of money,<br>get started with BCB."
 msgstr ""
 
 #: www/views/tab-settings.html:45
@@ -1321,7 +1321,7 @@ msgid "Lock Canoe"
 msgstr "Zamknúť Canoe"
 
 #: www/views/onboarding/disclaimer.html:15
-msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
+msgid "BCB is different &ndash; it cannot be safely held with a bank or web service."
 msgstr ""
 
 #: src/js/controllers/confirm.js:85
@@ -1329,8 +1329,8 @@ msgid "No accounts available"
 msgstr "Nie sú k dispozícii žiadne účty"
 
 #: www/views/onboarding/backupRequest.html:5
-msgid "No backup, no Nano."
-msgstr "Žiadna záloha, žiadné Nano."
+msgid "No backup, no BCB."
+msgstr "Žiadna záloha, žiadné BCB."
 
 #: src/js/controllers/preferencesLanguage.js:12
 msgid "Open POEditor"
@@ -1357,19 +1357,19 @@ msgid "Repair"
 msgstr ""
 
 #: www/views/addressbook.view.html:35
-msgid "Send Nano"
+msgid "Send BCB"
 msgstr ""
 
 #: www/views/tab-send.html:33
-msgid "Start sending Nano"
+msgid "Start sending BCB"
 msgstr ""
 
 #: www/views/tab-send.html:37
-msgid "To get started, you need Nano. Share your account to receive Nano."
+msgid "To get started, you need BCB. Share your account to receive BCB."
 msgstr ""
 
 #: www/views/tab-send.html:38
-msgid "To get started, you need an Account in your wallet to receive Nano."
+msgid "To get started, you need an Account in your wallet to receive BCB."
 msgstr ""
 
 #: www/views/preferencesAlias.html:12
@@ -1389,15 +1389,15 @@ msgid "You can make contributions by signing up on our POEditor community transl
 msgstr ""
 
 #: www/views/tab-scan.html:16
-msgid "You can scan Nano addresses, payment requests and more."
+msgid "You can scan BCB addresses, payment requests and more."
 msgstr ""
 
 #: www/views/tab-home.html:50
-msgid "Your Nano Wallet is ready!"
+msgid "Your Bitcoin Black Betanet Wallet is ready!"
 msgstr ""
 
 #: www/views/includes/confirmBackupPopup.html:6
-msgid "Your Nano wallet seed is backed up!"
+msgid "Your BCB wallet seed is backed up!"
 msgstr ""
 
 #: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
@@ -1462,7 +1462,7 @@ msgid "Your password has been changed"
 msgstr ""
 
 #: www/views/onboarding/tour.html:46
-msgid "Canoe stores your Nano using cutting-edge security."
+msgid "Canoe stores your BCB using cutting-edge security."
 msgstr ""
 
 #: www/views/import.html:10
@@ -1500,15 +1500,15 @@ msgid "Manage"
 msgstr ""
 
 #: www/views/onboarding/tour.html:31
-msgid "Nano is Feeless"
+msgid "BCB is Feeless"
 msgstr ""
 
 #: www/views/onboarding/tour.html:18
-msgid "Nano is Instant"
+msgid "BCB is Instant"
 msgstr ""
 
 #: www/views/onboarding/tour.html:45
-msgid "Nano is Secure"
+msgid "BCB is Secure"
 msgstr ""
 
 #: www/views/onboarding/tour.html:36
@@ -1520,11 +1520,11 @@ msgid "Support"
 msgstr ""
 
 #: www/views/onboarding/tour.html:32
-msgid "Trade Nano for other currencies like USD or Euros."
+msgid "Trade BCB for other currencies like USD or Euros."
 msgstr ""
 
 #: www/views/onboarding/tour.html:19
-msgid "Transfer Nano instantly to anyone, anywhere."
+msgid "Transfer BCB instantly to anyone, anywhere."
 msgstr ""
 
 #: www/views/preferencesRepresentative.html:4
@@ -1580,11 +1580,11 @@ msgid "Error importing wallet:"
 msgstr ""
 
 #: www/views/tab-settings.html:134
-msgid "How to buy Nano"
+msgid "How to buy BCB"
 msgstr ""
 
 #: src/js/controllers/tab-settings.js:60
-msgid "How to buy and sell Nano is described at the website."
+msgid "How to buy and sell BCB is described at the website."
 msgstr ""
 
 #: www/views/addressbook.add.html:76 www/views/addressbook.edit.html:76
@@ -1681,7 +1681,7 @@ msgid "4-digit PIN"
 msgstr ""
 
 #: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your Nano."
+msgid "Anyone with your seed can access or spend your BCB."
 msgstr ""
 
 #: www/views/changeLocks.html:54
@@ -1877,15 +1877,15 @@ msgid "Successfully connected to backend"
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:29
-msgid "Nano Account"
+msgid "BCB Account"
 msgstr ""
 
 #: www/views/includes/incomingDataMenu.html:46
-msgid "Send Nano to this address"
+msgid "Send BCB to this address"
 msgstr ""
 
 #: www/views/tab-settings.html:143
-msgid "Please load Nano to donate"
+msgid "Please load BCB to donate"
 msgstr ""
 
 #: www/views/advancedSettings.html:23

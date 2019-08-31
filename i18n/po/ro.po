@@ -1311,24 +1311,24 @@ msgid "Joe Doe"
 msgstr "Ion Ionescu"
 
 #: www/views/onboarding/welcome.html:5
-msgid "Join the future of money,<br>get started with Nano."
-msgstr "Alăturați-va viitorului banilor,<br>începeți cu Nano."
+msgid "Join the future of money,<br>get started with BCB."
+msgstr "Alăturați-va viitorului banilor,<br>începeți cu BCB."
 
 #: www/views/tab-settings.html:45
 msgid "Lock Canoe"
 msgstr "Blocați Canoe"
 
 #: www/views/onboarding/disclaimer.html:15
-msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
-msgstr "Nano este diferit &ndash; nu poate fi stocat în siguranță la bancă sau printr-un serviciu web."
+msgid "BCB is different &ndash; it cannot be safely held with a bank or web service."
+msgstr "BCB este diferit &ndash; nu poate fi stocat în siguranță la bancă sau printr-un serviciu web."
 
 #: src/js/controllers/confirm.js:85
 msgid "No accounts available"
 msgstr "Nu sunt conturi disponibile"
 
 #: www/views/onboarding/backupRequest.html:5
-msgid "No backup, no Nano."
-msgstr "Fără backup, fără Nano."
+msgid "No backup, no BCB."
+msgstr "Fără backup, fără BCB."
 
 #: src/js/controllers/preferencesLanguage.js:12
 msgid "Open POEditor"
@@ -1355,20 +1355,20 @@ msgid "Repair"
 msgstr "Repară"
 
 #: www/views/addressbook.view.html:35
-msgid "Send Nano"
-msgstr "Trimite Nano"
+msgid "Send BCB"
+msgstr "Trimite BCB"
 
 #: www/views/tab-send.html:33
-msgid "Start sending Nano"
-msgstr "Începeți să trimiteți Nano"
+msgid "Start sending BCB"
+msgstr "Începeți să trimiteți BCB"
 
 #: www/views/tab-send.html:37
-msgid "To get started, you need Nano. Share your account to receive Nano."
-msgstr "Pentru a începe, aveți nevoie de Nano. Împărtășiți-va adresa pentru a primi Nano."
+msgid "To get started, you need BCB. Share your account to receive BCB."
+msgstr "Pentru a începe, aveți nevoie de BCB. Împărtășiți-va adresa pentru a primi BCB."
 
 #: www/views/tab-send.html:38
-msgid "To get started, you need an Account in your wallet to receive Nano."
-msgstr "Pentru a începe, aveți nevoie de un Cont în portofelul dumneavoastră pentru a primi Nano."
+msgid "To get started, you need an Account in your wallet to receive BCB."
+msgstr "Pentru a începe, aveți nevoie de un Cont în portofelul dumneavoastră pentru a primi BCB."
 
 #: www/views/preferencesAlias.html:12
 msgid "Type below to see if an alias is free to use."
@@ -1387,15 +1387,15 @@ msgid "You can make contributions by signing up on our POEditor community transl
 msgstr "Puteți contribui la traducerea acestui proiect înregistrându-va pe POEditor. Așteptăm cu nerăbdare să auzim de la dumneavoastră!"
 
 #: www/views/tab-scan.html:16
-msgid "You can scan Nano addresses, payment requests and more."
-msgstr "Puteți scana adrese de Nano, cereri de plată și altele."
+msgid "You can scan BCB addresses, payment requests and more."
+msgstr "Puteți scana adrese de BCB, cereri de plată și altele."
 
 #: www/views/tab-home.html:50
-msgid "Your Nano Wallet is ready!"
-msgstr "Portofelul dumneavoastră de Nano este pregătit!"
+msgid "Your Bitcoin Black Betanet Wallet is ready!"
+msgstr "Portofelul dumneavoastră de BCB este pregătit!"
 
 #: www/views/includes/confirmBackupPopup.html:6
-msgid "Your Nano wallet seed is backed up!"
+msgid "Your BCB wallet seed is backed up!"
 msgstr "Seed-ul portofelului dumneavoastră este în siguranță! (backup realizat)"
 
 #: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
@@ -1460,8 +1460,8 @@ msgid "Your password has been changed"
 msgstr "Parolă dumneavoastră a fost schimbată"
 
 #: www/views/onboarding/tour.html:46
-msgid "Canoe stores your Nano using cutting-edge security."
-msgstr "Nano este stocat de Canoe folosind securitate de ultimă oră."
+msgid "Canoe stores your BCB using cutting-edge security."
+msgstr "BCB este stocat de Canoe folosind securitate de ultimă oră."
 
 #: www/views/import.html:10
 msgid "Caution"
@@ -1498,16 +1498,16 @@ msgid "Manage"
 msgstr "Administrați"
 
 #: www/views/onboarding/tour.html:31
-msgid "Nano is Feeless"
-msgstr "Nano nu percepe tarife!"
+msgid "BCB is Feeless"
+msgstr "BCB nu percepe tarife!"
 
 #: www/views/onboarding/tour.html:18
-msgid "Nano is Instant"
-msgstr "Nano este instant"
+msgid "BCB is Instant"
+msgstr "BCB este instant"
 
 #: www/views/onboarding/tour.html:45
-msgid "Nano is Secure"
-msgstr "Nano este sigur"
+msgid "BCB is Secure"
+msgstr "BCB este sigur"
 
 #: www/views/onboarding/tour.html:36
 msgid "Never pay transfer fees again!"
@@ -1518,12 +1518,12 @@ msgid "Support"
 msgstr "Asistență"
 
 #: www/views/onboarding/tour.html:32
-msgid "Trade Nano for other currencies like USD or Euros."
-msgstr "Tranzacționați Nano pentru alte valute precum USD sau Euro."
+msgid "Trade BCB for other currencies like USD or Euros."
+msgstr "Tranzacționați BCB pentru alte valute precum USD sau Euro."
 
 #: www/views/onboarding/tour.html:19
-msgid "Transfer Nano instantly to anyone, anywhere."
-msgstr "Transferați Nano în mod instant oricui, oriunde."
+msgid "Transfer BCB instantly to anyone, anywhere."
+msgstr "Transferați BCB în mod instant oricui, oriunde."
 
 #: www/views/preferencesRepresentative.html:4
 msgid "Account Representative"
@@ -1578,12 +1578,12 @@ msgid "Error importing wallet:"
 msgstr "Eroare la importarea portofelului:"
 
 #: www/views/tab-settings.html:134
-msgid "How to buy Nano"
-msgstr "Cum să cumpărați Nano"
+msgid "How to buy BCB"
+msgstr "Cum să cumpărați BCB"
 
 #: src/js/controllers/tab-settings.js:60
-msgid "How to buy and sell Nano is described at the website."
-msgstr "Pe site este descris cum să cumpărați și să vindeți Nano."
+msgid "How to buy and sell BCB is described at the website."
+msgstr "Pe site este descris cum să cumpărați și să vindeți BCB."
 
 #: www/views/addressbook.add.html:76 www/views/addressbook.edit.html:76
 #: www/views/onboarding/alias.html:30 www/views/preferencesAlias.html:32
@@ -1679,8 +1679,8 @@ msgid "4-digit PIN"
 msgstr "PIN cu 4 cifre"
 
 #: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your Nano."
-msgstr "Oricine are acces la seed-ul dumneavoastră poate cheltui Nano."
+msgid "Anyone with your seed can access or spend your BCB."
+msgstr "Oricine are acces la seed-ul dumneavoastră poate cheltui BCB."
 
 #: www/views/changeLocks.html:54
 msgid "Background Behaviour"
@@ -1879,16 +1879,16 @@ msgid "Successfully connected to backend"
 msgstr "Conectare cu succes la backend"
 
 #: www/views/includes/incomingDataMenu.html:29
-msgid "Nano Account"
-msgstr "Contul de Nano"
+msgid "BCB Account"
+msgstr "Contul de BCB"
 
 #: www/views/includes/incomingDataMenu.html:46
-msgid "Send Nano to this address"
-msgstr "Trimiteți Nano la această adresă"
+msgid "Send BCB to this address"
+msgstr "Trimiteți BCB la această adresă"
 
 #: www/views/tab-settings.html:143
-msgid "Please load Nano to donate"
-msgstr "Nu există Nano pentru a face o donație"
+msgid "Please load BCB to donate"
+msgstr "Nu există BCB pentru a face o donație"
 
 #: www/views/advancedSettings.html:23
 msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."

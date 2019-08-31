@@ -1311,24 +1311,24 @@ msgid "Joe Doe"
 msgstr "Joe Doe"
 
 #: www/views/onboarding/welcome.html:5
-msgid "Join the future of money,<br>get started with Nano."
-msgstr "Přidej se k měně budoucnosti,<br>začni s Nano!"
+msgid "Join the future of money,<br>get started with BCB."
+msgstr "Přidej se k měně budoucnosti,<br>začni s BCB!"
 
 #: www/views/tab-settings.html:45
 msgid "Lock Canoe"
 msgstr "Zamkni Canoe"
 
 #: www/views/onboarding/disclaimer.html:15
-msgid "Nano is different &ndash; it cannot be safely held with a bank or web service."
-msgstr "Nano je jiné &ndash; nemůže být bezpečně uschováno v bance, nebo web servisu."
+msgid "BCB is different &ndash; it cannot be safely held with a bank or web service."
+msgstr "BCB je jiné &ndash; nemůže být bezpečně uschováno v bance, nebo web servisu."
 
 #: src/js/controllers/confirm.js:85
 msgid "No accounts available"
 msgstr "Žádné dostupné účty"
 
 #: www/views/onboarding/backupRequest.html:5
-msgid "No backup, no Nano."
-msgstr "Žádná záloha, žádné Nano."
+msgid "No backup, no BCB."
+msgstr "Žádná záloha, žádné BCB."
 
 #: src/js/controllers/preferencesLanguage.js:12
 msgid "Open POEditor"
@@ -1355,20 +1355,20 @@ msgid "Repair"
 msgstr "Opravit"
 
 #: www/views/addressbook.view.html:35
-msgid "Send Nano"
-msgstr "Poslat Nano"
+msgid "Send BCB"
+msgstr "Poslat BCB"
 
 #: www/views/tab-send.html:33
-msgid "Start sending Nano"
-msgstr "Odesílám Nano"
+msgid "Start sending BCB"
+msgstr "Odesílám BCB"
 
 #: www/views/tab-send.html:37
-msgid "To get started, you need Nano. Share your account to receive Nano."
-msgstr "Abyste začali, potřebujete Nano. Nasdílejte svůj účet k přijímání Nano. "
+msgid "To get started, you need BCB. Share your account to receive BCB."
+msgstr "Abyste začali, potřebujete BCB. Nasdílejte svůj účet k přijímání BCB. "
 
 #: www/views/tab-send.html:38
-msgid "To get started, you need an Account in your wallet to receive Nano."
-msgstr "Abyste začali, potřebujete účet, na který příjmete Nano."
+msgid "To get started, you need an Account in your wallet to receive BCB."
+msgstr "Abyste začali, potřebujete účet, na který příjmete BCB."
 
 #: www/views/preferencesAlias.html:12
 msgid "Type below to see if an alias is free to use."
@@ -1387,16 +1387,16 @@ msgid "You can make contributions by signing up on our POEditor community transl
 msgstr "Přihlášením se na POEditor se můžete přidat do komunity překladatelů. Rádi vás tu uvidíme!"
 
 #: www/views/tab-scan.html:16
-msgid "You can scan Nano addresses, payment requests and more."
-msgstr "Můžete scanovat Nano adresy, platební požadavky atd."
+msgid "You can scan BCB addresses, payment requests and more."
+msgstr "Můžete scanovat BCB adresy, platební požadavky atd."
 
 #: www/views/tab-home.html:50
-msgid "Your Nano Wallet is ready!"
-msgstr "Vaše Nano peněženka je připravena!"
+msgid "Your Bitcoin Black Betanet Wallet is ready!"
+msgstr "Vaše BCB peněženka je připravena!"
 
 #: www/views/includes/confirmBackupPopup.html:6
-msgid "Your Nano wallet seed is backed up!"
-msgstr "Váš seed Nano peněženky je zálohován!"
+msgid "Your BCB wallet seed is backed up!"
+msgstr "Váš seed BCB peněženky je zálohován!"
 
 #: src/js/services/nanoService.js:712 www/views/addressbook.add.html:39
 #: www/views/addressbook.edit.html:39 www/views/addressbook.view.html:26
@@ -1460,8 +1460,8 @@ msgid "Your password has been changed"
 msgstr "Vaše bylo změněno"
 
 #: www/views/onboarding/tour.html:46
-msgid "Canoe stores your Nano using cutting-edge security."
-msgstr "Canoe uchová vaše Nano s vynikající bezpečnostni"
+msgid "Canoe stores your BCB using cutting-edge security."
+msgstr "Canoe uchová vaše BCB s vynikající bezpečnostni"
 
 #: www/views/import.html:10
 msgid "Caution"
@@ -1498,16 +1498,16 @@ msgid "Manage"
 msgstr "Spravovat"
 
 #: www/views/onboarding/tour.html:31
-msgid "Nano is Feeless"
-msgstr "Nano je bez poplatků"
+msgid "BCB is Feeless"
+msgstr "BCB je bez poplatků"
 
 #: www/views/onboarding/tour.html:18
-msgid "Nano is Instant"
-msgstr "Nano je instatní"
+msgid "BCB is Instant"
+msgstr "BCB je instatní"
 
 #: www/views/onboarding/tour.html:45
-msgid "Nano is Secure"
-msgstr "Nano je bezpečné"
+msgid "BCB is Secure"
+msgstr "BCB je bezpečné"
 
 #: www/views/onboarding/tour.html:36
 msgid "Never pay transfer fees again!"
@@ -1518,12 +1518,12 @@ msgid "Support"
 msgstr "Podpora"
 
 #: www/views/onboarding/tour.html:32
-msgid "Trade Nano for other currencies like USD or Euros."
-msgstr "Směň Nano s dalšími měnami jako USD nebo EUR."
+msgid "Trade BCB for other currencies like USD or Euros."
+msgstr "Směň BCB s dalšími měnami jako USD nebo EUR."
 
 #: www/views/onboarding/tour.html:19
-msgid "Transfer Nano instantly to anyone, anywhere."
-msgstr "Pošli Nano okamžitě komukoli a kdykoli."
+msgid "Transfer BCB instantly to anyone, anywhere."
+msgstr "Pošli BCB okamžitě komukoli a kdykoli."
 
 #: www/views/preferencesRepresentative.html:4
 msgid "Account Representative"
@@ -1578,12 +1578,12 @@ msgid "Error importing wallet:"
 msgstr "Error import peněženky:"
 
 #: www/views/tab-settings.html:134
-msgid "How to buy Nano"
-msgstr "Jak koupit Nano"
+msgid "How to buy BCB"
+msgstr "Jak koupit BCB"
 
 #: src/js/controllers/tab-settings.js:60
-msgid "How to buy and sell Nano is described at the website."
-msgstr "Jak nakoupit a prodat Nano je popsáno na stránkách."
+msgid "How to buy and sell BCB is described at the website."
+msgstr "Jak nakoupit a prodat BCB je popsáno na stránkách."
 
 #: www/views/addressbook.add.html:76 www/views/addressbook.edit.html:76
 #: www/views/onboarding/alias.html:30 www/views/preferencesAlias.html:32
@@ -1679,8 +1679,8 @@ msgid "4-digit PIN"
 msgstr "4-číselný PIN"
 
 #: www/views/backupWarning.html:14
-msgid "Anyone with your seed can access or spend your Nano."
-msgstr "Kdokoli s Vašim seed má přístup, nebo může utratit Vaše Nano."
+msgid "Anyone with your seed can access or spend your BCB."
+msgstr "Kdokoli s Vašim seed má přístup, nebo může utratit Vaše BCB."
 
 #: www/views/changeLocks.html:54
 msgid "Background Behaviour"
@@ -1878,16 +1878,16 @@ msgid "Successfully connected to backend"
 msgstr "Úspěšně připojeno k backend"
 
 #: www/views/includes/incomingDataMenu.html:29
-msgid "Nano Account"
-msgstr "Nano účet"
+msgid "BCB Account"
+msgstr "BCB účet"
 
 #: www/views/includes/incomingDataMenu.html:46
-msgid "Send Nano to this address"
-msgstr "Poslat Nano na tuto adresu"
+msgid "Send BCB to this address"
+msgstr "Poslat BCB na tuto adresu"
 
 #: www/views/tab-settings.html:143
-msgid "Please load Nano to donate"
-msgstr "Prosím proveďte vklad Nano pro dotaci Canoe"
+msgid "Please load BCB to donate"
+msgstr "Prosím proveďte vklad BCB pro dotaci Canoe"
 
 #: www/views/advancedSettings.html:23
 msgid "If enabled, sounds will be played whenever you send, receive, change representative, or unlock your wallet."

@@ -524,11 +524,11 @@ module.exports = function (password) {
   }
 
   /**
-   * Verifies a block signature given its hash, sig and NANO account
+   * Verifies a block signature given its hash, sig and BCB account
    *
    * @param {string} blockHash - 32 byte hex encoded block hash
    * @param {string} blockSignature - 64 byte hex encoded signature
-   * @param {string} account - A NANO account supposed to have signed the block
+   * @param {string} account - A BCB account supposed to have signed the block
    * @returns {boolean}
    */
   api.verifyBlockSignature = function (blockHash, blockSignature, account) {

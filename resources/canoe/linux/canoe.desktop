@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Canoe
-Comment=Nano Wallet
+Comment=Bitcoin Black Betanet Wallet
 Exec=canoe
 Icon=canoe
 Terminal=false

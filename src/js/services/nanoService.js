@@ -652,7 +652,7 @@ angular.module('canoeApp.services')
     }
 
     root.isValidAccount = function (addr) {
-      if (addr.startsWith('xrb_') || addr.startsWith('nano_')) {
+      if (addr.startsWith('xrb_') || addr.startsWith('bcb_')) {
         return rai.account_validate(addr)
       }
       return false

@@ -245,7 +245,7 @@ XRB.account_get = function (key) {
     var bytes = uint4_uint5(array_extend(uint8_uint4(key_array)))
     var blake_hash = blake2b(key_array, null, 5).reverse()
     var hash_bytes = uint4_uint5(uint8_uint4(blake_hash))
-    var account = 'nano_' + uint5_string(bytes) + uint5_string(hash_bytes)
+    var account = 'bcb_' + uint5_string(bytes) + uint5_string(hash_bytes)
     return account
   }	else {
     XRB.error('Invalid public key')

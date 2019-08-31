@@ -2,7 +2,7 @@
 <widget android-versionCode="391014" id="io.getcanoe.canoe" ios-CFBundleVersion="1.0.2" version="1.0.2">
     <name>Canoe</name>
     <description>
-      Canoe Nano Wallet
+      Canoe Bitcoin Black Betanet Wallet
     </description>
     <author email="goran.krampe@gmail.com" href="https://getcanoe.io">
         Göran Krampe
@@ -14,7 +14,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="WindowsStoreIdentityName" value="------" />
-    <preference name="WindowsStoreDisplayName" value="Canoe - Secure Nano Wallet" />
+    <preference name="WindowsStoreDisplayName" value="Canoe - Secure Bitcoin Black Betanet Wallet" />
     <preference name="StatusBarBackgroundColor" value="#261454" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="windows-target-version" value="10.0" />

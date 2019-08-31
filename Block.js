@@ -91,7 +91,7 @@ module.exports = function (isState = true) {
    * Sets the send parameters and builds the block
    *
    * @param {string} previousBlockHash - The previous block 32 byte hash hex encoded
-   * @param {string} destinationAccount - The NANO account receiving the money
+   * @param {string} destinationAccount - The BCB account receiving the money
    * @param {string} balanceRemaining - Remaining balance after sending this block (Raw)
    * @throws An exception on invalid block hash
    * @throws An exception on invalid destination account
@@ -136,7 +136,7 @@ module.exports = function (isState = true) {
     try {
       account = keyFromAccount(newAccount)
     } catch (err) {
-      throw new Error('Invalid NANO account')
+      throw new Error('Invalid BCB account')
     }
     try {
       representative = keyFromAccount(representativeAccount)
@@ -152,7 +152,7 @@ module.exports = function (isState = true) {
    * Sets the open parameters and builds the block
    *
    * @param {string} sourceBlockHash - The hash of the send block which is going to be received, 32 byte hex encoded
-   * @param {string} newAccount - The NANO account which is being created
+   * @param {string} newAccount - The BCB account which is being created
    * @param {string} representativeAccount - The account to be set as representative, if none, its self assigned
    * @throws An exception on invalid sourceBlockHash
    * @throws An exception on invalid account
@@ -164,7 +164,7 @@ module.exports = function (isState = true) {
     try {
       account = keyFromAccount(newAccount)
     } catch (err) {
-      throw new Error('Invalid NANO account')
+      throw new Error('Invalid BCB account')
     }
 
     if (representativeAccount) {
@@ -245,7 +245,7 @@ module.exports = function (isState = true) {
   /**
    * Sets the account owner of the block
    *
-   * @param {string} acc - The NANO account
+   * @param {string} acc - The BCB account
    */
   api.setAccount = function (acc) {
     blockAccount = acc
@@ -280,7 +280,7 @@ module.exports = function (isState = true) {
 
   /**
    * Sets the account which sent the block
-   * @param {string} acc - The NANO account
+   * @param {string} acc - The BCB account
    */
   api.setOrigin = function (acc) {
     if (type === 'receive' || type === 'open') { origin = acc }
