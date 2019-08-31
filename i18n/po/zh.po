@@ -1318,7 +1318,7 @@ msgid "Join the future of money,<br>get started with BCB."
 msgstr "货币的未来，<br>从Nano开始。"
 
 #: www/views/tab-settings.html:45
-msgid "Lock Canoe"
+msgid "Lock wallet"
 msgstr "锁定Canoe"
 
 #: www/views/onboarding/disclaimer.html:15

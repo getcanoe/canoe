@@ -964,7 +964,7 @@ msgid "Loading transaction info..."
 msgstr ""
 
 #: www/views/tab-settings.html:45
-msgid "Lock Canoe"
+msgid "Lock wallet"
 msgstr ""
 
 #: www/views/changeLocks.html:58

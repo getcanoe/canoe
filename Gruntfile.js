@@ -240,7 +240,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: 'build/',
-          src: ['../resources/canoe/linux/canoe.desktop', '../www/img/app/favicon.ico', '../resources/canoe/linux/canoe.png'],
+          src: ['../resources/canoe/linux/canoe.desktop', '../www/img/bcb.ico', '../resources/canoe/linux/canoe.png'],
           dest: 'build/canoe/linux64/',
           flatten: true,
           filter: 'isFile'
@@ -275,7 +275,7 @@ module.exports = function (grunt) {
           'CFBundleURLTypes': [
             {
               'CFBundleURLName': 'URI Handler',
-              'CFBundleURLSchemes': ['nano', 'canoe']
+              'CFBundleURLSchemes': ['bcb', 'canoe']
             }
           ]
         }

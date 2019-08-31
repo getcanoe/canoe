@@ -455,7 +455,7 @@ angular.module('canoeApp.services')
         }
         // Don't show unless rate is loaded, ui update will be lanched by $broadcast('rates.loaded')
         acc.alternativeBalanceStr = 'hide'
-        acc.alternativeBalanceStr = root.toFiat(acc.balance, config.alternativeIsoCode, 'nano')
+        acc.alternativeBalanceStr = root.toFiat(acc.balance, config.alternativeIsoCode, 'bcb')
         acc.pendingBalanceStr = root.formatAmountWithUnit(acc.pendingBalance)
       })
 

@@ -143,7 +143,7 @@
 
   function publishPayment(hash) {
     var payment = {
-      crypto_currency: "nano",
+      crypto_currency: "bcb",
       transaction_hash: hash,
     };
     mqtt.subscribe('acks/'+sessionID);

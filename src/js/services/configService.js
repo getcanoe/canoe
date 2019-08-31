@@ -17,7 +17,7 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
 
     rateApp: {
       canoe: {
-        ios: 'https://itunes.apple.com/us/app/canoe-nano-wallet/id1365127213?mt=8',
+        ios: 'https://itunes.apple.com/us/app/canoe-bcb-wallet/id1365127213?mt=8',
         android: 'https://play.google.com/store/apps/details?id=io.getcanoe.canoe',
         wp: ''
       }

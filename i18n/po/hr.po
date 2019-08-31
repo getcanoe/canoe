@@ -1315,7 +1315,7 @@ msgid "Join the future of money,<br>get started with BCB."
 msgstr "Pridružite se budućnosti novca, <br> počnite s Nanoom."
 
 #: www/views/tab-settings.html:45
-msgid "Lock Canoe"
+msgid "Lock wallet"
 msgstr "Zaključaj Canoe"
 
 #: www/views/onboarding/disclaimer.html:15

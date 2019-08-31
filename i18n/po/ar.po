@@ -1315,7 +1315,7 @@ msgid "Join the future of money,<br>get started with BCB."
 msgstr "مستقبل النقود هنا <br> استخدم عملة نانو."
 
 #: www/views/tab-settings.html:45
-msgid "Lock Canoe"
+msgid "Lock wallet"
 msgstr "اقفل كانوو"
 
 #: www/views/onboarding/disclaimer.html:15

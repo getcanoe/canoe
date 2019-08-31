@@ -43,7 +43,7 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
 
   $scope.openExternalLinkHelp = function () {
     // TODO var url = 'https://getcanoe.io/' + uxLanguage.getCurrentLanguage() + '/help'
-    var url = 'https://bitcoin.black/mobile-wallet-faq/'
+    var url = 'https://bitcoin.black/support/'
     var optIn = true
     var title = null
     var message = gettextCatalog.getString('Help and support information is available at the website.')
@@ -54,7 +54,7 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
 
   $scope.openExternalLinkHowToBuy = function () {
     // TODO var url = 'https://getcanoe.io/' + uxLanguage.getCurrentLanguage() + '/howtobuy'
-    var url = 'https://getcanoe.io/howtobuy.html'
+    var url = 'https://bitcoin.black/buy'
     var optIn = true
     var title = null
     var message = gettextCatalog.getString('How to buy and sell BCB is described at the website.')

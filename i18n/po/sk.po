@@ -1317,7 +1317,7 @@ msgid "Join the future of money,<br>get started with BCB."
 msgstr ""
 
 #: www/views/tab-settings.html:45
-msgid "Lock Canoe"
+msgid "Lock wallet"
 msgstr "Zamknúť Canoe"
 
 #: www/views/onboarding/disclaimer.html:15

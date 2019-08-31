@@ -59,7 +59,7 @@ angular.module('canoeApp.services').factory('openURLService', function ($rootSco
       // This event is sent to an existent instance of Canoe (only for standalone apps)
       gui.App.on('open', function (pathData) {
         // All URL protocols plus bare accounts
-        if (pathData.match(/^(xrb:|nano:|canoe:|xrb_|bcb_)/) !== null) {
+        if (pathData.match(/^(xrb:|bcb:|canoe:|xrb_|bcb_)/) !== null) {
           $log.debug('BCB or Canoe URL found')
           handleOpenURL({
             url: pathData
@@ -81,9 +81,9 @@ angular.module('canoeApp.services').factory('openURLService', function ($rootSco
       if (navigator.registerProtocolHandler) {
         $log.debug('Registering Browser handlers base:' + base)
         // These two not allowed, see: https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler
-        // navigator.registerProtocolHandler('nano', url, 'Canoe BCB Handler')
+        // navigator.registerProtocolHandler('bcb', url, 'Canoe BCB Handler')
         // navigator.registerProtocolHandler('xrb', url, 'Canoe XRB Handler')
-        navigator.registerProtocolHandler('web+nano', url, 'Canoe web BCB Handler')
+        navigator.registerProtocolHandler('web+bcb', url, 'Canoe web BCB Handler')
         navigator.registerProtocolHandler('web+canoe', url, 'Canoe Wallet Handler')
         navigator.registerProtocolHandler('web+xrb', url, 'Canoe web XRB Handler')
       }

@@ -493,7 +493,7 @@ angular.module('canoeApp.services')
         lodash.each(accountsAndHashes, function (hashes, account) {
           if (account.startsWith('xrb')) {
             account = account.substring(3)
-            account = 'nano'.concat(account)
+            account = 'bcb'.concat(account)
           }
           var blocks = rai.blocks_info(hashes)
           lodash.each(blocks, function (blk, hash) {
@@ -521,18 +521,18 @@ angular.module('canoeApp.services')
     root.parseQRCode = function (data, cb) {
       // <protocol>:<encoded address>[?][amount=<raw amount>][&][label=<label>][&][message=<message>]
       var code = {}
-      var protocols = ['xrb', 'nano', 'raiblocks', 'xrbseed', 'nanoseed', 'xrbkey', 'nanokey', 'xrbblock', 'nanoblock', 'manta']
+      var protocols = ['xrb', 'bcb', 'raiblocks', 'xrbseed', 'nanoseed', 'xrbkey', 'nanokey', 'xrbblock', 'nanoblock', 'manta']
       try {
         var parts = data.match(/^([a-z]+):(.*)/) // Match protocol:whatever
         if (!parts) {
           // No match,  perhaps a bare account, alias, seed? TODO bare key
           if (root.isValidAccount(data)) {
             // A bare account
-            code.protocol = 'nano'
+            code.protocol = 'bcb'
             parts = data
           } else if (data.startsWith('@')) {
             // A bare alias
-            code.protocol = 'nano'
+            code.protocol = 'bcb'
             parts = data
           } else if (root.isValidSeed(data)) {
             // A bare seed

@@ -1287,7 +1287,7 @@ module.exports = function (password) {
    */
   function xrb2nano (acc) {
     if (acc.startsWith('xrb_')) {
-      return 'nano' + acc.slice(3)
+      return 'bcb' + acc.slice(3)
     }
     return acc
   }
