@@ -268,7 +268,7 @@ msgid "Cannot Create Wallet"
 msgstr ""
 
 #: www/views/modals/password.html:6
-msgid "Canoe is Locked"
+msgid "Wallet is Locked"
 msgstr ""
 
 #: www/views/onboarding/tour.html:46

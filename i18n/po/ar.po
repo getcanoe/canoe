@@ -1667,7 +1667,7 @@ msgid "joedoe"
 msgstr ""
 
 #: www/views/modals/password.html:6
-msgid "Canoe is Locked"
+msgid "Wallet is Locked"
 msgstr "كانوو مُقفل"
 
 #: www/views/modals/password.html:39
