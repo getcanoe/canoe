@@ -1,17 +1,17 @@
 {
   "name": "canoe",
-  "description": "A Secure Cross Platform Nano Wallet",
-  "author": "Göran Krampe",
+  "description": "A Secure Cross Platform Bitcoin Black Betanet Wallet",
+  "author": "Bitcoin Black",
   "version": "1.0.2",
   "keywords": [
-    "nano",
+    "bcb",
     "raiblocks",
     "wallet"
   ],
   "main": "www/index.html",
   "title": "Canoe",
   "window": {
-    "title": "Canoe - Nano Wallet",
+    "title": "Canoe - Bitcoin Black Betanet Wallet",
     "icon": "www/img/app/icon.png",
     "toolbar": false,
     "show": true,
@@ -46,7 +46,7 @@
     "url": "https://github.com/gokr/canoe/issues"
   },
   "engines": {
-    "node": "6",
+    "node": "10",
     "npm": "3"
   },
   "dependencies": {
@@ -190,7 +190,7 @@
       "cordova-plugin-whitelist": {},
       "cordova-plugin-qrscanner": {},
       "cordova-plugin-customurlscheme": {
-        "URL_SCHEME": "nano",
+        "URL_SCHEME": "bcb",
         "SECOND_URL_SCHEME": "xrb",
         "THIRD_URL_SCHEME": "canoe"
       },
