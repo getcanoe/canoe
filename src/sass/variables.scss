@@ -14,9 +14,9 @@ $v-mid-gray:                                         #667 !default;
 $v-light-gray:                                       #9b9bab !default;
 $v-subtle-gray:                                      darken(#ffffff, 5%) !default;
 
-$v-primary-color:                                  #311C67 !default;
+$v-primary-color:                                  #000000 !default;
 $v-secondary-color:                                    #0ACA52 !default;
-$v-accent-color:                                     #0DB4F3 !default;
+$v-accent-color:                                     #e1990f !default;
 $v-light-color:                                      #FFFFFF;
 
 $canoe-light-blue: #20bffb;
@@ -108,8 +108,8 @@ $v-success-bg-color:                                 #11D1A6 !default;
 
 /* Onboarding */
 $v-onboarding-pane-bg:                               $v-primary-color !default;
-$v-onboarding-gradient-top-color:                    #524988 !default;
-$v-onboarding-gradient-bottom-color:                 #311C67 !default;
+$v-onboarding-gradient-top-color:                    #000000 !default;
+$v-onboarding-gradient-bottom-color:                 #000000 !default;
 $v-onboarding-welcome-bg:                            url(../img/onboarding/onboarding-welcome-bg.png) !default;
 $v-onboarding-color:                                 #ffffff;
 $v-onboarding-bar-header-color:                      #ffffff !default;
