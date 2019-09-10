@@ -58,6 +58,8 @@
         <icon height="50" src="resources/canoe/ios/icon/icon-50.png" width="50" />
         <icon height="100" src="resources/canoe/ios/icon/icon-50@2x.png" width="100" />
         <icon height="167" src="resources/canoe/ios/icon/icon-83.5@2x.png" width="167" />
+        <icon height="144" src="resources/canoe/ios/icon/icon-72@2x.png" width="144" />
+        <icon height="167" src="resources/canoe/ios/icon/icon-167.png" width="167" />
         <splash src="resources/canoe/ios/splash/Default@2x~universal~anyany.png" />
         <allow-navigation href="*" />
     </platform>
