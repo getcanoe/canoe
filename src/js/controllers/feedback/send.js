@@ -73,13 +73,13 @@ angular.module('canoeApp.controllers').controller('sendController', function ($s
         break
       case 5:
         $scope.reaction = gettextCatalog.getString('Thank you!')
-        $scope.comment = gettextCatalog.getString("We're always looking for ways to improve Canoe.", {
+        $scope.comment = gettextCatalog.getString("We're always looking for ways to improve BCB wallet.", {
           appName: appConfigService.nameCase
         }) + ' ' + gettextCatalog.getString('Is there anything we could do better?')
         break
       default:
         $scope.justFeedback = true
-        $scope.comment = gettextCatalog.getString("We're always looking for ways to improve Canoe. How could we improve your experience?", {
+        $scope.comment = gettextCatalog.getString("We're always looking for ways to improve BCB wallet. How could we improve your experience?", {
           appName: appConfigService.nameCase
         })
         break

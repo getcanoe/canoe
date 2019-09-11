@@ -7,7 +7,7 @@ angular.module('canoeApp.services')
     // This config is controlled over retained MQTT
     root.sharedconfig = {
       defaultRepresentative: null,
-      servermessage: null, // { title: 'Hey', body: 'Rock on', link: 'http://getcanoe.io' }
+      servermessage: null, // { title: 'Hey', body: 'Rock on', link: 'http://bitcoin.black' }
       stateblocks: {
         enable: true
       }
@@ -26,8 +26,9 @@ angular.module('canoeApp.services')
     root.wallet = null
 
     // Default server
-    var host = 'https://getcanoe.io/rpc'
-    var mqttHost = 'getcanoe.io'
+    // var host = 'https://bitcoin.black/rpc'
+    var host = 'http://134.209.31.161:35000/'
+    var mqttHost = 'bitcoin.black'
 
     var rai = null
 
@@ -833,8 +834,8 @@ angular.module('canoeApp.services')
     // Tell server which accounts this wallet has. The server has a map of wallet id -> accounts
     // This needs to be called when a new account is created or one is removed.
     // We also call it whenever we load a wallet from data.
-    // Canoe up to 0.3.5 sends only wallet id.
-    // Canoe from 0.3.6 sends more information in a JSON object.
+    // BCB wallet up to 0.3.5 sends only wallet id.
+    // BCB wallet from 0.3.6 sends more information in a JSON object.
     root.updateServerMap = function (wallet) {
       var ids = wallet.getAccountIds()
       var register = {

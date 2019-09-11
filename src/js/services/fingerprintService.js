@@ -23,7 +23,7 @@ angular.module('canoeApp.services').factory('fingerprintService', function ($log
   var requestFinger = function (cb) {
     try {
       FingerprintAuth.encrypt({
-        clientId: 'Canoe'
+        clientId: 'BCB'
       },
         function (result) {
           if (result.withFingerprint) {

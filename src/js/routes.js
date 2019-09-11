@@ -905,7 +905,7 @@ angular.module('canoeApp').config(function (historicLogProvider, $provide, $logP
       }, 101)
 
       $ionicPlatform.on('pause', function () {
-        // Canoe is going to background
+        // BCB wallet is going to background
         applicationService.lockBackground()
       })
 

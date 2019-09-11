@@ -27,7 +27,7 @@ angular.module('canoeApp.services')
       root.enteredPassword(null)
     }
 
-    // This is where we keep the password entered when you start Canoe
+    // This is where we keep the password entered when you start BCB wallet
     // or when timeout is reached and it needs to be entered again.
     root.enteredPassword = function (pw) {
       root.password = pw

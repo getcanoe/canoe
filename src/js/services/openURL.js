@@ -56,18 +56,18 @@ angular.module('canoeApp.services').factory('openURLService', function ($rootSco
     } else if (platformInfo.isNW) {
       var gui = require('nw.gui')
 
-      // This event is sent to an existent instance of Canoe (only for standalone apps)
+      // This event is sent to an existent instance of BCB wallet (only for standalone apps)
       gui.App.on('open', function (pathData) {
         // All URL protocols plus bare accounts
         if (pathData.match(/^(xrb:|bcb:|canoe:|xrb_|bcb_)/) !== null) {
-          $log.debug('BCB or Canoe URL found')
+          $log.debug('BCB wallet URL found')
           handleOpenURL({
             url: pathData
           })
         }
       })
 
-      // Used at the startup of Canoe
+      // Used at the startup of BCB wallet
       var argv = gui.App.argv
       if (argv && argv[0]) {
         handleOpenURL({
@@ -81,11 +81,11 @@ angular.module('canoeApp.services').factory('openURLService', function ($rootSco
       if (navigator.registerProtocolHandler) {
         $log.debug('Registering Browser handlers base:' + base)
         // These two not allowed, see: https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler
-        // navigator.registerProtocolHandler('bcb', url, 'Canoe BCB Handler')
-        // navigator.registerProtocolHandler('xrb', url, 'Canoe XRB Handler')
-        navigator.registerProtocolHandler('web+bcb', url, 'Canoe web BCB Handler')
-        navigator.registerProtocolHandler('web+canoe', url, 'Canoe Wallet Handler')
-        navigator.registerProtocolHandler('web+xrb', url, 'Canoe web XRB Handler')
+        // navigator.registerProtocolHandler('bcb', url, 'BCB wallet BCB Handler')
+        // navigator.registerProtocolHandler('xrb', url, 'BCB wallet XRB Handler')
+        navigator.registerProtocolHandler('web+bcb', url, 'BCB wallet web BCB Handler')
+        navigator.registerProtocolHandler('web+canoe', url, 'BCB wallet Wallet Handler')
+        navigator.registerProtocolHandler('web+xrb', url, 'BCB wallet web XRB Handler')
       }
     }
   }

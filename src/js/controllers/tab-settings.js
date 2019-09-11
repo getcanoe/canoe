@@ -42,7 +42,7 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
   }
 
   $scope.openExternalLinkHelp = function () {
-    // TODO var url = 'https://getcanoe.io/' + uxLanguage.getCurrentLanguage() + '/help'
+    // TODO var url = 'http://bitcoin.black/' + uxLanguage.getCurrentLanguage() + '/help'
     var url = 'https://bitcoin.black/support/'
     var optIn = true
     var title = null
@@ -53,7 +53,7 @@ angular.module('canoeApp.controllers').controller('tabSettingsController', funct
   }
 
   $scope.openExternalLinkHowToBuy = function () {
-    // TODO var url = 'https://getcanoe.io/' + uxLanguage.getCurrentLanguage() + '/howtobuy'
+    // TODO var url = 'http://bitcoin.black/' + uxLanguage.getCurrentLanguage() + '/howtobuy'
     var url = 'https://bitcoin.black/buy'
     var optIn = true
     var title = null

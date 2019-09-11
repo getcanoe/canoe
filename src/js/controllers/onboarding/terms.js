@@ -18,7 +18,7 @@ angular.module('canoeApp.controllers').controller('termsController', function ($
     var url = appConfigService.disclaimerUrl
     var optIn = true
     var title = gettextCatalog.getString('View Terms of Service')
-    var message = gettextCatalog.getString('The official English Terms of Service are available on the Canoe website.')
+    var message = gettextCatalog.getString('The official English Terms of Service are available on the BCB wallet website.')
     var okText = gettextCatalog.getString('Open Website')
     var cancelText = gettextCatalog.getString('Go Back')
     externalLinkService.open(url, optIn, title, message, okText, cancelText)

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="391014" id="io.getcanoe.canoe" ios-CFBundleVersion="1.0.2" version="1.0.2">
-    <name>Canoe</name>
+<widget android-versionCode="391014" id="com.bcbcanoe.bitcoinblack" ios-CFBundleVersion="1.0.2" version="1.0.2">
+    <name>Bitcoin Black Betanet Wallet</name>
     <description>
-      Canoe Bitcoin Black Betanet Wallet
+        Bitcoin Black Betanet Wallet
     </description>
-    <author email="goran.krampe@gmail.com" href="https://getcanoe.io">
+    <author email="hello@bitcoin.black" href="http://bitcoin.black">
         Bitcoin Black
     </author>
     <content src="index.html" />
@@ -14,7 +14,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="WindowsStoreIdentityName" value="------" />
-    <preference name="WindowsStoreDisplayName" value="Canoe - Secure Bitcoin Black Betanet Wallet" />
+    <preference name="WindowsStoreDisplayName" value="Secure Bitcoin Black Betanet Wallet" />
     <preference name="StatusBarBackgroundColor" value="#261454" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="windows-target-version" value="10.0" />

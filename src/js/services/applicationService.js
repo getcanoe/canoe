@@ -212,7 +212,7 @@ angular.module('canoeApp.services')
       root.lock('password', force)
     }
     
-    // When starting Canoe etc
+    // When starting BCB wallet etc
     root.lockStartup = function () {
       root.lock('password', true, true)
     }

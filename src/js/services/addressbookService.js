@@ -6,7 +6,7 @@ angular.module('canoeApp.services').factory('addressbookService', function ($log
   // We initialize with this entry added
   var DONATE_ADDRESS = 'nano_1qckwc5o3obkrwbet4amnkya113xq77qpaknsmiq9hwq31tmd5bpyo7sepsw'
   var DONATE_ENTRY = {
-    name: 'Donate to Canoe',
+    name: 'Donate to BCB',
     email: 'donate@getcanoe.io',
     address: DONATE_ADDRESS,
     alias: {

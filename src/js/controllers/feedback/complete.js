@@ -2,7 +2,7 @@
 
 angular.module('canoeApp.controllers').controller('completeController', function ($scope, $stateParams, $timeout, $log, $ionicHistory, $state, $ionicNavBarDelegate, $ionicConfig, platformInfo, configService, storageService, lodash, appConfigService, gettextCatalog) {
   $scope.isCordova = platformInfo.isCordova
-  $scope.title = gettextCatalog.getString('Share Canoe', {
+  $scope.title = gettextCatalog.getString('Share BCB Wallet', {
     appName: appConfigService.nameCase
   })
 

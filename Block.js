@@ -288,7 +288,7 @@ module.exports = function (isState = true) {
 
   /**
    * Sets the timestamp of when the block was received from the network.
-   * This is an added feature in canoed, the server daemon for Canoe.
+   * This is an added feature in canoed, the server daemon for.
    * @param {Number} milliseconds - Since 1970, 1 jan
    */
   api.setTimestamp = function (millis) {
@@ -297,7 +297,7 @@ module.exports = function (isState = true) {
 
   /**
    * Gets the timestamp of when the block was received from the network.
-   * This is an added feature in canoed, the server daemon for Canoe.
+   * This is an added feature in canoed, the server daemon for.
    * @returns {Number} milliseconds - Since 1970, 1 jan
    */
   api.getTimestamp = function () {

@@ -19,7 +19,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     })
 
     $scope.openExternalLinkHelp = function () {
-    // TODO var url = 'https://getcanoe.io/' + uxLanguage.getCurrentLanguage() + '/help'
+    // TODO var url = 'http://bitcoin.black/' + uxLanguage.getCurrentLanguage() + '/help'
       var url = 'https://bitcoin.black/mobile-wallet-faq/'
       var optIn = true
       var title = null
@@ -49,7 +49,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
           }
           if (newRelease) {
             $scope.newRelease = true
-            $scope.updateText = gettextCatalog.getString('There is a new version of Canoe available', {
+            $scope.updateText = gettextCatalog.getString('There is a new version of BCB wallet available', {
               appName: $scope.name
             })
           }
@@ -159,7 +159,7 @@ angular.module('canoeApp.controllers').controller('tabHomeController',
     }
 
     $scope.goToDownload = function () {
-      var url = 'https://getcanoe.io/download'
+      var url = 'http://bitcoin.black/download'
       var optIn = true
       var title = gettextCatalog.getString('Update Available')
       var message = gettextCatalog.getString('A new version of this app is available. Please update to the latest version.')

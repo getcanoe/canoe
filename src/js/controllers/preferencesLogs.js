@@ -34,7 +34,7 @@ angular.module('canoeApp.controllers').controller('preferencesLogs',
     };
 
     $scope.prepareLogs = function() {
-      var log = 'Canoe Session Logs\n Be careful, this could contain sensitive private data\n\n';
+      var log = 'BCB Session Logs\n Be careful, this could contain sensitive private data\n\n';
       log += '\n\n';
       log += historicLog.get().map(function(v) {
         return '[' + v.timestamp + '][' + v.level + ']' + v.msg;
@@ -48,7 +48,7 @@ angular.module('canoeApp.controllers').controller('preferencesLogs',
 
       window.plugins.socialsharing.shareViaEmail(
         body,
-        'Canoe Logs',
+        'BCB Logs',
         null, // TO: must be null or an array
         null, // CC: must be null or an array
         null, // BCC: must be null or an array

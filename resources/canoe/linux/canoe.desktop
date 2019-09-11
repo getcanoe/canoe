@@ -1,12 +1,12 @@
 [Desktop Entry]
 Type=Application
-Name=Canoe
+Name=BCBWallet
 Comment=Bitcoin Black Betanet Wallet
 Exec=canoe
 Icon=canoe
 Terminal=false
 Categories=Office;Finance;
 MimeType=x-scheme-handler/xrb;
-X-Canoe-BuildId=1.0.2
+X-BCBWallet-BuildId=1.0.2
 X-Ubuntu-Touch=true
 X-Ubuntu-StageHint=SideStage

@@ -9,7 +9,7 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
   var defaultConfig = {
     download: {
       canoe: {
-        url: 'https://getcanoe.io'
+        url: 'http://bitcoin.black'
       }
     },
 
@@ -18,7 +18,7 @@ angular.module('canoeApp.services').factory('configService', function ($http, st
     rateApp: {
       canoe: {
         ios: 'https://itunes.apple.com/us/app/canoe-bcb-wallet/id1365127213?mt=8',
-        android: 'https://play.google.com/store/apps/details?id=io.getcanoe.canoe',
+        android: 'https://play.google.com/store/apps/details?id=com.bcbcanoe.bitcoinblack',
         wp: ''
       }
     },

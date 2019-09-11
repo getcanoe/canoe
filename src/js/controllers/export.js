@@ -130,7 +130,7 @@ angular.module('canoeApp.controllers').controller('exportController',
       $scope.getBackup(function (backup) {
         var ew = backup
         if (!ew) return
-        var subject = 'Canoe Wallet Backup'
+        var subject = 'BCB Wallet Backup'
         var body = 'Here is the encrypted backup of the wallet.\n\n' + ew + '\n\n To import this backup, copy all text between {...}, including the symbols {}'
         window.plugins.socialsharing.shareViaEmail(
           body,
