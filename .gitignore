@@ -84,7 +84,7 @@ Session.vim
 /src/sass/app
 
 # www ?
-www/css/*
+# www/css/*
 www/lib/*
 www/js/*
 www/raiwallet/braiwallet.js

@@ -1,10 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg version="1.1" id="Home" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 20 24" style="enable-background:new 0 0 20 24;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#D5DFFF;}
-	.st1{fill:#647ce8;}
-</style>
-<polygon class="st0" points="10,0.9 0.7,9.4 0.7,23.3 6.9,23.3 6.9,15.8 13.1,15.8 13.1,23.3 19.3,23.3 19.3,9.4 "/>
-<path class="st1" d="M20,24h-7.5v-7.5H7.5V24H0V9.1L10,0l10,9.1V24z M13.8,22.6h4.8V9.7L10,1.9L1.4,9.7v12.9h4.8v-7.5h7.6V22.6z"/>
+<svg width="20" height="24" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <polygon fill="#f2d7a4" id="svg_1" points="10,0.9 0.7,9.4 0.7,23.3 6.9,23.3 6.9,15.8 13.1,15.8 13.1,23.3 19.3,23.3 19.3,9.4 " class="st0"/>
+  <path fill="#e1990f" id="svg_2" d="m20,24l-7.5,0l0,-7.5l-5,0l0,7.5l-7.5,0l0,-14.9l10,-9.1l10,9.1l0,14.9zm-6.2,-1.4l4.8,0l0,-12.9l-8.6,-7.8l-8.6,7.8l0,12.9l4.8,0l0,-7.5l7.6,0l0,7.5z" class="st1"/>
+ </g>
 </svg>
