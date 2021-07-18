@@ -1,3 +1,10 @@
+# NOT MAINTAINED ANYMORE
+Canoe is not maintained, the website with binary downloads is not live anymore and the [wallet backend](https://github.com/gokr/canoed) is not running. The domain "getcanoe.io" will not be renewed at end of 2021.
+This means Canoe **can no longer be used** but if you used Canoe earlier you can easily import your seed to another wallet, no funds are lost. Canoe is fully Open Source and anyone could revive it, rebrand and start their own server. If anyone is interested in doing that, feel free to contact me.
+
+regards, Göran and the rest of the developers of Canoe
+_____
+
 [![Build Status](https://secure.travis-ci.org/gokr/canoe.svg)](http://travis-ci.org/gokr/canoe)
 
 Canoe is a cross platform Nano Wallet application. It's based upon the [Copay](https://copay.io) Bitcoin wallet source code released under the MIT license. For binary downloads, when available, see [getcanoe.io](https://getcanoe.io).
