@@ -1,5 +1,5 @@
 # NOT MAINTAINED ANYMORE
-Canoe is not maintained, the website with binary downloads is not live anymore and the [wallet backend](https://github.com/gokr/canoed) is not running. The domain "getcanoe.io" will not be renewed at end of 2021.
+Canoe is not maintained, the website with the binary downloads **is not live anymore** and the [wallet backend](https://github.com/gokr/canoed) is not running. The domain "getcanoe.io" will not be renewed at end of 2021.
 This means Canoe **can no longer be used** but if you used Canoe earlier you can easily import your seed to another wallet, no funds are lost. Canoe is fully Open Source and anyone could revive it, rebrand and start their own server. If anyone is interested in doing that, feel free to contact me.
 
 regards, Göran and the rest of the developers of Canoe
@@ -7,7 +7,7 @@ _____
 
 [![Build Status](https://secure.travis-ci.org/gokr/canoe.svg)](http://travis-ci.org/gokr/canoe)
 
-Canoe is a cross platform Nano Wallet application. It's based upon the [Copay](https://copay.io) Bitcoin wallet source code released under the MIT license. For binary downloads, when available, see [getcanoe.io](https://getcanoe.io).
+Canoe is a cross platform Nano Wallet application. It's based upon the [Copay](https://copay.io) Bitcoin wallet source code released under the MIT license. 
 
 ## Main Features
 
@@ -164,7 +164,7 @@ Launch the app from `chrome://apps`.
 You may also want to enable debugging by enabling `chrome://flags/#debug-packed-apps`. Then right click in Canoe window for debugging.
 
 ## Translations
-Canoe uses standard gettext PO files for translations.[POEditor](https://poeditor.com/join/project/cnSZa85DRN) is the front-end tool for translators and that's the only path for contributing translation work - we do not take pull requests for translations because it gets really complicated then to keep POEditor in sync.
+Canoe uses standard gettext PO files for translations.[POEditor](https://poeditor.com/join/project/cnSZa85DRN) **was** the front-end tool for translators and that's the only path for contributing translation work - we do not take pull requests for translations because it gets really complicated then to keep POEditor in sync.
 
 Credits to the partial translations Canoe inherited from Copay:
 
@@ -189,8 +189,8 @@ We are using `sketchtool` which is a tool that comes bundled with Sketch. Unfort
 ## Version numbering
 Canoe uses the `MAJOR.MINOR.PATCH` convention for versioning.  Any release that adds features should modify the MINOR or MAJOR number.
 
-## Contributing to this project
-Anyone and everyone is welcome to contribute, here is our [discord link](https://discord.gg/ecVcJM3).
+## Discord
+Anyone can still ask questions on [discord](https://discord.gg/ecVcJM3) where you should still find me.
 
 ## License
 Canoe is released under the MIT License.  Please refer to the [LICENSE](https://github.com/gokr/canoe/blob/master/LICENSE) file that accompanies this project for more information including complete terms and conditions.
