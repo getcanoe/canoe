@@ -154,7 +154,7 @@
     "nw-builder": "^3.5.7",
     "nw-gyp": "^3.6.3",
     "pre-commit": "^1.2.2",
-    "shelljs": "^0.8.3",
+    "shelljs": "^0.8.5",
     "trash-cli": "^1.4.0"
   },
   "pre-commit": "unstage-package",
